@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.env
+*.pdf
+service_account.json
+test_*.xlsx
+
+# Node
+node_modules/
+.next/
+.env.local
+.env*.local
+
+# Misc
+*.log
+.DS_Store
