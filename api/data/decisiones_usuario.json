@@ -1,0 +1,211 @@
+[
+  {
+    "n": 1,
+    "cod_prov": "03140423",
+    "desc_prov": "BANDA ACUSTICA TECNO 100MM X 25MTS",
+    "cant": 5,
+    "precio_con_iva": 17605.5,
+    "precio_sin_iva": 14550,
+    "cod_propuesto": "A009",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 2,
+    "cod_prov": "03090038",
+    "desc_prov": "LANA ISOVER ROLAC PLATA 100 1.2x11mts",
+    "cant": 9,
+    "precio_con_iva": 179113.25,
+    "precio_sin_iva": 148027.48,
+    "cod_propuesto": "AISL111",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 3,
+    "cod_prov": "02080010",
+    "desc_prov": "CHAPA CINCALUM C25 0,5 x ML",
+    "cant": 94,
+    "precio_con_iva": 15556.58,
+    "precio_sin_iva": 12856.68,
+    "cod_propuesto": "CH009",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 4,
+    "cod_prov": "03090385",
+    "desc_prov": "POLIETILENO 180MIC NEGRO 4Mx50M",
+    "cant": 1,
+    "precio_con_iva": 162905.61,
+    "precio_sin_iva": 134632.74,
+    "cod_propuesto": "CONS119",
+    "decision": "IGNORAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 5,
+    "cod_prov": "03140030",
+    "desc_prov": "OSB 11.1mm APA 1.22 X 2.44 LP",
+    "cant": 34,
+    "precio_con_iva": 25694.93,
+    "precio_sin_iva": 21235.48,
+    "cod_propuesto": "EST101",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 6,
+    "cod_prov": "03090616",
+    "desc_prov": "CINTA FLEX TYPAR 15,24X22,8",
+    "cant": 1,
+    "precio_con_iva": 254410.44,
+    "precio_sin_iva": 210256.56,
+    "cod_propuesto": "EST111",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 7,
+    "cod_prov": "03090370",
+    "desc_prov": "MEMBRANA WICHI ROOFING 1,16x26M",
+    "cant": 4,
+    "precio_con_iva": 54020.57,
+    "precio_sin_iva": 44645.1,
+    "cod_propuesto": "MAD007",
+    "decision": "CAMBIAR",
+    "cod_correcto": "EST113"
+  },
+  {
+    "n": 8,
+    "cod_prov": "03020070",
+    "desc_prov": "PERFIL SOLERA 35mm x 2,6 MTS",
+    "cant": 20,
+    "precio_con_iva": 3017.3,
+    "precio_sin_iva": 2493.64,
+    "cod_propuesto": "P101",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 9,
+    "cod_prov": "03020080",
+    "desc_prov": "PERFIL MONTANTE 35mm x 2,6 MTS",
+    "cant": 30,
+    "precio_con_iva": 3495.65,
+    "precio_sin_iva": 2888.97,
+    "cod_propuesto": "P102",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 10,
+    "cod_prov": "03020030",
+    "desc_prov": "PERFIL SOLERA 70mm x 2,6 MTS",
+    "cant": 19,
+    "precio_con_iva": 4153.68,
+    "precio_sin_iva": 3432.79,
+    "cod_propuesto": "P104",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 11,
+    "cod_prov": "03020040",
+    "desc_prov": "PERFIL MONTANTE 70mm x 2,6 MTS",
+    "cant": 62,
+    "precio_con_iva": 4618.62,
+    "precio_sin_iva": 3817.04,
+    "cod_propuesto": "P105",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 12,
+    "cod_prov": "03080015",
+    "desc_prov": "PGO 22 0,90 x 3 MTS (B)",
+    "cant": 24,
+    "precio_con_iva": 7969.01,
+    "precio_sin_iva": 6585.96,
+    "cod_propuesto": "P114",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 13,
+    "cod_prov": "03040412",
+    "desc_prov": "TORNILLO HEXAGONAL 10x3/4 500",
+    "cant": 1,
+    "precio_con_iva": 25343.94,
+    "precio_sin_iva": 20945.4,
+    "cod_propuesto": "T001",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 14,
+    "cod_prov": "03040072",
+    "desc_prov": "TORNILLO TEL T2 AGUJA 200 MINI ESTUCHE",
+    "cant": 2,
+    "precio_con_iva": 2400.41,
+    "precio_sin_iva": 1983.81,
+    "cod_propuesto": "T012",
+    "decision": "CAMBIAR",
+    "cod_correcto": "T003"
+  },
+  {
+    "n": 15,
+    "cod_prov": "03040114",
+    "desc_prov": "TORNILLO TEL T2 MECHA 700 ESTUCHE",
+    "cant": 2,
+    "precio_con_iva": 16642.82,
+    "precio_sin_iva": 13754.4,
+    "cod_propuesto": "T004",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 16,
+    "cod_prov": "03040351",
+    "desc_prov": "TORNILLO C/ALAS MECHA 8x1 1/4 500u",
+    "cant": 4,
+    "precio_con_iva": 16793.47,
+    "precio_sin_iva": 13878.9,
+    "cod_propuesto": "T005",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 17,
+    "cod_prov": "03040507",
+    "desc_prov": "TORNILLO METAL TIPO 2 14X2 1/2",
+    "cant": 633,
+    "precio_con_iva": 139.29,
+    "precio_sin_iva": 115.12,
+    "cod_propuesto": "T007",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 18,
+    "cod_prov": "03010040",
+    "desc_prov": "PLACA YESO KNAUF 12.5mm x 2.4 mts STD",
+    "cant": 45,
+    "precio_con_iva": 14097.63,
+    "precio_sin_iva": 11650.93,
+    "cod_propuesto": "Y101",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  },
+  {
+    "n": 19,
+    "cod_prov": "03140270",
+    "desc_prov": "CINTA PAPEL 150 MTS",
+    "cant": 3,
+    "precio_con_iva": 6516.56,
+    "precio_sin_iva": 5385.59,
+    "cod_propuesto": "Y106",
+    "decision": "CARGAR",
+    "cod_correcto": null
+  }
+]

@@ -1,0 +1,148 @@
+{
+  "_descripcion": "Configuración del usuario para el skill carga-precios-proveedores. Editable a mano si cambian paths o se agregan proveedores.",
+  "_actualizado": "2026-04-28",
+
+  "paths": {
+    "archivo_maestro": "C:\\Pablo\\Cotizaciones\\Carga de Precios Presupuestos\\Base de Presupuestos_2026_macro.xlsm",
+    "carpeta_trabajo": "C:\\Pablo\\Cotizaciones\\Carga de Precios Presupuestos",
+    "carpeta_backups": "C:\\Pablo\\Cotizaciones\\Carga de Precios Presupuestos\\_backups"
+  },
+
+  "regla_iva_default": {
+    "factor": 1.105,
+    "explicacion": "Descuento efectivo del 10,5% que el usuario consigue pagando en efectivo. Construcción para vivienda usa alícuota reducida. La regla 1,21 (IVA 21%) es excepcional y aplica solo si el PDF discrimina factura A o se paga con tarjeta."
+  },
+
+  "fuente_dolar": {
+    "url": "https://dolarapi.com/v1/dolares/oficial",
+    "campo": "venta",
+    "fallback": "preguntar al usuario el valor del dólar"
+  },
+
+  "proveedores": [
+    {
+      "nombre_canonico": "BAUKRAFT",
+      "columna_destino": "BH",
+      "columna_destino_num": 60,
+      "factor_iva_default": 1.000,
+      "alias_archivo": ["baukraft", "BAUKRAFT"],
+      "rubros_predominantes": ["ACCESORIO ESTRUCTURA", "AISLACIONES", "PLACAS", "PERFILES", "CHAPA"],
+      "notas": "Steel framing, construcción seca. Cotiza SIN IVA (precios netos). factor_iva=1.000: no dividir. Aunque el PDF diga 'Consumidor Final' o tenga leyenda de IVA 21%, los precios de lista ya son netos."
+    },
+    {
+      "nombre_canonico": "BONORA",
+      "columna_destino": "BS",
+      "columna_destino_num": 71,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["bonora", "BONORA"],
+      "rubros_predominantes": ["I. ELÉCTRICA"],
+      "notas": "Materiales eléctricos. PDF/Excel sin discriminar IVA. Cuidado con discrepancias de unidad: cables por metro vs. rollos de 100m, conector/empalme por unidad vs. BOLSA*100."
+    },
+    {
+      "nombre_canonico": "CAROSIO CORRALON",
+      "columna_destino": "BB",
+      "columna_destino_num": 54,
+      "factor_iva_default": 1.000,
+      "alias_archivo": ["carosio", "carosio corralon", "carosio grueso", "carosio steel"],
+      "rubros_predominantes": ["ALBAÑILERÍA", "ARIDOS", "HIERRO", "ACCESORIO ESTRUCTURA", "PERFILES"],
+      "notas": "Corralón Carosio: materiales gruesos (áridos, hierro, albañilería) y steel frame. Cotiza SIN IVA (precios netos). factor_iva=1.000: no dividir. Pago efectivo. Excluir sanitarios -> van a CAROSIO SANITARIO (BC)."
+    },
+    {
+      "nombre_canonico": "CAROSIO SANITARIO",
+      "columna_destino": "BC",
+      "columna_destino_num": 55,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["carosio sanitario", "carosio sanitarios"],
+      "rubros_predominantes": ["I. SANITARIA"],
+      "notas": "Mismo grupo Carosio pero columna distinta. Sólo sanitarios."
+    },
+    {
+      "nombre_canonico": "PINT. CHASCO",
+      "columna_destino": "AC",
+      "columna_destino_num": 29,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["pintureria chascomus", "chascomus", "pint chascomus", "pint. chasco"],
+      "rubros_predominantes": ["PINTURAS"],
+      "notas": "Pinturería de Chascomús."
+    },
+    {
+      "nombre_canonico": "SAUCE",
+      "columna_destino": "AQ",
+      "columna_destino_num": 43,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["sauce", "sauce solo"],
+      "rubros_predominantes": ["VARIOS"],
+      "notas": "Multimateriales. Llega como múltiples imágenes JPG (Hoja 1, Hoja 2, ...). Procesar con visión y unir resultados."
+    },
+    {
+      "nombre_canonico": "FAGUA2",
+      "columna_destino": "AW",
+      "columna_destino_num": 49,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["fagua"],
+      "rubros_predominantes": ["VARIOS"],
+      "notas": "La columna se llama 'FAGUA2' en el archivo (probablemente versión 2)."
+    },
+    {
+      "nombre_canonico": "E. BELGRANO",
+      "columna_destino": "BT",
+      "columna_destino_num": 72,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["electricidad belgrano", "elec belgrano", "e belgrano"],
+      "rubros_predominantes": ["I. ELÉCTRICA"],
+      "notas": "Electricidad. Llega como JFIF (foto de WhatsApp). Procesar con visión."
+    },
+    {
+      "nombre_canonico": "HIERRO S.N",
+      "columna_destino": "AF",
+      "columna_destino_num": 32,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["hierros otega", "otega", "hierro sn", "hierro s.n"],
+      "rubros_predominantes": ["HIERRO"],
+      "notas": "Hierros Otega → mapea a la columna HIERRO S.N. Confirmar con el usuario en la primera carga."
+    },
+    {
+      "nombre_canonico": "JMA PERFILES",
+      "columna_destino": "Q",
+      "columna_destino_num": 17,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["jma", "JMA"],
+      "rubros_predominantes": ["PERFILES", "AISLACIONES", "PLACAS"],
+      "notas": "JMA puede cotizar en USD o en ARS según el presupuesto — verificar moneda en el PDF antes de cargar. Cuando dice 'USD' o 'U$S': Precio_neto_ARS = Precio_USD × TC_BNA_vendedor / 1.105. Cuando dice precios en pesos: Precio_neto_ARS = Precio_ARS / 1.105. TC BNA vendedor oficial 2026-06: 1450. El borrador debe registrar el TC usado (campo DÓLAR) si la moneda es USD."
+    },
+    {
+      "nombre_canonico": "MADERERA LOBOS",
+      "columna_destino": "S",
+      "columna_destino_num": 19,
+      "factor_iva_default": 1.000,
+      "alias_archivo": ["mad. lobos", "maderera lobos", "maderas lobos"],
+      "rubros_predominantes": ["MADERA", "PLACAS", "PERFILES", "AISLACIONES"],
+      "notas": "MONOTRIBUTO — no carga IVA, factor_iva=1.000. Precios de lista con Bonif -10% (transferencia/débito). Precio neto = P.Lista * 0.90. Maderas cepilladas cotizadas en pies cuadrados (board feet)."
+    },
+    {
+      "nombre_canonico": "MOLBER",
+      "columna_destino": "AD",
+      "columna_destino_num": 30,
+      "factor_iva_default": 1.000,
+      "alias_archivo": ["molber", "MOLBER"],
+      "rubros_predominantes": ["PERFILES", "AISLACIONES", "PLACAS", "TORNILLOS"],
+      "notas": "Steel frame. Cotiza SIN IVA en columna 'PRECIO C/DESCUENTO'. factor_iva=1.000: no dividir. Descuentos variables por rubro (15-40%) ya aplicados en el precio cotizado. Precio neto = columna PRECIO C/DESCUENTO directo."
+    },
+    {
+      "nombre_canonico": "PINT. ALVEAR",
+      "columna_destino": "AA",
+      "columna_destino_num": 27,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["pint. alvear", "pintureria alvear", "pint alvear"],
+      "rubros_predominantes": ["PINTURAS"],
+      "notas": "Pinturería Alvear Chascomús. IVA Responsable Inscripto factura a Consumidor Final — suma=subtotal=total → factor 1.105. Pago contado/efectivo."
+    }
+  ],
+
+  "ajustes_unidad_conocidos": [
+    {"keyword_proveedor": ["mts cable", "metros cable"], "multiplicador": 100, "razon": "código interno por rollo de 100m"},
+    {"keyword_proveedor": ["mts caño manguera", "manguera"], "multiplicador": 25, "razon": "rollo de 25m"},
+    {"keyword_proveedor": ["conector metalico", "union metalica", "empalme"], "multiplicador": 100, "razon": "BOLSA *100"},
+    {"keyword_proveedor": ["banda acustica"], "multiplicador": 1, "razon": "rollo unitario"}
+  ]
+}

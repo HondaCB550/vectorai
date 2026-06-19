@@ -1,0 +1,7498 @@
+[
+  {
+    "codigo": "A001",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "SUNCHO",
+    "detalle": "FLEJE 50mm/0.90 X 50MTS",
+    "unidad": "ROLLO",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A002",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "CRUZ S. ANDRÉS",
+    "detalle": "CARTELA 20X20",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A003",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "CRUZ S. ANDRÉS",
+    "detalle": "ÁNGULO TENSOR",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A004",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "L 70*160MM",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A005",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "SA/23 60X60",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A006",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "VARILLA 12*160",
+    "unidad": "UN",
+    "marca": "FISCHER"
+  },
+  {
+    "codigo": "A007",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "HTT14",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A008",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "BROCA FWA 12*150",
+    "unidad": "UN",
+    "marca": "FISCHER"
+  },
+  {
+    "codigo": "A009",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "AISLANTE",
+    "detalle": "BANDA ACÚSTICA 100MMX25",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A010",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "REFUERZO",
+    "detalle": "CHAPA REFUERZO 21*12",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A011",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "ARANDELA 57*57 3.2MM",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A012",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "AMPOLLA QUÍMICA",
+    "detalle": "M12",
+    "unidad": "UN",
+    "marca": "FISCHER"
+  },
+  {
+    "codigo": "A013",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "AMPOLLA QUÍMICA",
+    "detalle": "M16 X10",
+    "unidad": "CAJA",
+    "marca": "FISCHER"
+  },
+  {
+    "codigo": "A014",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "CONECTOR COLUMNA",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A015",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "AMPOLLA QUÍMICA",
+    "detalle": "M16",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A016",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A017",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "ANCLAJES",
+    "detalle": "FWA 10*95",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "A018",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "BROCAS",
+    "detalle": "FWA 12*120",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "AISL100",
+    "rubro": "AISLACIONES",
+    "item": "MANTA CERÁMICA",
+    "detalle": "1200ºc -96k -1.25mmx61cmx1mts",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "AISL110",
+    "rubro": "AISLACIONES",
+    "item": "LANA DE VIDRIO",
+    "detalle": "F. LIVIANO 100MM",
+    "unidad": "UN",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AISL111",
+    "rubro": "AISLACIONES",
+    "item": "LANA DE VIDRIO",
+    "detalle": "ROLAC PLATA ALUM 100MM",
+    "unidad": "UN",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AISL112",
+    "rubro": "AISLACIONES",
+    "item": "LANA DE VIDRIO",
+    "detalle": "ROLAC PLATA ALUM 50MM",
+    "unidad": "UN",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AISL113",
+    "rubro": "AISLACIONES",
+    "item": "LANA DE VIDRIO",
+    "detalle": "ACUSTIVER R400 70mm",
+    "unidad": "UN",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AISL114",
+    "rubro": "AISLACIONES",
+    "item": "AISLANTE TÉRMICO",
+    "detalle": "DOBLE ALU 10MM / 1 X 20MTS",
+    "unidad": "ROLLO",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AISL115",
+    "rubro": "FERRETERÍA",
+    "item": "CINTA ALUMINIO",
+    "detalle": "72MM x 50mt",
+    "unidad": "ROLLO",
+    "marca": "MATERFLEX"
+  },
+  {
+    "codigo": "AISL116",
+    "rubro": "AISLACIONES",
+    "item": "FRISELINA",
+    "detalle": "ROLLO",
+    "unidad": "50 MTS",
+    "marca": "CELULOSAPRO"
+  },
+  {
+    "codigo": "AISL117",
+    "rubro": "AISLACIONES",
+    "item": "CELULOSA INSUFLADA",
+    "detalle": "BOLSON x 16",
+    "unidad": "KG",
+    "marca": "CELULOSAPRO"
+  },
+  {
+    "codigo": "AISL118",
+    "rubro": "AISLACIONES",
+    "item": "AISLANTE TÉRMICO",
+    "detalle": "RUFI ALU 5MM / 1X20MTS",
+    "unidad": "ROLLO",
+    "marca": "ISOVER"
+  },
+  {
+    "codigo": "AUX001",
+    "rubro": "ALBAÑILERÍA",
+    "item": "TUBO ALCANTARILLA HORMIGÓN",
+    "detalle": "30CM",
+    "unidad": "1 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CH001",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "SINUSOIDAL GALVANIZADA C25 *M",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH002",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "PREPINTADA C25",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH003",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "CANALETA",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH004",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "ZINGUERÍA - CUMBRERA 15*15",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH005",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "MINI ONDA COLOR C25",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH006",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "LISA PREPINTADA C24 1,20*2M",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH007",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "FRENTE CANALETA P/PINTAR",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH008",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "TRANSLUCIDA POLICARBONATO 8MM",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH009",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "ZINCADA x ml",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH010",
+    "rubro": "CHAPA",
+    "item": "CHAPA",
+    "detalle": "SINUSOIDAL NEGRA C25 *1,10",
+    "unidad": "TIRA",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH011",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "BABETA PERIMETRAL",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH012",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "BABETA DE ARRANQUE",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH013",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "GARGOLA",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH014",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "EMBUDO",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH015",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "CAÑO GALVANIZADO 3\"",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CH016",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "GRAMPA PARA CAÑO 3\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CH017",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "CAÑO GALVANIZADO - 100 x 50",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CH018",
+    "rubro": "CHAPA",
+    "item": "ZINGUERÍA",
+    "detalle": "PIEZA 40CM DE DESARROLLO",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CLIM101",
+    "rubro": "INSUMOS",
+    "item": "PRESINTOS",
+    "detalle": "100 UN",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM102",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "COLECTOR CALEFACCIÓN",
+    "detalle": "4 UN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM103",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "CAÑO PEX",
+    "detalle": "20MM * 400",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM104",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "CAÑO PEX",
+    "detalle": "1 X 1",
+    "unidad": "TIRA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM110",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "COLECTORES",
+    "detalle": "2 VIAS C/CAJA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM111",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "CALDERA",
+    "detalle": "PEISA DIVA UNICA",
+    "unidad": "UN",
+    "marca": "PEISA"
+  },
+  {
+    "codigo": "CLIM112",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "PISO ELÉCTRICO",
+    "detalle": "PISO",
+    "unidad": "M2",
+    "marca": "PISO CALOR"
+  },
+  {
+    "codigo": "CLIM113",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "AIRE ACONDICIONADO",
+    "detalle": "surrey wifi 2650",
+    "unidad": "UN",
+    "marca": "SURREY"
+  },
+  {
+    "codigo": "CLIM114",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "AIRE ACONDICIONADO",
+    "detalle": "bgh 5000",
+    "unidad": "UN",
+    "marca": "BGH"
+  },
+  {
+    "codigo": "CLIM115",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "CAÑERÍA A/AC",
+    "detalle": "MT LINEAL DE CAÑERIA",
+    "unidad": "MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM116",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "CAJA A/AC",
+    "detalle": "PLASTICA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM117",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "TOALLERO",
+    "detalle": "PEISA SCALA 80",
+    "unidad": "UN",
+    "marca": "PEISA"
+  },
+  {
+    "codigo": "CLIM118",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "PLACA VITROCERAMICA",
+    "detalle": "TEMPTECH 500W",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CLIM119",
+    "rubro": "I. CLIMATIZACIÓN",
+    "item": "HOGAR TROMEN",
+    "detalle": "TR HOGAR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS101",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CEMENTO",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "CEMENTO AVELLANEDA"
+  },
+  {
+    "codigo": "CONS102",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PLASTICOR",
+    "detalle": "25 KG",
+    "unidad": "BOLSA",
+    "marca": "CEMENTO AVELLANEDA"
+  },
+  {
+    "codigo": "CONS103",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CAL",
+    "detalle": "30KG",
+    "unidad": "BOLSA",
+    "marca": "CAL HIDRAT EXTRA"
+  },
+  {
+    "codigo": "CONS104",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PASTINA",
+    "detalle": "5KG",
+    "unidad": "BOLSA",
+    "marca": "KLAUKOL"
+  },
+  {
+    "codigo": "CONS105",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PEGAMENTO",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "PERFECTO FLEXIBLE"
+  },
+  {
+    "codigo": "CONS106",
+    "rubro": "HORMIGÓN",
+    "item": "CUARZO ENM",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "POLICEMENTO"
+  },
+  {
+    "codigo": "CONS107",
+    "rubro": "ARIDOS",
+    "item": "TOSCA",
+    "detalle": "A GRANEL",
+    "unidad": "M3",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS108",
+    "rubro": "ARIDOS",
+    "item": "ARENA",
+    "detalle": "M3",
+    "unidad": "BOLSÓN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS109",
+    "rubro": "ARIDOS",
+    "item": "CASCOTE",
+    "detalle": "M3",
+    "unidad": "BOLSÓN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS110",
+    "rubro": "ARIDOS",
+    "item": "PIEDRA",
+    "detalle": "M3",
+    "unidad": "BOLSÓN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS111",
+    "rubro": "HIERRO",
+    "item": "ALAMBRE",
+    "detalle": "DULCE PARA ATAR",
+    "unidad": "KG",
+    "marca": "AGROPOL"
+  },
+  {
+    "codigo": "CONS112",
+    "rubro": "HIERRO",
+    "item": "MALLA SIMA 6",
+    "detalle": "15 X 15 6MM",
+    "unidad": "M2",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS113",
+    "rubro": "HORMIGÓN",
+    "item": "HORMIGÓN ELABORADO",
+    "detalle": "H21",
+    "unidad": "M3",
+    "marca": "CEMENTO AVELLANEDA"
+  },
+  {
+    "codigo": "CONS114",
+    "rubro": "HORMIGÓN",
+    "item": "HORMIGÓN ELABORADO",
+    "detalle": "H30",
+    "unidad": "M3",
+    "marca": "CEMENTO AVELLANEDA"
+  },
+  {
+    "codigo": "CONS115",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 4.2",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS116",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 6",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS117",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 10",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS118",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 12",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS119",
+    "rubro": "FERRETERÍA",
+    "item": "POLIETILENO",
+    "detalle": "4*50",
+    "unidad": "ROLLO",
+    "marca": "AGROPOL"
+  },
+  {
+    "codigo": "CONS120",
+    "rubro": "VARIOS",
+    "item": "VOLQUETES",
+    "detalle": "GRANDE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS121",
+    "rubro": "VARIOS",
+    "item": "BAÑO QUÍMICO",
+    "detalle": "COMÚN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS122",
+    "rubro": "PRELIMINARES",
+    "item": "CERCO DE OBRA",
+    "detalle": "ALTURA 1,50",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS123",
+    "rubro": "PRELIMINARES",
+    "item": "OBRADOR",
+    "detalle": "3X4",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS124",
+    "rubro": "PRELIMINARES",
+    "item": "CARTEL DE OBRA",
+    "detalle": "2X1",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS125",
+    "rubro": "ALBAÑILERÍA",
+    "item": "LADRILLO",
+    "detalle": "REFRACTARIO 15*20*.05",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS126",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PEGAMENTO",
+    "detalle": "REFRACTARIO 10 KG",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS127",
+    "rubro": "ARIDOS",
+    "item": "MURETE PIEDRA",
+    "detalle": "POLELIN LISTON",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS128",
+    "rubro": "ARIDOS",
+    "item": "PIEDRA PARTIDA BLANCA",
+    "detalle": "M3",
+    "unidad": "BOLSÓN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS129",
+    "rubro": "HORMIGÓN",
+    "item": "CEMENTO BLANCO",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "CONS130",
+    "rubro": "HORMIGÓN",
+    "item": "SUPERFLUIDIFICANTE",
+    "detalle": "20 KG",
+    "unidad": "TABLA",
+    "marca": "PROTEX"
+  },
+  {
+    "codigo": "CONS131",
+    "rubro": "ALBAÑILERÍA",
+    "item": "KLAUKOL PORCELANATO",
+    "detalle": "30 KG",
+    "unidad": "BOLSA",
+    "marca": "KLAUKOL"
+  },
+  {
+    "codigo": "CONS132",
+    "rubro": "ALBAÑILERÍA",
+    "item": "KLAUKOL PRO BLANCO",
+    "detalle": "PRO BLANCO 30 KG",
+    "unidad": "BOLSA",
+    "marca": "KLAUKOL"
+  },
+  {
+    "codigo": "CONS133",
+    "rubro": "PARQUIZACIÓN",
+    "item": "GEOTEXTIL 300 GRS",
+    "detalle": "1,5*50",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS134",
+    "rubro": "ALBAÑILERÍA",
+    "item": "LADRILLO",
+    "detalle": "HUECO 12*18*33",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS135",
+    "rubro": "ALBAÑILERÍA",
+    "item": "LADRILLO",
+    "detalle": "COMÚN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS136",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 8",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS137",
+    "rubro": "HIERRO",
+    "item": "HIERRO ALETEADO",
+    "detalle": "DIAMETRO 16",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS138",
+    "rubro": "ALBAÑILERÍA",
+    "item": "VIGUETA",
+    "detalle": "2,60 MTS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS139",
+    "rubro": "ALBAÑILERÍA",
+    "item": "LADRILLO",
+    "detalle": "SAPO TELGOPOR 12 CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS140",
+    "rubro": "ALBAÑILERÍA",
+    "item": "TACURU",
+    "detalle": "20 LTS",
+    "unidad": "TACHO",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "CONS141",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CERECITA",
+    "detalle": "20 LTS",
+    "unidad": "TACHO",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "CONS142",
+    "rubro": "ALBAÑILERÍA",
+    "item": "SELLADOR ACUOSO",
+    "detalle": "20 LTS",
+    "unidad": "TACHO",
+    "marca": "POLICEMENTO"
+  },
+  {
+    "codigo": "CONS143",
+    "rubro": "ALBAÑILERÍA",
+    "item": "ANTISOL AL AGUA",
+    "detalle": "MC B 20LTS",
+    "unidad": "TACHO",
+    "marca": "POLICEMENTO"
+  },
+  {
+    "codigo": "CONS144",
+    "rubro": "ARIDOS",
+    "item": "BLOQUE DE HORMIGON",
+    "detalle": "19*19*39",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS145",
+    "rubro": "ARIDOS",
+    "item": "PIEDRA DECORATIVA",
+    "detalle": "VOLADURA MAR DEL PLATA",
+    "unidad": "TON",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS201",
+    "rubro": "HORMIGÓN",
+    "item": "FIBRAS DE POLIPROPILENO H°A",
+    "detalle": "UN",
+    "unidad": "BOLSA",
+    "marca": "POLICEMENTO"
+  },
+  {
+    "codigo": "CONS202",
+    "rubro": "HORMIGÓN",
+    "item": "ISOCRETE PERLAS EPS",
+    "detalle": "BOLSA 170 LTS",
+    "unidad": "BOLSÓN",
+    "marca": "ETISOL"
+  },
+  {
+    "codigo": "CONS203",
+    "rubro": "ARIDOS",
+    "item": "MURETE PIEDRA",
+    "detalle": "POLELIN ESCALLA",
+    "unidad": "M3",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS204",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PEGAMENTO",
+    "detalle": "flex 25KG",
+    "unidad": "BOLSA",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "CONS206",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PASTINA",
+    "detalle": "1KG",
+    "unidad": "BOLSA",
+    "marca": "KLAUKOL"
+  },
+  {
+    "codigo": "CONS207",
+    "rubro": "ALBAÑILERÍA",
+    "item": "MEMBRANA ASFÁLTICA",
+    "detalle": "CON ALUMINIO",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS208",
+    "rubro": "ALBAÑILERÍA",
+    "item": "DEMOLICION",
+    "detalle": "CIMIENTOS",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS209",
+    "rubro": "HIERRO",
+    "item": "MALLA SIMA 8",
+    "detalle": "15 X 15 8MM",
+    "unidad": "M2",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "CONS210",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CLAVO",
+    "detalle": "2\"",
+    "unidad": "KG",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS211",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CLAVO",
+    "detalle": "2 1/2\"",
+    "unidad": "KG",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS222",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CEMENTO",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "LOMA NEGRA"
+  },
+  {
+    "codigo": "CONS223",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CEMENTO",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "HOLCIM"
+  },
+  {
+    "codigo": "CONS224",
+    "rubro": "ALBAÑILERÍA",
+    "item": "CAL",
+    "detalle": "30 KG",
+    "unidad": "BOLSA",
+    "marca": "CACIQUE"
+  },
+  {
+    "codigo": "CONS225",
+    "rubro": "ALBAÑILERÍA",
+    "item": "ARENA",
+    "detalle": "M3",
+    "unidad": "A GRANEL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS226",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PASTINA",
+    "detalle": "2 KG",
+    "unidad": "BOLSA",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "CONS227",
+    "rubro": "ALBAÑILERÍA",
+    "item": "PEGAMENTO",
+    "detalle": "30 KG",
+    "unidad": "BOLSA",
+    "marca": "CEMENTO AVELLANEDA"
+  },
+  {
+    "codigo": "CONS228",
+    "rubro": "ALBANILERIA",
+    "item": "LADRILLO",
+    "detalle": "HUECO 8*18*33",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS229",
+    "rubro": "ALBANILERIA",
+    "item": "LADRILLO",
+    "detalle": "HUECO 18*18*33",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS230",
+    "rubro": "ALBANILERIA",
+    "item": "LADRILLO",
+    "detalle": "PORTANTE 18*18*33",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS231",
+    "rubro": "ALBANILERIA",
+    "item": "BLOQUE",
+    "detalle": "CERAMICO 40*15*20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS232",
+    "rubro": "ALBANILERIA",
+    "item": "BLOQUE",
+    "detalle": "CERAMICO 40*20*20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS233",
+    "rubro": "ALBANILERIA",
+    "item": "BLOQUE",
+    "detalle": "HORMIGON 40*10*20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "CONS234",
+    "rubro": "ALBANILERIA",
+    "item": "BLOQUE",
+    "detalle": "HORMIGON 40*20*20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "EST101",
+    "rubro": "PLACAS",
+    "item": "OSB",
+    "detalle": "11MM",
+    "unidad": "PLACA",
+    "marca": "LP"
+  },
+  {
+    "codigo": "EST102",
+    "rubro": "PLACAS",
+    "item": "OSB",
+    "detalle": "15MM",
+    "unidad": "PLACA",
+    "marca": "LP"
+  },
+  {
+    "codigo": "EST103",
+    "rubro": "PLACAS",
+    "item": "OSB",
+    "detalle": "18MM",
+    "unidad": "PLACA",
+    "marca": "LP"
+  },
+  {
+    "codigo": "EST104",
+    "rubro": "PLACAS",
+    "item": "SUPERBOARD",
+    "detalle": "CEMENTICIA 15",
+    "unidad": "PLACA",
+    "marca": "ETERNIT"
+  },
+  {
+    "codigo": "EST105",
+    "rubro": "PLACAS",
+    "item": "SUPERBOARD",
+    "detalle": "CEMENTICIA 8",
+    "unidad": "PLACA",
+    "marca": "ETERNIT"
+  },
+  {
+    "codigo": "EST106",
+    "rubro": "PLACAS",
+    "item": "SUPERBOARD",
+    "detalle": "CEMENTICIA 6",
+    "unidad": "PLACA",
+    "marca": "ETERNIT"
+  },
+  {
+    "codigo": "EST107",
+    "rubro": "AISLACIONES",
+    "item": "BARRERA AGUA Y VIENTO",
+    "detalle": "0,91X30,5",
+    "unidad": "ROLLO",
+    "marca": "TYPAR"
+  },
+  {
+    "codigo": "EST108",
+    "rubro": "PLACAS",
+    "item": "AQUAPANEL",
+    "detalle": "12MM",
+    "unidad": "PLACA",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "EST109",
+    "rubro": "PLACAS",
+    "item": "AQUAPANEL",
+    "detalle": "8MM",
+    "unidad": "PLACA",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "EST110",
+    "rubro": "AISLACIONES",
+    "item": "BARRERA AGUA Y VIENTO",
+    "detalle": "CINTA TOMA JUNTAS 22,9 MTS",
+    "unidad": "ROLLO",
+    "marca": "TYPAR"
+  },
+  {
+    "codigo": "EST111",
+    "rubro": "AISLACIONES",
+    "item": "BARRERA AGUA Y VIENTO",
+    "detalle": "CINTA FLEX 22,8 MTS",
+    "unidad": "ROLLO",
+    "marca": "TYPAR"
+  },
+  {
+    "codigo": "EST112",
+    "rubro": "AISLACIONES",
+    "item": "BARRERA AGUA Y VIENTO",
+    "detalle": "2,74X45,7",
+    "unidad": "ROLLO",
+    "marca": "TYPAR"
+  },
+  {
+    "codigo": "EST113",
+    "rubro": "AISLACIONES",
+    "item": "BARRERA AGUA Y VIENTO",
+    "detalle": "1X30",
+    "unidad": "ROLLO",
+    "marca": "WICHI"
+  },
+  {
+    "codigo": "EST114",
+    "rubro": "PLACAS",
+    "item": "OSB",
+    "detalle": "18MM",
+    "unidad": "PLACA",
+    "marca": "LP"
+  },
+  {
+    "codigo": "EST115",
+    "rubro": "TERMINACIONES",
+    "item": "PANEL PARA TABIQUE",
+    "detalle": "SKINPUR50MM NEGRO - MICRORIB X 3M",
+    "unidad": "M2",
+    "marca": "DUOPANEL"
+  },
+  {
+    "codigo": "EST116",
+    "rubro": "TERMINACIONES",
+    "item": "PANEL PARA CUBIERTA",
+    "detalle": "MAXIMA 15MM NEGRO X 4M",
+    "unidad": "M2",
+    "marca": "DUOPANEL"
+  },
+  {
+    "codigo": "HIE001",
+    "rubro": "HIERRO",
+    "item": "UPN",
+    "detalle": "U 60",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE002",
+    "rubro": "HIERRO",
+    "item": "UPN",
+    "detalle": "U 120",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE003",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECT",
+    "detalle": "50*150*3",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE004",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "100*100*2",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE005",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECT",
+    "detalle": "50*100*2",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE006",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "20*20*1,6",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE007",
+    "rubro": "HIERRO",
+    "item": "PLANCHUELA",
+    "detalle": "6*3/16",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE008",
+    "rubro": "HIERRO",
+    "item": "ANGULO",
+    "detalle": "11/2* 3/16\"",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE009",
+    "rubro": "VARIOS",
+    "item": "MOTOR LEVADIZO",
+    "detalle": "1\" * 3/16\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE010",
+    "rubro": "VARIOS",
+    "item": "PORTON LEVADIZO",
+    "detalle": "2,60 * 3",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE011",
+    "rubro": "VARIOS",
+    "item": "KIT COLUMNA 3\" MOLDURA",
+    "detalle": "2,40 * 3\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE012",
+    "rubro": "HIERRO",
+    "item": "CAÑO REDONDO",
+    "detalle": "2,5\" x 2mm",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE013",
+    "rubro": "HIERRO",
+    "item": "PLANCHUELA",
+    "detalle": "4\" * 1/4",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE014",
+    "rubro": "HIERRO",
+    "item": "PLANCHUELA",
+    "detalle": "1\" 1/4 * 1/4",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE015",
+    "rubro": "HIERRO",
+    "item": "IPN",
+    "detalle": "260",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE016",
+    "rubro": "HERRERÍA",
+    "item": "FRENTE PARRILLA",
+    "detalle": "2.3",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE017",
+    "rubro": "HERRERÍA",
+    "item": "CAMPANA CON TIRAJE AMERICANO",
+    "detalle": "1,50*3,00",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE018",
+    "rubro": "HERRERÍA",
+    "item": "TAPA INSPECCIÓN",
+    "detalle": "60*60",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE019",
+    "rubro": "HERRERÍA",
+    "item": "PUERTAS PLEGADIZAS",
+    "detalle": "1,70*3,90",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE020",
+    "rubro": "HERRERÍA",
+    "item": "GABINETE PILETA",
+    "detalle": "3,00*1,00",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE021",
+    "rubro": "HERRERÍA",
+    "item": "GABINETE CERRAMIENTO",
+    "detalle": "2.55m x 2.20m",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE022",
+    "rubro": "HERRERÍA",
+    "item": "PUERTAS DE CANILLA SERVICIO",
+    "detalle": "0,20*,30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE023",
+    "rubro": "HERRERÍA",
+    "item": "PUERTA GALPONERA DEPÓSITO",
+    "detalle": "0,90*2,20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE024",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECT",
+    "detalle": "30*50*1.2",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE025",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECT",
+    "detalle": "100*50*1.6",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE026",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "70*70*3.25",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE027",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "100*100*3.25",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE028",
+    "rubro": "CHAPA",
+    "item": "CHAPA NEGRA",
+    "detalle": "CAL.18 3000*1500",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE029",
+    "rubro": "HIERRO",
+    "item": "PLANCHUELA",
+    "detalle": "2\"*1/8",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE030",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "50*20*2",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE031",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "100*50*3MM",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE032",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "40*40*1.25",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE033",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "80*40*1,6",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE034",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "100*40*1,6",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE035",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "60*40*2",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE036",
+    "rubro": "HERRERÍA",
+    "item": "ABERTURA FRONTAL GABINETE",
+    "detalle": "1,80*0,90 - (MODULO) C18",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE037",
+    "rubro": "HERRERÍA",
+    "item": "ABERTURA GABINETE",
+    "detalle": "1,52*2,20 - (MODULO) C18",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE038",
+    "rubro": "HIERRO",
+    "item": "IPN",
+    "detalle": "200",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE039",
+    "rubro": "HIERRO",
+    "item": "IPN",
+    "detalle": "90 *",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE040",
+    "rubro": "HERRERÍA",
+    "item": "REJILLA VENTILACION",
+    "detalle": "0.85m x 1.5m",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE041",
+    "rubro": "HERRERÍA",
+    "item": "PUERTA DE HIERRO",
+    "detalle": "0.80m x 2.60 - con vidrio",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE042",
+    "rubro": "HERRERÍA",
+    "item": "CERRAMIENTO VIDRIO REPARTIDO",
+    "detalle": "ABERTURA PLEGABLE CON VIDRIO LAMINADO 3+3",
+    "unidad": "ML",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE043",
+    "rubro": "HERRERÍA",
+    "item": "HERRERÍA BAJO MESADA",
+    "detalle": "2.16m x 0.80m - CHAPA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE044",
+    "rubro": "HERRERÍA",
+    "item": "CERRAMIENTO VIDRIO REPARTIDO",
+    "detalle": "PUERTA ESTILO GRANERO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "HIE046",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "100*100*2",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE047",
+    "rubro": "HIERRO",
+    "item": "PERFIL U",
+    "detalle": "200*3,25",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE048",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "100*50*2MM",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE049",
+    "rubro": "HIERRO",
+    "item": "IPN",
+    "detalle": "120",
+    "unidad": "12 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE050",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "80X80 2mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE051",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "140*60 3,2mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE052",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "140*60 2mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE053",
+    "rubro": "HIERRO",
+    "item": "CAÑO CUADRADO",
+    "detalle": "80*40 1.6mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE054",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "60*40 2mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "HIE055",
+    "rubro": "HIERRO",
+    "item": "CAÑO RECTANGULAR",
+    "detalle": "80X80 1,6mm",
+    "unidad": "6 MTS",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "INS001",
+    "rubro": "INSUMOS",
+    "item": "Guantes",
+    "detalle": "ENGOMADOS ANTICORTE STEELPRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS002",
+    "rubro": "INSUMOS",
+    "item": "Discos Corte Sensitiva",
+    "detalle": "DEWALT",
+    "unidad": "UN",
+    "marca": "TYROLIT"
+  },
+  {
+    "codigo": "INS003",
+    "rubro": "INSUMOS",
+    "item": "Discos Corte amoladora G",
+    "detalle": "9\"",
+    "unidad": "UN",
+    "marca": "TYROLIT"
+  },
+  {
+    "codigo": "INS004",
+    "rubro": "INSUMOS",
+    "item": "Discos Corte amoladora C",
+    "detalle": "4 1/2\"",
+    "unidad": "UN",
+    "marca": "TYROLIT"
+  },
+  {
+    "codigo": "INS005",
+    "rubro": "INSUMOS",
+    "item": "DISCO CORTE CIRCULAR MADERA",
+    "detalle": "7\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS006",
+    "rubro": "INSUMOS",
+    "item": "Puntas Atornilladoras",
+    "detalle": "PH2 1/4*50mm *5",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS007",
+    "rubro": "INSUMOS",
+    "item": "Cintas medición",
+    "detalle": "8 MTS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS008",
+    "rubro": "INSUMOS",
+    "item": "Lapices",
+    "detalle": "CARPINTERO * 12",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS009",
+    "rubro": "INSUMOS",
+    "item": "Marcadores",
+    "detalle": "INDELEBLE COLOR EDDING 100 * 10",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS010",
+    "rubro": "INSUMOS",
+    "item": "Trincheta",
+    "detalle": "TRAPEZOIDAL STANLEY",
+    "unidad": "UN",
+    "marca": "STANLEY"
+  },
+  {
+    "codigo": "INS011",
+    "rubro": "INSUMOS",
+    "item": "repuesto trincheta",
+    "detalle": "TRAPEZOIDAL X 100",
+    "unidad": "UN",
+    "marca": "STANLEY"
+  },
+  {
+    "codigo": "INS012",
+    "rubro": "INSUMOS",
+    "item": "Anteojos protección",
+    "detalle": "ESTANDAR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS013",
+    "rubro": "INSUMOS",
+    "item": "Ganchos grampa",
+    "detalle": "stanley 3/8 * 1000",
+    "unidad": "UN",
+    "marca": "PAMPERO"
+  },
+  {
+    "codigo": "INS014",
+    "rubro": "INSUMOS",
+    "item": "Puntas hexagonales",
+    "detalle": "5/16 * 10",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS015",
+    "rubro": "INSUMOS",
+    "item": "CINTA SCOTCH",
+    "detalle": "2\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS016",
+    "rubro": "PINTURAS",
+    "item": "Lijas",
+    "detalle": "18/220/360 * 10",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS017",
+    "rubro": "PINTURAS",
+    "item": "Rodillos",
+    "detalle": "PELO LARGO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS017",
+    "rubro": "PINTURAS",
+    "item": "Rodillos",
+    "detalle": "PELO CORTO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS018",
+    "rubro": "PINTURAS",
+    "item": "Pinceles",
+    "detalle": "1\"/2\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS020",
+    "rubro": "INDUMENTARIA",
+    "item": "Gorra",
+    "detalle": "CON BORDADO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS021",
+    "rubro": "INDUMENTARIA",
+    "item": "Remera",
+    "detalle": "ESTAMPADA COLOR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS022",
+    "rubro": "INDUMENTARIA",
+    "item": "Pantalón",
+    "detalle": "CARGO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS023",
+    "rubro": "INDUMENTARIA",
+    "item": "Buzo",
+    "detalle": "ESTAMPADO COLOR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS024",
+    "rubro": "INDUMENTARIA",
+    "item": "Borcegos",
+    "detalle": "CON PUNTERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS025",
+    "rubro": "PINTURAS",
+    "item": "SELLADOR",
+    "detalle": "POLIURETANICO NEGRO",
+    "unidad": "UN",
+    "marca": "SIKA"
+  },
+  {
+    "codigo": "INS026",
+    "rubro": "PINTURAS",
+    "item": "SELLADOR",
+    "detalle": "POLIURETANICO GRIS",
+    "unidad": "UN",
+    "marca": "SIKA"
+  },
+  {
+    "codigo": "INS027",
+    "rubro": "INDUMENTARIA",
+    "item": "Medias",
+    "detalle": "ABRIGO PACK * 5",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS028",
+    "rubro": "INDUMENTARIA",
+    "item": "Botas",
+    "detalle": "GOMA CON PUNTERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS029",
+    "rubro": "VARIOS",
+    "item": "FLETES",
+    "detalle": "Camioneta F-100",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS030",
+    "rubro": "INDUMENTARIA",
+    "item": "Bermuda",
+    "detalle": "CARGO PAMPERO",
+    "unidad": "UN",
+    "marca": "PAMPERO"
+  },
+  {
+    "codigo": "INS031",
+    "rubro": "FERRETERÍA",
+    "item": "MEDIA SOMBRA",
+    "detalle": "50 MTS",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS032",
+    "rubro": "FERRETERÍA",
+    "item": "ALAMBRE SAN MARTIN",
+    "detalle": "17/15/250 mts",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS033",
+    "rubro": "INSUMOS",
+    "item": "ENGRAMPADORA",
+    "detalle": "Stanley aluminum",
+    "unidad": "UN",
+    "marca": "STANLEY"
+  },
+  {
+    "codigo": "INS034",
+    "rubro": "INSUMOS",
+    "item": "SELLADOR",
+    "detalle": "SILICONA NEUTRA",
+    "unidad": "UN",
+    "marca": "SUPRABOND"
+  },
+  {
+    "codigo": "INS035",
+    "rubro": "INSUMOS",
+    "item": "DISCO CORTE PORCELANATO",
+    "detalle": "ALIAFOR TURBO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS036",
+    "rubro": "INSUMOS",
+    "item": "DISCO DE CORTE AMOLADORA",
+    "detalle": "WOODIE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS037",
+    "rubro": "INSUMOS",
+    "item": "ARCO DE COLOCACIÓN",
+    "detalle": "NIVEL ESPACIADOR 1,5MM X 100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS038",
+    "rubro": "TERMINACIONES",
+    "item": "MOLDURA DE EPS INTERIOR",
+    "detalle": "ATENNEAS CORNISA AT35 X 2MTS",
+    "unidad": "UN",
+    "marca": "ATTENEAS"
+  },
+  {
+    "codigo": "INS039",
+    "rubro": "INSUMOS",
+    "item": "FILTRO DE ESPUMA",
+    "detalle": "30CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS040",
+    "rubro": "INSUMOS",
+    "item": "RECARGA DE GAS MEZCLA",
+    "detalle": "1M3",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS041",
+    "rubro": "INSUMOS",
+    "item": "DILUYENTE",
+    "detalle": "AGUARRAS",
+    "unidad": "4LTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS042",
+    "rubro": "INSUMOS",
+    "item": "THINNER",
+    "detalle": "LATA SELLO DE ORO",
+    "unidad": "4LTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS043",
+    "rubro": "INSUMOS",
+    "item": "ESTOPA",
+    "detalle": "BLANCA DE LUSTRE ABSORBENTE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS044",
+    "rubro": "PINTURAS",
+    "item": "LATEX COLOR INTERIOR",
+    "detalle": "COLOR VERDE MUSGO",
+    "unidad": "4LTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS045",
+    "rubro": "INSUMOS",
+    "item": "CINTA DE PAPEL",
+    "detalle": "PARA PINTAR - 40MM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INS046",
+    "rubro": "INSUMOS",
+    "item": "DISCO DE DESBASTE",
+    "detalle": "FLAP 4 1/2  grano 120",
+    "unidad": "UN",
+    "marca": "TYROLIT"
+  },
+  {
+    "codigo": "INS047",
+    "rubro": "INSUMOS",
+    "item": "ALAMBRE PARA SOLDAR MIG",
+    "detalle": "0,9MM X 5KG",
+    "unidad": "ROLLO",
+    "marca": "LUSQTOFF"
+  },
+  {
+    "codigo": "INS048",
+    "rubro": "TERMINACIONES",
+    "item": "FIJACION MEDIA SOMBRA GANCHO GRAMPA",
+    "detalle": "100 UNIDADES",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE001",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TABLERO ROCKER",
+    "detalle": "CAJA 36 BOCAS",
+    "unidad": "UN",
+    "marca": "ROKER"
+  },
+  {
+    "codigo": "INSTE002",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TABLERO ROCKER",
+    "detalle": "CAJA 24 BOCAS",
+    "unidad": "UN",
+    "marca": "ROKER"
+  },
+  {
+    "codigo": "INSTE003",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TABLERO ROCKER",
+    "detalle": "CAJA 16 BOCAS",
+    "unidad": "UN",
+    "marca": "ROKER"
+  },
+  {
+    "codigo": "INSTE004",
+    "rubro": "I. ELÉCTRICA",
+    "item": "DISYUNTOR",
+    "detalle": "4X63AMP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE005",
+    "rubro": "I. ELÉCTRICA",
+    "item": "DISYUNTOR",
+    "detalle": "4X32AMP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE006",
+    "rubro": "I. ELÉCTRICA",
+    "item": "DISYUNTOR",
+    "detalle": "2X32AMP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE007",
+    "rubro": "I. ELÉCTRICA",
+    "item": "DISYUNTOR",
+    "detalle": "2X25AMP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE008",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TÉRMICA",
+    "detalle": "4x32A",
+    "unidad": "UN",
+    "marca": "MOELLER"
+  },
+  {
+    "codigo": "INSTE009",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TÉRMICA",
+    "detalle": "2x32A",
+    "unidad": "UN",
+    "marca": "MOELLER"
+  },
+  {
+    "codigo": "INSTE010",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TÉRMICA",
+    "detalle": "2x16A 4,5KA",
+    "unidad": "UN",
+    "marca": "MOELLER"
+  },
+  {
+    "codigo": "INSTE011",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TÉRMICA",
+    "detalle": "2x10A 4,5KA",
+    "unidad": "UN",
+    "marca": "MOELLER"
+  },
+  {
+    "codigo": "INSTE012",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CONTACTOR",
+    "detalle": "MONOFÁSICO 2*24",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE013",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TIMMER",
+    "detalle": "PARA RIEL DIN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE014",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CONECTOR",
+    "detalle": "3/4\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE015",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CONECTOR",
+    "detalle": "7/8\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE016",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CONECTOR",
+    "detalle": "1\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE017",
+    "rubro": "I. ELÉCTRICA",
+    "item": "EMPALME",
+    "detalle": "3/4\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE018",
+    "rubro": "I. ELÉCTRICA",
+    "item": "EMPALME",
+    "detalle": "7/8\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE019",
+    "rubro": "I. ELÉCTRICA",
+    "item": "EMPALME",
+    "detalle": "1\" METÁLICO *100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE020",
+    "rubro": "I. ELÉCTRICA",
+    "item": "JABALINA",
+    "detalle": "KIT 3/8\"",
+    "unidad": "UN",
+    "marca": "ARGENJAB"
+  },
+  {
+    "codigo": "INSTE021",
+    "rubro": "I. ELÉCTRICA",
+    "item": "JABALINA",
+    "detalle": "KIT 3/4\"",
+    "unidad": "UN",
+    "marca": "ARGENJAB"
+  },
+  {
+    "codigo": "INSTE022",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO CORRUGADO",
+    "detalle": "3/4\" PVC PESADO IGNIFUGO",
+    "unidad": "25 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE023",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO CORRUGADO",
+    "detalle": "7/8\" PVC PESADO IGNIFUGO",
+    "unidad": "25 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE024",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO CORRUGADO",
+    "detalle": "1\" PVC PESADO IGNIFUGO",
+    "unidad": "25 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE025",
+    "rubro": "I. ELÉCTRICA",
+    "item": "GRAMPA OMEGA",
+    "detalle": "3/4\" * 100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE026",
+    "rubro": "I. ELÉCTRICA",
+    "item": "GRAMPA OMEGA",
+    "detalle": "7/8\" * 100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE027",
+    "rubro": "I. ELÉCTRICA",
+    "item": "GRAMPA OMEGA",
+    "detalle": "1\" * 100",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE028",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "MIGNON PVC",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE029",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "10*5 PVC",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE030",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "OCT PVC",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE031",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "ESTANCA 11*11",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE032",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "ESTANCA 15*15",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE033",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "ESTANCA 20*20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE034",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE SINTENAX",
+    "detalle": "4*6",
+    "unidad": "MTS",
+    "marca": "SINTENAX"
+  },
+  {
+    "codigo": "INSTE035",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE SINTENAX",
+    "detalle": "4*10",
+    "unidad": "MTS",
+    "marca": "SINTENAX"
+  },
+  {
+    "codigo": "INSTE036",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE SINTENAX",
+    "detalle": "2*10",
+    "unidad": "MTS",
+    "marca": "SINTENAX"
+  },
+  {
+    "codigo": "INSTE037",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE SINTENAX",
+    "detalle": "2*6",
+    "unidad": "MTS",
+    "marca": "SINTENAX"
+  },
+  {
+    "codigo": "INSTE038",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE",
+    "detalle": "6MM * 100",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE039",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE",
+    "detalle": "4MM * 100",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE040",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE",
+    "detalle": "2,5MM * 100",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE041",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE",
+    "detalle": "1,5MM * 100",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE042",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE",
+    "detalle": "1MM * 100",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE043",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE PARALELO",
+    "detalle": "2 X 0,75",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE044",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE TELEFÓNICO",
+    "detalle": "5 PARES x100M",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE045",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TOMA",
+    "detalle": "SIMPLE CAMBRE SXXII",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE046",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TOMA",
+    "detalle": "DOBLE CAMBRE SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE047",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TECLA DOBLE",
+    "detalle": "CAMBRE SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE048",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TOMA DOBLE",
+    "detalle": "ENCAPSULADO CAMBRE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE049",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CINTA AISLADORA",
+    "detalle": "3M * 20METROS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE050",
+    "rubro": "I. ELÉCTRICA",
+    "item": "PRESINTOS",
+    "detalle": "300MM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE051",
+    "rubro": "I. ELÉCTRICA",
+    "item": "ARTEFACTOS ILUMINACIÓN PILETA",
+    "detalle": "Luces Pooled Nazar 3 Unidades + Trafo + Control",
+    "unidad": "KIT",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE052",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO COMBINACION",
+    "detalle": "10A BLANCO SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE053",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO PUNTO",
+    "detalle": "10A BLANCO SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE054",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "10A BLANCO SXXI - SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE055",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "20A BLANCO SXXI - SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE056",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR MIGNON",
+    "detalle": "5x5 SXXI - SXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE057",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR RECTANGULAR",
+    "detalle": "10x5 SXXI - SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE058",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA",
+    "detalle": "ESTANCA 10*10",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE059",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TÉRMICA",
+    "detalle": "2x20A 4,5KA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE060",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TAPA",
+    "detalle": "MIGNON CIEGA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE061",
+    "rubro": "I. ELÉCTRICA",
+    "item": "JABALINA",
+    "detalle": "1/2 1500MM L14",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE062",
+    "rubro": "I. ELÉCTRICA",
+    "item": "JABALINA T-CABLE",
+    "detalle": "T-2 L14-L16",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE063",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CONTACTOR",
+    "detalle": "TRIPOLAR 12A",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE064",
+    "rubro": "I. ELÉCTRICA",
+    "item": "FLOTANTE AUTOMATICO",
+    "detalle": "TANQUE AGUA VIYILANT 1,5M",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE065",
+    "rubro": "I. ELÉCTRICA",
+    "item": "UNION TUBO",
+    "detalle": "PVC 22mm",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE066",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA p/TERMICAS",
+    "detalle": "DNI 8MODS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE067",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TAPA",
+    "detalle": "10x5 4MODS SXXII",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE068",
+    "rubro": "I. ELÉCTRICA",
+    "item": "KIT SOLAR UPS",
+    "detalle": "Inversor Cargador 5kw / 10kw 4.8kwh Renogen",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE069",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE TELEFÓNICO",
+    "detalle": "6 PARES x100M",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE070",
+    "rubro": "I. ELÉCTRICA",
+    "item": "RELOJ PROGRAMABLE DIGITAL",
+    "detalle": "DIN SICA",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "INSTE071",
+    "rubro": "I. ELÉCTRICA",
+    "item": "LAMPARA LED PILETA",
+    "detalle": "VULCANO RGB",
+    "unidad": "UN",
+    "marca": "VULCANO"
+  },
+  {
+    "codigo": "INSTE072",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CABLE PARALELO",
+    "detalle": "2*1/2 * 100M",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE073",
+    "rubro": "I. ELÉCTRICA",
+    "item": "GABINETE MEDIDOR",
+    "detalle": "TRIFÁSICO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE074",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO BAJADA MEDIDOR CON PIPETA",
+    "detalle": "1 1/2 X 3MTS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE075",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BANDEJA PORTACABLES",
+    "detalle": "15 X 150MM",
+    "unidad": "3 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE076",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA PARA TOMA + TOMA DOBLE",
+    "detalle": "EXTERIOR",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE077",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO RIGIDO DE PVC SEMIPESADO",
+    "detalle": "20MM",
+    "unidad": "3 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE078",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CURVA 7/8 PVC RIGIDO",
+    "detalle": "22MM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE079",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAJA + LLAVE ARMADA",
+    "detalle": "EXTERIOR",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE080",
+    "rubro": "I. ELÉCTRICA",
+    "item": "ARTEFACTO ILUMINACION EXTERIOR",
+    "detalle": "BIDIRECCIONAL - 8CM x 17CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE081",
+    "rubro": "I. ELÉCTRICA",
+    "item": "PLAFON SPOT",
+    "detalle": "DICROICA - MOVIL",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE082",
+    "rubro": "I. ELÉCTRICA",
+    "item": "SPOT TACHO",
+    "detalle": "AR11 - MOVIL",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE083",
+    "rubro": "I. ELÉCTRICA",
+    "item": "CAÑO MANGUERA AZUL",
+    "detalle": "ROLLO",
+    "unidad": "25 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE084",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TECLA",
+    "detalle": "CAMBRE BAUHAUS",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE085",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "10AM CAMBRE BAUHAUS",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE086",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "20AM CAMBRE BAUHAUS",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE087",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TAPA",
+    "detalle": "BAUHAUS",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE088",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR",
+    "detalle": "BAUHAUS 10X5",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE089",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR",
+    "detalle": "BAUHAUS MIGNON",
+    "unidad": "UN",
+    "marca": "CAMBRE"
+  },
+  {
+    "codigo": "INSTE090",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TECLA",
+    "detalle": "JELUZ PLATINUM",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE091",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "10AM JELUZ PLATINUM",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE092",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TOMA",
+    "detalle": "20AM JELUZ PLATINUM",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE093",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TAPA",
+    "detalle": "JELUZ PLATINUM",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE094",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR",
+    "detalle": "JELUZ PLATINUM 10X5",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE095",
+    "rubro": "I. ELÉCTRICA",
+    "item": "BASTIDOR",
+    "detalle": "JELUZ PLATINUM MIGNON",
+    "unidad": "UN",
+    "marca": "JELUZ"
+  },
+  {
+    "codigo": "INSTE096",
+    "rubro": "I. ELÉCTRICA",
+    "item": "GABINETE CON TABLERO",
+    "detalle": "TABLERO NH",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE097",
+    "rubro": "I. ELÉCTRICA",
+    "item": "DISYUNTOR",
+    "detalle": "ALTA SENSIBILIDAD",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE098",
+    "rubro": "I. ELÉCTRICA",
+    "item": "LLAVE SELECTORA",
+    "detalle": "",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE099",
+    "rubro": "I. ELÉCTRICA",
+    "item": "OJO DE BUEY",
+    "detalle": "",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE100",
+    "rubro": "I. ELÉCTRICA",
+    "item": "MODULO TECLA INALAMBRICA",
+    "detalle": "1 Punto Cinetica +controlador Macroled",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTE101",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TIRA LED",
+    "detalle": "5M",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS001",
+    "rubro": "I. SANITARIA",
+    "item": "BIODIGESTOR",
+    "detalle": "Autolimpiante 600lt",
+    "unidad": "UN",
+    "marca": "WATERPLAST"
+  },
+  {
+    "codigo": "INSTS002",
+    "rubro": "I. SANITARIA",
+    "item": "POZO ABSORVENTE",
+    "detalle": "MANUAL",
+    "unidad": "UN",
+    "marca": ""
+  },
+  {
+    "codigo": "INSTS003",
+    "rubro": "I. SANITARIA",
+    "item": "CAMARA INSPECCIÓN CLOACAL",
+    "detalle": "DUKE",
+    "unidad": "UN",
+    "marca": "DUKE"
+  },
+  {
+    "codigo": "INSTS004",
+    "rubro": "I. SANITARIA",
+    "item": "CÁMARA DESGRASADORA",
+    "detalle": "TIGRE - CAPACIDAD 3L 56.7x30x41.5",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS005",
+    "rubro": "I. SANITARIA",
+    "item": "CAMARA INSPECCIÓN PLUVIAL",
+    "detalle": "DUKE",
+    "unidad": "UN",
+    "marca": "DUKE"
+  },
+  {
+    "codigo": "INSTS006",
+    "rubro": "I. SANITARIA",
+    "item": "TIGRE",
+    "detalle": "ARO PROLONGADOR",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS007",
+    "rubro": "I. SANITARIA",
+    "item": "DUKE",
+    "detalle": "ARO PROLONGADOR",
+    "unidad": "UN",
+    "marca": "DUKE"
+  },
+  {
+    "codigo": "INSTS008",
+    "rubro": "I. SANITARIA",
+    "item": "CÁMARA DE LODOS",
+    "detalle": "WATERPLAST",
+    "unidad": "UN",
+    "marca": "WATERPLAST"
+  },
+  {
+    "codigo": "INSTS009",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA LINEAL",
+    "detalle": "ACQUA 70CM - ATRIM",
+    "unidad": "UN",
+    "marca": "ATRIM"
+  },
+  {
+    "codigo": "INSTS010",
+    "rubro": "I. SANITARIA",
+    "item": "PLUVIAL FUNDICIONES CORDOBA",
+    "detalle": "EMBUDO 20X20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS011",
+    "rubro": "I. SANITARIA",
+    "item": "TANQUE DE AGUA",
+    "detalle": "TRICAPA 1000lts",
+    "unidad": "UN",
+    "marca": "ROTOPLAST"
+  },
+  {
+    "codigo": "INSTS012",
+    "rubro": "I. SANITARIA",
+    "item": "TANQUE DE AGUA",
+    "detalle": "TRICAPA 500lts",
+    "unidad": "UN",
+    "marca": "WATERPLAST"
+  },
+  {
+    "codigo": "INSTS013",
+    "rubro": "I. SANITARIA",
+    "item": "BOMBA ELEVADORA",
+    "detalle": "CENTRIFUGA 1HP",
+    "unidad": "UN",
+    "marca": "ROWA"
+  },
+  {
+    "codigo": "INSTS014",
+    "rubro": "I. SANITARIA",
+    "item": "TERMOTANQUE ELÉCTRICO",
+    "detalle": "RHEEM 125 LTS",
+    "unidad": "UN",
+    "marca": "RHEEM"
+  },
+  {
+    "codigo": "INSTS015",
+    "rubro": "I. SANITARIA",
+    "item": "COLECTOR",
+    "detalle": "4 BAJADAS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS016",
+    "rubro": "I. SANITARIA",
+    "item": "BOMBA PRESURIZADORA",
+    "detalle": "ROWA TANG SFL 20",
+    "unidad": "UN",
+    "marca": "ROWA"
+  },
+  {
+    "codigo": "INSTS017",
+    "rubro": "I. SANITARIA",
+    "item": "TANQUE DE AGUA",
+    "detalle": "CISTERNA 1000LT",
+    "unidad": "UN",
+    "marca": "ROTOPLAST"
+  },
+  {
+    "codigo": "INSTS018",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA PLUVIAL",
+    "detalle": "INDUSTRIA EDIGMA 15 CM GALVA",
+    "unidad": "UN",
+    "marca": "EDIGMA"
+  },
+  {
+    "codigo": "INSTS019",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "1*110",
+    "unidad": "1 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS020",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "2*110",
+    "unidad": "2 MTS",
+    "marca": "DURATOP"
+  },
+  {
+    "codigo": "INSTS021",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "4*110",
+    "unidad": "4 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS022",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "1*63",
+    "unidad": "1 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS023",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "2*63",
+    "unidad": "2 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS024",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "4*63",
+    "unidad": "4 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS025",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "1*50",
+    "unidad": "1 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS026",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "2*50",
+    "unidad": "2 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS027",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "4*50",
+    "unidad": "4 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS028",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "1*40",
+    "unidad": "1 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS029",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "2*40",
+    "unidad": "2 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS030",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO CLOACAL",
+    "detalle": "4*40",
+    "unidad": "4 MTS",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS031",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 HH",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS032",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 HH",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS033",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 HH",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS034",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 HH",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS035",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 MH",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS036",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 MH",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS037",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 MH",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS038",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 45 MH",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS039",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 MH",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS040",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 MH",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS041",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 MH",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS042",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 MH",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS043",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 HH",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS044",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 HH",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS045",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 HH",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS046",
+    "rubro": "I. SANITARIA",
+    "item": "CODO CLOACAL A 90 HH",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS047",
+    "rubro": "I. SANITARIA",
+    "item": "CODO ACOMETIDA",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS048",
+    "rubro": "I. SANITARIA",
+    "item": "RAMAL A 45",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS049",
+    "rubro": "I. SANITARIA",
+    "item": "RAMAL A 45",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS050",
+    "rubro": "I. SANITARIA",
+    "item": "RAMAL A 45",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS051",
+    "rubro": "I. SANITARIA",
+    "item": "REDUCCIÓN 110-63",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS052",
+    "rubro": "I. SANITARIA",
+    "item": "CUPLA",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS053",
+    "rubro": "I. SANITARIA",
+    "item": "CUPLA",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS054",
+    "rubro": "I. SANITARIA",
+    "item": "CUPLA",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS055",
+    "rubro": "I. SANITARIA",
+    "item": "CUPLA",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS056",
+    "rubro": "I. SANITARIA",
+    "item": "PILETA DE PATIO",
+    "detalle": "3 ENTRADAS",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS057",
+    "rubro": "I. SANITARIA",
+    "item": "PILETA DE PATIO",
+    "detalle": "7 ENTRADAS",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS058",
+    "rubro": "I. SANITARIA",
+    "item": "BOCA DE ACCESO",
+    "detalle": "63*50 3 ENTRADAS",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS059",
+    "rubro": "I. SANITARIA",
+    "item": "BOCA DE ACCESO",
+    "detalle": "50*110 PARA LOSA",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS060",
+    "rubro": "I. SANITARIA",
+    "item": "PILETA DE PATIO",
+    "detalle": "50*110*63 C SIFON PARA LOSA",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS061",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA HEMBRA",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS062",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA HEMBRA",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS063",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA HEMBRA",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS064",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA HEMBRA",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS065",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA MACHO",
+    "detalle": "40",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS066",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA MACHO",
+    "detalle": "50",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS067",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA MACHO",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS068",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA MACHO",
+    "detalle": "110",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS069",
+    "rubro": "I. SANITARIA",
+    "item": "LUBRICANTE",
+    "detalle": "AEROSOL GRANDE",
+    "unidad": "UN",
+    "marca": "AWADUCT"
+  },
+  {
+    "codigo": "INSTS070",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN12 / 20",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS071",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN12 / 25",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS072",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN12 / 32",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS073",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN12 / 50",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS074",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN20 / 20 X4",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS075",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN20 / 25 X4",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS076",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN20 / 32 X4",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS077",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "PN20 / 50 X4",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS078",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNION / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS079",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNION / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS080",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNION / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS081",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNION / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS082",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CURVA 90 / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS083",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CURVA 90 / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS084",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CURVA 90 / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS085",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 45 / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS086",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 45 / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS087",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 45 / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS088",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 45 / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS089",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 90 / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS090",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 90 / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS091",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 90 / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS092",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO 90 / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS093",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS094",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS095",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS096",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS097",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE REDUCCIÓN / 32*25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS098",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE REDUCCIÓN / 50*32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS099",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TEE REDUCCIÓN / 25*20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS100",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TAPA / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS101",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TAPA / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS102",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TAPA / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS103",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TAPA / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS104",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA H / 20*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS105",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA H / 25*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS106",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA H / 25*3/4",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS107",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA M / 20*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS108",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA M / 25*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS109",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "CODO CON ROSCA M / 25*3/4",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS110",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO M / 20*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS111",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO H / 20*3/8",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS112",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO H / 20*1/2",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS113",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO M / 25*3/4",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS114",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO H / 25*3/4",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS115",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO M / 32*1",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS116",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "TUBO H / 32*1",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS117",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "BUJE REDUCCIÓN / 25*20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS118",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "BUJE REDUCCIÓN / 32*20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS119",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "BUJE REDUCCIÓN / 32*25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS120",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "BUJE REDUCCIÓN / 50*32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS121",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNIÓN DOBLE MIXTA / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS122",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNIÓN DOBLE / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS123",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNIÓN DOBLE / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS124",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "UNIÓN DOBLE / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS125",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "SOBREPASO / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS126",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "SOBREPASO / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS127",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "SOBREPASO / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS128",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE DE PASO / 20",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS129",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE DE PASO / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS130",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS131",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE VÁLVULA ESFÉRICA / 1\" 1/2\"",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS132",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE VÁLVULA ESFÉRICA / 50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS133",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE VÁLVULA ESFÉRICA / 25",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS134",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN AGUA",
+    "detalle": "LLAVE VÁLVULA ESFÉRICA / 32",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS135",
+    "rubro": "I. SANITARIA",
+    "item": "CANILLA ESFÉRICA",
+    "detalle": "/ 3/4\"",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS136",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE PASO TOTAL",
+    "detalle": "1/2\" - MH - x35",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS137",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE PASO TOTAL",
+    "detalle": "3/4\" - MH - x50",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS138",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DE PISO",
+    "detalle": "ABIERTA 15*15",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS139",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DE PISO",
+    "detalle": "CIEGA 15*15",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS140",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TERMOFUSIÓN GAS / 20x4mts",
+    "unidad": "4 MTS",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS141",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TERMOFUSIÓN GAS / 25x4mts",
+    "unidad": "4 MTS",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS142",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TERMOFUSIÓN GAS / 32x4mts",
+    "unidad": "4 MTS",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS143",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO 90 / 20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS144",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO 90 / 25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS145",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO 90 / 32",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS146",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TEE / 20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS147",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TEE / 25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS148",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TEE / 32",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS149",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "UNION / 20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS150",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "UNION / 25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS151",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "UNION / 32",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS152",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "REDUCCIÓN / 25-20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS153",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "REDUCCIÓN / 32-25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS154",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "REDUCCIÓN / 32-20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS155",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO HEMBRA / 20*1/2",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS156",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO HEMBRA / 25*1/2",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS157",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO HEMBRA / 25*3/4",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS158",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO HEMBRA / 32*1",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS159",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TAPA / 20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS160",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TAPA / 25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS161",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "TAPA / 32",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS162",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "VALVULA ESFERICA / 20",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS163",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "VALVULA ESFERICA / 25",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS164",
+    "rubro": "I. GAS",
+    "item": "FUSIÓN GAS",
+    "detalle": "VALVULA ESFERICA / 32",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS165",
+    "rubro": "I. SANITARIA",
+    "item": "CAMARA SERTEC",
+    "detalle": "ENTERRADA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS166",
+    "rubro": "I. SANITARIA",
+    "item": "PERFORACION",
+    "detalle": "25 METROS",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS167",
+    "rubro": "I. SANITARIA",
+    "item": "FILTRO Y BOMBA PILETA C/ COLECTOR",
+    "detalle": "VULCANO VC30",
+    "unidad": "UN",
+    "marca": "VULCANO"
+  },
+  {
+    "codigo": "INSTS168",
+    "rubro": "I. SANITARIA",
+    "item": "CLIMATIZACIÓN PILETA",
+    "detalle": "32M2 DE SUP / 48.000 LITROS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS169",
+    "rubro": "I. SANITARIA",
+    "item": "FILTRO DE OSMOSIS INVERSA",
+    "detalle": "5 ETAPAS AQUA HOME",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS170",
+    "rubro": "I. SANITARIA",
+    "item": "FILTRO ABLANDADOR DE AGUA",
+    "detalle": "ELEKTRIM HF 2100 - FLUVIAL AF1500",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "INSTS171",
+    "rubro": "I. SANITARIA",
+    "item": "TIGRE",
+    "detalle": "BOCA DE ACCESO PVC 160X110X110 PLUVIAL",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS172",
+    "rubro": "I. SANITARIA",
+    "item": "TIGRE",
+    "detalle": "CAÑO PVC 3,2MM 160 4 MTS",
+    "unidad": "4 MTS",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS173",
+    "rubro": "I. SANITARIA",
+    "item": "SOMBRERO PVC",
+    "detalle": "63",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS174",
+    "rubro": "I. SANITARIA",
+    "item": "TEE",
+    "detalle": "BRONCE 3/4\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS175",
+    "rubro": "I. SANITARIA",
+    "item": "ENTRE ROSCA CON TUERCA",
+    "detalle": "BRONCE 1/2\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS176",
+    "rubro": "I. SANITARIA",
+    "item": "ENTRE ROSCA CON TUERCA",
+    "detalle": "BRONCE 3/4\"",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS177",
+    "rubro": "I. SANITARIA",
+    "item": "MARCO BRONDE C/REJILLA",
+    "detalle": "ACERO INOX. 12x12",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS178",
+    "rubro": "I. SANITARIA",
+    "item": "MARCO BRONCE C/TAPA",
+    "detalle": "ACERO INOX. 12x12",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS179",
+    "rubro": "I. SANITARIA",
+    "item": "CANILLA ESFÉRICA c/PICO",
+    "detalle": "PICO 1/2 x 3/4 MARIPOSA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS180",
+    "rubro": "I. SANITARIA",
+    "item": "CANILLA ESFÉRICA c/PICO",
+    "detalle": "PICO 3/4 x 1 MARIPOSA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS181",
+    "rubro": "I. SANITARIA",
+    "item": "TANQUE DE AGUA",
+    "detalle": "FLAT 1100lts",
+    "unidad": "UN",
+    "marca": "ROTOPLAST"
+  },
+  {
+    "codigo": "INSTS182",
+    "rubro": "I. SANITARIA",
+    "item": "TANQUE DE AGUA",
+    "detalle": "FLAT 750lts",
+    "unidad": "UN",
+    "marca": "ROTOPLAST"
+  },
+  {
+    "codigo": "INSTS183",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE MALLADO",
+    "detalle": "1/2x30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS184",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE MALLADO",
+    "detalle": "3/4x30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS185",
+    "rubro": "I. SANITARIA",
+    "item": "REJA 15x15",
+    "detalle": "FUNDICIÓN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS186",
+    "rubro": "I. SANITARIA",
+    "item": "TAPA 15x15",
+    "detalle": "FUNDICIÓN",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS187",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO 32 x RH 1",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS188",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "CODO 20 x RH 1/2",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS189",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "LLAVE ESFERICA PARA GAS CANDADO 3/4 - MH",
+    "unidad": "UN",
+    "marca": "FUSIOGAS"
+  },
+  {
+    "codigo": "INSTS190",
+    "rubro": "I. SANITARIA",
+    "item": "BAÑERA DE ACERO BLANCA ANTIDESLIZANTE",
+    "detalle": "170 X 070",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS191",
+    "rubro": "I. SANITARIA",
+    "item": "BOMBA SUMERGIBLE VASSER",
+    "detalle": "1HP c/ cable sumergible y emplame",
+    "unidad": "UN",
+    "marca": "VASSER"
+  },
+  {
+    "codigo": "INSTS192",
+    "rubro": "I. SANITARIA",
+    "item": "BOMBA SUMERGIBLE MOTORARG SUB4",
+    "detalle": "1HP c/ cable sumergible, emplame y tablero protec.",
+    "unidad": "UN",
+    "marca": "MOTORARG"
+  },
+  {
+    "codigo": "INSTS193",
+    "rubro": "I. SANITARIA",
+    "item": "KIT VULCANO",
+    "detalle": "TOMA DE FONDO + SKIMMER + VIROLAS + RETORNOS",
+    "unidad": "UN",
+    "marca": "VULCANO"
+  },
+  {
+    "codigo": "INSTS194",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑERÍA DE PVC",
+    "detalle": "50MM GRIS",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS195",
+    "rubro": "I. SANITARIA",
+    "item": "LLAVE DE PASO SOLDABLE",
+    "detalle": "50MM GRIS",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS196",
+    "rubro": "I. SANITARIA",
+    "item": "CODO PVC SOLDABLE",
+    "detalle": "50MM GRIS",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS197",
+    "rubro": "I. SANITARIA",
+    "item": "UNIÓN PVC SOLDABLE",
+    "detalle": "50MM GRIS",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS198",
+    "rubro": "I. SANITARIA",
+    "item": "TEE PVC SOLDABLE",
+    "detalle": "50MM GRIS",
+    "unidad": "UN",
+    "marca": "TIGRE"
+  },
+  {
+    "codigo": "INSTS199",
+    "rubro": "I. SANITARIA",
+    "item": "COLECTOR PVC SOLDABLE",
+    "detalle": "3 VÍAS 50 MM LACUS",
+    "unidad": "UN",
+    "marca": "LACUS"
+  },
+  {
+    "codigo": "INSTS200",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "TEE CON RED.EXT.CENT. 32-25-20",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS201",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "TEE CON RED. CENTRAL 32-25",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS202",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "FLEXIBLE 30 X 1/2",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS203",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "FLEXIBLE 30/70 1 1/4 (3/4*1/4)",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS204",
+    "rubro": "I. SANITARIA",
+    "item": "FUSIÓN GAS",
+    "detalle": "FLEXIBLE 3/8 - 40 A 105",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS205",
+    "rubro": "I. SANITARIA",
+    "item": "PUERTA NICHO GABINETE DE GAS",
+    "detalle": "STANDAR - 60 x 40",
+    "unidad": "UN",
+    "marca": "SIGAS"
+  },
+  {
+    "codigo": "INSTS206",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE MALLADO",
+    "detalle": "1\" - FACILITADOR INST. BOMBA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS207",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DE FUNDICION",
+    "detalle": "20X20",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "INSTS208",
+    "rubro": "I. SANITARIA",
+    "item": "SOPAPA PARA LAVATORIO",
+    "detalle": "ø40",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS209",
+    "rubro": "I. SANITARIA",
+    "item": "FLEXIBLE DESCARAGA DE BIDET",
+    "detalle": "ø40",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS210",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "110 X 3,2MM",
+    "unidad": "4 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS211",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 90 DE 110",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS212",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 90 DE 40",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS213",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 90 DE 160",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS214",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 45 DE 160",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS215",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 45 DE 110",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS216",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CODO A 45 DE 40",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS217",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CUPLA DE 110",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS218",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "CUPLA DE 160",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS219",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "RAMAL DE 110",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS220",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "RAMAL DE 160",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS221",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "REDUCCION 160 A 110",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS222",
+    "rubro": "I. SANITARIA",
+    "item": "MALLA DE ADVERTENCIA",
+    "detalle": "INSTALACIONES SUBTERRANEAS",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "INSTS223",
+    "rubro": "I. SANITARIA",
+    "item": "CAÑO PVC",
+    "detalle": "REDUCCION 110 A 63",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD001",
+    "rubro": "MADERAS",
+    "item": "VIGA",
+    "detalle": "3*12",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD002",
+    "rubro": "MADERAS",
+    "item": "VIGA",
+    "detalle": "3*8",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD003",
+    "rubro": "MADERAS",
+    "item": "VIGA",
+    "detalle": "3*6",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD004",
+    "rubro": "MADERAS",
+    "item": "CABIO",
+    "detalle": "2*6",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD005",
+    "rubro": "MADERAS",
+    "item": "CABIO",
+    "detalle": "2*4",
+    "unidad": "3,5 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD006",
+    "rubro": "MADERAS",
+    "item": "MACHIMBRE EUCA",
+    "detalle": "1*4",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD007",
+    "rubro": "MADERAS",
+    "item": "MACHIMBRE PINO",
+    "detalle": "1*6",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD008",
+    "rubro": "MADERAS",
+    "item": "TABLA SALIGNA",
+    "detalle": "1 X 6",
+    "unidad": "4 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD009",
+    "rubro": "PINTURAS",
+    "item": "DESENCOFRANTE",
+    "detalle": "SIKA SEPAROL",
+    "unidad": "20 LTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD010",
+    "rubro": "MADERAS",
+    "item": "LISTON SALIGNA",
+    "detalle": "2X1",
+    "unidad": "4 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD011",
+    "rubro": "MADERAS",
+    "item": "PUNTAL SALIGNA",
+    "detalle": "3x3x3,0",
+    "unidad": "TIRA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD012",
+    "rubro": "MADERAS",
+    "item": "MEDIO DURMIENTE QUEBRACHO",
+    "detalle": "200*23*06",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD013",
+    "rubro": "MADERAS",
+    "item": "DURMIENTE QUEBRACHO",
+    "detalle": "200*23*12",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD014",
+    "rubro": "MADERAS",
+    "item": "MEDIO DURMIENTE QUEBRACHO",
+    "detalle": "270*23*05",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD015",
+    "rubro": "MADERAS",
+    "item": "CLAVADERA SALIGNA",
+    "detalle": "2X2X3",
+    "unidad": "TIRA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD016",
+    "rubro": "MADERAS",
+    "item": "LISTON DE KIRI",
+    "detalle": "2X1",
+    "unidad": "TIRA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "MAD017",
+    "rubro": "MADERAS",
+    "item": "TABLA SALIGNA",
+    "detalle": "1 X 4",
+    "unidad": "4 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "P101",
+    "rubro": "PERFILES",
+    "item": "SOLERA 35",
+    "detalle": "2,6 MTS",
+    "unidad": "1 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P102",
+    "rubro": "PERFILES",
+    "item": "MONTANTE 35",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P103",
+    "rubro": "PERFILES",
+    "item": "OMEGA 35",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P104",
+    "rubro": "PERFILES",
+    "item": "SOLERA 70",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P105",
+    "rubro": "PERFILES",
+    "item": "MONTANTE 70",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P106",
+    "rubro": "PERFILES",
+    "item": "PERFIL PERIMETRAL CIELORASO SUSPENDIDO",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "P107",
+    "rubro": "PERFILES",
+    "item": "LARGUERO CIELORASO SUSPENDIDO",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "P108",
+    "rubro": "PERFILES",
+    "item": "TRAVESAÑO CIELORASO SUSPENDIDO",
+    "detalle": "2,6 MTS",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "P109",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100*1,60",
+    "detalle": "8,2 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P111",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU",
+    "detalle": "100*1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P112",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 100*0,94",
+    "detalle": "8,2 MTS",
+    "unidad": "PERFIL",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P113",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC",
+    "detalle": "250*2,04",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P114",
+    "rubro": "ESTRUCTURA",
+    "item": "PGO",
+    "detalle": "22MM",
+    "unidad": "3 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P115",
+    "rubro": "ESTRUCTURA",
+    "item": "CORREA C",
+    "detalle": "100*50*15*1,6",
+    "unidad": "12 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P116",
+    "rubro": "ESTRUCTURA",
+    "item": "PGO",
+    "detalle": "37 MM",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "P117",
+    "rubro": "ESTRUCTURA",
+    "item": "CORREA C",
+    "detalle": "120*50*20*2,0",
+    "unidad": "12 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PAISA001",
+    "rubro": "PARQUIZACIÓN",
+    "item": "TABLESTACADO",
+    "detalle": "QUEBRACHOS",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA002",
+    "rubro": "PARQUIZACIÓN",
+    "item": "VARIOS",
+    "detalle": "FIJACIONES",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA003",
+    "rubro": "PARQUIZACIÓN",
+    "item": "MOVIMIENTO SUELOS",
+    "detalle": "TIERRA NEGRA",
+    "unidad": "M3",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA004",
+    "rubro": "PARQUIZACIÓN",
+    "item": "PAISAJISMO",
+    "detalle": "PLANTAS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA005",
+    "rubro": "PARQUIZACIÓN",
+    "item": "RIEGO",
+    "detalle": "m2",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA006",
+    "rubro": "PARQUIZACIÓN",
+    "item": "GRAMA BAHIANA",
+    "detalle": "m2",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA007",
+    "rubro": "PARQUIZACIÓN",
+    "item": "BALDOSON ATERMICO BORDE",
+    "detalle": "UN 50*50",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA008",
+    "rubro": "PARQUIZACIÓN",
+    "item": "BALDOSON ATERMICO",
+    "detalle": "UN 50*50",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA009",
+    "rubro": "TERMINACIONES",
+    "item": "VENECITA LACUS",
+    "detalle": "m2",
+    "unidad": "CAJA",
+    "marca": "LACUS"
+  },
+  {
+    "codigo": "PAISA010",
+    "rubro": "PARQUIZACIÓN",
+    "item": "EXCAVACIÓN PISCINA",
+    "detalle": "40M3",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA011",
+    "rubro": "PARQUIZACIÓN",
+    "item": "PALMERA",
+    "detalle": "PINDÓ MEDIANA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA012",
+    "rubro": "PARQUIZACIÓN",
+    "item": "ARBOL FRUTAL",
+    "detalle": "LIMONERO 4 ESTACIONES",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA013",
+    "rubro": "TERMINACIONES",
+    "item": "CERCO PERIMETRAL PILETA",
+    "detalle": "REMOVIBLE - ALUMINIO / POLIESTER CON PVC 1m X1m",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PAISA014",
+    "rubro": "PARQUIZACIÓN",
+    "item": "VALVULA SOLENOIDE",
+    "detalle": "RAIN BIRD 1\" 100HV 24V",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PC000",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 250",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC001",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 200",
+    "detalle": "2,04",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC002",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 200",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC003",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 200",
+    "detalle": "1,29",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC004",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 150",
+    "detalle": "1,29",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC005",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 150",
+    "detalle": "2,00",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC006",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100",
+    "detalle": "1,29",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC007",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100",
+    "detalle": "SIN PUNCH 0,94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC008",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100",
+    "detalle": "0.94",
+    "unidad": "3,5 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC009",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 150",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC010",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC011",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 100",
+    "detalle": "CON PUNCH 0,94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC012",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 70",
+    "detalle": "CON PUNCH 0,94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PC013",
+    "rubro": "ESTRUCTURA",
+    "item": "PGC 150",
+    "detalle": "0.94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PERI001",
+    "rubro": "SEGURIDAD",
+    "item": "ALARMA",
+    "detalle": "CSC 4 SENSORES",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PERI002",
+    "rubro": "SEGURIDAD",
+    "item": "ALARMA",
+    "detalle": "CSC 10 SENSORES",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PERI003",
+    "rubro": "SEGURIDAD",
+    "item": "VIDEO",
+    "detalle": "4 CÁMARAS CON DISCO RIG.",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "PU001",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 250",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU002",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 200",
+    "detalle": "1,64",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU003",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 200",
+    "detalle": "1,29",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU004",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 150",
+    "detalle": "0.94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU005",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 100",
+    "detalle": "1,29",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU006",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 100",
+    "detalle": "0,94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "PU007",
+    "rubro": "ESTRUCTURA",
+    "item": "PGU 70",
+    "detalle": "0.94",
+    "unidad": "6 MTS",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "T001",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T1 HEX 10*3/4",
+    "detalle": "(4000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T002",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T1 MECHA 8*1/2",
+    "detalle": "(10.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T003",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T2 6*1 AGUJA",
+    "detalle": "(10.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T004",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T2 6*1 MECHA",
+    "detalle": "(8.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T005",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "TEL ALAS 8*1 1/4",
+    "detalle": "(6.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T006",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T3 8*1 1/2 AGUJA",
+    "detalle": "(5.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T007",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T4 6*1 1/2",
+    "detalle": "(5.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T008",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "CHAPA HEX 14*2 1/2 c/ARANDELA",
+    "detalle": "(1.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T009",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T4 AGUJA 6*2",
+    "detalle": "(3.500 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T010",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T2 6*1 1/8 MECHA",
+    "detalle": "(8.000 unidades)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T011",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "HEX 14*1/2 MAX",
+    "detalle": "UNIDAD",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T012",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "T3 6*1/2 AGUJA",
+    "detalle": "(6.500 unidaes)",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "T013",
+    "rubro": "ACCESORIO ESTRUCTURA",
+    "item": "AUTOP. MECHA 14*5",
+    "detalle": "UNIDAD",
+    "unidad": "UN",
+    "marca": "TEL"
+  },
+  {
+    "codigo": "TER101",
+    "rubro": "PINTURAS",
+    "item": "FIJADOR",
+    "detalle": "20 L",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER102",
+    "rubro": "PINTURAS",
+    "item": "LATEX",
+    "detalle": "INTERIOR 20LT",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER103",
+    "rubro": "INSUMOS",
+    "item": "SIKALASTIC 560",
+    "detalle": "10 LTS",
+    "unidad": "TACHO",
+    "marca": "SIKA"
+  },
+  {
+    "codigo": "TER104",
+    "rubro": "INSUMOS",
+    "item": "VELO GEOTEXTIL",
+    "detalle": "1 X 25",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER105",
+    "rubro": "PINTURAS",
+    "item": "REVESTIMIENTO PILETAS CAUCHO CLORADO",
+    "detalle": "20 LTS",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER110",
+    "rubro": "ALBAÑILERÍA",
+    "item": "BASECOAT",
+    "detalle": "30 KG",
+    "unidad": "BOLSA",
+    "marca": "WEBER"
+  },
+  {
+    "codigo": "TER111",
+    "rubro": "AISLACIONES",
+    "item": "EPS 20MM",
+    "detalle": "20KG",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER112",
+    "rubro": "AISLACIONES",
+    "item": "EPS 30MM",
+    "detalle": "20KG",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER113",
+    "rubro": "AISLACIONES",
+    "item": "EPS GRAFITO 30",
+    "detalle": "30 KG",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER114",
+    "rubro": "AISLACIONES",
+    "item": "EIFS",
+    "detalle": "ARANDELA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER115",
+    "rubro": "AISLACIONES",
+    "item": "MALLA F. VIDRIO",
+    "detalle": "160 GRS/5*5",
+    "unidad": "ROLLO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER116",
+    "rubro": "AISLACIONES",
+    "item": "EIFS",
+    "detalle": "PERFIL J PVC",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER117",
+    "rubro": "AISLACIONES",
+    "item": "PERFIL DE ARRANQUE",
+    "detalle": "ALUMINIO p/30MM",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER118",
+    "rubro": "AISLACIONES",
+    "item": "JUNTA DE DILATACIÓN",
+    "detalle": "PVC",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER119",
+    "rubro": "AISLACIONES",
+    "item": "CANTONERA PVC",
+    "detalle": "CHINA (GENERICA)",
+    "unidad": "PERFIL",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER120",
+    "rubro": "TERMINACIONES",
+    "item": "PIEDRA MEDIA",
+    "detalle": "27 KG",
+    "unidad": "TACHO",
+    "marca": "ANCLAFLEX"
+  },
+  {
+    "codigo": "TER121",
+    "rubro": "TERMINACIONES",
+    "item": "TEXTURADO",
+    "detalle": "BASE",
+    "unidad": "20 LTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER122",
+    "rubro": "TERMINACIONES",
+    "item": "MACHIMBRE PVC SIMIL MADERA",
+    "detalle": "25CM*9MM",
+    "unidad": "3 MTS",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER131",
+    "rubro": "TERMINACIONES",
+    "item": "SIDING TEXTURADO",
+    "detalle": "8MM*3,60*0,20",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER132",
+    "rubro": "TERMINACIONES",
+    "item": "SIDING COLOR",
+    "detalle": "8MM*3,60*0,20",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER133",
+    "rubro": "TERMINACIONES",
+    "item": "FAJAS TERMINACIÓN",
+    "detalle": "2,40*0,10 10mm",
+    "unidad": "PLACA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER134",
+    "rubro": "MADERAS",
+    "item": "CLAVADERAS",
+    "detalle": "2*1*4MTS",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER135",
+    "rubro": "MADERAS",
+    "item": "MACHIMBRE EUCA",
+    "detalle": "ESPESOR 1/2\"",
+    "unidad": "TABLA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER136",
+    "rubro": "PINTURAS",
+    "item": "INSUMOS",
+    "detalle": "X PINTAR",
+    "unidad": "",
+    "marca": ""
+  },
+  {
+    "codigo": "TER137",
+    "rubro": "PINTURAS",
+    "item": "PINTURA COLOR SIDING",
+    "detalle": "IMPERMEABILIZANTE COLOR 20 lts",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER138",
+    "rubro": "PINTURAS",
+    "item": "PINTURA COLOR MADERA",
+    "detalle": "ESMALTE COLOR 20 LTS",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER139",
+    "rubro": "PINTURAS",
+    "item": "PRESERVADOR MADERA",
+    "detalle": "PENTA 18 LTS",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER140",
+    "rubro": "TERMINACIONES",
+    "item": "MOLDURA EPS REVESTIDA",
+    "detalle": "Gremold Premium C0",
+    "unidad": "UN",
+    "marca": "GREMOLD"
+  },
+  {
+    "codigo": "TER141",
+    "rubro": "TERMINACIONES",
+    "item": "MOLDURA EPS REVESTIDA",
+    "detalle": "Gremold premium A0 x1M",
+    "unidad": "UN",
+    "marca": "GREMOLD"
+  },
+  {
+    "codigo": "TER142",
+    "rubro": "PINTURAS",
+    "item": "FIJADOR AL ACEITE",
+    "detalle": "AL AGUARRAS X 4LTS",
+    "unidad": "1 MTS",
+    "marca": "ALBA"
+  },
+  {
+    "codigo": "TER143",
+    "rubro": "PINTURAS",
+    "item": "LATEX",
+    "detalle": "CIELORASO 20LT",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER144",
+    "rubro": "PINTURAS",
+    "item": "LATEX",
+    "detalle": "LOXON SATINADO 20LT",
+    "unidad": "TACHO",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER145",
+    "rubro": "TERMINACIONES",
+    "item": "MOLDURA TELGOPOR",
+    "detalle": "ATENEA CORNISA 20X30 2MTS",
+    "unidad": "UN",
+    "marca": "ATTENEAS"
+  },
+  {
+    "codigo": "TER146",
+    "rubro": "TERMINACIONES",
+    "item": "ATRIM",
+    "detalle": "PROTECTOR ESCALÓN CROMO MATE x 2,50",
+    "unidad": "ML",
+    "marca": "ATRIM"
+  },
+  {
+    "codigo": "TER147",
+    "rubro": "TERMINACIONES",
+    "item": "ZÓCALO MADERA",
+    "detalle": "PINO 7CMX1/2 \"",
+    "unidad": "ML",
+    "marca": ""
+  },
+  {
+    "codigo": "TER201",
+    "rubro": "AISLACIONES",
+    "item": "SELLADOR POLIURETÁNICO",
+    "detalle": "SIKAFLEX 1A 600MM",
+    "unidad": "UN",
+    "marca": "SIKA"
+  },
+  {
+    "codigo": "TER202",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "COMPACT EVOLUTION 90X90",
+    "unidad": "M2",
+    "marca": "ILVA"
+  },
+  {
+    "codigo": "TER203",
+    "rubro": "TERMINACIONES",
+    "item": "ZÓCALO MADERA",
+    "detalle": "PZ95L X 2,75MTS",
+    "unidad": "ML",
+    "marca": "ARQUIPLAST"
+  },
+  {
+    "codigo": "TER204",
+    "rubro": "TERMINACIONES",
+    "item": "PISO CEMENTO ALIZADO",
+    "detalle": "KIT 8M2",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER205",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "MOOD 60X60",
+    "unidad": "M2",
+    "marca": "SAN LORENZO"
+  },
+  {
+    "codigo": "TER206",
+    "rubro": "TERMINACIONES",
+    "item": "PICAPORTE",
+    "detalle": "LIMAY",
+    "unidad": "UN",
+    "marca": "LIMAY"
+  },
+  {
+    "codigo": "TER207",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA PLACA",
+    "detalle": "Camden Gromanti MM 80/10",
+    "unidad": "UN",
+    "marca": "OBLACK"
+  },
+  {
+    "codigo": "TER208",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA PLACA",
+    "detalle": "NATIVA OBLAK",
+    "unidad": "UN",
+    "marca": "OBLACK"
+  },
+  {
+    "codigo": "TER209",
+    "rubro": "MUEBLES",
+    "item": "INTERIOR PLACARD",
+    "detalle": "3*2,6",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER210",
+    "rubro": "MUEBLES",
+    "item": "FRENTE PLACARD",
+    "detalle": "3*2,6",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER211",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA EXTERIOR",
+    "detalle": "INNOVA 1900 CEDRO",
+    "unidad": "UN",
+    "marca": "OBLACK"
+  },
+  {
+    "codigo": "TER212",
+    "rubro": "TERMINACIONES",
+    "item": "PISO VINILICO",
+    "detalle": "AUTOADHESIVO SIMIL MADERA",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER213",
+    "rubro": "TERMINACIONES",
+    "item": "ZÓCALO PVC",
+    "detalle": "3 MTS",
+    "unidad": "TIRA",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "TER214",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "VITE BLANCO APUANO",
+    "unidad": "M2",
+    "marca": "VITE"
+  },
+  {
+    "codigo": "TER215",
+    "rubro": "I. SANITARIA",
+    "item": "VENECITAS",
+    "detalle": "LACTUS",
+    "unidad": "",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER216",
+    "rubro": "I. SANITARIA",
+    "item": "PISO ATERMICO DECK",
+    "detalle": "ATERMICO MADERO",
+    "unidad": "M2",
+    "marca": "MADERO"
+  },
+  {
+    "codigo": "TER217",
+    "rubro": "I. SANITARIA",
+    "item": "BORDE ATERMICO DECK",
+    "detalle": "ATERMICO MADERO",
+    "unidad": "M2",
+    "marca": "MADERO"
+  },
+  {
+    "codigo": "TER218",
+    "rubro": "TERMINACIONES",
+    "item": "ZOCALO DE PVC",
+    "detalle": "8CM X 2,44MTS",
+    "unidad": "UN",
+    "marca": "ATRIM"
+  },
+  {
+    "codigo": "TER301",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO LARGO + MOCHILA",
+    "detalle": "VARIOS STD",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER302",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "FV ARIZONA - LAVATORIO",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER303",
+    "rubro": "I. SANITARIA",
+    "item": "ACCESORIOS DE BAÑO",
+    "detalle": "FV ARIZONA",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER304",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA DE BAÑO",
+    "detalle": "PIAZZA A117",
+    "unidad": "UN",
+    "marca": "PIAZZA"
+  },
+  {
+    "codigo": "TER305",
+    "rubro": "I. SANITARIA",
+    "item": "MAMPARA DUCHA",
+    "detalle": "DOS HOJAS CORREDIZA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER306",
+    "rubro": "I. SANITARIA",
+    "item": "ESPEJO",
+    "detalle": "5MM - precio final de presupuesto x 5 espejos Puerto 104",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER307",
+    "rubro": "MESADAS",
+    "item": "MARMOL CARRARA",
+    "detalle": "MESADA DE BAÑO",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER308",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DESAGÜE LINEAL",
+    "detalle": "TIGRE 70 CM",
+    "unidad": "UN",
+    "marca": "FLUENZA"
+  },
+  {
+    "codigo": "TER309",
+    "rubro": "I. SANITARIA",
+    "item": "DESAGÜE LAVATORIO CON SIFÓN",
+    "detalle": "CROMADO FV 0242.02",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER310",
+    "rubro": "MESADAS",
+    "item": "CUARZO",
+    "detalle": "BLANCO",
+    "unidad": "M2",
+    "marca": "MARMOTECH"
+  },
+  {
+    "codigo": "TER400",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "BLANCO DALLAS",
+    "unidad": "M2",
+    "marca": "GRANITO"
+  },
+  {
+    "codigo": "TER401",
+    "rubro": "ELECTRODOMÉSTICOS",
+    "item": "COCINA",
+    "detalle": "4 HORNALLAS",
+    "unidad": "UN",
+    "marca": "MARTIRI"
+  },
+  {
+    "codigo": "TER402",
+    "rubro": "ELECTRODOMÉSTICOS",
+    "item": "ANAFE ELÉCTRICO",
+    "detalle": "DOMEC AV46",
+    "unidad": "UN",
+    "marca": "DOMEC"
+  },
+  {
+    "codigo": "TER403",
+    "rubro": "ELECTRODOMÉSTICOS",
+    "item": "HORNO ELÉCTRICO",
+    "detalle": "DOMEC HEX16",
+    "unidad": "UN",
+    "marca": "DOMEC"
+  },
+  {
+    "codigo": "TER404",
+    "rubro": "ELECTRODOMÉSTICOS",
+    "item": "HELADERA BAJO MESADA",
+    "detalle": "RANSER",
+    "unidad": "UN",
+    "marca": "RANSER"
+  },
+  {
+    "codigo": "TER405",
+    "rubro": "MUEBLES",
+    "item": "BAJO MESADA",
+    "detalle": "STD",
+    "unidad": "UN",
+    "marca": "PRACTIMOBEL"
+  },
+  {
+    "codigo": "TER406",
+    "rubro": "MUEBLES",
+    "item": "CAJONERA",
+    "detalle": "1 MTS",
+    "unidad": "UN",
+    "marca": "PRACTIMOBEL"
+  },
+  {
+    "codigo": "TER407",
+    "rubro": "MUEBLES",
+    "item": "COLUMNA",
+    "detalle": "STD",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER408",
+    "rubro": "MUEBLES",
+    "item": "ALACENA",
+    "detalle": "STD",
+    "unidad": "UN",
+    "marca": "PRACTIMOBEL"
+  },
+  {
+    "codigo": "TER409",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "GRANITO GRIS MARA",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER410",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA DE COCINA",
+    "detalle": "COCINA MI PILETA 305",
+    "unidad": "UN",
+    "marca": "MI PILETA"
+  },
+  {
+    "codigo": "TER411",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA COCINA",
+    "detalle": "PIAZZA GOURMET",
+    "unidad": "UN",
+    "marca": "PIAZZA"
+  },
+  {
+    "codigo": "TER412",
+    "rubro": "ELECTRODOMÉSTICOS",
+    "item": "EXTRACTOR/PURIFICADOR",
+    "detalle": "TURBOTRONIC",
+    "unidad": "UN",
+    "marca": "ACINDAR"
+  },
+  {
+    "codigo": "TER413",
+    "rubro": "MUEBLES",
+    "item": "DESAYUNADOR BARRA",
+    "detalle": "MÓDULO",
+    "unidad": "UN",
+    "marca": "HOME COLLECTION"
+  },
+  {
+    "codigo": "TER414",
+    "rubro": "MUEBLES",
+    "item": "MUEBLES BAÑO",
+    "detalle": "MELAMINA BLANCA / FRENTE ENCHAPADO",
+    "unidad": "UN",
+    "marca": "BERNOVA"
+  },
+  {
+    "codigo": "TER415",
+    "rubro": "MUEBLES",
+    "item": "RACK LIVING",
+    "detalle": "BLANCO CON MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER416",
+    "rubro": "MUEBLES",
+    "item": "VESTIDOR DORMITORIO",
+    "detalle": "MELAMINA SEDA GIORNO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER417",
+    "rubro": "MUEBLES",
+    "item": "MUEBLE DE COCINA + ISLA",
+    "detalle": "COLORES + BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER418",
+    "rubro": "MUEBLES",
+    "item": "PLACARD DORMITORIO",
+    "detalle": "MELAMINA SEDA GIORNO / INTERIOR BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER419",
+    "rubro": "MUEBLES",
+    "item": "MUEBLE HOGAR",
+    "detalle": "MUEBLE LEÑERO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER420",
+    "rubro": "MUEBLES",
+    "item": "ARMARIO HALL",
+    "detalle": "MELAMINA MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER421",
+    "rubro": "I. SANITARIA",
+    "item": "PILETA SIMPLE LUXOR SI85A 85,5x48,2x21",
+    "detalle": "JOHNSON",
+    "unidad": "UN",
+    "marca": "JHONSON"
+  },
+  {
+    "codigo": "TER422",
+    "rubro": "I. SANITARIA",
+    "item": "PLETA SIMPLE G-50 50x40x26",
+    "detalle": "JOHNSON",
+    "unidad": "UN",
+    "marca": "JHONSON"
+  },
+  {
+    "codigo": "TER423",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA COCINA MONOCOMANDO",
+    "detalle": "FV ARIZONA",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER424",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA COCINA MONOCOMANDO",
+    "detalle": "FV TEMPLE",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER425",
+    "rubro": "I. SANITARIA",
+    "item": "SIFON SIMPLE CAUCHO",
+    "detalle": "TIPO CRUPIER",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER426",
+    "rubro": "I. GAS",
+    "item": "REJA VENTILACIÓN",
+    "detalle": "15X15",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER427",
+    "rubro": "I. SANITARIA",
+    "item": "KIT FIJACIÓN INODORO",
+    "detalle": "CERA + TORNILLOS + CINTA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER428",
+    "rubro": "I. SANITARIA",
+    "item": "KIT FIJACIÓN ART. SANITARIOS",
+    "detalle": "TORNILLOS + CONO PLAST.",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER429",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA DE BAÑO",
+    "detalle": "PIAZZA A146 - 47x25x12 - Bco brillante",
+    "unidad": "UN",
+    "marca": "PIAZZA"
+  },
+  {
+    "codigo": "TER430",
+    "rubro": "I. SANITARIA",
+    "item": "ASIENTO INODORO",
+    "detalle": "BARI MADERA",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER431",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA LAVADERO",
+    "detalle": "MI PILETA - MOD 420 LE",
+    "unidad": "UN",
+    "marca": "MI PILETA"
+  },
+  {
+    "codigo": "TER432",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA COCINA",
+    "detalle": "BACHA SIMPLE - 103EC",
+    "unidad": "UN",
+    "marca": "MI PILETA"
+  },
+  {
+    "codigo": "TER433",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA COCINA",
+    "detalle": "BACHA DOBLE - C37/18",
+    "unidad": "UN",
+    "marca": "JHONSON"
+  },
+  {
+    "codigo": "TER434",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA COCINA",
+    "detalle": "JHONSON - 44*34",
+    "unidad": "UN",
+    "marca": "JHONSON"
+  },
+  {
+    "codigo": "TER435",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA BAÑO",
+    "detalle": "VARIOS STD",
+    "unidad": "UN",
+    "marca": "LUPE"
+  },
+  {
+    "codigo": "TER436",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA BAÑO",
+    "detalle": "BLADE",
+    "unidad": "UN",
+    "marca": "BLADE"
+  },
+  {
+    "codigo": "TER437",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA BAÑO",
+    "detalle": "FERRUM TORI CILINDRICA 36,5cm",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER438",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA COCINA MONOCOMANDO",
+    "detalle": "GENERICA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER439",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA COCINA MONOCOMANDO",
+    "detalle": "FV PUELO",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER440",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "AQUALIA APULIA",
+    "unidad": "UN",
+    "marca": "AQUIALIA APULIA"
+  },
+  {
+    "codigo": "TER441",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA DE BACHA BAÑO",
+    "detalle": "FV PUELO",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER442",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE LAVATORIO",
+    "detalle": "MONOCOMANDO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER443",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO LARGO + MOCHILA",
+    "detalle": "FERRUM VARESE",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER444",
+    "rubro": "I. SANITARIA",
+    "item": "JUEGO DE BAÑO",
+    "detalle": "FERRUM ANDINA",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER445",
+    "rubro": "I. SANITARIA",
+    "item": "ACCESORIOS DE BAÑO",
+    "detalle": "FV CALIFORNIA",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER446",
+    "rubro": "I. SANITARIA",
+    "item": "PLATO DE DUCHA",
+    "detalle": "AQUAGLASS 120x80",
+    "unidad": "UN",
+    "marca": "AQUAGLASS"
+  },
+  {
+    "codigo": "TER447",
+    "rubro": "I. SANITARIA",
+    "item": "MAMPARA DE DUCHA",
+    "detalle": "VIDRIO CORREDIZA 2*1,20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER448",
+    "rubro": "I. ELÉCTRICA",
+    "item": "ANAFE ELÉCTRICO",
+    "detalle": "VITROCERAMICO TACTIL NEGRO - DOS HORNALLAS",
+    "unidad": "UN",
+    "marca": "HOECH FOSTER"
+  },
+  {
+    "codigo": "TER449",
+    "rubro": "I. ELÉCTRICA",
+    "item": "ANAFE ELÉCTRICO",
+    "detalle": "VITROCERAMICO NEGRO - DOS HORNALLAS",
+    "unidad": "UN",
+    "marca": "SAMSUNG"
+  },
+  {
+    "codigo": "TER450",
+    "rubro": "I. ELÉCTRICA",
+    "item": "ANAFE ELÉCTRICO",
+    "detalle": "A INDUCCION IC30 - NEGRO",
+    "unidad": "UN",
+    "marca": "ELECTROLUX"
+  },
+  {
+    "codigo": "TER451",
+    "rubro": "I. ELÉCTRICA",
+    "item": "TERMOTANQUE ELÉCTRICO",
+    "detalle": "SEÑORIAL 60lt",
+    "unidad": "UN",
+    "marca": "SEÑORIAL"
+  },
+  {
+    "codigo": "TER452",
+    "rubro": "TERMINACIONES",
+    "item": "PORCELANATO BLEND",
+    "detalle": "61*61",
+    "unidad": "M2",
+    "marca": "CERRO NEGRO"
+  },
+  {
+    "codigo": "TER453",
+    "rubro": "TERMINACIONES",
+    "item": "PORCELANATO OPORTO BLANCO",
+    "detalle": "80X80",
+    "unidad": "M2",
+    "marca": "ALBERDI"
+  },
+  {
+    "codigo": "TER454",
+    "rubro": "TERMINACIONES",
+    "item": "PISO FLOTANTE",
+    "detalle": "8MM EGGER",
+    "unidad": "M2",
+    "marca": "EGGER"
+  },
+  {
+    "codigo": "TER455",
+    "rubro": "TERMINACIONES",
+    "item": "PISO FLOTANTE",
+    "detalle": "8MM EUROTEC",
+    "unidad": "M2",
+    "marca": "EUROTEC"
+  },
+  {
+    "codigo": "TER456",
+    "rubro": "TERMINACIONES",
+    "item": "DECK WPC",
+    "detalle": "FRESNO NORDICO",
+    "unidad": "M2",
+    "marca": "GREENPLACE"
+  },
+  {
+    "codigo": "TER457",
+    "rubro": "TERMINACIONES",
+    "item": "DECK MADERA RECICLADA",
+    "detalle": "BLANCO SMOKE - De pisos",
+    "unidad": "M2",
+    "marca": "DEPISOS"
+  },
+  {
+    "codigo": "TER458",
+    "rubro": "TERMINACIONES",
+    "item": "MELAMINA FAPLAC",
+    "detalle": "CAMELIA SCOTH 1,20*2,40*18mm",
+    "unidad": "UN",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "TER459",
+    "rubro": "TERMINACIONES",
+    "item": "GUATAMBU",
+    "detalle": "2,60*1,83*12MM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER460",
+    "rubro": "TERMINACIONES",
+    "item": "ALISTONADO EUCALIPTO",
+    "detalle": "3,05*0,12cm",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER461",
+    "rubro": "TERMINACIONES",
+    "item": "PLAKIMBRE EUCALIPTO",
+    "detalle": "1,22*2,44*0,12",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER462",
+    "rubro": "TERMINACIONES",
+    "item": "MADERA QUEMADA",
+    "detalle": "PINO/EUCA/KIRI m2 (20 u$d)",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER463",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA PLACA CORREDIZA",
+    "detalle": "2,00*0,80",
+    "unidad": "UN",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "TER464",
+    "rubro": "TERMINACIONES",
+    "item": "METAL DESPLEGADO",
+    "detalle": "3*1,50 - 450/30/30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER465",
+    "rubro": "MESADAS",
+    "item": "MESADA BAÑO",
+    "detalle": "TABLA MADERA 0,73*0,44 LAQUEADA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER466",
+    "rubro": "MESADAS",
+    "item": "MESADA DEKTON",
+    "detalle": "BLANCO NORTE 12MM - PULIDO",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER467",
+    "rubro": "TERMINACIONES",
+    "item": "BARNIZ SINTETICO",
+    "detalle": "20LT (REND. 120M2)",
+    "unidad": "LT",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER468",
+    "rubro": "TERMINACIONES",
+    "item": "PINTURA ANTIOXIDO",
+    "detalle": "4LT",
+    "unidad": "LT",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "TER469",
+    "rubro": "TERMINACIONES",
+    "item": "METAL DESPLEGADO",
+    "detalle": "3*1,50 - 600/30/60",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER470",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DESAGÜE LINEAL",
+    "detalle": "SLIM CLASICO BRILLANTE",
+    "unidad": "UN",
+    "marca": "ATRIM"
+  },
+  {
+    "codigo": "TER471",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "FV ARIZONA - BIDET",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER472",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "FV ARIZONA - BAÑERA",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER473",
+    "rubro": "I. SANITARIA",
+    "item": "REJILLA DESAGÜE LINEAL",
+    "detalle": "ATRIM - RÍO PP+AC / INOX WAVE",
+    "unidad": "UN",
+    "marca": "WAVE"
+  },
+  {
+    "codigo": "TER474",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA PLACA",
+    "detalle": "CEDRO - 70CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER475",
+    "rubro": "I. SANITARIA",
+    "item": "JUEGO DE BAÑO",
+    "detalle": "INODORO LARGO ITALIANA BCO",
+    "unidad": "UN",
+    "marca": "ROCA"
+  },
+  {
+    "codigo": "TER476",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "LAVATORIO MONOCOMANDO LUGO",
+    "unidad": "UN",
+    "marca": "PEIRANO"
+  },
+  {
+    "codigo": "TER477",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERÍA DE BAÑO",
+    "detalle": "BIDET MONOCOMANDO LUGO",
+    "unidad": "UN",
+    "marca": "PEIRANO"
+  },
+  {
+    "codigo": "TER478",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "NEGRO BRASIL",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER479",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "SILESTONE BLANCO",
+    "unidad": "M2",
+    "marca": "SILESTONE"
+  },
+  {
+    "codigo": "TER480",
+    "rubro": "MESADAS",
+    "item": "MESADA GUIDONI",
+    "detalle": "BLANCO PECORA",
+    "unidad": "M2",
+    "marca": "GRANITO"
+  },
+  {
+    "codigo": "TER481",
+    "rubro": "I. SANITARIA",
+    "item": "MAMPARA",
+    "detalle": "PAÑO FIJO - 0.90m x 1.90m",
+    "unidad": "M2",
+    "marca": "ALUHOME"
+  },
+  {
+    "codigo": "TER482",
+    "rubro": "ALBAÑILERÍA",
+    "item": "BASECOAT",
+    "detalle": "25KG",
+    "unidad": "BOLSA",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER483",
+    "rubro": "MESADAS",
+    "item": "ZÓCALO DE DUCHA MAMPARA",
+    "detalle": "VARIOS STD",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER484",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO LARGO + MOCHILA",
+    "detalle": "ANDINA",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER485",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "FERRUM BARI",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER486",
+    "rubro": "I. SANITARIA",
+    "item": "ASIENTO INODORO",
+    "detalle": "ANDINA",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER487",
+    "rubro": "TERMINACIONES",
+    "item": "ESTUFA",
+    "detalle": "PEHUEN 7500",
+    "unidad": "UN",
+    "marca": "TROMEN"
+  },
+  {
+    "codigo": "TER488",
+    "rubro": "TERMINACIONES",
+    "item": "SELLADOR ADHESIVO POLIURETANO",
+    "detalle": "SIKA 221 X 300ML",
+    "unidad": "UN",
+    "marca": "SIKA"
+  },
+  {
+    "codigo": "TER489",
+    "rubro": "PINTURAS",
+    "item": "ESMALTE SINTETICO",
+    "detalle": "BLANCO X 1LT",
+    "unidad": "UN",
+    "marca": "SINTEPLAX"
+  },
+  {
+    "codigo": "TER490",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA PLACA",
+    "detalle": "CAMDEN MARCO MADERA GROMANTI - 70 CM",
+    "unidad": "UN",
+    "marca": "GROMANTI"
+  },
+  {
+    "codigo": "TER491",
+    "rubro": "CARPINTERIAS",
+    "item": "PUERTA Y MEDIA",
+    "detalle": "DOBLE CHAPA INYECTADA - 1,30m",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER492",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "FERRUM ANDINA",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER493",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "FERRUM VARESE",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER494",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA BAÑO - BIDET",
+    "detalle": "MONOCOMANDO FV PUELO",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER495",
+    "rubro": "I. SANITARIA",
+    "item": "GRIFERIA BAÑO - DUCHA",
+    "detalle": "MONOCOMANDO FV PUELO",
+    "unidad": "UN",
+    "marca": "FV"
+  },
+  {
+    "codigo": "TER496",
+    "rubro": "MUEBLES",
+    "item": "MODULO OFICINA",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER497",
+    "rubro": "MUEBLES",
+    "item": "MODULO OFICINA",
+    "detalle": "MELAMINA BLANCA Y COLOR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER498",
+    "rubro": "MUEBLES",
+    "item": "MODULO VIVIENDA - BAJOMESADA",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER499",
+    "rubro": "MUEBLES",
+    "item": "MODULO VIVIENDA - BAJOMESADA",
+    "detalle": "MELAMINA BLANCA Y COLOR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER500",
+    "rubro": "MUEBLES",
+    "item": "MODULO VIVIENDA - ALACENA",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER501",
+    "rubro": "MUEBLES",
+    "item": "MODULO VIVIENDA - ALACENA",
+    "detalle": "MELAMINA BLANCA Y COLOR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER502",
+    "rubro": "MUEBLES",
+    "item": "ISLA DE COCINA",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER503",
+    "rubro": "MUEBLES",
+    "item": "MOBILIARIO PUERTO COMPLETO",
+    "detalle": "MELAMINA BANCO / SIMIL MADERA / NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER504",
+    "rubro": "AISLACIONES",
+    "item": "EPS 50MM",
+    "detalle": "20KG",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER505",
+    "rubro": "AISLACIONES",
+    "item": "EIFS",
+    "detalle": "ARANDELA PARA MAMPOSTERIA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER506",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA DE BAÑO",
+    "detalle": "COUNTRY BAJA II",
+    "unidad": "UN",
+    "marca": "FERRUM"
+  },
+  {
+    "codigo": "TER507",
+    "rubro": "I. SANITARIA",
+    "item": "BACHA DE BAÑO",
+    "detalle": "DECA SLIM L14050.17 - DE APOYO - OVAL 50CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER508",
+    "rubro": "MESADAS",
+    "item": "MESADA MÁRMOL",
+    "detalle": "VERDE BOSQUE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER509",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO ESPECIAL",
+    "detalle": "CERÁMICO FIKA",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER510",
+    "rubro": "MUEBLES",
+    "item": "BOTIQUIN",
+    "detalle": "GABINETE BAÑO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER511",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "INFINITY CALACATTA GOLD",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER512",
+    "rubro": "MESADAS",
+    "item": "MESADA PURASTONE",
+    "detalle": "BIANCO LUXE",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER513",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "NEGRO ABSOLUTO",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER514",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "GRANITO NEGRO GALAXIA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER515",
+    "rubro": "MESADAS",
+    "item": "MESADA",
+    "detalle": "NEW BEIGE",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER516",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO",
+    "detalle": "PORCELANATO CALACATTA",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER517",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO",
+    "detalle": "PORCELANATO RICCHETI - GOLDEN PURE",
+    "unidad": "M2",
+    "marca": "BARUGEL"
+  },
+  {
+    "codigo": "TER518",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO",
+    "detalle": "FERRUM - LINEA FONTANA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER519",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "FERRUM - LINEA FONTANA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER520",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO",
+    "detalle": "FERRUM - LINEA MILENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER521",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "FERRUM - LINEA MILENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER522",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO",
+    "detalle": "ROCA - LINEA INSPIRA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER523",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "ROCA - LINEA INSPIRA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER524",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO",
+    "detalle": "ROCA - LINEA THE GAP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER525",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "ROCA - LINEA THE GAP",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER526",
+    "rubro": "I. SANITARIA",
+    "item": "INODORO",
+    "detalle": "ROCA - DAMA SENSO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER527",
+    "rubro": "I. SANITARIA",
+    "item": "BIDET",
+    "detalle": "ROCA - DAMA SENSO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER528",
+    "rubro": "TERMINACIONES",
+    "item": "ANGULO",
+    "detalle": "ATRIM - TAPACANTO BEIGE 16mm x 16mm x 2.5m",
+    "unidad": "ML",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER529",
+    "rubro": "TERMINACIONES",
+    "item": "PISO FLOTANTE",
+    "detalle": "CLICK AMBIENTA TECH MIEL 18,1X152",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER530",
+    "rubro": "TERMINACIONES",
+    "item": "PISO FLOTANTE",
+    "detalle": "CLICK ESSENCE TECH HORTELA 22,8X122",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER531",
+    "rubro": "TERMINACIONES",
+    "item": "HORNO",
+    "detalle": "TRH LEÑA EMBUTIR",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER532",
+    "rubro": "HERRERÍA",
+    "item": "BRASERO PARA PARRILLA",
+    "detalle": "30CM",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER533",
+    "rubro": "HERRERÍA",
+    "item": "MODULO ACHURAS",
+    "detalle": "PLANCHETA HIERRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER534",
+    "rubro": "HERRERÍA",
+    "item": "EMPARRILLADO DE HIERRO",
+    "detalle": "1,60M",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER535",
+    "rubro": "TERMINACIONES",
+    "item": "PORCELANATO",
+    "detalle": "60X120 NEGRO MARMOL MATE",
+    "unidad": "M2",
+    "marca": "BARUGEL"
+  },
+  {
+    "codigo": "TER536",
+    "rubro": "TERMINACIONES",
+    "item": "PISO FLOTANTE",
+    "detalle": "OLIVER VINILICO ROBLE NATURAL SOFT",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER537",
+    "rubro": "TERMINACIONES",
+    "item": "PORCELANATO",
+    "detalle": "PAMESA ARGILE IVORY / CHALK 120*120",
+    "unidad": "M2",
+    "marca": "BARUGEL"
+  },
+  {
+    "codigo": "TER538",
+    "rubro": "TERMINACIONES",
+    "item": "PORCELANATO",
+    "detalle": "VITE PORCELANATO LISCIO IVORY / WHITE 60*120",
+    "unidad": "M2",
+    "marca": "BARUGEL"
+  },
+  {
+    "codigo": "TER539",
+    "rubro": "MUEBLES",
+    "item": "REVESTIMIENTO RESPALDO CAMA",
+    "detalle": "MELAMINA SIMIL MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER540",
+    "rubro": "MUEBLES",
+    "item": "MUEBLE TOILETTE",
+    "detalle": "MELAMINA SIMIL MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER540",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP MOOD / CLASSIC H5 60X60",
+    "unidad": "M2",
+    "marca": "ALBERDI"
+  },
+  {
+    "codigo": "TER541",
+    "rubro": "MUEBLES",
+    "item": "PUERTAS CORREDIZAS QUINCHO",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER542",
+    "rubro": "MUEBLES",
+    "item": "MUEBLE LAVADERO",
+    "detalle": "MELAMINA BLANCA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER543",
+    "rubro": "MUEBLES",
+    "item": "MUEBLE DE BAÑO",
+    "detalle": "MELAMINA MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER544",
+    "rubro": "TERMINACIONES",
+    "item": "PINTURA PARA GALVANIZADO",
+    "detalle": "PINTURA ACRILICA ANTIADHERENTE X 4LT",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER545",
+    "rubro": "TERMINACIONES",
+    "item": "CANTONERA",
+    "detalle": "PVC C / MALLA DE FIBRA DE VIDRIO AZUL",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "TER546",
+    "rubro": "TERMINACIONES",
+    "item": "ESPEJO",
+    "detalle": "5MM x M2",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER547",
+    "rubro": "TERMINACIONES",
+    "item": "CONTRAMARCO",
+    "detalle": "PUERTA PLACA DE MADERA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER548",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP FIKA / KIT KAT SNOW GLOSSY 11,5X23",
+    "unidad": "M2",
+    "marca": "DUNE CERAMICS"
+  },
+  {
+    "codigo": "TER549",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "PORCELANATO CALACATTA GRIS PULIDO 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER550",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP ARIANA EPOQUE BLACK / SPECTRUM 59X1,19",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER551",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP ARIANA EPOQUE BLACK / PORTORO PULIDO 58X1,17",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER552",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP ARIANA EPOQUE BLACK / MARKINA NATURAL 82X1,415",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER553",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP CHALK / GIBRALTAR GRAFFITTI 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER554",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP CHALK / ILVA CEMIX DARK 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER555",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP CHALK / MEDITERRANEA CHALK 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER556",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP VITE LISCIO IVORY / GIBRALTAR CEMENT 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER557",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP VITE LISCIO IVORY / ILVA CEMIX DARK 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER558",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO PORCELANATO",
+    "detalle": "REEMP VITE LISCIO IVORY / COMPACT CITY 60X60",
+    "unidad": "M2",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "TER559",
+    "rubro": "TERMINACIONES",
+    "item": "REVESTIMIENTO RANURADO",
+    "detalle": "MDF 9MM 2,75*0,90",
+    "unidad": "UN",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "TER560",
+    "rubro": "TERMINACIONES",
+    "item": "MULTILAMINADO FENOLICO",
+    "detalle": "18MM EUCA 1,22*2,44",
+    "unidad": "UN",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "TER561",
+    "rubro": "TERMINACIONES",
+    "item": "FLOTANTE SPC 5MM",
+    "detalle": "CLICK SIMIL MADERA",
+    "unidad": "M2",
+    "marca": "FAPLAC"
+  },
+  {
+    "codigo": "V001",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO + V ABRIR",
+    "detalle": "1,95*2,50",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V002",
+    "rubro": "ABERTURAS",
+    "item": "ANGULO + DVH",
+    "detalle": "1,8*0,30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V003",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA ABRIR + PF",
+    "detalle": "0,80*2,20",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V004",
+    "rubro": "ABERTURAS",
+    "item": "PORTON LEVADIZO DE CHAPA",
+    "detalle": "2,70x2,35 - con motor + control",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V005",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA PUERTA BALCÓN",
+    "detalle": "5,65*2,50",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V006",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA CIEGA BOMBAS",
+    "detalle": "0,60*2,19",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V007",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA PUERTA BALCÓN",
+    "detalle": "3,00*2,20 - ALUM NEGRO - A30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V008",
+    "rubro": "ABERTURAS",
+    "item": "RAJA PF + PROYECTANTE",
+    "detalle": "0,50*1,60",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V009",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA EXTERIOR CHAPA",
+    "detalle": "2,00*2,05",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V010",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE + PAÑO FIJO + MOSQUITERO",
+    "detalle": "0.60m x 1.90m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V011",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE + PAÑO FIJO + MOSQUITERO",
+    "detalle": "0.40m x 1.90m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V012",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA BALCON 3 HOJAS + MOSQUITERO",
+    "detalle": "4.85m x 2.20m - ALUM BLANCO - A30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V013",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO",
+    "detalle": "2.05m x 2.75m - A30 NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V014",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA DESPLAZABLE A TIJERAS",
+    "detalle": "0,50m x 1.20m - ALUM BLANCO - MODENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V015",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE + MOSQUITERO",
+    "detalle": "0.60m x 1.30m - ALUM BLANCO - MODENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V016",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE + MOSQUITERO",
+    "detalle": "0.80m x 1.35m - ALUM BLANCO - MODENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V017",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 2 HOJAS + MOSQUITERO",
+    "detalle": "1.95m x 0.60m - ALUM BLANCO - MODENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V018",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE + PAÑO FIJO + MOSQUITERO",
+    "detalle": "0.80m x 1.90m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V019",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO",
+    "detalle": "0.40m x 1.90m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V020",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA ABATIBLE",
+    "detalle": "0.90m x 2.05m - A30 NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V021",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE",
+    "detalle": "0,95m x 1,60m - ALUM NEGRO - MODENA",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V022",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 2 HOJAS + MOSQUITERO",
+    "detalle": "2 x 2,05m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V023",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 4 HOJAS + MOSQUITERO",
+    "detalle": "2,20m x 5m - PVC BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V024",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA PROYECTANTE",
+    "detalle": "0,35m x 1,20m - PVC BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V025",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA PROYECTANTE",
+    "detalle": "0,40m x 1.20m - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V026",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 2 HOJAS + MOSQUITERO",
+    "detalle": "0,62m x 2m - PVC BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V027",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 2 HOJAS + MOSQUITERO",
+    "detalle": "2,05m x 3,00m - A30 NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V028",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE",
+    "detalle": "1,85m x 0,60m - PVC BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V029",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 2 HOJAS + MOSQUTERO",
+    "detalle": "2,05m x 2m - PVC BLANCO - A30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V030",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILOBATIENTE",
+    "detalle": "1,15m x 0,60m - PVC BLANCO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V031",
+    "rubro": "ABERTURAS",
+    "item": "CURTAIN WALL",
+    "detalle": "0,80x 1,70m - ALUMINIO NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V032",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA + PAÑO FIJO",
+    "detalle": "1,38x 2,20m - ALUMINIO NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V033",
+    "rubro": "ABERTURAS",
+    "item": "CURTAIN WALL",
+    "detalle": "0,40x1,70 - ALUMINIO NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V034",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO IRREGULAR",
+    "detalle": "3,00x0,42m - ALUMINIO NEGRO - A30",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V035",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO",
+    "detalle": "0,40x1,50 - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V036",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO",
+    "detalle": "0,80x1,90 - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V037",
+    "rubro": "ABERTURAS",
+    "item": "PAÑO FIJO",
+    "detalle": "0,40x2,62 - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V038",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA OSCILO BATIENTE + PAÑO FIJO",
+    "detalle": "0,60x1,90 - FRENTE - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V039",
+    "rubro": "ABERTURAS",
+    "item": "PUERTA",
+    "detalle": "0,85x2,05 - A30 NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V040",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA CORREDIZA 4 HOJAS + MOSQUITERO + PUERTA",
+    "detalle": "5,26x2,20 + PUERTA 0,90x2,20 - A30 NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "V041",
+    "rubro": "ABERTURAS",
+    "item": "VENTANA PROYECTANTE",
+    "detalle": "0,50x1,50 - MODENA NEGRO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "VARIOS001",
+    "rubro": "VARIOS",
+    "item": "SEGUROS",
+    "detalle": "ACCIDENTES DE TRABAJO",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "Y101",
+    "rubro": "PLACAS",
+    "item": "PLACA ROCA YESO",
+    "detalle": "12,5MM",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "Y102",
+    "rubro": "PLACAS",
+    "item": "PLACA ROCA YESO",
+    "detalle": "9,5MM",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "Y103",
+    "rubro": "PLACAS",
+    "item": "PLACA ROCA YESO",
+    "detalle": "VERDE",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "Y104",
+    "rubro": "PLACAS",
+    "item": "PLACA ROCA YESO",
+    "detalle": "AQUABOARD 12.5",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "Y105",
+    "rubro": "PLACAS",
+    "item": "PLACA ROCA YESO",
+    "detalle": "SEMICUBIERTO",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  },
+  {
+    "codigo": "Y106",
+    "rubro": "PLACAS",
+    "item": "CINTA PAPEL MICROPERFORADA",
+    "detalle": "150MTS",
+    "unidad": "UN",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "Y107",
+    "rubro": "PERFILES",
+    "item": "CANTONERA DE INTERIOR",
+    "detalle": "2.6",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "Y108",
+    "rubro": "PERFILES",
+    "item": "BUÑA PERIMETRAL",
+    "detalle": "Z X 2,60M",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "Y109",
+    "rubro": "PERFILES",
+    "item": "PERFIL ANGULO DE AJUSTE",
+    "detalle": "L",
+    "unidad": "UN",
+    "marca": "BARBIERI"
+  },
+  {
+    "codigo": "Y110",
+    "rubro": "PINTURAS",
+    "item": "ENDUIDO",
+    "detalle": "20 LTS",
+    "unidad": "LT",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "Y111",
+    "rubro": "PINTURAS",
+    "item": "ENDUIDO",
+    "detalle": "16 KG",
+    "unidad": "LT",
+    "marca": "KNAUF"
+  },
+  {
+    "codigo": "Y112",
+    "rubro": "PINTURAS",
+    "item": "MASILLA",
+    "detalle": "32 KGS",
+    "unidad": "KG",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "Y113",
+    "rubro": "PINTURAS",
+    "item": "MASILLA",
+    "detalle": "SEMICUB. 18 KGS",
+    "unidad": "KG",
+    "marca": "VARIOS"
+  },
+  {
+    "codigo": "Y114",
+    "rubro": "TERMINACIONES",
+    "item": "PLACA DECO CLASIC TEXTURADA",
+    "detalle": "60X60",
+    "unidad": "UN",
+    "marca": "DURLOCK"
+  }
+]

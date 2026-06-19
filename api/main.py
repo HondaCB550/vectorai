@@ -21,18 +21,26 @@ from io import BytesIO
 from pydantic import BaseModel
 
 # ── Motor de matching (reutiliza scripts existentes) ──────────────────────────
-SCRIPTS_DIR = Path(__file__).parent.parent.parent / "Cotizaciones" / "Claude" / "skill_updates" / "scripts"
-CLAUDE_DIR  = Path(__file__).parent.parent.parent / "Cotizaciones" / "Claude"
+API_DIR     = Path(__file__).parent
+SCRIPTS_DIR = API_DIR / "matching"
+DATA_DIR    = API_DIR / "data"
+
+# Fallback a paths locales de desarrollo si no existen en el repo
+if not SCRIPTS_DIR.exists():
+    SCRIPTS_DIR = Path(__file__).parent.parent.parent / "Cotizaciones" / "Claude" / "skill_updates" / "scripts"
+if not DATA_DIR.exists():
+    DATA_DIR = Path(__file__).parent.parent.parent / "Cotizaciones" / "Claude"
+
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from detectar_proveedor import detectar_proveedor  # noqa: E402
 from extraer_pdf_texto import extraer               # noqa: E402
 from matching import matchear_item                  # noqa: E402
 
-MASTER_JSON  = CLAUDE_DIR / "master_materiales.json"
-CONFIG_PATH  = CLAUDE_DIR / "carga-precios-proveedores" / "references" / "configuracion.json"
+MASTER_JSON  = DATA_DIR / "master_materiales.json"
+CONFIG_PATH  = DATA_DIR / "configuracion.json"
 
-DECISIONES_JSON = CLAUDE_DIR / "decisiones_usuario.json"
+DECISIONES_JSON = DATA_DIR / "decisiones_usuario.json"
 
 # Cache en memoria (recargamos solo si el archivo cambia)
 _master_cache: list[dict] | None = None
@@ -46,7 +54,7 @@ def get_master() -> list[dict]:
             _master_cache = json.load(f)
     return _master_cache
 
-CARGAS_JSON = CLAUDE_DIR / "cargas_realizadas.json"
+CARGAS_JSON = DATA_DIR / "cargas_realizadas.json"
 
 def get_equiv() -> dict:
     """Equivalencias aprendidas de decisiones_usuario.json + cargas_realizadas.json."""
