@@ -59,12 +59,13 @@ def generar_excel_comparativo(
     ws = wb.active
     ws.title = "Comparativa"
 
-    # Columnas: Rubro(oculto) | Material | Unidad | prov1..N | Mejor precio | Ahorro
+    # Columnas: Rubro(oculto) | Material | Cant. | Unidad | prov1..N | Mejor precio | Ahorro
     n_prov     = len(proveedores)
     col_rubro  = 1
     col_mat    = 2
-    col_unidad = 3
-    col_prov0  = 4
+    col_cant   = 3
+    col_unidad = 4
+    col_prov0  = 5
     col_mejor  = col_prov0 + n_prov
     col_ahorro = col_mejor + 1
     total_cols = col_ahorro
@@ -89,7 +90,7 @@ def generar_excel_comparativo(
     ws.row_dimensions[3].height = 6
 
     # ── Fila 4: encabezados de columnas ───────────────────────────────────────
-    headers = ["Rubro", "Material", "Unidad"] + proveedores + ["Mejor precio", "Ahorro s/IVA"]
+    headers = ["Rubro", "Material", "Cant.", "Unidad"] + proveedores + ["Mejor precio", "Ahorro s/IVA"]
     for col_idx, label in enumerate(headers, start=1):
         c = ws.cell(4, col_idx, label)
         c.alignment = Alignment(horizontal="center" if col_idx > 3 else "left",
@@ -124,12 +125,13 @@ def generar_excel_comparativo(
     for row in comparativo:
         rubro   = row.get("rubro", "")
         mat     = row.get("material", "")
+        cant    = row.get("cant", 1) or 1
         unidad  = row.get("unidad", "")
         precios = row.get("precios", {})
         mejor   = row.get("mejor_proveedor", "")
         ahorro  = row.get("ahorro", 0) or 0
 
-        precios_vals = {p: precios[p]["precio_sin_iva"] for p in proveedores if p in precios}
+        precios_vals = {p: precios[p]["precio_sin_iva"] * cant for p in proveedores if p in precios}
         precio_min = min(precios_vals.values()) if len(precios_vals) > 1 else None
 
         # Separador de rubro
@@ -153,6 +155,10 @@ def generar_excel_comparativo(
         c = ws.cell(current_row, col_mat, mat)
         c.font = _font(size=9)
         c.alignment = Alignment(horizontal="left", vertical="center", indent=2, wrap_text=True)
+
+        c = ws.cell(current_row, col_cant, cant if cant != 1 else "")
+        c.font = _font(size=9)
+        c.alignment = Alignment(horizontal="center", vertical="center")
 
         c = ws.cell(current_row, col_unidad, unidad)
         c.font = _font(size=9)
@@ -214,8 +220,9 @@ def generar_excel_comparativo(
     ws.row_dimensions[current_row].height = 18
 
     # ── Anchos de columna ─────────────────────────────────────────────────────
-    ws.column_dimensions[get_column_letter(col_rubro)].width  = 0.5   # oculto visualmente
+    ws.column_dimensions[get_column_letter(col_rubro)].width  = 0.5
     ws.column_dimensions[get_column_letter(col_mat)].width    = 42
+    ws.column_dimensions[get_column_letter(col_cant)].width   = 7
     ws.column_dimensions[get_column_letter(col_unidad)].width = 9
     for i in range(n_prov):
         ws.column_dimensions[get_column_letter(col_prov0 + i)].width = 18

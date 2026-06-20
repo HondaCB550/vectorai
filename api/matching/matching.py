@@ -246,6 +246,10 @@ def normalize(s: str) -> str:
     # Quitar acentos frecuentes
     for a, b in [("Á","A"),("É","E"),("Í","I"),("Ó","O"),("Ú","U"),("Ü","U")]:
         s = s.replace(a, b)
+    # Quitar patrones de ruido tipo ***NUEVA BOLSA X 25KG*** al inicio
+    s = re.sub(r"^\*+[^*]+\*+\s*", "", s)
+    # Quitar unidades de presentación redundantes al inicio (BOLSA X NNN, CAJA X NNN)
+    s = re.sub(r"^(NUEVA\s+)?(BOLSA|CAJA|PAQUETE|ROLLO|BIDON)\s+X\s+\d+\w*\s*", "", s)
     s = re.sub(r"[^\w\s\.\-/]", " ", s)
     s = re.sub(r"\s+", " ", s)
     return s.strip()
