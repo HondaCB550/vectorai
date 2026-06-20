@@ -35,9 +35,9 @@ export default function Landing() {
           href="/registro"
           className="inline-block bg-blue-600 text-white text-base font-semibold px-8 py-4 rounded-xl hover:bg-blue-700 transition shadow-sm"
         >
-          Empezar gratis — sin tarjeta
+          Probalo gratis
         </Link>
-        <p className="text-sm text-gray-400 mt-4">Gratis: 2 PDFs · 1 comparativa · descarga Google Sheets</p>
+        <p className="text-sm text-gray-400 mt-4">Gratis: 2 PDFs · 1 comparativa · descarga Excel</p>
       </section>
 
       {/* Cómo funciona */}
@@ -118,7 +118,7 @@ export default function Landing() {
                 <li className="flex gap-2 text-gray-400"><span>✗</span>Múltiples rubros y proveedores</li>
               </ul>
               <Link href="/registro" className="block text-center border border-gray-300 text-gray-700 font-medium py-3 rounded-xl hover:bg-gray-50 transition">
-                Empezar gratis
+                Probalo gratis
               </Link>
             </div>
 
