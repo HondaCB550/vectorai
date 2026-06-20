@@ -65,11 +65,16 @@ def get_equiv() -> dict:
         if DECISIONES_JSON.exists():
             with open(DECISIONES_JSON, encoding="utf-8") as f:
                 for d in json.load(f):
-                    if d.get("decision") == "CARGAR":
+                    dec = d.get("decision", "")
+                    if dec == "CARGAR":
                         cod = d.get("cod_correcto") or d.get("cod_propuesto")
-                        desc = (d.get("desc_prov") or "").strip()
-                        if desc and cod:
-                            _equiv_cache[desc] = cod
+                    elif dec == "CAMBIAR":
+                        cod = d.get("cod_correcto")  # solo si el usuario puso código correcto
+                    else:
+                        cod = None
+                    desc = (d.get("desc_prov") or "").strip()
+                    if desc and cod:
+                        _equiv_cache[desc] = cod
         # Fuente 2: cargas efectivamente realizadas al Excel
         if CARGAS_JSON.exists():
             with open(CARGAS_JSON, encoding="utf-8") as f:
