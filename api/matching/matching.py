@@ -349,12 +349,15 @@ def matchear_item(
                 como fallback para no perder matches válidos.
     """
     confirmado_cod = None
-    if equivalencias and cod_prov:
-        entrada = equivalencias.get(str(cod_prov).strip())
-        if entrada:
-            confirmado_cod = (
-                entrada.get("cod_interno") if isinstance(entrada, dict) else entrada
-            )
+    if equivalencias:
+        # Buscar por cod_prov (formato skill Excel) o por descripcion (formato API)
+        for lookup_key in ([str(cod_prov).strip()] if cod_prov else []) + [str(prov_desc).strip()]:
+            entrada = equivalencias.get(lookup_key)
+            if entrada:
+                confirmado_cod = (
+                    entrada.get("cod_interno") if isinstance(entrada, dict) else entrada
+                )
+                break
 
     # Pre-filtro por rubro (siempre incluye el ítem de equivalencia si existe)
     if rubro_prov:
