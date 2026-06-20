@@ -10,6 +10,7 @@ type FilaComparativa = {
   rubro: string;
   material: string;
   unidad: string;
+  cant: number;
   precios: Record<string, Precio>;
   mejor_proveedor: string;
   ahorro: number;
@@ -270,7 +271,7 @@ export default function Comparar() {
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200">
                     <th className="text-left px-4 py-3 font-semibold text-gray-600 min-w-[240px]">Material</th>
-                    <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Unidad</th>
+                    <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Cant.</th>
                     {resultado.proveedores.map((p) => (
                       <th key={p} className="px-4 py-3 font-semibold text-gray-700 text-center">{p}</th>
                     ))}
@@ -285,10 +286,13 @@ export default function Comparar() {
                         <div className="font-medium text-gray-800 text-xs">{row.material}</div>
                         <div className="text-xs text-gray-400">{row.rubro}</div>
                       </td>
-                      <td className="px-3 py-3 text-center text-xs text-gray-500">{row.unidad}</td>
+                      <td className="px-3 py-3 text-center text-xs text-gray-500">
+                        {row.cant > 1 ? `${row.cant} ${row.unidad}` : row.unidad}
+                      </td>
                       {resultado.proveedores.map((p) => {
                         const precio = row.precios[p];
                         const esMejor = row.mejor_proveedor === p && row.en_varios;
+                        const total = precio ? precio.precio_sin_iva * (row.cant || 1) : null;
                         return (
                           <td
                             key={p}
@@ -297,10 +301,10 @@ export default function Comparar() {
                             {precio ? (
                               <div>
                                 <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
-                                  {fmt(precio.precio_sin_iva)}
+                                  {fmt(total!)}
                                 </span>
                                 <div className="text-xs text-gray-400">
-                                  {precio.origen === "EQUIV" ? "✓ aprend." : `${precio.score.toFixed(0)}%`}
+                                  {fmt(precio.precio_sin_iva)}/u · {precio.origen === "EQUIV" ? "✓" : `${precio.score.toFixed(0)}%`}
                                 </div>
                               </div>
                             ) : (

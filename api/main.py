@@ -293,16 +293,24 @@ def _build_comparativo(resultados: dict, master: list) -> list[dict]:
                 "precio_sin_iva": m["precio_sin_iva"],
                 "score": m["score"],
                 "origen": m["origen"],
+                "cant": m.get("cant", 1),
             }
+            # Guardar la mayor cantidad vista (para calcular ahorro total)
+            cant_actual = por_cod[cod].get("cant", 1)
+            por_cod[cod]["cant"] = max(cant_actual, m.get("cant", 1))
 
     # Calcular mejor precio
     rows = []
     for cod, row in por_cod.items():
         precios_val = {p: row["precios"][p]["precio_sin_iva"] for p in row["precios"]}
+        cant = row.get("cant", 1)
         if precios_val:
             row["mejor_proveedor"] = min(precios_val, key=precios_val.get)
-            row["ahorro"] = round(max(precios_val.values()) - min(precios_val.values()), 2) if len(precios_val) > 1 else 0
-        row["en_varios"] = len(row["precios"]) > 1  # cotizado por más de 1 proveedor
+            if len(precios_val) > 1:
+                row["ahorro"] = round((max(precios_val.values()) - min(precios_val.values())) * cant, 2)
+            else:
+                row["ahorro"] = 0
+        row["en_varios"] = len(row["precios"]) > 1
         rows.append(row)
 
     # Ordenar: primero ítems en varios proveedores (los más útiles para comparar)
