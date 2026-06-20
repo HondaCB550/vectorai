@@ -5,7 +5,7 @@ export default function Landing() {
     <main className="min-h-screen bg-white">
       {/* Nav */}
       <nav className="flex items-center justify-between px-8 py-5 border-b border-gray-100">
-        <span className="text-xl font-bold text-gray-900 tracking-tight">VectorAI</span>
+        <span className="text-xl font-bold text-gray-900 tracking-tight">VectorAI <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span></span>
         <div className="flex gap-4 items-center">
           <Link href="/login" className="text-sm text-gray-500 hover:text-gray-800 transition">
             Iniciar sesión
