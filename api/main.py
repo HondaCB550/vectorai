@@ -19,6 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from io import BytesIO
 from pydantic import BaseModel
+from supabase import create_client, Client as SupabaseClient
 
 # ── Motor de matching (reutiliza scripts existentes) ──────────────────────────
 API_DIR     = Path(__file__).parent
@@ -107,6 +108,11 @@ def factor_iva(proveedor: str) -> float:
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
 
+def get_supabase() -> SupabaseClient | None:
+    if SUPABASE_URL and SUPABASE_SERVICE_KEY:
+        return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+    return None
+
 def get_user_plan(authorization: Optional[str]) -> dict:
     """Devuelve {'user_id': ..., 'plan': 'free'|'basico', 'usos_hoy': N}.
 
@@ -147,8 +153,38 @@ class SheetsRequest(BaseModel):
     user_mail: Optional[str] = None
 
 
-# Cache en memoria de comparativas (hasta Supabase)
+# Cache en memoria (fallback si Supabase no está disponible)
 _comparativas_cache: dict[str, dict] = {}
+
+def _guardar_comparativa(comparativa_id: str, data: dict):
+    """Persiste en Supabase; fallback a memoria."""
+    _comparativas_cache[comparativa_id] = data
+    sb = get_supabase()
+    if sb:
+        try:
+            sb.table("comparativas").insert({
+                "id": comparativa_id,
+                "comparativo": data["comparativo"],
+                "proveedores": data["proveedores"],
+            }).execute()
+        except Exception as e:
+            print(f"Supabase insert error (usando cache memoria): {e}")
+
+def _leer_comparativa(comparativa_id: str) -> dict | None:
+    """Lee de memoria primero, luego Supabase."""
+    if comparativa_id in _comparativas_cache:
+        return _comparativas_cache[comparativa_id]
+    sb = get_supabase()
+    if sb:
+        try:
+            res = sb.table("comparativas").select("comparativo,proveedores").eq("id", comparativa_id).single().execute()
+            if res.data:
+                data = {"comparativo": res.data["comparativo"], "proveedores": res.data["proveedores"]}
+                _comparativas_cache[comparativa_id] = data
+                return data
+        except Exception as e:
+            print(f"Supabase read error: {e}")
+    return None
 
 
 # ── /analizar ─────────────────────────────────────────────────────────────────
@@ -259,11 +295,10 @@ async def analizar(
     comparativa = _build_comparativo(resultados, master)
     comparativa_id = str(uuid.uuid4())
 
-    # Cache en memoria para /sheets (TODO: persistir en Supabase)
-    _comparativas_cache[comparativa_id] = {
+    _guardar_comparativa(comparativa_id, {
         "comparativo": comparativa,
         "proveedores": list(resultados.keys()),
-    }
+    })
 
     return {
         "comparativa_id": comparativa_id,
@@ -358,7 +393,7 @@ async def generar_sheets(
     """
     user = get_user_plan(authorization)
 
-    cached = _comparativas_cache.get(req.comparativa_id)
+    cached = _leer_comparativa(req.comparativa_id)
     if not cached:
         raise HTTPException(
             status_code=404,
