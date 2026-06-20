@@ -68,9 +68,10 @@ export default function Comparar() {
 
       if (!res.ok) {
         if (data?.detail?.error === "plan_limit") {
-          setError("Plan gratuito: máximo 2 PDFs. Pasate al plan básico para analizar más presupuestos.");
+          setError("Plan gratuito: máximo 2 PDFs. Pasate al plan Advance para analizar más presupuestos.");
         } else {
-          setError(data?.detail?.mensaje || "Error al analizar los PDFs");
+          const errores = data?.detail?.errores?.map((e: {archivo: string, error: string}) => `${e.archivo}: ${e.error}`).join(" | ");
+          setError(errores || data?.detail?.mensaje || JSON.stringify(data?.detail) || "Error al analizar los PDFs");
         }
         return;
       }
