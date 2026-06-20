@@ -151,6 +151,8 @@ class SheetsRequest(BaseModel):
     comparativa_id: str
     titulo: Optional[str] = None
     user_mail: Optional[str] = None
+    solo_comunes: bool = False
+    filtro_rubro: Optional[str] = None
 
 
 # Cache en memoria (fallback si Supabase no está disponible)
@@ -404,8 +406,9 @@ async def generar_sheets(
     from exportar_excel import generar_excel_comparativo
     fecha = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    comparativo = _aplicar_filtros(cached["comparativo"], req)
     xlsx_bytes = generar_excel_comparativo(
-        comparativo=cached["comparativo"],
+        comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
     )
@@ -415,6 +418,15 @@ async def generar_sheets(
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
+
+
+def _aplicar_filtros(comparativo: list, req: SheetsRequest) -> list:
+    rows = comparativo
+    if req.solo_comunes:
+        rows = [r for r in rows if r.get("en_varios")]
+    if req.filtro_rubro and req.filtro_rubro != "Todos":
+        rows = [r for r in rows if r.get("rubro") == req.filtro_rubro]
+    return rows
 
 
 # ── /pdf ──────────────────────────────────────────────────────────────────────
@@ -433,8 +445,9 @@ async def generar_pdf(
     from exportar_pdf import generar_pdf_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    comparativo = _aplicar_filtros(cached["comparativo"], req)
     pdf_bytes = generar_pdf_comparativo(
-        comparativo=cached["comparativo"],
+        comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
     )
@@ -462,8 +475,9 @@ async def generar_imagen(
     from exportar_imagen import generar_imagen_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    comparativo = _aplicar_filtros(cached["comparativo"], req)
     jpg_bytes = generar_imagen_comparativo(
-        comparativo=cached["comparativo"],
+        comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
     )

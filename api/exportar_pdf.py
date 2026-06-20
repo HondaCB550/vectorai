@@ -6,7 +6,7 @@ from io import BytesIO
 from datetime import datetime
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
@@ -44,7 +44,7 @@ def generar_pdf_comparativo(
     buf = BytesIO()
     doc = SimpleDocTemplate(
         buf,
-        pagesize=landscape(A4),
+        pagesize=A4,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
         topMargin=1.5*cm, bottomMargin=1.5*cm,
     )
@@ -102,10 +102,10 @@ def generar_pdf_comparativo(
         textColor=colors.HexColor("#3A5080"), alignment=TA_RIGHT
     )))
 
-    # Anchos de columna
-    page_w = landscape(A4)[0] - 3*cm
-    prov_w = min(3.8*cm, (page_w - 7*cm - 2*cm) / n_prov)
-    col_widths = [7*cm, 1.5*cm] + [prov_w]*n_prov + [2.5*cm, 2*cm]
+    # Anchos de columna — A4 portrait: 21cm - 3cm márgenes = 18cm útiles
+    page_w = A4[0] - 3*cm
+    prov_w = min(3.5*cm, (page_w - 5.5*cm - 2*cm) / max(n_prov, 1))
+    col_widths = [5.5*cm, 1.4*cm] + [prov_w]*n_prov + [2.2*cm, 1.8*cm]
 
     # ── Filas de datos ───────────────────────────────────────────────────────
     table_data = [col_headers]

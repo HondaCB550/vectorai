@@ -33,7 +33,7 @@ export default function Login() {
           VectorAI
         </Link>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Iniciar sesión</h1>
-        <p className="text-gray-500 text-sm mb-8">
+        <p className="text-gray-700 text-sm mb-8">
           ¿No tenés cuenta?{" "}
           <Link href="/registro" className="text-blue-600 font-medium hover:underline">
             Registrate gratis
@@ -42,24 +42,24 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Mail</label>
+            <label className="block text-sm font-semibold text-gray-800 mb-1">Mail</label>
             <input
               type="email"
               value={mail}
               onChange={(e) => setMail(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="tu@mail.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+            <label className="block text-sm font-semibold text-gray-800 mb-1">Contraseña</label>
             <input
               type="password"
               value={pass}
               onChange={(e) => setPass(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
           </div>
