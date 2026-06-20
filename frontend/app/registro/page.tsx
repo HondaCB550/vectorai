@@ -23,8 +23,8 @@ const PROFESIONES = [
   "Otro",
 ];
 
-const INPUT = "w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
-const LABEL = "block text-sm font-medium text-gray-700 mb-1";
+const INPUT = "w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500";
+const LABEL = "block text-sm font-semibold text-gray-800 mb-1";
 
 function RegistroInner() {
   const router = useRouter();
@@ -99,7 +99,7 @@ function RegistroInner() {
         {paso === 1 && (
           <>
             <h1 className="text-2xl font-bold text-gray-900 mb-1">Crear cuenta</h1>
-            <p className="text-gray-500 text-sm mb-7">
+            <p className="text-gray-700 text-sm mb-7">
               ¿Ya tenés cuenta?{" "}
               <Link href="/login" className="text-blue-600 font-medium hover:underline">Iniciá sesión</Link>
             </p>
@@ -122,7 +122,7 @@ function RegistroInner() {
               <div>
                 <label className={LABEL}>
                   Empresa o estudio{" "}
-                  <span className="text-gray-400 font-normal">(opcional)</span>
+                  <span className="text-gray-500 font-normal">(opcional)</span>
                 </label>
                 <input type="text" value={empresa} onChange={(e) => setEmpresa(e.target.value)}
                   className={INPUT} placeholder="Estudio García Arquitectura" />
@@ -156,7 +156,7 @@ function RegistroInner() {
         {paso === 2 && (
           <>
             <h1 className="text-2xl font-bold text-gray-900 mb-1">Tu zona</h1>
-            <p className="text-gray-500 text-sm mb-7">
+            <p className="text-gray-700 text-sm mb-7">
               Usamos esta info para mostrarte precios de tu zona y comparativas más precisas.
             </p>
 
