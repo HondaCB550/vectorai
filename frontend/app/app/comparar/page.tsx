@@ -154,7 +154,7 @@ export default function Comparar() {
             Revisar sin-match
           </Link>
           <a
-            href="https://wa.me/5491130625467?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
+            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-3 py-1.5 rounded-lg"
