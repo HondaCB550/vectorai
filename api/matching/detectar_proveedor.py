@@ -15,7 +15,7 @@ import json
 import re
 from pathlib import Path
 
-CONFIG_DEFAULT = Path(__file__).parent.parent.parent / "carga-precios-proveedores" / "references" / "configuracion.json"
+CONFIG_DEFAULT = Path(__file__).parent.parent / "data" / "configuracion.json"
 
 
 def _cargar_config(config_path: str | Path = None) -> dict:
