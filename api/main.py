@@ -417,6 +417,64 @@ async def generar_sheets(
     )
 
 
+# ── /pdf ──────────────────────────────────────────────────────────────────────
+@app.post("/pdf")
+async def generar_pdf(
+    req: SheetsRequest,
+    authorization: Optional[str] = Header(None),
+):
+    cached = _leer_comparativa(req.comparativa_id)
+    if not cached:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "comparativa_no_encontrada",
+                    "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs."}
+        )
+    from exportar_pdf import generar_pdf_comparativo
+    fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+    titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    pdf_bytes = generar_pdf_comparativo(
+        comparativo=cached["comparativo"],
+        proveedores=cached["proveedores"],
+        titulo=titulo,
+    )
+    filename = f"VectorAI_Comparativa_{fecha}.pdf"
+    return StreamingResponse(
+        BytesIO(pdf_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+# ── /imagen ───────────────────────────────────────────────────────────────────
+@app.post("/imagen")
+async def generar_imagen(
+    req: SheetsRequest,
+    authorization: Optional[str] = Header(None),
+):
+    cached = _leer_comparativa(req.comparativa_id)
+    if not cached:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "comparativa_no_encontrada",
+                    "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs."}
+        )
+    from exportar_imagen import generar_imagen_comparativo
+    fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+    titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    jpg_bytes = generar_imagen_comparativo(
+        comparativo=cached["comparativo"],
+        proveedores=cached["proveedores"],
+        titulo=titulo,
+    )
+    filename = f"VectorAI_Comparativa_{fecha}.jpg"
+    return StreamingResponse(
+        BytesIO(jpg_bytes),
+        media_type="image/jpeg",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
 # ── Health ─────────────────────────────────────────────────────────────────────
 @app.get("/health")
 def health():

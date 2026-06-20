@@ -37,6 +37,8 @@ export default function Comparar() {
   const [filtroRubro, setFiltroRubro] = useState("Todos");
   const [soloComunes, setSoloComunes] = useState(false);
   const [generandoSheets, setGenerandoSheets] = useState(false);
+  const [generandoPdf, setGenerandoPdf] = useState(false);
+  const [generandoJpg, setGenerandoJpg] = useState(false);
 
   // Drag & drop
   const onDrop = useCallback((e: React.DragEvent) => {
@@ -97,11 +99,11 @@ export default function Comparar() {
     }
   }
 
-  async function descargarSheets() {
+  async function descargar(endpoint: string, ext: string, setLoading: (v: boolean) => void) {
     if (!resultado) return;
-    setGenerandoSheets(true);
+    setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/sheets`, {
+      const res = await fetch(`${API_URL}/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ comparativa_id: resultado.comparativa_id }),
@@ -116,13 +118,17 @@ export default function Comparar() {
       const a = document.createElement("a");
       const fecha = new Date().toISOString().slice(0, 10);
       a.href = url;
-      a.download = `VectorAI_Comparativa_${fecha}.xlsx`;
+      a.download = `VectorAI_Comparativa_${fecha}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {
-      setGenerandoSheets(false);
+      setLoading(false);
     }
   }
+
+  const descargarSheets = () => descargar("sheets", "xlsx", setGenerandoSheets);
+  const descargarPdf    = () => descargar("pdf",    "pdf",  setGenerandoPdf);
+  const descargarJpg    = () => descargar("imagen", "jpg",  setGenerandoJpg);
 
   const rubros = resultado
     ? ["Todos", ...Array.from(new Set(resultado.comparativo.map((r) => r.rubro))).sort()]
@@ -235,7 +241,21 @@ export default function Comparar() {
                 disabled={generandoSheets}
                 className="bg-green-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition text-sm disabled:opacity-50"
               >
-                {generandoSheets ? "Generando…" : "↓ Descargar Excel"}
+                {generandoSheets ? "Generando…" : "↓ Excel"}
+              </button>
+              <button
+                onClick={descargarPdf}
+                disabled={generandoPdf}
+                className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition text-sm disabled:opacity-50"
+              >
+                {generandoPdf ? "Generando…" : "↓ PDF"}
+              </button>
+              <button
+                onClick={descargarJpg}
+                disabled={generandoJpg}
+                className="bg-purple-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50"
+              >
+                {generandoJpg ? "Generando…" : "↓ JPG"}
               </button>
               <button
                 onClick={() => { setResultado(null); setFiles([]); }}

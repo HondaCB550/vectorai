@@ -29,7 +29,7 @@ export default function Landing() {
         </h1>
         <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
           Subís los PDFs de tus corralones y proveedores. El sistema los lee, normaliza los
-          materiales y genera la comparativa en segundos. Descargable en Google Sheets.
+          materiales y genera la comparativa en segundos. Descargable en múltiples formatos.
         </p>
         <Link
           href="/registro"
@@ -49,7 +49,7 @@ export default function Landing() {
               { n: "1", titulo: "Subís los PDFs", desc: "PDF, JPG o imagen del presupuesto de cada proveedor" },
               { n: "2", titulo: "La IA lo lee", desc: "Extrae ítems, precios y cantidades automáticamente" },
               { n: "3", titulo: "Normaliza materiales", desc: 'Entiende que "Placa verde Durlock" = "Placa RH 12.5mm"' },
-              { n: "4", titulo: "Comparativa lista", desc: "Tabla con mejor precio por ítem. Descargá en Google Sheets" },
+              { n: "4", titulo: "Comparativa lista", desc: "Tabla con mejor precio por ítem. Descargá en Excel, PDF o JPG." },
             ].map((s) => (
               <div key={s.n} className="text-center">
                 <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-4">
@@ -111,7 +111,7 @@ export default function Landing() {
               <div className="text-lg font-bold text-gray-900 mb-1">Gratuito</div>
               <div className="text-3xl font-bold text-gray-900 mb-6">$0</div>
               <ul className="space-y-3 text-sm text-gray-600 mb-8">
-                {["2 PDFs (1 por proveedor)", "Comparativa en pantalla", "Descarga Google Sheets", "Matching automático"].map((f) => (
+                {["2 PDFs (1 por proveedor)", "Comparativa en pantalla", "Descarga Excel · PDF · JPG", "Matching automático"].map((f) => (
                   <li key={f} className="flex gap-2"><span className="text-green-500">✓</span>{f}</li>
                 ))}
                 <li className="flex gap-2 text-gray-400"><span>✗</span>Revisión manual de sin-match</li>
@@ -125,7 +125,7 @@ export default function Landing() {
             <div className="bg-blue-600 rounded-2xl p-8 text-white relative">
               <div className="absolute top-4 right-4 bg-white/20 text-xs font-bold px-2 py-1 rounded-full">Más popular</div>
               <div className="text-lg font-bold mb-1">Advance</div>
-              <div className="text-3xl font-bold mb-1">$38.000<span className="text-lg font-normal opacity-70">/mes</span></div>
+              <div className="text-3xl font-bold mb-1">$48.000<span className="text-lg font-normal opacity-70">/mes</span></div>
               <p className="text-blue-100 text-xs mb-6">Pesos argentinos · IVA incluido</p>
               <ul className="space-y-3 text-sm mb-8">
                 {[
