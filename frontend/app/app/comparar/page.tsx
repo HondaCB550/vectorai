@@ -333,7 +333,7 @@ export default function Comparar() {
                 <p className="text-sm text-amber-700 mb-3">
                   Estos ítems no pudieron ser identificados automáticamente y no aparecen en la comparativa.
                   {resultado.plan === "free"
-                    ? " En el plan básico podés revisarlos manualmente para completar la comparativa."
+                    ? " En el plan Advance podés revisarlos manualmente para completar la comparativa."
                     : " Podés revisarlos manualmente en la sección de revisión."}
                 </p>
                 {resultado.plan !== "free" ? (
@@ -345,10 +345,10 @@ export default function Comparar() {
                   </Link>
                 ) : (
                   <Link
-                    href="/registro?plan=basico"
+                    href="/registro?plan=advance"
                     className="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                   >
-                    Ver plan básico →
+                    Ver plan Advance →
                   </Link>
                 )}
               </div>

@@ -124,7 +124,7 @@ export default function Landing() {
 
             <div className="bg-blue-600 rounded-2xl p-8 text-white relative">
               <div className="absolute top-4 right-4 bg-white/20 text-xs font-bold px-2 py-1 rounded-full">Más popular</div>
-              <div className="text-lg font-bold mb-1">Básico</div>
+              <div className="text-lg font-bold mb-1">Advance</div>
               <div className="text-3xl font-bold mb-1">$38.000<span className="text-lg font-normal opacity-70">/mes</span></div>
               <p className="text-blue-100 text-xs mb-6">Pesos argentinos · IVA incluido</p>
               <ul className="space-y-3 text-sm mb-8">
@@ -139,8 +139,8 @@ export default function Landing() {
                   <li key={f} className="flex gap-2"><span className="text-blue-200">✓</span>{f}</li>
                 ))}
               </ul>
-              <Link href="/registro?plan=basico" className="block text-center bg-white text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-50 transition">
-                7 días gratis
+              <Link href="/registro?plan=advance" className="block text-center bg-white text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-50 transition">
+                Suscribirme
               </Link>
             </div>
           </div>
