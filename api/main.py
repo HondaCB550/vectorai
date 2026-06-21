@@ -14,7 +14,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent / ".env")
 
-from fastapi import FastAPI, UploadFile, File, HTTPException, Header, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, Header, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from io import BytesIO
@@ -107,6 +107,8 @@ def factor_iva(proveedor: str) -> float:
 # En producción usar supabase-py para verificar el JWT.
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
+MP_ACCESS_TOKEN = os.environ.get("MERCADOPAGO_ACCESS_TOKEN", "")
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://vectorai.com.ar")
 
 def get_supabase() -> SupabaseClient | None:
     if SUPABASE_URL and SUPABASE_SERVICE_KEY:
@@ -551,6 +553,94 @@ async def generar_imagen(
         media_type="image/jpeg",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
+
+
+# ── MercadoPago ──────────────────────────────────────────────────────────────
+class MPSuscripcionRequest(BaseModel):
+    user_id: str
+    email: str
+
+@app.post("/mp/suscripcion")
+async def crear_suscripcion(req: MPSuscripcionRequest):
+    """
+    Crea una suscripción recurrente en MercadoPago y devuelve la URL de pago.
+    Usa Preapproval (débito automático mensual).
+    """
+    if not MP_ACCESS_TOKEN:
+        raise HTTPException(status_code=503, detail={"error": "mp_no_configurado"})
+
+    import mercadopago
+    sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
+
+    preapproval_data = {
+        "preapproval_plan_id": None,  # sin plan predefinido → ad-hoc
+        "reason": "VectorAI Plan Advance — comparador de presupuestos",
+        "external_reference": req.user_id,
+        "payer_email": req.email,
+        "auto_recurring": {
+            "frequency": 1,
+            "frequency_type": "months",
+            "transaction_amount": 48000,
+            "currency_id": "ARS",
+        },
+        "back_url": f"{FRONTEND_URL}/app/comparar?suscripcion=ok",
+        "status": "pending",
+    }
+
+    result = sdk.preapproval().create(preapproval_data)
+    if result["status"] not in (200, 201):
+        raise HTTPException(status_code=502, detail={"error": "mp_error", "detalle": result.get("response")})
+
+    return {
+        "init_point": result["response"]["init_point"],
+        "preapproval_id": result["response"]["id"],
+    }
+
+
+@app.post("/mp/webhook")
+async def mp_webhook(request: Request):
+    """
+    Webhook de MercadoPago. Cuando una suscripción se activa o renueva,
+    actualiza perfiles.plan = 'advance'.
+    """
+    body = await request.json()
+    tipo = body.get("type", "")
+
+    if tipo not in ("preapproval", "subscription_preapproval"):
+        return {"ok": True}
+
+    mp_id = body.get("data", {}).get("id")
+    if not mp_id:
+        return {"ok": True}
+
+    if not MP_ACCESS_TOKEN:
+        return {"ok": True}
+
+    import mercadopago
+    sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
+    result = sdk.preapproval().get(mp_id)
+    if result["status"] != 200:
+        return {"ok": True}
+
+    preapproval = result["response"]
+    estado = preapproval.get("status", "")
+    user_id = preapproval.get("external_reference", "")
+
+    if not user_id:
+        return {"ok": True}
+
+    sb = get_supabase()
+    if not sb:
+        return {"ok": True}
+
+    if estado == "authorized":
+        sb.table("perfiles").update({"plan": "advance"}).eq("id", user_id).execute()
+        print(f"Plan Advance activado: {user_id}")
+    elif estado in ("cancelled", "paused"):
+        sb.table("perfiles").update({"plan": "free"}).eq("id", user_id).execute()
+        print(f"Plan cancelado, vuelve a free: {user_id}")
+
+    return {"ok": True}
 
 
 # ── Health ─────────────────────────────────────────────────────────────────────

@@ -139,7 +139,7 @@ export default function Landing() {
                   <li key={f} className="flex gap-2"><span className="text-blue-200">✓</span>{f}</li>
                 ))}
               </ul>
-              <Link href="/registro?plan=advance" className="block text-center bg-white text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-50 transition">
+              <Link href="/suscribirse" className="block text-center bg-white text-blue-600 font-semibold py-3 rounded-xl hover:bg-blue-50 transition">
                 Suscribirme
               </Link>
             </div>
