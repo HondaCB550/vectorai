@@ -1,6 +1,7 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -39,6 +40,14 @@ export default function Comparar() {
   const [generandoSheets, setGenerandoSheets] = useState(false);
   const [generandoPdf, setGenerandoPdf] = useState(false);
   const [generandoJpg, setGenerandoJpg] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sb = createClient();
+    sb.auth.getSession().then(({ data }) => {
+      setToken(data.session?.access_token ?? null);
+    });
+  }, []);
 
   // Drag & drop
   const onDrop = useCallback((e: React.DragEvent) => {
@@ -62,10 +71,13 @@ export default function Comparar() {
     files.forEach((f) => form.append("files", f));
 
     try {
+      const headers: Record<string, string> = {};
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
       const res = await fetch(`${API_URL}/analizar`, {
         method: "POST",
+        headers,
         body: form,
-        // headers: { Authorization: `Bearer ${token}` }, // TODO: Supabase token
       });
       const data = await res.json();
 

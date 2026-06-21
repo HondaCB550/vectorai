@@ -71,14 +71,15 @@ function RegistroInner() {
       return;
     }
 
-    await supabase.from("perfiles").update({
+    await supabase.from("perfiles").upsert({
+      id: data.user.id,
       nombre,
       profesion,
       empresa: empresa || null,
       localidad,
       provincia,
-      plan: planInicial,
-    }).eq("id", data.user.id);
+      plan: planInicial === "advance" ? "advance" : "free",
+    });
 
     router.push("/app/comparar");
   }

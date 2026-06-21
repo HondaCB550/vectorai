@@ -114,15 +114,36 @@ def get_supabase() -> SupabaseClient | None:
     return None
 
 def get_user_plan(authorization: Optional[str]) -> dict:
-    """Devuelve {'user_id': ..., 'plan': 'free'|'basico', 'usos_hoy': N}.
+    """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N}.
 
     Sin token → plan free (permite probar sin login).
-    TODO: verificar JWT con Supabase en producción.
+    Con token → verifica JWT con Supabase y consulta tabla perfiles.
     """
     if not authorization:
         return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
-    # TODO: verificar JWT con supabase-py y consultar tabla perfiles
-    return {"user_id": "demo", "plan": "basico", "usos_hoy": 0, "limite": 999}
+
+    token = authorization.removeprefix("Bearer ").strip()
+    sb = get_supabase()
+    if not sb:
+        return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+
+    try:
+        user_resp = sb.auth.get_user(token)
+        user_id = user_resp.user.id if user_resp.user else None
+        if not user_id:
+            return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+
+        perfil = sb.table("perfiles").select("plan,usos_hoy,fecha_usos").eq("id", user_id).single().execute()
+        if not perfil.data:
+            return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": 2}
+
+        plan = perfil.data.get("plan", "free")
+        usos = perfil.data.get("usos_hoy", 0)
+        limite = 999 if plan == "advance" else 2
+        return {"user_id": user_id, "plan": plan, "usos_hoy": usos, "limite": limite}
+    except Exception as e:
+        print(f"get_user_plan error: {e}")
+        return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
 
 
 # ── App FastAPI ───────────────────────────────────────────────────────────────
