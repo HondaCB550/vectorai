@@ -114,10 +114,10 @@ def get_supabase() -> SupabaseClient | None:
     return None
 
 def get_user_plan(authorization: Optional[str]) -> dict:
-    """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N}.
+    """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N, 'limite': N}.
 
-    Sin token → plan free (permite probar sin login).
-    Con token → verifica JWT con Supabase y consulta tabla perfiles.
+    Sin token → anónimo, plan free, límite 2 análisis/día (no trackeado).
+    Con token → verifica JWT, consulta perfiles, resetea contador si es nuevo día.
     """
     if not authorization:
         return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
@@ -135,15 +135,42 @@ def get_user_plan(authorization: Optional[str]) -> dict:
 
         perfil = sb.table("perfiles").select("plan,usos_hoy,fecha_usos").eq("id", user_id).single().execute()
         if not perfil.data:
+            # Crear perfil si el trigger no lo hizo
+            sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_hoy": 0}).execute()
             return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": 2}
 
-        plan = perfil.data.get("plan", "free")
-        usos = perfil.data.get("usos_hoy", 0)
+        plan  = perfil.data.get("plan", "free")
+        usos  = perfil.data.get("usos_hoy", 0)
+        fecha = str(perfil.data.get("fecha_usos") or "")
+        hoy   = datetime.now().strftime("%Y-%m-%d")
+
+        # Resetear contador si es un nuevo día
+        if fecha != hoy:
+            sb.table("perfiles").update({"usos_hoy": 0, "fecha_usos": hoy}).eq("id", user_id).execute()
+            usos = 0
+
         limite = 999 if plan == "advance" else 2
         return {"user_id": user_id, "plan": plan, "usos_hoy": usos, "limite": limite}
     except Exception as e:
         print(f"get_user_plan error: {e}")
         return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+
+
+def _incrementar_uso(user_id: str, usos_actuales: int):
+    """Incrementa usos_hoy en perfiles para el usuario logueado."""
+    if user_id == "anonimo":
+        return
+    sb = get_supabase()
+    if not sb:
+        return
+    try:
+        hoy = datetime.now().strftime("%Y-%m-%d")
+        sb.table("perfiles").update({
+            "usos_hoy": usos_actuales + 1,
+            "fecha_usos": hoy,
+        }).eq("id", user_id).execute()
+    except Exception as e:
+        print(f"_incrementar_uso error: {e}")
 
 
 # ── App FastAPI ───────────────────────────────────────────────────────────────
@@ -222,12 +249,20 @@ async def analizar(
     """
     user = get_user_plan(authorization)
 
-    # Límite freemium
+    # Límite freemium: máximo 2 PDFs por análisis
     if user["plan"] == "free" and len(files) > 2:
         raise HTTPException(
             status_code=402,
             detail={"error": "plan_limit", "mensaje": "El plan gratuito permite máximo 2 PDFs (uno por proveedor).", "upgrade": True}
         )
+
+    # Límite diario para usuarios logueados con plan free
+    if user["plan"] == "free" and user["user_id"] != "anonimo":
+        if user["usos_hoy"] >= user["limite"]:
+            raise HTTPException(
+                status_code=402,
+                detail={"error": "plan_limit", "mensaje": f"Alcanzaste el límite de {user['limite']} análisis por día del plan gratuito.", "upgrade": True}
+            )
 
     master = get_master()
     equiv: dict = get_equiv()  # Equivalencias aprendidas de borradores confirmados
@@ -323,6 +358,13 @@ async def analizar(
         "proveedores": list(resultados.keys()),
     })
 
+    # Registrar uso del día para usuarios logueados
+    _incrementar_uso(user["user_id"], user["usos_hoy"])
+
+    usos_restantes = None
+    if user["plan"] == "free" and user["user_id"] != "anonimo":
+        usos_restantes = max(0, user["limite"] - user["usos_hoy"] - 1)
+
     return {
         "comparativa_id": comparativa_id,
         "proveedores": list(resultados.keys()),
@@ -330,6 +372,7 @@ async def analizar(
         "comparativo": comparativa,
         "errores": errores,
         "plan": user["plan"],
+        "usos_restantes": usos_restantes,
     }
 
 

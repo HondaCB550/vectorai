@@ -33,6 +33,7 @@ export default function Comparar() {
     sin_match: Record<string, SinMatch[]>;
     plan: string;
     comparativa_id: string;
+    usos_restantes: number | null;
   }>(null);
   const [error, setError] = useState("");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
@@ -103,6 +104,7 @@ export default function Comparar() {
         sin_match,
         plan: data.plan,
         comparativa_id: data.comparativa_id,
+        usos_restantes: data.usos_restantes ?? null,
       });
     } catch {
       setError("No se pudo conectar con el servidor de análisis.");
@@ -244,6 +246,26 @@ export default function Comparar() {
         {/* Resultados */}
         {resultado && (
           <>
+            {/* Aviso usos restantes plan free */}
+            {resultado.usos_restantes !== null && resultado.usos_restantes <= 1 && (
+              <div className={`mb-4 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between ${
+                resultado.usos_restantes === 0
+                  ? "bg-red-50 border border-red-200 text-red-700"
+                  : "bg-amber-50 border border-amber-200 text-amber-700"
+              }`}>
+                <span>
+                  {resultado.usos_restantes === 0
+                    ? "Usaste todos tus análisis gratuitos de hoy. Mañana se renueva, o pasate al plan Advance."
+                    : "Te queda 1 análisis gratuito hoy."}
+                </span>
+                {resultado.usos_restantes === 0 && (
+                  <Link href="/registro?plan=advance" className="ml-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition whitespace-nowrap">
+                    Ver Advance →
+                  </Link>
+                )}
+              </div>
+            )}
+
             {/* KPIs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               {[
