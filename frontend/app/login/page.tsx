@@ -1,13 +1,14 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
 
-export default function Login() {
+function LoginInner() {
   const router = useRouter();
+  const params = useSearchParams();
   const supabase = createClient();
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
@@ -23,11 +24,13 @@ export default function Login() {
       setError("Mail o contraseña incorrectos");
       setLoading(false);
     } else {
-      router.push("/app/comparar");
+      const from = params.get("from") || "/app/comparar";
+      router.push(from);
     }
   }
 
   return (
+    <Suspense>
     <>
       <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full max-w-md p-10">
@@ -82,5 +85,14 @@ export default function Login() {
       </main>
       <Footer />
     </>
+    </Suspense>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense>
+      <LoginInner />
+    </Suspense>
   );
 }

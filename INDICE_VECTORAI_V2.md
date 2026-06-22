@@ -1,335 +1,170 @@
-# 📚 VectorAI v2 — Índice Maestro de Documentación
+# VectorAI v2 — Índice Maestro de Documentación
 
 **Última actualización:** 22 Junio 2026  
+**Decisión clave:** Sin codigos_proveedores — matching 100% por texto (aliases)  
 **Estado:** ✅ Arquitectura finalizada y documentada
 
 ---
 
-## 🎯 ¿Por dónde empiezo?
+## ¿Por dónde empiezo?
 
 ### Para entender la arquitectura en 10 minutos
-👉 Lee: [`RESUMEN_FINAL_ARQUITECTURA_V2.md`](RESUMEN_FINAL_ARQUITECTURA_V2.md)
-- Cambio v1 → v2
-- 6 pilares clave
-- Flowcharts de usuario y admin
+→ Lee: [`RESUMEN_FINAL_ARQUITECTURA_V2.md`](RESUMEN_FINAL_ARQUITECTURA_V2.md)
+- Por qué v2 vs v1
+- Los 4 pilares
+- Flujo de usuario y flujo admin
 - Roadmap de implementación
 
-### Para ver todo visualmente
-👉 Abre: [`arquitectura_v2_final.html`](arquitectura_v2_final.html) (en navegador)
-- Diagramas ASCII
-- Explicaciones detalladas
-- Casos de uso
-- Flywheel de mejora
-
-### Para implementar (developers)
-👉 Lee: [`SCHEMA_VECTORAI_v2.md`](SCHEMA_VECTORAI_v2.md)
-- SQL exacto para cada tabla
-- Ejemplos de filas con datos reales
-- Mapeo desde tu BD actual
-- Script Python de migración
-- Validaciones y índices
+### Para implementar (SQL + código)
+→ Lee: [`SCHEMA_VECTORAI_v2.md`](SCHEMA_VECTORAI_v2.md)
+- SQL exacto para las 4 tablas
+- Script de migración completo
+- Lógica de matching en Python
+- Queries de verificación
 
 ---
 
-## 📋 Estructura de Documentos
+## Estructura de Documentos
 
 ```
 presupuestor/
-├── INDICE_VECTORAI_V2.md ← TÚ ESTÁS AQUÍ
-├── RESUMEN_FINAL_ARQUITECTURA_V2.md (read-me ejecutivo)
-├── arquitectura_v2_final.html (guía visual)
-├── SCHEMA_VECTORAI_v2.md (implementación técnica)
-└── pendientes_v2_arquitectura.html (versión anterior, solo referencia)
+├── INDICE_VECTORAI_V2.md           ← TÚ ESTÁS AQUÍ
+├── RESUMEN_FINAL_ARQUITECTURA_V2.md (arquitectura + roadmap)
+└── SCHEMA_VECTORAI_v2.md           (implementación técnica)
 ```
 
 ---
 
-## 🎬 Roadmap de Lectura
+## Roadmap de Implementación
 
-### Día 1: Entender
+### Esta semana: Schema + Datos
 ```
-1. RESUMEN_FINAL_ARQUITECTURA_V2.md (20 min)
-2. arquitectura_v2_final.html (30 min)
-3. SCHEMA_VECTORAI_v2.md - primeras secciones (15 min)
-→ Ya entiendes qué es VectorAI v2
-```
-
-### Día 2-3: Implementación
-```
-1. SCHEMA_VECTORAI_v2.md - SQL completo (30 min)
-2. Script de migración desde tu BD (15 min)
-3. Crear tablas en Supabase (30 min)
-→ Schema en Supabase listo
+1. Ejecutar SQL en Supabase (4 tablas) — 30 min
+2. Correr script de migración (915 materiales) — 15 min
+3. Verificar con queries — 15 min
+→ BD lista para procesar PDFs
 ```
 
-### Semana 1: Endpoints básicos
+### Semana 1-2: Backend
 ```
-1. RESUMEN_FINAL_ARQUITECTURA_V2.md - sección Endpoints (10 min)
-2. Implementar /analizar-pdf-con-codigos (8-12 horas)
-3. Implementar /confirmar-analisis (4-6 horas)
-→ Backend MVP funcional
+1. POST /analizar-pdf (fuzzy match texto → material_denominaciones)
+2. POST /confirmar-analisis (guarda aliases + precios)
+3. GET/POST /admin/pendientes (revisar sin-match)
+→ API funcional
 ```
 
-### Semana 2-3: Frontend
+### Semana 2-4: Frontend
 ```
-1. Página de upload de PDFs
-2. Vista interactiva con 3 grupos
-3. Admin dashboard
+1. Vista upload de PDFs
+2. Vista 3 grupos: automático / dudoso / sin match
+3. Admin dashboard (revisar pendientes)
 → MVP en producción
 ```
 
----
-
-## 📌 Documentos Rápidos (Copy/Paste)
-
-### SQL para crear todas las tablas
-```sql
--- Ir a SCHEMA_VECTORAI_v2.md, sección "Tabla: materiales_validados"
--- Copiar bloques CREATE TABLE
--- Ejecutar en Supabase
+### Mes 1-2: Bootstrapping
 ```
-
-### Script Python para migración
-```python
-# Ir a SCHEMA_VECTORAI_v2.md, sección "Cómo Migrar desde Tu Base Actual"
-# Copiar script completo
-# Ajustar rutas a tu CSV
-# Ejecutar: python script.py
-```
-
-### Ejemplos de datos JSON
-```json
-// Ir a SCHEMA_VECTORAI_v2.md, sección "Campos Detallados"
-// Buscar "especificaciones" o "unidades_posibles"
-// Copy/paste estructura exacta
+Nosotros cargamos PDFs propios proactivamente
+Revisamos pendientes 15 min/día
+Meta: 90%+ matching automático
 ```
 
 ---
 
-## 🎯 Las 5 Decisiones Clave
+## Los 4 Pilares (resumen rápido)
 
-| Decisión | Por qué | Impacto |
-|----------|---------|--------|
-| **Usuario NO crea materiales** | Control de calidad, evita duplicados | Sistema más robusto |
-| **Códigos de proveedores = 95% confianza** | No necesita revisión manual | Usuarios felices, matching rápido |
-| **Data warehouse (precios_historicos)** | Base para futuros análisis | Escalabilidad a trading/consulting |
-| **Human in the Loop diario** | Validamos pero no bloqueamos | Bootstrapping rápido de 1-2 meses |
-| **Nosotros alimentamos datos** | No esperamos solo a usuarios | Sistema mejora incluso sin usuarios iniciales |
+### 1. BD Central Verificada
+- `materiales_validados`: 915 materiales iniciales, fuente de verdad
+- `materiales_pendientes`: textos sin match, cola de revisión diaria
 
----
+### 2. Aliases de Texto (el corazón)
+- `material_denominaciones`: todas las formas de decir lo mismo
+- "Codo PVC 45-40mm", "Codo A90 45", "Codo 45-40" → todos 001-A
+- Crece con cada PDF procesado
+- Una sola tabla para todos los proveedores del país
 
-## 🏗️ Los 6 Pilares
+### 3. Matching de Texto (2 niveles)
+- Score ≥ 85 → automático
+- Score 60-84 → usuario elige
+- Score < 60 → sin match, va a pendientes
 
-### 1. Dos Bases de Datos
-- `materiales_validados`: BD verificada (915 items iniciales)
-- `materiales_pendientes`: Nuevos encontrados en PDFs
-
-### 2. Códigos de Proveedores
-- `codigos_proveedores`: Baukraft BK-4521 → 001-A
-- Permite matching 95% automático
-
-### 3. Denominaciones con Alias
-- `material_denominaciones`: "Codo PVC", "Codo 45-40", "Codo A90" → todas 001-A
-- Fuzzy match tolerante
-
-### 4. Matching Multi-Nivel
-- Nivel 1: Código (95%)
-- Nivel 2: Denominación (70-90%)
-- Nivel 3: IA agrupamiento (60-85%)
-- Nivel 4: Sin match (0%)
-
-### 5. Human in the Loop
-- Nosotros revisamos pendientes 1x/día
-- 15 min por día de trabajo
-- Validamos y subimos a BD
-
-### 6. Flywheel de Mejora
-- Semana 1: 70% automático
-- Mes 1: 85% automático
-- Semana 6: 95% automático
+### 4. Human in the Loop + Flywheel
+- 15 min/día revisando pendientes
+- Cada alias validado mejora el sistema para siempre
+- Más PDFs → más aliases → mejor matching → menos trabajo
 
 ---
 
-## 🚀 Implementación (Orden)
+## Decisiones Clave
 
-```
-FASE 1: Schema (1-2 semanas)
-├─ Crear tablas en Supabase
-├─ Migrar 915 materiales
-├─ Mapear códigos (80% coverage)
-└─ ✅ BD lista
-
-FASE 2: Backend (2-3 semanas)
-├─ POST /analizar-pdf-con-codigos
-├─ POST /confirmar-analisis
-├─ Endpoints admin
-└─ ✅ APIs funcionales
-
-FASE 3: Frontend (2-3 semanas)
-├─ Upload PDFs
-├─ Vista interactiva
-├─ Admin dashboard
-└─ ✅ UI completa
-
-FASE 4: Testing (1 semana)
-├─ Accuracy de matching
-├─ Load testing
-├─ Beta users
-└─ ✅ MVP en producción
-
-FASE 5: Bootstrapping (1-2 meses)
-├─ Cargamos datos propios
-├─ Descubrimos códigos nuevos
-├─ Refinamos denominaciones
-└─ ✅ Sistema robusto (95%)
-```
+| Decisión | Por qué |
+|----------|---------|
+| Sin codigos_proveedores | 500+ proveedores, cada uno con sus propios códigos → inmanejable. Los aliases de texto son universales. |
+| Aliases como fuente de matching | Un texto confirmado sirve para cualquier proveedor del país que lo use. |
+| Data warehouse de precios | precios_historicos crece indefinidamente — activo de largo plazo. |
+| Human in the Loop no bloquea | Pendientes se procesan a la mañana; el usuario ya terminó su análisis. |
+| Nosotros alimentamos datos | No esperamos solo a usuarios — cargamos PDFs propios proactivamente. |
 
 ---
 
-## 🎬 Flujos Clave
+## Tablas
 
-### Flujo Usuario
-```
-1. Sube PDFs
-2. Sistema matchea automáticamente
-3. Revisa 3 grupos (automático, dudoso, sin match)
-4. Confirma
-5. Sistema guarda equivalencias + precios
-```
-
-### Flujo Nosotros (Diario)
-```
-1. Dashboard: "47 nuevos pendientes"
-2. IA ya los agrupó por categoría
-3. Para cada grupo: crear/linkear/rechazar
-4. Validamos → suben a materiales_validados
-5. Próximos usuarios: mejor matching
-```
-
-### Flujo Proactivo (Semanal)
-```
-1. Pedimos presupuestos a otros corralones
-2. Los cargamos en nuestro sistema
-3. Descubrimos códigos nuevos
-4. Validamos → tabla codigos_proveedores
-5. Sistema mejora sin usuarios iniciales
-```
+| Tabla | Rows iniciales | Propósito |
+|-------|----------------|-----------|
+| materiales_validados | ~915 | Fuente de verdad |
+| material_denominaciones | ~1500 | Aliases para matching (el corazón) |
+| materiales_pendientes | 0 | Cola de revisión diaria |
+| precios_historicos | 0 | Data warehouse (crece para siempre) |
 
 ---
 
-## 📊 Tablas Principales
-
-| Tabla | Rows | Frecuencia | Rol |
-|-------|------|-----------|-----|
-| materiales_validados | ~915 | 1x/semana | BD central verificada |
-| material_denominaciones | ~2000+ | Diaria | Aliases encontrados |
-| codigos_proveedores | ~500+ | Continua | Mágica matching 95% |
-| materiales_pendientes | ~100+ | Diaria | Nuevos temporales |
-| precios_historicos | Millones | Continua | Data warehouse futuro |
-
----
-
-## ✅ Checklist Pre-Implementación
+## Checklist de Implementación
 
 - [ ] Leer RESUMEN_FINAL_ARQUITECTURA_V2.md completo
-- [ ] Revisar arquitectura_v2_final.html (visual)
-- [ ] Entender SCHEMA_VECTORAI_v2.md (tablas, campos, ejemplos)
-- [ ] Exportar 915 materiales desde tu BD actual a CSV
-- [ ] Preparar lista de códigos Baukraft/Bonora/Carosio
-- [ ] Crear proyecto Supabase (o usar uno existente)
-- [ ] Ejecutar SQL de tablas
-- [ ] Correr script de migración
-- [ ] Mapear códigos en tabla codigos_proveedores
-- [ ] Verificar datos con queries
-- [ ] Listo para implementar endpoints
+- [ ] Leer SCHEMA_VECTORAI_v2.md (SQL + script de migración)
+- [ ] Ejecutar SQL de las 4 tablas en Supabase
+- [ ] Correr script de migración desde master_materiales.json
+- [ ] Verificar conteos (915 materiales, ~1500 aliases)
+- [ ] Implementar POST /analizar-pdf
+- [ ] Implementar POST /confirmar-analisis
+- [ ] Implementar endpoints admin
+- [ ] Construir vista frontend 3 grupos
+- [ ] Testing con PDFs reales de Baukraft/Bonora/Carosio
+- [ ] Ajustar umbrales de confianza
+- [ ] MVP en producción
 
 ---
 
-## 🎓 Ejemplos Clave
+## Ejemplo: cómo crece el sistema
 
-### Ejemplo 1: Material con múltiples unidades
-```json
-{
-  "codigo": "002-B",
-  "categoria": "Herrajes",
-  "denominacion_principal": "Tornillo #8x1\"",
-  "marcas_disponibles": ["Marca A", "Marca B", "Marca China"],
-  "unidades_posibles": [
-    {"unidad": "UNIDAD", "descripcion": "1 tornillo", "equivalencia": 1},
-    {"unidad": "CAJA_1000", "descripcion": "Caja 1000", "equivalencia": 1000},
-    {"unidad": "BOLSA_500", "descripcion": "Bolsa 500", "equivalencia": 500}
-  ]
-}
+**Semana 1 — PDF de Baukraft:**
+```
+PDF dice: "Codo PVC 45-40mm"
+No hay alias aún → va a dudoso (score 72 contra denominacion_principal)
+Usuario confirma → se agrega alias "codo pvc 45-40mm" → 001-A
 ```
 
-### Ejemplo 2: Código de proveedor mágico
+**Semana 1 — PDF de Bonora (mismo día):**
 ```
-Baukraft PDF: "BK-4521" → $150
-         ↓
-System busca en codigos_proveedores
-         ↓
-Encuentra: proveedor=Baukraft, codigo_proveedor=BK-4521 → codigo_material=001-A
-         ↓
-✅ Match automático, 95% confianza
+PDF dice: "Codo PVC A90 45"
+Fuzzy match contra aliases conocidos: score 81 (dudoso)
+Usuario confirma → se agrega alias "codo pvc a90 45" → 001-A
 ```
 
-### Ejemplo 3: IA agrupando pendientes
+**Semana 2 — PDF de corralón del interior:**
 ```
-Baukraft: "Tornillo #8x1 inox"
-Bonora: "Tornillo #8x1"
-Carosio: "Tornillo acero #8"
-         ↓
-IA: "Estos 3 probablemente sean lo mismo (91% confianza)"
-         ↓
-Usuario: [✓ Agrupar] o [✗ Son distintos]
+PDF dice: "Codo 45-40"
+Fuzzy match: "codo pvc 45-40mm" score 88 → automático
+Sin revisión manual necesaria.
 ```
 
----
-
-## 🔧 Herramientas & Config
-
-| Herramienta | Rol | Config |
-|-------------|-----|--------|
-| FUSI | Matching de código / denominación | Ya lo tienes |
-| Claude/GPT-4 | IA agrupamiento de pendientes | Prompt incluido en SCHEMA |
-| Supabase | BD central | Tablas + índices en SCHEMA |
-| Python | Script migración | Copy/paste en SCHEMA |
-
----
-
-## 📞 Support
-
-Si hay duda:
-1. Buscar en `RESUMEN_FINAL_ARQUITECTURA_V2.md` (más legible)
-2. Buscar en `arquitectura_v2_final.html` (más visual)
-3. Buscar en `SCHEMA_VECTORAI_v2.md` (más técnico)
-
-Los 3 documentos cubren el 100% de VectorAI v2.
-
----
-
-## 📌 Links Rápidos
-
-- [📋 Resumen Ejecutivo](RESUMEN_FINAL_ARQUITECTURA_V2.md)
-- [🎨 Arquitectura Visual](arquitectura_v2_final.html)
-- [🛠️ Schema Técnico](SCHEMA_VECTORAI_v2.md)
-- [📜 Documentación Anterior](pendientes_v2_arquitectura.html) (referencia)
-
----
-
-## 🎯 Estado Actual
-
-| Aspecto | Estado | Fecha |
-|---------|--------|-------|
-| Arquitectura | ✅ Finalizada | 21-22 Jun 2026 |
-| Documentación | ✅ Completa | 22 Jun 2026 |
-| Schema | ✅ Definido | 22 Jun 2026 |
-| Roadmap | ✅ Claro | 22 Jun 2026 |
-| Implementación | ⏳ Por empezar | Próximamente |
+**Mes 2 — cualquier PDF del país:**
+```
+"Codo PVC 45-40mm" → match instantáneo, score 100
+"Codo 45-40"       → match automático, score 88
+"Codo A90 45"      → match automático, score 91
+```
 
 ---
 
 **Documento creado:** 22 de Junio de 2026  
-**Versión:** 1.0  
-**Siguientes pasos:** Crear schema en Supabase + migrar datos
-
+**Versión:** 2.0 — sin codigos_proveedores

@@ -3,10 +3,55 @@ import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
+import UserMenu from "@/components/UserMenu";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-type Precio = { precio_sin_iva: number; score: number; origen: string };
+// ── Tipos ─────────────────────────────────────────────────────────────────────
+type Alternativa = { codigo_material: string; denominacion: string; score: number };
+
+type ItemAutomatico = {
+  desc_prov: string;
+  cod_prov: string;
+  precio_sin_iva: number;
+  precio_con_iva: number;
+  cant: number;
+  codigo_material: string;
+  denominacion_matcheada: string;
+  score: number;
+  categoria: string;
+  denominacion_principal: string;
+  descripcion: string;
+  alternativas: Alternativa[];
+};
+
+type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
+
+type ItemSinMatch = {
+  desc_prov: string;
+  cod_prov: string;
+  precio_sin_iva: number;
+  precio_con_iva: number;
+  cant: number;
+};
+
+type StatsProveedor = {
+  total: number;
+  automatico: number;
+  dudoso: number;
+  sin_match: number;
+  pct_automatico: number;
+};
+
+type ResultadoProveedor = {
+  automatico: ItemAutomatico[];
+  dudoso: ItemDudoso[];
+  sin_match: ItemSinMatch[];
+  stats: StatsProveedor;
+  iva_detectado: boolean;
+};
+
+type Precio = { precio_sin_iva: number; score: number; origen: string; cant: number };
 type FilaComparativa = {
   cod_int: string;
   rubro: string;
@@ -18,31 +63,49 @@ type FilaComparativa = {
   ahorro: number;
   en_varios: boolean;
 };
-type SinMatch = { cod_prov: string; desc_prov: string; precio: number };
 
+type Resultado = {
+  comparativa_id: string;
+  proveedores: string[];
+  resultados: Record<string, ResultadoProveedor>;
+  comparativo: FilaComparativa[];
+  plan: string;
+  usos_restantes: number | null;
+  aliases_en_bd: number;
+};
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function fmt(v: number) {
   return `$ ${Math.round(v).toLocaleString("es-AR")}`;
 }
 
+function ScoreBadge({ score }: { score: number }) {
+  const color = score >= 85 ? "text-green-700 bg-green-100" : score >= 70 ? "text-amber-700 bg-amber-100" : "text-red-700 bg-red-100";
+  return <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${color}`}>{score.toFixed(0)}%</span>;
+}
+
+// ── Componente principal ──────────────────────────────────────────────────────
 export default function Comparar() {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles]       = useState<File[]>([]);
   const [dragging, setDragging] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [resultado, setResultado] = useState<null | {
-    comparativo: FilaComparativa[];
-    proveedores: string[];
-    sin_match: Record<string, SinMatch[]>;
-    plan: string;
-    comparativa_id: string;
-    usos_restantes: number | null;
-  }>(null);
-  const [error, setError] = useState("");
+  const [loading, setLoading]   = useState(false);
+  const [resultado, setResultado] = useState<Resultado | null>(null);
+  const [error, setError]       = useState("");
+  const [tab, setTab]           = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
   const [soloComunes, setSoloComunes] = useState(false);
+  const [confirmando, setConfirmando] = useState(false);
+  const [confirmado, setConfirmado]   = useState(false);
+  const [token, setToken]       = useState<string | null>(null);
+
+  // Estado editable de dudosos: usuario puede elegir alternativa
+  const [dudososEditados, setDudososEditados] = useState<
+    Record<string, Record<number, string>>  // proveedor → idx → codigo_material elegido
+  >({});
+
   const [generandoSheets, setGenerandoSheets] = useState(false);
-  const [generandoPdf, setGenerandoPdf] = useState(false);
-  const [generandoJpg, setGenerandoJpg] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  const [generandoPdf, setGenerandoPdf]       = useState(false);
+  const [generandoJpg, setGenerandoJpg]       = useState(false);
 
   useEffect(() => {
     const sb = createClient();
@@ -51,7 +114,7 @@ export default function Comparar() {
     });
   }, []);
 
-  // Drag & drop
+  // ── Upload ─────────────────────────────────────────────────────────────────
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setDragging(false);
@@ -63,11 +126,13 @@ export default function Comparar() {
     setFiles((prev) => prev.filter((_, idx) => idx !== i));
   }
 
+  // ── Analizar ───────────────────────────────────────────────────────────────
   async function analizar() {
     if (!files.length) return;
     setLoading(true);
     setError("");
     setResultado(null);
+    setConfirmado(false);
 
     const form = new FormData();
     files.forEach((f) => form.append("files", f));
@@ -76,37 +141,30 @@ export default function Comparar() {
       const headers: Record<string, string> = {};
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      const res = await fetch(`${API_URL}/analizar`, {
-        method: "POST",
-        headers,
-        body: form,
-      });
+      const res = await fetch(`${API_URL}/analizar-v2`, { method: "POST", headers, body: form });
       const data = await res.json();
 
       if (!res.ok) {
         if (data?.detail?.error === "plan_limit") {
-          setError("Plan gratuito: máximo 2 PDFs. Pasate al plan Advance para analizar más presupuestos.");
+          setError("Plan gratuito: máximo 2 análisis por día. Pasate al plan Advance.");
         } else {
-          const errores = data?.detail?.errores?.map((e: {archivo: string, error: string}) => `${e.archivo}: ${e.error}`).join(" | ");
-          setError(errores || data?.detail?.mensaje || JSON.stringify(data?.detail) || "Error al analizar los PDFs");
+          setError(data?.detail?.mensaje || JSON.stringify(data?.detail) || "Error al analizar los PDFs");
         }
         return;
       }
 
-      // Construir sin_match por proveedor
-      const sin_match: Record<string, SinMatch[]> = {};
-      for (const [prov, d] of Object.entries(data.resultados as Record<string, { sin_match: SinMatch[] }>)) {
-        sin_match[prov] = d.sin_match || [];
-      }
+      setResultado(data);
+      setTab("comparativa");
 
-      setResultado({
-        comparativo: data.comparativo,
-        proveedores: data.proveedores,
-        sin_match,
-        plan: data.plan,
-        comparativa_id: data.comparativa_id,
-        usos_restantes: data.usos_restantes ?? null,
-      });
+      // Inicializar dudosos con la primera alternativa como selección por defecto
+      const init: Record<string, Record<number, string>> = {};
+      for (const [prov, r] of Object.entries(data.resultados as Record<string, ResultadoProveedor>)) {
+        init[prov] = {};
+        r.dudoso.forEach((item: ItemDudoso, idx: number) => {
+          init[prov][idx] = item.codigo_material; // la sugerida por defecto
+        });
+      }
+      setDudososEditados(init);
     } catch {
       setError("No se pudo conectar con el servidor de análisis.");
     } finally {
@@ -114,41 +172,98 @@ export default function Comparar() {
     }
   }
 
-  async function descargar(endpoint: string, ext: string, setLoading: (v: boolean) => void) {
+  // ── Confirmar v2 ───────────────────────────────────────────────────────────
+  async function confirmar() {
     if (!resultado) return;
-    setLoading(true);
+    setConfirmando(true);
+
+    const confirmados: object[] = [];
+    const sin_match_items: object[] = [];
+
+    for (const [prov, r] of Object.entries(resultado.resultados)) {
+      // Items automáticos
+      for (const item of r.automatico) {
+        confirmados.push({
+          desc_prov:       item.desc_prov,
+          proveedor:       prov,
+          codigo_material: item.codigo_material,
+          precio_sin_iva:  item.precio_sin_iva,
+          unidad:          "UN",
+          cantidad:        item.cant,
+        });
+      }
+      // Items dudosos con el código que el usuario eligió
+      r.dudoso.forEach((item, idx) => {
+        const codigoElegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
+        confirmados.push({
+          desc_prov:       item.desc_prov,
+          proveedor:       prov,
+          codigo_material: codigoElegido,
+          precio_sin_iva:  item.precio_sin_iva,
+          unidad:          "UN",
+          cantidad:        item.cant,
+        });
+      });
+      // Sin match
+      for (const item of r.sin_match) {
+        sin_match_items.push({
+          desc_prov:      item.desc_prov,
+          proveedor:      prov,
+          precio_sin_iva: item.precio_sin_iva,
+          unidad:         "UN",
+        });
+      }
+    }
+
+    try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+
+      await fetch(`${API_URL}/confirmar-v2`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          comparativa_id: resultado.comparativa_id,
+          confirmados,
+          sin_match: sin_match_items,
+        }),
+      });
+      setConfirmado(true);
+    } catch {
+      // no bloqueante
+    } finally {
+      setConfirmando(false);
+    }
+  }
+
+  // ── Descargar ──────────────────────────────────────────────────────────────
+  async function descargar(endpoint: string, ext: string, setGen: (v: boolean) => void) {
+    if (!resultado) return;
+    setGen(true);
     try {
       const res = await fetch(`${API_URL}/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           comparativa_id: resultado.comparativa_id,
-          solo_comunes: soloComunes,
-          filtro_rubro: filtroRubro !== "Todos" ? filtroRubro : null,
+          solo_comunes:   soloComunes,
+          filtro_rubro:   filtroRubro !== "Todos" ? filtroRubro : null,
         }),
       });
-      if (!res.ok) {
-        const err = await res.json();
-        alert(err.detail?.mensaje || "Error al generar el archivo");
-        return;
-      }
+      if (!res.ok) { alert("Error al generar el archivo"); return; }
       const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      const fecha = new Date().toISOString().slice(0, 10);
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
       a.href = url;
-      a.download = `VectorAI_Comparativa_${fecha}.${ext}`;
+      a.download = `VectorAI_${new Date().toISOString().slice(0, 10)}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {
-      setLoading(false);
+      setGen(false);
     }
   }
 
-  const descargarSheets = () => descargar("sheets", "xlsx", setGenerandoSheets);
-  const descargarPdf    = () => descargar("pdf",    "pdf",  setGenerandoPdf);
-  const descargarJpg    = () => descargar("imagen", "jpg",  setGenerandoJpg);
-
+  // ── Datos derivados ────────────────────────────────────────────────────────
   const rubros = resultado
     ? ["Todos", ...Array.from(new Set(resultado.comparativo.map((r) => r.rubro))).sort()]
     : [];
@@ -159,28 +274,33 @@ export default function Comparar() {
 
   const ahorroTotal = filasFiltradas.reduce((s, r) => s + (r.ahorro || 0), 0);
 
+  const totalDudosos  = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.dudoso.length, 0) : 0;
+  const totalSinMatch = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.sin_match.length, 0) : 0;
+  const pctAuto       = resultado
+    ? Math.round(100 * Object.values(resultado.resultados).reduce((s, r) => s + r.stats.automatico, 0) /
+        Math.max(1, Object.values(resultado.resultados).reduce((s, r) => s + r.stats.total, 0)))
+    : 0;
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <>
     <main className="min-h-screen bg-gray-50">
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-gray-900">VectorAI <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span></Link>
+        <Link href="/" className="text-lg font-bold text-gray-900">
+          VectorAI <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
+        </Link>
         <div className="flex gap-3 items-center">
-          <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">
-            📜 Mis comparativas
-          </Link>
-          <Link href="/app/revisar" className="text-sm text-gray-500 hover:text-gray-800 transition">
-            Revisar sin-match
-          </Link>
+          <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
+          <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-3 py-1.5 rounded-lg"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Consultas
           </a>
+          <UserMenu />
         </div>
       </nav>
 
@@ -190,68 +310,56 @@ export default function Comparar() {
 
         {/* Upload zone */}
         {!resultado && (
-          <div
-            onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-            onDragLeave={() => setDragging(false)}
-            onDrop={onDrop}
-            className={`border-2 border-dashed rounded-2xl p-12 text-center transition cursor-pointer mb-6 ${
-              dragging ? "border-blue-400 bg-blue-50" : "border-gray-300 bg-white hover:border-blue-300"
-            }`}
-            onClick={() => document.getElementById("file-input")?.click()}
-          >
-            <input
-              id="file-input"
-              type="file"
-              accept="application/pdf"
-              multiple
-              className="hidden"
-              onChange={(e) => setFiles((prev) => [...prev, ...Array.from(e.target.files || [])])}
-            />
-            <div className="text-4xl mb-4">📄</div>
-            <p className="text-gray-600 font-medium">Arrastrá los PDFs acá o hacé click para seleccionar</p>
-            <p className="text-gray-400 text-sm mt-1">Solo PDFs · Plan gratuito: máximo 2 archivos</p>
-          </div>
-        )}
+          <>
+            <div
+              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={onDrop}
+              className={`border-2 border-dashed rounded-2xl p-12 text-center transition cursor-pointer mb-6 ${
+                dragging ? "border-blue-400 bg-blue-50" : "border-gray-300 bg-white hover:border-blue-300"
+              }`}
+              onClick={() => document.getElementById("file-input")?.click()}
+            >
+              <input
+                id="file-input" type="file" accept="application/pdf" multiple className="hidden"
+                onChange={(e) => setFiles((prev) => [...prev, ...Array.from(e.target.files || [])])}
+              />
+              <div className="text-4xl mb-4">📄</div>
+              <p className="text-gray-600 font-medium">Arrastrá los PDFs acá o hacé click para seleccionar</p>
+              <p className="text-gray-400 text-sm mt-1">Solo PDFs · Uno por proveedor</p>
+            </div>
 
-        {/* Lista de archivos */}
-        {files.length > 0 && !resultado && (
-          <div className="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
-            {files.map((f, i) => (
-              <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
-                <span className="text-gray-400">📄</span>
-                <span className="flex-1 text-sm text-gray-700">{f.name}</span>
-                <span className="text-xs text-gray-400">{(f.size / 1024).toFixed(0)} KB</span>
-                <button onClick={() => removeFile(i)} className="text-gray-400 hover:text-red-500 text-lg">×</button>
+            {files.length > 0 && (
+              <div className="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
+                {files.map((f, i) => (
+                  <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+                    <span className="text-gray-400">📄</span>
+                    <span className="flex-1 text-sm text-gray-700">{f.name}</span>
+                    <span className="text-xs text-gray-400">{(f.size / 1024).toFixed(0)} KB</span>
+                    <button onClick={() => removeFile(i)} className="text-gray-400 hover:text-red-500 text-lg">×</button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-4 rounded-xl mb-6">
-            {error}
-            {error.includes("básico") && (
-              <Link href="/registro?plan=basico" className="ml-2 font-semibold underline">
-                Ver plan básico →
-              </Link>
             )}
-          </div>
-        )}
 
-        {!resultado && (
-          <button
-            onClick={analizar}
-            disabled={!files.length || loading}
-            className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition disabled:opacity-40"
-          >
-            {loading ? "Analizando…" : "⚡ Analizar"}
-          </button>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-4 rounded-xl mb-6">{error}</div>
+            )}
+
+            <button
+              onClick={analizar}
+              disabled={!files.length || loading}
+              className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition disabled:opacity-40"
+            >
+              {loading ? "Analizando…" : "⚡ Analizar"}
+            </button>
+          </>
         )}
 
         {/* Resultados */}
         {resultado && (
           <>
-            {/* Aviso usos restantes plan free */}
+            {/* Aviso usos restantes */}
             {resultado.usos_restantes !== null && resultado.usos_restantes <= 1 && (
               <div className={`mb-4 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between ${
                 resultado.usos_restantes === 0
@@ -260,11 +368,11 @@ export default function Comparar() {
               }`}>
                 <span>
                   {resultado.usos_restantes === 0
-                    ? "Usaste todos tus análisis gratuitos de hoy. Mañana se renueva, o pasate al plan Advance."
+                    ? "Usaste todos tus análisis gratuitos de hoy. Mañana se renueva."
                     : "Te queda 1 análisis gratuito hoy."}
                 </span>
                 {resultado.usos_restantes === 0 && (
-                  <Link href="/registro?plan=advance" className="ml-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition whitespace-nowrap">
+                  <Link href="/suscribirse" className="ml-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
                     Ver Advance →
                   </Link>
                 )}
@@ -274,9 +382,9 @@ export default function Comparar() {
             {/* KPIs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               {[
-                { label: "Proveedores", value: resultado.proveedores.length },
-                { label: "Materiales", value: resultado.comparativo.length },
-                { label: "En común", value: resultado.comparativo.filter((r) => r.en_varios).length },
+                { label: "Proveedores",     value: resultado.proveedores.length },
+                { label: "Match automático", value: `${pctAuto}%` },
+                { label: "En común",        value: resultado.comparativo.filter((r) => r.en_varios).length },
                 { label: "Ahorro potencial", value: fmt(ahorroTotal) },
               ].map((k) => (
                 <div key={k.label} className="bg-white rounded-xl border border-gray-200 px-5 py-4">
@@ -286,147 +394,230 @@ export default function Comparar() {
               ))}
             </div>
 
-            {/* Botones de acción */}
-            <div className="flex gap-3 mb-6 flex-wrap">
-              <button
-                onClick={descargarSheets}
-                disabled={generandoSheets}
-                className="bg-green-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition text-sm disabled:opacity-50"
-              >
+            {/* Acciones */}
+            <div className="flex gap-3 mb-6 flex-wrap items-center">
+              <button onClick={() => descargar("sheets", "xlsx", setGenerandoSheets)} disabled={generandoSheets}
+                className="bg-green-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition text-sm disabled:opacity-50">
                 {generandoSheets ? "Generando…" : "↓ Excel"}
               </button>
-              <button
-                onClick={descargarPdf}
-                disabled={generandoPdf}
-                className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition text-sm disabled:opacity-50"
-              >
+              <button onClick={() => descargar("pdf", "pdf", setGenerandoPdf)} disabled={generandoPdf}
+                className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition text-sm disabled:opacity-50">
                 {generandoPdf ? "Generando…" : "↓ PDF"}
               </button>
-              <button
-                onClick={descargarJpg}
-                disabled={generandoJpg}
-                className="bg-purple-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50"
-              >
+              <button onClick={() => descargar("imagen", "jpg", setGenerandoJpg)} disabled={generandoJpg}
+                className="bg-purple-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50">
                 {generandoJpg ? "Generando…" : "↓ JPG"}
               </button>
-              <button
-                onClick={() => { setResultado(null); setFiles([]); }}
-                className="border border-gray-300 text-gray-600 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition text-sm"
-              >
+              <button onClick={() => { setResultado(null); setFiles([]); setConfirmado(false); }}
+                className="border border-gray-300 text-gray-600 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition text-sm">
                 + Nueva comparativa
               </button>
+
+              {/* Confirmar aliases */}
+              {!confirmado ? (
+                <button onClick={confirmar} disabled={confirmando}
+                  className="ml-auto bg-gray-900 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-gray-700 transition text-sm disabled:opacity-50">
+                  {confirmando ? "Guardando…" : "✓ Confirmar y aprender"}
+                </button>
+              ) : (
+                <span className="ml-auto text-sm text-green-700 font-medium bg-green-50 px-4 py-2.5 rounded-lg border border-green-200">
+                  ✓ Guardado — el sistema aprendió estos matches
+                </span>
+              )}
             </div>
 
-            {/* Filtros */}
-            <div className="flex gap-3 items-center mb-4 flex-wrap">
-              <select
-                value={filtroRubro}
-                onChange={(e) => setFiltroRubro(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                {rubros.map((r) => <option key={r}>{r}</option>)}
-              </select>
-              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={soloComunes}
-                  onChange={(e) => setSoloComunes(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 rounded"
-                />
-                Solo ítems en común entre proveedores
-              </label>
+            {/* Tabs */}
+            <div className="flex gap-1 mb-4 bg-gray-100 p-1 rounded-xl w-fit">
+              {([
+                ["comparativa", `Comparativa (${resultado.comparativo.length})`],
+                ["dudosos",     `Dudosos (${totalDudosos})`],
+                ["sin_match",   `Sin match (${totalSinMatch})`],
+              ] as const).map(([id, label]) => (
+                <button
+                  key={id}
+                  onClick={() => setTab(id)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                    tab === id ? "bg-white shadow text-gray-900" : "text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
-            {/* Tabla comparativa */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200">
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 min-w-[240px]">Material</th>
-                    <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Cant.</th>
-                    {resultado.proveedores.map((p) => (
-                      <th key={p} className="px-4 py-3 font-semibold text-gray-700 text-center">{p}</th>
-                    ))}
-                    <th className="px-4 py-3 font-semibold text-gray-600 text-center">Mejor</th>
-                    <th className="px-4 py-3 font-semibold text-gray-500 text-center text-xs">Ahorro</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filasFiltradas.map((row, i) => (
-                    <tr key={i} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
-                      <td className="px-4 py-3">
-                        <div className="font-medium text-gray-800 text-xs">{row.material}</div>
-                        <div className="text-xs text-gray-400">{row.rubro}</div>
-                      </td>
-                      <td className="px-3 py-3 text-center text-xs text-gray-500">
-                        {row.cant > 1 ? `${row.cant} ${row.unidad}` : row.unidad}
-                      </td>
-                      {resultado.proveedores.map((p) => {
-                        const precio = row.precios[p];
-                        const esMejor = row.mejor_proveedor === p && row.en_varios;
-                        const total = precio ? precio.precio_sin_iva * (row.cant || 1) : null;
-                        return (
-                          <td
-                            key={p}
-                            className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}
-                          >
-                            {precio ? (
-                              <div>
-                                <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
-                                  {fmt(total!)}
-                                </span>
-                                <div className="text-xs text-gray-400">
-                                  {fmt(precio.precio_sin_iva)}/u · {precio.origen === "EQUIV" ? "✓" : `${precio.score.toFixed(0)}%`}
-                                </div>
-                              </div>
-                            ) : (
-                              <span className="text-gray-300">—</span>
+            {/* ── TAB: Comparativa ─────────────────────────────────────────── */}
+            {tab === "comparativa" && (
+              <>
+                <div className="flex gap-3 items-center mb-4 flex-wrap">
+                  <select value={filtroRubro} onChange={(e) => setFiltroRubro(e.target.value)}
+                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    {rubros.map((r) => <option key={r}>{r}</option>)}
+                  </select>
+                  <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                    <input type="checkbox" checked={soloComunes} onChange={(e) => setSoloComunes(e.target.checked)}
+                      className="w-4 h-4 text-blue-600 rounded" />
+                    Solo ítems en común entre proveedores
+                  </label>
+                </div>
+
+                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-gray-50 border-b border-gray-200">
+                        <th className="text-left px-4 py-3 font-semibold text-gray-600 min-w-[240px]">Material</th>
+                        <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Cant.</th>
+                        {resultado.proveedores.map((p) => (
+                          <th key={p} className="px-4 py-3 font-semibold text-gray-700 text-center">{p}</th>
+                        ))}
+                        <th className="px-4 py-3 font-semibold text-gray-600 text-center">Mejor</th>
+                        <th className="px-4 py-3 font-semibold text-gray-500 text-center text-xs">Ahorro</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filasFiltradas.map((row, i) => (
+                        <tr key={i} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                          <td className="px-4 py-3">
+                            <div className="font-medium text-gray-800 text-xs">{row.material}</div>
+                            <div className="text-xs text-gray-400">{row.rubro}</div>
+                          </td>
+                          <td className="px-3 py-3 text-center text-xs text-gray-500">
+                            {row.cant > 1 ? `${row.cant} ${row.unidad}` : row.unidad}
+                          </td>
+                          {resultado.proveedores.map((p) => {
+                            const precio = row.precios[p];
+                            const esMejor = row.mejor_proveedor === p && row.en_varios;
+                            const total = precio ? precio.precio_sin_iva * (row.cant || 1) : null;
+                            return (
+                              <td key={p} className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}>
+                                {precio ? (
+                                  <div>
+                                    <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
+                                      {fmt(total!)}
+                                    </span>
+                                    <div className="text-xs text-gray-400">{fmt(precio.precio_sin_iva)}/u</div>
+                                  </div>
+                                ) : <span className="text-gray-300">—</span>}
+                              </td>
+                            );
+                          })}
+                          <td className="px-4 py-3 text-center">
+                            {row.en_varios && (
+                              <span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-1 rounded-full">
+                                {row.mejor_proveedor}
+                              </span>
                             )}
                           </td>
-                        );
-                      })}
-                      <td className="px-4 py-3 text-center">
-                        {row.en_varios && (
-                          <span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-1 rounded-full">
-                            {row.mejor_proveedor}
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 text-center text-xs text-gray-400">
-                        {row.ahorro > 0 ? fmt(row.ahorro) : ""}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                          <td className="px-4 py-3 text-center text-xs text-gray-400">
+                            {row.ahorro > 0 ? fmt(row.ahorro) : ""}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
 
-            {/* Sin match — Human in the Loop */}
-            {Object.values(resultado.sin_match).some((arr) => arr.length > 0) && (
-              <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-5">
-                <h3 className="font-semibold text-amber-800 mb-2 flex items-center gap-2">
-                  ⚠️ Ítems sin match automático
-                </h3>
-                <p className="text-sm text-amber-700 mb-3">
-                  Estos ítems no pudieron ser identificados automáticamente y no aparecen en la comparativa.
-                  {resultado.plan === "free"
-                    ? " En el plan Advance podés revisarlos manualmente para completar la comparativa."
-                    : " Podés revisarlos manualmente en la sección de revisión."}
-                </p>
-                {resultado.plan !== "free" ? (
-                  <Link
-                    href="/app/revisar"
-                    className="inline-block bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-amber-700 transition"
-                  >
-                    Revisar manualmente →
-                  </Link>
+            {/* ── TAB: Dudosos ─────────────────────────────────────────────── */}
+            {tab === "dudosos" && (
+              <div className="space-y-3">
+                {totalDudosos === 0 ? (
+                  <div className="bg-white rounded-xl border border-gray-200 px-6 py-10 text-center text-gray-400">
+                    No hay ítems dudosos — todos los matches fueron automáticos.
+                  </div>
                 ) : (
-                  <Link
-                    href="/registro?plan=advance"
-                    className="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-                  >
-                    Ver plan Advance →
-                  </Link>
+                  Object.entries(resultado.resultados).map(([prov, r]) =>
+                    r.dudoso.length === 0 ? null : (
+                      <div key={prov}>
+                        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">{prov}</h3>
+                        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                          {r.dudoso.map((item, idx) => (
+                            <div key={idx} className="px-4 py-4 border-b border-gray-100 last:border-0">
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-sm font-medium text-gray-800 truncate">{item.desc_prov}</div>
+                                  <div className="text-xs text-gray-400 mt-0.5">{fmt(item.precio_sin_iva)}/u · cant {item.cant}</div>
+                                </div>
+                                <ScoreBadge score={item.score} />
+                              </div>
+
+                              {/* Selector de alternativas */}
+                              <div className="mt-3">
+                                <div className="text-xs text-gray-500 mb-1.5">¿A qué material corresponde?</div>
+                                <div className="flex flex-col gap-1.5">
+                                  {/* La sugerida */}
+                                  {[
+                                    { codigo_material: item.codigo_material, denominacion: item.denominacion_principal || item.denominacion_matcheada, score: item.score },
+                                    ...item.alternativas,
+                                  ].map((alt) => {
+                                    const elegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
+                                    const isSelected = elegido === alt.codigo_material;
+                                    return (
+                                      <button
+                                        key={alt.codigo_material}
+                                        onClick={() => setDudososEditados((prev) => ({
+                                          ...prev,
+                                          [prov]: { ...prev[prov], [idx]: alt.codigo_material },
+                                        }))}
+                                        className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg border text-sm transition ${
+                                          isSelected
+                                            ? "border-blue-500 bg-blue-50 text-blue-800"
+                                            : "border-gray-200 hover:border-gray-300 text-gray-700"
+                                        }`}
+                                      >
+                                        <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
+                                          isSelected ? "border-blue-500 bg-blue-500" : "border-gray-300"
+                                        }`} />
+                                        <span className="flex-1 truncate">{alt.denominacion}</span>
+                                        <ScoreBadge score={alt.score} />
+                                        <span className="text-xs text-gray-400 flex-shrink-0">{alt.codigo_material}</span>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  )
+                )}
+              </div>
+            )}
+
+            {/* ── TAB: Sin match ────────────────────────────────────────────── */}
+            {tab === "sin_match" && (
+              <div className="space-y-3">
+                {totalSinMatch === 0 ? (
+                  <div className="bg-white rounded-xl border border-gray-200 px-6 py-10 text-center text-gray-400">
+                    Sin ítems sin match — todo fue identificado.
+                  </div>
+                ) : (
+                  <>
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
+                      Estos ítems no están en la base de materiales todavía. Al confirmar se guardan como pendientes
+                      y los revisamos para agregarlos — la próxima vez que aparezcan se van a matchear automáticamente.
+                    </div>
+                    {Object.entries(resultado.resultados).map(([prov, r]) =>
+                      r.sin_match.length === 0 ? null : (
+                        <div key={prov}>
+                          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">{prov}</h3>
+                          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                            {r.sin_match.map((item, idx) => (
+                              <div key={idx} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+                                <span className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-sm text-gray-700 truncate">{item.desc_prov}</div>
+                                </div>
+                                <div className="text-xs text-gray-400 flex-shrink-0">{fmt(item.precio_sin_iva)}/u</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </>
                 )}
               </div>
             )}

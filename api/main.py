@@ -124,7 +124,7 @@ def factor_iva(proveedor: str) -> float:
 # La API verifica el plan del usuario para aplicar límites freemium.
 # En producción usar supabase-py para verificar el JWT.
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
-SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
+SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY") or os.environ.get("SUPABASE_KEY", "")
 MP_ACCESS_TOKEN = os.environ.get("MERCADOPAGO_ACCESS_TOKEN", "")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://vectorai.com.ar")
 
@@ -790,8 +790,521 @@ async def mp_webhook(request: Request):
     return {"ok": True}
 
 
+# ── V2: Cache de denominaciones ───────────────────────────────────────────────
+import time
+from rapidfuzz import fuzz, process as fuzz_process
+
+_den_cache: list[dict] | None = None
+_den_cache_ts: float = 0
+_DEN_TTL = 300  # 5 minutos
+
+def _get_denominaciones() -> list[dict]:
+    """Carga material_denominaciones desde Supabase con cache de 5 min."""
+    global _den_cache, _den_cache_ts
+    ahora = time.time()
+    if _den_cache is not None and (ahora - _den_cache_ts) < _DEN_TTL:
+        return _den_cache
+
+    sb = get_supabase()
+    if not sb:
+        return _den_cache or []
+
+    try:
+        # Cargar en páginas de 1000 (Supabase limita por defecto)
+        todas = []
+        page = 0
+        PAGE = 1000
+        while True:
+            res = sb.table("material_denominaciones") \
+                    .select("codigo_material,denominacion,confianza,frecuencia_encontrada") \
+                    .range(page * PAGE, (page + 1) * PAGE - 1) \
+                    .execute()
+            batch = res.data or []
+            todas.extend(batch)
+            if len(batch) < PAGE:
+                break
+            page += 1
+
+        _den_cache = todas
+        _den_cache_ts = ahora
+        print(f"[v2] Cache denominaciones: {len(todas)} aliases cargados")
+        return todas
+    except Exception as e:
+        print(f"[v2] Error cargando denominaciones: {e}")
+        return _den_cache or []
+
+
+def _invalidar_cache_den():
+    global _den_cache_ts
+    _den_cache_ts = 0
+
+
+def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[dict]:
+    """
+    Fuzzy match de texto contra lista de denominaciones.
+    Retorna hasta top_n resultados con nivel: automatico / dudoso / sin_match.
+    """
+    texto_norm = texto.strip().lower()
+    if not texto_norm or not denominaciones:
+        return []
+
+    textos = [d["denominacion"] for d in denominaciones]
+
+    resultados = fuzz_process.extract(
+        texto_norm,
+        textos,
+        scorer=fuzz.token_set_ratio,
+        limit=top_n,
+        score_cutoff=50,
+    )
+
+    salida = []
+    for texto_match, score, idx in resultados:
+        den = denominaciones[idx]
+        if score >= 85:
+            nivel = "automatico"
+        elif score >= 60:
+            nivel = "dudoso"
+        else:
+            nivel = "sin_match"
+        salida.append({
+            "codigo_material":      den["codigo_material"],
+            "denominacion_matcheada": texto_match,
+            "score":                round(score, 1),
+            "nivel":                nivel,
+            "confianza_alias":      den.get("confianza", 80),
+        })
+
+    return salida
+
+
+# ── Modelos V2 ────────────────────────────────────────────────────────────────
+class ConfirmarItemV2(BaseModel):
+    desc_prov: str
+    proveedor: str
+    codigo_material: str      # confirmado por usuario (puede ser el sugerido u otro)
+    precio_sin_iva: float
+    unidad: str = "UN"
+    cantidad: float = 1.0
+
+class PendienteItem(BaseModel):
+    desc_prov: str
+    proveedor: str
+    precio_sin_iva: float
+    unidad: str = "UN"
+
+class ConfirmarV2Request(BaseModel):
+    comparativa_id: str
+    confirmados: list[ConfirmarItemV2]
+    sin_match: list[PendienteItem] = []
+
+
+# ── /analizar-v2 ──────────────────────────────────────────────────────────────
+@app.post("/analizar-v2")
+async def analizar_v2(
+    files: list[UploadFile] = File(...),
+    authorization: Optional[str] = Header(None),
+):
+    """
+    V2: Matchea texto de PDFs contra material_denominaciones en Supabase.
+    Devuelve 3 grupos por proveedor: automatico / dudoso / sin_match.
+    """
+    user = get_user_plan(authorization)
+
+    denominaciones = _get_denominaciones()
+    if not denominaciones:
+        raise HTTPException(
+            status_code=503,
+            detail={"error": "bd_no_disponible", "mensaje": "No se pudo cargar la base de materiales."}
+        )
+
+    # Cargar materiales validados para enriquecer respuesta (nombre, rubro, unidad)
+    sb = get_supabase()
+    materiales_dict: dict[str, dict] = {}
+    if sb:
+        try:
+            res = sb.table("materiales_validados") \
+                    .select("codigo,categoria,denominacion_principal,descripcion,unidades_posibles") \
+                    .execute()
+            materiales_dict = {m["codigo"]: m for m in (res.data or [])}
+        except Exception as e:
+            print(f"[v2] Error cargando materiales_validados: {e}")
+
+    resultados = {}
+    errores = []
+
+    for f in files:
+        content = await f.read()
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
+            tmp.write(content)
+            tmp_path = tmp.name
+
+        try:
+            proveedor = detectar_proveedor(f.filename or "") or Path(f.filename or "archivo").stem.upper()
+            resultado = extraer(tmp_path)
+            items = resultado.get("items", [])
+            fac = factor_iva(proveedor)
+
+            automatico, dudoso, sin_match = [], [], []
+
+            for item in items:
+                desc = (item.get("desc") or "").strip()
+                pu   = float(item.get("pu") or 0)
+                if not desc or pu <= 0:
+                    continue
+
+                precio = round(pu / fac, 2)
+                cant   = float(item.get("cant") or 1)
+
+                matches = _match_v2(desc, denominaciones, top_n=3)
+
+                base = {
+                    "desc_prov":     desc,
+                    "cod_prov":      str(item.get("cod") or "").strip(),
+                    "precio_sin_iva": precio,
+                    "precio_con_iva": round(pu, 2),
+                    "cant":          cant,
+                }
+
+                if not matches or matches[0]["nivel"] == "sin_match":
+                    sin_match.append(base)
+                    continue
+
+                mejor = matches[0]
+                mat   = materiales_dict.get(mejor["codigo_material"], {})
+
+                entry = {
+                    **base,
+                    "codigo_material":       mejor["codigo_material"],
+                    "denominacion_matcheada": mejor["denominacion_matcheada"],
+                    "score":                 mejor["score"],
+                    "nivel":                 mejor["nivel"],
+                    "categoria":             mat.get("categoria", ""),
+                    "denominacion_principal": mat.get("denominacion_principal", ""),
+                    "descripcion":           mat.get("descripcion", ""),
+                    "alternativas": [
+                        {
+                            "codigo_material": m["codigo_material"],
+                            "denominacion":    materiales_dict.get(m["codigo_material"], {}).get("denominacion_principal", m["denominacion_matcheada"]),
+                            "score":           m["score"],
+                        }
+                        for m in matches[1:]
+                    ],
+                }
+
+                if mejor["nivel"] == "automatico":
+                    automatico.append(entry)
+                else:
+                    dudoso.append(entry)
+
+            resultados[proveedor] = {
+                "automatico": automatico,
+                "dudoso":     dudoso,
+                "sin_match":  sin_match,
+                "stats": {
+                    "total":          len(automatico) + len(dudoso) + len(sin_match),
+                    "automatico":     len(automatico),
+                    "dudoso":         len(dudoso),
+                    "sin_match":      len(sin_match),
+                    "pct_automatico": round(
+                        100 * len(automatico) / max(1, len(automatico) + len(dudoso) + len(sin_match)), 1
+                    ),
+                },
+                "iva_detectado": resultado.get("iva_detectado"),
+            }
+
+        except Exception as e:
+            errores.append({"archivo": f.filename, "error": str(e)})
+        finally:
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+
+    if not resultados:
+        raise HTTPException(status_code=422, detail={"error": "sin_resultados", "errores": errores})
+
+    # Construir tabla pivot comparativa (igual que v1 pero con estructura v2)
+    comparativo = _build_comparativo_v2(resultados, materiales_dict)
+    comparativa_id = str(uuid.uuid4())
+
+    _guardar_comparativa(
+        comparativa_id,
+        {"comparativo": comparativo, "proveedores": list(resultados.keys())},
+        user_id=user["user_id"],
+        titulo=f"Análisis v2 — {', '.join(resultados.keys())} ({datetime.now().strftime('%d/%m/%Y')})"
+    )
+
+    _incrementar_uso(user["user_id"], user["usos_hoy"])
+
+    usos_restantes = None
+    if user["plan"] == "free" and user["user_id"] != "anonimo":
+        usos_restantes = max(0, user["limite"] - user["usos_hoy"] - 1)
+
+    return {
+        "comparativa_id": comparativa_id,
+        "proveedores":    list(resultados.keys()),
+        "resultados":     resultados,
+        "comparativo":    comparativo,
+        "errores":        errores,
+        "plan":           user["plan"],
+        "usos_restantes": usos_restantes,
+        "aliases_en_bd":  len(denominaciones),
+    }
+
+
+def _build_comparativo_v2(resultados: dict, materiales_dict: dict) -> list[dict]:
+    """Tabla pivot para v2: solo con items automáticos (los de confianza alta)."""
+    proveedores = list(resultados.keys())
+    por_cod: dict[str, dict] = {}
+
+    for prov, data in resultados.items():
+        for m in data.get("automatico", []):
+            cod = m["codigo_material"]
+            if cod not in por_cod:
+                mat = materiales_dict.get(cod, {})
+                label = mat.get("denominacion_principal", cod)
+                desc  = mat.get("descripcion", "")
+                por_cod[cod] = {
+                    "cod_int":  cod,
+                    "rubro":    mat.get("categoria", ""),
+                    "material": f"{label} — {desc}".rstrip(" —"),
+                    "unidad":   (mat.get("unidades_posibles") or [{}])[0].get("unidad", "UN"),
+                    "precios":  {},
+                }
+            por_cod[cod]["precios"][prov] = {
+                "precio_sin_iva": m["precio_sin_iva"],
+                "score":          m["score"],
+                "origen":         "v2",
+                "cant":           m.get("cant", 1),
+            }
+
+    rows = []
+    for cod, row in por_cod.items():
+        precios_val = {p: row["precios"][p]["precio_sin_iva"] for p in row["precios"]}
+        if precios_val:
+            mejor_prov = min(precios_val, key=precios_val.get)
+            row["mejor_proveedor"] = mejor_prov
+            row["cant"] = row["precios"][mejor_prov]["cant"]
+            if len(precios_val) > 1:
+                row["ahorro"] = round((max(precios_val.values()) - min(precios_val.values())) * row["cant"], 2)
+            else:
+                row["ahorro"] = 0
+        row["en_varios"] = len(row["precios"]) > 1
+        rows.append(row)
+
+    rows.sort(key=lambda r: (-int(r["en_varios"]), r["rubro"], r["material"]))
+    return rows
+
+
+# ── /confirmar-v2 ─────────────────────────────────────────────────────────────
+@app.post("/confirmar-v2")
+async def confirmar_v2(
+    req: ConfirmarV2Request,
+    authorization: Optional[str] = Header(None),
+):
+    """
+    V2: Guarda aliases confirmados + pendientes + precios históricos.
+    - confirmados → material_denominaciones (alias) + precios_historicos
+    - sin_match   → materiales_pendientes + precios_historicos (sin codigo_material)
+    """
+    user = get_user_plan(authorization)
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    guardados = {"aliases": 0, "pendientes": 0, "precios": 0}
+
+    # ── Confirmados: alias + precio histórico ──────────────────────────────────
+    for item in req.confirmados:
+        desc_norm = item.desc_prov.strip().lower()
+
+        # Alias: upsert (puede ya existir, solo sube frecuencia)
+        try:
+            existing = sb.table("material_denominaciones") \
+                         .select("id,frecuencia_encontrada") \
+                         .eq("codigo_material", item.codigo_material) \
+                         .eq("denominacion", desc_norm) \
+                         .execute()
+
+            if existing.data:
+                freq = (existing.data[0].get("frecuencia_encontrada") or 1) + 1
+                sb.table("material_denominaciones") \
+                  .update({"frecuencia_encontrada": freq, "confianza": min(99, 80 + freq)}) \
+                  .eq("id", existing.data[0]["id"]) \
+                  .execute()
+            else:
+                sb.table("material_denominaciones").insert({
+                    "codigo_material":      item.codigo_material,
+                    "denominacion":         desc_norm,
+                    "origen":               f"usuario_{item.proveedor.lower().replace(' ', '_')}",
+                    "confianza":            80,
+                    "frecuencia_encontrada": 1,
+                }).execute()
+            guardados["aliases"] += 1
+        except Exception as e:
+            print(f"[v2] Error guardando alias '{desc_norm}': {e}")
+
+        # Precio histórico
+        try:
+            sb.table("precios_historicos").insert({
+                "proveedor":      item.proveedor,
+                "codigo_material": item.codigo_material,
+                "unidad":         item.unidad,
+                "precio":         item.precio_sin_iva,
+                "cantidad":       int(item.cantidad),
+            }).execute()
+            guardados["precios"] += 1
+        except Exception as e:
+            print(f"[v2] Error guardando precio: {e}")
+
+    # ── Sin match: pendientes + precio histórico (sin codigo_material) ─────────
+    for item in req.sin_match:
+        try:
+            res = sb.table("materiales_pendientes").insert({
+                "descripcion_original":    item.desc_prov.strip(),
+                "descripcion_normalizada": item.desc_prov.strip().lower(),
+                "proveedor":              item.proveedor,
+                "precio_visto":           item.precio_sin_iva,
+                "estado":                 "PENDIENTE",
+            }).execute()
+            guardados["pendientes"] += 1
+
+            # Precio histórico referenciando el pendiente
+            if res.data:
+                pendiente_id = res.data[0]["id"]
+                sb.table("precios_historicos").insert({
+                    "proveedor":      item.proveedor,
+                    "codigo_pendiente": pendiente_id,
+                    "unidad":         item.unidad,
+                    "precio":         item.precio_sin_iva,
+                }).execute()
+                guardados["precios"] += 1
+        except Exception as e:
+            print(f"[v2] Error guardando pendiente '{item.desc_prov}': {e}")
+
+    # Invalidar cache para que el próximo análisis vea los nuevos aliases
+    _invalidar_cache_den()
+
+    return {
+        "ok": True,
+        "guardados": guardados,
+        "mensaje": f"{guardados['aliases']} aliases, {guardados['pendientes']} pendientes, {guardados['precios']} precios guardados.",
+    }
+
+
+# ── /admin/pendientes ─────────────────────────────────────────────────────────
+@app.get("/admin/pendientes")
+async def admin_pendientes(
+    authorization: Optional[str] = Header(None),
+    estado: str = "PENDIENTE",
+    limit: int = 50,
+):
+    """Lista materiales pendientes de validación. Solo admin."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    res = sb.table("materiales_pendientes") \
+            .select("*") \
+            .eq("estado", estado) \
+            .order("created_at", desc=True) \
+            .limit(limit) \
+            .execute()
+
+    return {"pendientes": res.data or [], "total": len(res.data or [])}
+
+
+class ValidarPendienteRequest(BaseModel):
+    pendiente_id: str
+    accion: str               # "linkear" | "crear" | "rechazar"
+    codigo_material: Optional[str] = None   # para "linkear"
+    nueva_denominacion: Optional[str] = None  # para "crear" (se agrega a materiales_validados manualmente luego)
+
+@app.post("/admin/validar-pendiente")
+async def admin_validar_pendiente(
+    req: ValidarPendienteRequest,
+    authorization: Optional[str] = Header(None),
+):
+    """
+    Valida un pendiente:
+    - linkear: agrega alias en material_denominaciones y marca VALIDADO
+    - rechazar: marca RECHAZADO (duplicado o irrelevante)
+    - crear: marca para creación manual (queda como VALIDADO sin codigo_material)
+    """
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    # Leer pendiente
+    res = sb.table("materiales_pendientes").select("*").eq("id", req.pendiente_id).single().execute()
+    if not res.data:
+        raise HTTPException(status_code=404, detail={"error": "no_encontrado"})
+
+    pendiente = res.data
+
+    if req.accion == "linkear":
+        if not req.codigo_material:
+            raise HTTPException(status_code=400, detail={"error": "codigo_material requerido para linkear"})
+
+        # Agregar alias
+        desc_norm = pendiente["descripcion_normalizada"] or pendiente["descripcion_original"].lower()
+        try:
+            sb.table("material_denominaciones").insert({
+                "codigo_material": req.codigo_material,
+                "denominacion":    desc_norm,
+                "origen":          "admin_validacion",
+                "confianza":       95,
+                "frecuencia_encontrada": 1,
+            }).execute()
+        except Exception:
+            pass  # ya existe el alias
+
+        # Actualizar precio histórico si existe
+        try:
+            sb.table("precios_historicos") \
+              .update({"codigo_material": req.codigo_material, "codigo_pendiente": None}) \
+              .eq("codigo_pendiente", req.pendiente_id) \
+              .execute()
+        except Exception:
+            pass
+
+        sb.table("materiales_pendientes").update({
+            "estado":          "VALIDADO",
+            "codigo_asignado": req.codigo_material,
+            "validado_por":    user["user_id"],
+        }).eq("id", req.pendiente_id).execute()
+
+        _invalidar_cache_den()
+        return {"ok": True, "accion": "linkeado", "alias_agregado": desc_norm, "codigo": req.codigo_material}
+
+    elif req.accion == "rechazar":
+        sb.table("materiales_pendientes").update({
+            "estado":      "RECHAZADO",
+            "validado_por": user["user_id"],
+        }).eq("id", req.pendiente_id).execute()
+        return {"ok": True, "accion": "rechazado"}
+
+    elif req.accion == "crear":
+        sb.table("materiales_pendientes").update({
+            "estado":      "VALIDADO",
+            "validado_por": user["user_id"],
+        }).eq("id", req.pendiente_id).execute()
+        return {"ok": True, "accion": "marcado_para_crear", "descripcion": pendiente["descripcion_original"]}
+
+    raise HTTPException(status_code=400, detail={"error": "accion inválida"})
+
+
 # ── Health ─────────────────────────────────────────────────────────────────────
 @app.get("/health")
 def health():
     master = get_master()
-    return {"status": "ok", "master_items": len(master)}
+    den = _get_denominaciones()
+    return {"status": "ok", "master_items": len(master), "aliases_v2": len(den)}
