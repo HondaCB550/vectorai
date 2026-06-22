@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 
 export default function Landing() {
   return (
+    <>
     <main className="min-h-screen bg-white">
       {/* Nav */}
       <nav className="flex items-center justify-between px-8 py-5 border-b border-gray-100">
@@ -150,5 +151,6 @@ export default function Landing() {
 
     </main>
     <Footer />
+    </>
   );
 }
