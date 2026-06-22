@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
+import Footer from "@/components/Footer";
 
 const PROVINCIAS = [
   "Buenos Aires", "CABA", "Córdoba", "Santa Fe", "Mendoza", "Entre Ríos",
@@ -85,6 +86,7 @@ function RegistroInner() {
   }
 
   return (
+    <>
     <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full max-w-md p-10">
         <Link href="/" className="text-xl font-bold text-gray-900 block mb-8">VectorAI</Link>
@@ -197,6 +199,8 @@ function RegistroInner() {
         )}
       </div>
     </main>
+    <Footer />
+    </>
   );
 }
 

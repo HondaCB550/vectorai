@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function Landing() {
   return (
@@ -37,7 +38,7 @@ export default function Landing() {
         >
           Probalo gratis
         </Link>
-        <p className="text-sm text-gray-400 mt-4">Gratis: 2 PDFs · 1 comparativa · descarga Excel</p>
+        <p className="text-sm text-gray-400 mt-4">Gratis durante el período de lanzamiento · Sin tarjeta requerida</p>
       </section>
 
       {/* Cómo funciona */}
@@ -111,7 +112,7 @@ export default function Landing() {
               <div className="text-lg font-bold text-gray-900 mb-1">Gratuito</div>
               <div className="text-3xl font-bold text-gray-900 mb-6">$0</div>
               <ul className="space-y-3 text-sm text-gray-600 mb-8">
-                {["2 PDFs (1 por proveedor)", "Comparativa en pantalla", "Descarga Excel · PDF · JPG", "Matching automático"].map((f) => (
+                {["PDFs ilimitados", "Comparativa en pantalla", "Descarga Excel", "Matching automático"].map((f) => (
                   <li key={f} className="flex gap-2"><span className="text-green-500">✓</span>{f}</li>
                 ))}
                 <li className="flex gap-2 text-gray-400"><span>✗</span>Revisión manual de sin-match</li>
@@ -147,9 +148,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="text-center py-10 text-sm text-gray-400 border-t border-gray-100">
-        VectorAI · Bonhaus · Buenos Aires, Argentina
-      </footer>
     </main>
+    <Footer />
   );
 }

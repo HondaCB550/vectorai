@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VectorAI v2 — Arquitectura de Base de Datos Propia</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f6fa;
+      color: #1a1a2e;
+      padding: 40px 20px 80px;
+    }
+
+    .container { max-width: 920px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    header .badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #fef9c3;
+      color: #a16207;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    header .fecha {
+      font-size: 13px;
+      color: #64748b;
+      margin-left: auto;
+    }
+
+    .section { margin-bottom: 40px; }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .arquitectura .dot { background: #3b82f6; }
+    .reusable .dot  { background: #22c55e; }
+    .nuevo .dot     { background: #f59e0b; }
+
+    .arquitectura .section-title { color: #1e40af; }
+    .reusable .section-title  { color: #15803d; }
+    .nuevo .section-title     { color: #b45309; }
+
+    .cards { display: flex; flex-direction: column; gap: 8px; }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow 0.15s;
+    }
+
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .card-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      min-width: 30px;
+      padding: 2px 6px;
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-right: 4px;
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
+
+    .tag-arq { background: #dbeafe; color: #1e40af; }
+    .tag-backend { background: #e0e7ff; color: #4338ca; }
+    .tag-frontend { background: #dcfce7; color: #15803d; }
+    .tag-db { background: #fcd34d; color: #92400e; }
+    .tag-ui { background: #fce7f3; color: #be185d; }
+    .tag-reusable { background: #d1fae5; color: #047857; }
+
+    .divider {
+      border: none;
+      border-top: 1px dashed #e2e8f0;
+      margin: 40px 0;
+    }
+
+    .highlight {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 12px;
+      margin: 20px 0;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.6;
+    }
+
+    .code {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 11px;
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>VectorAI v2</h1>
+    <span class="badge">arquitectura replanteada</span>
+    <span class="fecha">Junio 2026 — Nueva estrategia</span>
+  </header>
+
+  <div class="highlight">
+    <strong>🔄 Cambio de paradigma:</strong><br>
+    De "comparar proveedores entre sí" → "Matchear cada proveedor CONTRA tu base de datos de materiales"<br>
+    Tu estructura (código + detalle + unidad) es la fuente de verdad. Las unidades se validan automáticamente.
+  </div>
+
+  <!-- ARQUITECTURA NUEVA -->
+  <div class="section arquitectura">
+    <div class="section-title"><span class="dot"></span> Arquitectura — Nuevo flujo de datos</div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A1</div>
+          <div>
+            <div class="card-title">Upload de Base de Datos de Materiales</div>
+            <div class="card-desc">Usuario sube su archivo Base de Presupuestos → hoja Materiales. Sistema extrae: CÓDIGO, ITEM, DETALLE, UNIDAD, MARCA. Guarda en tabla `base_materiales` por user_id.</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-frontend">frontend</span>
+              <span class="tag tag-db">database</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A2</div>
+          <div>
+            <div class="card-title">Matcheo contra Base Propia (no inter-proveedor)</div>
+            <div class="card-desc">Para cada PDF de proveedor, el sistema matchea cada ítem CONTRA la base de materiales del usuario. Score = similitud descripción. No se comparan proveedores entre sí.</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A3</div>
+          <div>
+            <div class="card-title">Validación de Unidades</div>
+            <div class="card-desc">Cada match calcula: <code>unidad_esperada</code> (de base_materiales) vs <code>unidad_cotizada</code> (del PDF). Si NO coinciden → FLAG AMARILLA en el resultado. Ej: base="bolsa", PDF="m³" → ⚠️ Revisar.</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A4</div>
+          <div>
+            <div class="card-title">Descarga con Columnas de Revisión</div>
+            <div class="card-desc">Excel descargable con columnas: COD_BASE, DESCRIPCIÓN_BASE, UNIDAD_BASE | COD_PDF, DESC_PDF, UNIDAD_PDF, PRECIO_SIN_IVA | SCORE, FLAG_UNIDAD, DECISIÓN, CÓD_CORRECTO. Usuario revisa y corrige en Excel.</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-frontend">frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A5</div>
+          <div>
+            <div class="card-title">Re-upload de Decisiones Revisadas</div>
+            <div class="card-desc">Usuario descarga → revisa → corrige DECISIÓN + CÓD_CORRECTO en Excel → sube el mismo archivo. Sistema importa equivalencias confirmadas a tabla `equivalencias` por proveedor + user_id.</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">A6</div>
+          <div>
+            <div class="card-title">Aprendizaje Incremental</div>
+            <div class="card-desc">Cada vez que un usuario confirma una equivalencia (DECIDIÓN=CARGAR), se guarda en tabla `equivalencias`. Próximas análisis de ese proveedor (mismo usuario) benefician del scoring anterior. Mismo proveedor, otros usuarios → opcional (plan Advance).</div>
+            <div class="card-meta">
+              <span class="tag tag-arq">arquitectura</span>
+              <span class="tag tag-backend">backend</span>
+              <span class="tag tag-db">database</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- REUSABLE -->
+  <div class="section reusable">
+    <div class="section-title"><span class="dot"></span> Reusable del sprint actual — Qué se mantiene</div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">R1</div>
+          <div>
+            <div class="card-title">✅ Historial de comparativas (#07)</div>
+            <div class="card-desc">Tabla `comparativas` con user_id + endpoints GET/DELETE. Totalmente reusable en v2 (solo cambia el contenido del JSON).</div>
+            <div class="card-meta">
+              <span class="tag tag-reusable">reusable</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">R2</div>
+          <div>
+            <div class="card-title">✅ Limpieza automática (#10)</div>
+            <div class="card-desc">Trigger SQL para borrar comparativas >48h. Aplica igual en v2 (puede subir a 7-30 días en lugar de 48h).</div>
+            <div class="card-meta">
+              <span class="tag tag-reusable">reusable</span>
+              <span class="tag tag-db">database</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">R3</div>
+          <div>
+            <div class="card-title">✅ Seed de equivalencias (#08)</div>
+            <div class="card-desc"><code>seed_supabase_equivalencias.py</code> importa decisiones → tabla `equivalencias`. Script es reutilizable; cambia la fuente (ahora local Borradores, después: archivo Excel del usuario).</div>
+            <div class="card-meta">
+              <span class="tag tag-reusable">reusable</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">R4</div>
+          <div>
+            <div class="card-title">⚠️ Matching fuzzy + equivalencias (#08, #09)</div>
+            <div class="card-desc">Lógica de scoring en `matching.py` es buena. En v2: se usa igual, pero contra base_materiales del usuario en lugar del master global. Ajuste mínimo.</div>
+            <div class="card-meta">
+              <span class="tag tag-reusable">reusable</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">R5</div>
+          <div>
+            <div class="card-title">⚠️ Extracción de PDFs</div>
+            <div class="card-desc"><code>extraer_pdf_texto.py</code> + <code>detectar_proveedor.py</code> funcionan igual. En v2: se usan sin cambios (ya no necesitan presupuesta de proveedores de configuracion.json, pero archivo se mantiene como fallback).</div>
+            <div class="card-meta">
+              <span class="tag tag-reusable">reusable</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- NUEVO TRABAJO -->
+  <div class="section nuevo">
+    <div class="section-title"><span class="dot"></span> Nuevo trabajo — Implementación v2</div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N1</div>
+          <div>
+            <div class="card-title">Tabla `base_materiales` en Supabase</div>
+            <div class="card-desc">Campos: id, user_id, codigo, item, detalle, unidad, marca, created_at. RLS: usuario solo ve los suyos. Índice en (user_id, codigo).</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-db">database</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N2</div>
+          <div>
+            <div class="card-title">Endpoint POST /upload-base-materiales</div>
+            <div class="card-desc">Recibe archivo .xlsx o .json con materiales del usuario. Extrae hoja "Materiales", parsea, valida estructura (código, unidad obligatorio), guarda en base_materiales. Devuelve count y warnings.</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N3</div>
+          <div>
+            <div class="card-title">Endpoint POST /analizar-v2</div>
+            <div class="card-desc">Recibe PDFs. Para cada PDF: extrae, matchea CONTRA base_materiales del usuario (no contra master global). Devuelve: matches con FLAG_UNIDAD si unidades no coinciden, sin_match, comparativa. Guarda en tabla `comparativas`.</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N4</div>
+          <div>
+            <div class="card-title">Exportar a Excel con columnas de revisión</div>
+            <div class="card-desc">En lugar de tabla comparativa tradicional: formato BORRADOR (COD_BASE | COD_PDF + DESC_PDF + UNIDAD_PDF + PRECIO | SCORE + FLAG_UNIDAD | DECISIÓN + CÓD_CORRECTO). Usuario edita en Excel.</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-backend">backend</span>
+              <span class="tag tag-ui">ui</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N5</div>
+          <div>
+            <div class="card-title">Endpoint POST /upload-decisiones</div>
+            <div class="card-desc">Recibe Excel revisado. Parsea columnas DECISIÓN + CÓD_CORRECTO. Para cada CARGAR/CAMBIAR: inserta en tabla `equivalencias` (cod_prov, cod_int, proveedor, user_id). Devuelve confirmación.</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-backend">backend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N6</div>
+          <div>
+            <div class="card-title">Frontend: Página de upload de base</div>
+            <div class="card-desc">Interfaz para subir Base de Presupuestos. Muestra preview: cantidad de ítems, rubros, unidades detectadas. Opción re-upload (reemplaza base anterior).</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-frontend">frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N7</div>
+          <div>
+            <div class="card-title">Frontend: Visualizar flags de unidades</div>
+            <div class="card-desc">En la comparativa: si FLAG_UNIDAD=true, mostrar banner naranja "⚠️ Unidad mismatch". Ejemplificar: "Base: bolsa | PDF: m³". Permitir descargar y corregir en Excel antes de confirmar.</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-frontend">frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">N8</div>
+          <div>
+            <div class="card-title">Frontend: Workflow de revisión y re-upload</div>
+            <div class="card-desc">Botón "Descargar para revisar" → Excel → usuario edita → "Subir decisiones" → sistema importa equivalencias. Confirmación visual: "X nuevas equivalencias guardadas".</div>
+            <div class="card-meta">
+              <span class="tag tag-nuevo">nuevo</span>
+              <span class="tag tag-frontend">frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- NOTAS -->
+  <div class="section" style="background: #f0fdf4; border-radius: 12px; padding: 20px; border: 1px solid #bbf7d0;">
+    <h2 style="font-size: 14px; font-weight: 600; color: #15803d; margin-bottom: 12px;">📋 Notas de implementación</h2>
+
+    <div style="font-size: 13px; color: #166534; line-height: 1.8;">
+      <p><strong>1. Reusable vs. Nuevo:</strong> R1–R5 no se tocan. Se integran directamente en v2. N1–N8 es trabajo nuevo.</p>
+
+      <p style="margin-top: 12px;"><strong>2. Base de Materiales:</strong> Ojo con duplicados. Si usuario sube base dos veces, ¿reemplazamos o mergeamos? Decisión: reemplazar (usuario controla versiones en su Excel).</p>
+
+      <p style="margin-top: 12px;"><strong>3. Unidades:</strong> Comparar string normalizado (uppercase, trim). Si base="BOLSA" y PDF="BOLSAS" → OK. Si base="BOLSA" y PDF="M3" → FLAG.</p>
+
+      <p style="margin-top: 12px;"><strong>4. Equivalencias por usuario + proveedor:</strong> Tabla `equivalencias` con UNIQUE (cod_prov, proveedor, user_id). Un usuario puede tener distinto mapeo que otro para el mismo proveedor.</p>
+
+      <p style="margin-top: 12px;"><strong>5. Migración de datos:</strong> Borradores actuales (Excel) + decisiones_usuario.json → se pueden importar con seed_supabase_equivalencias.py como punto de partida.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

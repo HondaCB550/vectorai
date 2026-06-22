@@ -58,11 +58,27 @@ def get_master() -> list[dict]:
 CARGAS_JSON = DATA_DIR / "cargas_realizadas.json"
 
 def get_equiv() -> dict:
-    """Equivalencias aprendidas de decisiones_usuario.json + cargas_realizadas.json."""
+    """Equivalencias: Supabase primero (aprendizaje compartido), luego archivos locales (fallback)."""
     global _equiv_cache
     if _equiv_cache is None:
         _equiv_cache = {}
-        # Fuente 1: decisiones confirmadas en borrador
+
+        # Fuente 1: Supabase (aprendizaje compartido de todos los usuarios)
+        sb = get_supabase()
+        if sb:
+            try:
+                res = sb.table("equivalencias").select("cod_prov,cod_int").execute()
+                for row in (res.data or []):
+                    cod_prov = (row.get("cod_prov") or "").strip()
+                    cod_int = (row.get("cod_int") or "").strip()
+                    if cod_prov and cod_int:
+                        # Mapear ambas claves: por código de proveedor Y por descripción normalizada
+                        _equiv_cache[cod_prov] = cod_int
+                print(f"✓ Cargadas {len(res.data or [])} equivalencias desde Supabase")
+            except Exception as e:
+                print(f"⚠️ Error leyendo equivalencias de Supabase: {e}")
+
+        # Fuente 2: Decisiones locales (fallback si Supabase no está disponible)
         if DECISIONES_JSON.exists():
             with open(DECISIONES_JSON, encoding="utf-8") as f:
                 for d in json.load(f):
@@ -70,13 +86,14 @@ def get_equiv() -> dict:
                     if dec == "CARGAR":
                         cod = d.get("cod_correcto") or d.get("cod_propuesto")
                     elif dec == "CAMBIAR":
-                        cod = d.get("cod_correcto")  # solo si el usuario puso código correcto
+                        cod = d.get("cod_correcto")
                     else:
                         cod = None
                     desc = (d.get("desc_prov") or "").strip()
                     if desc and cod:
                         _equiv_cache[desc] = cod
-        # Fuente 2: cargas efectivamente realizadas al Excel
+
+        # Fuente 3: Cargas realizadas
         if CARGAS_JSON.exists():
             with open(CARGAS_JSON, encoding="utf-8") as f:
                 for d in json.load(f):
@@ -84,6 +101,7 @@ def get_equiv() -> dict:
                     cod  = (d.get("cod_int") or "").strip()
                     if desc and cod:
                         _equiv_cache[desc] = cod
+
     return _equiv_cache
 
 def get_config() -> dict:
@@ -208,16 +226,29 @@ class SheetsRequest(BaseModel):
 # Cache en memoria (fallback si Supabase no está disponible)
 _comparativas_cache: dict[str, dict] = {}
 
-def _guardar_comparativa(comparativa_id: str, data: dict):
+def _calcular_ahorro_total(comparativo: list) -> float:
+    """Suma todos los ahorros de la comparativa."""
+    return round(sum(r.get("ahorro", 0) for r in comparativo), 2)
+
+def _guardar_comparativa(comparativa_id: str, data: dict, user_id: str = "anonimo", titulo: str = ""):
     """Persiste en Supabase; fallback a memoria."""
     _comparativas_cache[comparativa_id] = data
     sb = get_supabase()
-    if sb:
+    if sb and user_id != "anonimo":
         try:
+            comparativo = data.get("comparativo", [])
+            n_comunes = len([r for r in comparativo if r.get("en_varios")])
+            ahorro_total = _calcular_ahorro_total(comparativo)
+
             sb.table("comparativas").insert({
                 "id": comparativa_id,
-                "comparativo": data["comparativo"],
+                "user_id": user_id,
+                "titulo": titulo or f"Comparativa {__import__('datetime').datetime.now().strftime('%d/%m/%Y')}",
                 "proveedores": data["proveedores"],
+                "n_items": len(comparativo),
+                "n_comunes": n_comunes,
+                "ahorro_total": ahorro_total,
+                "datos_json": data,
             }).execute()
         except Exception as e:
             print(f"Supabase insert error (usando cache memoria): {e}")
@@ -251,20 +282,7 @@ async def analizar(
     """
     user = get_user_plan(authorization)
 
-    # Límite freemium: máximo 2 PDFs por análisis
-    if user["plan"] == "free" and len(files) > 2:
-        raise HTTPException(
-            status_code=402,
-            detail={"error": "plan_limit", "mensaje": "El plan gratuito permite máximo 2 PDFs (uno por proveedor).", "upgrade": True}
-        )
-
-    # Límite diario para usuarios logueados con plan free
-    if user["plan"] == "free" and user["user_id"] != "anonimo":
-        if user["usos_hoy"] >= user["limite"]:
-            raise HTTPException(
-                status_code=402,
-                detail={"error": "plan_limit", "mensaje": f"Alcanzaste el límite de {user['limite']} análisis por día del plan gratuito.", "upgrade": True}
-            )
+    # Sin límites durante el período de lanzamiento
 
     master = get_master()
     equiv: dict = get_equiv()  # Equivalencias aprendidas de borradores confirmados
@@ -354,11 +372,17 @@ async def analizar(
     # Armar comparativo (tabla pivot)
     comparativa = _build_comparativo(resultados, master)
     comparativa_id = str(uuid.uuid4())
+    fecha_hoy = datetime.now().strftime("%d/%m/%Y")
 
-    _guardar_comparativa(comparativa_id, {
-        "comparativo": comparativa,
-        "proveedores": list(resultados.keys()),
-    })
+    _guardar_comparativa(
+        comparativa_id,
+        {
+            "comparativo": comparativa,
+            "proveedores": list(resultados.keys()),
+        },
+        user_id=user["user_id"],
+        titulo=f"Análisis — {', '.join(resultados.keys())} ({fecha_hoy})"
+    )
 
     # Registrar uso del día para usuarios logueados
     _incrementar_uso(user["user_id"], user["usos_hoy"])
@@ -379,7 +403,11 @@ async def analizar(
 
 
 def _build_comparativo(resultados: dict, master: list) -> list[dict]:
-    """Tabla comparativa: filas = material, columnas = proveedor."""
+    """Tabla comparativa: filas = material, columnas = proveedor.
+
+    Maneja unidades distintas: cada proveedor tiene su cantidad, y el ahorro se calcula
+    usando la cantidad del mejor proveedor (para evitar comparar manzanas con naranjas).
+    """
     master_dict = {m["codigo"]: m for m in master}
     proveedores = list(resultados.keys())
 
@@ -403,19 +431,21 @@ def _build_comparativo(resultados: dict, master: list) -> list[dict]:
                 "origen": m["origen"],
                 "cant": m.get("cant", 1),
             }
-            # Guardar la mayor cantidad vista (para calcular ahorro total)
-            cant_actual = por_cod[cod].get("cant", 1)
-            por_cod[cod]["cant"] = max(cant_actual, m.get("cant", 1))
 
-    # Calcular mejor precio
+    # Calcular mejor precio y ahorro
     rows = []
     for cod, row in por_cod.items():
         precios_val = {p: row["precios"][p]["precio_sin_iva"] for p in row["precios"]}
-        cant = row.get("cant", 1)
         if precios_val:
-            row["mejor_proveedor"] = min(precios_val, key=precios_val.get)
+            # Mejor proveedor = menor precio
+            mejor_prov = min(precios_val, key=precios_val.get)
+            row["mejor_proveedor"] = mejor_prov
+            row["cant"] = row["precios"][mejor_prov]["cant"]  # Cantidad del mejor proveedor
+
             if len(precios_val) > 1:
-                row["ahorro"] = round((max(precios_val.values()) - min(precios_val.values())) * cant, 2)
+                # Ahorro = (máx - mín) * cantidad_del_mejor_proveedor
+                ahorro_unitario = max(precios_val.values()) - min(precios_val.values())
+                row["ahorro"] = round(ahorro_unitario * row["cant"], 2)
             else:
                 row["ahorro"] = 0
         row["en_varios"] = len(row["precios"]) > 1
@@ -448,6 +478,123 @@ async def confirmar(
     print(f"EQUIV confirmada: {item.cod_prov} → {item.cod_int} (por {user['user_id']})")
 
     return {"ok": True, "mensaje": "Equivalencia guardada. El sistema aprenderá de esta corrección."}
+
+
+# ── /comparativas (Historial) ─────────────────────────────────────────────────
+@app.get("/comparativas")
+async def listar_comparativas(
+    authorization: Optional[str] = Header(None),
+):
+    """
+    Lista todas las comparativas guardadas del usuario autenticado.
+    Anónimos devuelven lista vacía.
+    """
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        return {"comparativas": []}
+
+    sb = get_supabase()
+    if not sb:
+        return {"comparativas": []}
+
+    try:
+        res = sb.table("comparativas").select(
+            "id,titulo,proveedores,n_items,n_comunes,ahorro_total,created_at"
+        ).eq("user_id", user["user_id"]).order("created_at", desc=True).execute()
+
+        comparativas = []
+        for c in (res.data or []):
+            comparativas.append({
+                "id": c["id"],
+                "titulo": c["titulo"],
+                "proveedores": c["proveedores"],
+                "n_items": c["n_items"],
+                "n_comunes": c["n_comunes"],
+                "ahorro_total": c["ahorro_total"],
+                "fecha": c["created_at"],
+            })
+
+        return {"comparativas": comparativas}
+    except Exception as e:
+        print(f"Error listando comparativas: {e}")
+        return {"comparativas": []}
+
+
+@app.get("/comparativas/{comparativa_id}")
+async def recuperar_comparativa(
+    comparativa_id: str,
+    authorization: Optional[str] = Header(None),
+):
+    """
+    Recupera una comparativa guardada específica.
+    Solo el propietario (o admin) puede verla.
+    """
+    user = get_user_plan(authorization)
+    sb = get_supabase()
+
+    if sb:
+        try:
+            res = sb.table("comparativas").select("*").eq("id", comparativa_id).single().execute()
+            if res.data:
+                # Verificar que el usuario sea el propietario
+                if res.data.get("user_id") != user["user_id"]:
+                    raise HTTPException(status_code=403, detail={"error": "forbidden"})
+
+                return {
+                    "id": res.data["id"],
+                    "titulo": res.data["titulo"],
+                    "proveedores": res.data["proveedores"],
+                    "n_items": res.data["n_items"],
+                    "n_comunes": res.data["n_comunes"],
+                    "ahorro_total": res.data["ahorro_total"],
+                    "fecha": res.data["created_at"],
+                    "comparativo": res.data.get("datos_json", {}).get("comparativo", []),
+                    "resultados": res.data.get("datos_json", {}).get("resultados", {}),
+                }
+        except Exception as e:
+            print(f"Error recuperando comparativa: {e}")
+
+    raise HTTPException(
+        status_code=404,
+        detail={"error": "comparativa_no_encontrada",
+                "mensaje": "La comparativa no existe o expiró."}
+    )
+
+
+@app.delete("/comparativas/{comparativa_id}")
+async def eliminar_comparativa(
+    comparativa_id: str,
+    authorization: Optional[str] = Header(None),
+):
+    """
+    Elimina una comparativa. Solo el propietario puede hacerlo.
+    """
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "unauthorized"})
+
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_unavailable"})
+
+    try:
+        # Verificar propietario
+        res = sb.table("comparativas").select("user_id").eq("id", comparativa_id).single().execute()
+        if not res.data or res.data.get("user_id") != user["user_id"]:
+            raise HTTPException(status_code=403, detail={"error": "forbidden"})
+
+        # Eliminar
+        sb.table("comparativas").delete().eq("id", comparativa_id).execute()
+
+        # Limpiar cache
+        _comparativas_cache.pop(comparativa_id, None)
+
+        return {"ok": True, "mensaje": "Comparativa eliminada."}
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error eliminando comparativa: {e}")
+        raise HTTPException(status_code=500, detail={"error": "internal_error"})
 
 
 # ── /sheets ───────────────────────────────────────────────────────────────────

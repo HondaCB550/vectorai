@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VectorAI — Pendientes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f6fa;
+      color: #1a1a2e;
+      padding: 40px 20px 80px;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    header .badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #dbeafe;
+      color: #2563eb;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    header .fecha {
+      font-size: 13px;
+      color: #64748b;
+      margin-left: auto;
+    }
+
+    .section { margin-bottom: 32px; }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .critico .dot   { background: #ef4444; }
+    .producto .dot  { background: #f59e0b; }
+    .ux .dot        { background: #22c55e; }
+    .futuro .dot    { background: #a855f7; }
+
+    .critico .section-title   { color: #b91c1c; }
+    .producto .section-title  { color: #b45309; }
+    .ux .section-title        { color: #15803d; }
+    .futuro .section-title    { color: #7e22ce; }
+
+    .cards { display: flex; flex-direction: column; gap: 8px; }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: box-shadow 0.15s;
+      cursor: default;
+    }
+
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+    .card.done {
+      opacity: 0.45;
+      background: #f8fafc;
+    }
+
+    .card.done .card-title { text-decoration: line-through; }
+
+    .num {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      min-width: 22px;
+      padding-top: 2px;
+    }
+
+    .card-body { flex: 1; }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #cbd5e1;
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .checkbox:hover { border-color: #3b82f6; }
+
+    .card.done .checkbox {
+      background: #22c55e;
+      border-color: #22c55e;
+    }
+
+    .card.done .checkbox::after {
+      content: "✓";
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-top: 5px;
+      letter-spacing: 0.2px;
+    }
+
+    .tag-blocker { background: #fee2e2; color: #dc2626; }
+    .tag-backend { background: #e0e7ff; color: #4338ca; }
+    .tag-frontend { background: #dcfce7; color: #15803d; }
+    .tag-infra { background: #fef9c3; color: #a16207; }
+    .tag-matching { background: #fce7f3; color: #be185d; }
+
+    .progress-bar {
+      background: #e2e8f0;
+      border-radius: 99px;
+      height: 6px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      transition: width 0.4s ease;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px dashed #e2e8f0;
+      margin: 28px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>VectorAI</h1>
+    <span class="badge">beta</span>
+    <span class="fecha">Pendientes · Junio 2026</span>
+  </header>
+
+  <div class="progress-label">
+    <span>Progreso hacia versión cobrable</span>
+    <span id="pct">—</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+  </div>
+
+  <!-- CRÍTICO -->
+  <div class="section critico">
+    <div class="section-title"><span class="dot"></span> Crítico — necesario para cobrar</div>
+    <div class="cards">
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">01</div>
+        <div class="card-body">
+          <div class="card-title">Tabla <code>perfiles</code> en Supabase</div>
+          <div class="card-desc">El registro crea usuario en Auth pero no guarda nombre, plan ni profesión. Sin esta tabla el login no tiene efecto real en la app.</div>
+          <span class="tag tag-blocker">bloqueante</span>
+          <span class="tag tag-backend">backend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">02</div>
+        <div class="card-body">
+          <div class="card-title">Verificación JWT real en API</div>
+          <div class="card-desc">Hoy <code>get_user_plan()</code> devuelve siempre "free" para anónimos sin verificar el token. Hay que consultar <code>perfiles</code> con supabase-py para saber el plan real del usuario.</div>
+          <span class="tag tag-bloqueante">bloqueante</span>
+          <span class="tag tag-backend">backend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">03</div>
+        <div class="card-body">
+          <div class="card-title">Límite real plan free</div>
+          <div class="card-desc">Se puede usar infinitas veces sin login. Hay que requerir JWT para <code>/analizar</code> y trackear usos diarios por <code>user_id</code> en la tabla <code>perfiles</code>.</div>
+          <span class="tag tag-blocker">bloqueante</span>
+          <span class="tag tag-backend">backend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">04</div>
+        <div class="card-body">
+          <div class="card-title">Integración MercadoPago</div>
+          <div class="card-desc">El botón "Suscribirme" del landing no tiene destino. Hay que integrar el checkout de MercadoPago y que al pagar exitosamente se actualice <code>perfiles.plan = 'advance'</code>.</div>
+          <span class="tag tag-blocker">bloqueante</span>
+          <span class="tag tag-backend">backend</span>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">05</div>
+        <div class="card-body">
+          <div class="card-title">Diferencia real entre plan free y Advance</div>
+          <div class="card-desc">Hoy ambos planes funcionan igual. Advance debería desbloquear: más de 2 PDFs por análisis, revisión manual de sin-match, historial de comparativas.</div>
+          <span class="tag tag-blocker">bloqueante</span>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PRODUCTO -->
+  <div class="section producto">
+    <div class="section-title"><span class="dot"></span> Producto — funcionalidad incompleta</div>
+    <div class="cards">
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">06</div>
+        <div class="card-body">
+          <div class="card-title">Revisión manual de sin-match</div>
+          <div class="card-desc">La página <code>/revisar</code> existe en el frontend pero el endpoint backend no está completo. Los ítems sin match no se pueden corregir desde la app y no aprenden al sistema.</div>
+          <span class="tag tag-backend">backend</span>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">07</div>
+        <div class="card-body">
+          <div class="card-title">Historial de comparativas por usuario</div>
+          <div class="card-desc">Cada análisis es descartable. El usuario no puede volver a ver ni descargar una comparativa anterior. Requiere tabla <code>comparativas</code> asociada a <code>user_id</code>.</div>
+          <span class="tag tag-backend">backend</span>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">08</div>
+        <div class="card-body">
+          <div class="card-title">Cobertura de matching insuficiente</div>
+          <div class="card-desc">En el demo actual salieron 24 de ~80 ítems. Faltan equivalencias para: pinturas, eléctrica, gas, terminaciones, aberturas. Hay que correr el seed cuando se generan nuevos borradores.</div>
+          <span class="tag tag-matching">matching</span>
+          <span class="tag tag-infra">infra</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">09</div>
+        <div class="card-body">
+          <div class="card-title">Cantidad por ítem no siempre es correcta</div>
+          <div class="card-desc">Cuando dos proveedores cotizan el mismo ítem en unidades distintas (bolsa vs m³), la cantidad se toma como el máximo entre ambos y el total queda mal.</div>
+          <span class="tag tag-backend">backend</span>
+          <span class="tag tag-matching">matching</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">10</div>
+        <div class="card-body">
+          <div class="card-title">Limpiar comparativas viejas en Supabase</div>
+          <div class="card-desc">La tabla <code>comparativas</code> va a crecer indefinidamente. Hay que agregar un job o policy que elimine registros de más de 48 horas.</div>
+          <span class="tag tag-infra">infra</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- UX -->
+  <div class="section ux">
+    <div class="section-title"><span class="dot"></span> UX / Pulido</div>
+    <div class="cards">
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">11</div>
+        <div class="card-body">
+          <div class="card-title">Email de confirmación personalizado</div>
+          <div class="card-desc">Supabase manda un email genérico en inglés al registrarse. Hay que configurar el template con el branding de VectorAI en español.</div>
+          <span class="tag tag-infra">infra</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">12</div>
+        <div class="card-body">
+          <div class="card-title">Páginas de error y 404</div>
+          <div class="card-desc">No existen. Si algo falla el usuario ve pantalla en blanco o el error crudo de Next.js.</div>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">13</div>
+        <div class="card-body">
+          <div class="card-title">Versión mobile</div>
+          <div class="card-desc">No testeado en celular. El upload de PDFs y la tabla comparativa probablemente se rompen en pantallas chicas.</div>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">14</div>
+        <div class="card-body">
+          <div class="card-title">Feedback de progreso durante el análisis</div>
+          <div class="card-desc">"Analizando…" no da feedback de avance. En PDFs grandes puede tardar 15-20 seg con el usuario sin saber qué está pasando. Agregar steps: "Extrayendo ítems… Matcheando… Listo".</div>
+          <span class="tag tag-frontend">frontend</span>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FUTURO -->
+  <div class="section futuro">
+    <div class="section-title"><span class="dot"></span> Futuro — post monetización</div>
+    <div class="cards">
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">15</div>
+        <div class="card-body">
+          <div class="card-title">Exportar a Google Sheets nativo</div>
+          <div class="card-desc">Hoy se descarga Excel. Agregar botón para crear el Sheet directamente en Google Drive del usuario via OAuth.</div>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">16</div>
+        <div class="card-body">
+          <div class="card-title">Dashboard del usuario</div>
+          <div class="card-desc">Historial de comparativas con métricas acumuladas: ahorro total identificado, proveedores más usados, materiales más cotizados.</div>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">17</div>
+        <div class="card-body">
+          <div class="card-title">Comparativa de 3+ proveedores (plan Advance)</div>
+          <div class="card-desc">Hoy el plan free permite 2 PDFs. Advance podría permitir 5+, con más columnas en la tabla comparativa.</div>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+      <div class="card" onclick="toggle(this)">
+        <div class="num">18</div>
+        <div class="card-body">
+          <div class="card-title">API pública para estudios y constructoras</div>
+          <div class="card-desc">Permitir integrar el motor de matching como API con autenticación por API key. Plan enterprise.</div>
+        </div>
+        <div class="checkbox"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle("done");
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll(".card");
+    const done = document.querySelectorAll(".card.done");
+    const pct = Math.round((done.length / all.length) * 100);
+    document.getElementById("progress-fill").style.width = pct + "%";
+    document.getElementById("pct").textContent = done.length + " / " + all.length + " (" + pct + "%)";
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>

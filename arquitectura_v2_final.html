@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VectorAI v2 — Arquitectura Final</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f6fa;
+      color: #1a1a2e;
+      padding: 40px 20px 80px;
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    header .badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #dcfce7;
+      color: #166534;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    header .fecha {
+      font-size: 13px;
+      color: #64748b;
+      margin-left: auto;
+    }
+
+    .section { margin-bottom: 48px; }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0f172a;
+    }
+
+    .section-title .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: #3b82f6;
+    }
+
+    .cards { display: flex; flex-direction: column; gap: 12px; }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-header {
+      display: flex;
+      gap: 12px;
+    }
+
+    .card-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      min-width: 35px;
+      padding: 4px 8px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      height: fit-content;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    .code {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .highlight {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 14px;
+      margin: 20px 0;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.6;
+    }
+
+    .flowchart {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-top: 8px;
+      line-height: 1.6;
+      color: #0f172a;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      font-size: 12px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px dashed #e2e8f0;
+      margin: 48px 0;
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+
+    .toc h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .toc li {
+      margin: 6px 0;
+    }
+
+    .toc a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .check { color: #16a34a; font-weight: 600; }
+    .risk { color: #dc2626; font-weight: 600; }
+    .info { color: #3b82f6; font-weight: 600; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>VectorAI v2</h1>
+    <span class="badge">ARQUITECTURA FINAL</span>
+    <span class="fecha">Junio 2026</span>
+  </header>
+
+  <div class="toc">
+    <h3>📑 Tabla de Contenidos</h3>
+    <ul>
+      <li><a href="#vision">Visión General</a></li>
+      <li><a href="#bases-datos">Las Dos Bases de Datos</a></li>
+      <li><a href="#flujo-usuario">Flujo del Usuario</a></li>
+      <li><a href="#human-loop">Human in the Loop (Nosotros)</a></li>
+      <li><a href="#matching">Matching Multi-Nivel</a></li>
+      <li><a href="#flywheel">Flywheel de Mejora Continua</a></li>
+      <li><a href="#tablas">Tablas en Supabase</a></li>
+      <li><a href="#endpoints">Endpoints Backend</a></li>
+      <li><a href="#riesgos">Riesgos y Consideraciones</a></li>
+    </ul>
+  </div>
+
+  <div class="highlight">
+    <strong>🎯 Esencia de v2:</strong><br>
+    Usuario sube PDFs. Sistema matchea automáticamente contra BD interna usando códigos de proveedores (95% confianza).
+    Lo que no matchea, nosotros lo validamos 1x/día. Flywheel: más datos propios → mejor matching → usuarios satisfechos.
+  </div>
+
+  <!-- VISIÓN GENERAL -->
+  <div class="section" id="vision">
+    <div class="section-title"><span class="dot"></span> Visión General</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">El Cambio Fundamental</div>
+        <div class="card-desc">
+          VectorAI no es un "comparador entre proveedores". Es un <strong>sistema de matching inteligente</strong>
+          que reconoce automáticamente qué material está cotizando cada proveedor, usando:
+          <br><br>
+          ✓ Códigos internos de proveedores (95% confianza)<br>
+          ✓ Denominaciones con alias (70-90% confianza)<br>
+          ✓ IA para agrupar pendientes (60-85% confianza)<br>
+          ✓ Human review para validar nuevos materiales
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Bootstrapping: 1-2 meses</div>
+        <div class="card-desc">
+          No esperamos perfección día 1. El sistema <strong>mejora cada día</strong> porque:
+          <br><br>
+          • Usuarios suben PDFs → datos para entrenar<br>
+          • Nosotros pedimos presupuestos a otros corralones → más datos<br>
+          • Descubrimos códigos nuevos, denominaciones, patrones<br>
+          • Validamos y agregamos a la BD<br>
+          • Próximos usuarios: mejor matching
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Dos Bases de Datos</div>
+        <div class="card-desc">
+          <span class="check">✓ materiales_validados</span>: 915 materiales verificados. Es la fuente de verdad.<br>
+          <span class="check">✓ materiales_pendientes</span>: Nuevos encontrados en PDFs. Nosotros los revisamos y validamos.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- BASES DE DATOS -->
+  <div class="section" id="bases-datos">
+    <div class="section-title"><span class="dot"></span> Las Dos Bases de Datos</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">materiales_validados</div>
+        <div class="card-desc">
+          La BD central, verificada. Contiene 915 materiales (tuya actualmente).
+          <br><br>
+          <strong>Estructura:</strong>
+        </div>
+        <div class="table-container">
+          <table>
+            <tr>
+              <th>Campo</th>
+              <th>Tipo</th>
+              <th>Ejemplo</th>
+            </tr>
+            <tr>
+              <td>codigo</td>
+              <td>string PK</td>
+              <td>001-A</td>
+            </tr>
+            <tr>
+              <td>categoria</td>
+              <td>string</td>
+              <td>Tubería PVC</td>
+            </tr>
+            <tr>
+              <td>denominacion_principal</td>
+              <td>string</td>
+              <td>Codo PVC A90 45-40mm</td>
+            </tr>
+            <tr>
+              <td>descripcion</td>
+              <td>text</td>
+              <td>Codo roscado PVC...</td>
+            </tr>
+            <tr>
+              <td>especificaciones</td>
+              <td>JSON</td>
+              <td>{"norma": "IRAM 2080", "diametro": 45}</td>
+            </tr>
+            <tr>
+              <td>marcas_disponibles</td>
+              <td>JSON array</td>
+              <td>["Marca A", "Marca B", "Marca China"]</td>
+            </tr>
+            <tr>
+              <td>unidades_posibles</td>
+              <td>JSON array</td>
+              <td>[{"unidad": "UNIDAD", "desc": "1 codo"}]</td>
+            </tr>
+            <tr>
+              <td>confianza_matching</td>
+              <td>int (0-100)</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>validado_por</td>
+              <td>email</td>
+              <td>team@vectorai.com</td>
+            </tr>
+            <tr>
+              <td>created_at, updated_at</td>
+              <td>timestamp</td>
+              <td>2026-06-21</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">materiales_pendientes</div>
+        <div class="card-desc">
+          Materiales nuevos encontrados en PDFs. Se llenan automáticamente cuando hay sin-match.
+          Nosotros los revisamos 1x/día y decidimos qué hacer.
+          <br><br>
+          <strong>Estructura:</strong>
+        </div>
+        <div class="table-container">
+          <table>
+            <tr>
+              <th>Campo</th>
+              <th>Tipo</th>
+              <th>Ejemplo</th>
+            </tr>
+            <tr>
+              <td>id</td>
+              <td>UUID PK</td>
+              <td>abc123...</td>
+            </tr>
+            <tr>
+              <td>descripcion_original</td>
+              <td>string</td>
+              <td>Aislante XYZ espuma 5cm</td>
+            </tr>
+            <tr>
+              <td>codigo_proveedor</td>
+              <td>string</td>
+              <td>CAR-789 (si lo tiene)</td>
+            </tr>
+            <tr>
+              <td>proveedor</td>
+              <td>string</td>
+              <td>Carosio</td>
+            </tr>
+            <tr>
+              <td>categoria_sugerida</td>
+              <td>string</td>
+              <td>Aislantes (IA)</td>
+            </tr>
+            <tr>
+              <td>unidad_sugerida</td>
+              <td>string</td>
+              <td>ROLLO</td>
+            </tr>
+            <tr>
+              <td>confianza_ia</td>
+              <td>int (0-100)</td>
+              <td>78</td>
+            </tr>
+            <tr>
+              <td>agrupado_con</td>
+              <td>JSON array</td>
+              <td>[id_otro_pdf_1, id_otro_pdf_2]</td>
+            </tr>
+            <tr>
+              <td>estado</td>
+              <td>enum</td>
+              <td>PENDIENTE|VALIDADO|RECHAZADO</td>
+            </tr>
+            <tr>
+              <td>validado_por</td>
+              <td>email</td>
+              <td>NULL (aún no)</td>
+            </tr>
+            <tr>
+              <td>created_at</td>
+              <td>timestamp</td>
+              <td>2026-06-21</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-top: 16px;">
+      <div class="card">
+        <div class="card-title">codigos_proveedores</div>
+        <div class="card-desc">
+          La tabla "mágica" de matching automático. Mapea códigos internos de proveedores
+          a nuestros códigos de materiales.
+          <br><br>
+          <strong>Estructura:</strong>
+        </div>
+        <div class="table-container">
+          <table>
+            <tr>
+              <th>Campo</th>
+              <th>Tipo</th>
+              <th>Ejemplo</th>
+            </tr>
+            <tr>
+              <td>proveedor</td>
+              <td>string</td>
+              <td>Baukraft</td>
+            </tr>
+            <tr>
+              <td>codigo_proveedor</td>
+              <td>string</td>
+              <td>BK-4521</td>
+            </tr>
+            <tr>
+              <td>codigo_material</td>
+              <td>string FK</td>
+              <td>001-A</td>
+            </tr>
+            <tr>
+              <td>marca_asignada</td>
+              <td>string</td>
+              <td>Marca A</td>
+            </tr>
+            <tr>
+              <td>confianza</td>
+              <td>int</td>
+              <td>95 (validado)</td>
+            </tr>
+            <tr>
+              <td>validado_por</td>
+              <td>email</td>
+              <td>team@vectorai.com</td>
+            </tr>
+            <tr>
+              <td>created_at</td>
+              <td>timestamp</td>
+              <td>2026-06-21</td>
+            </tr>
+            <tr>
+              <td><strong>UNIQUE</strong></td>
+              <td colspan="2">(proveedor, codigo_proveedor)</td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-desc" style="margin-top: 12px;">
+          <span class="info">ℹ️ Clave compuesta:</span> Previene que el mismo proveedor tenga dos códigos
+          para el mismo material. Pero SÍ permite que dos proveedores usen el mismo código para materiales distintos
+          (porque cada uno es independiente).
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">material_denominaciones</div>
+        <div class="card-desc">
+          Alias y variaciones de nombres. Permite matchear "Codo PVC", "Codo 45-40", "Codo PVC A90"
+          contra el mismo material.
+          <br><br>
+          <strong>Estructura:</strong>
+        </div>
+        <div class="table-container">
+          <table>
+            <tr>
+              <th>Campo</th>
+              <th>Tipo</th>
+              <th>Ejemplo</th>
+            </tr>
+            <tr>
+              <td>codigo_material</td>
+              <td>string FK</td>
+              <td>001-A</td>
+            </tr>
+            <tr>
+              <td>denominacion</td>
+              <td>string</td>
+              <td>Codo PVC 45-40mm</td>
+            </tr>
+            <tr>
+              <td>origen</td>
+              <td>string</td>
+              <td>usuario_baukraft | pdf_bonora</td>
+            </tr>
+            <tr>
+              <td>confianza</td>
+              <td>int (0-100)</td>
+              <td>98 (encontrado 50 veces)</td>
+            </tr>
+            <tr>
+              <td>frecuencia_encontrada</td>
+              <td>int</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>created_at</td>
+              <td>timestamp</td>
+              <td>2026-06-21</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLUJO USUARIO -->
+  <div class="section" id="flujo-usuario">
+    <div class="section-title"><span class="dot"></span> Flujo del Usuario (Simplificado)</div>
+
+    <div class="flowchart">
+1️⃣  Usuario sube PDFs
+    └─ "Baukraft.pdf", "Bonora.pdf", "Carosio.pdf"
+
+2️⃣  Sistema procesa automáticamente
+    ├─ Extrae items de cada PDF
+    ├─ Matchea contra materiales_validados
+    └─ Envía a IA los que no matchearon
+
+3️⃣  Vista interactiva con 3 grupos:
+
+    ✅ MATCHES AUTOMÁTICOS (código de proveedor encontrado)
+    │  └─ "Baukraft BK-4521" → código 001-A (Codo PVC)
+    │     Automático, confianza 95%, sin revisar
+    │
+    ├─ "Bonora BON-0087" → código 001-A
+    │     Automático ✓
+    │
+    └─ "Carosio CAR-789" → código 001-A
+           Automático ✓
+           → Comparativa en vivo:
+              Baukraft: $150  | Bonora: $155 | Carosio: $160
+
+    ⚠️  MATCHES DUDOSOS (denominación similar)
+    │  └─ "Acero construcción 10mm"
+    │     ¿Es código 002-A, 002-B ó 002-C?
+    │     Usuario elige o busca
+    │
+    └─ IA sugiere: "¿Es 002-B (Acero redondo)?"
+           [Confirmar] [Buscar otro]
+
+    ❌ SIN MATCH (no está en base)
+    │  └─ "Aislante XYZ espuma 5cm" (Carosio)
+    │     No hay código_proveedor
+    │     No hay denominación similar
+    │     IA intenta agrupar con otros PDFs
+    │
+    ├─ "Aislante XYZ espuma 5cm" (Bonora)
+    │     ¿Probablemente lo mismo? (IA: 91% confianza)
+    │     [✓ Agrupar] [✗ Son distintos]
+    │
+    └─ "Aislante XYZ espuma 5cm" (Carosio)
+           Mismo grupo
+
+4️⃣  Usuario confirma
+    └─ [Confirmar análisis]
+
+5️⃣  Sistema guarda automáticamente
+    ├─ Equivalencias (PDF → material validado)
+    ├─ Sugerencias de agrupamiento (para nosotros)
+    ├─ Precios históricos
+    └─ Análisis completado
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- HUMAN IN THE LOOP -->
+  <div class="section" id="human-loop">
+    <div class="section-title"><span class="dot"></span> Human in the Loop (Nosotros)</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Revisión Diaria (o cada tanto)</div>
+        <div class="card-desc">
+          Dashboard interno para nosotros. Mostramos:
+          <br><br>
+          📊 "Hoy: 47 nuevos items en materiales_pendientes"<br>
+          <br>
+          Agrupados por IA en 8 grupos potenciales:
+          <br><br>
+          • Grupo A: Tornillos (4 items, 91% confianza IA)<br>
+          • Grupo B: Aislantes (8 items, 78% confianza)<br>
+          • Grupo C: Pinturas (3 items, 85% confianza)<br>
+          • Items sin agrupar: 24
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Acciones Posibles</div>
+        <div class="card-desc">
+          Para cada grupo o item:
+          <br><br>
+          <span class="check">✓ Crear como nuevo material validado</span><br>
+          → Asigna código (999-NEW-001), mueve a materiales_validados<br>
+          → Próximos usuarios lo ven al matchear<br>
+          <br>
+          <span class="check">✓ Linkear a uno existente</span><br>
+          → "Tornillo #8 inox" es lo mismo que código 002-B<br>
+          → Agrega a marcas_disponibles<br>
+          <br>
+          <span class="check">✓ Rechazar</span><br>
+          → Si es un error o descripción mala<br>
+          → Usuario recibe notificación<br>
+          <br>
+          <span class="check">✓ Esperar más datos</span><br>
+          → Si solo aparece 1 vez (quizás sea typo)<br>
+          → Mañana vemos si aparece de nuevo
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Trabajo Proactivo (Nosotros)</div>
+        <div class="card-desc">
+          No solo esperamos a usuarios. Hacemos:
+          <br><br>
+          📞 Contactamos corralones de otras zonas<br>
+          📄 Solicitamos presupuestos<br>
+          📥 Los cargamos en nuestro sistema<br>
+          🔍 Extraemos códigos nuevos, denominaciones, patrones<br>
+          ✅ Validamos y agregamos a BD<br>
+          <br>
+          <strong>Resultado:</strong> Cada día la BD crece,
+          matching mejora, próximos usuarios tienen mejor experiencia.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MATCHING MULTI-NIVEL -->
+  <div class="section" id="matching">
+    <div class="section-title"><span class="dot"></span> Matching Multi-Nivel</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Nivel 1: Código de Proveedor (95%)</div>
+        <div class="card-desc">
+          Sistema busca en tabla <code>codigos_proveedores</code>
+          <br><br>
+          <span class="check">✓ ENCONTRADO</span><br>
+          → Match automático, confianza 95%, no requiere revisión<br>
+          → Usuario ve checkmark, se confirma automáticamente<br>
+          <br>
+          <span class="risk">✗ NO ENCONTRADO</span><br>
+          → Pasa a Nivel 2
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nivel 2: Denominación Fuzzy (70-90%)</div>
+        <div class="card-desc">
+          Sistema busca en tabla <code>material_denominaciones</code>
+          <br><br>
+          <span class="check">✓ ENCONTRADO (score > 85)</span><br>
+          → Match probable, confianza 87%, usuario revisa<br>
+          <br>
+          <span class="info">⚠️ DUDOSO (score 60-85)</span><br>
+          → Usuario elige entre opciones<br>
+          <br>
+          <span class="risk">✗ NO ENCONTRADO (score < 60)</span><br>
+          → Pasa a Nivel 3
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nivel 3: Agrupamiento IA (60-85%)</div>
+        <div class="card-desc">
+          IA busca denominaciones similares en <code>materiales_pendientes</code>
+          de hoy (otros PDFs)
+          <br><br>
+          <span class="info">💡 Ejemplo:</span><br>
+          Baukraft: "Tornillo #8x1 inox"<br>
+          Bonora: "Tornillo #8x1"""<br>
+          Carosio: "Tornillo acero #8"<br>
+          <br>
+          IA: "Estos 3 probablemente sean lo mismo (91% confianza)"<br>
+          <br>
+          Usuario ve: [✓ Agrupar] [✗ Son distintos]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nivel 4: Sin Match (0%)</div>
+        <div class="card-desc">
+          No hay código, no hay denominación, IA no encuentra similares.
+          <br><br>
+          → Item se agrega a <code>materiales_pendientes</code><br>
+          → Usuario ve: "No está en base, será revisado por nosotros"<br>
+          → Mañana nosotros decidimos qué hacer
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>📊 Distribución esperada (Día 1):</strong><br>
+      ✅ 70% Nivel 1 (códigos automáticos)<br>
+      ✅ 20% Nivel 2 (denominación fuzzy)<br>
+      ⚠️ 7% Nivel 3 (agrupamiento IA)<br>
+      ❌ 3% Nivel 4 (sin información)
+      <br><br>
+      <strong>Después de 1-2 meses (bootstrapping):</strong><br>
+      ✅ 95% Nivel 1 + Nivel 2 (automático)<br>
+      ⚠️ 4% Nivel 3 (usuario + nosotros)<br>
+      ❌ 1% Nivel 4 (sin información)
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FLYWHEEL -->
+  <div class="section" id="flywheel">
+    <div class="section-title"><span class="dot"></span> Flywheel de Mejora Continua (1-2 meses)</div>
+
+    <div class="flowchart">
+SEMANA 1: MVP Launch
+══════════════════════
+├─ BD: 915 materiales validados (tuyos actuales)
+├─ Códigos: Baukraft, Bonora, Carosio mapeados (80% coverage)
+├─ Usuarios: empiezan a subir PDFs
+└─ Matching esperado: ~70% automático
+
+
+SEMANAS 2-4: Nosotros alimentamos datos
+════════════════════════════════════════
+├─ ACCIÓN: Pedimos presupuestos a otros corralones
+│  ├─ Corralón Zona Norte
+│  ├─ Corralón Zona Sur
+│  └─ Corralón Zona Oeste
+├─
+├─ Cargamos presupuestos en nuestro sistema
+│  └─ Extrae PDFs → Matchea → Guarda datos
+├─
+├─ Revisamos materiales_pendientes + nuevos códigos
+│  ├─ Corralón X usa código COR-X-1234
+│  ├─ Validamos: COR-X-1234 = código 001-A
+│  ├─ Agregamos a tabla codigos_proveedores
+│  └─ Próximo usuario de Corralón X: matching automático
+└─
+└─ RESULTADO: Matching sube a ~85% automático
+
+
+SEMANAS 5-8: Refinamiento de denominaciones
+════════════════════════════════════════════
+├─ ACCIÓN: Analizamos denominaciones encontradas
+│  └─ "Codo PVC", "Codo 45-40", "Codo PVC A90", "Codo 45/40"
+│     Todas refieren a 001-A
+├─
+├─ Agregamos aliases a tabla material_denominaciones
+│  └─ Cada alias con confianza según frecuencia
+├─
+├─ Re-procesamos materiales_pendientes con nuevos aliases
+│  └─ Algunos ahora hacen match (antes era pendiente)
+└─
+└─ RESULTADO: Matching sube a ~90% automático
+
+
+SEMANAS 9-10: Resolver falsos positivos
+════════════════════════════════════════
+├─ ACCIÓN: Revisamos matches de baja confianza (60-75%)
+│  └─ ¿Hay errores? ¿False positives?
+├─
+├─ Ajustamos umbrales, añadimos reglas
+│  Ejemplo: "Si código_proveedor coincide, ignora denominación"
+├─
+├─ (Opcional) Re-entrenamos FUSI si aplica
+│  └─ Mejor reconocimiento de especificaciones técnicas
+└─
+└─ RESULTADO: Matching llega a ~95% automático
+
+
+SEMANAS 11-12+: Ciclo positivo sostenible
+══════════════════════════════════════════
+├─ Usuarios suben PDFs → Sistema casi perfecto
+├─ Nosotros suben datos nuevos → Sistema mejora más
+├─ Otros proveedores descubiertos → Nuevos códigos
+├─ Tabla codigos_proveedores crece exponencialmente
+└─
+└─ OPERACIÓN NORMAL: ~95% matching automático, 4% revisión manual, 1% sin info
+    </div>
+
+    <div class="cards" style="margin-top: 20px;">
+      <div class="card">
+        <div class="card-title">¿Por qué funciona?</div>
+        <div class="card-desc">
+          El matching depende de DATOS. Cada PDF de usuario o presupuesto que cargamos
+          es una oportunidad de descubrir:
+          <br><br>
+          • Nuevos códigos de proveedores<br>
+          • Nuevas denominaciones<br>
+          • Patrones de descripción<br>
+          • Nuevos materiales<br>
+          <br>
+          Cuantos más datos, mejor entrena el sistema. No es magia, es acumulación inteligente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- TABLAS SUPABASE -->
+  <div class="section" id="tablas">
+    <div class="section-title"><span class="dot"></span> Tablas en Supabase (Resumen)</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">5 Tablas Principales</div>
+        <div class="card-desc">
+          <strong>1. materiales_validados</strong><br>
+          La fuente de verdad. 915+ materiales. Read-mostly. Actualizada por nosotros.<br>
+          <br>
+          <strong>2. material_denominaciones</strong><br>
+          Alias y variaciones de nombres. Crece continuamente. Mejora fuzzy match.<br>
+          <br>
+          <strong>3. codigos_proveedores</strong><br>
+          La tabla "mágica". Mapeo proveedor→código interno→material nuestro. UNIQUE (proveedor, codigo_proveedor).<br>
+          <br>
+          <strong>4. materiales_pendientes</strong><br>
+          Nuevos encontrados. Nosotros los revisamos y movemos a validados.<br>
+          <br>
+          <strong>5. precios_historicos</strong><br>
+          Data warehouse. Cada precio que ve el sistema se guarda aquí. Base para futuros análisis.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tablas Auxiliares</div>
+        <div class="card-desc">
+          <strong>equivalencias</strong><br>
+          Mapeo proveedor + descripción → material validado + marca. Para usuarios (si aplica).<br>
+          <br>
+          <strong>comparativas</strong><br>
+          Histórico de análisis de usuarios. user_id + resultado JSON.<br>
+          <br>
+          <strong>Trigger: cleanup_old_comparativas</strong><br>
+          Borra comparativas >48h automáticamente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ENDPOINTS -->
+  <div class="section" id="endpoints">
+    <div class="section-title"><span class="dot"></span> Endpoints Backend (MVP)</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Para Usuarios</div>
+        <div class="card-desc">
+          <strong>POST /analizar-pdf-con-codigos</strong><br>
+          Input: PDF(s) + proveedor (detectado o manual)<br>
+          Output: JSON con análisis (códigos, fuzzy, agrupamientos)<br>
+          <br>
+          <strong>POST /confirmar-analisis</strong><br>
+          Input: análisis_id<br>
+          Guarda: equivalencias + precios_historicos<br>
+          Output: "Análisis guardado"<br>
+          <br>
+          <strong>POST /resolver-match-dudoso</strong><br>
+          Input: análisis_id + item_id + codigo_elegido<br>
+          Output: actualiza vista<br>
+          <br>
+          <strong>POST /confirmar-agrupamiento</strong><br>
+          Input: análisis_id + agrupamiento_id<br>
+          Output: agrupamiento confirmado<br>
+          <br>
+          <strong>GET /comparativas</strong><br>
+          Retorna: listado de análisis del usuario<br>
+          <br>
+          <strong>GET /comparativas/{id}</strong><br>
+          Retorna: análisis completo
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Para Nosotros (Admin)</div>
+        <div class="card-desc">
+          <strong>GET /admin/materiales-pendientes</strong><br>
+          Retorna: items sin revisar, agrupados por IA<br>
+          <br>
+          <strong>POST /admin/procesar-pendiente</strong><br>
+          Input: pendiente_id + accion (crear_nuevo|linkear_a|rechazar)<br>
+          Guarda en materiales_validados<br>
+          <br>
+          <strong>POST /admin/agregar-codigo-proveedor</strong><br>
+          Input: proveedor + codigo_proveedor + codigo_material + marca<br>
+          Valida UNIQUE (proveedor, codigo_proveedor)<br>
+          <br>
+          <strong>GET /admin/codigos-por-validar</strong><br>
+          Retorna: códigos encontrados en usuarios, agrupados por frecuencia<br>
+          <br>
+          <strong>GET /admin/analytics</strong><br>
+          KPIs: % automático, % manual, % pendiente, eficiencia
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- RIESGOS -->
+  <div class="section" id="riesgos">
+    <div class="section-title"><span class="dot"></span> Riesgos y Consideraciones</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">¿Colisión de Códigos?</div>
+        <div class="card-desc">
+          <span class="risk">Riesgo:</span> ¿Pueden dos proveedores usar el MISMO código para DIFERENTES materiales?<br>
+          <br>
+          <span class="check">Respuesta:</span> SÍ es posible, pero es raro.
+          <br><br>
+          <strong>Ejemplo (hipotético):</strong><br>
+          • Baukraft BK-100 = Acero estructural 100mm<br>
+          • Bonora BON-100 = Pintura latex blanca 10L<br>
+          <br>
+          <strong>Solución:</strong> Clave compuesta UNIQUE (proveedor, codigo_proveedor)<br>
+          Esto permite que cada proveedor tenga BK-100 y BON-100 por separado.
+          <br><br>
+          <strong>Double-check:</strong><br>
+          Si el usuario escribe "BK-10" (incompleto), sistema:<br>
+          1. Busca en codigos_proveedores<br>
+          2. Si encuentra múltiples (BK-100, BK-101, etc.)<br>
+          3. Usa denominación como desempate<br>
+          4. "BK-10, Acero" → matchea con "Acero estructural"
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">False Positives</div>
+        <div class="card-desc">
+          <span class="risk">Riesgo:</span> IA agrupa materiales que NO son lo mismo.
+          <br><br>
+          <span class="check">Mitigación:</span><br>
+          • Usar umbral de confianza alto (>85% para auto-agrupar)<br>
+          • Usuario revisa agrupamientos antes de confirmar<br>
+          • Nosotros validamos en Human Loop<br>
+          • Datos incorrrectos nunca entran a materiales_validados sin revisión
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Escalabilidad de Denominaciones</div>
+        <div class="card-desc">
+          <span class="risk">Riesgo:</span> Tabla material_denominaciones crece muy rápido.
+          <br><br>
+          <span class="check">Mitigación:</span><br>
+          • Crear índice en (codigo_material, denominacion)<br>
+          • Limpiar duplicados periódicamente<br>
+          • Agradecer solo aliases con confianza >70%<br>
+          • Monitorear tamaño de tabla
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Bootstrapping Lento</div>
+        <div class="card-desc">
+          <span class="risk">Riesgo:</span> ¿Y si no hay suficientes usuarios/datos en primeras semanas?
+          <br><br>
+          <span class="check">Mitigación:</span><br>
+          • Nosotros NO esperamos. Cargamos datos propios.<br>
+          • Solicitamos presupuestos a otros corralones.<br>
+          • Procesamos nosotros mismos los datos.<br>
+          • El sistema mejora incluso sin usuarios iniciales.
+        </div>
+      </card>
+
+      <div class="card">
+        <div class="card-title">Validación de Códigos Duplicados</div>
+        <div class="card-desc">
+          <span class="risk">Riesgo:</span> ¿Qué pasa si un usuario sube el MISMO PDF dos veces?
+          <br><br>
+          <span class="check">Mitigación:</span><br>
+          • Sistema detecta hash del PDF<br>
+          • No procesa dos veces<br>
+          • O permite re-procesar si el usuario desea
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- NOTAS FINALES -->
+  <div class="section">
+    <div class="section-title"><span class="dot"></span> Notas Finales</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">¿Cuándo lanzar?</div>
+        <div class="card-desc">
+          Cuando tengas:<br><br>
+          ✓ Tabla materiales_validados cargada (915 items)<br>
+          ✓ Tabla codigos_proveedores con Baukraft, Bonora, Carosio (80% coverage)<br>
+          ✓ Endpoints básicos funcionando<br>
+          ✓ Frontend de upload + vista interactiva<br>
+          ✓ Admin dashboard para revisar pendientes<br>
+          <br>
+          Esto es MVP. Después iteramos.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">¿Qué viene después (Post-MVP)?</div>
+        <div class="card-desc">
+          Cuando tengas 100+ usuarios + 1-2 meses de datos:
+          <br><br>
+          💰 Plan FULL con análisis de tendencias<br>
+          📊 Recomendaciones de proveedores<br>
+          🏪 Trading floor (comprar en volumen)<br>
+          🔗 API para integraciones<br>
+          <br>
+          Pero eso es DESPUÉS. Primero: MVP que funcione bien.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Configuración de IA</div>
+        <div class="card-desc">
+          <strong>Para Nivel 1 (Códigos):</strong> FUSI (ya lo tienes)<br>
+          <br>
+          <strong>Para Nivel 2 (Denominaciones):</strong> FUSI o fuzzy + especificaciones<br>
+          <br>
+          <strong>Para Nivel 3 (Agrupamiento):</strong> Claude/GPT-4 general<br>
+          (Es más tolerante con lo desconocido)<br>
+          <br>
+          Prompt recomendado:<br>
+          <code class="code">
+"¿Estos 3 ítems describen el mismo producto de construcción?
+- Item 1: {desc1}
+- Item 2: {desc2}
+- Item 3: {desc3}
+
+Responde: {si|no|probable} + confianza (0-100) + razón"
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

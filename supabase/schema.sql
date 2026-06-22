@@ -98,6 +98,21 @@ create table public.precios_zona (
   created_at     timestamptz default now()
 );
 
+-- ── Limpieza automática de comparativas viejas (>48h) ─────────
+create or replace function public.cleanup_old_comparativas()
+returns void language plpgsql security definer as $$
+begin
+  delete from public.comparativas
+  where created_at < now() - interval '48 hours';
+end;
+$$;
+
+-- Trigger: ejecuta cleanup cada vez que se inserta una nueva comparativa
+-- Mantiene la tabla limpia sin necesidad de cron job externo
+create trigger cleanup_on_new_comparativa
+  after insert on public.comparativas
+  for each statement execute procedure public.cleanup_old_comparativas();
+
 -- ── Índices para consultas frecuentes ────────────────────────
 create index on public.precios_zona (cod_int, provincia, fecha_precio desc);
 create index on public.equivalencias (cod_prov, proveedor);
