@@ -124,7 +124,7 @@ export default function ComparativaDetalle() {
   const totalAhorro = mostradas.reduce((s, r) => s + r.ahorro, 0);
 
   async function descargarExcel() {
-    if (!token) return;
+    if (!token || !comparativa) return;
     setGenerandoSheets(true);
     try {
       const res = await fetch(`${API_URL}/sheets`, {
