@@ -101,6 +101,21 @@ export default function ComparativaDetalle() {
     );
   }
 
+  if (!comparativa) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/app/historial" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
+            ← Volver al historial
+          </Link>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-8 text-center">
+            <p className="text-red-700">Comparativa no encontrada.</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   const filas = comparativa.comparativo || [];
   const rubros = Array.from(new Set(filas.map((r) => r.rubro)));
   const filtradas =
