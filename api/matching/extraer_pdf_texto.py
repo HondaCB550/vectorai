@@ -47,6 +47,14 @@ RE_EUROPEO = re.compile(
 
 RE_PRECIO = re.compile(r"^[\d,]+\.\d{2}$|^[\d.]+,\d{2}$")
 
+# Artículo de PDF: "H ORMIGON" → "HORMIGON", "F IBRAKRETE" → "FIBRAKRETE"
+RE_SPLIT_WORD = re.compile(r'\b([A-Z]) ([A-Z]{3,})\b')
+
+
+def _fix_split_words(s: str) -> str:
+    """Repara artefactos de PDF donde una letra queda separada del resto de la palabra."""
+    return RE_SPLIT_WORD.sub(r'\1\2', s)
+
 
 def parse_num(s: str) -> float:
     """Parsea números en formato americano (12,892.91) y europeo (12.892,91)."""
@@ -207,7 +215,7 @@ def _parsear_tabla_generica(tabla: list[list]) -> list[dict]:
 
         items.append({
             "cod":   cod_raw or "",
-            "desc":  desc,
+            "desc":  _fix_split_words(desc),
             "cant":  cant,
             "pu":    pu,
             "total": total,
@@ -244,19 +252,19 @@ def extraer_regex(texto: str) -> list[dict]:
             if parser == "baukraft":
                 cod, desc, cant, pu, total = m.groups()
                 items.append({
-                    "cod": cod, "desc": desc.strip(),
+                    "cod": cod, "desc": _fix_split_words(desc.strip()),
                     "cant": float(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             elif parser == "carosio":
                 cod, desc, pu, cant, total = m.groups()
                 items.append({
-                    "cod": cod, "desc": desc.strip(),
+                    "cod": cod, "desc": _fix_split_words(desc.strip()),
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             else:  # europeo
                 cod, cant, desc, pu, total = m.groups()
                 items.append({
-                    "cod": cod, "desc": desc.strip(),
+                    "cod": cod, "desc": _fix_split_words(desc.strip()),
                     "cant": float(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             break

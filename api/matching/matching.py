@@ -61,9 +61,8 @@ SINONIMOS: dict[str, str] = {
     "ARENA FINA":                 "ARENA",
     "ARENA GRUESA":               "ARENA",
     "PIEDRA PARTIDA":             "PIEDRA",
-    "HORMIGON ELABORADO":         "HORMIGON",
-    "HORMIGON H21":               "HORMIGON",
-    "HORMIGON H30":               "HORMIGON",
+    # HORMIGON ELABORADO H21/H30 — NO normalizar: el grado (H21/H30) es info
+    # discriminante. Sin sinónimos, fuzzy matching maneja la similitud correctamente.
 
     # ── Hierro liso ──────────────────────────────────────────────────────────
     "VARILLA LISA":               "REDONDO LISO",
@@ -237,7 +236,7 @@ KEYWORDS_DISTINTIVAS = {
     "MONTANTE", "SOLERA", "PGO", "PGU", "AGUJA", "MECHA", "HEXAGONAL",
     "CAJA", "CABLE", "TOMA", "TECLA", "MODULO", "BASTIDOR", "TAPA", "SPOT",
     "DISYUNTOR", "TERMICA", "CORRUGADO", "REDONDO", "ANGULO", "PLANCHUELA",
-    "MALLA", "SOLDADA",
+    "MALLA", "SOLDADA", "BLOQUE",
 }
 
 
@@ -246,10 +245,18 @@ def normalize(s: str) -> str:
     # Quitar acentos frecuentes
     for a, b in [("Á","A"),("É","E"),("Í","I"),("Ó","O"),("Ú","U"),("Ü","U")]:
         s = s.replace(a, b)
+    # Quitar contenido entre paréntesis (dimensiones técnicas como "(3,33 x 63,5 mm)")
+    s = re.sub(r"\([^)]*\)", " ", s)
     # Quitar patrones de ruido tipo ***NUEVA BOLSA X 25KG*** al inicio
     s = re.sub(r"^\*+[^*]+\*+\s*", "", s)
     # Quitar unidades de presentación redundantes al inicio (BOLSA X NNN, CAJA X NNN)
     s = re.sub(r"^(NUEVA\s+)?(BOLSA|CAJA|PAQUETE|ROLLO|BIDON)\s+X\s+\d+\w*\s*", "", s)
+    # Normalizar guión entre letra y número (H-21 → H21, C-25 → C25)
+    s = re.sub(r"(?<=[A-Z])-(?=\d)|(?<=\d)-(?=[A-Z])", "", s)
+    # Quitar parámetros técnicos de hormigón que no aparecen en el master
+    s = re.sub(r"\bASENTAMIENTO\b", " ", s)
+    # Quitar medidas de asentamiento como "10 CM" que generan falsos positivos numéricos
+    s = re.sub(r"\b\d+\s*CM\b", " ", s)
     s = re.sub(r"[^\w\s\.\-/]", " ", s)
     s = re.sub(r"\s+", " ", s)
     return s.strip()

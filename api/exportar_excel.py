@@ -28,7 +28,7 @@ COLORES_PROV = [
     "4D99B3",  # celeste
 ]
 
-NUM_FMT = '#,##0'
+NUM_FMT = '"$" #,##0'
 
 
 def _fill(hex_color: str) -> PatternFill:
@@ -48,12 +48,14 @@ def generar_excel_comparativo(
     comparativo: list[dict],
     proveedores: list[str],
     titulo: str = None,
+    subtitulo: str = None,
 ) -> bytes:
     """
     Genera un Excel comparativo y devuelve los bytes del archivo.
     """
     titulo = titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
     fecha  = datetime.now().strftime("%d/%m/%Y")
+    subtitulo = subtitulo or f"Generado el {fecha} · Precios sin IVA · VectorAI"
 
     wb = Workbook()
     ws = wb.active
@@ -80,7 +82,7 @@ def generar_excel_comparativo(
 
     # ── Fila 2: subtítulo ─────────────────────────────────────────────────────
     ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=total_cols)
-    c = ws.cell(2, 1, f"Generado el {fecha} · Precios sin IVA · VectorAI")
+    c = ws.cell(2, 1, subtitulo)
     c.fill  = _fill(COLOR_HEADER)
     c.font  = _font(color="BFC8E6", size=9, italic=True)
     c.alignment = Alignment(vertical="center", horizontal="left", indent=2)

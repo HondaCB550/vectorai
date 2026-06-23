@@ -118,6 +118,26 @@ def factor_iva(proveedor: str) -> float:
             return float(p.get("factor_iva_default", 1.105))
     return 1.105
 
+def descuento_proveedor(proveedor: str) -> float:
+    """Descuento comercial configurado para el proveedor (0–100). 0 = sin descuento."""
+    config = get_config()
+    for p in config.get("proveedores", []):
+        if p["nombre_canonico"] == proveedor:
+            return float(p.get("descuento_default", 0))
+    return 0.0
+
+def precio_neto(pu: float, proveedor: str) -> float:
+    """Precio neto = precio_pdf / factor_iva * (1 - descuento%). Siempre sin IVA."""
+    fac  = factor_iva(proveedor)
+    desc = descuento_proveedor(proveedor)
+    return round(pu / fac * (1 - desc / 100), 2)
+
+def config_proveedor(proveedor: str) -> dict:
+    """Devuelve dict con iva_incluido y descuento_pct para mostrar en el frontend."""
+    fac  = factor_iva(proveedor)
+    desc = descuento_proveedor(proveedor)
+    return {"iva_incluido": fac != 1.0, "factor_iva": fac, "descuento_pct": desc}
+
 
 # ── Supabase ──────────────────────────────────────────────────────────────────
 # Validación de token: el frontend envía el JWT de Supabase en Authorization
@@ -221,6 +241,8 @@ class SheetsRequest(BaseModel):
     user_mail: Optional[str] = None
     solo_comunes: bool = False
     filtro_rubro: Optional[str] = None
+    incluir_iva: bool = False
+    descuento_pct: float = 0.0  # 0–100
 
 
 # Cache en memoria (fallback si Supabase no está disponible)
@@ -305,7 +327,6 @@ async def analizar(
                 errores.append({"archivo": f.filename, "error": "No se encontraron ítems"})
                 continue
 
-            fac = factor_iva(proveedor)
             matches = []
             sin_match = []
 
@@ -319,7 +340,7 @@ async def analizar(
 
                 top = matchear_item(desc, master, top_n=3, cod_prov=cod, equivalencias=equiv)
                 if not top:
-                    sin_match.append({"cod_prov": cod, "desc_prov": desc, "precio": round(pu / fac, 2)})
+                    sin_match.append({"cod_prov": cod, "desc_prov": desc, "precio": precio_neto(pu, proveedor)})
                     continue
 
                 score, mat, origen = top[0]
@@ -330,7 +351,7 @@ async def analizar(
                     "desc_prov":      desc,
                     "cant":           float(item.get("cant") or 1),
                     "precio_con_iva": pu,
-                    "precio_sin_iva": round(pu / fac, 2),
+                    "precio_sin_iva": precio_neto(pu, proveedor),
                     "cod_int":        mat["codigo"],
                     "rubro":          mat.get("rubro", ""),
                     "item_int":       mat.get("item", ""),
@@ -620,10 +641,14 @@ async def generar_sheets(
     fecha = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
+    iva_label = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
+    subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · VectorAI"
     xlsx_bytes = generar_excel_comparativo(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
+        subtitulo=subtitulo,
     )
     filename = f"VectorAI_Comparativa_{fecha}.xlsx"
     return StreamingResponse(
@@ -634,12 +659,30 @@ async def generar_sheets(
 
 
 def _aplicar_filtros(comparativo: list, req: SheetsRequest) -> list:
+    import copy
     rows = comparativo
     if req.solo_comunes:
         rows = [r for r in rows if r.get("en_varios")]
     if req.filtro_rubro and req.filtro_rubro != "Todos":
         rows = [r for r in rows if r.get("rubro") == req.filtro_rubro]
-    return rows
+
+    factor_iva = 1.105 if req.incluir_iva else 1.0
+    factor_desc = 1.0 - (req.descuento_pct / 100.0) if req.descuento_pct else 1.0
+    factor = round(factor_iva * factor_desc, 6)
+
+    if factor == 1.0:
+        return rows
+
+    # Aplicar factor a una copia para no mutar el cache
+    result = []
+    for row in rows:
+        r = copy.deepcopy(row)
+        for prov_data in r.get("precios", {}).values():
+            prov_data["precio_sin_iva"] = round(prov_data["precio_sin_iva"] * factor, 2)
+        if r.get("ahorro"):
+            r["ahorro"] = round(r["ahorro"] * factor, 2)
+        result.append(r)
+    return result
 
 
 # ── /pdf ──────────────────────────────────────────────────────────────────────
@@ -943,8 +986,6 @@ async def analizar_v2(
             proveedor = detectar_proveedor(f.filename or "") or Path(f.filename or "archivo").stem.upper()
             resultado = extraer(tmp_path)
             items = resultado.get("items", [])
-            fac = factor_iva(proveedor)
-
             automatico, dudoso, sin_match = [], [], []
 
             for item in items:
@@ -953,7 +994,7 @@ async def analizar_v2(
                 if not desc or pu <= 0:
                     continue
 
-                precio = round(pu / fac, 2)
+                precio = precio_neto(pu, proveedor)
                 cant   = float(item.get("cant") or 1)
 
                 matches = _match_v2(desc, denominaciones, top_n=3)
@@ -1041,15 +1082,18 @@ async def analizar_v2(
     if user["plan"] == "free" and user["user_id"] != "anonimo":
         usos_restantes = max(0, user["limite"] - user["usos_hoy"] - 1)
 
+    config_provs = {prov: config_proveedor(prov) for prov in resultados}
+
     return {
-        "comparativa_id": comparativa_id,
-        "proveedores":    list(resultados.keys()),
-        "resultados":     resultados,
-        "comparativo":    comparativo,
-        "errores":        errores,
-        "plan":           user["plan"],
-        "usos_restantes": usos_restantes,
-        "aliases_en_bd":  len(denominaciones),
+        "comparativa_id":   comparativa_id,
+        "proveedores":      list(resultados.keys()),
+        "resultados":       resultados,
+        "comparativo":      comparativo,
+        "errores":          errores,
+        "plan":             user["plan"],
+        "usos_restantes":   usos_restantes,
+        "aliases_en_bd":    len(denominaciones),
+        "config_proveedores": config_provs,
     }
 
 

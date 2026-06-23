@@ -70,9 +70,10 @@
       "columna_destino": "AQ",
       "columna_destino_num": 43,
       "factor_iva_default": 1.105,
+      "descuento_default": 8,
       "alias_archivo": ["sauce", "sauce solo"],
       "rubros_predominantes": ["VARIOS"],
-      "notas": "Multimateriales. Llega como múltiples imágenes JPG (Hoja 1, Hoja 2, ...). Procesar con visión y unir resultados."
+      "notas": "Multimateriales. Cotiza CON IVA (factor 1.105). Descuento comercial 8% sobre precio c/IVA. Precio neto = precio_pdf / 1.105 * 0.92. Llega como múltiples imágenes JPG (Hoja 1, Hoja 2, ...). Procesar con visión y unir resultados."
     },
     {
       "nombre_canonico": "FAGUA2",
@@ -115,9 +116,10 @@
       "columna_destino": "S",
       "columna_destino_num": 19,
       "factor_iva_default": 1.000,
+      "descuento_default": 10,
       "alias_archivo": ["mad. lobos", "maderera lobos", "maderas lobos"],
       "rubros_predominantes": ["MADERA", "PLACAS", "PERFILES", "AISLACIONES"],
-      "notas": "MONOTRIBUTO — no carga IVA, factor_iva=1.000. Precios de lista con Bonif -10% (transferencia/débito). Precio neto = P.Lista * 0.90. Maderas cepilladas cotizadas en pies cuadrados (board feet)."
+      "notas": "MONOTRIBUTO — no carga IVA, factor_iva=1.000. Bonificación 10% transferencia/débito. Precio neto = P.Lista * 0.90. Maderas cepilladas cotizadas en pies cuadrados (board feet)."
     },
     {
       "nombre_canonico": "MOLBER",

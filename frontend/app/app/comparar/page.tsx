@@ -64,6 +64,12 @@ type FilaComparativa = {
   en_varios: boolean;
 };
 
+type ConfigProveedor = {
+  iva_incluido: boolean;
+  factor_iva: number;
+  descuento_pct: number;
+};
+
 type Resultado = {
   comparativa_id: string;
   proveedores: string[];
@@ -72,11 +78,25 @@ type Resultado = {
   plan: string;
   usos_restantes: number | null;
   aliases_en_bd: number;
+  config_proveedores: Record<string, ConfigProveedor>;
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function fmt(v: number) {
   return `$ ${Math.round(v).toLocaleString("es-AR")}`;
+}
+
+function aplicarFactores(v: number, conIva: boolean, descPct: number) {
+  const iva  = conIva ? 1.105 : 1;
+  const desc = descPct > 0 ? (1 - descPct / 100) : 1;
+  return v * iva * desc;
+}
+
+function pctDiferencia(precios: Record<string, { precio_sin_iva: number }>, cant: number): number {
+  const vals = Object.values(precios).map((p) => p.precio_sin_iva * cant);
+  if (vals.length < 2) return 0;
+  const mn = Math.min(...vals), mx = Math.max(...vals);
+  return mn > 0 ? Math.round(((mx - mn) / mn) * 100) : 0;
 }
 
 function ScoreBadge({ score }: { score: number }) {
@@ -106,6 +126,10 @@ export default function Comparar() {
   const [generandoSheets, setGenerandoSheets] = useState(false);
   const [generandoPdf, setGenerandoPdf]       = useState(false);
   const [generandoJpg, setGenerandoJpg]       = useState(false);
+
+  const [conIva, setConIva]           = useState(false);
+  const [descuentoPct, setDescuentoPct] = useState(0);
+  const [soloDifGrande, setSoloDifGrande] = useState(false);
 
   useEffect(() => {
     const sb = createClient();
@@ -248,6 +272,8 @@ export default function Comparar() {
           comparativa_id: resultado.comparativa_id,
           solo_comunes:   soloComunes,
           filtro_rubro:   filtroRubro !== "Todos" ? filtroRubro : null,
+          incluir_iva:    conIva,
+          descuento_pct:  descuentoPct,
         }),
       });
       if (!res.ok) { alert("Error al generar el archivo"); return; }
@@ -270,9 +296,12 @@ export default function Comparar() {
 
   const filasFiltradas = resultado?.comparativo
     .filter((r) => filtroRubro === "Todos" || r.rubro === filtroRubro)
-    .filter((r) => !soloComunes || r.en_varios) ?? [];
+    .filter((r) => !soloComunes || r.en_varios)
+    .filter((r) => !soloDifGrande || pctDiferencia(r.precios, r.cant || 1) >= 25) ?? [];
 
-  const ahorroTotal = filasFiltradas.reduce((s, r) => s + (r.ahorro || 0), 0);
+  const ahorroTotal = filasFiltradas.reduce(
+    (s, r) => s + aplicarFactores(r.ahorro || 0, conIva, descuentoPct), 0
+  );
 
   const totalDudosos  = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.dudoso.length, 0) : 0;
   const totalSinMatch = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.sin_match.length, 0) : 0;
@@ -321,12 +350,12 @@ export default function Comparar() {
               onClick={() => document.getElementById("file-input")?.click()}
             >
               <input
-                id="file-input" type="file" accept="application/pdf" multiple className="hidden"
+                id="file-input" type="file" accept="application/pdf,image/*,.tiff,.tif" multiple className="hidden"
                 onChange={(e) => setFiles((prev) => [...prev, ...Array.from(e.target.files || [])])}
               />
               <div className="text-4xl mb-4">📄</div>
               <p className="text-gray-600 font-medium">Arrastrá los PDFs acá o hacé click para seleccionar</p>
-              <p className="text-gray-400 text-sm mt-1">Solo PDFs · Uno por proveedor</p>
+              <p className="text-gray-400 text-sm mt-1">PDF, JPG, TIFF · Uno por proveedor</p>
             </div>
 
             {files.length > 0 && (
@@ -456,8 +485,39 @@ export default function Comparar() {
                   <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
                     <input type="checkbox" checked={soloComunes} onChange={(e) => setSoloComunes(e.target.checked)}
                       className="w-4 h-4 text-blue-600 rounded" />
-                    Solo ítems en común entre proveedores
+                    Solo en común
                   </label>
+                  <label className="flex items-center gap-2 text-sm text-amber-700 cursor-pointer">
+                    <input type="checkbox" checked={soloDifGrande} onChange={(e) => setSoloDifGrande(e.target.checked)}
+                      className="w-4 h-4 text-amber-500 rounded" />
+                    Solo dif. &gt;25%
+                  </label>
+
+                  {/* IVA / Descuento */}
+                  <div className="flex items-center gap-1 ml-auto border border-gray-200 rounded-lg overflow-hidden text-sm">
+                    <button
+                      onClick={() => setConIva(false)}
+                      className={`px-3 py-2 transition ${!conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Sin IVA
+                    </button>
+                    <button
+                      onClick={() => setConIva(true)}
+                      className={`px-3 py-2 transition ${conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Con IVA
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-sm">
+                    <span className="text-gray-500">Desc.</span>
+                    <input
+                      type="number" min="0" max="100" step="1" value={descuentoPct || ""}
+                      onChange={(e) => setDescuentoPct(Number(e.target.value) || 0)}
+                      placeholder="0"
+                      className="w-16 border border-gray-300 rounded-lg px-2 py-2 text-sm text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                    <span className="text-gray-500">%</span>
+                  </div>
                 </div>
 
                 <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
@@ -466,16 +526,34 @@ export default function Comparar() {
                       <tr className="bg-gray-50 border-b border-gray-200">
                         <th className="text-left px-4 py-3 font-semibold text-gray-600 min-w-[240px]">Material</th>
                         <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Cant.</th>
-                        {resultado.proveedores.map((p) => (
-                          <th key={p} className="px-4 py-3 font-semibold text-gray-700 text-center">{p}</th>
-                        ))}
+                        {resultado.proveedores.map((p) => {
+                          const cfg = resultado.config_proveedores?.[p];
+                          return (
+                            <th key={p} className="px-4 py-3 font-semibold text-gray-700 text-center">
+                              <div>{p}</div>
+                              {cfg && (
+                                <div className="flex gap-1 justify-center mt-0.5 flex-wrap">
+                                  {cfg.iva_incluido && (
+                                    <span className="text-[10px] font-normal bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded">c/IVA</span>
+                                  )}
+                                  {cfg.descuento_pct > 0 && (
+                                    <span className="text-[10px] font-normal bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">desc {cfg.descuento_pct}%</span>
+                                  )}
+                                </div>
+                              )}
+                            </th>
+                          );
+                        })}
                         <th className="px-4 py-3 font-semibold text-gray-600 text-center">Mejor</th>
                         <th className="px-4 py-3 font-semibold text-gray-500 text-center text-xs">Ahorro</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {filasFiltradas.map((row, i) => (
-                        <tr key={i} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                      {filasFiltradas.map((row, i) => {
+                        const difPct = pctDiferencia(row.precios, row.cant || 1);
+                        const granDif = difPct >= 25 && row.en_varios;
+                        return (
+                        <tr key={i} className={`border-b border-gray-100 last:border-0 hover:bg-gray-50 ${granDif ? "bg-amber-50/60" : ""}`}>
                           <td className="px-4 py-3">
                             <div className="font-medium text-gray-800 text-xs">{row.material}</div>
                             <div className="text-xs text-gray-400">{row.rubro}</div>
@@ -486,15 +564,16 @@ export default function Comparar() {
                           {resultado.proveedores.map((p) => {
                             const precio = row.precios[p];
                             const esMejor = row.mejor_proveedor === p && row.en_varios;
-                            const total = precio ? precio.precio_sin_iva * (row.cant || 1) : null;
+                            const precioU = precio ? aplicarFactores(precio.precio_sin_iva, conIva, descuentoPct) : null;
+                            const total   = precioU !== null ? precioU * (row.cant || 1) : null;
                             return (
                               <td key={p} className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}>
-                                {precio ? (
+                                {precioU !== null ? (
                                   <div>
                                     <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
                                       {fmt(total!)}
                                     </span>
-                                    <div className="text-xs text-gray-400">{fmt(precio.precio_sin_iva)}/u</div>
+                                    <div className="text-xs text-gray-400">{fmt(precioU)}/u</div>
                                   </div>
                                 ) : <span className="text-gray-300">—</span>}
                               </td>
@@ -507,11 +586,16 @@ export default function Comparar() {
                               </span>
                             )}
                           </td>
-                          <td className="px-4 py-3 text-center text-xs text-gray-400">
-                            {row.ahorro > 0 ? fmt(row.ahorro) : ""}
+                          <td className="px-4 py-3 text-center text-xs">
+                            {row.ahorro > 0 && (
+                              <div className={granDif ? "text-amber-700 font-semibold" : "text-gray-400"}>
+                                {fmt(aplicarFactores(row.ahorro, conIva, descuentoPct))}
+                                {granDif && <div className="text-amber-500 font-bold">↕ {difPct}%</div>}
+                              </div>
+                            )}
                           </td>
                         </tr>
-                      ))}
+                      );})}
                     </tbody>
                   </table>
                 </div>
