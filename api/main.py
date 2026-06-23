@@ -787,13 +787,26 @@ async def crear_suscripcion(req: MPSuscripcionRequest):
     }
 
 
+MP_WEBHOOK_SECRET = os.environ.get("MP_WEBHOOK_SECRET", "")
+
 @app.post("/mp/webhook")
 async def mp_webhook(request: Request):
     """
     Webhook de MercadoPago. Cuando una suscripción se activa o renueva,
     actualiza perfiles.plan = 'advance'.
     """
-    body = await request.json()
+    # Verificar firma si está configurada
+    if MP_WEBHOOK_SECRET:
+        import hmac, hashlib
+        sig_header = request.headers.get("x-signature", "")
+        raw_body   = await request.body()
+        expected   = hmac.new(MP_WEBHOOK_SECRET.encode(), raw_body, hashlib.sha256).hexdigest()
+        received   = sig_header.split("v1=")[-1]
+        if not hmac.compare_digest(expected, received):
+            raise HTTPException(status_code=401, detail="Firma inválida")
+        body = json.loads(raw_body)
+    else:
+        body = await request.json()
     tipo = body.get("type", "")
 
     if tipo not in ("preapproval", "subscription_preapproval"):
