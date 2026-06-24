@@ -1032,16 +1032,28 @@ class ConfirmarV2Request(BaseModel):
 
 
 # ── /analizar-v2 ──────────────────────────────────────────────────────────────
+from fastapi import Form as FastAPIForm
+
 @app.post("/analizar-v2")
 async def analizar_v2(
     files: list[UploadFile] = File(...),
+    file_configs: Optional[str] = FastAPIForm(default=None),
     authorization: Optional[str] = Header(None),
 ):
     """
     V2: Matchea texto de PDFs contra material_denominaciones en Supabase.
+    file_configs: JSON array con {con_iva, descuento} por archivo (mismo orden que files).
     Devuelve 3 grupos por proveedor: automatico / dudoso / sin_match.
     """
     user = get_user_plan(authorization)
+
+    # Parsear config por archivo (override de IVA y descuento)
+    cfgs: list[dict] = []
+    if file_configs:
+        try:
+            cfgs = json.loads(file_configs)
+        except Exception:
+            cfgs = []
 
     denominaciones = _get_denominaciones()
     if not denominaciones:
@@ -1065,7 +1077,7 @@ async def analizar_v2(
     resultados = {}
     errores = []
 
-    for f in files:
+    for file_idx, f in enumerate(files):
         content = await f.read()
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
             tmp.write(content)
@@ -1077,13 +1089,26 @@ async def analizar_v2(
             items = resultado.get("items", [])
             automatico, dudoso, sin_match = [], [], []
 
+            # Config por archivo: override explícito del usuario, o default del config
+            cfg_archivo = cfgs[file_idx] if file_idx < len(cfgs) else {}
+            if cfg_archivo:
+                # El usuario especificó explícitamente IVA y descuento para este archivo
+                fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
+                desc_archivo = float(cfg_archivo.get("descuento", 0))
+                def precio_archivo(pu: float) -> float:
+                    return round(pu / fac_archivo * (1 - desc_archivo / 100), 2)
+            else:
+                # Usar la config del proveedor desde configuracion.json
+                def precio_archivo(pu: float) -> float:
+                    return precio_neto(pu, proveedor)
+
             for item in items:
                 desc = (item.get("desc") or "").strip()
                 pu   = float(item.get("pu") or 0)
                 if not desc or pu <= 0:
                     continue
 
-                precio = precio_neto(pu, proveedor)
+                precio = precio_archivo(pu)
                 cant   = float(item.get("cant") or 1)
 
                 matches = _match_v2(desc, denominaciones, top_n=3)
@@ -1143,6 +1168,10 @@ async def analizar_v2(
                 "iva_detectado":      resultado.get("iva_detectado"),
                 "metodo_extraccion":  resultado.get("metodo_extraccion", "desconocido"),
                 "n_items_extraidos":  resultado.get("n_items", 0),
+                "cfg_aplicada": {
+                    "con_iva":   cfg_archivo.get("con_iva", True) if cfg_archivo else (factor_iva(proveedor) != 1.0),
+                    "descuento": cfg_archivo.get("descuento", 0) if cfg_archivo else descuento_proveedor(proveedor),
+                },
             }
 
         except Exception as e:

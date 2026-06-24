@@ -106,23 +106,32 @@ function ScoreBadge({ score }: { score: number }) {
   return <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${color}`}>{score.toFixed(0)}%</span>;
 }
 
+// ── Config por archivo ────────────────────────────────────────────────────────
+type FileConfig = {
+  con_iva:      boolean;
+  descuento:    number;   // %
+};
+
+const CONFIG_DEFAULT: FileConfig = { con_iva: true, descuento: 0 };
+
 // ── Componente principal ──────────────────────────────────────────────────────
 export default function Comparar() {
-  const [files, setFiles]       = useState<File[]>([]);
-  const [dragging, setDragging] = useState(false);
-  const [loading, setLoading]   = useState(false);
-  const [resultado, setResultado] = useState<Resultado | null>(null);
-  const [error, setError]       = useState("");
-  const [tab, setTab]           = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
+  const [files, setFiles]             = useState<File[]>([]);
+  const [fileConfigs, setFileConfigs] = useState<FileConfig[]>([]);
+  const [dragging, setDragging]       = useState(false);
+  const [loading, setLoading]         = useState(false);
+  const [resultado, setResultado]     = useState<Resultado | null>(null);
+  const [error, setError]             = useState("");
+  const [tab, setTab]                 = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
   const [soloComunes, setSoloComunes] = useState(true);
   const [confirmando, setConfirmando] = useState(false);
   const [confirmado, setConfirmado]   = useState(false);
-  const [token, setToken]       = useState<string | null>(null);
+  const [token, setToken]             = useState<string | null>(null);
 
   // Estado editable de dudosos: usuario puede elegir alternativa
   const [dudososEditados, setDudososEditados] = useState<
-    Record<string, Record<number, string>>  // proveedor → idx → codigo_material elegido
+    Record<string, Record<number, string>>
   >({});
 
   const [generandoSheets, setGenerandoSheets] = useState(false);
@@ -140,16 +149,31 @@ export default function Comparar() {
     });
   }, []);
 
+  // ── Helpers de config por archivo ──────────────────────────────────────────
+  function setFileCfg(i: number, patch: Partial<FileConfig>) {
+    setFileConfigs((prev) => {
+      const next = [...prev];
+      next[i] = { ...next[i], ...patch };
+      return next;
+    });
+  }
+
   // ── Upload ─────────────────────────────────────────────────────────────────
+  function agregarFiles(nuevos: File[]) {
+    setFiles((prev) => [...prev, ...nuevos]);
+    setFileConfigs((prev) => [...prev, ...nuevos.map(() => ({ ...CONFIG_DEFAULT }))]);
+  }
+
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setDragging(false);
-    const nuevos = Array.from(e.dataTransfer.files).filter((f) => f.type === "application/pdf");
-    setFiles((prev) => [...prev, ...nuevos]);
-  }, []);
+    const nuevos = Array.from(e.dataTransfer.files);
+    agregarFiles(nuevos);
+  }, []);  // eslint-disable-line
 
   function removeFile(i: number) {
     setFiles((prev) => prev.filter((_, idx) => idx !== i));
+    setFileConfigs((prev) => prev.filter((_, idx) => idx !== i));
   }
 
   // ── Analizar ───────────────────────────────────────────────────────────────
@@ -162,6 +186,8 @@ export default function Comparar() {
 
     const form = new FormData();
     files.forEach((f) => form.append("files", f));
+    // Config por archivo: array JSON en el mismo orden que los files
+    form.append("file_configs", JSON.stringify(fileConfigs));
 
     try {
       const headers: Record<string, string> = {};
@@ -353,7 +379,7 @@ export default function Comparar() {
             >
               <input
                 id="file-input" type="file" accept="application/pdf,image/*,.tiff,.tif" multiple className="hidden"
-                onChange={(e) => setFiles((prev) => [...prev, ...Array.from(e.target.files || [])])}
+                onChange={(e) => agregarFiles(Array.from(e.target.files || []))}
               />
               <div className="text-4xl mb-4">📄</div>
               <p className="text-gray-600 font-medium">Arrastrá los PDFs acá o hacé click para seleccionar</p>
@@ -362,14 +388,51 @@ export default function Comparar() {
 
             {files.length > 0 && (
               <div className="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
-                {files.map((f, i) => (
-                  <div key={i} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
-                    <span className="text-gray-400">📄</span>
-                    <span className="flex-1 text-sm text-gray-700">{f.name}</span>
-                    <span className="text-xs text-gray-400">{(f.size / 1024).toFixed(0)} KB</span>
-                    <button onClick={() => removeFile(i)} className="text-gray-400 hover:text-red-500 text-lg">×</button>
+                {/* Header */}
+                <div className="grid grid-cols-[1fr_auto_auto_auto] gap-2 px-4 py-2 bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-400 uppercase tracking-wide">
+                  <span>Archivo</span>
+                  <span className="text-center w-24">Precio</span>
+                  <span className="text-center w-24">Descuento</span>
+                  <span className="w-6" />
+                </div>
+                {files.map((f, i) => {
+                  const cfg = fileConfigs[i] ?? CONFIG_DEFAULT;
+                  return (
+                  <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-2 items-center px-4 py-3 border-b border-gray-100 last:border-0">
+                    {/* Nombre + tamaño */}
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-gray-700 truncate">📄 {f.name}</div>
+                      <div className="text-xs text-gray-400">{(f.size / 1024).toFixed(0)} KB</div>
+                    </div>
+
+                    {/* Toggle Con/Sin IVA */}
+                    <div className="flex items-center gap-1 border border-gray-200 rounded-lg overflow-hidden text-xs w-24">
+                      <button
+                        onClick={() => setFileCfg(i, { con_iva: false })}
+                        className={`flex-1 py-1.5 transition ${!cfg.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                      >Sin IVA</button>
+                      <button
+                        onClick={() => setFileCfg(i, { con_iva: true })}
+                        className={`flex-1 py-1.5 transition ${cfg.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                      >C/IVA</button>
+                    </div>
+
+                    {/* Descuento % */}
+                    <div className="flex items-center gap-1 w-24">
+                      <input
+                        type="number" min="0" max="100" step="1"
+                        value={cfg.descuento || ""}
+                        onChange={(e) => setFileCfg(i, { descuento: Number(e.target.value) || 0 })}
+                        placeholder="0"
+                        className="w-12 border border-gray-300 rounded-lg px-1.5 py-1.5 text-xs text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      />
+                      <span className="text-xs text-gray-400">% desc.</span>
+                    </div>
+
+                    {/* Quitar */}
+                    <button onClick={() => removeFile(i)} className="text-gray-400 hover:text-red-500 text-lg w-6 text-center">×</button>
                   </div>
-                ))}
+                );})}
               </div>
             )}
 
