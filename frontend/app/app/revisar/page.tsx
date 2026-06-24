@@ -81,7 +81,10 @@ export default function Revisar() {
   return (
     <main className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-gray-900">VectorAI</Link>
+        <Link href="/" className="text-xl font-black text-gray-900 tracking-tight">
+          Vector<span className="text-blue-600">AI</span>
+          <span className="ml-1.5 text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
+        </Link>
         <Link href="/app/comparar" className="text-sm text-blue-600 hover:underline">← Volver a comparativas</Link>
       </nav>
 

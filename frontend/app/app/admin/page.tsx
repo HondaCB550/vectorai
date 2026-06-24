@@ -121,8 +121,12 @@ export default function AdminPage() {
     <main className="min-h-screen bg-gray-50">
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-gray-900">VectorAI</Link>
-        <div className="flex items-center gap-6">
+        <Link href="/" className="text-xl font-black text-gray-900 tracking-tight">
+          Vector<span className="text-blue-600">AI</span>
+          <span className="ml-1.5 text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
+        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
           <Link href="/app/comparar" className="text-sm text-gray-500 hover:text-gray-900">Comparar</Link>
           <span className="text-sm font-medium text-blue-600">Admin</span>
           <UserMenu />
