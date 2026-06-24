@@ -50,10 +50,64 @@ RE_PRECIO = re.compile(r"^[\d,]+\.\d{2}$|^[\d.]+,\d{2}$")
 # Artículo de PDF: "H ORMIGON" → "HORMIGON", "F IBRAKRETE" → "FIBRAKRETE"
 RE_SPLIT_WORD = re.compile(r'\b([A-Z]) ([A-Z]{3,})\b')
 
+# Código entre corchetes al inicio de descripción: "[BARBI9ZPBZD2T] FLEJE PARA..."
+RE_BRACKET_COD = re.compile(r'^\[([A-Z0-9\s]+)\]\s*(.+)$', re.DOTALL)
+
+# Sufijos de unidad después de un número: "9,00 Unidades" → "9,00"
+RE_UNIDAD_SUFIJO = re.compile(r'^([\d.,]+)\s+(?:Unidades?|Mts?\.?|Kg\.?|m2|m3|ml|gl|lts?\.?|un\.?|pz\.?)\s*$', re.I)
+
+# Notas de proveedor que no son ítems
+RE_NOTA_PROVEEDOR = re.compile(
+    r'producto bajo pedido|demora entre|solo para retiro|horario de retiro|'
+    r'condici[oó]n de pago|validez del presupuesto|cotizaci[oó]n sujeta|'
+    r'la responsabilidad|p[aá]gina\s*\d|aclaraciones',
+    re.I
+)
+
 
 def _fix_split_words(s: str) -> str:
     """Repara artefactos de PDF donde una letra queda separada del resto de la palabra."""
     return RE_SPLIT_WORD.sub(r'\1\2', s)
+
+
+def _limpiar_celda(s) -> str:
+    """Limpia una celda de tabla:
+    - Quita símbolos monetarios ($, pesos, etc.)
+    - Convierte "9,00 Unidades" → "9,00"
+    - Quita espacios y saltos de línea internos
+    """
+    if s is None:
+        return ""
+    s = str(s).strip()
+    # Quitar símbolo $ y espacios antes del número
+    s = re.sub(r'^\$\s*', '', s)
+    s = re.sub(r'^ARS\s*', '', s, flags=re.I)
+    # Limpiar saltos de línea internos (EN SECO tiene notas en segunda línea de la celda)
+    # Tomar solo la primera línea si hay salto
+    s = s.split('\n')[0].strip()
+    # Quitar sufijo de unidad: "9,00 Unidades" → "9,00"
+    m = RE_UNIDAD_SUFIJO.match(s)
+    if m:
+        s = m.group(1)
+    return s
+
+
+def _extraer_cod_desc(raw: str) -> tuple[str, str]:
+    """Extrae código entre corchetes y descripción de celdas como '[BARBI9Z] FLEJE...'"""
+    if not raw:
+        return "", ""
+    raw = raw.strip()
+    # Tomar solo la primera línea (ignorar notas de proveedor en líneas siguientes)
+    lineas = [l.strip() for l in raw.split('\n') if l.strip()]
+    # Filtrar líneas que son notas del proveedor
+    desc_lineas = [l for l in lineas if not RE_NOTA_PROVEEDOR.search(l)]
+    if not desc_lineas:
+        return "", ""
+    primera = desc_lineas[0]
+    m = RE_BRACKET_COD.match(primera)
+    if m:
+        return m.group(1).strip(), m.group(2).strip()
+    return "", primera
 
 
 def parse_num(s: str) -> float:
@@ -111,7 +165,8 @@ def _inferir_columnas(tabla: list[list]) -> dict | None:
     avg_valor = []  # valor numérico promedio (para distinguir precios de cantidades)
 
     for col in range(n_cols):
-        valores = [str(r[col]).strip() if col < len(r) and r[col] else "" for r in datos]
+        # _limpiar_celda antes de analizar (maneja "$", "Unidades", etc.)
+        valores = [_limpiar_celda(r[col]) if col < len(r) and r[col] else "" for r in datos]
         valores = [v for v in valores if v]
         if not valores:
             pct_num.append(0); avg_len.append(0); avg_valor.append(0)
@@ -178,17 +233,28 @@ def _parsear_tabla_generica(tabla: list[list]) -> list[dict]:
 
     items = []
     for row in tabla[1:]:  # skip header
-        def get(idx):
+        def get_raw(idx):
             if idx is None or idx >= len(row):
                 return None
             return str(row[idx]).strip() if row[idx] else None
 
-        desc = get(cols["desc"])
+        def get(idx):
+            return _limpiar_celda(get_raw(idx))
+
+        desc_raw = get_raw(cols["desc"])
+
+        # Saltar filas que son notas del proveedor
+        if desc_raw and RE_NOTA_PROVEEDOR.search(desc_raw):
+            continue
+
+        # Extraer código entre corchetes y descripción limpia
+        cod_bracket, desc_clean = _extraer_cod_desc(desc_raw or "")
+
         pu_raw = get(cols["pu"])
 
-        if not desc or not pu_raw or not _es_numero(pu_raw):
+        if not desc_clean or not pu_raw or not _es_numero(pu_raw):
             continue
-        if len(desc) < 3:
+        if len(desc_clean) < 3:
             continue
 
         try:
@@ -201,7 +267,9 @@ def _parsear_tabla_generica(tabla: list[list]) -> list[dict]:
 
         cant_raw = get(cols["cant"])
         total_raw = get(cols["total"])
-        cod_raw = get(cols["cod"])
+        # Código: preferir el del corchete, si no el de la columna dedicada
+        cod_col = get(cols["cod"]) if cols.get("cod") is not None else None
+        cod_final = cod_bracket or cod_col or ""
 
         try:
             cant = parse_num(cant_raw) if cant_raw and _es_numero(cant_raw) else 1.0
@@ -214,8 +282,8 @@ def _parsear_tabla_generica(tabla: list[list]) -> list[dict]:
             total = round(pu * cant, 2)
 
         items.append({
-            "cod":   cod_raw or "",
-            "desc":  _fix_split_words(desc),
+            "cod":   cod_final,
+            "desc":  _fix_split_words(desc_clean),
             "cant":  cant,
             "pu":    pu,
             "total": total,
