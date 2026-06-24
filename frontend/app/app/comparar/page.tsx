@@ -113,7 +113,7 @@ export default function Comparar() {
   const [error, setError]       = useState("");
   const [tab, setTab]           = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
-  const [soloComunes, setSoloComunes] = useState(false);
+  const [soloComunes, setSoloComunes] = useState(true);
   const [confirmando, setConfirmando] = useState(false);
   const [confirmado, setConfirmado]   = useState(false);
   const [token, setToken]       = useState<string | null>(null);
@@ -482,10 +482,10 @@ export default function Comparar() {
                     className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
                     {rubros.map((r) => <option key={r}>{r}</option>)}
                   </select>
-                  <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer" title="Mostrar solo ítems cotizados por más de un proveedor">
                     <input type="checkbox" checked={soloComunes} onChange={(e) => setSoloComunes(e.target.checked)}
                       className="w-4 h-4 text-blue-600 rounded" />
-                    Solo en común
+                    Solo comparables
                   </label>
                   <label className="flex items-center gap-2 text-sm text-amber-700 cursor-pointer">
                     <input type="checkbox" checked={soloDifGrande} onChange={(e) => setSoloDifGrande(e.target.checked)}

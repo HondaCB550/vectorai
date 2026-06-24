@@ -162,7 +162,11 @@ SINONIMOS: dict[str, str] = {
     "PEAD":                       "POLIETILENO",
     "UNION DOBLE":                "UNION",
     "NIPLE":                      "UNION",
+    "CUPLA":                      "UNION",   # cupla = unión en desagüe cloacal PVC
+    "ACOPLE":                     "UNION",
     "REDUCCIÓN":                  "REDUCCION",
+    "REDUCCION EXCENTRICA":       "REDUCCION",
+    "REDUCCION CONCENTRICA":      "REDUCCION",
 
     # ── Sanitaria – grifería / válvulas ───────────────────────────────────────
     "VALVULA DE ESFERA":          "VALVULA",
@@ -217,6 +221,36 @@ SINONIMOS: dict[str, str] = {
 
 # Orden de reemplazo: primero frases largas, luego palabras sueltas
 _SINONIMOS_ORDENADOS = sorted(SINONIMOS.items(), key=lambda x: -len(x[0]))
+
+
+# ── Grupos de marcas equivalentes ────────────────────────────────────────────
+# Si ambos lados (proveedor y maestro) tienen una marca del mismo grupo,
+# se trata como marca compatible aunque no sea idéntica (+5 puntos).
+# Útil para accesorios PVC donde Waduct/Duratop/Amanco son intercambiables.
+MARCAS_EQUIVALENTES: list[frozenset] = [
+    frozenset({"WADUCT", "DURATOP", "AMANCO", "TIGRE", "PLUSGAS", "LOTIX"}),   # PVC desagüe cloacal
+    frozenset({"AWADUCT", "ADURATOP"}),                                          # variantes con A-
+    frozenset({"BTICINO", "GEWISS", "TICINO"}),                                  # eléctrica modular
+    frozenset({"IRAM", "SICA"}),                                                 # cables eléctricos
+]
+
+def _marcas_en_texto(texto: str) -> set[str]:
+    """Devuelve todas las marcas de MARCAS_EQUIVALENTES presentes en texto (uppercase)."""
+    encontradas = set()
+    for grupo in MARCAS_EQUIVALENTES:
+        for m in grupo:
+            if m in texto:
+                encontradas.add(m)
+    return encontradas
+
+def _mismo_grupo_marca(texto_a: str, texto_b: str) -> bool:
+    """True si ambos textos comparten al menos una marca del mismo grupo equivalente."""
+    for grupo in MARCAS_EQUIVALENTES:
+        en_a = any(m in texto_a for m in grupo)
+        en_b = any(m in texto_b for m in grupo)
+        if en_a and en_b:
+            return True
+    return False
 
 
 KEYWORDS_CATEGORICAS = [
@@ -306,10 +340,12 @@ def score_match(prov_desc: str, mat: dict) -> float:
     if nums_p and nums_m:
         score += (len(nums_p & nums_m) / max(len(nums_p), 1)) * 20
 
-    # Marca textual
+    # Marca textual — exacta o del mismo grupo equivalente
     marca = (mat.get("marca") or "").upper()
     if marca and marca not in ("VARIOS", "") and marca in p:
         score += 8
+    elif _mismo_grupo_marca(p, m_text):
+        score += 5   # marca compatible (ej. Waduct ↔ Amanco, mismo producto distinta marca)
 
     # Keywords categóricas (sobre texto con sinónimos ya aplicados)
     for kw in KEYWORDS_CATEGORICAS:
