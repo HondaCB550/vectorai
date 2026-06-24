@@ -1140,7 +1140,9 @@ async def analizar_v2(
                         100 * len(automatico) / max(1, len(automatico) + len(dudoso) + len(sin_match)), 1
                     ),
                 },
-                "iva_detectado": resultado.get("iva_detectado"),
+                "iva_detectado":      resultado.get("iva_detectado"),
+                "metodo_extraccion":  resultado.get("metodo_extraccion", "desconocido"),
+                "n_items_extraidos":  resultado.get("n_items", 0),
             }
 
         except Exception as e:

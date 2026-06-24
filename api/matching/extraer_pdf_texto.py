@@ -225,13 +225,146 @@ def _parsear_tabla_generica(tabla: list[list]) -> list[dict]:
 
 
 def extraer_tablas(pdf_path: str) -> list[dict]:
-    """Método 1: extracción por tablas estructuradas (pdfplumber.extract_tables)."""
+    """Método 1: extracción por tablas con bordes explícitos (pdfplumber default)."""
     items = []
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             for tabla in (page.extract_tables() or []):
                 found = _parsear_tabla_generica(tabla)
                 items.extend(found)
+    return items
+
+
+def extraer_tablas_texto(pdf_path: str) -> list[dict]:
+    """Método 1b: tablas detectadas por alineación de texto (sin bordes explícitos).
+
+    Cubre PDFs exportados desde Excel, ERP o software que no dibuja cuadrículas.
+    Típico en Molber, JMA Perfiles, Maderera Lobos, etc.
+    """
+    items = []
+    settings = {
+        "vertical_strategy":   "text",
+        "horizontal_strategy": "text",
+        "snap_tolerance":       3,
+        "join_tolerance":       3,
+        "min_words_vertical":   3,
+        "min_words_horizontal": 1,
+        "intersection_tolerance": 3,
+    }
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            try:
+                tablas = page.extract_tables(settings) or []
+                for tabla in tablas:
+                    found = _parsear_tabla_generica(tabla)
+                    items.extend(found)
+            except Exception:
+                continue
+    return items
+
+
+# Precio al final de línea: "12.345,67" o "12,345.67" o "1234.67" o "1234,67"
+RE_PRECIO_EOL = re.compile(
+    r'(?:(?:\d{1,3}[.]\d{3})+[,]\d{2}|'   # europeo con miles: 12.345,67
+    r'(?:\d{1,3}[,]\d{3})+[.]\d{2}|'       # americano con miles: 12,345.67
+    r'\d+[.]\d{2}|'                          # solo punto decimal: 1234.67
+    r'\d+[,]\d{2})$'                         # solo coma decimal: 1234,67
+)
+
+# Token numérico genérico (cantidad, código numérico, etc.)
+RE_NUM_TOKEN = re.compile(r'^\d[\d.,]*\d$|^\d+$')
+
+
+def _parsear_linea_libre(line: str) -> dict | None:
+    """Intenta extraer un ítem de una línea de texto libre.
+
+    Lógica: los últimos tokens de la línea que sean numéricos son precio/cantidad/total.
+    Todo lo anterior es la descripción.
+    Mínimo: descripción de 4+ chars + 1 precio > 10.
+    """
+    tokens = line.strip().split()
+    if len(tokens) < 2:
+        return None
+
+    # Recolectar tokens numéricos del final hacia atrás
+    trailing = []
+    i = len(tokens) - 1
+    while i >= 0 and RE_NUM_TOKEN.match(tokens[i]):
+        try:
+            v = parse_num(tokens[i])
+            trailing.insert(0, v)
+            i -= 1
+        except (ValueError, AttributeError):
+            break
+
+    if not trailing:
+        return None
+
+    # Al menos un valor > 10 (descarta líneas que solo tienen cantidades pequeñas)
+    if max(trailing) < 10:
+        return None
+
+    # Descripción: tokens antes del grupo numérico trailing
+    desc_tokens = tokens[:i + 1]
+    if not desc_tokens:
+        return None
+    desc = " ".join(desc_tokens)
+    # Filtrar líneas muy cortas o que son solo números/códigos
+    if len(desc) < 4 or re.fullmatch(r'[\d\-/\.]+', desc):
+        return None
+    # Descartar si la descripción es solo una letra o número de ítem
+    if len(desc_tokens) == 1 and len(desc) <= 3:
+        return None
+
+    # Asignar cant / pu / total según cuántos trailing numbers hay
+    if len(trailing) == 1:
+        pu   = trailing[0]
+        cant = 1.0
+    elif len(trailing) == 2:
+        # Dos valores: si el primero parece cantidad (< 500, entero o medio entero), es cant
+        a, b = trailing
+        if a < 500 and (a == int(a) or a % 0.5 == 0) and b > a:
+            cant, pu = a, b
+        else:
+            cant, pu = 1.0, max(a, b)  # tomar el mayor como precio
+    else:
+        # Tres o más: primer pequeño = cant, el del medio = pu, último = total
+        a, b, c = trailing[0], trailing[1], trailing[-1]
+        if a < 500 and (a == int(a) or a % 0.5 == 0):
+            cant, pu = a, b
+        else:
+            cant, pu = 1.0, b
+
+    if pu <= 0:
+        return None
+
+    return {
+        "cod":   "",
+        "desc":  _fix_split_words(desc),
+        "cant":  cant,
+        "pu":    pu,
+        "total": round(pu * cant, 2),
+    }
+
+
+def extraer_lineas(texto: str) -> list[dict]:
+    """Método 3: heurístico línea por línea para PDFs sin estructura tabular.
+
+    Solo acepta líneas cuyo último token sea un precio bien formateado (RE_PRECIO_EOL),
+    para evitar falsos positivos de líneas de texto normal con algún número.
+    """
+    items = []
+    for line in texto.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        # El último token debe tener formato de precio (con coma o punto decimal)
+        last_token = line.split()[-1]
+        if not RE_PRECIO_EOL.match(last_token):
+            continue
+        parsed = _parsear_linea_libre(line)
+        if parsed:
+            items.append(parsed)
     return items
 
 
@@ -292,16 +425,28 @@ def extraer(pdf_path: str) -> dict:
             except ValueError:
                 pass
 
-    # Método 1: tablas estructuradas (genérico, funciona para cualquier proveedor)
+    # Método 1: tablas con bordes explícitos
     items = extraer_tablas(pdf_path)
     if items:
-        metodo = "tablas"
+        metodo = "tablas_bordes"
 
-    # Método 2: regex proveedores conocidos (fallback)
+    # Método 1b: tablas por alineación de texto (PDFs sin bordes: Excel, ERP, etc.)
+    if not items:
+        items = extraer_tablas_texto(pdf_path)
+        if items:
+            metodo = "tablas_texto"
+
+    # Método 2: regex proveedores conocidos (Baukraft, Carosio, Sauce)
     if not items and all_text.strip():
         items = extraer_regex(all_text)
         if items:
             metodo = "regex"
+
+    # Método 3: heurístico línea por línea (último recurso para texto plano)
+    if not items and all_text.strip():
+        items = extraer_lineas(all_text)
+        if items:
+            metodo = "lineas_heuristico"
 
     # Detectar IVA comparando suma de líneas vs total declarado en el PDF
     suma = sum(it["total"] for it in items)
