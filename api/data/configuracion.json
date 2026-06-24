@@ -131,6 +131,15 @@
       "notas": "Steel frame. Cotiza SIN IVA en columna 'PRECIO C/DESCUENTO'. factor_iva=1.000: no dividir. Descuentos variables por rubro (15-40%) ya aplicados en el precio cotizado. Precio neto = columna PRECIO C/DESCUENTO directo."
     },
     {
+      "nombre_canonico": "EN SECO",
+      "columna_destino": "",
+      "columna_destino_num": 0,
+      "factor_iva_default": 1.105,
+      "alias_archivo": ["en seco", "enseco", "EN SECO", "grupo mmc", "mmc"],
+      "rubros_predominantes": ["PERFILES", "AISLACIONES", "PLACAS", "TORNILLOS", "ACCESORIO ESTRUCTURA"],
+      "notas": "Proveedor steel frame / construcción en seco. GRUPO MMC (enseco.com.ar). IVA Responsable Inscripto — precios CON IVA incluido. factor_iva=1.105. Códigos de producto entre corchetes [BARBI...] en la descripción. Formato europeo de números (punto miles, coma decimal)."
+    },
+    {
       "nombre_canonico": "PINT. ALVEAR",
       "columna_destino": "AA",
       "columna_destino_num": 27,
