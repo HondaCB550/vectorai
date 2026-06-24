@@ -1089,18 +1089,13 @@ async def analizar_v2(
             items = resultado.get("items", [])
             automatico, dudoso, sin_match = [], [], []
 
-            # Config por archivo: override explícito del usuario, o default del config
-            cfg_archivo = cfgs[file_idx] if file_idx < len(cfgs) else {}
-            if cfg_archivo:
-                # El usuario especificó explícitamente IVA y descuento para este archivo
-                fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
-                desc_archivo = float(cfg_archivo.get("descuento", 0))
-                def precio_archivo(pu: float) -> float:
-                    return round(pu / fac_archivo * (1 - desc_archivo / 100), 2)
-            else:
-                # Usar la config del proveedor desde configuracion.json
-                def precio_archivo(pu: float) -> float:
-                    return precio_neto(pu, proveedor)
+            # Config por archivo: siempre la que el usuario eligió al subir.
+            # IVA y descuento son condiciones de cada operación, no del proveedor.
+            cfg_archivo  = cfgs[file_idx] if file_idx < len(cfgs) else {}
+            fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
+            desc_archivo = float(cfg_archivo.get("descuento", 0))
+            def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
+                return round(pu / _fac * (1 - _desc / 100), 2)
 
             for item in items:
                 desc = (item.get("desc") or "").strip()
