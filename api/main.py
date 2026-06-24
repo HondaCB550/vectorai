@@ -216,6 +216,9 @@ def _incrementar_uso(user_id: str, usos_actuales: int):
 # ── App FastAPI ───────────────────────────────────────────────────────────────
 app = FastAPI(title="VectorAI API", version="0.1.0")
 
+from whatsapp import router as whatsapp_router
+app.include_router(whatsapp_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "https://vectorai.com.ar", "https://www.vectorai.com.ar"],
@@ -846,16 +849,73 @@ async def mp_webhook(request: Request):
     return {"ok": True}
 
 
-# ── V2: Cache de denominaciones ───────────────────────────────────────────────
+# ── V2: Cache de denominaciones + sinónimos + grupos de marcas ────────────────
 import time
 from rapidfuzz import fuzz, process as fuzz_process
+from matching import normalize, aplicar_sinonimos, SINONIMOS, MARCAS_EQUIVALENTES
 
 _den_cache: list[dict] | None = None
 _den_cache_ts: float = 0
 _DEN_TTL = 300  # 5 minutos
 
+# Cache de sinónimos y grupos de marcas cargados desde Supabase
+_sin_extra: dict[str, str] = {}          # original → canonico (desde BD, extra al código)
+_grupos_extra: list[frozenset] = []      # grupos de marcas equivalentes (desde BD)
+_knowledge_cache_ts: float = 0
+
+
+def _prep_v2(s: str) -> str:
+    """Normaliza + aplica sinónimos → lowercase. Usado en ambos lados del match."""
+    return aplicar_sinonimos(normalize(s)).lower()
+
+
+def _load_knowledge_cache():
+    """Carga sinonimos y grupos_marcas desde Supabase (TTL compartido con denominaciones)."""
+    global _sin_extra, _grupos_extra, _knowledge_cache_ts
+    ahora = time.time()
+    if (ahora - _knowledge_cache_ts) < _DEN_TTL:
+        return
+
+    sb = get_supabase()
+    if not sb:
+        return
+
+    # Sinónimos adicionales desde BD (complementan los hardcodeados en matching.py)
+    try:
+        res = sb.table("sinonimos").select("original,canonico").eq("activo", True).execute()
+        _sin_extra = {r["original"]: r["canonico"] for r in (res.data or [])}
+    except Exception as e:
+        print(f"[v2] Error cargando sinonimos: {e}")
+
+    # Grupos de marcas equivalentes desde BD
+    try:
+        res = sb.table("grupos_marcas").select("marca,grupo").eq("activo", True).execute()
+        grupos: dict[str, set] = {}
+        for r in (res.data or []):
+            grupos.setdefault(r["grupo"], set()).add(r["marca"].upper())
+        _grupos_extra = [frozenset(v) for v in grupos.values()]
+    except Exception as e:
+        print(f"[v2] Error cargando grupos_marcas: {e}")
+
+    _knowledge_cache_ts = ahora
+    print(f"[v2] Knowledge cache: {len(_sin_extra)} sinónimos BD, {len(_grupos_extra)} grupos marcas")
+
+
+def _mismo_grupo_v2(texto_a: str, texto_b: str) -> bool:
+    """True si ambos textos comparten al menos una marca del mismo grupo (BD + hardcoded)."""
+    todos_grupos = list(MARCAS_EQUIVALENTES) + _grupos_extra
+    for grupo in todos_grupos:
+        en_a = any(m in texto_a.upper() for m in grupo)
+        en_b = any(m in texto_b.upper() for m in grupo)
+        if en_a and en_b:
+            return True
+    return False
+
+
 def _get_denominaciones() -> list[dict]:
-    """Carga material_denominaciones desde Supabase con cache de 5 min."""
+    """Carga material_denominaciones desde Supabase con cache de 5 min.
+    Agrega campo 'denominacion_norm' (sinónimos aplicados) para matching mejorado.
+    """
     global _den_cache, _den_cache_ts
     ahora = time.time()
     if _den_cache is not None and (ahora - _den_cache_ts) < _DEN_TTL:
@@ -865,8 +925,10 @@ def _get_denominaciones() -> list[dict]:
     if not sb:
         return _den_cache or []
 
+    # Cargar sinónimos/grupos antes de armar el índice
+    _load_knowledge_cache()
+
     try:
-        # Cargar en páginas de 1000 (Supabase limita por defecto)
         todas = []
         page = 0
         PAGE = 1000
@@ -881,9 +943,13 @@ def _get_denominaciones() -> list[dict]:
                 break
             page += 1
 
+        # Pre-computar forma normalizada (sinónimos aplicados) para cada alias
+        for d in todas:
+            d["denominacion_norm"] = _prep_v2(d["denominacion"])
+
         _den_cache = todas
         _den_cache_ts = ahora
-        print(f"[v2] Cache denominaciones: {len(todas)} aliases cargados")
+        print(f"[v2] Cache denominaciones: {len(todas)} aliases cargados (con normalización)")
         return todas
     except Exception as e:
         print(f"[v2] Error cargando denominaciones: {e}")
@@ -891,32 +957,40 @@ def _get_denominaciones() -> list[dict]:
 
 
 def _invalidar_cache_den():
-    global _den_cache_ts
+    global _den_cache_ts, _knowledge_cache_ts
     _den_cache_ts = 0
+    _knowledge_cache_ts = 0
 
 
 def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[dict]:
     """
-    Fuzzy match de texto contra lista de denominaciones.
+    Fuzzy match con sinónimos aplicados en ambos lados + bonus por grupo de marca.
     Retorna hasta top_n resultados con nivel: automatico / dudoso / sin_match.
     """
-    texto_norm = texto.strip().lower()
-    if not texto_norm or not denominaciones:
+    if not texto or not denominaciones:
         return []
 
-    textos = [d["denominacion"] for d in denominaciones]
+    texto_prep = _prep_v2(texto)   # normalizar + sinónimos → lowercase
+    if not texto_prep:
+        return []
+
+    # Usar denominacion_norm (pre-normalizada) si existe, si no la raw
+    textos_norm = [d.get("denominacion_norm") or d["denominacion"] for d in denominaciones]
 
     resultados = fuzz_process.extract(
-        texto_norm,
-        textos,
+        texto_prep,
+        textos_norm,
         scorer=fuzz.token_set_ratio,
-        limit=top_n,
-        score_cutoff=50,
+        limit=top_n * 3,   # pedir más candidatos para aplicar el bonus de marca
+        score_cutoff=48,
     )
 
     salida = []
     for texto_match, score, idx in resultados:
         den = denominaciones[idx]
+        # Bonus si comparten marca del mismo grupo equivalente
+        if _mismo_grupo_v2(texto, den["denominacion"]):
+            score = min(100, score + 6)
         if score >= 85:
             nivel = "automatico"
         elif score >= 60:
@@ -924,14 +998,16 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
         else:
             nivel = "sin_match"
         salida.append({
-            "codigo_material":      den["codigo_material"],
-            "denominacion_matcheada": texto_match,
-            "score":                round(score, 1),
-            "nivel":                nivel,
-            "confianza_alias":      den.get("confianza", 80),
+            "codigo_material":        den["codigo_material"],
+            "denominacion_matcheada": den["denominacion"],   # mostrar la original, no la norm
+            "score":                  round(score, 1),
+            "nivel":                  nivel,
+            "confianza_alias":        den.get("confianza", 80),
         })
 
-    return salida
+    # Ordenar por score desc y devolver top_n
+    salida.sort(key=lambda x: -x["score"])
+    return salida[:top_n]
 
 
 # ── Modelos V2 ────────────────────────────────────────────────────────────────
@@ -1359,9 +1435,100 @@ async def admin_validar_pendiente(
     raise HTTPException(status_code=400, detail={"error": "accion inválida"})
 
 
+# ── Admin: sinónimos ──────────────────────────────────────────────────────────
+@app.get("/admin/sinonimos")
+async def admin_listar_sinonimos(authorization: Optional[str] = Header(None)):
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    res = sb.table("sinonimos").select("*").order("categoria").order("original").execute()
+    return {"sinonimos": res.data or [], "total": len(res.data or [])}
+
+
+class SinonimoRequest(BaseModel):
+    original:  str
+    canonico:  str
+    categoria: Optional[str] = None
+    notas:     Optional[str] = None
+    activo:    bool = True
+
+@app.post("/admin/sinonimos")
+async def admin_upsert_sinonimo(
+    req: SinonimoRequest,
+    authorization: Optional[str] = Header(None),
+):
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    sb.table("sinonimos").upsert({
+        "original":  req.original.upper().strip(),
+        "canonico":  req.canonico.upper().strip(),
+        "categoria": req.categoria,
+        "notas":     req.notas,
+        "activo":    req.activo,
+        "updated_at": datetime.now().isoformat(),
+    }, on_conflict="original").execute()
+    _invalidar_cache_den()
+    return {"ok": True, "original": req.original.upper(), "canonico": req.canonico.upper()}
+
+
+# ── Admin: grupos de marcas ────────────────────────────────────────────────────
+@app.get("/admin/grupos-marcas")
+async def admin_listar_grupos_marcas(authorization: Optional[str] = Header(None)):
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    res = sb.table("grupos_marcas").select("*").order("categoria").order("grupo").execute()
+    return {"grupos": res.data or [], "total": len(res.data or [])}
+
+
+class GrupoMarcaRequest(BaseModel):
+    marca:    str
+    grupo:    str
+    categoria: Optional[str] = None
+    notas:    Optional[str] = None
+    activo:   bool = True
+
+@app.post("/admin/grupos-marcas")
+async def admin_upsert_grupo_marca(
+    req: GrupoMarcaRequest,
+    authorization: Optional[str] = Header(None),
+):
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    sb.table("grupos_marcas").upsert({
+        "marca":     req.marca.upper().strip(),
+        "grupo":     req.grupo.strip(),
+        "categoria": req.categoria,
+        "notas":     req.notas,
+        "activo":    req.activo,
+    }, on_conflict="marca").execute()
+    _invalidar_cache_den()
+    return {"ok": True, "marca": req.marca.upper(), "grupo": req.grupo}
+
+
 # ── Health ─────────────────────────────────────────────────────────────────────
 @app.get("/health")
 def health():
     master = get_master()
     den = _get_denominaciones()
-    return {"status": "ok", "master_items": len(master), "aliases_v2": len(den)}
+    return {
+        "status": "ok",
+        "master_items": len(master),
+        "aliases_v2": len(den),
+        "sinonimos_bd": len(_sin_extra),
+        "grupos_marcas_bd": len(_grupos_extra),
+    }
