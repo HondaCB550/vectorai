@@ -472,6 +472,27 @@ def extraer_regex(texto: str) -> list[dict]:
     return items
 
 
+# ── Calidad de extracción (para elegir entre métodos) ─────────────────────────
+
+def _desc_es_codigo(desc: str) -> bool:
+    """True si la 'descripción' parece en realidad un código de proveedor.
+
+    Un código (ej. '023-0005-30', '002-0009-CI-ACA') no tiene ninguna palabra
+    alfabética de 4+ letras. Una descripción real casi siempre tiene una
+    (TUBO, CHAPA, ARENA, HIERRO, CEMENTO, MALLA, etc.).
+    """
+    d = (desc or "").strip()
+    if not d:
+        return True
+    return not re.search(r"[A-Za-zÁÉÍÓÚÑáéíóúñ]{4,}", d)
+
+
+def _calidad(items: list[dict]) -> int:
+    """Cantidad de ítems con descripción real (no un código). Sirve para elegir
+    el método de extracción que mejor entendió la tabla."""
+    return sum(1 for it in items if not _desc_es_codigo(it.get("desc", "")))
+
+
 # ── Función principal ──────────────────────────────────────────────────────────
 
 def extraer(pdf_path: str) -> dict:
@@ -493,22 +514,30 @@ def extraer(pdf_path: str) -> dict:
             except ValueError:
                 pass
 
-    # Método 1: tablas con bordes explícitos
-    items = extraer_tablas(pdf_path)
-    if items:
-        metodo = "tablas_bordes"
+    # Métodos 1 / 1b / 2: se evalúan los tres y se elige el de MEJOR CALIDAD
+    # (más descripciones reales, no códigos). Antes ganaba el primero no vacío,
+    # pero tablas_texto a veces parte la descripción en columnas y termina
+    # tomando el código como descripción (rompía el formato Sauce y similares);
+    # elegir por calidad hace que en ese caso gane el regex, que parsea bien.
+    # En empate de (calidad, n_items) gana el método más prioritario por el
+    # orden en que se agregan a la lista (bordes > texto > regex).
+    candidatos: list[tuple[str, list[dict]]] = []
 
-    # Método 1b: tablas por alineación de texto (PDFs sin bordes: Excel, ERP, etc.)
-    if not items:
-        items = extraer_tablas_texto(pdf_path)
-        if items:
-            metodo = "tablas_texto"
+    items_bordes = extraer_tablas(pdf_path)
+    if items_bordes:
+        candidatos.append(("tablas_bordes", items_bordes))
 
-    # Método 2: regex proveedores conocidos (Baukraft, Carosio, Sauce)
-    if not items and all_text.strip():
-        items = extraer_regex(all_text)
-        if items:
-            metodo = "regex"
+    items_texto = extraer_tablas_texto(pdf_path)
+    if items_texto:
+        candidatos.append(("tablas_texto", items_texto))
+
+    if all_text.strip():
+        items_regex = extraer_regex(all_text)
+        if items_regex:
+            candidatos.append(("regex", items_regex))
+
+    if candidatos:
+        metodo, items = max(candidatos, key=lambda c: (_calidad(c[1]), len(c[1])))
 
     # Método 3: heurístico línea por línea (último recurso para texto plano)
     if not items and all_text.strip():
