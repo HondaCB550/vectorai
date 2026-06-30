@@ -488,9 +488,25 @@ def _desc_es_codigo(desc: str) -> bool:
 
 
 def _calidad(items: list[dict]) -> int:
-    """Cantidad de ítems con descripción real (no un código). Sirve para elegir
-    el método de extracción que mejor entendió la tabla."""
-    return sum(1 for it in items if not _desc_es_codigo(it.get("desc", "")))
+    """Puntaje de calidad de una extracción, para elegir el método que mejor
+    entendió la tabla. Premia dos señales independientes por ítem:
+
+      1. Descripción real (no un código de proveedor).
+      2. Precios consistentes: pu * cant ≈ total. Esto detecta cuando el parser
+         confundió la columna de importe con la de precio unitario (un bug típico
+         de _inferir_columnas, que toma como 'unitario' la columna de mayor valor
+         = el importe). El regex por proveedor parsea bien y queda consistente.
+    """
+    puntaje = 0
+    for it in items:
+        if not _desc_es_codigo(it.get("desc", "")):
+            puntaje += 1
+        pu    = it.get("pu") or 0
+        cant  = it.get("cant") or 0
+        total = it.get("total") or 0
+        if pu > 0 and cant > 0 and total > 0 and abs(pu * cant - total) <= max(1.0, 0.01 * total):
+            puntaje += 1
+    return puntaje
 
 
 # ── Función principal ──────────────────────────────────────────────────────────
