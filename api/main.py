@@ -1077,6 +1077,20 @@ async def analizar_v2(
     resultados = {}
     errores = []
 
+    # Resolver un nombre de proveedor por bloque: todos los archivos de un mismo
+    # bloque son el mismo proveedor. Si el usuario no lo nombró, se auto-detecta
+    # desde el primer archivo del bloque. Sin 'bloque' (frontend viejo) cada
+    # archivo es su propio grupo (file_idx) → 1 PDF = 1 proveedor.
+    nombre_por_bloque: dict = {}
+    for idx, f in enumerate(files):
+        cfg = cfgs[idx] if idx < len(cfgs) else {}
+        clave = cfg.get("bloque", idx)
+        if clave not in nombre_por_bloque:
+            nombre = (cfg.get("nombre_proveedor") or "").strip()
+            if not nombre:
+                nombre = detectar_proveedor(f.filename or "") or Path(f.filename or "archivo").stem.upper()
+            nombre_por_bloque[clave] = nombre
+
     for file_idx, f in enumerate(files):
         content = await f.read()
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
@@ -1084,14 +1098,15 @@ async def analizar_v2(
             tmp_path = tmp.name
 
         try:
-            proveedor = detectar_proveedor(f.filename or "") or Path(f.filename or "archivo").stem.upper()
+            cfg_archivo  = cfgs[file_idx] if file_idx < len(cfgs) else {}
+            proveedor = nombre_por_bloque[cfg_archivo.get("bloque", file_idx)]
+
             resultado = extraer(tmp_path)
             items = resultado.get("items", [])
             automatico, dudoso, sin_match = [], [], []
 
             # Config por archivo: siempre la que el usuario eligió al subir.
             # IVA y descuento son condiciones de cada operación, no del proveedor.
-            cfg_archivo  = cfgs[file_idx] if file_idx < len(cfgs) else {}
             fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
             desc_archivo = float(cfg_archivo.get("descuento", 0))
             def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
@@ -1147,27 +1162,44 @@ async def analizar_v2(
                 else:
                     dudoso.append(entry)
 
-            resultados[proveedor] = {
-                "automatico": automatico,
-                "dudoso":     dudoso,
-                "sin_match":  sin_match,
-                "stats": {
-                    "total":          len(automatico) + len(dudoso) + len(sin_match),
-                    "automatico":     len(automatico),
-                    "dudoso":         len(dudoso),
-                    "sin_match":      len(sin_match),
-                    "pct_automatico": round(
-                        100 * len(automatico) / max(1, len(automatico) + len(dudoso) + len(sin_match)), 1
-                    ),
-                },
-                "iva_detectado":      resultado.get("iva_detectado"),
-                "metodo_extraccion":  resultado.get("metodo_extraccion", "desconocido"),
-                "n_items_extraidos":  resultado.get("n_items", 0),
-                "cfg_aplicada": {
-                    "con_iva":   cfg_archivo.get("con_iva", True) if cfg_archivo else (factor_iva(proveedor) != 1.0),
-                    "descuento": cfg_archivo.get("descuento", 0) if cfg_archivo else descuento_proveedor(proveedor),
-                },
-            }
+            # Guardar precios automáticos (alta confianza) en histórico sin esperar confirmación.
+            # Los dudosos y sin_match se guardan solo cuando el usuario confirma.
+            if sb and automatico:
+                try:
+                    sb.table("precios_historicos").insert([
+                        {
+                            "proveedor":       proveedor,
+                            "codigo_material":  item["codigo_material"],
+                            "unidad":          "UN",
+                            "precio":          item["precio_sin_iva"],
+                            "cantidad":        int(item.get("cant", 1)),
+                            "user_id":         user["user_id"] if user["user_id"] != "anonimo" else None,
+                        }
+                        for item in automatico
+                    ]).execute()
+                except Exception as e:
+                    print(f"[v2] Error guardando precios_historicos para {proveedor}: {e}")
+
+            # Fusionar con lo ya acumulado del proveedor: un bloque puede tener
+            # varios PDFs, y antes esto pisaba el resultado del archivo anterior.
+            acc = resultados.get(proveedor)
+            if acc is None:
+                acc = {
+                    "automatico": [], "dudoso": [], "sin_match": [],
+                    "iva_detectado":     resultado.get("iva_detectado"),
+                    "metodo_extraccion": resultado.get("metodo_extraccion", "desconocido"),
+                    "n_items_extraidos": 0,
+                    "cfg_aplicada": {
+                        "con_iva":   cfg_archivo.get("con_iva", True) if cfg_archivo else (factor_iva(proveedor) != 1.0),
+                        "descuento": cfg_archivo.get("descuento", 0) if cfg_archivo else descuento_proveedor(proveedor),
+                    },
+                }
+                resultados[proveedor] = acc
+
+            acc["automatico"].extend(automatico)
+            acc["dudoso"].extend(dudoso)
+            acc["sin_match"].extend(sin_match)
+            acc["n_items_extraidos"] += resultado.get("n_items", 0)
 
         except Exception as e:
             errores.append({"archivo": f.filename, "error": str(e)})
@@ -1179,6 +1211,18 @@ async def analizar_v2(
 
     if not resultados:
         raise HTTPException(status_code=422, detail={"error": "sin_resultados", "errores": errores})
+
+    # Recalcular stats por proveedor sobre las listas ya fusionadas
+    for data in resultados.values():
+        n_auto, n_dud, n_sin = len(data["automatico"]), len(data["dudoso"]), len(data["sin_match"])
+        total = n_auto + n_dud + n_sin
+        data["stats"] = {
+            "total":          total,
+            "automatico":     n_auto,
+            "dudoso":         n_dud,
+            "sin_match":      n_sin,
+            "pct_automatico": round(100 * n_auto / max(1, total), 1),
+        }
 
     # Construir tabla pivot comparativa (igual que v1 pero con estructura v2)
     comparativo = _build_comparativo_v2(resultados, materiales_dict)

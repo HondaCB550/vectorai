@@ -106,19 +106,22 @@ function ScoreBadge({ score }: { score: number }) {
   return <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${color}`}>{score.toFixed(0)}%</span>;
 }
 
-// ── Config por archivo ────────────────────────────────────────────────────────
-type FileConfig = {
-  con_iva:      boolean;
-  descuento:    number;   // %
+// ── Bloque de proveedor ───────────────────────────────────────────────────────
+type BloqueProveedor = {
+  nombre:    string;
+  con_iva:   boolean;
+  descuento: number;
+  files:     File[];
 };
 
-const CONFIG_DEFAULT: FileConfig = { con_iva: true, descuento: 0 };
+function bloqueVacio(): BloqueProveedor {
+  return { nombre: "", con_iva: true, descuento: 0, files: [] };
+}
 
 // ── Componente principal ──────────────────────────────────────────────────────
 export default function Comparar() {
-  const [files, setFiles]             = useState<File[]>([]);
-  const [fileConfigs, setFileConfigs] = useState<FileConfig[]>([]);
-  const [dragging, setDragging]       = useState(false);
+  const [bloques, setBloques]         = useState<BloqueProveedor[]>([bloqueVacio()]);
+  const [dragging, setDragging]       = useState<number | null>(null);  // índice del bloque activo
   const [loading, setLoading]         = useState(false);
   const [resultado, setResultado]     = useState<Resultado | null>(null);
   const [error, setError]             = useState("");
@@ -149,44 +152,67 @@ export default function Comparar() {
     });
   }, []);
 
-  // ── Helpers de config por archivo ──────────────────────────────────────────
-  function setFileCfg(i: number, patch: Partial<FileConfig>) {
-    setFileConfigs((prev) => {
-      const next = [...prev];
-      next[i] = { ...next[i], ...patch };
-      return next;
-    });
+  // ── Helpers de bloques ─────────────────────────────────────────────────────
+  function addBloque() {
+    setBloques((prev) => [...prev, bloqueVacio()]);
   }
 
-  // ── Upload ─────────────────────────────────────────────────────────────────
-  function agregarFiles(nuevos: File[]) {
-    setFiles((prev) => [...prev, ...nuevos]);
-    setFileConfigs((prev) => [...prev, ...nuevos.map(() => ({ ...CONFIG_DEFAULT }))]);
+  function removeBloque(bi: number) {
+    setBloques((prev) => prev.length === 1 ? [bloqueVacio()] : prev.filter((_, i) => i !== bi));
   }
 
-  const onDrop = useCallback((e: React.DragEvent) => {
+  function updateBloque(bi: number, patch: Partial<Omit<BloqueProveedor, "files">>) {
+    setBloques((prev) => prev.map((b, i) => i === bi ? { ...b, ...patch } : b));
+  }
+
+  function addFilesToBloque(bi: number, nuevos: File[]) {
+    setBloques((prev) => prev.map((b, i) => i === bi ? { ...b, files: [...b.files, ...nuevos] } : b));
+  }
+
+  function removeFileFromBloque(bi: number, fi: number) {
+    setBloques((prev) => prev.map((b, i) => i === bi ? { ...b, files: b.files.filter((_, j) => j !== fi) } : b));
+  }
+
+  // Drop global: cada archivo arrastrado = un proveedor nuevo (1 PDF = 1 proveedor).
+  // Para agrupar varios PDFs en un mismo proveedor, usar "Agregar PDF" dentro del bloque.
+  const onDropGlobal = useCallback((e: React.DragEvent) => {
     e.preventDefault();
-    setDragging(false);
+    setDragging(null);
     const nuevos = Array.from(e.dataTransfer.files);
-    agregarFiles(nuevos);
-  }, []);  // eslint-disable-line
-
-  function removeFile(i: number) {
-    setFiles((prev) => prev.filter((_, idx) => idx !== i));
-    setFileConfigs((prev) => prev.filter((_, idx) => idx !== i));
-  }
+    if (!nuevos.length) return;
+    setBloques((prev) => {
+      const usados = prev.filter((b) => b.files.length > 0 || b.nombre.trim());
+      const nuevosBloques = nuevos.map((f) => ({ ...bloqueVacio(), files: [f] }));
+      return [...usados, ...nuevosBloques];
+    });
+  }, []);
 
   // ── Analizar ───────────────────────────────────────────────────────────────
   async function analizar() {
-    if (!files.length) return;
+    const hayFiles = bloques.some((b) => b.files.length > 0);
+    if (!hayFiles) return;
     setLoading(true);
     setError("");
     setResultado(null);
     setConfirmado(false);
 
     const form = new FormData();
-    files.forEach((f) => form.append("files", f));
-    // Config por archivo: array JSON en el mismo orden que los files
+    const fileConfigs: object[] = [];
+
+    // Flatten: por cada bloque, por cada file → agrega al form en el mismo orden.
+    // Se manda el índice de bloque para que el backend agrupe los archivos de un
+    // mismo proveedor (varios PDFs en un bloque = un solo proveedor).
+    bloques.forEach((b, bi) => {
+      for (const f of b.files) {
+        form.append("files", f);
+        fileConfigs.push({
+          bloque:           bi,
+          nombre_proveedor: b.nombre.trim() || undefined,
+          con_iva:          b.con_iva,
+          descuento:        b.descuento,
+        });
+      }
+    });
     form.append("file_configs", JSON.stringify(fileConfigs));
 
     try {
@@ -373,88 +399,134 @@ export default function Comparar() {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
         <p className="text-gray-500 text-sm mb-8">Subí los PDFs de tus proveedores para compararlos</p>
 
-        {/* Upload zone */}
+        {/* Upload: bloques de proveedor */}
         {!resultado && (
           <>
+            {/* Zona global de drop */}
             <div
-              onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-              onDragLeave={() => setDragging(false)}
-              onDrop={onDrop}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center transition cursor-pointer mb-6 ${
-                dragging ? "border-blue-400 bg-blue-50" : "border-gray-300 bg-white hover:border-blue-300"
+              onDragOver={(e) => { e.preventDefault(); setDragging(-1); }}
+              onDragLeave={() => setDragging(null)}
+              onDrop={onDropGlobal}
+              className={`border-2 border-dashed rounded-2xl px-8 py-6 text-center transition mb-6 ${
+                dragging === -1 ? "border-blue-400 bg-blue-50" : "border-gray-200 bg-white"
               }`}
-              onClick={() => document.getElementById("file-input")?.click()}
             >
-              <input
-                id="file-input" type="file" accept="application/pdf,image/*,.tiff,.tif" multiple className="hidden"
-                onChange={(e) => agregarFiles(Array.from(e.target.files || []))}
-              />
-              <div className="text-4xl mb-4">📄</div>
-              <p className="text-gray-600 font-medium">Arrastrá los PDFs acá o hacé click para seleccionar</p>
-              <p className="text-gray-400 text-sm mt-1">PDF, JPG, TIFF · Uno por proveedor</p>
+              <div className="text-3xl mb-2">📄</div>
+              <p className="text-gray-500 text-sm">Arrastrá PDFs acá — cada archivo se agrega como un proveedor nuevo</p>
             </div>
 
-            {files.length > 0 && (
-              <div className="bg-white rounded-xl border border-gray-200 mb-6 overflow-hidden">
-                {/* Header */}
-                <div className="grid grid-cols-[1fr_auto_auto_auto] gap-2 px-4 py-2 bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-400 uppercase tracking-wide">
-                  <span>Archivo</span>
-                  <span className="text-center w-24">Precio</span>
-                  <span className="text-center w-24">Descuento</span>
-                  <span className="w-6" />
-                </div>
-                {files.map((f, i) => {
-                  const cfg = fileConfigs[i] ?? CONFIG_DEFAULT;
-                  return (
-                  <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-2 items-center px-4 py-3 border-b border-gray-100 last:border-0">
-                    {/* Nombre + tamaño */}
-                    <div className="min-w-0">
-                      <div className="text-sm font-medium text-gray-700 truncate">📄 {f.name}</div>
-                      <div className="text-xs text-gray-400">{(f.size / 1024).toFixed(0)} KB</div>
-                    </div>
+            {/* Bloques de proveedor */}
+            <div className="space-y-4 mb-6">
+              {bloques.map((b, bi) => (
+                <div
+                  key={bi}
+                  onDragOver={(e) => { e.preventDefault(); setDragging(bi); }}
+                  onDragLeave={() => setDragging(null)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setDragging(null);
+                    addFilesToBloque(bi, Array.from(e.dataTransfer.files));
+                  }}
+                  className={`bg-white rounded-xl border transition ${
+                    dragging === bi ? "border-blue-400 ring-2 ring-blue-100" : "border-gray-200"
+                  }`}
+                >
+                  {/* Cabecera del bloque */}
+                  <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide w-20 shrink-0">Proveedor</span>
+                    <input
+                      type="text"
+                      value={b.nombre}
+                      onChange={(e) => updateBloque(bi, { nombre: e.target.value })}
+                      placeholder={`Proveedor ${bi + 1}`}
+                      className="flex-1 text-sm font-semibold text-gray-800 border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:font-normal placeholder:text-gray-400"
+                    />
 
-                    {/* Toggle Con/Sin IVA */}
-                    <div className="flex items-center gap-1 border border-gray-200 rounded-lg overflow-hidden text-xs w-24">
+                    {/* Toggle IVA */}
+                    <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden text-xs shrink-0">
                       <button
-                        onClick={() => setFileCfg(i, { con_iva: false })}
-                        className={`flex-1 py-1.5 transition ${!cfg.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                        onClick={() => updateBloque(bi, { con_iva: false })}
+                        className={`px-2.5 py-1.5 transition ${!b.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
                       >Sin IVA</button>
                       <button
-                        onClick={() => setFileCfg(i, { con_iva: true })}
-                        className={`flex-1 py-1.5 transition ${cfg.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                        onClick={() => updateBloque(bi, { con_iva: true })}
+                        className={`px-2.5 py-1.5 transition ${b.con_iva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
                       >C/IVA</button>
                     </div>
 
-                    {/* Descuento % */}
-                    <div className="flex items-center gap-1 w-24">
+                    {/* Descuento */}
+                    <div className="flex items-center gap-1 shrink-0">
                       <input
                         type="number" min="0" max="100" step="1"
-                        value={cfg.descuento || ""}
-                        onChange={(e) => setFileCfg(i, { descuento: Number(e.target.value) || 0 })}
+                        value={b.descuento || ""}
+                        onChange={(e) => updateBloque(bi, { descuento: Number(e.target.value) || 0 })}
                         placeholder="0"
-                        className="w-12 border border-gray-300 rounded-lg px-1.5 py-1.5 text-xs text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-12 border border-gray-200 rounded-lg px-1.5 py-1.5 text-xs text-center text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                       />
                       <span className="text-xs text-gray-400">% desc.</span>
                     </div>
 
-                    {/* Quitar */}
-                    <button onClick={() => removeFile(i)} className="text-gray-400 hover:text-red-500 text-lg w-6 text-center">×</button>
+                    {/* Quitar bloque */}
+                    <button
+                      onClick={() => removeBloque(bi)}
+                      className="text-gray-300 hover:text-red-400 text-xl leading-none ml-1 shrink-0"
+                      title="Quitar proveedor"
+                    >×</button>
                   </div>
-                );})}
-              </div>
-            )}
 
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-4 rounded-xl mb-6">{error}</div>
-            )}
+                  {/* Archivos del bloque */}
+                  {b.files.length > 0 && (
+                    <div className="px-4 py-2 space-y-1">
+                      {b.files.map((f, fi) => (
+                        <div key={fi} className="flex items-center gap-2 text-sm py-1">
+                          <span className="text-gray-400">📄</span>
+                          <span className="flex-1 text-gray-700 truncate">{f.name}</span>
+                          <span className="text-xs text-gray-400 shrink-0">{(f.size / 1024).toFixed(0)} KB</span>
+                          <button
+                            onClick={() => removeFileFromBloque(bi, fi)}
+                            className="text-gray-300 hover:text-red-400 text-base leading-none shrink-0"
+                          >×</button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-            <button
-              onClick={analizar}
-              disabled={!files.length || loading}
-              className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-blue-700 transition disabled:opacity-40"
-            >
-              {loading ? "Analizando…" : "⚡ Analizar"}
-            </button>
+                  {/* Agregar PDFs al bloque */}
+                  <div className="px-4 py-2.5">
+                    <label className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 cursor-pointer w-fit">
+                      <span>＋</span>
+                      <span>Agregar PDF</span>
+                      <input
+                        type="file" accept="application/pdf,image/*,.tiff,.tif" multiple className="hidden"
+                        onChange={(e) => addFilesToBloque(bi, Array.from(e.target.files || []))}
+                      />
+                    </label>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Agregar proveedor + Analizar */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <button
+                onClick={addBloque}
+                className="border border-dashed border-gray-300 text-gray-500 text-sm font-medium px-5 py-2.5 rounded-xl hover:border-blue-400 hover:text-blue-600 transition"
+              >
+                ＋ Agregar proveedor
+              </button>
+
+              {error && (
+                <div className="flex-1 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2.5 rounded-xl">{error}</div>
+              )}
+
+              <button
+                onClick={analizar}
+                disabled={!bloques.some((b) => b.files.length > 0) || loading}
+                className="ml-auto bg-blue-600 text-white font-semibold px-8 py-2.5 rounded-xl hover:bg-blue-700 transition disabled:opacity-40"
+              >
+                {loading ? "Analizando…" : "⚡ Analizar"}
+              </button>
+            </div>
           </>
         )}
 
@@ -541,7 +613,7 @@ export default function Comparar() {
                 className="bg-purple-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50">
                 {generandoJpg ? "Generando…" : "↓ JPG"}
               </button>
-              <button onClick={() => { setResultado(null); setFiles([]); setConfirmado(false); }}
+              <button onClick={() => { setResultado(null); setBloques([bloqueVacio()]); setConfirmado(false); }}
                 className="border border-gray-300 text-gray-600 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition text-sm">
                 + Nueva comparativa
               </button>
@@ -557,6 +629,38 @@ export default function Comparar() {
                   ✓ Guardado — el sistema aprendió estos matches
                 </span>
               )}
+            </div>
+
+            {/* Stats por proveedor */}
+            <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-hidden">
+              <div className="grid grid-cols-[1fr_auto_auto_auto_auto] gap-x-6 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-400 uppercase tracking-wide">
+                <span>Proveedor</span>
+                <span className="text-center">Extraídos</span>
+                <span className="text-center">Auto</span>
+                <span className="text-center">Dudosos</span>
+                <span className="text-center">Sin match</span>
+              </div>
+              {Object.entries(resultado.resultados).map(([prov, r]) => {
+                const pct = r.stats.pct_automatico;
+                const barColor = pct >= 80 ? "bg-green-500" : pct >= 60 ? "bg-amber-400" : "bg-red-400";
+                return (
+                  <div key={prov} className="grid grid-cols-[1fr_auto_auto_auto_auto] gap-x-6 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
+                    <div>
+                      <div className="text-sm font-semibold text-gray-800">{prov}</div>
+                      <div className="flex items-center gap-2 mt-1">
+                        <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden max-w-[120px]">
+                          <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="text-xs text-gray-500">{pct}% auto</span>
+                      </div>
+                    </div>
+                    <span className="text-sm text-center text-gray-600">{r.n_items_extraidos}</span>
+                    <span className="text-sm text-center font-medium text-green-700">{r.stats.automatico}</span>
+                    <span className="text-sm text-center text-amber-600">{r.stats.dudoso}</span>
+                    <span className="text-sm text-center text-red-500">{r.stats.sin_match}</span>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Tabs */}
@@ -583,7 +687,7 @@ export default function Comparar() {
               <>
                 <div className="flex gap-3 items-center mb-4 flex-wrap">
                   <select value={filtroRubro} onChange={(e) => setFiltroRubro(e.target.value)}
-                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
                     {rubros.map((r) => <option key={r}>{r}</option>)}
                   </select>
                   <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer" title="Mostrar solo ítems cotizados por más de un proveedor">
@@ -618,7 +722,7 @@ export default function Comparar() {
                       type="number" min="0" max="100" step="1" value={descuentoPct || ""}
                       onChange={(e) => setDescuentoPct(Number(e.target.value) || 0)}
                       placeholder="0"
-                      className="w-16 border border-gray-300 rounded-lg px-2 py-2 text-sm text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="w-16 border border-gray-300 rounded-lg px-2 py-2 text-sm text-center text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                     <span className="text-gray-500">%</span>
                   </div>

@@ -165,7 +165,7 @@ export default function AdminPage() {
             placeholder="Buscar descripción o proveedor..."
             value={busqueda}
             onChange={e => setBusqueda(e.target.value)}
-            className="flex-1 min-w-48 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 min-w-48 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <button
@@ -308,7 +308,7 @@ export default function AdminPage() {
                           placeholder="Ej: AISL008"
                           value={codigos[item.id] || ""}
                           onChange={e => setCodigos(prev => ({ ...prev, [item.id]: e.target.value }))}
-                          className="w-full max-w-xs border border-gray-300 rounded-lg px-3 py-2 text-sm uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full max-w-xs border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"
                           autoFocus
                         />
                         <p className="text-xs text-gray-400 mt-1">

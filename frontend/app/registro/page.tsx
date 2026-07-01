@@ -48,6 +48,7 @@ function RegistroInner() {
 
   const [error, setError]     = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   function paso1Valido() {
     return nombre.trim() && profesion && mail.includes("@") && pass.length >= 6;
@@ -61,28 +62,59 @@ function RegistroInner() {
     setLoading(true);
     setError("");
 
-    const { data, error: signUpErr } = await supabase.auth.signUp({
-      email: mail,
-      password: pass,
-    });
+    try {
+      const { data, error: signUpErr } = await supabase.auth.signUp({
+        email: mail,
+        password: pass,
+      });
 
-    if (signUpErr || !data.user) {
-      setError(signUpErr?.message || "Error al registrarse. Intentá de nuevo.");
+      if (signUpErr) {
+        const msg = signUpErr.message || signUpErr.name || JSON.stringify(signUpErr);
+        if (msg.toLowerCase().includes("already registered") || msg.toLowerCase().includes("already exists") || msg.toLowerCase().includes("user already")) {
+          setError("Ya existe una cuenta con ese mail. Iniciá sesión.");
+        } else if (msg.toLowerCase().includes("rate limit") || msg.toLowerCase().includes("too many")) {
+          setError("Demasiados intentos. Esperá unos minutos e intentá de nuevo.");
+        } else if (msg && msg !== "{}") {
+          setError(msg);
+        } else {
+          setError(`Error al registrarse (${JSON.stringify(signUpErr)})`);
+        }
+        setLoading(false);
+        return;
+      }
+
+      if (!data.user) {
+        setError("No se pudo crear la cuenta. Intentá de nuevo.");
+        setLoading(false);
+        return;
+      }
+
+      // Guardar perfil (no bloqueante si falla)
+      await supabase.from("perfiles").upsert({
+        id: data.user.id,
+        nombre,
+        profesion,
+        empresa: empresa || null,
+        localidad,
+        provincia,
+        plan: planInicial === "advance" ? "advance" : "free",
+      });
+
+      // Si Supabase requiere confirmación de email, data.session es null
+      if (!data.session) {
+        setError("");
+        setLoading(false);
+        // Mostrar mensaje de "chequeá tu email"
+        setPaso(3 as never);
+        return;
+      }
+
+      router.push("/app/comparar");
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Error inesperado. Intentá de nuevo.";
+      setError(msg);
       setLoading(false);
-      return;
     }
-
-    await supabase.from("perfiles").upsert({
-      id: data.user.id,
-      nombre,
-      profesion,
-      empresa: empresa || null,
-      localidad,
-      provincia,
-      plan: planInicial === "advance" ? "advance" : "free",
-    });
-
-    router.push("/app/comparar");
   }
 
   return (
@@ -139,8 +171,18 @@ function RegistroInner() {
 
               <div>
                 <label className={LABEL}>Contraseña</label>
-                <input type="password" value={pass} onChange={(e) => setPass(e.target.value)}
-                  className={INPUT} placeholder="Mínimo 6 caracteres" />
+                <div className="relative">
+                  <input type={showPass ? "text" : "password"} value={pass} onChange={(e) => setPass(e.target.value)}
+                    className={INPUT} placeholder="Mínimo 6 caracteres" />
+                  <button type="button" onClick={() => setShowPass(v => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 select-none">
+                    {showPass ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    )}
+                  </button>
+                </div>
               </div>
 
               <button
@@ -194,6 +236,23 @@ function RegistroInner() {
               >
                 ← Volver
               </button>
+            </div>
+          </>
+        )}
+
+        {/* ── Paso 3: Confirmar email ───────────────────────────── */}
+        {paso === (3 as never) && (
+          <>
+            <div className="text-center py-4">
+              <div className="text-5xl mb-4">📬</div>
+              <h1 className="text-xl font-bold text-gray-900 mb-2">Revisá tu mail</h1>
+              <p className="text-gray-500 text-sm mb-6">
+                Te mandamos un link de confirmación a <strong>{mail}</strong>.
+                Hacé click en el link para activar tu cuenta.
+              </p>
+              <Link href="/login" className="text-blue-600 text-sm font-medium hover:underline">
+                Ya confirmé → Iniciar sesión
+              </Link>
             </div>
           </>
         )}

@@ -168,7 +168,7 @@ export default function Revisar() {
                       placeholder="Ej: EST001"
                       value={codsCustom[item.cod_prov] || ""}
                       onChange={(e) => setCodsCustom((prev) => ({ ...prev, [item.cod_prov]: e.target.value }))}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   )}
 

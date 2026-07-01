@@ -146,3 +146,15 @@ create policy "precios_insert_auth" on public.precios_zona
   for insert with check (auth.uid() = user_id);
 create policy "precios_own_read" on public.precios_zona
   for select using (auth.uid() = user_id);
+
+-- ═══════════════════════════════════════════════════════════════
+-- V2: Motor de matching y precios históricos
+-- (ver migrations/001_v2_tables.sql para las tablas completas)
+-- ═══════════════════════════════════════════════════════════════
+
+-- materiales_validados  — catálogo canónico (codigo → categoria, nombre)
+-- material_denominaciones — aliases y denominaciones alternativas para fuzzy match
+-- sinonimos             — sinónimos de palabras editables sin deploy
+-- grupos_marcas         — grupos de marcas equivalentes (ej: Waduct = Amanco)
+-- materiales_pendientes — ítems sin match esperando revisión manual
+-- precios_historicos    — precio acumulado por material+proveedor en cada análisis
