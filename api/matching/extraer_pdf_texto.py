@@ -581,7 +581,8 @@ def extraer(pdf_path: str) -> dict:
     # Detectar IVA comparando suma de líneas vs total declarado en el PDF
     suma = sum(it["total"] for it in items)
     iva_detectado = "ASUMIDO 1,105"
-    rx_total = re.search(r"TOTAL[\s\$]+([\d,]+\.\d+)", all_text)
+    # Acepta formato americano (52,885,396.83) y europeo (52.885.396,83)
+    rx_total = re.search(r"TOTAL[\s\$:]+([\d,]+\.\d{2}|[\d.]+,\d{2})", all_text, re.I)
     if rx_total:
         total_pdf = parse_num(rx_total.group(1))
         if abs(suma - total_pdf) < 1:
