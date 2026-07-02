@@ -24,6 +24,7 @@ type ItemAutomatico = {
   denominacion_principal: string;
   descripcion: string;
   alternativas: Alternativa[];
+  item_id?: string;
 };
 
 type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
@@ -34,6 +35,7 @@ type ItemSinMatch = {
   precio_sin_iva: number;
   precio_con_iva: number;
   cant: number;
+  item_id?: string;
 };
 
 type StatsProveedor = {
@@ -269,6 +271,7 @@ export default function Comparar() {
           precio_sin_iva:  item.precio_sin_iva,
           unidad:          "UN",
           cantidad:        item.cant,
+          item_id:         item.item_id ?? null,
         });
       }
       // Items dudosos con el código que el usuario eligió
@@ -281,6 +284,7 @@ export default function Comparar() {
           precio_sin_iva:  item.precio_sin_iva,
           unidad:          "UN",
           cantidad:        item.cant,
+          item_id:         item.item_id ?? null,
         });
       });
       // Sin match
@@ -290,6 +294,7 @@ export default function Comparar() {
           proveedor:      prov,
           precio_sin_iva: item.precio_sin_iva,
           unidad:         "UN",
+          item_id:        item.item_id ?? null,
         });
       }
     }

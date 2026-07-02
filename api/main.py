@@ -1059,12 +1059,14 @@ class ConfirmarItemV2(BaseModel):
     precio_sin_iva: float
     unidad: str = "UN"
     cantidad: float = 1.0
+    item_id: Optional[str] = None   # id en presupuesto_items (devuelto por /analizar-v2)
 
 class PendienteItem(BaseModel):
     desc_prov: str
     proveedor: str
     precio_sin_iva: float
     unidad: str = "UN"
+    item_id: Optional[str] = None   # id en presupuesto_items (devuelto por /analizar-v2)
 
 class ConfirmarV2Request(BaseModel):
     comparativa_id: str
@@ -1243,12 +1245,15 @@ async def analizar_v2(
                 except Exception as e:
                     print(f"[v2] Error guardando precios_historicos para {proveedor}: {e}")
 
-            # Guardar cada línea del PDF con su resultado de match
+            # Guardar cada línea del PDF con su resultado de match. Los ids
+            # generados se devuelven en la respuesta (item_id) para que el
+            # frontend pueda referenciarlos al confirmar.
             if sb and presupuesto_id:
                 try:
-                    filas = []
+                    filas, origen_filas = [], []
                     for grupo, estado in ((automatico, "MATCH"), (dudoso, "REVISAR"), (sin_match, "SIN_MATCH")):
                         for it in grupo:
+                            origen_filas.append(it)
                             filas.append({
                                 "presupuesto_id":    presupuesto_id,
                                 "texto_original":    it["desc_prov"],
@@ -1261,7 +1266,10 @@ async def analizar_v2(
                                 "origen_match":      "fuzzy" if estado != "SIN_MATCH" else None,
                             })
                     if filas:
-                        sb.table("presupuesto_items").insert(filas).execute()
+                        res_items = sb.table("presupuesto_items").insert(filas).execute()
+                        if res_items.data and len(res_items.data) == len(origen_filas):
+                            for it, fila_bd in zip(origen_filas, res_items.data):
+                                it["item_id"] = fila_bd["id"]
                     sb.table("presupuestos").update({"estado": "PROCESADO"}).eq("id", presupuesto_id).execute()
                 except Exception as e:
                     print(f"[v2] Error guardando presupuesto_items para {f.filename}: {e}")
@@ -1464,6 +1472,17 @@ async def confirmar_v2(
         except Exception as e:
             print(f"[v2] Error guardando precio: {e}")
 
+        # Marcar la línea del presupuesto como confirmada por el usuario
+        if item.item_id:
+            try:
+                sb.table("presupuesto_items").update({
+                    "estado_match":    "CONFIRMADO",
+                    "codigo_material": item.codigo_material,
+                    "origen_match":    "usuario",
+                }).eq("id", item.item_id).execute()
+            except Exception as e:
+                print(f"[v2] Error actualizando presupuesto_item {item.item_id}: {e}")
+
     # ── Sin match: pendientes + precio histórico (sin codigo_material) ─────────
     for item in req.sin_match:
         try:
@@ -1487,6 +1506,15 @@ async def confirmar_v2(
                     "precio":         item.precio_sin_iva,
                 }).execute()
                 guardados["precios"] += 1
+
+                # Vincular la línea del presupuesto con su pendiente
+                if item.item_id:
+                    try:
+                        sb.table("presupuesto_items").update({
+                            "pendiente_id": pendiente_id,
+                        }).eq("id", item.item_id).execute()
+                    except Exception as e:
+                        print(f"[v2] Error vinculando presupuesto_item {item.item_id}: {e}")
         except Exception as e:
             print(f"[v2] Error guardando pendiente '{item.desc_prov}': {e}")
 
