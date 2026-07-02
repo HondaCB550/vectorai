@@ -153,61 +153,68 @@ def get_supabase() -> SupabaseClient | None:
         return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     return None
 
+_ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+
 def get_user_plan(authorization: Optional[str]) -> dict:
     """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N, 'limite': N}.
 
-    Sin token → anónimo, plan free, límite 2 análisis/día (no trackeado).
-    Con token → verifica JWT, consulta perfiles, resetea contador si es nuevo día.
+    'usos_hoy' es el contador del MES en curso (nombre histórico de la clave;
+    el esquema real de perfiles es usos_mes/limite_mes/mes_usos — las columnas
+    usos_hoy/fecha_usos nunca existieron en la tabla y el select fallaba,
+    degradando a TODOS los logueados a anónimo).
+
+    Sin token → anónimo, plan free, límite 2 (no trackeado).
+    Con token → verifica JWT, consulta perfiles, resetea contador si cambió el mes.
     """
     if not authorization:
-        return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+        return dict(_ANONIMO)
 
     token = authorization.removeprefix("Bearer ").strip()
     sb = get_supabase()
     if not sb:
-        return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+        return dict(_ANONIMO)
 
     try:
         user_resp = sb.auth.get_user(token)
         user_id = user_resp.user.id if user_resp.user else None
         if not user_id:
-            return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+            return dict(_ANONIMO)
 
-        perfil = sb.table("perfiles").select("plan,usos_hoy,fecha_usos").eq("id", user_id).single().execute()
+        mes = datetime.now().strftime("%Y-%m")
+        perfil = sb.table("perfiles").select("plan,usos_mes,limite_mes,mes_usos").eq("id", user_id).single().execute()
         if not perfil.data:
             # Crear perfil si el trigger no lo hizo
-            sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_hoy": 0}).execute()
+            sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_mes": 0, "mes_usos": mes}).execute()
             return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": 2}
 
-        plan  = perfil.data.get("plan", "free")
-        usos  = perfil.data.get("usos_hoy", 0)
-        fecha = str(perfil.data.get("fecha_usos") or "")
-        hoy   = datetime.now().strftime("%Y-%m-%d")
+        plan   = perfil.data.get("plan") or "free"
+        usos   = perfil.data.get("usos_mes") or 0
+        limite = perfil.data.get("limite_mes") or 2
 
-        # Resetear contador si es un nuevo día
-        if fecha != hoy:
-            sb.table("perfiles").update({"usos_hoy": 0, "fecha_usos": hoy}).eq("id", user_id).execute()
+        # Resetear contador si es un nuevo mes
+        if (perfil.data.get("mes_usos") or "") != mes:
+            sb.table("perfiles").update({"usos_mes": 0, "mes_usos": mes}).eq("id", user_id).execute()
             usos = 0
 
-        limite = 999 if plan == "advance" else 2
+        if plan in ("advance", "pro"):
+            limite = 999
         return {"user_id": user_id, "plan": plan, "usos_hoy": usos, "limite": limite}
     except Exception as e:
         print(f"get_user_plan error: {e}")
-        return {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+        return dict(_ANONIMO)
 
 
 def _incrementar_uso(user_id: str, usos_actuales: int):
-    """Incrementa usos_hoy en perfiles para el usuario logueado."""
+    """Incrementa usos_mes en perfiles para el usuario logueado."""
     if user_id == "anonimo":
         return
     sb = get_supabase()
     if not sb:
         return
     try:
-        hoy = datetime.now().strftime("%Y-%m-%d")
         sb.table("perfiles").update({
-            "usos_hoy": usos_actuales + 1,
-            "fecha_usos": hoy,
+            "usos_mes": usos_actuales + 1,
+            "mes_usos": datetime.now().strftime("%Y-%m"),
         }).eq("id", user_id).execute()
     except Exception as e:
         print(f"_incrementar_uso error: {e}")
