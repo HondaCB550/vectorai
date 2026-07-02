@@ -1151,6 +1151,20 @@ async def analizar_v2(
 
     for file_idx, f in enumerate(files):
         content = await f.read()
+
+        # Imágenes (JPG/PNG/HEIC) todavía no se procesan: avisar claro en vez
+        # de dejar que pdfplumber explote con "No /Root object".
+        if not content.startswith(b"%PDF"):
+            tipo = "imagen" if content[:4] in (b"\xff\xd8\xff\xe0", b"\xff\xd8\xff\xe1", b"\x89PNG") or \
+                   (f.filename or "").lower().endswith((".jpg", ".jpeg", ".png", ".jfif", ".heic")) else "archivo"
+            errores.append({
+                "archivo": f.filename,
+                "error": f"Es una {tipo}, no un PDF. Por ahora solo procesamos PDFs con texto — "
+                         "pedile al proveedor el PDF original o exportalo desde su sistema. "
+                         "El soporte de fotos está en el roadmap."
+            })
+            continue
+
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
             tmp.write(content)
             tmp_path = tmp.name

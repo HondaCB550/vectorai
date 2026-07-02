@@ -229,6 +229,11 @@ export default function Comparar() {
       if (!res.ok) {
         if (data?.detail?.error === "plan_limit") {
           setError("Plan gratuito: máximo 2 análisis por día. Pasate al plan Advance.");
+        } else if (data?.detail?.error === "sin_resultados" && Array.isArray(data?.detail?.errores)) {
+          const lineas = data.detail.errores
+            .map((e: { archivo: string; error: string }) => `• ${e.archivo}: ${e.error}`)
+            .join("\n");
+          setError(`Ningún archivo se pudo procesar:\n${lineas}`);
         } else {
           setError(data?.detail?.mensaje || JSON.stringify(data?.detail) || "Error al analizar los PDFs");
         }
@@ -529,7 +534,7 @@ export default function Comparar() {
               </button>
 
               {error && (
-                <div className="flex-1 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2.5 rounded-xl">{error}</div>
+                <div className="flex-1 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2.5 rounded-xl whitespace-pre-line">{error}</div>
               )}
 
               <button
