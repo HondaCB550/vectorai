@@ -45,6 +45,16 @@ RE_EUROPEO = re.compile(
     r"^\s*(\S+)\s+(\d+)\s+(.+?)\s+((?:\d{1,3}\.)*\d{1,3},\d{2})\s+((?:\d{1,3}\.)*\d{1,3},\d{2})\s*$"
 )
 
+# EN SECO / GRUPO MMC (formato 2026):
+# "[BARBI9ZPBZD2T] FLEJE PARA CRUZ DE SAN ANDRES 50MM E0,94 X 50 MTS 9,00 Unidades 73.429,98 $ 660.869,78"
+# Números europeos; el código entre corchetes puede faltar en alguna línea.
+RE_ENSECO = re.compile(
+    r"^\s*(?:\[([A-Z0-9]+)\]\s+)?(\S.+?)\s+"
+    r"((?:\d{1,3}\.)*\d{1,3},\d{2})\s+(?:Unidades?|ML|MTS?|M2|M3|KG|UN)\s+"
+    r"((?:\d{1,3}\.)*\d{1,3},\d{2})\s+\$\s*((?:\d{1,3}\.)*\d{1,3},\d{2})\s*$",
+    re.I,
+)
+
 RE_PRECIO = re.compile(r"^[\d,]+\.\d{2}$|^[\d.]+,\d{2}$")
 
 # Artículo de PDF: "H ORMIGON" → "HORMIGON", "F IBRAKRETE" → "FIBRAKRETE"
@@ -443,6 +453,7 @@ def extraer_regex(texto: str) -> list[dict]:
     items = []
     for line in texto.splitlines():
         for patron, parser in [
+            (RE_ENSECO,   "enseco"),
             (RE_BAUKRAFT, "baukraft"),
             (RE_CAROSIO,  "carosio"),
             (RE_EUROPEO,  "europeo"),
@@ -450,7 +461,13 @@ def extraer_regex(texto: str) -> list[dict]:
             m = patron.match(line)
             if not m:
                 continue
-            if parser == "baukraft":
+            if parser == "enseco":
+                cod, desc, cant, pu, total = m.groups()
+                items.append({
+                    "cod": (cod or "").strip(), "desc": _fix_split_words(desc.strip()),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "baukraft":
                 cod, desc, cant, pu, total = m.groups()
                 items.append({
                     "cod": cod, "desc": _fix_split_words(desc.strip()),

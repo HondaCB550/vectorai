@@ -84,6 +84,7 @@ type Resultado = {
   usos_restantes: number | null;
   aliases_en_bd: number;
   config_proveedores: Record<string, ConfigProveedor>;
+  errores?: { archivo: string; error: string }[];
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -236,6 +237,12 @@ export default function Comparar() {
 
       setResultado(data);
       setTab("comparativa");
+
+      // Con un solo proveedor no hay ítems "en común": si el filtro
+      // "Solo comparables" quedara activo, la tabla se vería vacía.
+      if ((data.proveedores?.length ?? 0) < 2) {
+        setSoloComunes(false);
+      }
 
       // Inicializar dudosos con la primera alternativa como selección por defecto
       const init: Record<string, Record<number, string>> = {};
@@ -556,6 +563,16 @@ export default function Comparar() {
                     Ver Advance →
                   </Link>
                 )}
+              </div>
+            )}
+
+            {/* Archivos que fallaron al procesarse (no llegaron a resultados) */}
+            {(resultado.errores?.length ?? 0) > 0 && (
+              <div className="mb-4 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-800 space-y-1">
+                <div className="font-semibold">⚠️ Archivos que no se pudieron procesar:</div>
+                {resultado.errores!.map((e, i) => (
+                  <div key={i}>• <strong>{e.archivo}</strong>: {e.error}</div>
+                ))}
               </div>
             )}
 
