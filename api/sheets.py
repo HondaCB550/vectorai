@@ -40,12 +40,25 @@ COLOR_BLANCO  = {"red": 1.0,  "green": 1.0,  "blue": 1.0}
 COLOR_TEXTO_W = {"red": 1.0,  "green": 1.0,  "blue": 1.0}
 
 
+def sheets_disponible() -> bool:
+    """True si hay credenciales de service account configuradas."""
+    if os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON"):
+        return True
+    sa_file = os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE", "service_account.json")
+    return Path(sa_file).exists()
+
+
 def _creds() -> Credentials:
+    # Railway/hosting sin filesystem persistente: el JSON completo va en la env var
+    sa_json = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
+    if sa_json:
+        return Credentials.from_service_account_info(json.loads(sa_json), scopes=SCOPES)
     sa_file = os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE", "service_account.json")
     if not Path(sa_file).exists():
         raise FileNotFoundError(
             f"Service account JSON no encontrado en '{sa_file}'. "
-            "Descargalo de Google Cloud Console y configurá GOOGLE_SERVICE_ACCOUNT_FILE."
+            "Descargalo de Google Cloud Console y configurá GOOGLE_SERVICE_ACCOUNT_FILE "
+            "o pegá el contenido del JSON en GOOGLE_SERVICE_ACCOUNT_JSON."
         )
     return Credentials.from_service_account_file(sa_file, scopes=SCOPES)
 

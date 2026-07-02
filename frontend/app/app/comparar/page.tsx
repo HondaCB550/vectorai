@@ -116,10 +116,11 @@ type BloqueProveedor = {
   con_iva:   boolean;
   descuento: number;
   files:     File[];
+  gsheet:    string;   // link de Google Sheets (opcional)
 };
 
 function bloqueVacio(): BloqueProveedor {
-  return { nombre: "", con_iva: true, descuento: 0, files: [] };
+  return { nombre: "", con_iva: true, descuento: 0, files: [], gsheet: "" };
 }
 
 // ── Componente principal ──────────────────────────────────────────────────────
@@ -193,8 +194,8 @@ export default function Comparar() {
 
   // ── Analizar ───────────────────────────────────────────────────────────────
   async function analizar() {
-    const hayFiles = bloques.some((b) => b.files.length > 0);
-    if (!hayFiles) return;
+    const hayFuentes = bloques.some((b) => b.files.length > 0 || b.gsheet.trim());
+    if (!hayFuentes) return;
     setLoading(true);
     setError("");
     setResultado(null);
@@ -218,6 +219,19 @@ export default function Comparar() {
       }
     });
     form.append("file_configs", JSON.stringify(fileConfigs));
+
+    // Links de Google Sheets por bloque (el backend los descarga y procesa)
+    const gsheetUrls = bloques
+      .map((b, bi) => ({ b, bi }))
+      .filter(({ b }) => b.gsheet.trim())
+      .map(({ b, bi }) => ({
+        url:              b.gsheet.trim(),
+        bloque:           bi,
+        nombre_proveedor: b.nombre.trim() || undefined,
+        con_iva:          b.con_iva,
+        descuento:        b.descuento,
+      }));
+    if (gsheetUrls.length) form.append("gsheet_urls", JSON.stringify(gsheetUrls));
 
     try {
       const headers: Record<string, string> = {};
@@ -349,6 +363,15 @@ export default function Comparar() {
         }),
       });
       if (!res.ok) { alert("Error al generar el archivo"); return; }
+      // /sheets devuelve JSON {url} cuando hay Google Sheets configurado;
+      // si no, un archivo binario para descargar (Excel/PDF/JPG).
+      const ctype = res.headers.get("content-type") || "";
+      if (ctype.includes("application/json")) {
+        const data = await res.json();
+        if (data?.url) { window.open(data.url, "_blank"); return; }
+        alert("Error al generar el archivo");
+        return;
+      }
       const blob = await res.blob();
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
@@ -415,7 +438,7 @@ export default function Comparar() {
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
-        <p className="text-gray-500 text-sm mb-8">Subí los PDFs de tus proveedores para compararlos</p>
+        <p className="text-gray-500 text-sm mb-8">Subí PDFs, fotos o planillas de tus proveedores para compararlos</p>
 
         {/* Upload: bloques de proveedor */}
         {!resultado && (
@@ -513,12 +536,19 @@ export default function Comparar() {
                   <div className="px-4 py-2.5">
                     <label className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 cursor-pointer w-fit">
                       <span>＋</span>
-                      <span>Agregar PDF</span>
+                      <span>Agregar PDF / foto / planilla</span>
                       <input
-                        type="file" accept="application/pdf,image/*,.tiff,.tif" multiple className="hidden"
+                        type="file" accept="application/pdf,image/*,.xlsx,.xls,.csv,.tiff,.tif" multiple className="hidden"
                         onChange={(e) => addFilesToBloque(bi, Array.from(e.target.files || []))}
                       />
                     </label>
+                    <input
+                      type="url"
+                      value={b.gsheet}
+                      onChange={(e) => updateBloque(bi, { gsheet: e.target.value })}
+                      placeholder="…o pegá un link de Google Sheets (compartido con enlace)"
+                      className="mt-1.5 w-full text-xs border border-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-400 placeholder:text-gray-400"
+                    />
                   </div>
                 </div>
               ))}
@@ -631,7 +661,7 @@ export default function Comparar() {
             <div className="flex gap-3 mb-6 flex-wrap items-center">
               <button onClick={() => descargar("sheets", "xlsx", setGenerandoSheets)} disabled={generandoSheets}
                 className="bg-green-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition text-sm disabled:opacity-50">
-                {generandoSheets ? "Generando…" : "↓ Excel"}
+                {generandoSheets ? "Generando…" : "↓ Excel / Sheets"}
               </button>
               <button onClick={() => descargar("pdf", "pdf", setGenerandoPdf)} disabled={generandoPdf}
                 className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition text-sm disabled:opacity-50">

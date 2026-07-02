@@ -37,6 +37,8 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 from detectar_proveedor import detectar_proveedor  # noqa: E402
 from extraer_pdf_texto import extraer, _desc_es_codigo  # noqa: E402
 from matching import matchear_item                  # noqa: E402
+from extraer_imagen import extraer_imagen           # noqa: E402
+from extraer_hoja import extraer_xlsx, extraer_csv, descargar_gsheet  # noqa: E402
 
 MASTER_JSON  = DATA_DIR / "master_materiales.json"
 CONFIG_PATH  = DATA_DIR / "configuracion.json"
@@ -422,10 +424,11 @@ async def analizar(
         except Exception as e:
             errores.append({"archivo": f.filename, "error": str(e)})
         finally:
-            try:
-                os.unlink(tmp_path)
-            except OSError:
-                pass
+            if tmp_path:
+                try:
+                    os.unlink(tmp_path)
+                except OSError:
+                    pass
 
     if not resultados:
         raise HTTPException(status_code=422, detail={"error": "sin_resultados", "errores": errores})
@@ -681,6 +684,21 @@ async def generar_sheets(
     fecha = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
+
+    # Google Sheet real si hay service account configurada; si no, fallback xlsx
+    try:
+        from sheets import crear_sheet_comparativa, sheets_disponible
+        if sheets_disponible():
+            url = crear_sheet_comparativa(
+                comparativo=comparativo,
+                proveedores=cached["proveedores"],
+                titulo=titulo,
+                user_mail=req.user_mail,
+            )
+            return {"ok": True, "tipo": "google_sheet", "url": url}
+    except Exception as e:
+        print(f"[sheets] Error creando Google Sheet (fallback a xlsx): {e}")
+
     iva_label = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · VectorAI"
@@ -1093,13 +1111,18 @@ from fastapi import Form as FastAPIForm
 
 @app.post("/analizar-v2")
 async def analizar_v2(
-    files: list[UploadFile] = File(...),
+    files: list[UploadFile] = File(default=[]),
     file_configs: Optional[str] = FastAPIForm(default=None),
+    gsheet_urls: Optional[str] = FastAPIForm(default=None),
     authorization: Optional[str] = Header(None),
 ):
     """
-    V2: Matchea texto de PDFs contra material_denominaciones en Supabase.
-    file_configs: JSON array con {con_iva, descuento} por archivo (mismo orden que files).
+    V2: Matchea presupuestos contra material_denominaciones en Supabase.
+    Fuentes soportadas: PDF con texto, fotos (JPG/PNG, vía OCR/visión),
+    planillas (.xlsx/.csv) y links de Google Sheets compartidos.
+    file_configs: JSON array con {bloque, nombre_proveedor, con_iva, descuento}
+    por archivo (mismo orden que files).
+    gsheet_urls: JSON array con {url, bloque, nombre_proveedor, con_iva, descuento}.
     Devuelve 3 grupos por proveedor: automatico / dudoso / sin_match.
     """
     user = get_user_plan(authorization)
@@ -1135,47 +1158,85 @@ async def analizar_v2(
     errores = []
     presupuestos_creados: list[str] = []
 
+    # ── Unificar fuentes: archivos subidos + links de Google Sheets ────────────
+    # entradas = [(nombre_archivo, contenido_bytes, cfg), ...]
+    entradas: list[tuple[str, bytes, dict]] = []
+    for idx, f in enumerate(files or []):
+        contenido = await f.read()
+        entradas.append((f.filename or f"archivo_{idx}", contenido,
+                         cfgs[idx] if idx < len(cfgs) else {}))
+
+    if gsheet_urls:
+        try:
+            lista_gs = json.loads(gsheet_urls)
+        except Exception:
+            lista_gs = []
+        for g in lista_gs if isinstance(lista_gs, list) else []:
+            url = (g.get("url") or "").strip()
+            if not url:
+                continue
+            try:
+                nombre_gs, contenido_gs = descargar_gsheet(url)
+                entradas.append((nombre_gs, contenido_gs, g))
+            except Exception as e:
+                errores.append({"archivo": url[:80], "error": str(e)})
+
     # Resolver un nombre de proveedor por bloque: todos los archivos de un mismo
     # bloque son el mismo proveedor. Si el usuario no lo nombró, se auto-detecta
     # desde el primer archivo del bloque. Sin 'bloque' (frontend viejo) cada
-    # archivo es su propio grupo (file_idx) → 1 PDF = 1 proveedor.
+    # archivo es su propio grupo (índice) → 1 archivo = 1 proveedor.
     nombre_por_bloque: dict = {}
-    for idx, f in enumerate(files):
-        cfg = cfgs[idx] if idx < len(cfgs) else {}
+    for idx, (fname, _, cfg) in enumerate(entradas):
         clave = cfg.get("bloque", idx)
         if clave not in nombre_por_bloque:
             nombre = (cfg.get("nombre_proveedor") or "").strip()
             if not nombre:
-                nombre = detectar_proveedor(f.filename or "") or Path(f.filename or "archivo").stem.upper()
+                nombre = detectar_proveedor(fname) or Path(fname or "archivo").stem.upper()
             nombre_por_bloque[clave] = nombre
 
-    for file_idx, f in enumerate(files):
-        content = await f.read()
-
-        # Imágenes (JPG/PNG/HEIC) todavía no se procesan: avisar claro en vez
-        # de dejar que pdfplumber explote con "No /Root object".
-        if not content.startswith(b"%PDF"):
-            tipo = "imagen" if content[:4] in (b"\xff\xd8\xff\xe0", b"\xff\xd8\xff\xe1", b"\x89PNG") or \
-                   (f.filename or "").lower().endswith((".jpg", ".jpeg", ".png", ".jfif", ".heic")) else "archivo"
-            errores.append({
-                "archivo": f.filename,
-                "error": f"Es una {tipo}, no un PDF. Por ahora solo procesamos PDFs con texto — "
-                         "pedile al proveedor el PDF original o exportalo desde su sistema. "
-                         "El soporte de fotos está en el roadmap."
-            })
+    for file_idx, (fname, content, cfg_archivo) in enumerate(entradas):
+        # ── Rutear por tipo de contenido ────────────────────────────────────
+        lower = (fname or "").lower()
+        tmp_path = None
+        try:
+            if content.startswith(b"%PDF"):
+                tipo_fuente = "pdf"
+            elif content[:4] == b"PK\x03\x04" and not lower.endswith((".jpg", ".jpeg", ".png")):
+                tipo_fuente = "xlsx"   # xlsx/xlsm son ZIP
+            elif content[:8] == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1":
+                errores.append({"archivo": fname,
+                                "error": "Excel viejo (.xls) no soportado — abrilo y guardalo como .xlsx."})
+                continue
+            elif lower.endswith(".csv"):
+                tipo_fuente = "csv"
+            elif content[:3] == b"\xff\xd8\xff" or content[:4] in (b"\x89PNG", b"RIFF") or \
+                    lower.endswith((".jpg", ".jpeg", ".png", ".jfif", ".webp")):
+                tipo_fuente = "imagen"
+            else:
+                errores.append({"archivo": fname,
+                                "error": "Formato no reconocido. Soportados: PDF, JPG/PNG, .xlsx, .csv o link de Google Sheets."})
+                continue
+        except Exception as e:
+            errores.append({"archivo": fname, "error": str(e)})
             continue
-
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
-            tmp.write(content)
-            tmp_path = tmp.name
 
         presupuesto_id = None
         try:
-            cfg_archivo  = cfgs[file_idx] if file_idx < len(cfgs) else {}
             proveedor = nombre_por_bloque[cfg_archivo.get("bloque", file_idx)]
             proveedor_id = _get_proveedor_id(sb, proveedor)
 
-            resultado = extraer(tmp_path)
+            if tipo_fuente == "pdf":
+                with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
+                    tmp.write(content)
+                    tmp_path = tmp.name
+                resultado = extraer(tmp_path)
+            elif tipo_fuente == "xlsx":
+                resultado = extraer_xlsx(content)
+            elif tipo_fuente == "csv":
+                resultado = extraer_csv(content)
+            else:  # imagen → OCR/visión
+                resultado = extraer_imagen(content, fname)
+
             items = resultado.get("items", [])
             automatico, dudoso, sin_match = [], [], []
 
@@ -1191,7 +1252,7 @@ async def analizar_v2(
                         "user_id":             user["user_id"],
                         "proveedor_id":        proveedor_id,
                         "proveedor_detectado": proveedor,
-                        "archivo":             f.filename,
+                        "archivo":             fname,
                         "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
                         "factor_iva":          fac_archivo,
                         "estado":              "PROCESANDO",
@@ -1200,7 +1261,7 @@ async def analizar_v2(
                         presupuesto_id = pres.data[0]["id"]
                         presupuestos_creados.append(presupuesto_id)
                 except Exception as e:
-                    print(f"[v2] Error creando presupuesto para {f.filename}: {e}")
+                    print(f"[v2] Error creando presupuesto para {fname}: {e}")
             def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
                 return round(pu / _fac * (1 - _desc / 100), 2)
 
@@ -1266,7 +1327,7 @@ async def analizar_v2(
                             "unidad":          "UN",
                             "precio":          item["precio_sin_iva"],
                             "cantidad":        int(item.get("cant", 1)),
-                            "pdf_origen":      f.filename,
+                            "pdf_origen":      fname,
                         }
                         for item in automatico
                     ]).execute()
@@ -1300,7 +1361,7 @@ async def analizar_v2(
                                 it["item_id"] = fila_bd["id"]
                     sb.table("presupuestos").update({"estado": "PROCESADO"}).eq("id", presupuesto_id).execute()
                 except Exception as e:
-                    print(f"[v2] Error guardando presupuesto_items para {f.filename}: {e}")
+                    print(f"[v2] Error guardando presupuesto_items para {fname}: {e}")
 
             # Fusionar con lo ya acumulado del proveedor: un bloque puede tener
             # varios PDFs, y antes esto pisaba el resultado del archivo anterior.
@@ -1324,7 +1385,7 @@ async def analizar_v2(
             acc["n_items_extraidos"] += resultado.get("n_items", 0)
 
         except Exception as e:
-            errores.append({"archivo": f.filename, "error": str(e)})
+            errores.append({"archivo": fname, "error": str(e)})
             if sb and presupuesto_id:
                 try:
                     sb.table("presupuestos").update({"estado": "ERROR"}).eq("id", presupuesto_id).execute()
