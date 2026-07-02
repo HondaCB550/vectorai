@@ -986,6 +986,13 @@ def _get_denominaciones() -> list[dict]:
         if antes != len(todas):
             print(f"[v2] Descartados {antes - len(todas)} aliases basura (sin palabra 4+)")
 
+        # Ordenar por confianza desc: fuzz_process.extract trunca a top_n*3
+        # candidatos y en empates de score devuelve los primeros de la lista.
+        # Con este orden, los empates favorecen al alias más confiable ANTES
+        # del truncado (el sort por confianza de _match_v2 llega tarde si el
+        # alias correcto quedó fuera de la ventana).
+        todas.sort(key=lambda d: -(d.get("confianza") or 80))
+
         _den_cache = todas
         _den_cache_ts = ahora
         print(f"[v2] Cache denominaciones: {len(todas)} aliases cargados (con normalización)")
