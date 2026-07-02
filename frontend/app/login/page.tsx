@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 
 function LoginInner() {
   const router = useRouter();
@@ -33,10 +34,10 @@ function LoginInner() {
   return (
     <Suspense>
     <>
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <main className="min-h-screen bg-[#F5F0E8] flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full max-w-md p-10">
-          <Link href="/" className="text-xl font-bold text-gray-900 block mb-8">
-            VectorAI
+          <Link href="/" className="block mb-8">
+            <Logo />
           </Link>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Iniciar sesión</h1>
           <p className="text-gray-700 text-sm mb-8">

@@ -1,29 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F0E8;
+  --foreground: #1A2B4A;
+
+  /* Tokens de marca */
+  --brand-crema:    #F5F0E8;
+  --brand-navy:     #1A2B4A;
+  --brand-navy-900: #0F172A;
+  --brand-orange:   #E87022;
+  --brand-grey:     #4B5563;
+  --brand-win:      #059669;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Tipografía (las variables las inyecta next/font en layout.tsx) */
+  --font-sans:    var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), 'Space Grotesk', 'Inter', sans-serif;
+
+  /* ---- Remapeo del AZUL de Tailwind → NARANJA de marca ----
+     Todo bg-blue-600 / text-blue-600 / ring-blue-500 del código rinde
+     en naranja. No hay que editar los componentes. */
+  --color-blue-50:  #FEF4EC;
+  --color-blue-100: #FBE4D2;
+  --color-blue-200: #F7CBA8;
+  --color-blue-300: #F3AE79;
+  --color-blue-400: #F08A45;
+  --color-blue-500: #EC7B30;   /* ring de foco */
+  --color-blue-600: #E87022;   /* botones / links primarios */
+  --color-blue-700: #CF5E15;   /* hover */
+  --color-blue-800: #A94C11;
+  --color-blue-900: #8A3F0F;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--brand-grey);
+  font-family: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+h1, h2, h3 {
+  font-family: var(--font-display), 'Space Grotesk', 'Inter', sans-serif;
+  color: var(--brand-navy);
+  letter-spacing: -0.02em;
+}
+
+::selection { background: #E87022; color: #fff; }
 
 /* Texto oscuro por defecto en los controles de formulario, para que no se
    vuelvan ilegibles cuando el sistema está en modo oscuro (el fondo de los

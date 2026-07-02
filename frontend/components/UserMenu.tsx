@@ -35,7 +35,7 @@ export default function UserMenu() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(v => !v)}
-        className="w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center hover:bg-blue-700 transition"
+        className="w-8 h-8 rounded-full bg-[#1A2B4A] text-white text-sm font-bold flex items-center justify-center hover:bg-[#243a5e] transition"
         title={email}
       >
         {inicial}

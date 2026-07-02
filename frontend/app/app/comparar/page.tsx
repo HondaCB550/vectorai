@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
 import UserMenu from "@/components/UserMenu";
+import Logo from "@/components/Logo";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -367,12 +368,12 @@ export default function Comparar() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <>
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-[#F5F0E8]">
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-black text-gray-900 tracking-tight">
-          Vector<span className="text-blue-600">AI</span>
-          <span className="ml-1.5 text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
+        <Link href="/" className="flex items-center gap-1.5">
+          <Logo />
+          <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
         </Link>
         <div className="flex gap-3 items-center">
           <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
