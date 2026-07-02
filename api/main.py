@@ -35,7 +35,7 @@ if not DATA_DIR.exists():
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from detectar_proveedor import detectar_proveedor  # noqa: E402
-from extraer_pdf_texto import extraer               # noqa: E402
+from extraer_pdf_texto import extraer, _desc_es_codigo  # noqa: E402
 from matching import matchear_item                  # noqa: E402
 
 MASTER_JSON  = DATA_DIR / "master_materiales.json"
@@ -947,6 +947,15 @@ def _get_denominaciones() -> list[dict]:
         for d in todas:
             d["denominacion_norm"] = _prep_v2(d["denominacion"])
 
+        # Descartar aliases "basura": textos sin ninguna palabra real de 4+ letras
+        # (unidades/números/fragmentos como "m3", "h21", "1 x 1", "3*6"). Con
+        # token_set_ratio matchean CUALQUIER descripción que los contenga a score
+        # 100 y arruinan el matching (ej. "hormigón ... x m3" → alias "m3").
+        antes = len(todas)
+        todas = [d for d in todas if not _desc_es_codigo(d["denominacion_norm"])]
+        if antes != len(todas):
+            print(f"[v2] Descartados {antes - len(todas)} aliases basura (sin palabra 4+)")
+
         _den_cache = todas
         _den_cache_ts = ahora
         print(f"[v2] Cache denominaciones: {len(todas)} aliases cargados (con normalización)")
@@ -1005,8 +1014,10 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
             "confianza_alias":        den.get("confianza", 80),
         })
 
-    # Ordenar por score desc y devolver top_n
-    salida.sort(key=lambda x: -x["score"])
+    # Ordenar por score desc; en empate de score, preferir el alias de mayor
+    # confianza (evita quedarse con un alias contaminado que puntúa igual, ej.
+    # "hormigón h-21" empatado 100 entre CONS113=hormigón y CONS108=arena).
+    salida.sort(key=lambda x: (-x["score"], -x.get("confianza_alias", 80)))
     return salida[:top_n]
 
 
@@ -1336,7 +1347,9 @@ async def confirmar_v2(
                   .update({"frecuencia_encontrada": freq, "confianza": min(99, 80 + freq)}) \
                   .eq("id", existing.data[0]["id"]) \
                   .execute()
-            else:
+            elif not _desc_es_codigo(_prep_v2(desc_norm)):
+                # Solo crear alias NUEVO si tiene una palabra real (no unidades ni
+                # números): evita volver a contaminar la base con aliases basura.
                 sb.table("material_denominaciones").insert({
                     "codigo_material":      item.codigo_material,
                     "denominacion":         desc_norm,
