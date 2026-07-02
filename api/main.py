@@ -213,6 +213,36 @@ def _incrementar_uso(user_id: str, usos_actuales: int):
         print(f"_incrementar_uso error: {e}")
 
 
+# ── Proveedores (catálogo global) ─────────────────────────────────────────────
+_proveedores_cache: dict[str, str] = {}
+
+def _get_proveedor_id(sb: SupabaseClient | None, nombre: str) -> str | None:
+    """Devuelve el id del proveedor por nombre exacto; lo crea si no existe."""
+    nombre = (nombre or "").strip()
+    if not sb or not nombre:
+        return None
+    if nombre in _proveedores_cache:
+        return _proveedores_cache[nombre]
+    try:
+        res = sb.table("proveedores").select("id").eq("nombre", nombre).execute()
+        if res.data:
+            pid = res.data[0]["id"]
+        else:
+            try:
+                ins = sb.table("proveedores").insert({"nombre": nombre}).execute()
+                pid = ins.data[0]["id"] if ins.data else None
+            except Exception:
+                # Otro request lo creó en paralelo (nombre es UNIQUE): releer
+                res = sb.table("proveedores").select("id").eq("nombre", nombre).execute()
+                pid = res.data[0]["id"] if res.data else None
+        if pid:
+            _proveedores_cache[nombre] = pid
+        return pid
+    except Exception as e:
+        print(f"_get_proveedor_id('{nombre}') error: {e}")
+        return None
+
+
 # ── App FastAPI ───────────────────────────────────────────────────────────────
 app = FastAPI(title="VectorAI API", version="0.1.0")
 
@@ -1087,6 +1117,7 @@ async def analizar_v2(
 
     resultados = {}
     errores = []
+    presupuestos_creados: list[str] = []
 
     # Resolver un nombre de proveedor por bloque: todos los archivos de un mismo
     # bloque son el mismo proveedor. Si el usuario no lo nombró, se auto-detecta
@@ -1108,9 +1139,11 @@ async def analizar_v2(
             tmp.write(content)
             tmp_path = tmp.name
 
+        presupuesto_id = None
         try:
             cfg_archivo  = cfgs[file_idx] if file_idx < len(cfgs) else {}
             proveedor = nombre_por_bloque[cfg_archivo.get("bloque", file_idx)]
+            proveedor_id = _get_proveedor_id(sb, proveedor)
 
             resultado = extraer(tmp_path)
             items = resultado.get("items", [])
@@ -1120,6 +1153,24 @@ async def analizar_v2(
             # IVA y descuento son condiciones de cada operación, no del proveedor.
             fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
             desc_archivo = float(cfg_archivo.get("descuento", 0))
+
+            # Registrar el documento subido (solo logueados: user_id es NOT NULL)
+            if sb and user["user_id"] != "anonimo":
+                try:
+                    pres = sb.table("presupuestos").insert({
+                        "user_id":             user["user_id"],
+                        "proveedor_id":        proveedor_id,
+                        "proveedor_detectado": proveedor,
+                        "archivo":             f.filename,
+                        "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
+                        "factor_iva":          fac_archivo,
+                        "estado":              "PROCESANDO",
+                    }).execute()
+                    if pres.data:
+                        presupuesto_id = pres.data[0]["id"]
+                        presupuestos_creados.append(presupuesto_id)
+                except Exception as e:
+                    print(f"[v2] Error creando presupuesto para {f.filename}: {e}")
             def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
                 return round(pu / _fac * (1 - _desc / 100), 2)
 
@@ -1180,16 +1231,40 @@ async def analizar_v2(
                     sb.table("precios_historicos").insert([
                         {
                             "proveedor":       proveedor,
+                            "proveedor_id":    proveedor_id,
                             "codigo_material":  item["codigo_material"],
                             "unidad":          "UN",
                             "precio":          item["precio_sin_iva"],
                             "cantidad":        int(item.get("cant", 1)),
-                            "user_id":         user["user_id"] if user["user_id"] != "anonimo" else None,
+                            "pdf_origen":      f.filename,
                         }
                         for item in automatico
                     ]).execute()
                 except Exception as e:
                     print(f"[v2] Error guardando precios_historicos para {proveedor}: {e}")
+
+            # Guardar cada línea del PDF con su resultado de match
+            if sb and presupuesto_id:
+                try:
+                    filas = []
+                    for grupo, estado in ((automatico, "MATCH"), (dudoso, "REVISAR"), (sin_match, "SIN_MATCH")):
+                        for it in grupo:
+                            filas.append({
+                                "presupuesto_id":    presupuesto_id,
+                                "texto_original":    it["desc_prov"],
+                                "texto_normalizado": it["desc_prov"].strip().lower(),
+                                "cantidad":          it.get("cant", 1),
+                                "precio":            it["precio_sin_iva"],
+                                "codigo_material":   it.get("codigo_material"),
+                                "score_match":       int(round(float(it["score"]))) if it.get("score") is not None else None,
+                                "estado_match":      estado,
+                                "origen_match":      "fuzzy" if estado != "SIN_MATCH" else None,
+                            })
+                    if filas:
+                        sb.table("presupuesto_items").insert(filas).execute()
+                    sb.table("presupuestos").update({"estado": "PROCESADO"}).eq("id", presupuesto_id).execute()
+                except Exception as e:
+                    print(f"[v2] Error guardando presupuesto_items para {f.filename}: {e}")
 
             # Fusionar con lo ya acumulado del proveedor: un bloque puede tener
             # varios PDFs, y antes esto pisaba el resultado del archivo anterior.
@@ -1214,6 +1289,11 @@ async def analizar_v2(
 
         except Exception as e:
             errores.append({"archivo": f.filename, "error": str(e)})
+            if sb and presupuesto_id:
+                try:
+                    sb.table("presupuestos").update({"estado": "ERROR"}).eq("id", presupuesto_id).execute()
+                except Exception:
+                    pass
         finally:
             try:
                 os.unlink(tmp_path)
@@ -1245,6 +1325,15 @@ async def analizar_v2(
         user_id=user["user_id"],
         titulo=f"Análisis v2 — {', '.join(resultados.keys())} ({datetime.now().strftime('%d/%m/%Y')})"
     )
+
+    # Vincular los documentos procesados a su comparativa (la FK requiere que
+    # la fila de comparativas exista: solo se crea para usuarios logueados)
+    if sb and presupuestos_creados and user["user_id"] != "anonimo":
+        try:
+            sb.table("presupuestos").update({"comparativa_id": comparativa_id}) \
+              .in_("id", presupuestos_creados).execute()
+        except Exception as e:
+            print(f"[v2] Error vinculando presupuestos a comparativa: {e}")
 
     _incrementar_uso(user["user_id"], user["usos_hoy"])
 
@@ -1365,6 +1454,7 @@ async def confirmar_v2(
         try:
             sb.table("precios_historicos").insert({
                 "proveedor":      item.proveedor,
+                "proveedor_id":   _get_proveedor_id(sb, item.proveedor),
                 "codigo_material": item.codigo_material,
                 "unidad":         item.unidad,
                 "precio":         item.precio_sin_iva,
@@ -1391,6 +1481,7 @@ async def confirmar_v2(
                 pendiente_id = res.data[0]["id"]
                 sb.table("precios_historicos").insert({
                     "proveedor":      item.proveedor,
+                    "proveedor_id":   _get_proveedor_id(sb, item.proveedor),
                     "codigo_pendiente": pendiente_id,
                     "unidad":         item.unidad,
                     "precio":         item.precio_sin_iva,
