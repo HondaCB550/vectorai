@@ -491,6 +491,22 @@ def extraer_regex(texto: str) -> list[dict]:
 
 # ── Calidad de extracción (para elegir entre métodos) ─────────────────────────
 
+def _colapsar_tokens_doblados(texto: str) -> str:
+    """Colapsa tokens con todos los caracteres duplicados (render de negrita
+    de algunos PDFs): 'TToottaall' → 'Total', '5522,,8833' → '52,83'.
+    Solo toca tokens de largo par cuyas posiciones pares == impares."""
+    lineas = []
+    for linea in texto.splitlines():
+        toks = []
+        for t in linea.split(" "):
+            if len(t) >= 4 and len(t) % 2 == 0 and t[0::2] == t[1::2]:
+                toks.append(t[0::2])
+            else:
+                toks.append(t)
+        lineas.append(" ".join(toks))
+    return "\n".join(lineas)
+
+
 def _desc_es_codigo(desc: str) -> bool:
     """True si la 'descripción' parece en realidad un código de proveedor.
 
@@ -581,8 +597,14 @@ def extraer(pdf_path: str) -> dict:
     # Detectar IVA comparando suma de líneas vs total declarado en el PDF
     suma = sum(it["total"] for it in items)
     iva_detectado = "ASUMIDO 1,105"
-    # Acepta formato americano (52,885,396.83) y europeo (52.885.396,83)
-    rx_total = re.search(r"TOTAL[\s\$:]+([\d,]+\.\d{2}|[\d.]+,\d{2})", all_text, re.I)
+    # Algunos PDFs (EN SECO/GRUPO MMC) duplican cada carácter en los textos en
+    # negrita ("TToottaall $$ 5522..."): buscar también en la versión colapsada.
+    texto_busqueda = all_text + "\n" + _colapsar_tokens_doblados(all_text)
+    # Acepta formato americano (52,885,396.83) y europeo (52.885.396,83).
+    # Un solo patrón que exige el número COMPLETO: separadores de miles en
+    # grupos de 3 + exactamente 2 decimales (una alternación americana|europea
+    # capturaba el prefijo "52.88" de "52.885.396,83" y cortaba ahí).
+    rx_total = re.search(r"TOTAL[\s\$:]+(\d{1,3}(?:[.,]\d{3})*[.,]\d{2})\b", texto_busqueda, re.I)
     if rx_total:
         total_pdf = parse_num(rx_total.group(1))
         if abs(suma - total_pdf) < 1:
