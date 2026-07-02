@@ -1392,10 +1392,12 @@ async def analizar_v2(
                 except Exception:
                     pass
         finally:
-            try:
-                os.unlink(tmp_path)
-            except OSError:
-                pass
+            # tmp_path solo existe para PDFs (los demás tipos se procesan en memoria)
+            if tmp_path:
+                try:
+                    os.unlink(tmp_path)
+                except OSError:
+                    pass
 
     if not resultados:
         raise HTTPException(status_code=422, detail={"error": "sin_resultados", "errores": errores})
