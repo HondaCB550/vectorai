@@ -108,10 +108,18 @@ def _iva_por_total(items: list[dict], total_declarado: float) -> str:
     return "ASUMIDO 1,105"
 
 
+def _api_key_limpia() -> str:
+    """La key pegada en el hosting a veces arrastra caracteres invisibles
+    (zero-width spaces, NBSP) que rompen el header HTTP con un error ascii.
+    Nos quedamos solo con los caracteres imprimibles ASCII."""
+    raw = os.environ.get("ANTHROPIC_API_KEY") or ""
+    return "".join(c for c in raw if 32 < ord(c) < 127)
+
+
 def _extraer_claude(content: bytes, media_type: str) -> dict:
     import anthropic
 
-    client = anthropic.Anthropic()
+    client = anthropic.Anthropic(api_key=_api_key_limpia())
     b64 = base64.standard_b64encode(content).decode("utf-8")
     response = client.messages.create(
         model="claude-opus-4-8",
