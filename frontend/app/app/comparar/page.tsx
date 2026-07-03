@@ -623,25 +623,6 @@ export default function Comparar() {
               </div>
             )}
 
-            {/* Info de método de extracción (solo si hay algo para mostrar) */}
-            {Object.entries(resultado.resultados).some(([, r]) => r.n_items_extraidos > 0) && (
-              <div className="mb-4 flex flex-wrap gap-2">
-                {Object.entries(resultado.resultados).map(([prov, r]) => {
-                  const metodo = r.metodo_extraccion || "desconocido";
-                  const color = metodo === "tablas_bordes" ? "bg-green-100 text-green-700"
-                    : metodo === "tablas_texto" ? "bg-blue-100 text-blue-700"
-                    : metodo === "regex" ? "bg-amber-100 text-amber-700"
-                    : metodo === "lineas_heuristico" ? "bg-orange-100 text-orange-700"
-                    : "bg-gray-100 text-gray-500";
-                  return r.n_items_extraidos > 0 ? (
-                    <span key={prov} className={`text-xs font-medium px-2 py-1 rounded-full ${color}`}>
-                      {prov}: {r.n_items_extraidos} ítems · {metodo.replace("_", " ")}
-                    </span>
-                  ) : null;
-                })}
-              </div>
-            )}
-
             {/* KPIs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               {[
