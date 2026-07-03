@@ -3,7 +3,7 @@ export default function Footer() {
     <>
       {/* Footer */}
       <footer className="text-center py-10 text-sm text-gray-400 border-t border-gray-100">
-        <span className="font-bold text-[#1A2B4A]">Vector<span className="text-[#E87022]">ai</span></span> · Buenos Aires, Argentina
+        <span className="font-bold text-[#1A2B4A]">Vectorai</span> · Buenos Aires, Argentina
       </footer>
 
       {/* WhatsApp Button */}
