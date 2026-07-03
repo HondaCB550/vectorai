@@ -1,7 +1,10 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
+import { esAdmin } from "@/lib/admin";
+import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -45,13 +48,19 @@ export default function AdminPage() {
   const [filtroEstado, setFiltroEstado] = useState<"PENDIENTE" | "VALIDADO" | "RECHAZADO">("PENDIENTE");
   const [busqueda, setBusqueda]     = useState("");
   const [token, setToken]           = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const sb = createClient();
     sb.auth.getSession().then(({ data }) => {
+      // Solo administradores: los usuarios normales vuelven al comparador
+      if (!esAdmin(data.session?.user?.email)) {
+        router.replace("/app/comparar");
+        return;
+      }
       setToken(data.session?.access_token ?? null);
     });
-  }, []);
+  }, [router]);
 
   const cargar = useCallback(async () => {
     setLoading(true);
@@ -121,14 +130,28 @@ export default function AdminPage() {
     <main className="min-h-screen bg-gray-50">
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-black text-gray-900 tracking-tight">
-          Vector<span className="text-blue-600">AI</span>
-          <span className="ml-1.5 text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
+        <Link href="/" className="flex items-center gap-1.5">
+          <Logo />
+          <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
-          <Link href="/app/comparar" className="text-sm text-gray-500 hover:text-gray-900">Comparar</Link>
+          <Link href="/app/comparar" className="text-sm text-gray-500 hover:text-gray-900 transition">Comparar</Link>
+          <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
           <span className="text-sm font-medium text-blue-600">Admin</span>
+          <Link
+            href="/suscribirse"
+            className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
+          >
+            Mejorar plan
+          </Link>
+          <a
+            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
+            target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-3 py-1.5 rounded-lg"
+          >
+            Consultas
+          </a>
           <UserMenu />
         </div>
       </nav>

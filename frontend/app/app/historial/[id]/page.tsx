@@ -121,7 +121,8 @@ export default function ComparativaDetalle() {
   const filtradas =
     filtroRubro === "Todos" ? filas : filas.filter((r) => r.rubro === filtroRubro);
   const mostradas = soloComunes ? filtradas.filter((r) => r.en_varios) : filtradas;
-  const totalAhorro = mostradas.reduce((s, r) => s + r.ahorro, 0);
+  // El ahorro solo tiene sentido en ítems presentes en 2+ proveedores
+  const totalAhorro = mostradas.filter((r) => r.en_varios).reduce((s, r) => s + r.ahorro, 0);
 
   async function descargarExcel() {
     if (!token || !comparativa) return;
@@ -214,7 +215,7 @@ export default function ComparativaDetalle() {
             <p className="text-2xl font-bold text-green-600">{fmt(totalAhorro)}</p>
           </div>
           <div className="bg-white rounded-xl shadow-sm p-5 border-l-4 border-purple-500">
-            <p className="text-gray-600 text-sm">En varios proveedores</p>
+            <p className="text-gray-600 text-sm">Ítems comparables (cotizados por 2+ proveedores)</p>
             <p className="text-2xl font-bold text-gray-900">
               {mostradas.filter((r) => r.en_varios).length}
             </p>
@@ -229,6 +230,8 @@ export default function ComparativaDetalle() {
                 <tr>
                   <th className="px-5 py-3 text-left font-semibold text-gray-900">Material</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-900">Rubro</th>
+                  <th className="px-3 py-3 text-center font-semibold text-gray-900">Cant.</th>
+                  <th className="px-3 py-3 text-center font-semibold text-gray-900">Unidad</th>
                   {comparativa.proveedores.map((p) => (
                     <th key={p} className="px-5 py-3 text-left font-semibold text-gray-900">
                       {p}
@@ -243,8 +246,11 @@ export default function ComparativaDetalle() {
                   <tr key={row.cod_int} className="hover:bg-gray-50">
                     <td className="px-5 py-3 text-gray-900 font-medium">{row.material}</td>
                     <td className="px-5 py-3 text-gray-600">{row.rubro}</td>
+                    <td className="px-3 py-3 text-center text-gray-600">{row.cant || 1}</td>
+                    <td className="px-3 py-3 text-center text-gray-600">{row.unidad || "—"}</td>
                     {comparativa.proveedores.map((p) => {
                       const precio = row.precios[p];
+                      const cant = row.cant || 1;
                       return (
                         <td
                           key={p}
@@ -252,7 +258,14 @@ export default function ComparativaDetalle() {
                             row.mejor_proveedor === p ? "bg-green-50 font-semibold text-green-700" : "text-gray-600"
                           }`}
                         >
-                          {precio ? fmt(precio.precio_sin_iva) : "—"}
+                          {precio ? (
+                            <div>
+                              {fmt(precio.precio_sin_iva * cant)}
+                              {cant > 1 && (
+                                <div className="text-xs text-gray-400 font-normal">{fmt(precio.precio_sin_iva)}/u</div>
+                              )}
+                            </div>
+                          ) : "—"}
                         </td>
                       );
                     })}
@@ -265,7 +278,7 @@ export default function ComparativaDetalle() {
               </tbody>
               <tfoot className="bg-gray-50 border-t-2 border-gray-200">
                 <tr>
-                  <td colSpan={2} className="px-5 py-3 font-semibold text-gray-900">
+                  <td colSpan={4} className="px-5 py-3 font-semibold text-gray-900">
                     Total
                   </td>
                   <td colSpan={comparativa.proveedores.length + 2} className="px-5 py-3 text-right">

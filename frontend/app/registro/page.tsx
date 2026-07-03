@@ -121,7 +121,11 @@ function RegistroInner() {
   return (
     <>
     <main className="min-h-screen bg-[#F5F0E8] flex items-center justify-center px-4 py-10">
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full max-w-md p-10">
+      <div className="w-full max-w-md">
+      <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-[#1A2B4A] transition mb-4">
+        ← Volver al inicio
+      </Link>
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full p-10">
         <Link href="/" className="block mb-8"><Logo /></Link>
 
         {/* Indicador de pasos */}
@@ -257,6 +261,7 @@ function RegistroInner() {
             </div>
           </>
         )}
+      </div>
       </div>
     </main>
     <Footer />

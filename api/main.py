@@ -157,6 +157,30 @@ def get_supabase() -> SupabaseClient | None:
 
 _ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
 
+# Emails con acceso al panel /admin (coma-separados en env, con fallback)
+ADMIN_EMAILS = {
+    e.strip().lower()
+    for e in os.environ.get("ADMIN_EMAILS", "bontempopablo@gmail.com").split(",")
+    if e.strip()
+}
+
+
+def require_admin(authorization: Optional[str]) -> str:
+    """403 salvo que el token pertenezca a un email de ADMIN_EMAILS. Devuelve el email."""
+    if not authorization:
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    try:
+        u = sb.auth.get_user(authorization.removeprefix("Bearer ").strip())
+        email = (u.user.email or "").lower() if u.user else ""
+    except Exception:
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    if email not in ADMIN_EMAILS:
+        raise HTTPException(status_code=403, detail={"error": "forbidden", "mensaje": "Solo administradores."})
+    return email
+
 def get_user_plan(authorization: Optional[str]) -> dict:
     """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N, 'limite': N}.
 
@@ -1614,9 +1638,7 @@ async def admin_pendientes(
     limit: int = 50,
 ):
     """Lista materiales pendientes de validación. Solo admin."""
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
 
     sb = get_supabase()
     if not sb:
@@ -1649,9 +1671,7 @@ async def admin_validar_pendiente(
     - rechazar: marca RECHAZADO (duplicado o irrelevante)
     - crear: marca para creación manual (queda como VALIDADO sin codigo_material)
     """
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
@@ -1718,9 +1738,7 @@ async def admin_validar_pendiente(
 # ── Admin: sinónimos ──────────────────────────────────────────────────────────
 @app.get("/admin/sinonimos")
 async def admin_listar_sinonimos(authorization: Optional[str] = Header(None)):
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
@@ -1740,9 +1758,7 @@ async def admin_upsert_sinonimo(
     req: SinonimoRequest,
     authorization: Optional[str] = Header(None),
 ):
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
@@ -1761,9 +1777,7 @@ async def admin_upsert_sinonimo(
 # ── Admin: grupos de marcas ────────────────────────────────────────────────────
 @app.get("/admin/grupos-marcas")
 async def admin_listar_grupos_marcas(authorization: Optional[str] = Header(None)):
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
@@ -1783,9 +1797,7 @@ async def admin_upsert_grupo_marca(
     req: GrupoMarcaRequest,
     authorization: Optional[str] = Header(None),
 ):
-    user = get_user_plan(authorization)
-    if user["user_id"] == "anonimo":
-        raise HTTPException(status_code=403, detail={"error": "forbidden"})
+    require_admin(authorization)
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})

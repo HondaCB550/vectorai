@@ -1,7 +1,8 @@
 /* Logo oficial VectorAI: isotipo embudo + wordmark "Vectorai".
    Usalo en login, registro, el nav del comparador y el footer.
    - dark: para fondos oscuros (barras blancas en vez de navy).
-   - El "ai" va en minúscula y naranja: destaca por color, no por tamaño. */
+   - El "ai" va en minúscula y azul navy (pedido de Pablo 03-07-2026;
+     antes iba en naranja). En fondos oscuros va celeste para contraste. */
 export default function Logo({
   dark = false,
   className = "",
@@ -21,7 +22,7 @@ export default function Logo({
         <rect x="40" y="70" width="20" height="13" rx="6.5" fill="#E87022" />
       </svg>
       <span style={{ color: dark ? "#ffffff" : "#1A2B4A" }}>
-        Vector<span style={{ color: "#E87022" }}>ai</span>
+        Vector<span style={{ color: dark ? "#7EA8E8" : "#2E5DB8" }}>ai</span>
       </span>
     </span>
   );

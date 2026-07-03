@@ -286,16 +286,15 @@ export default function Landing() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
-                { emoji: "📎", n: "1", titulo: "Subís los PDFs", desc: "Arrastrás el presupuesto de cada proveedor en la web, o se los mandás a nuestro WhatsApp." },
-                { emoji: "🤖", n: "2", titulo: "La IA los lee", desc: "Extrae ítems, precios y unidades de forma automática. No tocás nada." },
-                { emoji: "🔗", n: "3", titulo: "Los cruza solo", desc: 'Entiende que "Perfil C 70" y "Perfil galv. 70x35" son lo mismo.' },
-                { emoji: "📊", n: "4", titulo: "Comparativa lista", desc: "Tabla con el mejor precio por ítem. Descargable en Excel al instante." },
+                { n: "1", titulo: "Subís los PDFs", desc: "Arrastrás el presupuesto de cada proveedor en la web, o se los mandás a nuestro WhatsApp." },
+                { n: "2", titulo: "La IA los lee", desc: "Extrae ítems, precios y unidades de forma automática. No tocás nada." },
+                { n: "3", titulo: "Los cruza solo", desc: 'Entiende que "Perfil C 70" y "Perfil galv. 70x35" son lo mismo.' },
+                { n: "4", titulo: "Comparativa lista", desc: "Tabla con el mejor precio por ítem. Descargable en Excel al instante." },
               ].map((s) => (
                 <div key={s.n} className="relative bg-white rounded-2xl shadow-sm p-8 overflow-hidden">
                   <div className="absolute -top-3 -right-2 text-8xl font-bold text-[#E87022]/[0.07] leading-none select-none pointer-events-none">
                     {s.n}
                   </div>
-                  <div className="text-4xl mb-3">{s.emoji}</div>
                   <div className="w-10 h-10 bg-[#E87022] text-white rounded-full flex items-center justify-center text-lg font-bold mb-5">
                     {s.n}
                   </div>
@@ -335,12 +334,12 @@ export default function Landing() {
 
         {/* Pricing */}
         <section className="py-24 px-6" id="pricing">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-[#1A2B4A] tracking-tight mb-4">Precios sin vueltas</h2>
               <p className="text-lg text-gray-600">Arrancás gratis. Si te sirve, te suscribís.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Free */}
               <div className="bg-white rounded-3xl border-2 border-gray-200 p-8">
                 <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Gratis 🙌</div>
@@ -360,6 +359,27 @@ export default function Landing() {
                 </ul>
                 <Link href="/registro" className="block text-center border-2 border-[#1A2B4A] text-[#1A2B4A] font-bold py-3.5 rounded-full hover:bg-[#1A2B4A] hover:text-white transition">
                   Empezar gratis
+                </Link>
+              </div>
+
+              {/* Inicial — contenido provisorio, Pablo define el detalle */}
+              <div className="bg-white rounded-3xl border-2 border-[#E87022]/40 p-8">
+                <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Inicial 🧰</div>
+                <div className="text-4xl font-bold text-[#1A2B4A] mb-1">$18.000<span className="text-xl font-normal text-gray-400">/mes</span></div>
+                <p className="text-gray-400 text-xs mb-8">Pesos argentinos · IVA incluido</p>
+                <ul className="space-y-3 text-sm text-gray-600 mb-8">
+                  {[
+                    "✅ Todo lo del plan gratis",
+                    "✅ Más comparativas por mes",
+                    "✅ Historial de comparativas",
+                    "✅ Revisión de ítems dudosos",
+                    "❌ Sin funcionalidades avanzadas",
+                  ].map((f) => (
+                    <li key={f} className="flex gap-2 leading-snug">{f}</li>
+                  ))}
+                </ul>
+                <Link href="/suscribirse" className="block text-center border-2 border-[#E87022] text-[#E87022] font-bold py-3.5 rounded-full hover:bg-[#E87022] hover:text-white transition">
+                  Quiero el Inicial
                 </Link>
               </div>
 

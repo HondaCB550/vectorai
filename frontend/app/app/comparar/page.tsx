@@ -2,6 +2,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
+import { esAdmin } from "@/lib/admin";
 import Footer from "@/components/Footer";
 import UserMenu from "@/components/UserMenu";
 import Logo from "@/components/Logo";
@@ -96,10 +97,13 @@ function fmt(v: number) {
   return `$ ${Math.round(v).toLocaleString("es-AR")}`;
 }
 
-function aplicarFactores(v: number, conIva: boolean, descPct: number) {
-  const iva  = conIva ? 1.105 : 1;
+// Precio a mostrar: el neto siempre es la base; "Con IVA" reconstruye el
+// precio con el factor PROPIO de cada proveedor (nunca un factor uniforme,
+// si no a los que ya cotizaron con IVA se les suma de nuevo).
+function precioMostrado(neto: number, factorIva: number, conIva: boolean, descPct: number) {
+  const iva  = conIva ? (factorIva || 1.105) : 1;
   const desc = descPct > 0 ? (1 - descPct / 100) : 1;
-  return v * iva * desc;
+  return neto * iva * desc;
 }
 
 function pctDiferencia(precios: Record<string, { precio_sin_iva: number }>, cant: number): number {
@@ -139,6 +143,7 @@ export default function Comparar() {
   const [confirmando, setConfirmando] = useState(false);
   const [confirmado, setConfirmado]   = useState(false);
   const [token, setToken]             = useState<string | null>(null);
+  const [soyAdmin, setSoyAdmin]       = useState(false);
 
   // Estado editable de dudosos: usuario puede elegir alternativa
   const [dudososEditados, setDudososEditados] = useState<
@@ -157,6 +162,7 @@ export default function Comparar() {
     const sb = createClient();
     sb.auth.getSession().then(({ data }) => {
       setToken(data.session?.access_token ?? null);
+      setSoyAdmin(esAdmin(data.session?.user?.email));
     });
   }, []);
 
@@ -330,7 +336,7 @@ export default function Comparar() {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      await fetch(`${API_URL}/confirmar-v2`, {
+      const res = await fetch(`${API_URL}/confirmar-v2`, {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -339,9 +345,89 @@ export default function Comparar() {
           sin_match: sin_match_items,
         }),
       });
+      if (!res.ok) {
+        alert("No se pudo guardar la confirmación. Probá de nuevo.");
+        return;
+      }
+
+      // Integrar en pantalla lo que el usuario resolvió: los dudosos
+      // matcheados pasan a la comparativa (y desaparecen de Dudosos),
+      // los marcados "ninguno corresponde" pasan a Sin match.
+      setResultado((prev) => {
+        if (!prev) return prev;
+        const comparativo = prev.comparativo.map((r) => ({ ...r, precios: { ...r.precios } }));
+        const idxPorCodigo = new Map(comparativo.map((r, i) => [r.cod_int, i] as const));
+        const nuevosResultados: typeof prev.resultados = {};
+
+        for (const [prov, r] of Object.entries(prev.resultados)) {
+          const nuevosSinMatch = [...r.sin_match];
+          let movidos = 0;
+          r.dudoso.forEach((item, idx) => {
+            const elegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
+            if (elegido === SIN_MATCH) {
+              nuevosSinMatch.push({
+                desc_prov: item.desc_prov, cod_prov: item.cod_prov,
+                precio_sin_iva: item.precio_sin_iva, precio_con_iva: item.precio_con_iva,
+                cant: item.cant, item_id: item.item_id,
+              });
+              return;
+            }
+            movidos++;
+            const opciones = [
+              { codigo_material: item.codigo_material, denominacion: item.denominacion_principal || item.denominacion_matcheada, descripcion: item.descripcion },
+              ...item.alternativas,
+            ];
+            const alt = opciones.find((a) => a.codigo_material === elegido);
+            const material = alt
+              ? `${alt.denominacion}${alt.descripcion ? " — " + alt.descripcion : ""}`
+              : elegido;
+            const precioNuevo = { precio_sin_iva: item.precio_sin_iva, score: item.score, origen: "usuario", cant: item.cant };
+            const i = idxPorCodigo.get(elegido);
+            if (i !== undefined) {
+              comparativo[i].precios[prov] = precioNuevo;
+            } else {
+              idxPorCodigo.set(elegido, comparativo.length);
+              comparativo.push({
+                cod_int: elegido, rubro: item.categoria || "", material,
+                unidad: "UN", cant: item.cant, precios: { [prov]: precioNuevo },
+                mejor_proveedor: prov, ahorro: 0, en_varios: false,
+              });
+            }
+          });
+          const total = Math.max(1, r.stats.total);
+          nuevosResultados[prov] = {
+            ...r,
+            dudoso: [],
+            sin_match: nuevosSinMatch,
+            stats: {
+              ...r.stats,
+              automatico: r.stats.automatico + movidos,
+              dudoso: 0,
+              sin_match: nuevosSinMatch.length,
+              pct_automatico: Math.round(100 * (r.stats.automatico + movidos) / total),
+            },
+          };
+        }
+
+        // Recalcular mejor proveedor y en_varios con las filas nuevas
+        for (const row of comparativo) {
+          const provs = Object.keys(row.precios);
+          row.en_varios = provs.length >= 2;
+          if (provs.length) {
+            row.mejor_proveedor = provs.reduce(
+              (best, p) => (row.precios[p].precio_sin_iva < row.precios[best].precio_sin_iva ? p : best),
+              provs[0]
+            );
+          }
+        }
+
+        return { ...prev, comparativo, resultados: nuevosResultados };
+      });
+      setDudososEditados({});
+      setTab("comparativa");
       setConfirmado(true);
     } catch {
-      // no bloqueante
+      alert("No se pudo guardar la confirmación. Revisá tu conexión y probá de nuevo.");
     } finally {
       setConfirmando(false);
     }
@@ -386,9 +472,25 @@ export default function Comparar() {
     .filter((r) => !soloComunes || r.en_varios)
     .filter((r) => !soloDifGrande || pctDiferencia(r.precios, r.cant || 1) >= 25) ?? [];
 
-  const ahorroTotal = filasFiltradas.reduce(
-    (s, r) => s + aplicarFactores(r.ahorro || 0, conIva, descuentoPct), 0
-  );
+  // Ahorro de una fila: diferencia entre el proveedor más caro y el más barato
+  // con los precios TAL COMO SE MUESTRAN (IVA por proveedor + descuento).
+  // Solo cuenta si el ítem está en varios proveedores — con un solo presupuesto
+  // no hay ahorro comparable.
+  function ahorroFila(row: FilaComparativa): number {
+    if (!row.en_varios || !resultado) return 0;
+    const totales = resultado.proveedores
+      .map((p) => {
+        const pr = row.precios[p];
+        if (!pr) return null;
+        const factor = resultado.config_proveedores?.[p]?.factor_iva || 1.105;
+        return precioMostrado(pr.precio_sin_iva, factor, conIva, descuentoPct) * (row.cant || 1);
+      })
+      .filter((v): v is number => v !== null);
+    if (totales.length < 2) return 0;
+    return Math.max(...totales) - Math.min(...totales);
+  }
+
+  const ahorroTotal = filasFiltradas.reduce((s, r) => s + ahorroFila(r), 0);
 
   const totalDudosos  = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.dudoso.length, 0) : 0;
   const totalSinMatch = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.sin_match.length, 0) : 0;
@@ -410,7 +512,9 @@ export default function Comparar() {
         <div className="flex gap-3 items-center">
           <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
-          <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
+          {soyAdmin && (
+            <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
+          )}
           <Link
             href="/suscribirse"
             className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
@@ -524,11 +628,11 @@ export default function Comparar() {
                     </div>
                   )}
 
-                  {/* Agregar PDFs al bloque */}
+                  {/* Agregar PDFs al bloque: label completo solo si está vacío */}
                   <div className="px-4 py-2.5">
-                    <label className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 cursor-pointer w-fit">
+                    <label className={`flex items-center gap-1.5 text-xs cursor-pointer w-fit ${b.files.length > 0 ? "text-gray-400 hover:text-blue-600" : "text-blue-600 hover:text-blue-800"}`}>
                       <span>＋</span>
-                      <span>Agregar PDF / foto / planilla</span>
+                      <span>{b.files.length > 0 ? "Agregar otro archivo" : "Agregar PDF / foto / planilla"}</span>
                       <input
                         type="file" accept="application/pdf,image/*,.xlsx,.xls,.csv,.tiff,.tif" multiple className="hidden"
                         onChange={(e) => addFilesToBloque(bi, Array.from(e.target.files || []))}
@@ -758,6 +862,7 @@ export default function Comparar() {
                       <tr className="bg-gray-50 border-b border-gray-200">
                         <th className="text-left px-4 py-3 font-semibold text-gray-600 min-w-[240px]">Material</th>
                         <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Cant.</th>
+                        <th className="px-3 py-3 font-semibold text-gray-600 text-xs uppercase">Unidad</th>
                         {resultado.proveedores.map((p) => {
                           const cfg = resultado.config_proveedores?.[p];
                           return (
@@ -791,12 +896,16 @@ export default function Comparar() {
                             <div className="text-xs text-gray-400">{row.rubro}</div>
                           </td>
                           <td className="px-3 py-3 text-center text-xs text-gray-500">
-                            {row.cant > 1 ? `${row.cant} ${row.unidad}` : row.unidad}
+                            {row.cant || 1}
+                          </td>
+                          <td className="px-3 py-3 text-center text-xs text-gray-500">
+                            {row.unidad || "—"}
                           </td>
                           {resultado.proveedores.map((p) => {
                             const precio = row.precios[p];
                             const esMejor = row.mejor_proveedor === p && row.en_varios;
-                            const precioU = precio ? aplicarFactores(precio.precio_sin_iva, conIva, descuentoPct) : null;
+                            const factorProv = resultado.config_proveedores?.[p]?.factor_iva || 1.105;
+                            const precioU = precio ? precioMostrado(precio.precio_sin_iva, factorProv, conIva, descuentoPct) : null;
                             const total   = precioU !== null ? precioU * (row.cant || 1) : null;
                             return (
                               <td key={p} className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}>
@@ -819,10 +928,15 @@ export default function Comparar() {
                             )}
                           </td>
                           <td className="px-4 py-3 text-center text-xs">
-                            {row.ahorro > 0 && (
+                            {ahorroFila(row) > 0 && (
                               <div className={granDif ? "text-amber-700 font-semibold" : "text-gray-400"}>
-                                {fmt(aplicarFactores(row.ahorro, conIva, descuentoPct))}
+                                {fmt(ahorroFila(row))}
                                 {granDif && <div className="text-amber-500 font-bold">↕ {difPct}%</div>}
+                                {difPct >= 200 && (
+                                  <div className="text-red-500 font-semibold" title="Diferencia enorme: puede ser un problema de unidades (ej. caja vs unidad)">
+                                    ⚠ ¿unidad?
+                                  </div>
+                                )}
                               </div>
                             )}
                           </td>
