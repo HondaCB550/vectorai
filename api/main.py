@@ -1818,10 +1818,29 @@ async def admin_upsert_grupo_marca(
 def health():
     master = get_master()
     den = _get_denominaciones()
+
+    # Diagnóstico de OCR sin exponer secretos: motor configurado, largo de la
+    # key (post-sanitización) y huella sha256 corta para comparar con la real.
+    import hashlib
+    from extraer_imagen import ocr_disponible, _api_key_limpia
+    key = _api_key_limpia()
+    ocr = {
+        "motor": ocr_disponible(),
+        "key_len": len(key),
+        "key_hash": hashlib.sha256(key.encode()).hexdigest()[:8] if key else None,
+    }
+    try:
+        from sheets import sheets_disponible
+        sheets_ok = sheets_disponible()
+    except Exception:
+        sheets_ok = False
+
     return {
         "status": "ok",
         "master_items": len(master),
         "aliases_v2": len(den),
         "sinonimos_bd": len(_sin_extra),
         "grupos_marcas_bd": len(_grupos_extra),
+        "ocr": ocr,
+        "sheets_export": sheets_ok,
     }
