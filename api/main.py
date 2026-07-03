@@ -1291,6 +1291,25 @@ async def analizar_v2(
                 mejor = matches[0]
                 mat   = materiales_dict.get(mejor["codigo_material"], {})
 
+                # Alternativas sin repetir código (varios aliases pueden apuntar
+                # al mismo material) y con descripción para que el usuario pueda
+                # distinguir materiales con la misma denominación (ej. CABLE 1MM
+                # vs CABLE 2,5MM).
+                alternativas = []
+                codigos_vistos = {mejor["codigo_material"]}
+                for m in matches[1:]:
+                    cod_alt = m["codigo_material"]
+                    if cod_alt in codigos_vistos:
+                        continue
+                    codigos_vistos.add(cod_alt)
+                    mat_alt = materiales_dict.get(cod_alt, {})
+                    alternativas.append({
+                        "codigo_material": cod_alt,
+                        "denominacion":    mat_alt.get("denominacion_principal", m["denominacion_matcheada"]),
+                        "descripcion":     mat_alt.get("descripcion", ""),
+                        "score":           m["score"],
+                    })
+
                 entry = {
                     **base,
                     "codigo_material":       mejor["codigo_material"],
@@ -1300,14 +1319,7 @@ async def analizar_v2(
                     "categoria":             mat.get("categoria", ""),
                     "denominacion_principal": mat.get("denominacion_principal", ""),
                     "descripcion":           mat.get("descripcion", ""),
-                    "alternativas": [
-                        {
-                            "codigo_material": m["codigo_material"],
-                            "denominacion":    materiales_dict.get(m["codigo_material"], {}).get("denominacion_principal", m["denominacion_matcheada"]),
-                            "score":           m["score"],
-                        }
-                        for m in matches[1:]
-                    ],
+                    "alternativas":          alternativas,
                 }
 
                 if mejor["nivel"] == "automatico":

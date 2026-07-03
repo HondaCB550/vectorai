@@ -9,7 +9,7 @@ import Logo from "@/components/Logo";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
-type Alternativa = { codigo_material: string; denominacion: string; score: number };
+type Alternativa = { codigo_material: string; denominacion: string; descripcion?: string; score: number };
 
 type ItemAutomatico = {
   desc_prov: string;
@@ -672,7 +672,7 @@ export default function Comparar() {
 
             {/* Stats por proveedor */}
             <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-hidden">
-              <div className="grid grid-cols-[1fr_auto_auto_auto_auto] gap-x-6 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-400 uppercase tracking-wide">
+              <div className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-400 uppercase tracking-wide">
                 <span>Proveedor</span>
                 <span className="text-center">Extraídos</span>
                 <span className="text-center">Auto</span>
@@ -683,7 +683,7 @@ export default function Comparar() {
                 const pct = r.stats.pct_automatico;
                 const barColor = pct >= 80 ? "bg-green-500" : pct >= 60 ? "bg-amber-400" : "bg-red-400";
                 return (
-                  <div key={prov} className="grid grid-cols-[1fr_auto_auto_auto_auto] gap-x-6 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
+                  <div key={prov} className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
                     <div>
                       <div className="text-sm font-semibold text-gray-800">{prov}</div>
                       <div className="flex items-center gap-2 mt-1">
@@ -876,11 +876,13 @@ export default function Comparar() {
                               <div className="mt-3">
                                 <div className="text-xs text-gray-500 mb-1.5">¿A qué material corresponde?</div>
                                 <div className="flex flex-col gap-1.5">
-                                  {/* La sugerida */}
+                                  {/* La sugerida + alternativas, sin códigos repetidos */}
                                   {[
-                                    { codigo_material: item.codigo_material, denominacion: item.denominacion_principal || item.denominacion_matcheada, score: item.score },
+                                    { codigo_material: item.codigo_material, denominacion: item.denominacion_principal || item.denominacion_matcheada, descripcion: item.descripcion, score: item.score },
                                     ...item.alternativas,
-                                  ].map((alt) => {
+                                  ].filter((alt, i, arr) =>
+                                    arr.findIndex((a) => a.codigo_material === alt.codigo_material) === i
+                                  ).map((alt) => {
                                     const elegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
                                     const isSelected = elegido === alt.codigo_material;
                                     return (
@@ -899,9 +901,13 @@ export default function Comparar() {
                                         <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
                                           isSelected ? "border-blue-500 bg-blue-500" : "border-gray-300"
                                         }`} />
-                                        <span className="flex-1 truncate">{alt.denominacion}</span>
+                                        <span className="flex-1 truncate">
+                                          {alt.denominacion}
+                                          {alt.descripcion ? (
+                                            <span className={isSelected ? "text-blue-500" : "text-gray-400"}> — {alt.descripcion}</span>
+                                          ) : null}
+                                        </span>
                                         <ScoreBadge score={alt.score} />
-                                        <span className="text-xs text-gray-400 flex-shrink-0">{alt.codigo_material}</span>
                                       </button>
                                     );
                                   })}
