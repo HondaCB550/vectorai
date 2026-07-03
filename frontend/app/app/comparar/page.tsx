@@ -29,6 +29,10 @@ type ItemAutomatico = {
 
 type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
 
+// Sentinela para "ninguna alternativa corresponde": el ítem se confirma como
+// sin match (va a materiales_pendientes) en vez de aprender un código erróneo.
+const SIN_MATCH = "__sin_match__";
+
 type ItemSinMatch = {
   desc_prov: string;
   cod_prov: string;
@@ -286,9 +290,20 @@ export default function Comparar() {
           item_id:         item.item_id ?? null,
         });
       }
-      // Items dudosos con el código que el usuario eligió
+      // Items dudosos con el código que el usuario eligió; si marcó que
+      // ninguno corresponde, va como sin match (cola de pendientes)
       r.dudoso.forEach((item, idx) => {
         const codigoElegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
+        if (codigoElegido === SIN_MATCH) {
+          sin_match_items.push({
+            desc_prov:      item.desc_prov,
+            proveedor:      prov,
+            precio_sin_iva: item.precio_sin_iva,
+            unidad:         "UN",
+            item_id:        item.item_id ?? null,
+          });
+          return;
+        }
         confirmados.push({
           desc_prov:       item.desc_prov,
           proveedor:       prov,
@@ -881,6 +896,29 @@ export default function Comparar() {
                                       </button>
                                     );
                                   })}
+                                  {/* Ninguna alternativa corresponde → dejar sin match */}
+                                  {(() => {
+                                    const elegido = dudososEditados[prov]?.[idx] ?? item.codigo_material;
+                                    const isSelected = elegido === SIN_MATCH;
+                                    return (
+                                      <button
+                                        onClick={() => setDudososEditados((prev) => ({
+                                          ...prev,
+                                          [prov]: { ...prev[prov], [idx]: SIN_MATCH },
+                                        }))}
+                                        className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg border text-sm transition ${
+                                          isSelected
+                                            ? "border-gray-500 bg-gray-100 text-gray-800"
+                                            : "border-dashed border-gray-300 hover:border-gray-400 text-gray-500"
+                                        }`}
+                                      >
+                                        <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
+                                          isSelected ? "border-gray-500 bg-gray-500" : "border-gray-300"
+                                        }`} />
+                                        <span className="flex-1">✕ Ninguno corresponde — dejar sin match</span>
+                                      </button>
+                                    );
+                                  })()}
                                 </div>
                               </div>
                             </div>
