@@ -183,18 +183,22 @@ def get_user_plan(authorization: Optional[str]) -> dict:
             return dict(_ANONIMO)
 
         mes = datetime.now().strftime("%Y-%m")
-        perfil = sb.table("perfiles").select("plan,usos_mes,limite_mes,mes_usos").eq("id", user_id).single().execute()
-        if not perfil.data:
-            # Crear perfil si el trigger no lo hizo
+        # OJO: .single() LANZA excepción con 0 filas (PGRST116) en vez de devolver
+        # data=None, así que el auto-create nunca corría y el usuario quedaba
+        # degradado a anónimo. limit(1) devuelve lista (vacía si no hay perfil).
+        perfil = sb.table("perfiles").select("plan,usos_mes,limite_mes,mes_usos").eq("id", user_id).limit(1).execute()
+        row = (perfil.data or [None])[0]
+        if not row:
+            # Crear perfil si el trigger no lo hizo (cuentas pre-trigger)
             sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_mes": 0, "mes_usos": mes}).execute()
             return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": 2}
 
-        plan   = perfil.data.get("plan") or "free"
-        usos   = perfil.data.get("usos_mes") or 0
-        limite = perfil.data.get("limite_mes") or 2
+        plan   = row.get("plan") or "free"
+        usos   = row.get("usos_mes") or 0
+        limite = row.get("limite_mes") or 2
 
         # Resetear contador si es un nuevo mes
-        if (perfil.data.get("mes_usos") or "") != mes:
+        if (row.get("mes_usos") or "") != mes:
             sb.table("perfiles").update({"usos_mes": 0, "mes_usos": mes}).eq("id", user_id).execute()
             usos = 0
 
