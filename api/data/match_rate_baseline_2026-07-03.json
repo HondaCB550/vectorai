@@ -1,0 +1,1470 @@
+{
+ "resumen": [
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "metodo": "regex",
+   "items": 46,
+   "auto": 33,
+   "dudoso": 13,
+   "sin_match": 0,
+   "pct_auto": 71.7
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "metodo": "tablas_texto",
+   "items": 133,
+   "auto": 44,
+   "dudoso": 36,
+   "sin_match": 53,
+   "pct_auto": 33.1
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "metodo": "regex",
+   "items": 40,
+   "auto": 34,
+   "dudoso": 6,
+   "sin_match": 0,
+   "pct_auto": 85.0
+  },
+  {
+   "pdf": "SAUCE SOLO - SANITARIOS.pdf",
+   "metodo": "desconocido",
+   "items": 0,
+   "auto": 0,
+   "dudoso": 0,
+   "sin_match": 0,
+   "pct_auto": 0
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "metodo": "tablas_texto",
+   "items": 85,
+   "auto": 34,
+   "dudoso": 39,
+   "sin_match": 12,
+   "pct_auto": 40.0
+  },
+  {
+   "pdf": "CAROSIO - GRUESO.pdf",
+   "metodo": "regex",
+   "items": 26,
+   "auto": 26,
+   "dudoso": 0,
+   "sin_match": 0,
+   "pct_auto": 100.0
+  },
+  {
+   "pdf": "SAUCE SOLO - M. GRUESO.pdf",
+   "metodo": "regex",
+   "items": 18,
+   "auto": 18,
+   "dudoso": 0,
+   "sin_match": 0,
+   "pct_auto": 100.0
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "metodo": "regex",
+   "items": 63,
+   "auto": 58,
+   "dudoso": 5,
+   "sin_match": 0,
+   "pct_auto": 92.1
+  },
+  {
+   "pdf": "Baukraft - 27.04.pdf",
+   "metodo": "regex",
+   "items": 19,
+   "auto": 18,
+   "dudoso": 1,
+   "sin_match": 0,
+   "pct_auto": 94.7
+  },
+  {
+   "pdf": "Carosio corralón 27_04.pdf",
+   "metodo": "regex",
+   "items": 23,
+   "auto": 23,
+   "dudoso": 0,
+   "sin_match": 0,
+   "pct_auto": 100.0
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "metodo": "tablas_texto",
+   "items": 61,
+   "auto": 31,
+   "dudoso": 27,
+   "sin_match": 3,
+   "pct_auto": 50.8
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "metodo": "tablas_texto",
+   "items": 41,
+   "auto": 10,
+   "dudoso": 29,
+   "sin_match": 2,
+   "pct_auto": 24.4
+  }
+ ],
+ "no_automaticos": [
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "ESP DE POL C/ALUM. 2 CARAS 10 MM 1,00 X 20 MTS",
+   "mejor": "INSTE042 (72.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "PLACA OSB APA 11,1 MM 1,22 X 2,44 MTS",
+   "mejor": "EST101 (81.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "CINTA PATAGONICO 48 MM X 25 MTS",
+   "mejor": "EST110 (68.1)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. HEX. PM 10 X 3/4\"",
+   "mejor": "T001 (76.6)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. T1 PM 8 X 1/2\"",
+   "mejor": "T002 (72.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. T2 PA 6 X 1\"",
+   "mejor": "T003 (66.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. T2 PM 6 X 1 1/8\"",
+   "mejor": "T010 (76.9)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. C/ALAS 8 X 1 1/4\"",
+   "mejor": "T005 (78.3)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. T3 PA 6 X 1 1/2\"",
+   "mejor": "T012 (72.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. T4 PA 6 X 2\"",
+   "mejor": "T009 (66.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "[IRON CIWH35KX] TORN. HEX. PM MAX 14 X 1 1/2\" C/ARAN.",
+   "mejor": "T011 (66.7)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "PLACA EPS 30 MM DENS. 20 KG 1,00 X 1,00 MTS",
+   "mejor": "TER112 (83.6)"
+  },
+  {
+   "pdf": "EN SECO - STEEL FRAME.pdf",
+   "nivel": "dudoso",
+   "texto": "TORN. HEX. PM 14 X 5\" C/ARAN.",
+   "mejor": "T001 (66.7)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "60-100020000",
+   "mejor": "HIE018 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "60-100025000",
+   "mejor": "HIE018 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "60-100032000",
+   "mejor": "HIE018 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "V1515 REJILL",
+   "mejor": "HIE040 (51.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "520014 BIODI",
+   "mejor": "INSTS001 (66.7)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "C AM04 CAMA",
+   "mejor": "CLIM116 (60.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "CAMARA DESENG",
+   "mejor": "INSTS008 (71.4)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "01110063141 P.DE",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "ONGADOR PVC G",
+   "mejor": "TER218 (61.5)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "RA REGISTRO LOD",
+   "mejor": "INSTS128 (73.7)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "ACENTRIFUGA F",
+   "mejor": "INSTS013 (74.1)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "EQUIP. PRESURIZ",
+   "mejor": "INSTS016 (68.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "PLAS MEJOR AGU",
+   "mejor": "INSTS008 (58.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "COCDO HDEA 40 SA 4C5",
+   "mejor": "INSTS216 (74.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-090045050",
+   "mejor": "INSTS188 (48.9)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-090045110",
+   "mejor": "INSTS187 (52.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-091045040",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-091045063",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-091045110",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-091090040",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-090090040",
+   "mejor": "INSTS143 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-090090050",
+   "mejor": "INSTS144 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-090090063",
+   "mejor": "INSTS145 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-097110363",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-165050000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-165063000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-165110000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-340110000",
+   "mejor": "HIE018 (50.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-340063000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-340040000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-351063540",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-342063000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "10-610400000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-120020000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-120025000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-120032000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-120050000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-340020000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-340025000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-090090020",
+   "mejor": "INSTS145 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-090090025",
+   "mejor": "INSTS144 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-090090032",
+   "mejor": "INSTS145 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-090090050",
+   "mejor": "INSTS144 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-130020000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-130025000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-130032000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-130050000",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-133032025",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-133050032",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-300050000",
+   "mejor": "HIE018 (51.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-091020015",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-091025015",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-091025020",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "08-272032025",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "UBO HEMBRA 3",
+   "mejor": "INSTS061 (70.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "UJE DE REDUC",
+   "mejor": "INSTS201 (80.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "UJE DE REDUC",
+   "mejor": "INSTS201 (80.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "NION DOBLE 32",
+   "mejor": "INSTS080 (69.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "NION DOBLE 50",
+   "mejor": "INSTS217 (72.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "URVA DE SOBR",
+   "mejor": "INSTS138 (59.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "URVA DE SOBR",
+   "mejor": "INSTS138 (59.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "LAVE DE PASO",
+   "mejor": "CONS210 (63.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "LAVE DE PASO",
+   "mejor": "CONS210 (63.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "VULA ESFERICA",
+   "mejor": "INSTS162 (76.5)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "ALVULA ESFERI",
+   "mejor": "A003 (53.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "LE DE COBRE A",
+   "mejor": "INSTS183 (76.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "LE DE COBRE 3",
+   "mejor": "INSTS183 (76.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "ADOR AF-1500",
+   "mejor": "INSTS170 (78.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "110063141 P.DE",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "AÑO 3,2 DE 160",
+   "mejor": "CH001 (83.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "RCERHETEA DES 63",
+   "mejor": "INSTS173 (63.2)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "01003 TEE 3/4 BRON",
+   "mejor": "INSTS176 (64.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "SB/RCT/004 ROSCA",
+   "mejor": "INSTS175 (48.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "SB/RCT/005 ROSCA",
+   "mejor": "INSTS175 (48.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "500120 ROTOPLAS M",
+   "mejor": "INSTS181 (64.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "sin_match",
+   "texto": "4.EB.S.2710.MSC BO",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "2800 FLEXIBLE EXTE",
+   "mejor": "INSTS202 (74.3)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "30803 CONEX FLEX",
+   "mejor": "INSTS203 (76.9)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "42 DESCARGA P/BID",
+   "mejor": "INSTS209 (68.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "11121110 MTS CAÑO",
+   "mejor": "CLIM103 (66.7)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "29911169 CODO DE",
+   "mejor": "INSTS211 (68.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "20215283 CODO DE",
+   "mejor": "INSTS216 (64.5)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "29913048 CURVA DE",
+   "mejor": "INSTS125 (64.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "29916110 RAMAL DE",
+   "mejor": "INSTS219 (82.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "26035163 JE-RAMAL",
+   "mejor": "INSTS172 (64.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "ZAS LINEA 11000",
+   "mejor": "HIE034 (84.6)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "EAPOYAR 475 X 405 X 155",
+   "mejor": "TER304 (80.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "BAÑERA EMB C / TRANSF",
+   "mejor": "CH014 (70.8)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
+   "texto": "ABAJA COUNTRY C/PERFIL BL",
+   "mejor": "TER506 (84.7)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 200 E 1.2 X 6 ML",
+   "mejor": "PC011 (68.1)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 200 E 2,0 X ML (PARA CORTE)",
+   "mejor": "V023 (63.4)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 150 E 1.2 X 6 ML",
+   "mejor": "P103 (73.7)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 100 E1.2 X 6 ML",
+   "mejor": "PC011 (84.8)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 150 E 0.9 X 6 ML",
+   "mejor": "P103 (73.7)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGU 100 E0,9 X 6 ML",
+   "mejor": "PC011 (73.9)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO 20MM P/G",
+   "mejor": "INSTE077 (81.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO 25MM P/G",
+   "mejor": "INSTS071 (81.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO 32MM P/G",
+   "mejor": "INSTS072 (81.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "VCUIH CODO 90",
+   "mejor": "INSTS089 (73.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "VCUIH CODO 90",
+   "mejor": "INSTS089 (73.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "ano 173",
+   "mejor": "INSTS167 (52.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "BOCA DE AC",
+   "mejor": "INSTS058 (83.3)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P20 CODO A",
+   "mejor": "INSTS031 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P20 CODO A",
+   "mejor": "INSTS031 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P20 CODO A",
+   "mejor": "INSTS031 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P20 CODO A",
+   "mejor": "INSTS031 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P30 TEE DE",
+   "mejor": "INSTS093 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P30 TEE DE",
+   "mejor": "INSTS093 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P30 TEE DE",
+   "mejor": "INSTS093 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P30 TEE DE",
+   "mejor": "INSTS093 (75.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P35 FTU RE",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P35 TEE RE",
+   "mejor": "INSTS098 (58.1)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P60 TAPON",
+   "mejor": "INSTS065 (71.4)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P23 CODO 9",
+   "mejor": "INSTS085 (63.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P23 CODO 9",
+   "mejor": "INSTS085 (63.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P23 CODO 9",
+   "mejor": "INSTS085 (63.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P11 CONECT",
+   "mejor": "INSTE014 (66.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "ano 173",
+   "mejor": "INSTS167 (52.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P41 REDUCCIO",
+   "mejor": "INSTS051 (71.4)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P41 REDUCCIO",
+   "mejor": "INSTS051 (71.4)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P16 FUD UNIO",
+   "mejor": "INSTS218 (58.3)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P16 FUD UNIO",
+   "mejor": "INSTS218 (58.3)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P90 FSOB SOB",
+   "mejor": "INSTS125 (48.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P90 FSOB SOB",
+   "mejor": "INSTS125 (48.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P51 LLAVE PA",
+   "mejor": "INSTE079 (58.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P51 LLAVE PA",
+   "mejor": "INSTE079 (58.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "VALVULAS ESF",
+   "mejor": "INSTS200 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "P51 V. ESFER",
+   "mejor": "-"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "SIS ROTOPLAS",
+   "mejor": "INSTS181 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "TUBO AMANCO",
+   "mejor": "CLIM115 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "RAMAL CURVO",
+   "mejor": "INSTS048 (66.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "RAMAL POSTIZ",
+   "mejor": "INSTS048 (66.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "80 B",
+   "mejor": "CLIM117 (66.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "C 37/18 70,8",
+   "mejor": "CONS228 (56.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "ZZ 52 52 x 3",
+   "mejor": "HIE047 (80.0)"
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "nivel": "dudoso",
+   "texto": "OSB 15.1 mm APA 1.22x2.44 LP",
+   "mejor": "EST102 (72.4)"
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "nivel": "dudoso",
+   "texto": "PGO 22 0,90 x 3 MTS (B)",
+   "mejor": "P103 (70.6)"
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 150-40-17 1,25x 6 MTS",
+   "mejor": "PC011 (72.7)"
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 100-40-17 0,90 x 6 MTS",
+   "mejor": "PC011 (84.4)"
+  },
+  {
+   "pdf": "test_baukraft.pdf",
+   "nivel": "dudoso",
+   "texto": "EPS 1x1 x 30 mm x 20Kg",
+   "mejor": "TER112 (75.0)"
+  },
+  {
+   "pdf": "Baukraft - 27.04.pdf",
+   "nivel": "dudoso",
+   "texto": "PGO 22 0,90 x 3 MTS (B)",
+   "mejor": "P103 (70.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "CINTA CONSTR",
+   "mejor": "INS015 (75.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "BANDA ACUSTI",
+   "mejor": "A009 (75.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "sin_match",
+   "texto": "WICHI ROOFIN",
+   "mejor": "EST113 (58.8)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "ANCLAJE TRAC",
+   "mejor": "Y107 (74.1)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "CARTELA BARB",
+   "mejor": "A002 (73.7)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "CHAPAS CINCA",
+   "mejor": "HIE028 (69.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MONTANTE PG",
+   "mejor": "P102 (84.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MONTANTE PG",
+   "mejor": "P102 (84.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MONTANTE PG",
+   "mejor": "P102 (84.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO AUT",
+   "mejor": "T003 (80.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T1 MEC",
+   "mejor": "T002 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T1 MEC",
+   "mejor": "T002 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T2 AGU",
+   "mejor": "T003 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T2 MEC",
+   "mejor": "T003 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T3 AGU",
+   "mejor": "T007 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO T4 AGU",
+   "mejor": "T009 (84.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "0FIJADOR SELLADO",
+   "mejor": "TER101 (69.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "2LATEX INTERIOR Y",
+   "mejor": "TER102 (80.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "4ARANDELA - VALE",
+   "mejor": "TER114 (68.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "9REDEFIBRA 160 G",
+   "mejor": "TER115 (60.9)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "5JUNTA DE DILATA",
+   "mejor": "TER446 (60.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "sin_match",
+   "texto": "8TARQUINI OBRA M",
+   "mejor": "TER120 (53.8)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "5MOLDURA EXTERI",
+   "mejor": "TER145 (71.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "8MOLDURA EXTERI",
+   "mejor": "TER145 (71.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "5LATEX CIELORRA",
+   "mejor": "TER143 (69.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "5BASE COAT MONO",
+   "mejor": "TER110 (69.6)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "PLACA 12.5 BLAN",
+   "mejor": "Y101 (80.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "PLACA 12.5 SEMIC",
+   "mejor": "Y101 (76.9)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "6CANTONERA FAU",
+   "mejor": "TER545 (78.3)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "sin_match",
+   "texto": "7ENDUIDO INTERIO",
+   "mejor": "TER467 (56.2)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "sin_match",
+   "texto": "C.U.I.T.",
+   "mejor": "-"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "ROTOPLAS 888,516",
+   "mejor": "INSTS181 (66.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "CRECCHIO 31,218",
+   "mejor": "INSTS003 (69.6)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "O.V. CAM 9,907",
+   "mejor": "INSTS007 (72.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "O.V. CAM 4,882",
+   "mejor": "INSTS007 (72.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "ROTOPLAS 304,425",
+   "mejor": "INSTS181 (66.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "FLUVIAL 161,224",
+   "mejor": "INSTS170 (63.6)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "RHEEM 577,162",
+   "mejor": "INSTS014 (69.2)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "sin_match",
+   "texto": "ROWA 669,834",
+   "mejor": "INSTS206 (50.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "ROTOPLAS 732,013",
+   "mejor": "INSTS181 (66.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 8,021",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 21,667",
+   "mejor": "INSTS021 (72.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,582",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 3,366",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 7,462",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 563",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 805",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 608",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 805",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,367",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,669",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,669",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 3,011",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 928",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,997",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 9,042",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 6,115",
+   "mejor": "INSTS021 (76.0)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 10,291",
+   "mejor": "INSTS021 (72.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 509",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "AWADUCT 826",
+   "mejor": "INSTS021 (83.8)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "LOSUNG 9,077",
+   "mejor": "INSTS069 (66.7)"
+  }
+ ]
+}
