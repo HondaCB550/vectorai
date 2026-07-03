@@ -66,6 +66,7 @@ Caso patrón: A018 "BROCAS" tenía colgadas placas OSB, yeso y tapas de inspecci
 - Checklist: extracción (n ítems > 0), stats alineadas, dudosos con `denominacion — descripcion` y opción "Ninguno corresponde", export ↓ Excel baja xlsx, y `precios_historicos` suma filas (verificar por SQL count antes/después).
 - **Si el análisis de prueba guardó precios sintéticos: borrarlos** (`delete from precios_historicos where pdf_origen = '<archivo de prueba>'` por fecha del test).
 - **No tocar "Confirmar y aprender" con datos sintéticos** — contamina aliases y pendientes.
+- **Prueba mobile logueado**: el resize de ventana no achica el viewport real y las páginas del app exigen sesión. Truco que funciona: en la pestaña logueada, reemplazar el body por un `<iframe src="/app/comparar" style="width:390px;height:740px">` — mismo origen ⇒ misma sesión, y las media queries responden al ancho del iframe. Interactuar via `iframe.contentDocument`. Páginas públicas: frontend local + preview_resize mobile.
 
 ## 4. Checklist post-deploy
 
