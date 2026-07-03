@@ -38,7 +38,7 @@ from detectar_proveedor import detectar_proveedor  # noqa: E402
 from extraer_pdf_texto import extraer, _desc_es_codigo  # noqa: E402
 from matching import matchear_item                  # noqa: E402
 from extraer_imagen import extraer_imagen           # noqa: E402
-from extraer_hoja import extraer_xlsx, extraer_csv, descargar_gsheet  # noqa: E402
+from extraer_hoja import extraer_xlsx, extraer_csv  # noqa: E402
 
 MASTER_JSON  = DATA_DIR / "master_materiales.json"
 CONFIG_PATH  = DATA_DIR / "configuracion.json"
@@ -685,20 +685,9 @@ async def generar_sheets(
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
 
-    # Google Sheet real si hay service account configurada; si no, fallback xlsx
-    try:
-        from sheets import crear_sheet_comparativa, sheets_disponible
-        if sheets_disponible():
-            url = crear_sheet_comparativa(
-                comparativo=comparativo,
-                proveedores=cached["proveedores"],
-                titulo=titulo,
-                user_mail=req.user_mail,
-            )
-            return {"ok": True, "tipo": "google_sheet", "url": url}
-    except Exception as e:
-        print(f"[sheets] Error creando Google Sheet (fallback a xlsx): {e}")
-
+    # Solo Excel: el export a Google Sheets se dio de baja (las service
+    # accounts ya no tienen cuota de Drive y crear el sheet devuelve 403;
+    # si se retoma, migrar sheets.py a OAuth del usuario).
     iva_label = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · VectorAI"
@@ -1113,16 +1102,14 @@ from fastapi import Form as FastAPIForm
 async def analizar_v2(
     files: list[UploadFile] = File(default=[]),
     file_configs: Optional[str] = FastAPIForm(default=None),
-    gsheet_urls: Optional[str] = FastAPIForm(default=None),
     authorization: Optional[str] = Header(None),
 ):
     """
     V2: Matchea presupuestos contra material_denominaciones en Supabase.
-    Fuentes soportadas: PDF con texto, fotos (JPG/PNG, vía OCR/visión),
-    planillas (.xlsx/.csv) y links de Google Sheets compartidos.
+    Fuentes soportadas: PDF con texto, fotos (JPG/PNG, vía OCR/visión)
+    y planillas (.xlsx/.csv).
     file_configs: JSON array con {bloque, nombre_proveedor, con_iva, descuento}
     por archivo (mismo orden que files).
-    gsheet_urls: JSON array con {url, bloque, nombre_proveedor, con_iva, descuento}.
     Devuelve 3 grupos por proveedor: automatico / dudoso / sin_match.
     """
     user = get_user_plan(authorization)
@@ -1158,28 +1145,12 @@ async def analizar_v2(
     errores = []
     presupuestos_creados: list[str] = []
 
-    # ── Unificar fuentes: archivos subidos + links de Google Sheets ────────────
     # entradas = [(nombre_archivo, contenido_bytes, cfg), ...]
     entradas: list[tuple[str, bytes, dict]] = []
     for idx, f in enumerate(files or []):
         contenido = await f.read()
         entradas.append((f.filename or f"archivo_{idx}", contenido,
                          cfgs[idx] if idx < len(cfgs) else {}))
-
-    if gsheet_urls:
-        try:
-            lista_gs = json.loads(gsheet_urls)
-        except Exception:
-            lista_gs = []
-        for g in lista_gs if isinstance(lista_gs, list) else []:
-            url = (g.get("url") or "").strip()
-            if not url:
-                continue
-            try:
-                nombre_gs, contenido_gs = descargar_gsheet(url)
-                entradas.append((nombre_gs, contenido_gs, g))
-            except Exception as e:
-                errores.append({"archivo": url[:80], "error": str(e)})
 
     # Resolver un nombre de proveedor por bloque: todos los archivos de un mismo
     # bloque son el mismo proveedor. Si el usuario no lo nombró, se auto-detecta
