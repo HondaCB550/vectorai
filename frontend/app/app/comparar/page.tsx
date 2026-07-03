@@ -504,27 +504,27 @@ export default function Comparar() {
     <>
     <main className="min-h-screen bg-[#F5F0E8]">
       {/* Nav */}
-      <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
+      <nav className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between flex-wrap gap-y-2">
         <Link href="/" className="flex items-center gap-1.5">
           <Logo />
           <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
         </Link>
-        <div className="flex gap-3 items-center">
-          <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
+        <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
+          <Link href="/" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
           {soyAdmin && (
             <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
           )}
           <Link
             href="/suscribirse"
-            className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
+            className="text-xs sm:text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
           >
             Mejorar plan
           </Link>
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
             target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-3 py-1.5 rounded-lg"
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
           >
             Consultas
           </a>
@@ -532,7 +532,7 @@ export default function Comparar() {
         </div>
       </nav>
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
         <p className="text-gray-500 text-sm mb-8">Subí PDFs, fotos o planillas de tus proveedores para compararlos</p>
 
@@ -569,14 +569,14 @@ export default function Comparar() {
                   }`}
                 >
                   {/* Cabecera del bloque */}
-                  <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
-                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide w-20 shrink-0">Proveedor</span>
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-4 py-3 border-b border-gray-100">
+                    <span className="hidden sm:inline text-xs font-bold text-gray-400 uppercase tracking-wide w-20 shrink-0">Proveedor</span>
                     <input
                       type="text"
                       value={b.nombre}
                       onChange={(e) => updateBloque(bi, { nombre: e.target.value })}
                       placeholder={`Proveedor ${bi + 1}`}
-                      className="flex-1 text-sm font-semibold text-gray-800 border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:font-normal placeholder:text-gray-400"
+                      className="flex-1 min-w-[140px] text-sm font-semibold text-gray-800 border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:font-normal placeholder:text-gray-400"
                     />
 
                     {/* Toggle IVA */}
@@ -760,8 +760,8 @@ export default function Comparar() {
             </div>
 
             {/* Stats por proveedor */}
-            <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-hidden">
-              <div className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-400 uppercase tracking-wide">
+            <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-x-auto">
+              <div className="min-w-[540px] grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-400 uppercase tracking-wide">
                 <span>Proveedor</span>
                 <span className="text-center">Extraídos</span>
                 <span className="text-center">Auto</span>
@@ -772,7 +772,7 @@ export default function Comparar() {
                 const pct = r.stats.pct_automatico;
                 const barColor = pct >= 80 ? "bg-green-500" : pct >= 60 ? "bg-amber-400" : "bg-red-400";
                 return (
-                  <div key={prov} className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
+                  <div key={prov} className="min-w-[540px] grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
                     <div>
                       <div className="text-sm font-semibold text-gray-800">{prov}</div>
                       <div className="flex items-center gap-2 mt-1">

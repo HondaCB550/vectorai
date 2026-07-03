@@ -78,7 +78,7 @@ export default function ComparativaDetalle() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-600">Cargando comparativa...</p>
         </div>
@@ -88,7 +88,7 @@ export default function ComparativaDetalle() {
 
   if (error || !comparativa) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
         <div className="max-w-7xl mx-auto">
           <Link href="/app/historial" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
             ← Volver al historial
@@ -103,7 +103,7 @@ export default function ComparativaDetalle() {
 
   if (!comparativa) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
         <div className="max-w-7xl mx-auto">
           <Link href="/app/historial" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
             ← Volver al historial
@@ -158,7 +158,7 @@ export default function ComparativaDetalle() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
         <Link href="/app/historial" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
           ← Volver al historial
@@ -170,7 +170,7 @@ export default function ComparativaDetalle() {
         </div>
 
         {/* Filtros */}
-        <div className="bg-white rounded-xl shadow-sm p-5 mb-6 border border-gray-200 flex gap-4 items-end">
+        <div className="bg-white rounded-xl shadow-sm p-5 mb-6 border border-gray-200 flex gap-4 items-end flex-wrap">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Rubro</label>
             <select
@@ -205,7 +205,7 @@ export default function ComparativaDetalle() {
         </div>
 
         {/* KPI */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="bg-white rounded-xl shadow-sm p-5 border-l-4 border-blue-500">
             <p className="text-gray-600 text-sm">Ítems</p>
             <p className="text-2xl font-bold text-gray-900">{mostradas.length}</p>

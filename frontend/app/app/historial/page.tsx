@@ -90,7 +90,7 @@ export default function Historial() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
         <div className="max-w-5xl mx-auto text-center">
           <p className="text-gray-600">Cargando historial...</p>
         </div>
@@ -99,7 +99,7 @@ export default function Historial() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
           <Link href="/app/comparar" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">

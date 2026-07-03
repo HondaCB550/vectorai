@@ -129,13 +129,13 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Nav */}
-      <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between">
+      <nav className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between flex-wrap gap-y-2">
         <Link href="/" className="flex items-center gap-1.5">
           <Logo />
           <span className="text-xs font-semibold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-full align-middle">beta</span>
         </Link>
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <Link href="/" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
           <Link href="/app/comparar" className="text-sm text-gray-500 hover:text-gray-900 transition">Comparar</Link>
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
           <span className="text-sm font-medium text-blue-600">Admin</span>

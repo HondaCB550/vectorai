@@ -66,14 +66,14 @@ export default function Landing() {
     <>
       <main className="min-h-screen bg-[#F5F0E8]">
         {/* Urgency bar */}
-        <div className="fixed top-0 left-0 right-0 z-[60] bg-[#0F172A] text-white text-sm font-medium text-center py-2 px-4 flex items-center justify-center gap-3">
-          <span>🔥 Precio de lanzamiento — <strong>20% OFF</strong> este mes</span>
+        <div className="fixed top-0 left-0 right-0 z-[60] bg-[#0F172A] text-white text-xs sm:text-sm font-medium text-center py-2 px-3 flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap overflow-hidden">
+          <span>🔥 <span className="hidden sm:inline">Precio de lanzamiento — </span><strong>20% OFF</strong> este mes</span>
           <CountdownBadge />
         </div>
 
         {/* Nav */}
         <nav className="fixed top-9 left-0 right-0 z-50 bg-white shadow-sm">
-          <div className="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[60px] sm:h-[68px] flex items-center justify-between gap-2">
             <Link href="/" className="flex items-center gap-2">
               <Logo />
               <span className="text-xs font-semibold text-[#E87022] bg-[#FBE4D2] px-2 py-0.5 rounded-full align-middle">beta</span>
@@ -84,11 +84,11 @@ export default function Landing() {
               <li><a href="#pricing" className="hover:text-[#1A2B4A] transition">Precios</a></li>
               <li><a href="#faq" className="hover:text-[#1A2B4A] transition">FAQ</a></li>
             </ul>
-            <div className="flex items-center gap-4">
-              <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition">Entrar</Link>
+            <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+              <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap">Entrar</Link>
               <Link
                 href="/registro"
-                className="bg-[#E87022] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)]"
+                className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
               >
                 Probar gratis →
               </Link>
