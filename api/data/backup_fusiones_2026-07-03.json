@@ -1,0 +1,31 @@
+{
+ "fecha": "2026-07-03",
+ "operacion": "fusion de duplicados aprobada por Pablo",
+ "fusiones": [
+  {
+   "absorbe": "CONS101",
+   "absorbido": "CONS222"
+  },
+  {
+   "absorbe": "CONS101",
+   "absorbido": "CONS223"
+  },
+  {
+   "absorbe": "EST103",
+   "absorbido": "EST114"
+  },
+  {
+   "absorbe": "TER448",
+   "absorbido": "TER449"
+  },
+  {
+   "absorbe": "CONS103",
+   "absorbido": "CONS224"
+  },
+  {
+   "absorbe": "HIE046",
+   "absorbido": "HIE004"
+  }
+ ],
+ "nota": "materiales y aliases completos de los absorbidos estan en el resultado SQL del backup previo; HIE004: solo 4 aliases compatibles con 100x100x2 se movieron a HIE046, los otros 26 se borraron por medidas incompatibles (mismo criterio que auditoria)"
+}

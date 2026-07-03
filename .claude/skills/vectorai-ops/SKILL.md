@@ -7,6 +7,17 @@ description: Operaciones de mantenimiento de VectorAI — curado de materiales_p
 
 Runbooks de mantenimiento. Contexto general del proyecto en `CLAUDE.md` (raíz del repo). Supabase project: `aetwdwvctowannnbelwb`.
 
+## Reglas de dominio (confirmadas por Pablo, 03-07-2026)
+
+Piezas que PARECEN duplicados o matches pero son productos distintos — nunca fusionar ni cruzar aliases entre ellas:
+- **Rosca H vs M**: hembra vs macho, misma medida = piezas distintas.
+- **Tee reducción vs buje reducción**: la tee empalma 3 caños, el buje 2.
+- **Bolsón vs a granel**: misma cantidad (ej. arena m3) pero presentación y precio distintos (bolsón vs tirada desde camión).
+- **Fusión agua vs fusión gas**: sistemas distintos (Acqua System = agua; Sigas = gas).
+- **Material del cuerpo importa**: rejilla de fundición ≠ rejilla de PVC ≠ cromada.
+- **Espesores/medidas distintas = materiales distintos** (guarda numérica siempre).
+- **"Codo con base" / "3 acometidas"** son piezas distintas al codo simple MH/HH.
+
 ## Regla de oro
 
 **Nunca borrar ni modificar datos del maestro sin backup previo + aprobación del usuario.** Backup = JSON con las filas completas en `api/data/backup_aliases_<tema>_<fecha>.json`. Borrados siempre por IDs explícitos, nunca con predicado amplio.
