@@ -1,0 +1,785 @@
+[
+ {
+  "id": "f4f60fad-a238-4af6-9278-559c38adde53",
+  "codigo_material": "INSTE014",
+  "denominacion": "3/4\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "36dff1a4-bd7a-4348-959e-15863f696948",
+  "codigo_material": "INSTE015",
+  "denominacion": "7/8\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "1404aa08-c84f-4654-a23a-ca21fcbc9ece",
+  "codigo_material": "INSTE016",
+  "denominacion": "1\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "941f1291-fa65-49bf-b8de-0b2c7ff7e6ea",
+  "codigo_material": "INSTE017",
+  "denominacion": "3/4\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "1d93a557-ce6d-4d43-ac89-0aef1adb63c0",
+  "codigo_material": "INSTE018",
+  "denominacion": "7/8\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "b7926848-8c97-403b-93e6-8827685bf6b3",
+  "codigo_material": "INSTE019",
+  "denominacion": "1\" metálico *100",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "7a7bfe51-4410-40ed-93d9-ab34cb205800",
+  "codigo_material": "INSTE052",
+  "denominacion": "10a blanco sxxii",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "9db19182-405a-4b0f-b8fb-981f9865adf3",
+  "codigo_material": "INSTE053",
+  "denominacion": "10a blanco sxxii",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.220135+00:00"
+ },
+ {
+  "id": "96a21ac8-10a1-432d-acf1-891b5d376c0b",
+  "codigo_material": "INSTS031",
+  "denominacion": "codo cloacal a 45 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "2bef1d18-29a7-4d8b-8b3d-fbee30b2703b",
+  "codigo_material": "INSTS032",
+  "denominacion": "codo cloacal a 45 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "773656cb-1865-4dad-b306-1f692286bf65",
+  "codigo_material": "INSTS033",
+  "denominacion": "codo cloacal a 45 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "fe316037-ebf4-4ad5-b40b-ca02f2143f56",
+  "codigo_material": "INSTS034",
+  "denominacion": "codo cloacal a 45 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "04c5536f-8024-4dc7-a8f2-68aa72cdfcf9",
+  "codigo_material": "INSTS035",
+  "denominacion": "codo cloacal a 45 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "4c3f94a7-4db1-4b7e-afd2-379f85d7cdf7",
+  "codigo_material": "INSTS036",
+  "denominacion": "codo cloacal a 45 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "90b962b5-e550-4dc9-b20b-79fdf5c3548e",
+  "codigo_material": "INSTS037",
+  "denominacion": "codo cloacal a 45 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "31c1c0c9-abf6-4468-bcdf-746e3eaec513",
+  "codigo_material": "INSTS038",
+  "denominacion": "codo cloacal a 45 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "3ba7ce0c-4249-47c4-8305-a0e073dfd55b",
+  "codigo_material": "INSTS039",
+  "denominacion": "codo cloacal a 90 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "9db446f7-b84f-4991-a925-d2df6e144739",
+  "codigo_material": "INSTS040",
+  "denominacion": "codo cloacal a 90 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "5f0c0af5-14b5-4189-83d3-890d627c3eb1",
+  "codigo_material": "INSTS041",
+  "denominacion": "codo cloacal a 90 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "354c47ae-b86d-4a60-93b9-6a9d7411a7f4",
+  "codigo_material": "INSTS042",
+  "denominacion": "codo cloacal a 90 mh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "49208304-aba0-407a-b5e2-a1eb7970dbe4",
+  "codigo_material": "INSTS043",
+  "denominacion": "codo cloacal a 90 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "a3d1a8f0-1773-491a-bf19-a5e1a6470830",
+  "codigo_material": "INSTS044",
+  "denominacion": "codo cloacal a 90 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "95ccca6c-86b9-4f35-9674-601f83e0a557",
+  "codigo_material": "INSTS045",
+  "denominacion": "codo cloacal a 90 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "287e109d-b88c-4a88-9c69-088fca8d182e",
+  "codigo_material": "INSTS046",
+  "denominacion": "codo cloacal a 90 hh",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "ec231790-354f-42ac-8f1e-a2c4be080dcf",
+  "codigo_material": "INSTS048",
+  "denominacion": "ramal a 45",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "f4f5d5c3-b6c4-4176-91cc-63234e6cb589",
+  "codigo_material": "INSTS049",
+  "denominacion": "ramal a 45",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "5c045fdc-25f2-47a4-8ae8-7ba3f8ec29ba",
+  "codigo_material": "INSTS050",
+  "denominacion": "ramal a 45",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.671815+00:00"
+ },
+ {
+  "id": "d2413546-faff-45de-afbc-54f0342b6c0d",
+  "codigo_material": "INSTS078",
+  "denominacion": "union / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "29660735-34b9-4f5f-a82f-12aeb76e1e03",
+  "codigo_material": "INSTS079",
+  "denominacion": "union / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "6224a9b1-fef7-4649-8883-4db7cec80aab",
+  "codigo_material": "INSTS080",
+  "denominacion": "union / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "e20ab32e-f47c-4d11-ad44-e4be13bfd94d",
+  "codigo_material": "INSTS089",
+  "denominacion": "codo 90 / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "c76ec7be-a480-4ef2-8a70-a39f8e1c2996",
+  "codigo_material": "INSTS090",
+  "denominacion": "codo 90 / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "e8b86f0f-74cf-44ec-8c5d-d6faf53c566a",
+  "codigo_material": "INSTS091",
+  "denominacion": "codo 90 / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "e5b1038b-062e-4a64-8139-94e43b2bd8fe",
+  "codigo_material": "INSTS100",
+  "denominacion": "tapa / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "2eeb4a01-d9c3-4dff-ae3b-93938ca8e8db",
+  "codigo_material": "INSTS101",
+  "denominacion": "tapa / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "86b038b7-0fe9-4c8c-b07b-c871191b0dd3",
+  "codigo_material": "INSTS102",
+  "denominacion": "tapa / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:11.905197+00:00"
+ },
+ {
+  "id": "dc4853f4-98ee-4345-918b-d8985df93e5b",
+  "codigo_material": "INSTS176",
+  "denominacion": "bronce 3/4\"",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "1a944f3c-9675-466a-8988-8e1f3f8c3cd7",
+  "codigo_material": "INSTS143",
+  "denominacion": "codo 90 / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "bf6c244e-6643-4fda-b233-11c1b8016ca3",
+  "codigo_material": "INSTS144",
+  "denominacion": "codo 90 / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "aa1c5ad9-e10d-4da0-ab41-6590baa30b49",
+  "codigo_material": "INSTS145",
+  "denominacion": "codo 90 / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "917ebc64-856c-45f7-b500-ad3ed40982cd",
+  "codigo_material": "INSTS149",
+  "denominacion": "union / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "157be11a-8efb-4607-8acb-997565c03ed0",
+  "codigo_material": "INSTS150",
+  "denominacion": "union / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "f579127f-8b95-44d3-9878-a431b91c0b68",
+  "codigo_material": "INSTS151",
+  "denominacion": "union / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.173292+00:00"
+ },
+ {
+  "id": "df3f238c-bdda-45d6-8831-28c48f286363",
+  "codigo_material": "INSTS159",
+  "denominacion": "tapa / 20",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "bad57449-1b8f-4342-b15f-7da9482234c9",
+  "codigo_material": "INSTS160",
+  "denominacion": "tapa / 25",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "75005284-dd2d-40d7-817e-e234ebc49052",
+  "codigo_material": "INSTS161",
+  "denominacion": "tapa / 32",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "127119c7-619c-4821-a3b4-63cd57b1b5b2",
+  "codigo_material": "INSTS174",
+  "denominacion": "bronce 3/4\"",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "317a2a9f-7291-4dc0-884c-f479788fe8fa",
+  "codigo_material": "INSTS177",
+  "denominacion": "acero inox. 12x12",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "41a205c5-f14b-4e58-baa6-c2e07cbebe46",
+  "codigo_material": "INSTS178",
+  "denominacion": "acero inox. 12x12",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "065e9f36-9fbb-4d47-86f3-1e0628147b08",
+  "codigo_material": "INSTS194",
+  "denominacion": "50mm gris",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "432e9294-c759-4bac-942b-7186e8268dc7",
+  "codigo_material": "INSTS195",
+  "denominacion": "50mm gris",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "3f9a2d4e-c15d-48dd-b0cc-c7562194232c",
+  "codigo_material": "INSTS196",
+  "denominacion": "50mm gris",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "3cdb49a5-8d60-4dbe-8720-1a6f675f2625",
+  "codigo_material": "INSTS197",
+  "denominacion": "50mm gris",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "c337a5a3-0d70-43d8-a0b4-7be72cde00bc",
+  "codigo_material": "INSTS198",
+  "denominacion": "50mm gris",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.417182+00:00"
+ },
+ {
+  "id": "982ab955-1667-4b60-acb7-847b7228918d",
+  "codigo_material": "PC011",
+  "denominacion": "con punch 0,94",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.920017+00:00"
+ },
+ {
+  "id": "ba37eed1-8f9b-40e2-91c9-21243509d863",
+  "codigo_material": "PC012",
+  "denominacion": "con punch 0,94",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:12.920017+00:00"
+ },
+ {
+  "id": "ede0ec11-5f3b-4f11-b746-46145816833a",
+  "codigo_material": "V011",
+  "denominacion": "0.40m x 1.90m - modena negro",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.47587+00:00"
+ },
+ {
+  "id": "37bb0e8b-2945-49fa-9a03-b5dab8a95f21",
+  "codigo_material": "V017",
+  "denominacion": "ventana corrediza 2 hojas + mosquitero",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.47587+00:00"
+ },
+ {
+  "id": "82691d78-cd96-47eb-8b4f-09ebcf8836a6",
+  "codigo_material": "V019",
+  "denominacion": "0.40m x 1.90m - modena negro",
+  "origen": "migracion_detalle",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.47587+00:00"
+ },
+ {
+  "id": "617d66db-ce14-476a-b51c-4da34eb6249f",
+  "codigo_material": "V022",
+  "denominacion": "ventana corrediza 2 hojas + mosquitero",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.47587+00:00"
+ },
+ {
+  "id": "0a37459d-68ca-42a9-b2bd-7ca9612cbe27",
+  "codigo_material": "V026",
+  "denominacion": "ventana corrediza 2 hojas + mosquitero",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.703823+00:00"
+ },
+ {
+  "id": "eebd484a-d0a8-4439-96dc-d02cac0ed919",
+  "codigo_material": "V027",
+  "denominacion": "ventana corrediza 2 hojas + mosquitero",
+  "origen": "migracion_item",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T16:56:14.703823+00:00"
+ },
+ {
+  "id": "82a7ccbb-19ce-4967-889c-7058ddfef252",
+  "codigo_material": "P112",
+  "denominacion": "solera pgu 100 x 0,94 ref. x 6 mts.",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "e89e7fb7-0582-4dfc-b5e5-adcc73d3769d",
+  "codigo_material": "CH009",
+  "denominacion": "chapas cincalum 0.5 sinusoidal x metro lineal",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "84900caf-758b-455e-b794-867434d451f5",
+  "codigo_material": "PC007",
+  "denominacion": "montante pgc 100 x 0.94 ref x 6 mts. [pgc con/sin punch (orden de aparición)]",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "2d4f58ab-c06c-4cd7-ad71-b3b38a273177",
+  "codigo_material": "PC011",
+  "denominacion": "montante pgc 100 x 0.94 ref x 6 mts. [pgc con/sin punch (orden de aparición)]",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "13f35ea6-a786-4247-83b3-8b4904296ffe",
+  "codigo_material": "Y107",
+  "denominacion": "cantonera pvc 33mm vinyl frame x 3mts.(barbieri)",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "633d7f9c-cde9-4f13-badf-98ddd54249ef",
+  "codigo_material": "TER207",
+  "denominacion": "puerta p/durlock ref - guat 70 der",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "dd46f63e-264e-4b6e-b336-776f6f053fc1",
+  "codigo_material": "INSTE011",
+  "denominacion": "termica 2x16 amp",
+  "origen": "borrador_borrador_bonora_17-06",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:21.317935+00:00"
+ },
+ {
+  "id": "af033d9b-d134-4243-abfc-fbddce39e365",
+  "codigo_material": "INSTE041",
+  "denominacion": "mts cable 1 mm",
+  "origen": "borrador_borrador_bonora_27-04",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:21.713553+00:00"
+ },
+ {
+  "id": "2b89bf07-d77e-42cb-8ae0-b348479961ae",
+  "codigo_material": "INSTS062",
+  "denominacion": "tapa hembra 50 acqua system",
+  "origen": "borrador_borrador_carosio_sanitario_19-0",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:19.949458+00:00"
+ },
+ {
+  "id": "da83614b-93ff-44f5-afb7-211fa85203e5",
+  "codigo_material": "CH001",
+  "denominacion": "chapas cincalum 0.5 sinusoidal x metro lineal",
+  "origen": "borrador_borrador_fagua2_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:25.755227+00:00"
+ },
+ {
+  "id": "60cac014-00bd-4821-b99b-4bff53dad921",
+  "codigo_material": "TER101",
+  "denominacion": "fijador sellador concentrado tersuave x 10 litros guz",
+  "origen": "borrador_borrador_fagua2_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:32:20.177434+00:00"
+ },
+ {
+  "id": "6b9c06d1-519c-4335-945e-5048bab201cd",
+  "codigo_material": "TER121",
+  "denominacion": "base coat monocomponente x 25kg faudax",
+  "origen": "borrador_borrador_fagua2_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:25.755227+00:00"
+ },
+ {
+  "id": "97fd8641-6f15-46c0-b048-90aa17e68d93",
+  "codigo_material": "TER474",
+  "denominacion": "puerta p/durlock ref - guat 70 der",
+  "origen": "borrador_borrador_fagua2_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:25.755227+00:00"
+ },
+ {
+  "id": "74cb0823-46ba-402b-aa94-8b8b46a4e7e9",
+  "codigo_material": "AISL111",
+  "denominacion": "lana d vidrio rolac plata (cubierta) 50 mm x 1.20m x 12m -",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "5d11c0f5-2462-4c93-bfb2-42d17fd391cb",
+  "codigo_material": "INSTE014",
+  "denominacion": "conector columna e2.54 mm",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "e6ebc1f2-17f8-4d29-a089-9a0c3ce8cd3f",
+  "codigo_material": "EST101",
+  "denominacion": "placa osb lp home 15.1 (inter)",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "33271e2b-179d-42a7-91e4-ad36c16b9283",
+  "codigo_material": "P102",
+  "denominacion": "montante pgc 150 x 1,25 ref. x 6 mts.",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "61ca72a0-4cb1-4296-bcdb-1a30f7ad1b72",
+  "codigo_material": "P105",
+  "denominacion": "montante pgc 100 x 0.94 ref x 6 mts.",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "53809fa8-97c0-41bf-a12f-49e0ec478a4e",
+  "codigo_material": "T007",
+  "denominacion": "tornillo auto tel max 14 x 1 1/2 x unidad",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "efacb23b-b4cd-4396-88f7-4670f9e02523",
+  "codigo_material": "CONS117",
+  "denominacion": "fijador sellador concentrado tersuave x 10 litros guz",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "16cf3557-fb8c-43c2-93c5-59ad43389d1a",
+  "codigo_material": "V009",
+  "denominacion": "moldura exterior chalten c0 base 100mm x 100mm x 1m",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "2c6158a4-3f3a-437b-b263-d7083634e036",
+  "codigo_material": "V009",
+  "denominacion": "moldura exterior chalten a0 base 25mm x 100mm x 1m",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "7a9f13ac-175b-4360-a495-7bf199addf42",
+  "codigo_material": "TER545",
+  "denominacion": "cantonera pvc 33mm vinyl frame x 3mts.(barbieri)",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "5aa24793-d23f-4372-b7ad-1c5e378eaa92",
+  "codigo_material": "TER490",
+  "denominacion": "puerta p/durlock ref - guat 70 der",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ },
+ {
+  "id": "fc5411d5-c6fc-41c4-9d31-e8304d27d943",
+  "codigo_material": "HIE041",
+  "denominacion": "cantonera faudax x 2.60 mts",
+  "origen": "borrador_borrador_fagua_05-03",
+  "confianza": 90,
+  "frecuencia_encontrada": 1,
+  "created_at": "2026-06-22T19:37:26.929174+00:00"
+ }
+]

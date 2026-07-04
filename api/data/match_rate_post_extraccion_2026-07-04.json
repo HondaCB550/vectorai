@@ -78,10 +78,10 @@
    "pdf": "Fagua.pdf",
    "metodo": "regex",
    "items": 56,
-   "auto": 49,
-   "dudoso": 7,
+   "auto": 53,
+   "dudoso": 3,
    "sin_match": 0,
-   "pct_auto": 87.5
+   "pct_auto": 94.6
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
@@ -398,7 +398,7 @@
    "pdf": "EN SECO - STEEL FRAME.pdf",
    "nivel": "dudoso",
    "texto": "ESP DE POL C/ALUM. 2 CARAS 10 MM 1,00 X 20 MTS",
-   "mejor": "INSTE040 (66.7)"
+   "mejor": "INSTE042 (72.7)"
   },
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
@@ -457,32 +457,8 @@
   {
    "pdf": "Fagua.pdf",
    "nivel": "dudoso",
-   "texto": "MONTANTE PGC 150 X 1,25 REF. X 6 MTS.",
-   "mejor": "P102 (84.2)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "SOLERA PGU 100 X 0,94 REF. X 6 MTS.",
-   "mejor": "P101 (80.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
    "texto": "FIJADOR SELLADOR CONCENTRADO TERSUAVE X 10 LITROS GUZ",
    "mejor": "TER101 (84.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "MOLDURA EXTERIOR CHALTEN C0 BASE 100mm x 100mm x 1m",
-   "mejor": "TER121 (84.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "MOLDURA EXTERIOR CHALTEN A0 BASE 25mm x 100mm x 1m",
-   "mejor": "TER121 (84.0)"
   },
   {
    "pdf": "Fagua.pdf",
