@@ -76,12 +76,12 @@
   },
   {
    "pdf": "Fagua.pdf",
-   "metodo": "tablas_texto",
-   "items": 61,
-   "auto": 30,
-   "dudoso": 28,
-   "sin_match": 3,
-   "pct_auto": 49.2
+   "metodo": "regex",
+   "items": 56,
+   "auto": 55,
+   "dudoso": 1,
+   "sin_match": 0,
+   "pct_auto": 98.2
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
@@ -595,188 +595,8 @@
   {
    "pdf": "Fagua.pdf",
    "nivel": "dudoso",
-   "texto": "CINTA CONSTR",
-   "mejor": "INS015 (75.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "BANDA ACUSTI",
-   "mejor": "A009 (75.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "sin_match",
-   "texto": "WICHI ROOFIN",
-   "mejor": "AISL114 (58.8)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "VARILLA ROSC",
-   "mejor": "A006 (73.7)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "ANCLAJE TRAC",
-   "mejor": "A007 (73.7)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "CARTELA BARB",
-   "mejor": "A002 (73.7)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "CHAPAS CINCA",
-   "mejor": "HIE028 (69.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "MONTANTE PG",
-   "mejor": "P102 (84.2)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "MONTANTE PG",
-   "mejor": "P102 (84.2)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "MONTANTE PG",
-   "mejor": "P102 (84.2)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO AUT",
-   "mejor": "T003 (80.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T1 MEC",
-   "mejor": "T002 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T1 MEC",
-   "mejor": "T002 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T2 AGU",
-   "mejor": "T003 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T2 MEC",
-   "mejor": "T003 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T3 AGU",
-   "mejor": "T007 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "TORNILLO T4 AGU",
-   "mejor": "T009 (84.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "0FIJADOR SELLADO",
-   "mejor": "TER101 (69.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "2LATEX INTERIOR Y",
-   "mejor": "TER102 (80.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "4ARANDELA - VALE",
-   "mejor": "TER114 (68.2)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "9REDEFIBRA 160 G",
-   "mejor": "TER115 (60.9)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "5JUNTA DE DILATA",
-   "mejor": "TER446 (60.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "sin_match",
-   "texto": "8TARQUINI OBRA M",
-   "mejor": "TER120 (53.8)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "5MOLDURA EXTERI",
-   "mejor": "TER145 (71.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "8MOLDURA EXTERI",
-   "mejor": "TER145 (71.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "5LATEX CIELORRA",
-   "mejor": "TER143 (69.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "5BASE COAT MONO",
-   "mejor": "TER110 (69.6)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "PLACA 12.5 BLAN",
-   "mejor": "Y101 (80.0)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "PLACA 12.5 SEMIC",
-   "mejor": "Y101 (76.9)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "dudoso",
-   "texto": "6CANTONERA FAU",
-   "mejor": "TER545 (78.3)"
-  },
-  {
-   "pdf": "Fagua.pdf",
-   "nivel": "sin_match",
-   "texto": "7ENDUIDO INTERIO",
-   "mejor": "TER467 (56.2)"
+   "texto": "PERNO FWA 10 x 115 (531566) FISCHER",
+   "mejor": "A008 (84.0)"
   },
   {
    "pdf": "Baukraft - 27.04.pdf",

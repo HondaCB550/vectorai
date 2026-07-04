@@ -76,6 +76,14 @@ RE_ALFONSIN = re.compile(
     r"((?:\d{1,3}\.)*\d+,\d{2})\s+((?:\d{1,3}\.)*\d+,\d{2})\s*$"
 )
 
+# Fagua: "8435223412558TAPA DE INSPECCION 60X60 ALUM PLAQUIA 1.00 $ 67,687.54 $ 67,687.54"
+# El código (EAN 13 o corto) viene PEGADO a la descripción sin espacio; precios
+# americanos con $. Las líneas de continuación ("13.2m2 ISOVER") no matchean.
+RE_FAGUA = re.compile(
+    r"^\s*(\d{2,13})\s*(.+?)\s+(\d+(?:\.\d{2})?)\s+"
+    r"\$\s*([\d,]+\.\d{2})\s+\$\s*([\d,]+\.\d{2})\s*$"
+)
+
 # Viejo Bueno: "1 1.00411110001 BIODIGESTOR RP 600 LTS 520014 ROTOPLAS 888,516.39 10.00 10.00 719,698.27 719,698.28"
 # CANT y CÓDIGO vienen pegados ("1.00"+"411110001"); hasta 3 columnas de descuento
 # entre precio de lista y precio de venta (americano). pu = precio de venta.
@@ -487,6 +495,7 @@ def extraer_regex(texto: str) -> list[dict]:
             (RE_VIEJOBUENO,    "viejobueno"),
             (RE_CAROSIO_PRESU, "carosio_presu"),
             (RE_ALFONSIN,      "alfonsin"),
+            (RE_FAGUA,         "fagua"),
             (RE_BAUKRAFT,      "baukraft"),
             (RE_CAROSIO,       "carosio"),
             (RE_EUROPEO,       "europeo"),
@@ -516,6 +525,12 @@ def extraer_regex(texto: str) -> list[dict]:
                 cant, cod, desc, _plista, pu, total = m.groups()
                 items.append({
                     "cod": cod or "", "desc": _fix_split_words(desc.strip().rstrip(" .")),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "fagua":
+                cod, desc, cant, pu, total = m.groups()
+                items.append({
+                    "cod": cod, "desc": _fix_split_words(desc.strip()),
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             elif parser == "baukraft":
