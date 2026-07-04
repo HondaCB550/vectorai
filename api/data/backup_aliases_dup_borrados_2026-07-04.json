@@ -1,0 +1,6 @@
+[
+ {"codigo_material": "EST111", "denominacion": "cinta construccion typar unidad x 4.78 cm x 50.3 ml", "origen": "borrador_borrador_fagua2_05-03", "confianza": 90, "motivo": "duplicado; el correcto es EST110 (CINTA CONST TYPAR, confirmado por equivalencias_baukraft conf 95)"},
+ {"codigo_material": "TER491", "denominacion": "polyespuma 10mm aluminizado doble (kartonsec)", "origen": "borrador_borrador_fagua_05-03", "confianza": 90, "motivo": "duplicado; TER491 es una puerta — el correcto es AISL114 (aislante doble alu 10mm)"},
+ {"codigo_material": "CONS140", "denominacion": "tarquini base x 20 kg", "origen": "borrador_borrador_fagua_05-03", "confianza": 90, "motivo": "duplicado; el correcto es TER121 (TEXTURADO BASE)"},
+ {"codigo_material": "TER138", "denominacion": "latex cielorraso tersuave x 20 litros guz", "origen": "borrador_borrador_fagua_05-03", "confianza": 90, "motivo": "duplicado; el correcto es TER143 (LATEX CIELORASO 20LT)"}
+]

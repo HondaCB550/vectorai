@@ -5,6 +5,7 @@ Endpoints: /analizar, /confirmar, /sheets
 import sys
 import json
 import os
+import re
 import tempfile
 import uuid
 from pathlib import Path
@@ -934,6 +935,46 @@ _DEN_TTL = 300  # 5 minutos
 _sin_extra: dict[str, str] = {}          # original → canonico (desde BD, extra al código)
 _grupos_extra: list[frozenset] = []      # grupos de marcas equivalentes (desde BD)
 _knowledge_cache_ts: float = 0
+_conv_extra: dict[str, dict] = {}
+
+# Marcadores de "precio por metro" en el texto o la unidad del ítem
+_UNIDADES_METRO = {"ML", "M", "MT", "MTS", "METRO", "METROS"}
+_RE_POR_METRO = re.compile(r"^\s*mts?\.?\s|\b(?:x|por)\s*(?:metro|ml|mt)\b", re.I)
+
+
+def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
+    """Normaliza precio por metro → presentación del material (tira/rollo).
+
+    Solo actúa con MARCADOR EXPLÍCITO de metro (unidad ML/MTS del documento o
+    "MTS …"/"x metro" en la descripción) y si el material tiene conversión
+    activa con unidad_comercial='m'. La conversión preserva el total de línea:
+    pu×factor y cant÷factor.
+
+    Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
+    el material se vende por presentación (tira/rollo) pero el texto no dice ni
+    "por metro" ni la presentación completa — el precio no es confiable y el
+    ítem debe ir a revisión en vez de entrar solo al histórico.
+    """
+    conv = _conv_extra.get(codigo)
+    unidad_norm = (unidad_item or "").strip(". ").upper()
+    if not conv or conv["unidad_comercial"] != "m":
+        return pu, cant, unidad_norm or "UN", None, False
+
+    factor = conv["factor"]
+    d = (desc or "").lower()
+    por_metro = unidad_norm in _UNIDADES_METRO or bool(_RE_POR_METRO.search(desc or ""))
+    if por_metro:
+        nota = f"normalizado a {conv['unidad_base']} (×{factor:g})"
+        return round(pu * factor, 2), cant / factor, conv["unidad_base"], nota, False
+
+    # ¿El texto menciona la presentación completa? ("x 4 mts", "20x4", "tira", "rollo")
+    f = f"{factor:g}"
+    presentacion = bool(re.search(rf"[x*]\s*{f}\s*m|\b{f}\s*m(?:t|ts|mts)?\b|x\s*{f}\b|tira|rollo|bobina", d))
+    if presentacion:
+        return pu, cant, conv["unidad_base"], None, False
+
+    # Sin marcador de metro ni de presentación: unidad ambigua
+    return pu, cant, unidad_norm or "UN", None, True
 
 
 def _prep_v2(s: str) -> str:
@@ -969,8 +1010,25 @@ def _load_knowledge_cache():
     except Exception as e:
         print(f"[v2] Error cargando grupos_marcas: {e}")
 
+    # Conversiones de unidad por material (ej. cable por metro → rollo 100m)
+    global _conv_extra
+    try:
+        res = sb.table("conversion_unidades").select(
+            "codigo_material,unidad_comercial,factor,unidad_base"
+        ).eq("activo", True).execute()
+        _conv_extra = {
+            r["codigo_material"]: {
+                "unidad_comercial": (r["unidad_comercial"] or "").strip().lower(),
+                "factor":           float(r["factor"]),
+                "unidad_base":      r["unidad_base"] or "",
+            }
+            for r in (res.data or []) if float(r["factor"] or 0) > 0
+        }
+    except Exception as e:
+        print(f"[v2] Error cargando conversion_unidades: {e}")
+
     _knowledge_cache_ts = ahora
-    print(f"[v2] Knowledge cache: {len(_sin_extra)} sinónimos BD, {len(_grupos_extra)} grupos marcas")
+    print(f"[v2] Knowledge cache: {len(_sin_extra)} sinónimos BD, {len(_grupos_extra)} grupos marcas, {len(_conv_extra)} conversiones")
 
 
 def _mismo_grupo_v2(texto_a: str, texto_b: str) -> bool:
@@ -1019,14 +1077,44 @@ def _get_denominaciones() -> list[dict]:
         for d in todas:
             d["denominacion_norm"] = _prep_v2(d["denominacion"])
 
-        # Descartar aliases "basura": textos sin ninguna palabra real de 4+ letras
+        # Descartar aliases "basura": textos sin ninguna palabra real de 3+ letras
         # (unidades/números/fragmentos como "m3", "h21", "1 x 1", "3*6"). Con
         # token_set_ratio matchean CUALQUIER descripción que los contenga a score
         # 100 y arruinan el matching (ej. "hormigón ... x m3" → alias "m3").
+        # Umbral en 3 (no 4): 'TEE', 'IPS', 'FUS' son vocabulario real de
+        # sanitarios ('p30 tee de 20 mm ips fus i'); los genéricos de una sola
+        # palabra corta quedan acotados por la guarda anti-genérico del match.
         antes = len(todas)
-        todas = [d for d in todas if not _desc_es_codigo(d["denominacion_norm"])]
+        todas = [d for d in todas
+                 if re.search(r"[A-Za-zÁÉÍÓÚÑáéíóúñ]{3,}", d["denominacion_norm"] or "")]
         if antes != len(todas):
-            print(f"[v2] Descartados {antes - len(todas)} aliases basura (sin palabra 4+)")
+            print(f"[v2] Descartados {antes - len(todas)} aliases basura (sin palabra real)")
+
+        # Resolver aliases AMBIGUOS: el mismo texto bajo más de un código (la
+        # migración dejó la denominación de familia como alias en cada material:
+        # 'fusión gas' ×33 códigos, 'tapa' ×4). Además de dar 100 falso contra
+        # un código arbitrario, esos empates desplazan a los aliases específicos
+        # fuera de la ventana top_n*3 de fuzz_process.extract.
+        # Regla: sobrevive solo la copia de MAYOR confianza; si hay empate en el
+        # máximo, el texto no identifica nada y se excluye el grupo entero del
+        # matching (queda en la BD).
+        grupos_texto: dict[str, list] = {}
+        for d in todas:
+            grupos_texto.setdefault(d["denominacion_norm"], []).append(d)
+        antes = len(todas)
+        filtradas = []
+        for grupo in grupos_texto.values():
+            codigos = {g["codigo_material"] for g in grupo}
+            if len(codigos) == 1:
+                filtradas.extend(grupo)
+                continue
+            conf_max = max(g.get("confianza") or 80 for g in grupo)
+            ganadores = [g for g in grupo if (g.get("confianza") or 80) == conf_max]
+            if len({g["codigo_material"] for g in ganadores}) == 1:
+                filtradas.extend(ganadores)
+        todas = filtradas
+        if antes != len(todas):
+            print(f"[v2] Excluidos {antes - len(todas)} aliases ambiguos (mismo texto en varios códigos)")
 
         # Ordenar por confianza desc: fuzz_process.extract trunca a top_n*3
         # candidatos y en empates de score devuelve los primeros de la lista.
@@ -1074,11 +1162,20 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
     )
 
     salida = []
+    n_tokens_texto = len(texto_prep.split())
     for texto_match, score, idx in resultados:
         den = denominaciones[idx]
         # Bonus si comparten marca del mismo grupo equivalente
         if _mismo_grupo_v2(texto, den["denominacion"]):
             score = min(100, score + 6)
+        # Guarda anti-genérico: un alias de UNA palabra contenido en un texto
+        # más largo da token_set 100 sin identificar nada (bug clase
+        # PERFIL/BROCAS: 'perfil', 'tapa', 'cupla'). Nunca puede ser automático
+        # — tope 84 (dudoso, decide el usuario). Los de 2+ palabras únicos en
+        # el maestro sí identifican ('banda acustica') y quedan libres.
+        n_tokens_alias = len((den.get("denominacion_norm") or den["denominacion"]).split())
+        if n_tokens_alias <= 1 and n_tokens_texto >= 3:
+            score = min(score, 84.0)
         if score >= 85:
             nivel = "automatico"
         elif score >= 60:
@@ -1284,11 +1381,21 @@ async def analizar_v2(
                 if not desc or pu <= 0:
                     continue
 
-                precio = precio_archivo(pu)
                 cant   = float(item.get("cant") or 1)
+                # La guarda corre con los números ORIGINALES del documento
                 sospechoso = _precio_inconsistente(pu, cant, float(item.get("total") or 0))
 
                 matches = _match_v2(desc, denominaciones, top_n=3)
+
+                # Normalización de unidades: por metro → tira/rollo del material
+                # matcheado. Preserva el total de línea (pu×f, cant÷f).
+                unidad_final = (item.get("unidad") or "").strip(". ").upper() or "UN"
+                conversion_nota, unidad_ambigua = None, False
+                if matches and matches[0]["nivel"] != "sin_match":
+                    pu, cant, unidad_final, conversion_nota, unidad_ambigua = _convertir_unidad(
+                        matches[0]["codigo_material"], desc, item.get("unidad") or "", pu, cant)
+
+                precio = precio_archivo(pu)
 
                 base = {
                     "desc_prov":     desc,
@@ -1296,9 +1403,14 @@ async def analizar_v2(
                     "precio_sin_iva": precio,
                     "precio_con_iva": round(pu, 2),
                     "cant":          cant,
+                    "unidad":        unidad_final,
                 }
                 if sospechoso:
                     base["precio_sospechoso"] = True
+                if conversion_nota:
+                    base["conversion"] = conversion_nota
+                if unidad_ambigua:
+                    base["unidad_ambigua"] = True
 
                 if not matches or matches[0]["nivel"] == "sin_match":
                     sin_match.append(base)
@@ -1338,9 +1450,10 @@ async def analizar_v2(
                     "alternativas":          alternativas,
                 }
 
-                # Precio sospechoso → nunca automático: baja a revisión para que
-                # un número roto no entre solo a precios_historicos.
-                if mejor["nivel"] == "automatico" and not sospechoso:
+                # Precio sospechoso o unidad ambigua → nunca automático: baja a
+                # revisión para que un número roto o no comparable no entre solo
+                # a precios_historicos.
+                if mejor["nivel"] == "automatico" and not sospechoso and not unidad_ambigua:
                     automatico.append(entry)
                 else:
                     dudoso.append(entry)
@@ -1354,9 +1467,9 @@ async def analizar_v2(
                             "proveedor":       proveedor,
                             "proveedor_id":    proveedor_id,
                             "codigo_material":  item["codigo_material"],
-                            "unidad":          "UN",
+                            "unidad":          item.get("unidad") or "UN",
                             "precio":          item["precio_sin_iva"],
-                            "cantidad":        int(item.get("cant", 1)),
+                            "cantidad":        max(1, round(float(item.get("cant", 1)))),
                             "pdf_origen":      fname,
                         }
                         for item in automatico

@@ -516,10 +516,11 @@ def extraer_regex(texto: str) -> list[dict]:
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             elif parser == "carosio_presu":
-                _cod_int, sku, desc, pu, cant, _umed, total = m.groups()
+                _cod_int, sku, desc, pu, cant, umed, total = m.groups()
                 items.append({
                     "cod": sku, "desc": _fix_split_words(desc.strip()),
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                    "unidad": umed.strip(".").upper(),
                 })
             elif parser == "alfonsin":
                 cant, cod, desc, _plista, pu, total = m.groups()

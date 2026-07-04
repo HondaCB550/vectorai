@@ -27,6 +27,8 @@ type ItemAutomatico = {
   alternativas: Alternativa[];
   item_id?: string;
   precio_sospechoso?: boolean;
+  conversion?: string;
+  unidad_ambigua?: boolean;
 };
 
 type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
@@ -971,6 +973,16 @@ export default function Comparar() {
                                   {item.precio_sospechoso && (
                                     <div className="text-xs text-red-600 mt-1">
                                       ⚠ Precio unitario × cantidad no coincide con el total de la línea — verificá el precio antes de confirmar.
+                                    </div>
+                                  )}
+                                  {item.conversion && (
+                                    <div className="text-xs text-blue-600 mt-1">
+                                      ↔ Precio {item.conversion} para comparar con otros proveedores.
+                                    </div>
+                                  )}
+                                  {item.unidad_ambigua && (
+                                    <div className="text-xs text-amber-600 mt-1">
+                                      ⚠ Este material se vende por tira/rollo y el texto no aclara si el precio es por metro o por presentación completa — verificá la unidad.
                                     </div>
                                   )}
                                 </div>

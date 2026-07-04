@@ -6,28 +6,28 @@
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "metodo": "regex",
    "items": 124,
-   "auto": 119,
+   "auto": 118,
    "dudoso": 3,
-   "sin_match": 2,
-   "pct_auto": 96.0
+   "sin_match": 3,
+   "pct_auto": 95.2
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "metodo": "regex",
    "items": 96,
-   "auto": 75,
-   "dudoso": 16,
+   "auto": 73,
+   "dudoso": 18,
    "sin_match": 5,
-   "pct_auto": 78.1
+   "pct_auto": 76.0
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "metodo": "regex",
    "items": 36,
-   "auto": 25,
-   "dudoso": 6,
+   "auto": 20,
+   "dudoso": 11,
    "sin_match": 5,
-   "pct_auto": 69.4
+   "pct_auto": 55.6
   },
   {
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
@@ -51,10 +51,10 @@
    "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
    "metodo": "regex",
    "items": 40,
-   "auto": 39,
-   "dudoso": 1,
+   "auto": 38,
+   "dudoso": 2,
    "sin_match": 0,
-   "pct_auto": 97.5
+   "pct_auto": 95.0
   },
   {
    "pdf": "EN SECO - STEEL FRAME.pdf",
@@ -69,19 +69,19 @@
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "metodo": "regex",
    "items": 40,
-   "auto": 33,
-   "dudoso": 7,
+   "auto": 32,
+   "dudoso": 8,
    "sin_match": 0,
-   "pct_auto": 82.5
+   "pct_auto": 80.0
   },
   {
    "pdf": "Fagua.pdf",
    "metodo": "regex",
    "items": 56,
-   "auto": 55,
-   "dudoso": 1,
+   "auto": 49,
+   "dudoso": 7,
    "sin_match": 0,
-   "pct_auto": 98.2
+   "pct_auto": 87.5
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
@@ -102,9 +102,9 @@
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
-   "nivel": "dudoso",
+   "nivel": "sin_match",
    "texto": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
-   "mejor": "INSTS056 (69.6)"
+   "mejor": "INSTS057 (56.5)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
@@ -121,6 +121,12 @@
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "nivel": "dudoso",
+   "texto": "EMBLEM COCINA MESADA",
+   "mejor": "TER401 (84.0)"
+  },
+  {
+   "pdf": "CAROSIO - SANITARIOS.pdf",
+   "nivel": "dudoso",
    "texto": "VILLAGE BAÑERA EMB C / TRANSF",
    "mejor": "TER493 (70.6)"
   },
@@ -133,32 +139,20 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "P30 TEE DE 20 MM IPS FUS I",
-   "mejor": "INSTS066 (69.2)"
+   "texto": "RAMAL a 45° HHH 40 SELEN T",
+   "mejor": "INSTS049 (71.4)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "P30 TEE DE 25 MM IPS FUS I",
-   "mejor": "INSTS066 (69.2)"
+   "texto": "CUPLA - Lisa 63 mm S",
+   "mejor": "INSTE065 (66.7)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "P30 TEE DE 32 MM IPS FUS I",
-   "mejor": "INSTS066 (65.4)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "P30 TEE DE 50 MM IPS FUS I",
-   "mejor": "INSTS066 (73.1)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "sin_match",
-   "texto": "P35 FTU RED TE HH 32X32X 2",
-   "mejor": "INSTS097 (59.3)"
+   "texto": "CUPLA - Lisa 40 mm S",
+   "mejor": "INSTE065 (66.7)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -183,6 +177,18 @@
    "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
    "mejor": "INSTS107 (78.4)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P11 CONECTOR MACHO DE 32",
+   "mejor": "Y107 (72.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P13 CONECTOR HEMBRA DE 3 2",
+   "mejor": "Y107 (72.7)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -224,19 +230,31 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "CODO A 45 HH - PN10 16 0",
-   "mejor": "INSTS031 (75.0)"
+   "mejor": "INSTS216 (75.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "RAMAL CURVO a 87 30’ MH",
-   "mejor": "INSTS048 (82.4)"
+   "mejor": "INSTS049 (71.4)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "REDUCCIÓN - Excéntrica M H",
    "mejor": "INSTS051 (72.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "INODORO + DEPOSITO SOUTH",
+   "mejor": "TER443 (84.2)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "sin_match",
+   "texto": "BIDET SOUTH VESSANTI",
+   "mejor": "TER495 (50.9)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -252,9 +270,21 @@
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
+   "texto": "DESGRASADERA PARA COCINA",
+   "mejor": "TER401 (84.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "sin_match",
    "texto": "PILETON INYEC. 20 X 20 S A",
    "mejor": "HIE032 (55.3)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
+   "texto": "DESAGUE BASE ABS REJA PL E",
+   "mejor": "TER121 (84.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -277,8 +307,14 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
+   "texto": "FLEXIBLE MALLADO T.M.F. 1",
+   "mejor": "INSTS183 (78.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
    "texto": "FLEXIBLE CORRUGADO PARA B",
-   "mejor": "INSTE022 (83.7)"
+   "mejor": "INSTE022 (74.1)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -297,6 +333,18 @@
    "nivel": "dudoso",
    "texto": "Bacha de Porcelana Sanit a",
    "mejor": "TER304 (81.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
+   "texto": "cocina mesada DOMANI P I",
+   "mejor": "TER401 (84.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
+   "texto": "ARO BASE INODORO C/CERA",
+   "mejor": "TER121 (84.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -341,10 +389,16 @@
    "mejor": "TER426 (60.5)"
   },
   {
+   "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
+   "nivel": "dudoso",
+   "texto": "VS454 ARO ACOPLE INOD.APISO REP-RX-012-00 FERRUM",
+   "mejor": "TER485 (70.6)"
+  },
+  {
    "pdf": "EN SECO - STEEL FRAME.pdf",
    "nivel": "dudoso",
    "texto": "ESP DE POL C/ALUM. 2 CARAS 10 MM 1,00 X 20 MTS",
-   "mejor": "INSTE042 (72.7)"
+   "mejor": "INSTE040 (66.7)"
   },
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
@@ -374,7 +428,13 @@
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "nivel": "dudoso",
    "texto": "PGC 100 E1.2 X 6 ML",
-   "mejor": "PC011 (84.8)"
+   "mejor": "PC011 (73.3)"
+  },
+  {
+   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
+   "nivel": "dudoso",
+   "texto": "PGC 100 E0.9 X 6 ML",
+   "mejor": "PC011 (73.3)"
   },
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
@@ -386,13 +446,49 @@
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "nivel": "dudoso",
    "texto": "PGU 100 E0,9 X 6 ML",
-   "mejor": "PC011 (73.9)"
+   "mejor": "PU006 (73.3)"
   },
   {
    "pdf": "Fagua.pdf",
    "nivel": "dudoso",
    "texto": "PERNO FWA 10 x 115 (531566) FISCHER",
    "mejor": "A008 (84.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MONTANTE PGC 150 X 1,25 REF. X 6 MTS.",
+   "mejor": "P102 (84.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "SOLERA PGU 100 X 0,94 REF. X 6 MTS.",
+   "mejor": "P101 (80.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "FIJADOR SELLADOR CONCENTRADO TERSUAVE X 10 LITROS GUZ",
+   "mejor": "TER101 (84.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MOLDURA EXTERIOR CHALTEN C0 BASE 100mm x 100mm x 1m",
+   "mejor": "TER121 (84.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "MOLDURA EXTERIOR CHALTEN A0 BASE 25mm x 100mm x 1m",
+   "mejor": "TER121 (84.0)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "PUERTA P/DURLOCK REF - GUAT 70 DER",
+   "mejor": "V039 (84.0)"
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
