@@ -188,6 +188,78 @@ def _extraer_google(content: bytes) -> dict:
     }
 
 
+# ── PDFs escaneados (sin capa de texto) ───────────────────────────────────────
+
+MAX_PAGINAS_PDF_OCR = 8
+
+
+def pdf_sin_texto(pdf_bytes: bytes) -> bool:
+    """True si el PDF no tiene capa de texto utilizable (escaneado o impreso
+    como imagen). Umbral bajo: los escaneos suelen tener 0 chars, pero algunos
+    traen basura de metadata."""
+    import io
+
+    import pdfplumber
+    try:
+        with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+            chars = sum(len(p.extract_text() or "") for p in pdf.pages)
+        return chars < 200
+    except Exception:
+        return False
+
+
+def extraer_pdf_escaneado(pdf_bytes: bytes) -> dict:
+    """PDF escaneado → renderiza cada página como JPEG y la pasa por el mismo
+    motor OCR que las fotos. Mergea los ítems de todas las páginas.
+
+    Procesa hasta MAX_PAGINAS_PDF_OCR páginas (cada página = 1 llamada de
+    visión). Lanza ValueError si no hay motor OCR configurado.
+    """
+    import io
+
+    import pypdfium2 as pdfium
+
+    if not ocr_disponible():
+        raise ValueError(
+            "El PDF parece escaneado (sin texto) y el procesamiento por visión "
+            "no está habilitado en este servidor (falta ANTHROPIC_API_KEY o "
+            "GOOGLE_VISION_API_KEY)."
+        )
+
+    pdf = pdfium.PdfDocument(pdf_bytes)
+    try:
+        n_total = len(pdf)
+        n_pag = min(n_total, MAX_PAGINAS_PDF_OCR)
+        items: list[dict] = []
+        fecha = None
+        iva = "ASUMIDO 1,105"
+        metodo = "ocr"
+        for i in range(n_pag):
+            # scale=2 ≈ 150 dpi: suficiente para leer tablas sin inflar el payload
+            img = pdf[i].render(scale=2.0).to_pil().convert("RGB")
+            buf = io.BytesIO()
+            img.save(buf, format="JPEG", quality=85)
+            r = extraer_imagen(buf.getvalue(), f"pagina_{i + 1}.jpg")
+            items.extend(r.get("items") or [])
+            fecha = fecha or r.get("fecha_presupuesto")
+            metodo = r.get("metodo_extraccion") or metodo
+            # El total general suele estar en la última página con datos:
+            # nos quedamos con el veredicto de IVA más informativo.
+            if r.get("iva_detectado") and r["iva_detectado"] != "ASUMIDO 1,105":
+                iva = r["iva_detectado"]
+    finally:
+        pdf.close()
+
+    return {
+        "fecha_presupuesto": fecha,
+        "iva_detectado": iva,
+        "suma_lineas": round(sum(it.get("total") or 0 for it in items), 2),
+        "n_items": len(items),
+        "metodo_extraccion": f"{metodo}_pdf" + (f" ({n_pag}/{n_total} pág.)" if n_total > n_pag else ""),
+        "items": items,
+    }
+
+
 def extraer_imagen(content: bytes, filename: str = "") -> dict:
     """Extrae ítems de una foto de presupuesto. Lanza ValueError con mensaje
     accionable si no hay motor configurado o la imagen no se puede procesar."""

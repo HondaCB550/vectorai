@@ -37,7 +37,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 from detectar_proveedor import detectar_proveedor  # noqa: E402
 from extraer_pdf_texto import extraer, _desc_es_codigo  # noqa: E402
 from matching import matchear_item                  # noqa: E402
-from extraer_imagen import extraer_imagen           # noqa: E402
+from extraer_imagen import extraer_imagen, pdf_sin_texto, extraer_pdf_escaneado  # noqa: E402
 from extraer_hoja import extraer_xlsx, extraer_csv  # noqa: E402
 
 MASTER_JSON  = DATA_DIR / "master_materiales.json"
@@ -1229,6 +1229,12 @@ async def analizar_v2(
                     tmp.write(content)
                     tmp_path = tmp.name
                 resultado = extraer(tmp_path)
+                # PDF escaneado (sin capa de texto) → renderizar páginas y OCR.
+                # Solo si la extracción normal no sacó nada Y el PDF no tiene
+                # texto: si tiene texto pero 0 ítems, es un formato nuevo a
+                # cubrir con regex, no gastamos visión en eso.
+                if not resultado.get("items") and pdf_sin_texto(content):
+                    resultado = extraer_pdf_escaneado(content)
             elif tipo_fuente == "xlsx":
                 resultado = extraer_xlsx(content)
             elif tipo_fuente == "csv":
