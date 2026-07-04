@@ -26,6 +26,7 @@ type ItemAutomatico = {
   descripcion: string;
   alternativas: Alternativa[];
   item_id?: string;
+  precio_sospechoso?: boolean;
 };
 
 type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
@@ -967,6 +968,11 @@ export default function Comparar() {
                                 <div className="flex-1 min-w-0">
                                   <div className="text-sm font-medium text-gray-800 truncate">{item.desc_prov}</div>
                                   <div className="text-xs text-gray-400 mt-0.5">{fmt(item.precio_sin_iva)}/u · cant {item.cant}</div>
+                                  {item.precio_sospechoso && (
+                                    <div className="text-xs text-red-600 mt-1">
+                                      ⚠ Precio unitario × cantidad no coincide con el total de la línea — verificá el precio antes de confirmar.
+                                    </div>
+                                  )}
                                 </div>
                                 <ScoreBadge score={item.score} />
                               </div>

@@ -1270,6 +1270,14 @@ async def analizar_v2(
             def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
                 return round(pu / _fac * (1 - _desc / 100), 2)
 
+            def _precio_inconsistente(pu: float, cant: float, total: float) -> bool:
+                """Guarda de calidad post-extracción: si el documento traía un
+                total de línea y pu×cant no cierra contra él (tolerancia 1%),
+                el precio unitario es sospechoso — columna corrida del parser u
+                OCR que leyó mal un dígito. Sin total extraído no hay señal
+                (los extractores lo completan con pu×cant)."""
+                return total > 0 and abs(pu * cant - total) > max(1.0, 0.01 * total)
+
             for item in items:
                 desc = (item.get("desc") or "").strip()
                 pu   = float(item.get("pu") or 0)
@@ -1278,6 +1286,7 @@ async def analizar_v2(
 
                 precio = precio_archivo(pu)
                 cant   = float(item.get("cant") or 1)
+                sospechoso = _precio_inconsistente(pu, cant, float(item.get("total") or 0))
 
                 matches = _match_v2(desc, denominaciones, top_n=3)
 
@@ -1288,6 +1297,8 @@ async def analizar_v2(
                     "precio_con_iva": round(pu, 2),
                     "cant":          cant,
                 }
+                if sospechoso:
+                    base["precio_sospechoso"] = True
 
                 if not matches or matches[0]["nivel"] == "sin_match":
                     sin_match.append(base)
@@ -1327,7 +1338,9 @@ async def analizar_v2(
                     "alternativas":          alternativas,
                 }
 
-                if mejor["nivel"] == "automatico":
+                # Precio sospechoso → nunca automático: baja a revisión para que
+                # un número roto no entre solo a precios_historicos.
+                if mejor["nivel"] == "automatico" and not sospechoso:
                     automatico.append(entry)
                 else:
                     dudoso.append(entry)
