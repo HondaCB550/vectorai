@@ -46,6 +46,8 @@ function RegistroInner() {
   // Paso 2
   const [localidad, setLocalidad] = useState("");
   const [provincia, setProvincia] = useState("");
+  const [aceptaTerminos, setAceptaTerminos]   = useState(false);
+  const [aceptaMarketing, setAceptaMarketing] = useState(true);
 
   const [error, setError]     = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,6 +60,10 @@ function RegistroInner() {
   async function handleRegistro() {
     if (!localidad.trim() || !provincia) {
       setError("Completá la localidad y provincia.");
+      return;
+    }
+    if (!aceptaTerminos) {
+      setError("Para crear la cuenta tenés que aceptar los Términos y Condiciones.");
       return;
     }
     setLoading(true);
@@ -99,6 +105,8 @@ function RegistroInner() {
         localidad,
         provincia,
         plan: planInicial === "advance" ? "advance" : "free",
+        acepto_terminos_at: new Date().toISOString(),
+        acepta_marketing: aceptaMarketing,
       });
 
       // Si Supabase requiere confirmación de email, data.session es null
@@ -224,6 +232,23 @@ function RegistroInner() {
                   {PROVINCIAS.map((p) => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
+
+              <label className="flex items-start gap-2.5 text-sm text-gray-700 cursor-pointer">
+                <input type="checkbox" checked={aceptaTerminos} onChange={(e) => setAceptaTerminos(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-blue-600" />
+                <span>
+                  Acepto los{" "}
+                  <Link href="/terminos" target="_blank" className="text-blue-600 font-medium hover:underline">Términos y Condiciones</Link>
+                  {" "}y la{" "}
+                  <Link href="/privacidad" target="_blank" className="text-blue-600 font-medium hover:underline">Política de Privacidad</Link>.
+                </span>
+              </label>
+
+              <label className="flex items-start gap-2.5 text-sm text-gray-500 cursor-pointer">
+                <input type="checkbox" checked={aceptaMarketing} onChange={(e) => setAceptaMarketing(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-blue-600" />
+                <span>Quiero recibir novedades, mejoras y promociones por email (opcional).</span>
+              </label>
 
               {error && <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">{error}</div>}
 
