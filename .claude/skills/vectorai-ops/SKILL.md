@@ -17,6 +17,7 @@ Piezas que PARECEN duplicados o matches pero son productos distintos — nunca f
 - **Material del cuerpo importa**: rejilla de fundición ≠ rejilla de PVC ≠ cromada.
 - **Espesores/medidas distintas = materiales distintos** (guarda numérica siempre).
 - **"Codo con base" / "3 acometidas"** son piezas distintas al codo simple MH/HH.
+- **Sinónimos: NUNCA mapear un tipo específico a su familia genérica** (UPN→PERFIL, VIGA→PERFIL). El alias corto se normaliza al genérico y matchea al 100 contra cualquier texto que contenga esa palabra, contaminando aliases y precios (bug PGC, 04-07-2026). Sinónimos válidos: variantes del MISMO concepto (PARANTE→MONTANTE, TOMACORRIENTE→TOMA).
 
 ## Regla de oro
 
