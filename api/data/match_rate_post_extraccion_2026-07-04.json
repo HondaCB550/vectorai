@@ -15,19 +15,19 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "metodo": "regex",
    "items": 96,
-   "auto": 50,
-   "dudoso": 40,
-   "sin_match": 6,
-   "pct_auto": 52.1
+   "auto": 75,
+   "dudoso": 16,
+   "sin_match": 5,
+   "pct_auto": 78.1
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "metodo": "regex",
    "items": 36,
-   "auto": 16,
-   "dudoso": 15,
+   "auto": 25,
+   "dudoso": 6,
    "sin_match": 5,
-   "pct_auto": 44.4
+   "pct_auto": 69.4
   },
   {
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
@@ -127,138 +127,6 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "TUBO 20MM P/GAS VANTEC+",
-   "mejor": "INSTS140 (84.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO 25MM P/GAS VANTEC+",
-   "mejor": "INSTS113 (84.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO 32MM P/GAS VANTEC+",
-   "mejor": "INSTS115 (84.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCU CODO 90 20MM P/GAS V",
-   "mejor": "INSTS089 (73.7)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCU CODO 90 25MM P/GAS V",
-   "mejor": "INSTS089 (73.7)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCU CODO 90 32MM P/GAS V",
-   "mejor": "INSTS089 (73.7)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCUIH CODO 90 20X1/2 H",
-   "mejor": "INSTS104 (84.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCUIH CODO 90 25X3/4 H",
-   "mejor": "INSTS106 (84.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "VCLLP VAL.DE CONO 25MM P /",
-   "mejor": "INSTS129 (61.2)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "sin_match",
-   "texto": "VCLLP VAL.DE CONO 32MM P",
-   "mejor": "INSTS128 (59.6)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TANQUE FORTEPLAS 1100 L T",
-   "mejor": "INSTS181 (66.7)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 110 mm x 1, 0",
-   "mejor": "HIE050 (72.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 110 mm x 4, 0",
-   "mejor": "HIE050 (72.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 63 mm x 1 ,",
-   "mejor": "HIE027 (72.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 63 mm x 2 ,",
-   "mejor": "HIE032 (72.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 63 mm x 4 ,",
-   "mejor": "HIE012 (68.8)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 50 mm x 2 ,",
-   "mejor": "HIE030 (80.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 50 mm x 4 ,",
-   "mejor": "HIE030 (80.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 40 mm x 1 ,",
-   "mejor": "HIE033 (80.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 40 mm x 2 ,",
-   "mejor": "HIE033 (80.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "TUBO AMANCO 40 mm x 4 ,",
-   "mejor": "HIE034 (80.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "CODO a 45° MH 63 mm SEL E",
-   "mejor": "INSTS037 (76.9)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
    "texto": "CODO a 87 30’ MH - Con 2",
    "mejor": "INSTS040 (68.6)"
   },
@@ -266,25 +134,25 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P30 TEE DE 20 MM IPS FUS I",
-   "mejor": "INSTS093 (63.8)"
+   "mejor": "INSTS066 (69.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P30 TEE DE 25 MM IPS FUS I",
-   "mejor": "INSTS094 (63.8)"
+   "mejor": "INSTS066 (69.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P30 TEE DE 32 MM IPS FUS I",
-   "mejor": "INSTS095 (63.8)"
+   "mejor": "INSTS066 (65.4)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P30 TEE DE 50 MM IPS FUS I",
-   "mejor": "INSTS143 (63.8)"
+   "mejor": "INSTS066 (73.1)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -301,12 +169,6 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "P60 TAPON DE 50 MM IPS F U",
-   "mejor": "INSTS066 (73.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
    "mejor": "INSTS107 (78.4)"
   },
@@ -321,18 +183,6 @@
    "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
    "mejor": "INSTS107 (78.4)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "P41 REDUCCION DE 25 X 20",
-   "mejor": "INSTS099 (83.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "dudoso",
-   "texto": "P41 REDUCCION DE 32 X 25",
-   "mejor": "INSTS097 (83.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -362,13 +212,13 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "TUBO AMANCO NIVEL 1 - St a",
-   "mejor": "CLIM103 (66.7)"
+   "mejor": "INSTS019 (76.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "TUBO AMANCO NIVEL 1 - St a",
-   "mejor": "CLIM103 (66.7)"
+   "mejor": "INSTS019 (76.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -402,12 +252,6 @@
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "KIT CAMARA INSPECCION 3. 2",
-   "mejor": "INSTS003 (81.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "sin_match",
    "texto": "PILETON INYEC. 20 X 20 S A",
    "mejor": "HIE032 (55.3)"
@@ -429,30 +273,6 @@
    "nivel": "sin_match",
    "texto": "Purifica Dvigi 6 etapas",
    "mejor": "CLIM111 (51.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "CANILLA ESFER. 3/4 PREMIU",
-   "mejor": "INSTS135 (64.9)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "BOMBA SUMERG BAICO TABLER",
-   "mejor": "INSTS191 (66.7)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "FLEX ACERO INOX 1/2 X 30",
-   "mejor": "INSTS177 (68.3)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "FLEX P/GABINETE DE GAS 3 /",
-   "mejor": "CONS204 (61.5)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -495,30 +315,6 @@
    "nivel": "sin_match",
    "texto": "ÑUK01-000-315 Ñuke Wichi 40",
    "mejor": "-"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "CAÑO FUSION 20 X 4MT PN20",
-   "mejor": "INSTS140 (75.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "CAÑO FUSION 25 X 4MT PN20",
-   "mejor": "INSTS140 (75.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "CAÑO FUSION 32 X 4MT PN20",
-   "mejor": "INSTS140 (75.0)"
-  },
-  {
-   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
-   "texto": "CAÑO FUSION 50 X 4MT PN20",
-   "mejor": "INSTS140 (75.0)"
   },
   {
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
