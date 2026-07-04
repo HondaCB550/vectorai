@@ -55,6 +55,36 @@ RE_ENSECO = re.compile(
     re.I,
 )
 
+# Carosio ERP "Presupuesto centro" (sanitarios):
+# "SI00050 60-100020000 MTS TUBO DE 20 SIGAS 4301.28 4.00 ML 17,205.12"
+# Orden: PRECIO_UNIT CANT U.MED TOTAL (americano). 1er token = código interno con
+# letras; 2do = SKU del proveedor. Las líneas corruptas (texto interleaveado) no
+# cumplen el patrón numérico y quedan afuera solas.
+RE_CAROSIO_PRESU = re.compile(
+    r"^\s*([A-Z]{2}[A-Z0-9]{2,})\s+(\S+)\s+(.+?)\s+"
+    r"([\d,]+\.\d{2})\s+([\d,]+\.\d{2})\s+([A-Za-z]{1,6}\.?)\s+([\d,]+\.\d{2})\s*$"
+)
+
+# Casa Alfonsín: "4,00 240019 TUBO 20MM P/GAS VANTEC+ . 5668,75 - 6,00% 5328,63 21314,50"
+# Orden: CANT [COD] DESC P.LISTA -DESC% P.UNIT TOTAL (europeo). Se toma el precio
+# unitario ya descontado (el que paga el cliente). El código puede faltar
+# ("1,00 ROWA TANGO SFL 20 ...") — solo se separa si es alnum≥5 con algún dígito.
+# El descuento aparece con y sin espacio: "- 6,00%" y "-20,00%".
+RE_ALFONSIN = re.compile(
+    r"^\s*(\d+(?:,\d{1,2})?)\s+(?:((?=[A-Z0-9]*\d)[A-Z0-9]{5,})\s+)?(.+?)\s+"
+    r"((?:\d{1,3}\.)*\d+,\d{2})\s+-\s*[\d.,]+%\s+"
+    r"((?:\d{1,3}\.)*\d+,\d{2})\s+((?:\d{1,3}\.)*\d+,\d{2})\s*$"
+)
+
+# Viejo Bueno: "1 1.00411110001 BIODIGESTOR RP 600 LTS 520014 ROTOPLAS 888,516.39 10.00 10.00 719,698.27 719,698.28"
+# CANT y CÓDIGO vienen pegados ("1.00"+"411110001"); hasta 3 columnas de descuento
+# entre precio de lista y precio de venta (americano). pu = precio de venta.
+RE_VIEJOBUENO = re.compile(
+    r"^\s*\d+\s+(\d+\.\d{2})(\d{8,})\s+(.+?)\s+"
+    r"((?:\d{1,3},)*\d+\.\d{2})\s+((?:\d{1,2}\.\d{2}\s+){0,3})"
+    r"((?:\d{1,3},)*\d+\.\d{2})\s+((?:\d{1,3},)*\d+\.\d{2})\s*$"
+)
+
 RE_PRECIO = re.compile(r"^[\d,]+\.\d{2}$|^[\d.]+,\d{2}$")
 
 # Artículo de PDF: "H ORMIGON" → "HORMIGON", "F IBRAKRETE" → "FIBRAKRETE"
@@ -453,10 +483,13 @@ def extraer_regex(texto: str) -> list[dict]:
     items = []
     for line in texto.splitlines():
         for patron, parser in [
-            (RE_ENSECO,   "enseco"),
-            (RE_BAUKRAFT, "baukraft"),
-            (RE_CAROSIO,  "carosio"),
-            (RE_EUROPEO,  "europeo"),
+            (RE_ENSECO,        "enseco"),
+            (RE_VIEJOBUENO,    "viejobueno"),
+            (RE_CAROSIO_PRESU, "carosio_presu"),
+            (RE_ALFONSIN,      "alfonsin"),
+            (RE_BAUKRAFT,      "baukraft"),
+            (RE_CAROSIO,       "carosio"),
+            (RE_EUROPEO,       "europeo"),
         ]:
             m = patron.match(line)
             if not m:
@@ -465,6 +498,24 @@ def extraer_regex(texto: str) -> list[dict]:
                 cod, desc, cant, pu, total = m.groups()
                 items.append({
                     "cod": (cod or "").strip(), "desc": _fix_split_words(desc.strip()),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "viejobueno":
+                cant, cod, desc, _plista, _descs, pu, total = m.groups()
+                items.append({
+                    "cod": cod, "desc": _fix_split_words(desc.strip()),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "carosio_presu":
+                _cod_int, sku, desc, pu, cant, _umed, total = m.groups()
+                items.append({
+                    "cod": sku, "desc": _fix_split_words(desc.strip()),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "alfonsin":
+                cant, cod, desc, _plista, pu, total = m.groups()
+                items.append({
+                    "cod": cod or "", "desc": _fix_split_words(desc.strip().rstrip(" .")),
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             elif parser == "baukraft":
