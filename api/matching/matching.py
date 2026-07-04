@@ -68,12 +68,11 @@ SINONIMOS: dict[str, str] = {
     "VARILLA LISA":               "REDONDO LISO",
 
     # ── Perfiles estructurales ────────────────────────────────────────────────
-    "VIGA":                       "PERFIL",
-    "UPN":                        "PERFIL",
-    "IPN":                        "PERFIL",
-    "HEA":                        "PERFIL",
-    "HEB":                        "PERFIL",
-    "DOBLE T":                    "PERFIL",
+    # NO mapear tipos específicos (UPN/IPN/HEA/HEB/VIGA/DOBLE T) al genérico
+    # "PERFIL": el alias corto (ej. "upn") se convertía en "perfil" y matcheaba
+    # al 100 contra CUALQUIER texto con la palabra perfil ("PERFIL PGC 200..."),
+    # inundando los candidatos y tapando los códigos correctos (bug PGC,
+    # detectado por Pablo 03-07-2026). El tipo ES la información discriminante.
 
     # ── Chapa / plancha ───────────────────────────────────────────────────────
     "PLANCHA":                    "CHAPA",
