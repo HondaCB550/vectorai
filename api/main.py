@@ -1303,10 +1303,22 @@ class ConfirmarV2Request(BaseModel):
 # ── /analizar-v2 ──────────────────────────────────────────────────────────────
 from fastapi import Form as FastAPIForm
 
+# Progreso de análisis en curso, por id que genera el frontend. En memoria:
+# una sola instancia de Railway y vida útil de minutos. El frontend lo consulta
+# por polling mientras espera la respuesta del análisis.
+_PROGRESO: dict[str, dict] = {}
+
+
+@app.get("/analizar-v2/progreso/{progreso_id}")
+async def progreso_analisis(progreso_id: str):
+    return _PROGRESO.get(progreso_id) or {"estado": "desconocido"}
+
+
 @app.post("/analizar-v2")
 async def analizar_v2(
     files: list[UploadFile] = File(default=[]),
     file_configs: Optional[str] = FastAPIForm(default=None),
+    progreso_id: Optional[str] = FastAPIForm(default=None),
     authorization: Optional[str] = Header(None),
 ):
     """
@@ -1371,6 +1383,14 @@ async def analizar_v2(
             nombre_por_bloque[clave] = nombre
 
     for file_idx, (fname, content, cfg_archivo) in enumerate(entradas):
+        if progreso_id:
+            if len(_PROGRESO) > 200:
+                _PROGRESO.clear()
+            _PROGRESO[progreso_id] = {
+                "estado": "procesando", "archivo": fname,
+                "idx": file_idx + 1, "total": len(entradas),
+                "etapa": "leyendo archivo",
+            }
         # ── Rutear por tipo de contenido ────────────────────────────────────
         lower = (fname or "").lower()
         tmp_path = None
@@ -1411,12 +1431,16 @@ async def analizar_v2(
                 # texto: si tiene texto pero 0 ítems, es un formato nuevo a
                 # cubrir con regex, no gastamos visión en eso.
                 if not resultado.get("items") and pdf_sin_texto(content):
+                    if progreso_id and progreso_id in _PROGRESO:
+                        _PROGRESO[progreso_id]["etapa"] = "documento escaneado — leyendo con IA (≈20s por página)"
                     resultado = extraer_pdf_escaneado(content)
             elif tipo_fuente == "xlsx":
                 resultado = extraer_xlsx(content)
             elif tipo_fuente == "csv":
                 resultado = extraer_csv(content)
             else:  # imagen → OCR/visión
+                if progreso_id and progreso_id in _PROGRESO:
+                    _PROGRESO[progreso_id]["etapa"] = "foto — leyendo con IA (≈20s)"
                 resultado = extraer_imagen(content, fname)
 
             items = resultado.get("items", [])
@@ -1650,6 +1674,9 @@ async def analizar_v2(
                     os.unlink(tmp_path)
                 except OSError:
                     pass
+
+    if progreso_id:
+        _PROGRESO.pop(progreso_id, None)
 
     if not resultados:
         raise HTTPException(status_code=422, detail={"error": "sin_resultados", "errores": errores})

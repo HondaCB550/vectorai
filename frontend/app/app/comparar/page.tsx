@@ -138,6 +138,7 @@ export default function Comparar() {
   const [bloques, setBloques]         = useState<BloqueProveedor[]>([bloqueVacio()]);
   const [dragging, setDragging]       = useState<number | null>(null);  // índice del bloque activo
   const [loading, setLoading]         = useState(false);
+  const [progreso, setProgreso]       = useState<{ idx: number; total: number; archivo: string; etapa: string } | null>(null);
   const [resultado, setResultado]     = useState<Resultado | null>(null);
   const [error, setError]             = useState("");
   const [tab, setTab]                 = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
@@ -213,8 +214,13 @@ export default function Comparar() {
     setResultado(null);
     setConfirmado(false);
 
+    const nTotal = bloques.reduce((s, b) => s + b.files.length, 0);
+    setProgreso({ idx: 0, total: nTotal, archivo: "", etapa: "subiendo archivos" });
+
     const form = new FormData();
     const fileConfigs: object[] = [];
+    const progresoId = crypto.randomUUID();
+    form.append("progreso_id", progresoId);
 
     // Flatten: por cada bloque, por cada file → agrega al form en el mismo orden.
     // Se manda el índice de bloque para que el backend agrupe los archivos de un
@@ -231,6 +237,18 @@ export default function Comparar() {
       }
     });
     form.append("file_configs", JSON.stringify(fileConfigs));
+
+    // Polling de progreso mientras el análisis corre: qué archivo va y en qué
+    // etapa (las fotos/escaneados tardan ~20s cada uno por la lectura con IA).
+    const timer = setInterval(async () => {
+      try {
+        const r = await fetch(`${API_URL}/analizar-v2/progreso/${progresoId}`);
+        const p = await r.json();
+        if (p && p.estado === "procesando") {
+          setProgreso({ idx: p.idx, total: p.total, archivo: p.archivo, etapa: p.etapa });
+        }
+      } catch { /* el polling nunca corta el análisis */ }
+    }, 2000);
 
     try {
       const headers: Record<string, string> = {};
@@ -274,6 +292,8 @@ export default function Comparar() {
     } catch {
       setError("No se pudo conectar con el servidor de análisis.");
     } finally {
+      clearInterval(timer);
+      setProgreso(null);
       setLoading(false);
     }
   }
@@ -668,6 +688,33 @@ export default function Comparar() {
                 {loading ? "Analizando…" : "⚡ Analizar"}
               </button>
             </div>
+
+            {/* Progreso del análisis en curso: qué archivo va y en qué etapa */}
+            {loading && progreso && (
+              <div className="mt-4 bg-white border border-blue-200 rounded-xl p-5 shadow-sm">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold text-gray-800">
+                    Analizando {progreso.total} archivo{progreso.total !== 1 ? "s" : ""}…
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {Math.min(Math.max(progreso.idx, 1), progreso.total)} de {progreso.total}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                  <div
+                    className="bg-blue-600 h-2.5 rounded-full transition-all duration-700"
+                    style={{ width: `${Math.max(4, Math.round((Math.max(progreso.idx - 1, 0) / Math.max(progreso.total, 1)) * 100))}%` }}
+                  />
+                </div>
+                {progreso.archivo && (
+                  <p className="text-sm text-gray-600 mt-2 truncate">📄 {progreso.archivo} — {progreso.etapa}</p>
+                )}
+                <p className="text-xs text-amber-600 mt-2">
+                  ⏳ Las fotos y documentos escaneados se leen con inteligencia artificial (≈20 segundos cada uno).
+                  No cierres ni salgas de esta pantalla: el análisis se perdería.
+                </p>
+              </div>
+            )}
           </>
         )}
 
