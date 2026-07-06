@@ -149,7 +149,7 @@ export default function AdminPage() {
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
           <span className="text-sm font-medium text-blue-600">Admin</span>
           <Link href="/app/admin/metricas" className="text-sm font-medium text-gray-600 hover:text-blue-700">
-            📊 Métricas
+            Métricas
           </Link>
           <Link
             href="/suscribirse"

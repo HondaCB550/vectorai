@@ -165,7 +165,7 @@ export default function MetricasPage() {
           </div>
           <div className="flex items-center gap-3">
             <Link href="/app/admin" className="text-sm text-blue-800 hover:underline">← Panel admin</Link>
-            <button onClick={recargar} className="text-sm text-gray-600 hover:text-gray-900">⟳ Recargar</button>
+            <button onClick={recargar} className="text-sm text-gray-600 hover:text-gray-900">Recargar</button>
             <UserMenu />
           </div>
         </div>

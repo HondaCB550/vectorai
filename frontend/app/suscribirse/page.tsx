@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -26,7 +27,7 @@ const PLANES: Plan[] = [
     bajada: "Para una obra. Compará los precios de todos tus rubros sin cargar nada a mano.",
     features: [
       "6 comparativas por mes",
-      "🎁 8 el primer mes (2 de regalo)",
+      "8 el primer mes (2 de regalo)",
       "Hasta 5 proveedores por comparativa",
       "Hasta 10 hojas por proveedor",
       "Lista de compras por proveedor",
@@ -91,7 +92,7 @@ export default function Suscribirse() {
     <>
       <main className="min-h-screen bg-gray-50 px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <Link href="/" className="text-xl font-bold text-gray-900 block mb-2">VectorAI</Link>
+          <Link href="/" className="inline-block mb-3"><Logo /></Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Elegí tu plan</h1>
           <p className="text-gray-600 mb-8">Empezá con lo que necesites. Cancelás cuando quieras desde MercadoPago.</p>
 
@@ -138,7 +139,7 @@ export default function Suscribirse() {
                 <ul className="space-y-2 text-sm text-gray-700 mb-6 flex-1">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2">
-                      <span className="text-green-500 font-bold">✓</span> {f}
+                      <span style={{ color: "#E87022" }} className="font-bold leading-6">•</span> {f}
                     </li>
                   ))}
                 </ul>
