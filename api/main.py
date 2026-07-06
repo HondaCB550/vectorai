@@ -1058,9 +1058,23 @@ async def mp_webhook(request: Request):
 
     if estado == "authorized":
         sb.table("perfiles").update({"plan": "advance"}).eq("id", user_id).execute()
+        try:
+            sb.table("facturacion_eventos").insert({
+                "user_id": user_id, "evento": "alta", "plan": "advance",
+                "monto": PRECIOS_PLAN.get("advance", 48000), "mp_id": str(mp_id),
+            }).execute()
+        except Exception as e:
+            print(f"facturacion_eventos error: {e}")
         print(f"Plan Advance activado: {user_id}")
     elif estado in ("cancelled", "paused"):
         sb.table("perfiles").update({"plan": "free"}).eq("id", user_id).execute()
+        try:
+            sb.table("facturacion_eventos").insert({
+                "user_id": user_id, "evento": "baja", "plan": "free",
+                "monto": 0, "mp_id": str(mp_id),
+            }).execute()
+        except Exception as e:
+            print(f"facturacion_eventos error: {e}")
         print(f"Plan cancelado, vuelve a free: {user_id}")
 
     return {"ok": True}
@@ -1631,6 +1645,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "incluye_iva":  bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":   fac_archivo,
                             "descuento_pct": desc_archivo,
+                            "metodo_extraccion": resultado.get("metodo_extraccion"),
                             "estado":       "PROCESANDO",
                             "obra_id":      obra_valida,
                             "created_at":   datetime.now().isoformat(),
@@ -1645,6 +1660,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":          fac_archivo,
                             "descuento_pct":       desc_archivo,
+                            "metodo_extraccion":   resultado.get("metodo_extraccion"),
                             "estado":              "PROCESANDO",
                             "obra_id":             obra_valida,
                         }).execute()
@@ -2184,6 +2200,103 @@ async def admin_validar_pendiente(
         return {"ok": True, "accion": "marcado_para_crear", "descripcion": pendiente["descripcion_original"]}
 
     raise HTTPException(status_code=400, detail={"error": "accion inválida"})
+
+
+# ── Dashboard de métricas (admin) ─────────────────────────────────────────────
+# Precios de referencia por plan (ARS/mes). El intermedio "basico" se setea al
+# definir su precio; advance = 48.000.
+PRECIOS_PLAN = {
+    "advance": int(os.environ.get("PRECIO_ADVANCE", "48000")),
+    "pro":     int(os.environ.get("PRECIO_PRO", "48000")),
+    "basico":  int(os.environ.get("PRECIO_BASICO", "0")),
+}
+# Costo estimado por llamada de visión (USD) — Sonnet 5, ~1 imagen.
+COSTO_OCR_USD = float(os.environ.get("COSTO_OCR_USD", "0.02"))
+
+_REGIONES = {
+    "caba": "CABA", "ciudad autonoma": "CABA", "capital federal": "CABA",
+    "buenos aires": "Buenos Aires", "gba": "Buenos Aires",
+    "cordoba": "Centro", "santa fe": "Centro", "entre rios": "Centro",
+    "mendoza": "Cuyo", "san juan": "Cuyo", "san luis": "Cuyo",
+    "jujuy": "NOA", "salta": "NOA", "tucuman": "NOA", "catamarca": "NOA",
+    "santiago del estero": "NOA", "la rioja": "NOA",
+    "misiones": "NEA", "corrientes": "NEA", "chaco": "NEA", "formosa": "NEA",
+    "neuquen": "Patagonia", "rio negro": "Patagonia", "chubut": "Patagonia",
+    "santa cruz": "Patagonia", "tierra del fuego": "Patagonia", "la pampa": "Patagonia",
+}
+
+def _region(prov: str) -> str:
+    import unicodedata
+    p = unicodedata.normalize("NFKD", (prov or "").lower().strip())
+    p = "".join(c for c in p if not unicodedata.combining(c))
+    for clave, region in _REGIONES.items():
+        if clave in p:
+            return region
+    return "Otras / sin dato"
+
+
+@app.get("/admin/metrics")
+def admin_metrics(authorization: Optional[str] = Header(None)):
+    """Métricas de negocio del SaaS (solo admin)."""
+    require_admin(authorization)
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    try:
+        resp = sb.rpc("admin_metrics").execute()
+        m = resp.data
+        if isinstance(m, list):
+            m = m[0] if m else {}
+        m = m or {}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail={"error": "metrics_error", "detalle": str(e)})
+
+    por_plan = m.get("por_plan") or {}
+    total = m.get("usuarios_total") or 0
+    pagos = sum(por_plan.get(p, 0) for p in ("advance", "pro", "basico"))
+    mrr = sum(por_plan.get(p, 0) * PRECIOS_PLAN.get(p, 0) for p in PRECIOS_PLAN)
+
+    # Agrupar provincias en regiones del país
+    zonas: dict = {}
+    for row in m.get("usuarios_por_provincia") or []:
+        r = _region(row.get("prov", ""))
+        zonas[r] = zonas.get(r, 0) + (row.get("n") or 0)
+    zonas_arr = sorted(
+        ({"zona": k, "usuarios": v} for k, v in zonas.items()),
+        key=lambda x: -x["usuarios"],
+    )
+
+    # Crecimiento acumulado de usuarios
+    acum = 0
+    crecimiento = []
+    for row in m.get("usuarios_por_mes") or []:
+        acum += row.get("nuevos") or 0
+        crecimiento.append({"mes": row["mes"], "nuevos": row.get("nuevos") or 0, "acumulado": acum})
+
+    ocr_total = m.get("ocr_total") or 0
+    return {
+        "usuarios": {
+            "total": total,
+            "por_plan": por_plan,
+            "activos": m.get("activos", 0),
+            "pagos": pagos,
+        },
+        "mrr": mrr,
+        "arpu": round(mrr / total, 2) if total else 0,
+        "conversion_pago_pct": round(100 * pagos / total, 1) if total else 0,
+        "comparativas_total": m.get("comparativas_total", 0),
+        "presupuestos_total": m.get("presupuestos_total", 0),
+        "ahorro_generado": m.get("ahorro_comparativas", 0),
+        "crecimiento_usuarios": crecimiento,
+        "usuarios_por_zona": zonas_arr,
+        "facturacion_por_mes": m.get("facturacion_por_mes") or [],
+        "ocr": {
+            "llamadas": ocr_total,
+            "costo_usd_estimado": round(ocr_total * COSTO_OCR_USD, 2),
+            "por_mes": m.get("ocr_por_mes") or [],
+        },
+        "precios_plan": PRECIOS_PLAN,
+    }
 
 
 # ── Admin: sinónimos ──────────────────────────────────────────────────────────

@@ -148,6 +148,9 @@ export default function AdminPage() {
           <Link href="/app/comparar" className="text-sm text-gray-500 hover:text-gray-900 transition">Comparar</Link>
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
           <span className="text-sm font-medium text-blue-600">Admin</span>
+          <Link href="/app/admin/metricas" className="text-sm font-medium text-gray-600 hover:text-blue-700">
+            📊 Métricas
+          </Link>
           <Link
             href="/suscribirse"
             className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
