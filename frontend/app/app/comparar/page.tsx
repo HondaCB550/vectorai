@@ -102,11 +102,13 @@ function fmt(v: number) {
   return `$ ${Math.round(v).toLocaleString("es-AR")}`;
 }
 
-// Precio a mostrar: el neto siempre es la base; "Con IVA" reconstruye el
-// precio con el factor PROPIO de cada proveedor (nunca un factor uniforme,
-// si no a los que ya cotizaron con IVA se les suma de nuevo).
-function precioMostrado(neto: number, factorIva: number, conIva: boolean, descPct: number) {
-  const iva  = conIva ? (factorIva || 1.105) : 1;
+// Precio a mostrar: el neto siempre es la base (todos los proveedores ya están
+// normalizados a sin-IVA al analizar). "Con IVA" aplica 10,5% UNIFORME a todos
+// — así la columna sigue siendo comparable. El factor propio del proveedor NO
+// se usa acá: para el que cotizó sin IVA su factor guardado es 1.0 y el toggle
+// no le cambiaba nada (bug reportado por Pablo: solo se movía Sauce).
+function precioMostrado(neto: number, _factorIva: number, conIva: boolean, descPct: number) {
+  const iva  = conIva ? 1.105 : 1;
   const desc = descPct > 0 ? (1 - descPct / 100) : 1;
   return neto * iva * desc;
 }

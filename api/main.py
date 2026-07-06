@@ -1337,7 +1337,10 @@ async def progreso_analisis(progreso_id: str):
 
 
 @app.post("/analizar-v2")
-async def analizar_v2(
+def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visión,
+    # Supabase sync) y como corutina congelaba el event loop — el polling de
+    # /analizar-v2/progreso no respondía hasta terminar. Como def, FastAPI lo
+    # corre en el threadpool y el progreso se actualiza en vivo.
     files: list[UploadFile] = File(default=[]),
     file_configs: Optional[str] = FastAPIForm(default=None),
     progreso_id: Optional[str] = FastAPIForm(default=None),
@@ -1391,7 +1394,7 @@ async def analizar_v2(
     # entradas = [(nombre_archivo, contenido_bytes, cfg), ...]
     entradas: list[tuple[str, bytes, dict]] = []
     for idx, f in enumerate(files or []):
-        contenido = await f.read()
+        contenido = f.file.read()
         entradas.append((f.filename or f"archivo_{idx}", contenido,
                          cfgs[idx] if idx < len(cfgs) else {}))
 
