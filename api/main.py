@@ -1501,6 +1501,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "proveedor_id": proveedor_id,
                             "incluye_iva":  bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":   fac_archivo,
+                            "descuento_pct": desc_archivo,
                             "estado":       "PROCESANDO",
                             "obra_id":      obra_valida,
                             "created_at":   datetime.now().isoformat(),
@@ -1514,6 +1515,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "archivo":             fname,
                             "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":          fac_archivo,
+                            "descuento_pct":       desc_archivo,
                             "estado":              "PROCESANDO",
                             "obra_id":             obra_valida,
                         }).execute()
@@ -2210,7 +2212,7 @@ async def listar_mis_presupuestos(authorization: Optional[str] = Header(None)):
         return {"presupuestos": []}
     try:
         res = sb.table("presupuestos").select(
-            "id,proveedor_detectado,archivo,estado,created_at,obra_id"
+            "id,proveedor_detectado,archivo,estado,created_at,obra_id,incluye_iva,descuento_pct"
         ).eq("user_id", user["user_id"]).order("created_at", desc=True).limit(100).execute()
         pres = res.data or []
         # Nombre de la obra de cada presupuesto (para agrupar en el frontend)
@@ -2245,6 +2247,8 @@ async def listar_mis_presupuestos(authorization: Optional[str] = Header(None)):
             "n_items":      counts.get(p["id"], 0),
             "total_sin_iva": round(totales.get(p["id"], 0.0), 2),
             "obra":         obras_map.get(p.get("obra_id") or "", None),
+            "con_iva":      bool(p.get("incluye_iva", True)),
+            "descuento":    float(p.get("descuento_pct") or 0),
         } for p in pres]}
     except Exception as e:
         print(f"[mis-presupuestos] Error listando: {e}")
@@ -2298,6 +2302,195 @@ async def detalle_mi_presupuesto(presupuesto_id: str, authorization: Optional[st
             "score":    it.get("score_match"),
             "estado":   it.get("estado_match"),
         } for it in items],
+    }
+
+
+@app.delete("/mis-presupuestos/{presupuesto_id}")
+async def eliminar_mi_presupuesto(presupuesto_id: str, authorization: Optional[str] = Header(None)):
+    """Elimina un presupuesto guardado y sus líneas. Solo el propietario."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    res = sb.table("presupuestos").select("id").eq("id", presupuesto_id) \
+            .eq("user_id", user["user_id"]).limit(1).execute()
+    if not res.data:
+        raise HTTPException(status_code=404, detail={"error": "no_encontrado"})
+    sb.table("presupuesto_items").delete().eq("presupuesto_id", presupuesto_id).execute()
+    sb.table("presupuestos").delete().eq("id", presupuesto_id).execute()
+    return {"ok": True}
+
+
+class CompararGuardadosRequest(BaseModel):
+    presupuesto_ids: list[str]
+    # {presupuesto_id: {"con_iva": bool, "descuento": float}} — si no viene,
+    # se usa la config RECORDADA del análisis original
+    overrides: dict[str, dict] = {}
+
+
+@app.post("/comparar-guardados")
+def comparar_guardados(req: CompararGuardadosRequest, authorization: Optional[str] = Header(None)):
+    """Re-arma una comparativa desde presupuestos YA procesados, sin re-subir
+    archivos. Usa la config recordada (IVA/descuento) de cada documento — con
+    override opcional — y RE-MATCHEA los textos con el motor actual (aprovecha
+    los aliases aprendidos desde el análisis original).
+
+    Nota: los precios guardados ya están normalizados (unidad convertida), por
+    eso acá NO se vuelve a aplicar conversión de unidades."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    if not req.presupuesto_ids or len(req.presupuesto_ids) > 20:
+        raise HTTPException(status_code=400, detail={"error": "seleccion_invalida"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    denominaciones = _get_denominaciones()
+    res_m = sb.table("materiales_validados") \
+              .select("codigo,categoria,denominacion_principal,descripcion,unidades_posibles").execute()
+    materiales_dict = {m["codigo"]: m for m in (res_m.data or [])}
+
+    res_p = sb.table("presupuestos").select("*").in_("id", req.presupuesto_ids) \
+              .eq("user_id", user["user_id"]).execute()
+    pres = res_p.data or []
+    if not pres:
+        raise HTTPException(status_code=404, detail={"error": "no_encontrado"})
+
+    obra_ids = {p.get("obra_id") for p in pres if p.get("obra_id")}
+    obra_id_comun = obra_ids.pop() if len(obra_ids) == 1 else None
+
+    resultados: dict[str, dict] = {}
+    for p in pres:
+        ov = req.overrides.get(p["id"]) or {}
+        con_iva_orig = bool(p.get("incluye_iva", True))
+        desc_orig    = float(p.get("descuento_pct") or 0)
+        fac_orig     = 1.105 if con_iva_orig else 1.0
+        con_iva_new  = bool(ov.get("con_iva", con_iva_orig))
+        desc_new     = float(ov.get("descuento", desc_orig))
+        fac_new      = 1.105 if con_iva_new else 1.0
+
+        res_i = sb.table("presupuesto_items").select("texto_original,cantidad,precio") \
+                  .eq("presupuesto_id", p["id"]).execute()
+        proveedor = p.get("proveedor_detectado") or "PROVEEDOR"
+        automatico, dudoso, sin_match = [], [], []
+
+        for it in (res_i.data or []):
+            desc_txt = (it.get("texto_original") or "").strip()
+            precio_guardado = float(it.get("precio") or 0)
+            if not desc_txt or precio_guardado <= 0:
+                continue
+            # Reconstruir el precio bruto del documento (deshacer la config
+            # original) y re-aplicar la config nueva
+            pu_bruto = precio_guardado * fac_orig
+            if 0 < desc_orig < 100:
+                pu_bruto = pu_bruto / (1 - desc_orig / 100)
+            precio = round(pu_bruto / fac_new * (1 - desc_new / 100), 2)
+            cant = float(it.get("cantidad") or 1)
+
+            matches = _match_v2(desc_txt, denominaciones, top_n=3)
+            base = {
+                "desc_prov": desc_txt, "cod_prov": "",
+                "precio_sin_iva": precio, "precio_con_iva": round(pu_bruto, 2),
+                "cant": cant, "unidad": "UN",
+            }
+            if not matches or matches[0]["nivel"] == "sin_match":
+                sin_match.append(base)
+                continue
+            mejor = matches[0]
+            mat = materiales_dict.get(mejor["codigo_material"], {})
+            alternativas = []
+            vistos = {mejor["codigo_material"]}
+            for m in matches[1:]:
+                if m["codigo_material"] in vistos:
+                    continue
+                vistos.add(m["codigo_material"])
+                mat_alt = materiales_dict.get(m["codigo_material"], {})
+                alternativas.append({
+                    "codigo_material": m["codigo_material"],
+                    "denominacion":    mat_alt.get("denominacion_principal", m["denominacion_matcheada"]),
+                    "descripcion":     mat_alt.get("descripcion", ""),
+                    "score":           m["score"],
+                })
+            entry = {
+                **base,
+                "codigo_material":        mejor["codigo_material"],
+                "denominacion_matcheada": mejor["denominacion_matcheada"],
+                "score":                  mejor["score"],
+                "nivel":                  mejor["nivel"],
+                "categoria":              mat.get("categoria", ""),
+                "denominacion_principal": mat.get("denominacion_principal", ""),
+                "descripcion":            mat.get("descripcion", ""),
+                "alternativas":           alternativas,
+            }
+            (automatico if mejor["nivel"] == "automatico" else dudoso).append(entry)
+
+        total_n = len(automatico) + len(dudoso) + len(sin_match)
+        acc = resultados.get(proveedor)
+        if acc is None:
+            resultados[proveedor] = {
+                "automatico": automatico, "dudoso": dudoso, "sin_match": sin_match,
+                "extraccion": {"metodo": "guardado", "n_items": total_n},
+                "n_items_extraidos": total_n,
+                "cfg_aplicada": {"con_iva": con_iva_new, "descuento": desc_new},
+            }
+        else:
+            acc["automatico"].extend(automatico)
+            acc["dudoso"].extend(dudoso)
+            acc["sin_match"].extend(sin_match)
+            acc["n_items_extraidos"] += total_n
+
+    if not resultados:
+        raise HTTPException(status_code=422, detail={"error": "sin_resultados"})
+
+    for data in resultados.values():
+        n_auto, n_dud, n_sin = len(data["automatico"]), len(data["dudoso"]), len(data["sin_match"])
+        total = n_auto + n_dud + n_sin
+        data["stats"] = {"total": total, "automatico": n_auto, "dudoso": n_dud,
+                         "sin_match": n_sin, "pct_automatico": round(100 * n_auto / max(1, total), 1)}
+
+    comparativo = _build_comparativo_v2(resultados, materiales_dict)
+    comparativa_id = str(uuid.uuid4())
+    obra_nombre = None
+    if obra_id_comun:
+        try:
+            ro = sb.table("obras").select("nombre").eq("id", obra_id_comun).limit(1).execute()
+            obra_nombre = ro.data[0]["nombre"] if ro.data else None
+        except Exception:
+            pass
+    _guardar_comparativa(
+        comparativa_id,
+        {"comparativo": comparativo, "proveedores": list(resultados.keys())},
+        user_id=user["user_id"],
+        titulo=(f"{obra_nombre} — " if obra_nombre else "") +
+               f"{', '.join(resultados.keys())} ({datetime.now().strftime('%d/%m/%Y')})",
+    )
+    if obra_id_comun:
+        try:
+            sb.table("comparativas").update({"obra_id": obra_id_comun}).eq("id", comparativa_id).execute()
+        except Exception:
+            pass
+
+    config_provs = {
+        prov: {
+            "iva_incluido":  data["cfg_aplicada"]["con_iva"],
+            "factor_iva":    1.105 if data["cfg_aplicada"]["con_iva"] else 1.0,
+            "descuento_pct": data["cfg_aplicada"]["descuento"],
+        }
+        for prov, data in resultados.items()
+    }
+    return {
+        "comparativa_id":     comparativa_id,
+        "proveedores":        list(resultados.keys()),
+        "resultados":         resultados,
+        "comparativo":        comparativo,
+        "errores":            [],
+        "plan":               user["plan"],
+        "usos_restantes":     None,
+        "aliases_en_bd":      len(denominaciones),
+        "config_proveedores": config_provs,
     }
 
 
