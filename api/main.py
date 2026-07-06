@@ -1389,7 +1389,8 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
     presupuestos_creados: list[str] = []
 
     # Obra (plan alto): solo si existe y es del usuario
-    obra_valida = _obra_del_usuario(sb, obra_id, user["user_id"]) if _plan_permite_obras(user["plan"]) else None
+    obra = _obra_del_usuario(sb, obra_id, user["user_id"]) if _plan_permite_obras(user["plan"]) else None
+    obra_valida = obra["id"] if obra else None
 
     # entradas = [(nombre_archivo, contenido_bytes, cfg), ...]
     entradas: list[tuple[str, bytes, dict]] = []
@@ -1732,7 +1733,9 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
         comparativa_id,
         {"comparativo": comparativo, "proveedores": list(resultados.keys())},
         user_id=user["user_id"],
-        titulo=f"Análisis v2 — {', '.join(resultados.keys())} ({datetime.now().strftime('%d/%m/%Y')})"
+        # Título legible: "{Obra} — {proveedores} (fecha)"; sin obra, solo proveedores
+        titulo=(f"{obra['nombre']} — " if obra else "") +
+               f"{', '.join(resultados.keys())} ({datetime.now().strftime('%d/%m/%Y')})"
     )
 
     # Vincular los documentos procesados a su comparativa (la FK requiere que
@@ -2170,13 +2173,13 @@ async def crear_obra(req: ObraRequest, authorization: Optional[str] = Header(Non
     return {"obra": res.data[0]}
 
 
-def _obra_del_usuario(sb, obra_id: Optional[str], user_id: str) -> Optional[str]:
-    """Valida que la obra exista y sea del usuario; devuelve el id o None."""
+def _obra_del_usuario(sb, obra_id: Optional[str], user_id: str) -> Optional[dict]:
+    """Valida que la obra exista y sea del usuario; devuelve {id, nombre} o None."""
     if not obra_id or user_id == "anonimo" or not sb:
         return None
     try:
-        res = sb.table("obras").select("id").eq("id", obra_id).eq("user_id", user_id).limit(1).execute()
-        return res.data[0]["id"] if res.data else None
+        res = sb.table("obras").select("id,nombre").eq("id", obra_id).eq("user_id", user_id).limit(1).execute()
+        return res.data[0] if res.data else None
     except Exception:
         return None
 

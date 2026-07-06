@@ -127,8 +127,24 @@ export default function Historial() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-3">
-            {comparativas.map((c) => (
+          <div className="space-y-8">
+            {Object.entries(
+              comparativas.reduce<Record<string, Comparativa[]>>((acc, c) => {
+                const key = c.obra
+                  ? `🏗️ ${c.obra.nombre}${c.obra.localidad ? ` — ${c.obra.localidad}` : ""}`
+                  : "Sin obra asignada";
+                (acc[key] = acc[key] || []).push(c);
+                return acc;
+              }, {})
+            )
+              .sort(([a], [b]) => (a === "Sin obra asignada" ? 1 : b === "Sin obra asignada" ? -1 : a.localeCompare(b)))
+              .map(([grupo, lista]) => (
+            <div key={grupo}>
+              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                {grupo} <span className="text-gray-400 font-normal normal-case">({lista.length})</span>
+              </h2>
+              <div className="space-y-3">
+            {lista.map((c) => (
               <div
                 key={c.id}
                 className="bg-white rounded-xl shadow-sm hover:shadow-md transition p-5 border border-gray-200"
@@ -172,6 +188,9 @@ export default function Historial() {
                 </div>
               </div>
             ))}
+              </div>
+            </div>
+              ))}
           </div>
         )}
       </div>
