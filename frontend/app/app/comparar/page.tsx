@@ -710,7 +710,7 @@ export default function Comparar() {
                   <p className="text-sm text-gray-600 mt-2 truncate">📄 {progreso.archivo} — {progreso.etapa}</p>
                 )}
                 <p className="text-xs text-amber-600 mt-2">
-                  ⏳ Las fotos y documentos escaneados se leen con inteligencia artificial (≈20 segundos cada uno).
+                  ⏳ Las fotos y documentos escaneados tardan más en procesarse (≈20 segundos cada uno).
                   No cierres ni salgas de esta pantalla: el análisis se perdería.
                 </p>
               </div>

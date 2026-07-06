@@ -1389,7 +1389,7 @@ async def analizar_v2(
             _PROGRESO[progreso_id] = {
                 "estado": "procesando", "archivo": fname,
                 "idx": file_idx + 1, "total": len(entradas),
-                "etapa": "leyendo archivo",
+                "etapa": "procesando",
             }
         # ── Rutear por tipo de contenido ────────────────────────────────────
         lower = (fname or "").lower()
@@ -1432,7 +1432,7 @@ async def analizar_v2(
                 # cubrir con regex, no gastamos visión en eso.
                 if not resultado.get("items") and pdf_sin_texto(content):
                     if progreso_id and progreso_id in _PROGRESO:
-                        _PROGRESO[progreso_id]["etapa"] = "documento escaneado — leyendo con IA (≈20s por página)"
+                        _PROGRESO[progreso_id]["etapa"] = "procesando documento escaneado (≈20s por página)"
                     resultado = extraer_pdf_escaneado(content)
             elif tipo_fuente == "xlsx":
                 resultado = extraer_xlsx(content)
@@ -1440,7 +1440,7 @@ async def analizar_v2(
                 resultado = extraer_csv(content)
             else:  # imagen → OCR/visión
                 if progreso_id and progreso_id in _PROGRESO:
-                    _PROGRESO[progreso_id]["etapa"] = "foto — leyendo con IA (≈20s)"
+                    _PROGRESO[progreso_id]["etapa"] = "procesando foto (≈20s)"
                 resultado = extraer_imagen(content, fname)
 
             items = resultado.get("items", [])
