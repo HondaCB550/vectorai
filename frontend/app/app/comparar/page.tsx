@@ -515,6 +515,7 @@ export default function Comparar() {
         <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
           <Link href="/" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-800 transition">Inicio</Link>
           <Link href="/app/historial" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis comparativas</Link>
+          <Link href="/app/presupuestos" className="text-sm text-gray-500 hover:text-gray-800 transition">Mis presupuestos</Link>
           {soyAdmin && (
             <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
           )}

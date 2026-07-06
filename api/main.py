@@ -1470,6 +1470,8 @@ async def analizar_v2(
                 # Normalización de unidades: por metro → tira/rollo del material
                 # matcheado. Preserva el total de línea (pu×f, cant÷f).
                 unidad_final = (item.get("unidad") or "").strip(". ").upper() or "UN"
+                # Trazabilidad: precio y unidad tal como vinieron en el documento
+                pu_raw, unidad_raw = round(pu, 2), unidad_final
                 conversion_nota, unidad_ambigua = None, False
                 if matches and matches[0]["nivel"] != "sin_match":
                     pu, cant, unidad_final, conversion_nota, unidad_ambigua = _convertir_unidad(
@@ -1484,6 +1486,8 @@ async def analizar_v2(
                     "precio_con_iva": round(pu, 2),
                     "cant":          cant,
                     "unidad":        unidad_final,
+                    "precio_raw":    pu_raw,
+                    "unidad_raw":    unidad_raw,
                 }
                 if sospechoso:
                     base["precio_sospechoso"] = True
@@ -1551,6 +1555,9 @@ async def analizar_v2(
                             "precio":          item["precio_sin_iva"],
                             "cantidad":        max(1, round(float(item.get("cant", 1)))),
                             "pdf_origen":      fname,
+                            "precio_raw":      item.get("precio_raw"),
+                            "unidad_raw":      item.get("unidad_raw"),
+                            "conversion_aplicada": item.get("conversion"),
                         }
                         for item in automatico
                     ]).execute()
@@ -2022,6 +2029,103 @@ async def admin_upsert_grupo_marca(
     }, on_conflict="marca").execute()
     _invalidar_cache_den()
     return {"ok": True, "marca": req.marca.upper(), "grupo": req.grupo}
+
+
+# ── Mis Presupuestos ───────────────────────────────────────────────────────────
+# Cada documento analizado (PDF/foto/planilla) queda registrado en `presupuestos`
+# con sus líneas en `presupuesto_items`. Estos endpoints los exponen read-only
+# para que el usuario pueda re-ver lo que subió sin volver a cargarlo.
+
+@app.get("/mis-presupuestos")
+async def listar_mis_presupuestos(authorization: Optional[str] = Header(None)):
+    """Documentos procesados del usuario, más nuevos primero. Anónimos: vacío."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        return {"presupuestos": []}
+    sb = get_supabase()
+    if not sb:
+        return {"presupuestos": []}
+    try:
+        res = sb.table("presupuestos").select(
+            "id,proveedor_detectado,archivo,estado,created_at"
+        ).eq("user_id", user["user_id"]).order("created_at", desc=True).limit(100).execute()
+        pres = res.data or []
+        counts: dict[str, int] = {}
+        totales: dict[str, float] = {}
+        ids = [p["id"] for p in pres]
+        if ids:
+            res_items = sb.table("presupuesto_items") \
+                          .select("presupuesto_id,precio,cantidad") \
+                          .in_("presupuesto_id", ids).execute()
+            for it in (res_items.data or []):
+                pid = it["presupuesto_id"]
+                counts[pid] = counts.get(pid, 0) + 1
+                try:
+                    totales[pid] = totales.get(pid, 0.0) + float(it.get("precio") or 0) * float(it.get("cantidad") or 1)
+                except (TypeError, ValueError):
+                    pass
+        return {"presupuestos": [{
+            "id":           p["id"],
+            "proveedor":    p.get("proveedor_detectado") or "—",
+            "archivo":      p.get("archivo") or "",
+            "estado":       p.get("estado") or "",
+            "fecha":        p.get("created_at"),
+            "n_items":      counts.get(p["id"], 0),
+            "total_sin_iva": round(totales.get(p["id"], 0.0), 2),
+        } for p in pres]}
+    except Exception as e:
+        print(f"[mis-presupuestos] Error listando: {e}")
+        return {"presupuestos": []}
+
+
+@app.get("/mis-presupuestos/{presupuesto_id}")
+async def detalle_mi_presupuesto(presupuesto_id: str, authorization: Optional[str] = Header(None)):
+    """Líneas de un presupuesto del usuario, con el material matcheado."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    res = sb.table("presupuestos").select("id,proveedor_detectado,archivo,estado,created_at") \
+            .eq("id", presupuesto_id).eq("user_id", user["user_id"]).limit(1).execute()
+    if not res.data:
+        raise HTTPException(status_code=404, detail={"error": "no_encontrado"})
+    p = res.data[0]
+
+    res_items = sb.table("presupuesto_items").select(
+        "texto_original,cantidad,precio,codigo_material,score_match,estado_match"
+    ).eq("presupuesto_id", presupuesto_id).execute()
+    items = res_items.data or []
+
+    # Enriquecer con el nombre del material matcheado
+    codigos = sorted({it["codigo_material"] for it in items if it.get("codigo_material")})
+    nombres: dict[str, str] = {}
+    if codigos:
+        res_mat = sb.table("materiales_validados").select("codigo,denominacion_principal,descripcion") \
+                    .in_("codigo", codigos).execute()
+        for m in (res_mat.data or []):
+            nombres[m["codigo"]] = f"{m['denominacion_principal']} — {m.get('descripcion') or ''}".strip(" —")
+
+    return {
+        "presupuesto": {
+            "id":        p["id"],
+            "proveedor": p.get("proveedor_detectado") or "—",
+            "archivo":   p.get("archivo") or "",
+            "estado":    p.get("estado") or "",
+            "fecha":     p.get("created_at"),
+        },
+        "items": [{
+            "texto":    it.get("texto_original") or "",
+            "cantidad": it.get("cantidad"),
+            "precio":   it.get("precio"),
+            "codigo":   it.get("codigo_material"),
+            "material": nombres.get(it.get("codigo_material") or "", ""),
+            "score":    it.get("score_match"),
+            "estado":   it.get("estado_match"),
+        } for it in items],
+    }
 
 
 # ── Health ─────────────────────────────────────────────────────────────────────
