@@ -28,6 +28,15 @@ const PROFESIONES = [
 const INPUT = "w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500";
 const LABEL = "block text-sm font-semibold text-gray-800 mb-1";
 
+// Dominios de mail temporal más comunes — aviso instantáneo al usuario. El
+// bloqueo real (lista completa) está en la base de datos.
+const DOMINIOS_TEMP = [
+  "mailinator.com", "guerrillamail.com", "10minutemail.com", "tempmail.com",
+  "temp-mail.org", "temp-mail.io", "yopmail.com", "throwawaymail.com", "getnada.com",
+  "trashmail.com", "maildrop.cc", "sharklasers.com", "grr.la", "dispostable.com",
+  "fakeinbox.com", "mohmal.com", "1secmail.com", "emailfake.com", "burnermail.io",
+];
+
 function RegistroInner() {
   const router = useRouter();
   const params = useSearchParams();
@@ -74,6 +83,11 @@ function RegistroInner() {
       setError("Para crear la cuenta tenés que aceptar los Términos y Condiciones.");
       return;
     }
+    const dominioMail = (mail.split("@")[1] || "").toLowerCase().trim();
+    if (DOMINIOS_TEMP.some((d) => dominioMail === d || dominioMail.endsWith("." + d))) {
+      setError("No se permiten correos temporales o descartables. Usá un email real para poder confirmar tu cuenta.");
+      return;
+    }
     setLoading(true);
     setError("");
 
@@ -84,15 +98,19 @@ function RegistroInner() {
       });
 
       if (signUpErr) {
-        const msg = signUpErr.message || signUpErr.name || JSON.stringify(signUpErr);
-        if (msg.toLowerCase().includes("already registered") || msg.toLowerCase().includes("already exists") || msg.toLowerCase().includes("user already")) {
+        const msg = (signUpErr.message || signUpErr.name || "").toLowerCase();
+        if (msg.includes("already registered") || msg.includes("already exists") || msg.includes("user already")) {
           setError("Ya existe una cuenta con ese mail. Iniciá sesión.");
-        } else if (msg.toLowerCase().includes("rate limit") || msg.toLowerCase().includes("too many")) {
+        } else if (msg.includes("rate limit") || msg.includes("too many")) {
           setError("Demasiados intentos. Esperá unos minutos e intentá de nuevo.");
-        } else if (msg && msg !== "{}") {
-          setError(msg);
+        } else if (msg.includes("password")) {
+          setError("La contraseña debe tener al menos 6 caracteres e incluir una minúscula, una mayúscula y un número.");
+        } else if ((msg.includes("email") && (msg.includes("invalid") || msg.includes("valid"))) || msg.includes("unable to validate email")) {
+          setError("El email no es válido. Revisalo e intentá de nuevo.");
+        } else if (msg.includes("database error") || msg.includes("saving new user") || msg.includes("temporal") || msg.includes("descartable")) {
+          setError("No se pudo crear la cuenta con ese email. Usá un email real (no se permiten correos temporales o descartables).");
         } else {
-          setError(`Error al registrarse (${JSON.stringify(signUpErr)})`);
+          setError("No se pudo crear la cuenta. Revisá los datos e intentá de nuevo.");
         }
         setLoading(false);
         return;
