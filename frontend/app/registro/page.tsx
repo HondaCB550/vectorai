@@ -95,6 +95,7 @@ function RegistroInner() {
       const { data, error: signUpErr } = await supabase.auth.signUp({
         email: mail,
         password: pass,
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
       });
 
       if (signUpErr) {
