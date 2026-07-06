@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
@@ -33,6 +33,14 @@ function RegistroInner() {
   const params = useSearchParams();
   const planInicial = params.get("plan") || "free";
   const supabase = createClient();
+
+  // Si ya hay sesión VÁLIDA (validada contra el servidor, como el middleware),
+  // directo al comparador — evita cuentas duplicadas y loops con sesión vencida
+  useEffect(() => {
+    createClient().auth.getUser().then(({ data }) => {
+      if (data.user) router.replace("/app/comparar");
+    });
+  }, [router]);
 
   const [paso, setPaso] = useState(1);
 

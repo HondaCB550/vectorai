@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { createClient } from "@/lib/supabase";
 
 const WA_NUMERO = "5492241410393";
 const WA_CONSULTA = `https://wa.me/${WA_NUMERO}?text=${encodeURIComponent("Hola, tengo una consulta sobre VectorAI")}`;
@@ -62,6 +63,12 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function Landing() {
+  // Sesión viva → la landing lo reconoce: botón directo al comparador en vez
+  // de "Entrar / Probar gratis" (antes parecía que el login se había perdido)
+  const [logueado, setLogueado] = useState(false);
+  useEffect(() => {
+    createClient().auth.getUser().then(({ data }) => setLogueado(!!data.user));
+  }, []);
   return (
     <>
       <main className="min-h-screen bg-[#F5F0E8]">
@@ -85,13 +92,24 @@ export default function Landing() {
               <li><a href="#faq" className="hover:text-[#1A2B4A] transition">FAQ</a></li>
             </ul>
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-              <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap">Entrar</Link>
-              <Link
-                href="/registro"
-                className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
-              >
-                Probar gratis →
-              </Link>
+              {logueado ? (
+                <Link
+                  href="/app/comparar"
+                  className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
+                >
+                  Ir al comparador →
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap">Entrar</Link>
+                  <Link
+                    href="/registro"
+                    className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
+                  >
+                    Probar gratis →
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </nav>

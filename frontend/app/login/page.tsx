@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
@@ -11,6 +11,15 @@ function LoginInner() {
   const router = useRouter();
   const params = useSearchParams();
   const supabase = createClient();
+  // Si ya hay sesión VÁLIDA, no pedir credenciales de nuevo. getUser() valida
+  // contra el servidor — la misma fuente de verdad que el middleware que
+  // protege /app/*. Con getSession() (lectura local) una sesión vencida
+  // generaba un loop infinito login ↔ /app/comparar.
+  useEffect(() => {
+    createClient().auth.getUser().then(({ data }) => {
+      if (data.user) router.replace(params.get("from") || "/app/comparar");
+    });
+  }, [router, params]);
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
