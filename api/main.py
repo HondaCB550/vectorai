@@ -997,18 +997,36 @@ async def mp_webhook(request: Request):
     Webhook de MercadoPago. Cuando una suscripción se activa o renueva,
     actualiza perfiles.plan = 'advance'.
     """
-    # Verificar firma si está configurada
-    if MP_WEBHOOK_SECRET:
-        import hmac, hashlib
-        sig_header = request.headers.get("x-signature", "")
-        raw_body   = await request.body()
-        expected   = hmac.new(MP_WEBHOOK_SECRET.encode(), raw_body, hashlib.sha256).hexdigest()
-        received   = sig_header.split("v1=")[-1]
-        if not hmac.compare_digest(expected, received):
-            raise HTTPException(status_code=401, detail="Firma inválida")
-        body = json.loads(raw_body)
-    else:
-        body = await request.json()
+    # Verificación de firma de MercadoPago (fail-closed). MP firma un MANIFIESTO
+    # "id:<data.id>;request-id:<x-request-id>;ts:<ts>;" con HMAC-SHA256 — NO el
+    # body crudo. El secret debe ser EXACTAMENTE el configurado en el panel de MP
+    # (Tus integraciones → Webhooks). El re-consultado a MP más abajo es la 2da
+    # barrera (toma el user_id de la respuesta de MP, no del atacante).
+    if not MP_WEBHOOK_SECRET:
+        raise HTTPException(status_code=503, detail="webhook_no_configurado")
+    import hmac, hashlib
+    sig_partes: dict = {}
+    for parte in request.headers.get("x-signature", "").split(","):
+        if "=" in parte:
+            k, v = parte.split("=", 1)
+            sig_partes[k.strip()] = v.strip()
+    ts = sig_partes.get("ts", "")
+    v1 = sig_partes.get("v1", "")
+    req_id = request.headers.get("x-request-id", "")
+    raw_body = await request.body()
+    try:
+        body = json.loads(raw_body or b"{}")
+    except Exception:
+        body = {}
+    # data.id: MP lo manda en el query (?data.id=...) y en el body. Si es
+    # alfanumérico, MP lo pasa a minúsculas para el manifiesto.
+    data_id = request.query_params.get("data.id") or str((body.get("data") or {}).get("id", ""))
+    if data_id.isalnum():
+        data_id = data_id.lower()
+    manifest = f"id:{data_id};request-id:{req_id};ts:{ts};"
+    expected = hmac.new(MP_WEBHOOK_SECRET.encode(), manifest.encode(), hashlib.sha256).hexdigest()
+    if not (ts and v1 and hmac.compare_digest(expected, v1)):
+        raise HTTPException(status_code=401, detail="firma_invalida")
     tipo = body.get("type", "")
 
     if tipo not in ("preapproval", "subscription_preapproval"):
