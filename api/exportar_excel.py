@@ -231,8 +231,81 @@ def generar_excel_comparativo(
     ws.column_dimensions[get_column_letter(col_mejor)].width  = 18
     ws.column_dimensions[get_column_letter(col_ahorro)].width = 16
 
+    # ── Hojas de compras: una por proveedor con sus ítems ganadores ──────────
+    _agregar_hojas_compras(wb, comparativo, proveedores, subtitulo)
+
     # ── Exportar a bytes ──────────────────────────────────────────────────────
     buf = BytesIO()
     wb.save(buf)
     buf.seek(0)
     return buf.read()
+
+
+_INVALIDOS_HOJA = set('[]:*?/\\')
+
+
+def _nombre_hoja(nombre: str) -> str:
+    limpio = "".join(ch for ch in (nombre or "") if ch not in _INVALIDOS_HOJA).strip()
+    return (f"Pedido {limpio}")[:31] or "Pedido"
+
+
+def _agregar_hojas_compras(wb, comparativo: list[dict], proveedores: list[str], subtitulo: str = None):
+    """Listado de compras: una hoja por proveedor con SOLO los materiales donde
+    ese proveedor tiene el mejor precio — el pedido listo para mandarle."""
+    for prov in proveedores:
+        filas = [r for r in comparativo
+                 if r.get("mejor_proveedor") == prov and prov in r.get("precios", {})]
+        if not filas:
+            continue
+        ws = wb.create_sheet(_nombre_hoja(prov))
+
+        ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=5)
+        c = ws.cell(1, 1, f"Pedido — {prov}")
+        c.fill = _fill(COLOR_HEADER)
+        c.font = _font(bold=True, color=COLOR_TEXTO_W, size=14)
+        c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
+        ws.row_dimensions[1].height = 26
+
+        ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=5)
+        c = ws.cell(2, 1, ((subtitulo + " · ") if subtitulo else "") +
+                    "Solo ítems donde este proveedor tiene el mejor precio")
+        c.font = _font(size=8, italic=True, color="666666")
+
+        headers = ["Material", "Cant.", "Unidad", "Precio unit.", "Subtotal"]
+        for j, h in enumerate(headers, start=1):
+            c = ws.cell(4, j, h)
+            c.font = _font(bold=True, size=9)
+            c.fill = _fill(COLOR_SUBHDR)
+            c.alignment = Alignment(horizontal="left" if j == 1 else "right")
+
+        fila = 5
+        total = 0.0
+        for r in sorted(filas, key=lambda x: (x.get("rubro") or "", x.get("material") or "")):
+            precio = r["precios"][prov]["precio_sin_iva"]
+            cant = r.get("cant") or r["precios"][prov].get("cant") or 1
+            subtotal = round(precio * cant, 2)
+            total += subtotal
+            ws.cell(fila, 1, r.get("material", "")).font = _font(size=9)
+            for j, (val, fmt) in enumerate([(cant, None), (r.get("unidad", ""), None),
+                                            (precio, NUM_FMT), (subtotal, NUM_FMT)], start=2):
+                c = ws.cell(fila, j, val)
+                c.font = _font(size=9)
+                c.alignment = Alignment(horizontal="right")
+                if fmt:
+                    c.number_format = fmt
+            fila += 1
+
+        fila += 1
+        ws.cell(fila, 1, f"TOTAL PEDIDO ({len(filas)} ítems)").font = _font(bold=True, size=10)
+        for j in range(1, 5):
+            ws.cell(fila, j).fill = _fill(COLOR_MEJOR)
+        c = ws.cell(fila, 5, round(total, 2))
+        c.number_format = NUM_FMT
+        c.font = _font(bold=True, size=10)
+        c.fill = _fill(COLOR_MEJOR)
+        c.alignment = Alignment(horizontal="right")
+
+        ws.column_dimensions["A"].width = 46
+        for col, w in (("B", 8), ("C", 9), ("D", 14), ("E", 14)):
+            ws.column_dimensions[col].width = w
+        ws.freeze_panes = "A5"

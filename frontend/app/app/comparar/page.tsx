@@ -141,7 +141,7 @@ export default function Comparar() {
   const [progreso, setProgreso]       = useState<{ idx: number; total: number; archivo: string; etapa: string } | null>(null);
   const [resultado, setResultado]     = useState<Resultado | null>(null);
   const [error, setError]             = useState("");
-  const [tab, setTab]                 = useState<"comparativa" | "dudosos" | "sin_match">("comparativa");
+  const [tab, setTab]                 = useState<"comparativa" | "compras" | "dudosos" | "sin_match">("comparativa");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
   const [soloComunes, setSoloComunes] = useState(true);
   const [confirmando, setConfirmando] = useState(false);
@@ -846,6 +846,7 @@ export default function Comparar() {
             <div className="flex gap-1 mb-4 bg-gray-100 p-1 rounded-xl w-fit">
               {([
                 ["comparativa", `Comparativa (${resultado.comparativo.length})`],
+                ["compras",     "🛒 Lista de compras"],
                 ["dudosos",     `Dudosos (${totalDudosos})`],
                 ["sin_match",   `Sin match (${totalSinMatch})`],
               ] as const).map(([id, label]) => (
@@ -998,6 +999,86 @@ export default function Comparar() {
                 </div>
               </>
             )}
+
+            {/* ── TAB: Lista de compras ────────────────────────────────────── */}
+            {tab === "compras" && (() => {
+              const factor = (conIva ? 1.105 : 1) * (1 - descuentoPct / 100);
+              const porProv: Record<string, { filas: FilaComparativa[]; total: number }> = {};
+              for (const row of resultado.comparativo) {
+                const prov = row.mejor_proveedor;
+                if (!prov || !row.precios[prov]) continue;
+                const cant = row.cant ?? row.precios[prov].cant ?? 1;
+                if (!porProv[prov]) porProv[prov] = { filas: [], total: 0 };
+                porProv[prov].filas.push(row);
+                porProv[prov].total += row.precios[prov].precio_sin_iva * factor * cant;
+              }
+              const provs = Object.keys(porProv).sort((a, b) => porProv[b].total - porProv[a].total);
+              const granTotal = provs.reduce((s, p) => s + porProv[p].total, 0);
+              return (
+                <>
+                  <div className="mb-4 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm text-blue-800">
+                    Cada proveedor con los materiales donde tiene el <strong>mejor precio</strong> — el pedido
+                    listo para mandarle. El Excel de descarga incluye una hoja por proveedor.
+                    <span className="ml-2 font-semibold">Total de la compra: {fmt(granTotal)} {conIva ? "c/IVA" : "s/IVA"}</span>
+                  </div>
+                  <div className="space-y-6">
+                    {provs.map((prov) => (
+                      <div key={prov} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
+                          <h3 className="font-semibold text-gray-900">🛒 {prov}</h3>
+                          <span className="text-sm text-gray-600">
+                            {porProv[prov].filas.length} ítems ·{" "}
+                            <strong className="text-gray-900">{fmt(porProv[prov].total)}</strong>
+                          </span>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="text-left text-xs text-gray-400 uppercase">
+                                <th className="py-2 px-5">Material</th>
+                                <th className="py-2 pr-4 text-right">Cant.</th>
+                                <th className="py-2 pr-4 text-right">Unidad</th>
+                                <th className="py-2 pr-4 text-right">Precio unit.</th>
+                                <th className="py-2 pr-5 text-right">Subtotal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {[...porProv[prov].filas]
+                                .sort((a, b) => (a.rubro || "").localeCompare(b.rubro || "") || a.material.localeCompare(b.material))
+                                .map((row) => {
+                                  const cant = row.cant ?? row.precios[prov].cant ?? 1;
+                                  const precio = row.precios[prov].precio_sin_iva * factor;
+                                  return (
+                                    <tr key={row.cod_int} className="border-t border-gray-50">
+                                      <td className="py-1.5 px-5 text-gray-800">{row.material}</td>
+                                      <td className="py-1.5 pr-4 text-right text-gray-600">{cant}</td>
+                                      <td className="py-1.5 pr-4 text-right text-gray-500">{row.unidad}</td>
+                                      <td className="py-1.5 pr-4 text-right text-gray-800">{fmt(precio)}</td>
+                                      <td className="py-1.5 pr-5 text-right font-medium text-gray-900">{fmt(precio * cant)}</td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                            <tfoot>
+                              <tr className="border-t-2 border-green-200 bg-green-50">
+                                <td className="py-2 px-5 font-semibold text-gray-900">TOTAL PEDIDO</td>
+                                <td colSpan={3} />
+                                <td className="py-2 pr-5 text-right font-bold text-green-700">{fmt(porProv[prov].total)}</td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                    {provs.length === 0 && (
+                      <div className="bg-white rounded-xl border border-gray-200 p-10 text-center text-gray-500 text-sm">
+                        No hay ítems automáticos todavía — resolvé los dudosos para armar la lista de compras.
+                      </div>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
 
             {/* ── TAB: Dudosos ─────────────────────────────────────────────── */}
             {tab === "dudosos" && (
