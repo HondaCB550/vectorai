@@ -102,13 +102,16 @@ function fmt(v: number) {
   return `$ ${Math.round(v).toLocaleString("es-AR")}`;
 }
 
-// Precio a mostrar: el neto siempre es la base (todos los proveedores ya están
-// normalizados a sin-IVA al analizar). "Con IVA" aplica 10,5% UNIFORME a todos
-// — así la columna sigue siendo comparable. El factor propio del proveedor NO
-// se usa acá: para el que cotizó sin IVA su factor guardado es 1.0 y el toggle
-// no le cambiaba nada (bug reportado por Pablo: solo se movía Sauce).
-function precioMostrado(neto: number, _factorIva: number, conIva: boolean, descPct: number) {
-  const iva  = conIva ? 1.105 : 1;
+// Precio a mostrar. Regla comercial (Pablo): el proveedor que cotizó CON IVA
+// no puede vender sin IVA — su precio NUNCA baja del final.
+// - "Precio final (c/IVA)": todos con IVA; el que cotizó c/IVA muestra su
+//   precio de documento exacto.
+// - "Precio efectivo": el que cotizó s/IVA muestra su neto; el que cotizó
+//   c/IVA sigue mostrando su precio final (con etiqueta c/IVA en la celda).
+// Si un proveedor puntual acepta vender sin IVA, se aplica como descuento
+// extra manual (10,5 o 21 en el campo Desc.).
+function precioMostrado(neto: number, provConIva: boolean, conIva: boolean, descPct: number) {
+  const iva  = (conIva || provConIva) ? 1.105 : 1;
   const desc = descPct > 0 ? (1 - descPct / 100) : 1;
   return neto * iva * desc;
 }
@@ -544,6 +547,24 @@ export default function Comparar() {
     .filter((r) => !soloComunes || r.en_varios)
     .filter((r) => !soloDifGrande || pctDiferencia(r.precios, r.cant || 1) >= 25) ?? [];
 
+  // ¿El proveedor cotizó con IVA incluido? (config real elegida al subir)
+  const provConIva = (p: string) => resultado?.config_proveedores?.[p]?.iva_incluido ?? true;
+
+  // Mejor proveedor de una fila SEGÚN LA VISTA ACTIVA (en precio efectivo el
+  // ranking puede diferir del calculado por neto en el backend)
+  function mejorMostrado(row: FilaComparativa): string | null {
+    if (!resultado) return null;
+    let best: string | null = null;
+    let bestV = Infinity;
+    for (const p of resultado.proveedores) {
+      const pr = row.precios[p];
+      if (!pr) continue;
+      const v = precioMostrado(pr.precio_sin_iva, provConIva(p), conIva, descuentoPct);
+      if (v < bestV) { bestV = v; best = p; }
+    }
+    return best;
+  }
+
   // Ahorro de una fila: diferencia entre el proveedor más caro y el más barato
   // con los precios TAL COMO SE MUESTRAN (IVA por proveedor + descuento).
   // Solo cuenta si el ítem está en varios proveedores — con un solo presupuesto
@@ -554,8 +575,7 @@ export default function Comparar() {
       .map((p) => {
         const pr = row.precios[p];
         if (!pr) return null;
-        const factor = resultado.config_proveedores?.[p]?.factor_iva || 1.105;
-        return precioMostrado(pr.precio_sin_iva, factor, conIva, descuentoPct) * (row.cant || 1);
+        return precioMostrado(pr.precio_sin_iva, provConIva(p), conIva, descuentoPct) * (row.cant || 1);
       })
       .filter((v): v is number => v !== null);
     if (totales.length < 2) return 0;
@@ -1000,9 +1020,10 @@ export default function Comparar() {
                     </button>
                     <button
                       onClick={() => setConIva(false)}
+                      title="Lo mínimo que te puede cobrar cada uno: el que cotizó sin IVA muestra su neto; el que cotizó con IVA no puede venderte sin IVA y mantiene su precio final (marcado c/IVA)"
                       className={`px-3 py-2 transition ${!conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
                     >
-                      Neto (s/IVA)
+                      Precio efectivo
                     </button>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm">
@@ -1050,6 +1071,7 @@ export default function Comparar() {
                       {filasFiltradas.map((row, i) => {
                         const difPct = pctDiferencia(row.precios, row.cant || 1);
                         const granDif = difPct >= 25 && row.en_varios;
+                        const mejorFila = mejorMostrado(row);
                         return (
                         <tr key={i} className={`border-b border-gray-100 last:border-0 hover:bg-gray-50 ${granDif ? "bg-amber-50/60" : ""}`}>
                           <td className="px-4 py-3">
@@ -1064,30 +1086,31 @@ export default function Comparar() {
                           </td>
                           {resultado.proveedores.map((p) => {
                             const precio = row.precios[p];
-                            const esMejor = row.mejor_proveedor === p && row.en_varios;
-                            const factorProv = resultado.config_proveedores?.[p]?.factor_iva || 1.105;
-                            const precioU = precio ? precioMostrado(precio.precio_sin_iva, factorProv, conIva, descuentoPct) : null;
+                            const esMejor = mejorFila === p && row.en_varios;
+                            const precioU = precio ? precioMostrado(precio.precio_sin_iva, provConIva(p), conIva, descuentoPct) : null;
                             const total   = precioU !== null ? precioU * (row.cant || 1) : null;
-                            // En modo neto, el que cotizó CON IVA muestra un neto
-                            // ESTIMADO (lo calculamos nosotros, no está en su papel)
-                            const netoEstimado = !conIva && (resultado.config_proveedores?.[p]?.iva_incluido ?? false);
+                            // En vista efectivo, el que cotizó CON IVA sigue en su
+                            // precio final (no puede vender sin IVA) — se marca
+                            const sigueConIva = !conIva && provConIva(p);
                             return (
                               <td key={p} className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}>
                                 {precioU !== null ? (
-                                  <div title={netoEstimado ? "Neto estimado: este proveedor cotizó con IVA incluido" : undefined}>
+                                  <div title={sigueConIva ? "Este proveedor cotizó con IVA incluido y no puede vender sin IVA: muestra su precio final" : undefined}>
                                     <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
-                                      {netoEstimado ? "~" : ""}{fmt(total!)}
+                                      {fmt(total!)}
                                     </span>
-                                    <div className="text-xs text-gray-400">{netoEstimado ? "~" : ""}{fmt(precioU)}/u</div>
+                                    <div className="text-xs text-gray-400">
+                                      {fmt(precioU)}/u{sigueConIva ? <span className="ml-1 text-amber-500 font-semibold">c/IVA</span> : ""}
+                                    </div>
                                   </div>
                                 ) : <span className="text-gray-300">—</span>}
                               </td>
                             );
                           })}
                           <td className="px-4 py-3 text-center">
-                            {row.en_varios && (
+                            {row.en_varios && mejorFila && (
                               <span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-1 rounded-full">
-                                {row.mejor_proveedor}
+                                {mejorFila}
                               </span>
                             )}
                           </td>
@@ -1114,15 +1137,15 @@ export default function Comparar() {
 
             {/* ── TAB: Lista de compras ────────────────────────────────────── */}
             {tab === "compras" && (() => {
-              const factor = (conIva ? 1.105 : 1) * (1 - descuentoPct / 100);
               const porProv: Record<string, { filas: FilaComparativa[]; total: number }> = {};
               for (const row of resultado.comparativo) {
-                const prov = row.mejor_proveedor;
+                // El pedido va al mejor proveedor SEGÚN LA VISTA ACTIVA
+                const prov = mejorMostrado(row) || row.mejor_proveedor;
                 if (!prov || !row.precios[prov]) continue;
                 const cant = row.cant ?? row.precios[prov].cant ?? 1;
                 if (!porProv[prov]) porProv[prov] = { filas: [], total: 0 };
                 porProv[prov].filas.push(row);
-                porProv[prov].total += row.precios[prov].precio_sin_iva * factor * cant;
+                porProv[prov].total += precioMostrado(row.precios[prov].precio_sin_iva, provConIva(prov), conIva, descuentoPct) * cant;
               }
               const provs = Object.keys(porProv).sort((a, b) => porProv[b].total - porProv[a].total);
               const granTotal = provs.reduce((s, p) => s + porProv[p].total, 0);
@@ -1159,7 +1182,7 @@ export default function Comparar() {
                                 .sort((a, b) => (a.rubro || "").localeCompare(b.rubro || "") || a.material.localeCompare(b.material))
                                 .map((row) => {
                                   const cant = row.cant ?? row.precios[prov].cant ?? 1;
-                                  const precio = row.precios[prov].precio_sin_iva * factor;
+                                  const precio = precioMostrado(row.precios[prov].precio_sin_iva, provConIva(prov), conIva, descuentoPct);
                                   return (
                                     <tr key={row.cod_int} className="border-t border-gray-50">
                                       <td className="py-1.5 px-5 text-gray-800">{row.material}</td>
