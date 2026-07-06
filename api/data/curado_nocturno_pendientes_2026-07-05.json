@@ -1,0 +1,615 @@
+{
+ "rechazar_basura": [
+  {
+   "id": "e711d8d5-fea8-4257-842c-a122229ec94d",
+   "texto": "0.10 m"
+  },
+  {
+   "id": "3c284316-0b74-4b7d-97fc-88d089bddd7a",
+   "texto": "4/9/4 mm"
+  },
+  {
+   "id": "8f4345da-4840-428e-a8f7-44bc3f2c2711",
+   "texto": "4 mm"
+  },
+  {
+   "id": "66eebaca-5041-4bbe-ac0a-c9f9c6b11cc9",
+   "texto": "H 17 C.R. 1 x m3"
+  },
+  {
+   "id": "2218d1c8-1908-4938-9026-866593717aaa",
+   "texto": "H 21 C.R. 1 x m3"
+  }
+ ],
+ "rechazar_duplicados": [
+  {
+   "id": "6f6a42c1-30a0-4e05-a3d0-a466590271dd",
+   "texto": "Membrana asfáltica con terminación de aluminio flexible",
+   "duplicado_de": "12f355fc-6f81-47c3-a2f6-286677a1197c"
+  },
+  {
+   "id": "24dfa04c-a621-4129-aaf7-50f382688a52",
+   "texto": "Membrana asfáltica SUPERFLEX con terminación de",
+   "duplicado_de": "d0322931-9085-4998-b92e-b8536f6745f8"
+  },
+  {
+   "id": "8db755db-400b-4fa1-83c8-650ef9e2f647",
+   "texto": "línea Vesta",
+   "duplicado_de": "ea33cda6-f0ca-4cf2-9530-22955ba4cbaa"
+  },
+  {
+   "id": "87d12170-167f-47d6-a276-8ba3fed7a333",
+   "texto": "Split 2250 Fg",
+   "duplicado_de": "ff6fc635-bcdc-4a1e-a16a-af6a794868f2"
+  },
+  {
+   "id": "2cced2d9-dfed-41a0-969e-5fbeb2e5b2a2",
+   "texto": "Split 3000 Fg",
+   "duplicado_de": "acfffea3-6373-4a95-9a54-00ed7bfc42a7"
+  },
+  {
+   "id": "ff57968c-7a1e-4eb3-b750-5e8b5642df8f",
+   "texto": "Split 4500 Fg",
+   "duplicado_de": "987213e8-2b38-4605-9316-bbf761485fd1"
+  },
+  {
+   "id": "4e5044d5-9ca1-47c8-8573-27d59a1fb72b",
+   "texto": "Split 5800 Fg",
+   "duplicado_de": "ccd052a4-4b10-42e0-b7cb-975dc6d7d6fa"
+  },
+  {
+   "id": "d5c46fba-56df-4a84-9421-c2c3248c286d",
+   "texto": "Split 2250 Fg",
+   "duplicado_de": "ff6fc635-bcdc-4a1e-a16a-af6a794868f2"
+  },
+  {
+   "id": "d4329a44-6eeb-4249-86c9-ae8448b54061",
+   "texto": "Split 3000 Fg",
+   "duplicado_de": "acfffea3-6373-4a95-9a54-00ed7bfc42a7"
+  },
+  {
+   "id": "c0c49e22-1602-409d-9509-cd4cc0b2104c",
+   "texto": "Split 4500 Fg",
+   "duplicado_de": "987213e8-2b38-4605-9316-bbf761485fd1"
+  },
+  {
+   "id": "7199067f-2d39-4b80-8e06-99d10ec36649",
+   "texto": "Split 5800 Fg",
+   "duplicado_de": "ccd052a4-4b10-42e0-b7cb-975dc6d7d6fa"
+  },
+  {
+   "id": "43ceccb1-b72f-417c-aa82-38329c47dd42",
+   "texto": "Split 2250 Fg",
+   "duplicado_de": "ff6fc635-bcdc-4a1e-a16a-af6a794868f2"
+  },
+  {
+   "id": "b098e9d0-c10f-44c0-be1d-5fad88416b36",
+   "texto": "Split 3000 Fg",
+   "duplicado_de": "acfffea3-6373-4a95-9a54-00ed7bfc42a7"
+  },
+  {
+   "id": "4b6a061a-b353-4f26-9b9a-13b6403a0eaa",
+   "texto": "Split 4500 Fg",
+   "duplicado_de": "987213e8-2b38-4605-9316-bbf761485fd1"
+  },
+  {
+   "id": "f1dddf82-cda5-4e23-99b4-07a88eeabcb8",
+   "texto": "Split 5800 Fg",
+   "duplicado_de": "ccd052a4-4b10-42e0-b7cb-975dc6d7d6fa"
+  },
+  {
+   "id": "159bd894-9071-479e-ba67-a29a4b15afa4",
+   "texto": "estantes) 1 puerta de abrir",
+   "duplicado_de": "f9daebdc-f7b9-46eb-bf09-11e5e9eef842"
+  },
+  {
+   "id": "7f81abe9-0c44-428a-b3a5-2859543e96f3",
+   "texto": "57,5 cm + puerta",
+   "duplicado_de": "e078ffb6-a9d4-47c8-b7db-6baed995787b"
+  },
+  {
+   "id": "7bb83a69-c9b3-45ff-8b6d-18f3b1da981c",
+   "texto": "57,5 cm + puerta",
+   "duplicado_de": "e078ffb6-a9d4-47c8-b7db-6baed995787b"
+  },
+  {
+   "id": "a0154379-d006-4597-a730-3f55e3366b54",
+   "texto": "57,5 cm + puerta",
+   "duplicado_de": "e078ffb6-a9d4-47c8-b7db-6baed995787b"
+  },
+  {
+   "id": "ea457bd0-fb05-41ef-8f7d-bf1d04b236c7",
+   "texto": "57,5 cm + puerta",
+   "duplicado_de": "e078ffb6-a9d4-47c8-b7db-6baed995787b"
+  },
+  {
+   "id": "7d775527-a743-446e-9779-775999800ebb",
+   "texto": "57,5 cm + puerta",
+   "duplicado_de": "e078ffb6-a9d4-47c8-b7db-6baed995787b"
+  },
+  {
+   "id": "e33458fa-f774-4dc8-bd2a-3c5378ac2bd6",
+   "texto": "profundidad 57,5 cm + puerta",
+   "duplicado_de": "65b77e8b-4cbd-44fa-98e0-b4a45485c257"
+  },
+  {
+   "id": "6279e08b-6ec0-4aa9-b909-e152112c51da",
+   "texto": "profundidad 57,5 cm + puerta",
+   "duplicado_de": "65b77e8b-4cbd-44fa-98e0-b4a45485c257"
+  },
+  {
+   "id": "c401859f-c75e-415f-aa3d-6146944ba1e2",
+   "texto": "profundidad 57,5 cm + puerta",
+   "duplicado_de": "65b77e8b-4cbd-44fa-98e0-b4a45485c257"
+  },
+  {
+   "id": "a9b54bc5-df6a-4d49-880e-46d2037ca089",
+   "texto": "sistema PREMOTION",
+   "duplicado_de": "509b2208-ff9b-4d37-b7e5-52307c8f9169"
+  },
+  {
+   "id": "983d13b8-8db4-4cc8-8d72-75f810c01c32",
+   "texto": "Cemento Loma Negra x 25 kg",
+   "duplicado_de": "3cd7a2f8-95ed-4e76-9608-92ddb5e56300"
+  },
+  {
+   "id": "485431a5-47d9-4c40-af67-ee459e4c4e7b",
+   "texto": "Aremat",
+   "duplicado_de": "7f9338a1-c52a-4941-a80c-3e32bc93af02"
+  },
+  {
+   "id": "f2b86adf-c40c-4182-8479-8d79c3ac24b3",
+   "texto": "ESP DE POL C/ALUM. 2 CARAS 10 MM 1,00 X 20 MTS",
+   "duplicado_de": "228645d1-89d7-44dc-bbcf-64515f9eaf72"
+  },
+  {
+   "id": "1ea31e47-7175-49bc-ad16-cba254dfc87e",
+   "texto": "PGC 200 E 1.2 X 6 ML",
+   "duplicado_de": "5d20370b-31d5-45b6-b12b-db2281677caa"
+  },
+  {
+   "id": "836773a6-ce05-4406-bff4-fb62bdf7d489",
+   "texto": "PGC 100 E1.2 X 6 ML",
+   "duplicado_de": "6f4e85f9-459c-4532-9142-8d1aac664ed9"
+  },
+  {
+   "id": "f6f3ab7b-44b4-4a1f-ab43-3bf5b2ff930f",
+   "texto": "PGC 150 E 0.9 X 6 ML",
+   "duplicado_de": "0c41c273-8717-429a-90ea-36dd56c098ec"
+  }
+ ],
+ "validar": [
+  {
+   "id": "337f445b-c2c5-4005-bdba-53000701dd16",
+   "codigo": "AISL113",
+   "texto": "LANA ISOVER R400 70 0,40x11x3 NEW",
+   "norm": "lana isover r400 70 0,40x11x3 new",
+   "score": 100.0,
+   "material": "LANA DE VIDRIO ACUSTIVER R400 70mm",
+   "nums_ok": false
+  },
+  {
+   "id": "a115eb16-3539-4749-a2a5-f5845ef87a3b",
+   "codigo": "CH010",
+   "texto": "SINUSOIDAL 0.8mm INC 1.1x 6.0m",
+   "norm": "sinusoidal 0.8mm inc 1.1x 6.0m",
+   "score": 100.0,
+   "material": "CHAPA SINUSOIDAL NEGRA C25 *1,10",
+   "nums_ok": false
+  },
+  {
+   "id": "916a03b2-f97e-4bbf-8246-e05d4400beaa",
+   "codigo": "T001",
+   "texto": "TORNILLO TEL HEXAGONAL 10x3/4 4.000",
+   "norm": "tornillo tel hexagonal 10x3/4 4.000",
+   "score": 100.0,
+   "material": "T1 HEX 10*3/4 (4000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "07ced72a-7e1d-4a3a-87f1-5a9c43ac0cb5",
+   "codigo": "T001",
+   "texto": "TORNILLO HEXAGONAL 10x3/4 500",
+   "norm": "tornillo hexagonal 10x3/4 500",
+   "score": 100.0,
+   "material": "T1 HEX 10*3/4 (4000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "1610e563-211c-4ff2-b72c-99642878856a",
+   "codigo": "T005",
+   "texto": "TORNILLO C/ALAS MECHA 8x1 1/4 500u",
+   "norm": "tornillo c/alas mecha 8x1 1/4 500u",
+   "score": 100.0,
+   "material": "TEL ALAS 8*1 1/4 (6.000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "32030792-0cd8-4c7c-a010-356badbef75e",
+   "codigo": "T005",
+   "texto": "TORNILLO C/ALAS MECHA 8x1 1/4 100u",
+   "norm": "tornillo c/alas mecha 8x1 1/4 100u",
+   "score": 100.0,
+   "material": "TEL ALAS 8*1 1/4 (6.000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "da76b14e-fceb-4268-b864-570634a3c733",
+   "codigo": "T007",
+   "texto": "TORNILLO METAL TIPO 2 14X1 1/2",
+   "norm": "tornillo metal tipo 2 14x1 1/2",
+   "score": 96.7,
+   "material": "T4 6*1 1/2 (5.000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "5041a189-e76e-426c-8006-451120323e65",
+   "codigo": "Y101",
+   "texto": "PLACA KNAUF SP GLASS 12,5x2,4M",
+   "norm": "placa knauf sp glass 12,5x2,4m",
+   "score": 100,
+   "material": "PLACA ROCA YESO 12,5MM",
+   "nums_ok": true
+  },
+  {
+   "id": "91e85942-a483-4edb-8ada-666d0955422d",
+   "codigo": "INS012",
+   "texto": "Contenedor estandar (de 5 m3 de capacidad)",
+   "norm": "contenedor estandar (de 5 m3 de capacidad)",
+   "score": 100.0,
+   "material": "Anteojos protección ESTANDAR",
+   "nums_ok": false
+  },
+  {
+   "id": "12f355fc-6f81-47c3-a2f6-286677a1197c",
+   "codigo": "CONS207",
+   "texto": "Membrana asfáltica con terminación de aluminio flexible",
+   "norm": "membrana asfáltica con terminación de aluminio flexible",
+   "score": 100.0,
+   "material": "MEMBRANA ASFÁLTICA CON ALUMINIO",
+   "nums_ok": false
+  },
+  {
+   "id": "cd84628b-4049-489a-95ce-053e1556f569",
+   "codigo": "CONS207",
+   "texto": "Lana de vidrio 50 mm con papel aluminio 21,60 m2",
+   "norm": "lana de vidrio 50 mm con papel aluminio 21,60 m2",
+   "score": 100.0,
+   "material": "MEMBRANA ASFÁLTICA CON ALUMINIO",
+   "nums_ok": false
+  },
+  {
+   "id": "16b05b4c-ed68-4a40-bdff-f67aced2215a",
+   "codigo": "TER103",
+   "texto": "Sikalastic 560 Blanco 20 kg",
+   "norm": "sikalastic 560 blanco 20 kg",
+   "score": 100.0,
+   "material": "SIKALASTIC 560 10 LTS",
+   "nums_ok": false
+  },
+  {
+   "id": "d0322931-9085-4998-b92e-b8536f6745f8",
+   "codigo": "CONS207",
+   "texto": "Membrana asfáltica SUPERFLEX con terminación de",
+   "norm": "membrana asfáltica superflex con terminación de",
+   "score": 100.0,
+   "material": "MEMBRANA ASFÁLTICA CON ALUMINIO",
+   "nums_ok": false
+  },
+  {
+   "id": "24efd966-48f8-40df-8c06-3072be29dda8",
+   "codigo": "TER547",
+   "texto": "Puerta placa cedro 0.80 m, marco de madera 0.10 m",
+   "norm": "puerta placa cedro 0.80 m, marco de madera 0.10 m",
+   "score": 100.0,
+   "material": "CONTRAMARCO PUERTA PLACA DE MADERA",
+   "nums_ok": false
+  },
+  {
+   "id": "2fe30043-0344-4ac9-b4c5-013eb258479e",
+   "codigo": "TER470",
+   "texto": "clásico)",
+   "norm": "clásico)",
+   "score": 100.0,
+   "material": "REJILLA DESAGÜE LINEAL SLIM CLASICO BRILLANTE",
+   "nums_ok": false
+  },
+  {
+   "id": "e078ffb6-a9d4-47c8-b7db-6baed995787b",
+   "codigo": "V039",
+   "texto": "57,5 cm + puerta",
+   "norm": "57,5 cm + puerta",
+   "score": 100.0,
+   "material": "PUERTA 0,85x2,05 - A30 NEGRO",
+   "nums_ok": false
+  },
+  {
+   "id": "ee81ba1a-efae-4136-9d36-a25f624149d3",
+   "codigo": "V039",
+   "texto": "Puerta automática",
+   "norm": "puerta automática",
+   "score": 100.0,
+   "material": "PUERTA 0,85x2,05 - A30 NEGRO",
+   "nums_ok": false
+  },
+  {
+   "id": "fb2a425c-8491-4edb-aed8-83a3283bc99c",
+   "codigo": "CONS207",
+   "texto": "Lana de vidrio Isover con papel aluminio 50 mm x 14,4 m2",
+   "norm": "lana de vidrio isover con papel aluminio 50 mm x 14,4 m2",
+   "score": 100.0,
+   "material": "MEMBRANA ASFÁLTICA CON ALUMINIO",
+   "nums_ok": false
+  },
+  {
+   "id": "b241e443-7fbf-4e9a-8bce-83bd09e3694a",
+   "codigo": "CONS207",
+   "texto": "Lana de vidrio Isover con papel aluminio 80 mm x 9,6 m2",
+   "norm": "lana de vidrio isover con papel aluminio 80 mm x 9,6 m2",
+   "score": 100.0,
+   "material": "MEMBRANA ASFÁLTICA CON ALUMINIO",
+   "nums_ok": false
+  },
+  {
+   "id": "f346718e-6cb4-41d8-a688-978d3c48e529",
+   "codigo": "INSTE030",
+   "texto": "Caja octogonal chica 7 x 7 chapa 20",
+   "norm": "caja octogonal chica 7 x 7 chapa 20",
+   "score": 100.0,
+   "material": "CAJA OCT PVC",
+   "nums_ok": false
+  },
+  {
+   "id": "b5bd08a5-7dd0-4991-bfd8-03da20b7f907",
+   "codigo": "INSTE030",
+   "texto": "Caja octogonal grande 9 x 9 chapa 20",
+   "norm": "caja octogonal grande 9 x 9 chapa 20",
+   "score": 100.0,
+   "material": "CAJA OCT PVC",
+   "nums_ok": false
+  },
+  {
+   "id": "4fbefa0f-6cb0-4463-b7fa-3c623ff26909",
+   "codigo": "CH015",
+   "texto": "Caño Galvanizado de bajada 1 1/4” x 3.20m",
+   "norm": "caño galvanizado de bajada 1 1/4” x 3.20m",
+   "score": 94.1,
+   "material": "ZINGUERÍA CAÑO GALVANIZADO 3\"",
+   "nums_ok": true
+  },
+  {
+   "id": "028cb51d-d422-4a5f-9881-a92751ae1820",
+   "codigo": "INSTE052",
+   "texto": "Módulo combinación 10a 1p-220v Arco Jeluz",
+   "norm": "módulo combinación 10a 1p-220v arco jeluz",
+   "score": 100.0,
+   "material": "MODULO COMBINACION 10A BLANCO SXXII",
+   "nums_ok": false
+  },
+  {
+   "id": "efaeaa97-d8eb-46c8-a1a9-b6e51871154e",
+   "codigo": "INSTE093",
+   "texto": "Tapa p/bastidor 5x10 Jeluz -Mod.Regina 300982",
+   "norm": "tapa p/bastidor 5x10 jeluz -mod.regina 300982",
+   "score": 100.0,
+   "material": "TAPA JELUZ PLATINUM",
+   "nums_ok": false
+  },
+  {
+   "id": "03d18da2-dcab-470f-a82f-fd775795c4b0",
+   "codigo": "INSTE093",
+   "texto": "Tapa p/bastidor 5x10 Jeluz -Mod,Regina 300982",
+   "norm": "tapa p/bastidor 5x10 jeluz -mod,regina 300982",
+   "score": 100.0,
+   "material": "TAPA JELUZ PLATINUM",
+   "nums_ok": false
+  },
+  {
+   "id": "20b4895a-a11d-488e-b2a0-d4f041a93e3f",
+   "codigo": "INSTS189",
+   "texto": "Llave esférica 3/4”",
+   "norm": "llave esférica 3/4”",
+   "score": 100.0,
+   "material": "FUSIÓN GAS LLAVE ESFERICA PARA GAS CANDADO 3/4 - MH",
+   "nums_ok": true
+  },
+  {
+   "id": "7ef51d44-1ec9-494c-9e61-c76d254761a4",
+   "codigo": "TER411",
+   "texto": "Grifería de cocina de embutir FV Allegro 0403/15- cromada",
+   "norm": "grifería de cocina de embutir fv allegro 0403/15- cromada",
+   "score": 100.0,
+   "material": "GRIFERÍA COCINA PIAZZA GOURMET",
+   "nums_ok": false
+  },
+  {
+   "id": "3cd7a2f8-95ed-4e76-9608-92ddb5e56300",
+   "codigo": "CONS101",
+   "texto": "Cemento Loma Negra x 25 kg",
+   "norm": "cemento loma negra x 25 kg",
+   "score": 98.1,
+   "material": "CEMENTO 25KG",
+   "nums_ok": false
+  },
+  {
+   "id": "2f307fe5-3209-4cb3-8b7f-85195d2fdd6c",
+   "codigo": "CH009",
+   "texto": "Chapa acanalada Cincalum (1.10 m de ancho) x m",
+   "norm": "chapa acanalada cincalum (1.10 m de ancho) x m",
+   "score": 100.0,
+   "material": "CHAPA ZINCADA x ml",
+   "nums_ok": false
+  },
+  {
+   "id": "1911b11a-b29e-4e06-810f-9d63b679274e",
+   "codigo": "CH001",
+   "texto": "Chapa acanalada galvanizada (1.10 m de ancho) x m",
+   "norm": "chapa acanalada galvanizada (1.10 m de ancho) x m",
+   "score": 96.7,
+   "material": "CHAPA SINUSOIDAL GALVANIZADA C25 *M",
+   "nums_ok": false
+  },
+  {
+   "id": "372cfa82-477f-440e-bd60-803e8c3413a0",
+   "codigo": "Y108",
+   "texto": "Buña perimetral 15 x 8.5 x 2.600 mm",
+   "norm": "buña perimetral 15 x 8.5 x 2.600 mm",
+   "score": 100.0,
+   "material": "BUÑA PERIMETRAL Z X 2,60M",
+   "nums_ok": false
+  },
+  {
+   "id": "f6c9a0a9-143a-4df5-aafa-13464aec8189",
+   "codigo": "A006",
+   "texto": "Masilla Anclaflex x 7 kg",
+   "norm": "masilla anclaflex x 7 kg",
+   "score": 100.0,
+   "material": "ANCLAJES VARILLA 12*160",
+   "nums_ok": false
+  },
+  {
+   "id": "a512487d-f1ca-4ab2-8c8f-e93045498eb5",
+   "codigo": "A006",
+   "texto": "Masilla Anclaflex x 32 kg",
+   "norm": "masilla anclaflex x 32 kg",
+   "score": 100.0,
+   "material": "ANCLAJES VARILLA 12*160",
+   "nums_ok": false
+  },
+  {
+   "id": "f8e671a9-1ee2-4731-a26b-29f2fc4808f3",
+   "codigo": "P102",
+   "texto": "Montante 34 x 35 x 2.600 mm",
+   "norm": "montante 34 x 35 x 2.600 mm",
+   "score": 100.0,
+   "material": "MONTANTE 35 2,6 MTS",
+   "nums_ok": false
+  },
+  {
+   "id": "a8c0dcbb-481d-473f-aa36-350a5e936fc3",
+   "codigo": "P101",
+   "texto": "Solera 35 x 30 x 2.600 mm",
+   "norm": "solera 35 x 30 x 2.600 mm",
+   "score": 100.0,
+   "material": "SOLERA 35 2,6 MTS",
+   "nums_ok": false
+  },
+  {
+   "id": "60a5caec-e0ad-4fa0-b640-827a913b7797",
+   "codigo": "P104",
+   "texto": "Solera 70 x 30 x 2.600 mm",
+   "norm": "solera 70 x 30 x 2.600 mm",
+   "score": 100.0,
+   "material": "SOLERA 70 2,6 MTS",
+   "nums_ok": false
+  },
+  {
+   "id": "bfa44bca-5577-4f2b-b9fb-9a91af32b62b",
+   "codigo": "A007",
+   "texto": "Anclaje S/HTT 14",
+   "norm": "anclaje s/htt 14",
+   "score": 100.0,
+   "material": "ANCLAJES HTT14",
+   "nums_ok": false
+  },
+  {
+   "id": "1a45df30-f2fc-4ac1-897d-640b40b34bdb",
+   "codigo": "A014",
+   "texto": "Basecoat monocomponente x 25 kg",
+   "norm": "basecoat monocomponente x 25 kg",
+   "score": 100.0,
+   "material": "ANCLAJES CONECTOR COLUMNA",
+   "nums_ok": false
+  },
+  {
+   "id": "5927d5c7-3bba-4353-8e4f-6dd3121d3556",
+   "codigo": "TER143",
+   "texto": "Cielorrasos x 20 lt",
+   "norm": "cielorrasos x 20 lt",
+   "score": 100.0,
+   "material": "LATEX CIELORASO 20LT",
+   "nums_ok": false
+  },
+  {
+   "id": "e28ebaf1-079f-4fd7-be88-7df7f0929799",
+   "codigo": "TER467",
+   "texto": "Plavicon Barniz sintético brillante x 1 lt",
+   "norm": "plavicon barniz sintético brillante x 1 lt",
+   "score": 100.0,
+   "material": "BARNIZ SINTETICO 20LT (REND. 120M2)",
+   "nums_ok": false
+  },
+  {
+   "id": "6632a544-1adc-40db-9a2b-d0b67751e17d",
+   "codigo": "TER467",
+   "texto": "Plavicon Barniz sintético semimate x 1 lt",
+   "norm": "plavicon barniz sintético semimate x 1 lt",
+   "score": 100.0,
+   "material": "BARNIZ SINTETICO 20LT (REND. 120M2)",
+   "nums_ok": false
+  },
+  {
+   "id": "93b84428-ff9d-49b1-a871-61ab86232a48",
+   "codigo": "CONS112",
+   "texto": "Malla SIMA 150 x 150 x 5 mm de 2,40 x 6 m",
+   "norm": "malla sima 150 x 150 x 5 mm de 2,40 x 6 m",
+   "score": 100.0,
+   "material": "MALLA SIMA 6 15 X 15 6MM",
+   "nums_ok": false
+  },
+  {
+   "id": "7d5b3cdb-b95e-4269-a692-2c87ee62c837",
+   "codigo": "HIE047",
+   "texto": "Profilit \"U Glass\" medidas del perfil 0.26 x 3 m",
+   "norm": "profilit \"u glass\" medidas del perfil 0.26 x 3 m",
+   "score": 100.0,
+   "material": "PERFIL U 200*3,25",
+   "nums_ok": false
+  },
+  {
+   "id": "6186094b-0f3a-41c3-a46f-f406586baea1",
+   "codigo": "TER213",
+   "texto": "Zócalo PVC WATERPROOF",
+   "norm": "zócalo pvc waterproof",
+   "score": 100.0,
+   "material": "ZÓCALO PVC 3 MTS",
+   "nums_ok": false
+  },
+  {
+   "id": "017a721a-6f04-4c77-9cd9-8854273c786c",
+   "codigo": "CONS110",
+   "texto": "BOLSON DE PIEDRA MAR DEL PLATA",
+   "norm": "bolson de piedra mar del plata",
+   "score": 100.0,
+   "material": "PIEDRA M3",
+   "nums_ok": false
+  },
+  {
+   "id": "aeb99696-88c7-421b-92f1-0a91b835e297",
+   "codigo": "INSTE077",
+   "texto": "Caño PVC rígido 22mm Clasif.3321 IEC 62386-1",
+   "norm": "caño pvc rígido 22mm clasif.3321 iec 62386-1",
+   "score": 97.7,
+   "material": "CAÑO RIGIDO DE PVC SEMIPESADO 20MM",
+   "nums_ok": false
+  },
+  {
+   "id": "33b7b870-453d-423d-82af-3585fbd68696",
+   "codigo": "T001",
+   "texto": "[IRON CIWH35KX] TORN. HEX. PM MAX 14 X 1 1/2\" C/ARAN.",
+   "norm": "[iron ciwh35kx] torn. hex. pm max 14 x 1 1/2\" c/aran.",
+   "score": 100.0,
+   "material": "T1 HEX 10*3/4 (4000 unidades)",
+   "nums_ok": false
+  },
+  {
+   "id": "db398d41-08c7-4940-a294-ebb50de52249",
+   "codigo": "T001",
+   "texto": "TORN. HEX. PM 14 X 5\" C/ARAN.",
+   "norm": "torn. hex. pm 14 x 5\" c/aran.",
+   "score": 100.0,
+   "material": "T1 HEX 10*3/4 (4000 unidades)",
+   "nums_ok": false
+  }
+ ]
+}

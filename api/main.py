@@ -37,7 +37,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from detectar_proveedor import detectar_proveedor  # noqa: E402
 from extraer_pdf_texto import extraer, _desc_es_codigo  # noqa: E402
-from matching import matchear_item                  # noqa: E402
+from matching import matchear_item, extract_nums    # noqa: E402
 from extraer_imagen import extraer_imagen, pdf_sin_texto, extraer_pdf_escaneado  # noqa: E402
 from extraer_hoja import extraer_xlsx, extraer_csv  # noqa: E402
 
@@ -1087,7 +1087,7 @@ def _get_denominaciones() -> list[dict]:
         PAGE = 1000
         while True:
             res = sb.table("material_denominaciones") \
-                    .select("codigo_material,denominacion,confianza,frecuencia_encontrada") \
+                    .select("codigo_material,denominacion,origen,confianza,frecuencia_encontrada") \
                     .range(page * PAGE, (page + 1) * PAGE - 1) \
                     .execute()
             batch = res.data or []
@@ -1112,6 +1112,15 @@ def _get_denominaciones() -> list[dict]:
                  if re.search(r"[A-Za-zÁÉÍÓÚÑáéíóúñ]{3,}", d["denominacion_norm"] or "")]
         if antes != len(todas):
             print(f"[v2] Descartados {antes - len(todas)} aliases basura (sin palabra real)")
+
+        # Los fragmentos de la migración (denominacion_principal sola como
+        # 'puerta', o descripcion sola como 'estandar'/'con aluminio') quedan
+        # FUERA del pool: los reemplazan los aliases sintéticos con el nombre
+        # completo. Siguen en la BD por si hiciera falta volver atrás.
+        antes = len(todas)
+        todas = [d for d in todas if d.get("origen") not in ("migracion_item", "migracion_detalle")]
+        if antes != len(todas):
+            print(f"[v2] Excluidos {antes - len(todas)} fragmentos de migración (los cubren los sintéticos)")
 
         # Resolver aliases AMBIGUOS: el mismo texto bajo más de un código (la
         # migración dejó la denominación de familia como alias en cada material:
@@ -1138,6 +1147,39 @@ def _get_denominaciones() -> list[dict]:
         todas = filtradas
         if antes != len(todas):
             print(f"[v2] Excluidos {antes - len(todas)} aliases ambiguos (mismo texto en varios códigos)")
+
+        # Aliases SINTÉTICOS del maestro: el nombre completo de cada material
+        # (denominacion_principal + descripcion). La migración solo indexó los
+        # fragmentos por separado ('puerta' / '0,85x2,05 - a30 negro') y el
+        # nombre completo nunca existió como alias — por eso los fragmentos
+        # daban 100 falso. Estos apuntan a su propio material por construcción
+        # (riesgo cero) y llevan la carga de los matches legítimos, lo que
+        # permite endurecer la guarda anti-fragmento. Las medidas fusionadas
+        # ("100MMX25") se separan para tokenizar como escriben los proveedores.
+        try:
+            res = sb.table("materiales_validados") \
+                    .select("codigo,denominacion_principal,descripcion").execute()
+            n_sint = 0
+            for m in (res.data or []):
+                nombre = f"{m.get('denominacion_principal') or ''} {m.get('descripcion') or ''}".strip()
+                if not nombre:
+                    continue
+                sep = re.sub(r"(?<=\d)\s*[xX*]\s*(?=\d)", " x ", nombre)
+                sep = re.sub(r"(?<=\d)(?=[A-Za-z])", " ", sep)
+                norm_sint = _prep_v2(sep)
+                todas.append({
+                    "codigo_material":       m["codigo"],
+                    "denominacion":          nombre,
+                    "confianza":             100,
+                    "frecuencia_encontrada": 1,
+                    "denominacion_norm":     norm_sint,
+                    "sintetico":             True,
+                    "nums":                  extract_nums(norm_sint),
+                })
+                n_sint += 1
+            print(f"[v2] Aliases sintéticos del maestro: {n_sint}")
+        except Exception as e:
+            print(f"[v2] Error generando aliases sintéticos: {e}")
 
         # Ordenar por confianza desc: fuzz_process.extract trunca a top_n*3
         # candidatos y en empates de score devuelve los primeros de la lista.
@@ -1186,19 +1228,34 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
 
     salida = []
     n_tokens_texto = len(texto_prep.split())
+    texto_nums = extract_nums(texto_prep)
     for texto_match, score, idx in resultados:
         den = denominaciones[idx]
         # Bonus si comparten marca del mismo grupo equivalente
         if _mismo_grupo_v2(texto, den["denominacion"]):
             score = min(100, score + 6)
-        # Guarda anti-genérico: un alias de UNA palabra contenido en un texto
-        # más largo da token_set 100 sin identificar nada (bug clase
-        # PERFIL/BROCAS: 'perfil', 'tapa', 'cupla'). Nunca puede ser automático
-        # — tope 84 (dudoso, decide el usuario). Los de 2+ palabras únicos en
-        # el maestro sí identifican ('banda acustica') y quedan libres.
-        n_tokens_alias = len((den.get("denominacion_norm") or den["denominacion"]).split())
-        if n_tokens_alias <= 1 and n_tokens_texto >= 3:
+        # Guarda anti-fragmento (bug clase PERFIL/BROCAS): cuando un lado tiene
+        # ≤2 tokens y los textos no son idénticos, token_set da 100 por
+        # contención sin identificar nada ('puerta', 'contenedor estandar'
+        # contra cualquier familia). Nunca automático — tope 84. Los matches
+        # legítimos los llevan los aliases sintéticos (nombre completo).
+        alias_norm = den.get("denominacion_norm") or den["denominacion"]
+        n_tokens_alias = len(alias_norm.split())
+        # Excepción: un alias SINTÉTICO corto con números ('cupla 110') no es
+        # un fragmento — es el nombre canónico completo de un material chico,
+        # y su guarda numérica ya protege contra medidas que no coinciden.
+        sintetico_con_medida = den.get("sintetico") and bool(den.get("nums"))
+        lado_corto_es_texto = n_tokens_texto < n_tokens_alias
+        if min(n_tokens_alias, n_tokens_texto) <= 2 and alias_norm != texto_prep \
+                and not (sintetico_con_medida and not lado_corto_es_texto):
             score = min(score, 84.0)
+        # Guarda numérica para sintéticos: si el nombre canónico tiene números
+        # (medida/presentación) y el texto no los contiene, no puede ser
+        # automático (ej. barniz x 1 LT contra el material de 20LT).
+        if den.get("sintetico") and score >= 85:
+            nums_alias = den.get("nums") or set()
+            if nums_alias and not nums_alias.issubset(texto_nums):
+                score = min(score, 84.0)
         if score >= 85:
             nivel = "automatico"
         elif score >= 60:

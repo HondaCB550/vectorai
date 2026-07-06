@@ -1,0 +1,9 @@
+[
+ {"codigo_material": "A006", "denominacion": "masilla anclaflex x 32 kg", "origen": "borrador_borrador_ferrocenter_05-05", "motivo": "masilla Anclaflex NO es la varilla de anclaje A006 (evidencia: curado nocturno 05-07)"},
+ {"codigo_material": "A006", "denominacion": "masilla x 28 kg anclaflex", "origen": "borrador_borrador_ferrocenter_05-05", "motivo": "idem"},
+ {"codigo_material": "A006", "denominacion": "masilla x 7 kg anclaflex", "origen": "borrador_borrador_ferrocenter_05-05", "motivo": "idem"},
+ {"codigo_material": "A014", "denominacion": "basecoat x 25 kg monocomponente anclaflex", "origen": "borrador_borrador_ferrocenter_05-05", "motivo": "basecoat NO es el conector columna A014; el correcto TER482 (BASECOAT 25KG) ya tiene su alias"},
+ {"codigo_material": "T001", "denominacion": "[iron ciwh35kx] torn. hex. pm max 14 x 1 1/2\" c/aran.", "origen": "usuario_en_seco", "motivo": "tornillo 14x1 1/2 MAX no es T001 (10x3/4); el material correcto es T011 (HEX 14 MAX)"},
+ {"codigo_material": "T001", "denominacion": "torn. hex. pm 14 x 5\" c/aran.", "origen": "usuario_en_seco", "motivo": "medida 14x5 no corresponde a T001 (10x3/4)"},
+ {"codigo_material": "CH010", "denominacion": "chapas cincalum 0.5 sinusoidal xmetro lineal", "origen": "curado_fagua", "motivo": "error propio del 04-07: CH010 es chapa NEGRA; cincalum no existe como material en el maestro (decision pendiente de Pablo)"}
+]

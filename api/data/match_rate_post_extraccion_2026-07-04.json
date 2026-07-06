@@ -7,27 +7,27 @@
    "metodo": "regex",
    "items": 124,
    "auto": 118,
-   "dudoso": 3,
-   "sin_match": 3,
+   "dudoso": 4,
+   "sin_match": 2,
    "pct_auto": 95.2
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "metodo": "regex",
    "items": 96,
-   "auto": 73,
-   "dudoso": 18,
+   "auto": 64,
+   "dudoso": 27,
    "sin_match": 5,
-   "pct_auto": 76.0
+   "pct_auto": 66.7
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "metodo": "regex",
    "items": 36,
-   "auto": 20,
+   "auto": 19,
    "dudoso": 11,
-   "sin_match": 5,
-   "pct_auto": 55.6
+   "sin_match": 6,
+   "pct_auto": 52.8
   },
   {
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
@@ -51,10 +51,10 @@
    "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
    "metodo": "regex",
    "items": 40,
-   "auto": 38,
-   "dudoso": 2,
+   "auto": 37,
+   "dudoso": 3,
    "sin_match": 0,
-   "pct_auto": 95.0
+   "pct_auto": 92.5
   },
   {
    "pdf": "EN SECO - STEEL FRAME.pdf",
@@ -69,42 +69,42 @@
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "metodo": "regex",
    "items": 40,
-   "auto": 37,
-   "dudoso": 3,
-   "sin_match": 0,
-   "pct_auto": 92.5
+   "auto": 39,
+   "dudoso": 0,
+   "sin_match": 1,
+   "pct_auto": 97.5
   },
   {
    "pdf": "Fagua.pdf",
    "metodo": "regex",
    "items": 56,
-   "auto": 53,
-   "dudoso": 3,
-   "sin_match": 0,
-   "pct_auto": 94.6
+   "auto": 51,
+   "dudoso": 4,
+   "sin_match": 1,
+   "pct_auto": 91.1
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
    "metodo": "regex",
    "items": 19,
-   "auto": 18,
-   "dudoso": 1,
+   "auto": 17,
+   "dudoso": 2,
    "sin_match": 0,
-   "pct_auto": 94.7
+   "pct_auto": 89.5
   }
  ],
  "no_automaticos": [
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
-   "nivel": "sin_match",
+   "nivel": "dudoso",
    "texto": "CODO C/3 ACOMET.ORTOGONALES 110-63",
-   "mejor": "INSTS051 (54.5)"
+   "mejor": "INSTS047 (61.5)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "nivel": "sin_match",
    "texto": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
-   "mejor": "INSTS057 (56.5)"
+   "mejor": "INSTS060 (58.1)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
@@ -116,13 +116,13 @@
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "nivel": "sin_match",
    "texto": "SET 6 PZAS LINEA 11000",
-   "mejor": "INSTS060 (57.1)"
+   "mejor": "MAD008 (53.7)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "nivel": "dudoso",
    "texto": "EMBLEM COCINA MESADA",
-   "mejor": "TER401 (84.0)"
+   "mejor": "TER411 (78.8)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
@@ -133,50 +133,62 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
+   "texto": "CODO a 45° MH 110 mm SE L",
+   "mejor": "INSTS037 (83.3)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
    "texto": "CODO a 87 30’ MH - Con 2",
    "mejor": "INSTS040 (68.6)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "RAMAL a 45° HHH 40 SELEN T",
-   "mejor": "INSTS049 (71.4)"
+   "texto": "P20 CODO A 90 DE 20 MM I P",
+   "mejor": "INSTS143 (84.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "CUPLA - Lisa 63 mm S",
-   "mejor": "INSTE065 (66.7)"
+   "texto": "P20 CODO A 90 DE 25 MM I P",
+   "mejor": "INSTS144 (84.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
-   "texto": "CUPLA - Lisa 40 mm S",
-   "mejor": "INSTE065 (66.7)"
+   "texto": "P20 CODO A 90 DE 32 MM I P",
+   "mejor": "INSTS145 (84.2)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P20 CODO A 90 DE 50 MM I P",
+   "mejor": "INSTS143 (74.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P35 TEE REDUCIDA CENTRAL",
-   "mejor": "INSTS201 (72.0)"
+   "mejor": "INSTS201 (64.5)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
-   "mejor": "INSTS107 (78.4)"
+   "mejor": "INSTS107 (76.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
-   "mejor": "INSTS107 (78.4)"
+   "mejor": "INSTS107 (76.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P23 CODO 90 CON ROSCA HE M",
-   "mejor": "INSTS107 (78.4)"
+   "mejor": "INSTS107 (76.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -189,6 +201,18 @@
    "nivel": "dudoso",
    "texto": "P13 CONECTOR HEMBRA DE 3 2",
    "mejor": "Y107 (72.7)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P90 FSOB SOBREPASO MM 20 M",
+   "mejor": "INSTS125 (73.2)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "P90 FSOB SOBREPASO MM 25 M",
+   "mejor": "INSTS126 (73.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -206,13 +230,13 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "VALVULAS ESFERICAS METAL I",
-   "mejor": "INSTS130 (69.2)"
+   "mejor": "INSTS162 (69.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "P51 V. ESFERICA CON MANI J",
-   "mejor": "INSTS135 (72.7)"
+   "mejor": "INSTS134 (63.2)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -230,7 +254,25 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "CODO A 45 HH - PN10 16 0",
-   "mejor": "INSTS216 (75.0)"
+   "mejor": "INSTS031 (68.6)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "CODO a 45° MH 110 mm PV C",
+   "mejor": "INSTS038 (80.0)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "CODO a 45° MH 40 mm P V",
+   "mejor": "INSTS035 (81.1)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "CUPLA HH - Lisa 160 mm P",
+   "mejor": "INSTS053 (76.9)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -241,8 +283,14 @@
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
+   "texto": "7261 RAMAL POSTIZO TIGRE 160 x",
+   "mejor": "INSTS050 (67.9)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
    "texto": "REDUCCIÓN - Excéntrica M H",
-   "mejor": "INSTS051 (72.0)"
+   "mejor": "INSTS221 (64.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -252,39 +300,45 @@
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
+   "nivel": "dudoso",
+   "texto": "REJILLA LINEAL AMANCO 70 c",
+   "mejor": "TER308 (84.8)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "sin_match",
    "texto": "BIDET SOUTH VESSANTI",
-   "mejor": "TER495 (50.9)"
+   "mejor": "TER493 (56.4)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "sin_match",
    "texto": "C 37/18 C 37/18 70,8 x 37 x 18 J H",
-   "mejor": "HIE007 (51.2)"
+   "mejor": "T010 (52.4)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "sin_match",
    "texto": "ZZ 52 ZZ 52 52 x 32 x 15 JHONS O",
-   "mejor": "INSTS187 (57.1)"
+   "mejor": "HIE003 (53.7)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
    "texto": "DESGRASADERA PARA COCINA",
-   "mejor": "TER401 (84.0)"
+   "mejor": "TER411 (63.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "sin_match",
    "texto": "PILETON INYEC. 20 X 20 S A",
-   "mejor": "HIE032 (55.3)"
+   "mejor": "HIE020 (59.6)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
    "texto": "DESAGUE BASE ABS REJA PL E",
-   "mejor": "TER121 (84.0)"
+   "mejor": "INSTS059 (60.9)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -302,13 +356,19 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "sin_match",
    "texto": "Purifica Dvigi 6 etapas",
-   "mejor": "CLIM111 (51.3)"
+   "mejor": "INSTS056 (53.1)"
+  },
+  {
+   "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
+   "nivel": "dudoso",
+   "texto": "CENTRIFUGA BAICO ROJA 1HP",
+   "mejor": "INSTS013 (64.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
    "texto": "FLEXIBLE MALLADO T.M.F. 1",
-   "mejor": "INSTS183 (78.0)"
+   "mejor": "INSTS206 (83.7)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -318,9 +378,9 @@
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
-   "nivel": "dudoso",
+   "nivel": "sin_match",
    "texto": "VILLAGE LAV. PIAZZA",
-   "mejor": "TER304 (70.6)"
+   "mejor": "TER442 (53.8)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -338,13 +398,13 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
    "texto": "cocina mesada DOMANI P I",
-   "mejor": "TER401 (84.0)"
+   "mejor": "TER411 (70.3)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
    "nivel": "dudoso",
    "texto": "ARO BASE INODORO C/CERA",
-   "mejor": "TER121 (84.0)"
+   "mejor": "TER427 (82.1)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",
@@ -368,7 +428,7 @@
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
    "nivel": "sin_match",
    "texto": "SUPLEMENTO ARO X 100MM O.V.CAM (cod.ARO) O.V. CAM",
-   "mejor": "INSTS050 (50.0)"
+   "mejor": "TER535 (51.9)"
   },
   {
    "pdf": "PRESUPUESTO-0010-00086342-viejo bueno.pdf",
@@ -385,6 +445,12 @@
   {
    "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
    "nivel": "dudoso",
+   "texto": "MALLA DE ADVERTENCIA ELECTRICIDAD 0.30 XITALVINIL",
+   "mejor": "INSTS222 (69.7)"
+  },
+  {
+   "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
+   "nivel": "dudoso",
    "texto": "REJA VENT.15X15 (100) GAS APROBADA IGA",
    "mejor": "TER426 (60.5)"
   },
@@ -392,7 +458,7 @@
    "pdf": "PRESUPUESTO-0010-00086382-viejo bueno.pdf",
    "nivel": "dudoso",
    "texto": "VS454 ARO ACOPLE INOD.APISO REP-RX-012-00 FERRUM",
-   "mejor": "TER485 (70.6)"
+   "mejor": "INSTS053 (76.9)"
   },
   {
    "pdf": "EN SECO - STEEL FRAME.pdf",
@@ -402,21 +468,9 @@
   },
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
+   "nivel": "sin_match",
    "texto": "MEMBRANA REG DE VAPOR PATAGONICO x 30m2",
-   "mejor": "CONS207 (61.5)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGC 200 E 2,0 X ML (PARA CORTE)",
-   "mejor": "PC001 (84.8)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGC 150 E 0.9 X 6 ML",
-   "mejor": "PC011 (73.5)"
+   "mejor": "CONS207 (59.3)"
   },
   {
    "pdf": "Fagua.pdf",
@@ -427,20 +481,38 @@
   {
    "pdf": "Fagua.pdf",
    "nivel": "dudoso",
-   "texto": "FIJADOR SELLADOR CONCENTRADO TERSUAVE X 10 LITROS GUZ",
-   "mejor": "TER101 (84.0)"
+   "texto": "CHAPAS CINCALUM 0.5 SINUSOIDAL XMETRO LINEAL",
+   "mejor": "CH010 (76.2)"
   },
   {
    "pdf": "Fagua.pdf",
    "nivel": "dudoso",
+   "texto": "FIJADOR SELLADOR CONCENTRADO TERSUAVE X 10 LITROS GUZ",
+   "mejor": "TER101 (73.7)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "dudoso",
+   "texto": "CANTONERA PVC 33MM VINYL FRAME X 3MTS.(BARBIERI)",
+   "mejor": "TER119 (81.2)"
+  },
+  {
+   "pdf": "Fagua.pdf",
+   "nivel": "sin_match",
    "texto": "PUERTA P/DURLOCK REF - GUAT 70 DER",
-   "mejor": "V039 (84.0)"
+   "mejor": "Y101 (58.1)"
   },
   {
    "pdf": "Baukraft - 27.04.pdf",
    "nivel": "dudoso",
    "texto": "PGO 22 0,90 x 3 MTS (B)",
    "mejor": "P116 (84.8)"
+  },
+  {
+   "pdf": "Baukraft - 27.04.pdf",
+   "nivel": "dudoso",
+   "texto": "TORNILLO METAL TIPO 2 14X2 1/2",
+   "mejor": "TER430 (67.8)"
   }
  ]
 }
