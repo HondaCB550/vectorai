@@ -606,6 +606,11 @@ def _calidad(items: list[dict]) -> int:
         total = it.get("total") or 0
         if pu > 0 and cant > 0 and total > 0 and abs(pu * cant - total) <= max(1.0, 0.01 * total):
             puntaje += 1
+        # Firma inequívoca de columnas corridas: cantidad negativa (leyó un
+        # "-10%" de descuento como cantidad) o precio absurdo. Penaliza fuerte
+        # para que este candidato pierda contra los otros métodos.
+        if cant < 0 or pu > 50_000_000:
+            puntaje -= 3
     return puntaje
 
 
