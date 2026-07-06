@@ -13,6 +13,7 @@ type Presupuesto = {
   fecha: string;
   n_items: number;
   total_sin_iva: number;
+  obra?: { nombre: string; localidad?: string | null; provincia?: string | null } | null;
 };
 
 type ItemDetalle = {
@@ -145,8 +146,24 @@ export default function MisPresupuestos() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-3">
-            {presupuestos.map((p) => (
+          <div className="space-y-8">
+            {Object.entries(
+              presupuestos.reduce<Record<string, Presupuesto[]>>((acc, p) => {
+                const key = p.obra
+                  ? `🏗️ ${p.obra.nombre}${p.obra.localidad ? ` — ${p.obra.localidad}` : ""}${p.obra.provincia ? `, ${p.obra.provincia}` : ""}`
+                  : "Sin obra asignada";
+                (acc[key] = acc[key] || []).push(p);
+                return acc;
+              }, {})
+            )
+              .sort(([a], [b]) => (a === "Sin obra asignada" ? 1 : b === "Sin obra asignada" ? -1 : a.localeCompare(b)))
+              .map(([grupo, lista]) => (
+            <div key={grupo}>
+              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                {grupo} <span className="text-gray-400 font-normal normal-case">({lista.length})</span>
+              </h2>
+              <div className="space-y-3">
+            {lista.map((p) => (
               <div key={p.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-200">
                 <div className="p-5 cursor-pointer" onClick={() => toggleDetalle(p.id)}>
                   <div className="flex justify-between items-start gap-4">
@@ -202,6 +219,9 @@ export default function MisPresupuestos() {
                 )}
               </div>
             ))}
+              </div>
+            </div>
+              ))}
           </div>
         )}
       </div>

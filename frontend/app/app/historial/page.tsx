@@ -13,6 +13,7 @@ type Comparativa = {
   n_comunes: number;
   ahorro_total: number;
   fecha: string;
+  obra?: { nombre: string; localidad?: string | null } | null;
 };
 
 function fmt(v: number) {
@@ -134,7 +135,14 @@ export default function Historial() {
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1 cursor-pointer hover:opacity-75" onClick={() => setSelectedId(c.id)}>
-                    <h2 className="font-semibold text-gray-900 text-lg">{c.titulo}</h2>
+                    <h2 className="font-semibold text-gray-900 text-lg">
+                      {c.titulo}
+                      {c.obra && (
+                        <span className="ml-2 text-xs font-medium bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full align-middle">
+                          🏗️ {c.obra.nombre}{c.obra.localidad ? ` — ${c.obra.localidad}` : ""}
+                        </span>
+                      )}
+                    </h2>
                     <p className="text-sm text-gray-600 mt-1">
                       {c.proveedores.join(" • ")} • {formatFecha(c.fecha)}
                     </p>

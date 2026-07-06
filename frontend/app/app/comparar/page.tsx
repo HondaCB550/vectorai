@@ -83,6 +83,8 @@ type ConfigProveedor = {
   descuento_pct: number;
 };
 
+type Obra = { id: string; nombre: string; localidad?: string | null; provincia?: string | null };
+
 type Resultado = {
   comparativa_id: string;
   proveedores: string[];
@@ -139,6 +141,14 @@ export default function Comparar() {
   const [dragging, setDragging]       = useState<number | null>(null);  // índice del bloque activo
   const [loading, setLoading]         = useState(false);
   const [progreso, setProgreso]       = useState<{ idx: number; total: number; archivo: string; etapa: string } | null>(null);
+  const [obras, setObras]             = useState<Obra[]>([]);
+  const [obrasHabilitado, setObrasHabilitado] = useState(false);
+  const [obraId, setObraId]           = useState("");
+  const [nuevaObraVisible, setNuevaObraVisible] = useState(false);
+  const [obraNombre, setObraNombre]   = useState("");
+  const [obraLocalidad, setObraLocalidad] = useState("");
+  const [obraProvincia, setObraProvincia] = useState("");
+  const [creandoObra, setCreandoObra] = useState(false);
   const [resultado, setResultado]     = useState<Resultado | null>(null);
   const [error, setError]             = useState("");
   const [tab, setTab]                 = useState<"comparativa" | "compras" | "dudosos" | "sin_match">("comparativa");
@@ -169,6 +179,40 @@ export default function Comparar() {
       setSoyAdmin(esAdmin(data.session?.user?.email));
     });
   }, []);
+
+  // Obras del usuario (plan Advance): para agrupar la comparativa por obra
+  useEffect(() => {
+    if (!token) return;
+    fetch(`${API_URL}/obras`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => r.json())
+      .then((d) => { setObras(d.obras || []); setObrasHabilitado(!!d.habilitado); })
+      .catch(() => {});
+  }, [token]);
+
+  async function crearObra() {
+    if (!obraNombre.trim() || !token) return;
+    setCreandoObra(true);
+    try {
+      const res = await fetch(`${API_URL}/obras`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ nombre: obraNombre, localidad: obraLocalidad, provincia: obraProvincia }),
+      });
+      const data = await res.json();
+      if (res.ok && data.obra) {
+        setObras((prev) => [data.obra, ...prev]);
+        setObraId(data.obra.id);
+        setNuevaObraVisible(false);
+        setObraNombre(""); setObraLocalidad(""); setObraProvincia("");
+      } else {
+        alert(data?.detail?.mensaje || "No se pudo crear la obra.");
+      }
+    } catch {
+      alert("No se pudo crear la obra.");
+    } finally {
+      setCreandoObra(false);
+    }
+  }
 
   // ── Helpers de bloques ─────────────────────────────────────────────────────
   function addBloque() {
@@ -221,6 +265,7 @@ export default function Comparar() {
     const fileConfigs: object[] = [];
     const progresoId = crypto.randomUUID();
     form.append("progreso_id", progresoId);
+    if (obraId) form.append("obra_id", obraId);
 
     // Flatten: por cada bloque, por cada file → agrega al form en el mismo orden.
     // Se manda el índice de bloque para que el backend agrupe los archivos de un
@@ -563,6 +608,65 @@ export default function Comparar() {
         {/* Upload: bloques de proveedor */}
         {!resultado && (
           <>
+            {/* Obra (plan Advance): agrupa la comparativa y aporta la zona geográfica */}
+            {obrasHabilitado && (
+              <div className="bg-white border border-gray-200 rounded-xl px-5 py-4 mb-4">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-sm font-semibold text-gray-800">🏗️ Obra</span>
+                  <select
+                    value={obraId}
+                    onChange={(e) => { setObraId(e.target.value); setNuevaObraVisible(false); }}
+                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    <option value="">Sin obra</option>
+                    {obras.map((o) => (
+                      <option key={o.id} value={o.id}>
+                        {o.nombre}{o.localidad ? ` — ${o.localidad}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={() => setNuevaObraVisible((v) => !v)}
+                    className="text-sm font-medium text-blue-600 hover:underline"
+                  >
+                    ＋ Nueva obra
+                  </button>
+                  {obraId && (
+                    <span className="text-xs text-gray-400">La comparativa y sus presupuestos quedan agrupados en esta obra.</span>
+                  )}
+                </div>
+                {nuevaObraVisible && (
+                  <div className="flex items-end gap-2 flex-wrap mt-3 pt-3 border-t border-gray-100">
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">Nombre de la obra</label>
+                      <input value={obraNombre} onChange={(e) => setObraNombre(e.target.value)}
+                        placeholder="Casa Pérez — etapa 1"
+                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-52" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">Localidad</label>
+                      <input value={obraLocalidad} onChange={(e) => setObraLocalidad(e.target.value)}
+                        placeholder="Chascomús"
+                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-40" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">Provincia</label>
+                      <input value={obraProvincia} onChange={(e) => setObraProvincia(e.target.value)}
+                        placeholder="Buenos Aires"
+                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-40" />
+                    </div>
+                    <button
+                      onClick={crearObra}
+                      disabled={!obraNombre.trim() || creandoObra}
+                      className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-40"
+                    >
+                      {creandoObra ? "Guardando…" : "Guardar obra"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Zona global de drop */}
             <div
               onDragOver={(e) => { e.preventDefault(); setDragging(-1); }}

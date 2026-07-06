@@ -592,8 +592,17 @@ async def listar_comparativas(
 
     try:
         res = sb.table("comparativas").select(
-            "id,titulo,proveedores,n_items,n_comunes,ahorro_total,created_at"
+            "id,titulo,proveedores,n_items,n_comunes,ahorro_total,created_at,obra_id"
         ).eq("user_id", user["user_id"]).order("created_at", desc=True).execute()
+
+        obras_map: dict[str, dict] = {}
+        obra_ids = sorted({c["obra_id"] for c in (res.data or []) if c.get("obra_id")})
+        if obra_ids:
+            try:
+                res_obras = sb.table("obras").select("id,nombre,localidad,provincia").in_("id", obra_ids).execute()
+                obras_map = {o["id"]: o for o in (res_obras.data or [])}
+            except Exception:
+                pass
 
         comparativas = []
         for c in (res.data or []):
@@ -605,6 +614,7 @@ async def listar_comparativas(
                 "n_comunes": c["n_comunes"],
                 "ahorro_total": c["ahorro_total"],
                 "fecha": c["created_at"],
+                "obra": obras_map.get(c.get("obra_id") or "", None),
             })
 
         return {"comparativas": comparativas}
@@ -1319,6 +1329,7 @@ async def analizar_v2(
     files: list[UploadFile] = File(default=[]),
     file_configs: Optional[str] = FastAPIForm(default=None),
     progreso_id: Optional[str] = FastAPIForm(default=None),
+    obra_id: Optional[str] = FastAPIForm(default=None),
     authorization: Optional[str] = Header(None),
 ):
     """
@@ -1361,6 +1372,9 @@ async def analizar_v2(
     resultados = {}
     errores = []
     presupuestos_creados: list[str] = []
+
+    # Obra (plan alto): solo si existe y es del usuario
+    obra_valida = _obra_del_usuario(sb, obra_id, user["user_id"]) if _plan_permite_obras(user["plan"]) else None
 
     # entradas = [(nombre_archivo, contenido_bytes, cfg), ...]
     entradas: list[tuple[str, bytes, dict]] = []
@@ -1472,6 +1486,7 @@ async def analizar_v2(
                             "incluye_iva":  bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":   fac_archivo,
                             "estado":       "PROCESANDO",
+                            "obra_id":      obra_valida,
                             "created_at":   datetime.now().isoformat(),
                         }).eq("id", presupuesto_id).execute()
                         presupuestos_creados.append(presupuesto_id)
@@ -1484,6 +1499,7 @@ async def analizar_v2(
                             "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
                             "factor_iva":          fac_archivo,
                             "estado":              "PROCESANDO",
+                            "obra_id":             obra_valida,
                         }).execute()
                         if pres.data:
                             presupuesto_id = pres.data[0]["id"]
@@ -1712,6 +1728,13 @@ async def analizar_v2(
               .in_("id", presupuestos_creados).execute()
         except Exception as e:
             print(f"[v2] Error vinculando presupuestos a comparativa: {e}")
+
+    if sb and obra_valida and user["user_id"] != "anonimo":
+        try:
+            sb.table("comparativas").update({"obra_id": obra_valida}) \
+              .eq("id", comparativa_id).execute()
+        except Exception as e:
+            print(f"[v2] Error vinculando comparativa a obra: {e}")
 
     _incrementar_uso(user["user_id"], user["usos_hoy"])
 
@@ -2080,6 +2103,69 @@ async def admin_upsert_grupo_marca(
     return {"ok": True, "marca": req.marca.upper(), "grupo": req.grupo}
 
 
+# ── Obras (plan alto) ──────────────────────────────────────────────────────────
+# Agrupan presupuestos y comparativas por proyecto. La localidad/provincia de la
+# obra es además el dato geográfico que alimenta los precios por zona.
+
+def _plan_permite_obras(plan: str) -> bool:
+    return plan in ("advance", "pro")
+
+
+@app.get("/obras")
+async def listar_obras(authorization: Optional[str] = Header(None)):
+    user = get_user_plan(authorization)
+    sb = get_supabase()
+    if user["user_id"] == "anonimo" or not sb:
+        return {"obras": [], "habilitado": False}
+    try:
+        res = sb.table("obras").select("id,nombre,localidad,provincia,created_at") \
+                .eq("user_id", user["user_id"]).order("created_at", desc=True).execute()
+        return {"obras": res.data or [], "habilitado": _plan_permite_obras(user["plan"])}
+    except Exception as e:
+        print(f"[obras] Error listando: {e}")
+        return {"obras": [], "habilitado": _plan_permite_obras(user["plan"])}
+
+
+class ObraRequest(BaseModel):
+    nombre: str
+    localidad: Optional[str] = None
+    provincia: Optional[str] = None
+
+
+@app.post("/obras")
+async def crear_obra(req: ObraRequest, authorization: Optional[str] = Header(None)):
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    if not _plan_permite_obras(user["plan"]):
+        raise HTTPException(status_code=403, detail={
+            "error": "plan_requerido",
+            "mensaje": "Las obras están disponibles en el plan Advance."})
+    if not (req.nombre or "").strip():
+        raise HTTPException(status_code=400, detail={"error": "nombre_requerido"})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    res = sb.table("obras").insert({
+        "user_id":   user["user_id"],
+        "nombre":    req.nombre.strip(),
+        "localidad": (req.localidad or "").strip() or None,
+        "provincia": (req.provincia or "").strip() or None,
+    }).execute()
+    return {"obra": res.data[0]}
+
+
+def _obra_del_usuario(sb, obra_id: Optional[str], user_id: str) -> Optional[str]:
+    """Valida que la obra exista y sea del usuario; devuelve el id o None."""
+    if not obra_id or user_id == "anonimo" or not sb:
+        return None
+    try:
+        res = sb.table("obras").select("id").eq("id", obra_id).eq("user_id", user_id).limit(1).execute()
+        return res.data[0]["id"] if res.data else None
+    except Exception:
+        return None
+
+
 # ── Mis Presupuestos ───────────────────────────────────────────────────────────
 # Cada documento analizado (PDF/foto/planilla) queda registrado en `presupuestos`
 # con sus líneas en `presupuesto_items`. Estos endpoints los exponen read-only
@@ -2096,9 +2182,18 @@ async def listar_mis_presupuestos(authorization: Optional[str] = Header(None)):
         return {"presupuestos": []}
     try:
         res = sb.table("presupuestos").select(
-            "id,proveedor_detectado,archivo,estado,created_at"
+            "id,proveedor_detectado,archivo,estado,created_at,obra_id"
         ).eq("user_id", user["user_id"]).order("created_at", desc=True).limit(100).execute()
         pres = res.data or []
+        # Nombre de la obra de cada presupuesto (para agrupar en el frontend)
+        obras_map: dict[str, dict] = {}
+        obra_ids = sorted({p["obra_id"] for p in pres if p.get("obra_id")})
+        if obra_ids:
+            try:
+                res_obras = sb.table("obras").select("id,nombre,localidad,provincia").in_("id", obra_ids).execute()
+                obras_map = {o["id"]: o for o in (res_obras.data or [])}
+            except Exception:
+                pass
         counts: dict[str, int] = {}
         totales: dict[str, float] = {}
         ids = [p["id"] for p in pres]
@@ -2121,6 +2216,7 @@ async def listar_mis_presupuestos(authorization: Optional[str] = Header(None)):
             "fecha":        p.get("created_at"),
             "n_items":      counts.get(p["id"], 0),
             "total_sin_iva": round(totales.get(p["id"], 0.0), 2),
+            "obra":         obras_map.get(p.get("obra_id") or "", None),
         } for p in pres]}
     except Exception as e:
         print(f"[mis-presupuestos] Error listando: {e}")
