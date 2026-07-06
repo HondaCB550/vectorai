@@ -76,6 +76,16 @@ RE_ALFONSIN = re.compile(
     r"((?:\d{1,3}\.)*\d+,\d{2})\s+((?:\d{1,3}\.)*\d+,\d{2})\s*$"
 )
 
+# Maderera Lobos: "9,00 PERFIL FLEJE CRUZ DE S.ANDRES 50MM ESP 0.52 (rollo x 50 mts) 42.667,85 -10,00 38.401,06 345.609,54"
+# Orden: CANT DESC P.LISTA BONIF(-10,00 sin %) IMPORTE TOTAL (europeo).
+# El IMPORTE es el unitario ya bonificado → ese es el pu. La cantidad puede
+# traer miles ("3.200,00").
+RE_MADLOBOS = re.compile(
+    r"^\s*((?:\d{1,3}\.)*\d+,\d{2})\s+(.+?)\s+"
+    r"((?:\d{1,3}\.)*\d+,\d{2})\s+(-(?:\d{1,3}\.)*\d+,\d{2})\s+"
+    r"((?:\d{1,3}\.)*\d+,\d{2})\s+((?:\d{1,3}\.)*\d+,\d{2})\s*$"
+)
+
 # Fagua: "8435223412558TAPA DE INSPECCION 60X60 ALUM PLAQUIA 1.00 $ 67,687.54 $ 67,687.54"
 # El código (EAN 13 o corto) viene PEGADO a la descripción sin espacio; precios
 # americanos con $. Las líneas de continuación ("13.2m2 ISOVER") no matchean.
@@ -495,6 +505,7 @@ def extraer_regex(texto: str) -> list[dict]:
             (RE_VIEJOBUENO,    "viejobueno"),
             (RE_CAROSIO_PRESU, "carosio_presu"),
             (RE_ALFONSIN,      "alfonsin"),
+            (RE_MADLOBOS,      "madlobos"),
             (RE_FAGUA,         "fagua"),
             (RE_BAUKRAFT,      "baukraft"),
             (RE_CAROSIO,       "carosio"),
@@ -526,6 +537,12 @@ def extraer_regex(texto: str) -> list[dict]:
                 cant, cod, desc, _plista, pu, total = m.groups()
                 items.append({
                     "cod": cod or "", "desc": _fix_split_words(desc.strip().rstrip(" .")),
+                    "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+                })
+            elif parser == "madlobos":
+                cant, desc, _plista, _bonif, pu, total = m.groups()
+                items.append({
+                    "cod": "", "desc": _fix_split_words(desc.strip()),
                     "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
                 })
             elif parser == "fagua":

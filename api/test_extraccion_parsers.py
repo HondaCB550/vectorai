@@ -83,6 +83,28 @@ def test_viejobueno_cantidad_mayor():
     _consistente(it)
 
 
+# ── Maderera Lobos (bonif -10,00 sin %, importe unitario ya bonificado) ───────
+
+def test_madlobos_basico():
+    it = _uno("9,00 PERFIL FLEJE CRUZ DE S.ANDRES 50MM ESP 0.52 (rollo x 50 mts) 42.667,85 -10,00 38.401,06 345.609,54")
+    assert it["desc"].startswith("PERFIL FLEJE CRUZ")
+    assert it["cant"] == 9.0 and it["pu"] == 38401.06 and it["total"] == 345609.54
+    _consistente(it)
+
+
+def test_madlobos_cantidad_con_miles():
+    it = _uno("3.200,00 ARANDELAS PLASTICAS CON TAPA EIFS (bolsa x 2500) 26,43 -10,00 23,78 76.104,58")
+    assert it["cant"] == 3200.0 and it["pu"] == 23.78
+    _consistente(it)
+
+
+def test_madlobos_oferta():
+    it = _uno("8,00 TEL-HEX T1 10X3/4 S/ARA X 4000 OFERTA 187.928,57 -10,00 169.135,71 1.353.085,68")
+    assert "TEL-HEX" in it["desc"]
+    assert it["cant"] == 8.0 and it["pu"] == 169135.71
+    _consistente(it)
+
+
 # ── Fagua (código EAN pegado a la descripción, precios con $) ─────────────────
 
 def test_fagua_ean_pegado():
