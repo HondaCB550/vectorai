@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
@@ -47,7 +47,9 @@ export default function AdminPage() {
   const [completados, setCompletados] = useState<Set<string>>(new Set());
   const [filtroEstado, setFiltroEstado] = useState<"PENDIENTE" | "VALIDADO" | "RECHAZADO">("PENDIENTE");
   const [busqueda, setBusqueda]     = useState("");
-  const [token, setToken]           = useState<string | null>(null);
+  // undefined = sesión todavía no resuelta (no disparar fetches aún)
+  const [token, setToken]           = useState<string | null | undefined>(undefined);
+  const reqSeq = useRef(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -63,6 +65,11 @@ export default function AdminPage() {
   }, [router]);
 
   const cargar = useCallback(async () => {
+    // Esperar a que la sesión esté resuelta: si el primer fetch sale sin token
+    // recibe 403, y si esa respuesta llega tarde pisa a la buena (banner de
+    // "Acceso denegado" con la lista cargada abajo).
+    if (token === undefined) return;
+    const seq = ++reqSeq.current;
     setLoading(true);
     setError("");
     try {
@@ -74,11 +81,13 @@ export default function AdminPage() {
         throw new Error(`HTTP ${res.status}`);
       }
       const data = await res.json();
+      if (seq !== reqSeq.current) return;  // llegó tarde: hay un pedido más nuevo
       setPendientes(data.pendientes || []);
     } catch (e: unknown) {
+      if (seq !== reqSeq.current) return;
       setError(e instanceof Error ? e.message : "Error cargando pendientes");
     } finally {
-      setLoading(false);
+      if (seq === reqSeq.current) setLoading(false);
     }
   }, [filtroEstado, token]);
 
