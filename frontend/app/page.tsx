@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import UserMenu from "@/components/UserMenu";
 import { createClient } from "@/lib/supabase";
 
 const WA_NUMERO = "5492241410393";
@@ -93,12 +94,15 @@ export default function Landing() {
             </ul>
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
               {logueado ? (
-                <Link
-                  href="/app/comparar"
-                  className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
-                >
-                  Ir al comparador →
-                </Link>
+                <>
+                  <Link
+                    href="/app/comparar"
+                    className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition shadow-[0_4px_16px_rgba(232,112,34,.35)] whitespace-nowrap"
+                  >
+                    Ir al comparador →
+                  </Link>
+                  <UserMenu />
+                </>
               ) : (
                 <>
                   <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap">Entrar</Link>

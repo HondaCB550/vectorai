@@ -347,17 +347,29 @@ def _guardar_comparativa(comparativa_id: str, data: dict, user_id: str = "anonim
             print(f"Supabase insert error (usando cache memoria): {e}")
 
 def _leer_comparativa(comparativa_id: str) -> dict | None:
-    """Lee de memoria primero, luego Supabase."""
+    """Lee de memoria primero, luego Supabase.
+
+    OJO: la tabla NO tiene columna `comparativo` — el contenido vive en
+    `datos_json` (pedirla rompía el select y las descargas de comparativas
+    viejas daban 404 después de cada redeploy, cuando la caché de memoria
+    arranca vacía)."""
     if comparativa_id in _comparativas_cache:
         return _comparativas_cache[comparativa_id]
     sb = get_supabase()
     if sb:
         try:
-            res = sb.table("comparativas").select("comparativo,proveedores").eq("id", comparativa_id).single().execute()
-            if res.data:
-                data = {"comparativo": res.data["comparativo"], "proveedores": res.data["proveedores"]}
-                _comparativas_cache[comparativa_id] = data
-                return data
+            res = sb.table("comparativas").select("datos_json,proveedores") \
+                    .eq("id", comparativa_id).limit(1).execute()
+            row = (res.data or [None])[0]
+            if row:
+                dj = row.get("datos_json") or {}
+                data = {
+                    "comparativo": dj.get("comparativo", []),
+                    "proveedores": row.get("proveedores") or dj.get("proveedores", []),
+                }
+                if data["comparativo"]:
+                    _comparativas_cache[comparativa_id] = data
+                    return data
         except Exception as e:
             print(f"Supabase read error: {e}")
     return None
