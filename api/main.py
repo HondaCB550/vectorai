@@ -151,15 +151,33 @@ SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY") or os.environ.get(
 MP_ACCESS_TOKEN = os.environ.get("MERCADOPAGO_ACCESS_TOKEN", "")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://vectorai.com.ar")
 
+try:
+    from supabase.client import ClientOptions as _SBOpts
+except Exception:
+    try:
+        from supabase import ClientOptions as _SBOpts
+    except Exception:
+        _SBOpts = None
+
 def get_supabase() -> SupabaseClient | None:
-    if SUPABASE_URL and SUPABASE_SERVICE_KEY:
-        return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
-    return None
+    if not (SUPABASE_URL and SUPABASE_SERVICE_KEY):
+        return None
+    # Timeout para que un Supabase colgado no cuelgue el request (agotaría el
+    # threadpool). Fallback si la versión de la lib no soporta las opciones.
+    if _SBOpts is not None:
+        try:
+            return create_client(
+                SUPABASE_URL, SUPABASE_SERVICE_KEY,
+                options=_SBOpts(postgrest_client_timeout=15, storage_client_timeout=15),
+            )
+        except Exception:
+            pass
+    return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 # ── Límites de plan / anti-abuso ──────────────────────────────────────────────
-# Plan free: 1 comparativa/mes, hasta 3 proveedores con 5 hojas c/u.
-# Todo configurable por env sin redeploy de código.
-LIMITE_FREE_MES      = int(os.environ.get("LIMITE_FREE_MES", "1"))
+# Plan free: 1 comparativa gratis DE POR VIDA (no se renueva), hasta 3
+# proveedores con 5 hojas c/u. Todo configurable por env sin redeploy.
+LIMITE_FREE          = int(os.environ.get("LIMITE_FREE", "1"))
 MAX_PROVEEDORES_FREE = int(os.environ.get("MAX_PROVEEDORES_FREE", "3"))
 MAX_HOJAS_PROV_FREE  = int(os.environ.get("MAX_HOJAS_PROV_FREE", "5"))
 # Planes pagos: topes de seguridad (evitan abuso aun con plan alto).
@@ -168,7 +186,7 @@ MAX_HOJAS_PROV       = int(os.environ.get("MAX_HOJAS_PROV", "15"))
 MAX_ARCHIVOS_TOTAL   = int(os.environ.get("MAX_ARCHIVOS_TOTAL", "60"))
 MAX_BYTES_ARCHIVO    = int(os.environ.get("MAX_MB_ARCHIVO", "20")) * 1024 * 1024
 
-_ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE_MES}
+_ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE}
 
 # Emails con acceso al panel /admin (coma-separados en env, con fallback)
 ADMIN_EMAILS = {
@@ -223,41 +241,45 @@ def get_user_plan(authorization: Optional[str]) -> dict:
         # OJO: .single() LANZA excepción con 0 filas (PGRST116) en vez de devolver
         # data=None, así que el auto-create nunca corría y el usuario quedaba
         # degradado a anónimo. limit(1) devuelve lista (vacía si no hay perfil).
-        perfil = sb.table("perfiles").select("plan,usos_mes,limite_mes,mes_usos").eq("id", user_id).limit(1).execute()
+        perfil = sb.table("perfiles").select("plan,usos_mes,usos_total,mes_usos").eq("id", user_id).limit(1).execute()
         row = (perfil.data or [None])[0]
         if not row:
             # Crear perfil si el trigger no lo hizo (cuentas pre-trigger)
-            sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_mes": 0, "mes_usos": mes}).execute()
-            return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE_MES}
+            sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_mes": 0, "usos_total": 0, "mes_usos": mes}).execute()
+            return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE}
 
-        plan   = row.get("plan") or "free"
-        usos   = row.get("usos_mes") or 0
+        plan = row.get("plan") or "free"
 
-        # Resetear contador si es un nuevo mes
+        # Reset del contador MENSUAL (reservado para futuros planes con tope por
+        # mes). El free se mide por usos_total: 1 gratis de por vida, no renueva.
         if (row.get("mes_usos") or "") != mes:
             sb.table("perfiles").update({"usos_mes": 0, "mes_usos": mes}).eq("id", user_id).execute()
-            usos = 0
 
-        # El límite lo fija el plan, no la columna (que un usuario podía haber
-        # intentado inflar; además ahora está congelada por trigger en la BD).
-        limite = 999 if plan in ("advance", "pro") else LIMITE_FREE_MES
-        return {"user_id": user_id, "plan": plan, "usos_hoy": usos, "limite": limite}
+        # El límite lo fija el plan (la columna limite_mes quedó congelada por
+        # trigger en la BD). Free: contador lifetime. Pago: ilimitado.
+        if plan in ("advance", "pro"):
+            return {"user_id": user_id, "plan": plan, "usos_hoy": 0, "limite": 999}
+        return {"user_id": user_id, "plan": plan, "usos_hoy": row.get("usos_total") or 0, "limite": LIMITE_FREE}
     except Exception as e:
         print(f"get_user_plan error: {e}")
         return dict(_ANONIMO)
 
 
-def _incrementar_uso(user_id: str, usos_actuales: int):
-    """Incrementa usos_mes en perfiles para el usuario logueado."""
+def _incrementar_uso(user_id: str, usos_actuales: int = 0):
+    """Suma 1 al contador mensual y al total (lifetime) del usuario. Va por
+    service key, así que el trigger de congelado no lo bloquea."""
     if user_id == "anonimo":
         return
     sb = get_supabase()
     if not sb:
         return
     try:
+        cur = sb.table("perfiles").select("usos_mes,usos_total").eq("id", user_id).limit(1).execute()
+        row = (cur.data or [{}])[0]
         sb.table("perfiles").update({
-            "usos_mes": usos_actuales + 1,
-            "mes_usos": datetime.now().strftime("%Y-%m"),
+            "usos_mes":   (row.get("usos_mes") or 0) + 1,
+            "usos_total": (row.get("usos_total") or 0) + 1,
+            "mes_usos":   datetime.now().strftime("%Y-%m"),
         }).eq("id", user_id).execute()
     except Exception as e:
         print(f"_incrementar_uso error: {e}")
@@ -272,13 +294,14 @@ def _gate_analisis(user: dict):
             "error": "auth_requerida",
             "mensaje": "Iniciá sesión para analizar presupuestos."})
     if user["usos_hoy"] >= user["limite"]:
-        plural = "s" if user["limite"] != 1 else ""
+        if user["plan"] not in ("advance", "pro"):
+            msg = ("Ya usaste tu comparativa gratis. Pasate a Advance para "
+                   "comparaciones ilimitadas.")
+        else:
+            msg = f"Alcanzaste el límite de tu plan ({user['limite']})."
         raise HTTPException(status_code=402, detail={
             "error": "limite_alcanzado",
-            "plan": user["plan"], "limite": user["limite"],
-            "mensaje": (f"Alcanzaste el límite de tu plan ({user['limite']} "
-                        f"comparativa{plural} por mes). Pasate a Advance para "
-                        "comparaciones ilimitadas.")})
+            "plan": user["plan"], "limite": user["limite"], "mensaje": msg})
 
 
 def _validar_archivos(files: list, cfgs: list, plan: str):
@@ -388,6 +411,14 @@ class SheetsRequest(BaseModel):
 
 # Cache en memoria (fallback si Supabase no está disponible)
 _comparativas_cache: dict[str, dict] = {}
+_MAX_COMPARATIVAS_CACHE = int(os.environ.get("MAX_COMPARATIVAS_CACHE", "200"))
+
+def _cache_comparativa(cid: str, data: dict):
+    """Guarda en el cache con tope FIFO para que no crezca sin límite en la
+    instancia (leak lento en Railway)."""
+    if cid not in _comparativas_cache and len(_comparativas_cache) >= _MAX_COMPARATIVAS_CACHE:
+        _comparativas_cache.pop(next(iter(_comparativas_cache)), None)
+    _comparativas_cache[cid] = data
 
 def _calcular_ahorro_total(comparativo: list) -> float:
     """Suma todos los ahorros de la comparativa."""
@@ -395,7 +426,7 @@ def _calcular_ahorro_total(comparativo: list) -> float:
 
 def _guardar_comparativa(comparativa_id: str, data: dict, user_id: str = "anonimo", titulo: str = ""):
     """Persiste en Supabase; fallback a memoria."""
-    _comparativas_cache[comparativa_id] = data
+    _cache_comparativa(comparativa_id, data)
     sb = get_supabase()
     if sb and user_id != "anonimo":
         try:
@@ -438,7 +469,7 @@ def _leer_comparativa(comparativa_id: str) -> dict | None:
                     "proveedores": row.get("proveedores") or dj.get("proveedores", []),
                 }
                 if data["comparativo"]:
-                    _comparativas_cache[comparativa_id] = data
+                    _cache_comparativa(comparativa_id, data)
                     return data
         except Exception as e:
             print(f"Supabase read error: {e}")

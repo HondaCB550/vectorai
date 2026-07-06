@@ -69,18 +69,18 @@ async def verificar_webhook(
 # ── POST /whatsapp/webhook — mensajes entrantes ────────────────────────────────
 @router.post("/webhook")
 async def recibir_mensaje(request: Request):
-    # Verificar firma X-Hub-Signature-256
-    if WA_APP_SECRET:
-        sig_header = request.headers.get("X-Hub-Signature-256", "")
-        raw_body   = await request.body()
-        expected   = "sha256=" + hmac.new(
-            WA_APP_SECRET.encode(), raw_body, hashlib.sha256
-        ).hexdigest()
-        if not hmac.compare_digest(expected, sig_header):
-            raise HTTPException(status_code=401, detail="Firma inválida")
-        body = __import__("json").loads(raw_body)
-    else:
-        body = await request.json()
+    # Verificar firma X-Hub-Signature-256 (fail-closed: sin secret no se procesa
+    # ningún body — el canal WhatsApp no se lanza todavía).
+    if not WA_APP_SECRET:
+        raise HTTPException(status_code=503, detail="webhook no configurado")
+    sig_header = request.headers.get("X-Hub-Signature-256", "")
+    raw_body   = await request.body()
+    expected   = "sha256=" + hmac.new(
+        WA_APP_SECRET.encode(), raw_body, hashlib.sha256
+    ).hexdigest()
+    if not hmac.compare_digest(expected, sig_header):
+        raise HTTPException(status_code=401, detail="Firma inválida")
+    body = __import__("json").loads(raw_body)
 
     # Extraer mensaje
     try:
