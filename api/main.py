@@ -977,9 +977,32 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
     return pu, cant, unidad_norm or "UN", None, True
 
 
+# Espesores comerciales de steel framing: los proveedores escriben el nominal
+# (0.9 / 1.2 / 1.25 / 1.6 / 2.0) y el maestro el real con zinc (0,94 / 1,29 /
+# 1,64 / 2,04). Se canonizan SOLO en contexto de perfiles PGC/PGU/PGO para no
+# tocar medidas de otros rubros. Nota: normalize() ya convirtió la coma en
+# espacio, por eso los patrones aceptan "1 29" además de "1.29".
+_RE_PERFIL_STEEL = re.compile(r"\b(?:pgc|pgu|pgo)\b")
+# Separador obligatorio ("2 0" o "2.0") para no capturar "200" de "PGC 200";
+# lookbehind en vez de \b para agarrar formas pegadas ya separadas ("e 1.2").
+_GAUGES_STEEL = [
+    (re.compile(r"(?<![\d.])0[. ](?:89|90|94|9)(?!\d)"), "0.94"),
+    (re.compile(r"(?<![\d.])1[. ](?:20|25|29|2)(?!\d)"), "1.29"),
+    (re.compile(r"(?<![\d.])1[. ](?:60|64|6)(?!\d)"), "1.64"),
+    (re.compile(r"(?<![\d.])2[. ](?:00|04|0)(?!\d)"), "2.04"),
+]
+# "E1.2" viene pegado como un solo token: separar el prefijo de espesor
+_RE_E_PEGADA = re.compile(r"\be(?=\d)")
+
+
 def _prep_v2(s: str) -> str:
     """Normaliza + aplica sinónimos → lowercase. Usado en ambos lados del match."""
-    return aplicar_sinonimos(normalize(s)).lower()
+    t = aplicar_sinonimos(normalize(s)).lower()
+    if _RE_PERFIL_STEEL.search(t):
+        t = _RE_E_PEGADA.sub("e ", t)
+        for rx, canon in _GAUGES_STEEL:
+            t = rx.sub(canon, t)
+    return t
 
 
 def _load_knowledge_cache():

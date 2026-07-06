@@ -69,10 +69,10 @@
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "metodo": "regex",
    "items": 40,
-   "auto": 32,
-   "dudoso": 8,
+   "auto": 37,
+   "dudoso": 3,
    "sin_match": 0,
-   "pct_auto": 80.0
+   "pct_auto": 92.5
   },
   {
    "pdf": "Fagua.pdf",
@@ -409,44 +409,14 @@
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "nivel": "dudoso",
-   "texto": "PGC 200 E 1.2 X 6 ML",
-   "mejor": "PC001 (71.0)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
    "texto": "PGC 200 E 2,0 X ML (PARA CORTE)",
-   "mejor": "PC001 (75.9)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGC 150 E 1.2 X 6 ML",
-   "mejor": "PC004 (71.0)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGC 100 E1.2 X 6 ML",
-   "mejor": "PC011 (73.3)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGC 100 E0.9 X 6 ML",
-   "mejor": "PC011 (73.3)"
+   "mejor": "PC001 (84.8)"
   },
   {
    "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
    "nivel": "dudoso",
    "texto": "PGC 150 E 0.9 X 6 ML",
-   "mejor": "PC004 (71.0)"
-  },
-  {
-   "pdf": "CAROSIO - STEEL - PRESUPUESTO 47259.pdf",
-   "nivel": "dudoso",
-   "texto": "PGU 100 E0,9 X 6 ML",
-   "mejor": "PU006 (73.3)"
+   "mejor": "PC011 (73.5)"
   },
   {
    "pdf": "Fagua.pdf",
@@ -470,7 +440,7 @@
    "pdf": "Baukraft - 27.04.pdf",
    "nivel": "dudoso",
    "texto": "PGO 22 0,90 x 3 MTS (B)",
-   "mejor": "P116 (73.3)"
+   "mejor": "P116 (84.8)"
   }
  ]
 }
