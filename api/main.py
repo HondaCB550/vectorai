@@ -1427,23 +1427,45 @@ async def analizar_v2(
             fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
             desc_archivo = float(cfg_archivo.get("descuento", 0))
 
-            # Registrar el documento subido (solo logueados: user_id es NOT NULL)
+            # Registrar el documento subido (solo logueados: user_id es NOT NULL).
+            # Mismo archivo del mismo proveedor re-analizado → REEMPLAZA el
+            # registro anterior en vez de duplicarlo en Mis Presupuestos: se
+            # borran sus líneas viejas y se reutiliza el id con el análisis
+            # nuevo (que además matchea mejor a medida que el motor aprende).
             if sb and user["user_id"] != "anonimo":
                 try:
-                    pres = sb.table("presupuestos").insert({
-                        "user_id":             user["user_id"],
-                        "proveedor_id":        proveedor_id,
-                        "proveedor_detectado": proveedor,
-                        "archivo":             fname,
-                        "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
-                        "factor_iva":          fac_archivo,
-                        "estado":              "PROCESANDO",
-                    }).execute()
-                    if pres.data:
-                        presupuesto_id = pres.data[0]["id"]
+                    prev = sb.table("presupuestos").select("id") \
+                             .eq("user_id", user["user_id"]) \
+                             .eq("archivo", fname) \
+                             .eq("proveedor_detectado", proveedor) \
+                             .limit(1).execute()
+                    if prev.data:
+                        presupuesto_id = prev.data[0]["id"]
+                        sb.table("presupuesto_items").delete() \
+                          .eq("presupuesto_id", presupuesto_id).execute()
+                        sb.table("presupuestos").update({
+                            "proveedor_id": proveedor_id,
+                            "incluye_iva":  bool(cfg_archivo.get("con_iva", True)),
+                            "factor_iva":   fac_archivo,
+                            "estado":       "PROCESANDO",
+                            "created_at":   datetime.now().isoformat(),
+                        }).eq("id", presupuesto_id).execute()
                         presupuestos_creados.append(presupuesto_id)
+                    else:
+                        pres = sb.table("presupuestos").insert({
+                            "user_id":             user["user_id"],
+                            "proveedor_id":        proveedor_id,
+                            "proveedor_detectado": proveedor,
+                            "archivo":             fname,
+                            "incluye_iva":         bool(cfg_archivo.get("con_iva", True)),
+                            "factor_iva":          fac_archivo,
+                            "estado":              "PROCESANDO",
+                        }).execute()
+                        if pres.data:
+                            presupuesto_id = pres.data[0]["id"]
+                            presupuestos_creados.append(presupuesto_id)
                 except Exception as e:
-                    print(f"[v2] Error creando presupuesto para {fname}: {e}")
+                    print(f"[v2] Error registrando presupuesto para {fname}: {e}")
             def precio_archivo(pu: float, _fac=fac_archivo, _desc=desc_archivo) -> float:
                 return round(pu / _fac * (1 - _desc / 100), 2)
 
