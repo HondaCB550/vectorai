@@ -114,7 +114,7 @@ function BarsV({ data, fmt }: { data: { label: string; value: number }[]; fmt?: 
   );
 }
 
-const NOMBRE_PLAN: Record<string, string> = { free: "Free", basico: "Básico", advance: "Advance", pro: "Pro" };
+const NOMBRE_PLAN: Record<string, string> = { free: "Free", basico: "Inicial", advance: "Advance", pro: "Pro" };
 
 export default function MetricasPage() {
   const [data, setData] = useState<Metrics | null>(null);

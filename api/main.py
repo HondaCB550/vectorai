@@ -177,14 +177,17 @@ def get_supabase() -> SupabaseClient | None:
 # ── Límites de plan / anti-abuso ──────────────────────────────────────────────
 # Plan free: 1 comparativa gratis DE POR VIDA (no se renueva), hasta 3
 # proveedores con 5 hojas c/u. Todo configurable por env sin redeploy.
-LIMITE_FREE          = int(os.environ.get("LIMITE_FREE", "1"))
-MAX_PROVEEDORES_FREE = int(os.environ.get("MAX_PROVEEDORES_FREE", "3"))
-MAX_HOJAS_PROV_FREE  = int(os.environ.get("MAX_HOJAS_PROV_FREE", "5"))
-# Planes pagos: topes de seguridad (evitan abuso aun con plan alto).
-MAX_PROVEEDORES      = int(os.environ.get("MAX_PROVEEDORES", "15"))
-MAX_HOJAS_PROV       = int(os.environ.get("MAX_HOJAS_PROV", "15"))
-MAX_ARCHIVOS_TOTAL   = int(os.environ.get("MAX_ARCHIVOS_TOTAL", "60"))
-MAX_BYTES_ARCHIVO    = int(os.environ.get("MAX_MB_ARCHIVO", "20")) * 1024 * 1024
+LIMITE_FREE           = int(os.environ.get("LIMITE_FREE", "1"))            # gratis de por vida
+LIMITE_INICIAL_MES    = int(os.environ.get("LIMITE_INICIAL_MES", "6"))      # plan Inicial (basico), por mes
+BONUS_INICIAL_1ER_MES = int(os.environ.get("BONUS_INICIAL_1ER_MES", "2"))   # +2 comparativas el primer mes
+MAX_PROVEEDORES_FREE  = int(os.environ.get("MAX_PROVEEDORES_FREE", "3"))
+MAX_HOJAS_PROV_FREE   = int(os.environ.get("MAX_HOJAS_PROV_FREE", "5"))
+# Planes pagos (Inicial y Advance): tope de seguridad. Más de 5 proveedores no
+# se cruzan en la práctica, y más de 10 hojas por proveedor arriesga colapsar.
+MAX_PROVEEDORES       = int(os.environ.get("MAX_PROVEEDORES", "5"))
+MAX_HOJAS_PROV        = int(os.environ.get("MAX_HOJAS_PROV", "10"))
+MAX_ARCHIVOS_TOTAL    = int(os.environ.get("MAX_ARCHIVOS_TOTAL", "60"))
+MAX_BYTES_ARCHIVO     = int(os.environ.get("MAX_MB_ARCHIVO", "20")) * 1024 * 1024
 
 _ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE}
 
@@ -241,7 +244,7 @@ def get_user_plan(authorization: Optional[str]) -> dict:
         # OJO: .single() LANZA excepción con 0 filas (PGRST116) en vez de devolver
         # data=None, así que el auto-create nunca corría y el usuario quedaba
         # degradado a anónimo. limit(1) devuelve lista (vacía si no hay perfil).
-        perfil = sb.table("perfiles").select("plan,usos_mes,usos_total,mes_usos").eq("id", user_id).limit(1).execute()
+        perfil = sb.table("perfiles").select("plan,usos_mes,usos_total,mes_usos,plan_desde").eq("id", user_id).limit(1).execute()
         row = (perfil.data or [None])[0]
         if not row:
             # Crear perfil si el trigger no lo hizo (cuentas pre-trigger)
@@ -250,15 +253,22 @@ def get_user_plan(authorization: Optional[str]) -> dict:
 
         plan = row.get("plan") or "free"
 
-        # Reset del contador MENSUAL (reservado para futuros planes con tope por
-        # mes). El free se mide por usos_total: 1 gratis de por vida, no renueva.
+        # Reset del contador MENSUAL al cambiar de mes (planes con tope por mes).
+        usos_mes = row.get("usos_mes") or 0
         if (row.get("mes_usos") or "") != mes:
             sb.table("perfiles").update({"usos_mes": 0, "mes_usos": mes}).eq("id", user_id).execute()
+            usos_mes = 0
 
         # El límite lo fija el plan (la columna limite_mes quedó congelada por
-        # trigger en la BD). Free: contador lifetime. Pago: ilimitado.
+        # trigger en la BD).
         if plan in ("advance", "pro"):
             return {"user_id": user_id, "plan": plan, "usos_hoy": 0, "limite": 999}
+        if plan == "basico":  # plan Inicial: tope mensual + bonus del primer mes
+            limite = LIMITE_INICIAL_MES
+            if str(row.get("plan_desde") or "")[:7] == mes:
+                limite += BONUS_INICIAL_1ER_MES
+            return {"user_id": user_id, "plan": plan, "usos_hoy": usos_mes, "limite": limite}
+        # free: contador de por vida (usos_total), 1 gratis, no renueva
         return {"user_id": user_id, "plan": plan, "usos_hoy": row.get("usos_total") or 0, "limite": LIMITE_FREE}
     except Exception as e:
         print(f"get_user_plan error: {e}")
@@ -294,14 +304,19 @@ def _gate_analisis(user: dict):
             "error": "auth_requerida",
             "mensaje": "Iniciá sesión para analizar presupuestos."})
     if user["usos_hoy"] >= user["limite"]:
-        if user["plan"] not in ("advance", "pro"):
-            msg = ("Ya usaste tu comparativa gratis. Pasate a Advance para "
+        plan = user["plan"]
+        if plan == "basico":
+            msg = (f"Alcanzaste tus {user['limite']} comparativas de este mes. "
+                   "Se renuevan el mes que viene, o pasate a Advance para "
                    "comparaciones ilimitadas.")
-        else:
+        elif plan in ("advance", "pro"):
             msg = f"Alcanzaste el límite de tu plan ({user['limite']})."
+        else:  # free
+            msg = ("Ya usaste tu comparativa gratis. Pasate al plan Inicial o "
+                   "Advance para seguir comparando.")
         raise HTTPException(status_code=402, detail={
             "error": "limite_alcanzado",
-            "plan": user["plan"], "limite": user["limite"], "mensaje": msg})
+            "plan": plan, "limite": user["limite"], "mensaje": msg})
 
 
 def _validar_archivos(files: list, cfgs: list, plan: str):
@@ -323,10 +338,10 @@ def _validar_archivos(files: list, cfgs: list, plan: str):
                 "mensaje": (f"'{f.filename}' supera el máximo de "
                             f"{MAX_BYTES_ARCHIVO // (1024 * 1024)} MB por archivo.")})
 
-    es_free = plan not in ("advance", "pro")
-    max_prov  = MAX_PROVEEDORES_FREE if es_free else MAX_PROVEEDORES
-    max_hojas = MAX_HOJAS_PROV_FREE  if es_free else MAX_HOJAS_PROV
-    sugerir   = " Pasate a Advance para comparar más." if es_free else ""
+    es_pago = plan in ("basico", "advance", "pro")
+    max_prov  = MAX_PROVEEDORES if es_pago else MAX_PROVEEDORES_FREE
+    max_hojas = MAX_HOJAS_PROV  if es_pago else MAX_HOJAS_PROV_FREE
+    sugerir   = "" if es_pago else " Pasate al plan Inicial o Advance para comparar más."
 
     conteo: dict = {}
     for idx in range(n):
@@ -334,12 +349,12 @@ def _validar_archivos(files: list, cfgs: list, plan: str):
         clave = cfg.get("bloque", idx)
         conteo[clave] = conteo.get(clave, 0) + 1
     if len(conteo) > max_prov:
-        raise HTTPException(status_code=402 if es_free else 413, detail={
+        raise HTTPException(status_code=413 if es_pago else 402, detail={
             "error": "demasiados_proveedores",
             "mensaje": f"Tu plan permite hasta {max_prov} proveedores por comparativa.{sugerir}"})
     for c in conteo.values():
         if c > max_hojas:
-            raise HTTPException(status_code=402 if es_free else 413, detail={
+            raise HTTPException(status_code=413 if es_pago else 402, detail={
                 "error": "demasiadas_hojas",
                 "mensaje": f"Tu plan permite hasta {max_hojas} hojas por proveedor.{sugerir}"})
 
@@ -951,6 +966,7 @@ async def generar_imagen(
 class MPSuscripcionRequest(BaseModel):
     user_id: str
     email: str
+    plan: str = "advance"  # 'basico' (Inicial) | 'advance'
 
 @app.post("/mp/suscripcion")
 async def crear_suscripcion(req: MPSuscripcionRequest):
@@ -961,18 +977,24 @@ async def crear_suscripcion(req: MPSuscripcionRequest):
     if not MP_ACCESS_TOKEN:
         raise HTTPException(status_code=503, detail={"error": "mp_no_configurado"})
 
+    plan = req.plan if req.plan in ("basico", "advance") else "advance"
+    monto = PRECIOS_PLAN.get(plan, 48000)
+    nombre_plan = "Inicial" if plan == "basico" else "Advance"
+
     import mercadopago
     sdk = mercadopago.SDK(MP_ACCESS_TOKEN)
 
     preapproval_data = {
         "preapproval_plan_id": None,  # sin plan predefinido → ad-hoc
-        "reason": "VectorAI Plan Advance — comparador de presupuestos",
-        "external_reference": req.user_id,
+        "reason": f"VectorAI Plan {nombre_plan} — comparador de presupuestos",
+        # El plan viaja en external_reference para que el webhook active el
+        # correcto: "<user_id>:<plan>".
+        "external_reference": f"{req.user_id}:{plan}",
         "payer_email": req.email,
         "auto_recurring": {
             "frequency": 1,
             "frequency_type": "months",
-            "transaction_amount": 48000,
+            "transaction_amount": monto,
             "currency_id": "ARS",
         },
         "back_url": f"{FRONTEND_URL}/app/comparar?suscripcion=ok",
@@ -1047,7 +1069,12 @@ async def mp_webhook(request: Request):
 
     preapproval = result["response"]
     estado = preapproval.get("status", "")
-    user_id = preapproval.get("external_reference", "")
+    ext = preapproval.get("external_reference", "") or ""
+    # external_reference = "<user_id>:<plan>". Suscripciones viejas traen solo
+    # el user_id → default advance.
+    user_id, _, plan_comprado = ext.partition(":")
+    if plan_comprado not in ("basico", "advance", "pro"):
+        plan_comprado = "advance"
 
     if not user_id:
         return {"ok": True}
@@ -1057,15 +1084,18 @@ async def mp_webhook(request: Request):
         return {"ok": True}
 
     if estado == "authorized":
-        sb.table("perfiles").update({"plan": "advance"}).eq("id", user_id).execute()
+        sb.table("perfiles").update({
+            "plan": plan_comprado,
+            "plan_desde": datetime.now().isoformat(),
+        }).eq("id", user_id).execute()
         try:
             sb.table("facturacion_eventos").insert({
-                "user_id": user_id, "evento": "alta", "plan": "advance",
-                "monto": PRECIOS_PLAN.get("advance", 48000), "mp_id": str(mp_id),
+                "user_id": user_id, "evento": "alta", "plan": plan_comprado,
+                "monto": PRECIOS_PLAN.get(plan_comprado, 0), "mp_id": str(mp_id),
             }).execute()
         except Exception as e:
             print(f"facturacion_eventos error: {e}")
-        print(f"Plan Advance activado: {user_id}")
+        print(f"Plan {plan_comprado} activado: {user_id}")
     elif estado in ("cancelled", "paused"):
         sb.table("perfiles").update({"plan": "free"}).eq("id", user_id).execute()
         try:
@@ -2208,7 +2238,7 @@ async def admin_validar_pendiente(
 PRECIOS_PLAN = {
     "advance": int(os.environ.get("PRECIO_ADVANCE", "48000")),
     "pro":     int(os.environ.get("PRECIO_PRO", "48000")),
-    "basico":  int(os.environ.get("PRECIO_BASICO", "0")),
+    "basico":  int(os.environ.get("PRECIO_BASICO", "19600")),  # plan Inicial (precio de lanzamiento)
 }
 # Costo estimado por llamada de visión (USD) — Sonnet 5, ~1 imagen.
 COSTO_OCR_USD = float(os.environ.get("COSTO_OCR_USD", "0.02"))
