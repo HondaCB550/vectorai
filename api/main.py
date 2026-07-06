@@ -1760,7 +1760,17 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
     if user["plan"] == "free" and user["user_id"] != "anonimo":
         usos_restantes = max(0, user["limite"] - user["usos_hoy"] - 1)
 
-    config_provs = {prov: config_proveedor(prov) for prov in resultados}
+    # Config REAL que el usuario eligió al subir cada bloque (no la tabla
+    # legacy por nombre de proveedor): es lo que decide si el neto que se
+    # muestra es de documento o estimado.
+    config_provs = {
+        prov: {
+            "iva_incluido":  bool((data.get("cfg_aplicada") or {}).get("con_iva", True)),
+            "factor_iva":    1.105 if (data.get("cfg_aplicada") or {}).get("con_iva", True) else 1.0,
+            "descuento_pct": (data.get("cfg_aplicada") or {}).get("descuento", 0),
+        }
+        for prov, data in resultados.items()
+    }
 
     return {
         "comparativa_id":   comparativa_id,

@@ -170,7 +170,9 @@ export default function Comparar() {
   const [generandoPdf, setGenerandoPdf]       = useState(false);
   const [generandoJpg, setGenerandoJpg]       = useState(false);
 
-  const [conIva, setConIva]           = useState(false);
+  // Vista por defecto: precio FINAL con IVA (la plata real; el que cotizó con
+  // IVA muestra exactamente su precio de documento — pedido de Pablo)
+  const [conIva, setConIva]           = useState(true);
   const [descuentoPct, setDescuentoPct] = useState(0);
   const [soloDifGrande, setSoloDifGrande] = useState(false);
 
@@ -988,18 +990,19 @@ export default function Comparar() {
                   </label>
 
                   {/* IVA / Descuento */}
-                  <div className="flex items-center gap-1 ml-auto border border-gray-200 rounded-lg overflow-hidden text-sm">
-                    <button
-                      onClick={() => setConIva(false)}
-                      className={`px-3 py-2 transition ${!conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
-                    >
-                      Sin IVA
-                    </button>
+                  <div className="flex items-center gap-1 ml-auto border border-gray-200 rounded-lg overflow-hidden text-sm"
+                    title="Precio final: lo que pagás con IVA — el que cotizó con IVA muestra exactamente su precio de documento. Neto: sin IVA; para los que cotizaron con IVA es un neto estimado (~).">
                     <button
                       onClick={() => setConIva(true)}
                       className={`px-3 py-2 transition ${conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
                     >
-                      Con IVA
+                      Precio final (c/IVA)
+                    </button>
+                    <button
+                      onClick={() => setConIva(false)}
+                      className={`px-3 py-2 transition ${!conIva ? "bg-blue-600 text-white font-semibold" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Neto (s/IVA)
                     </button>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm">
@@ -1065,14 +1068,17 @@ export default function Comparar() {
                             const factorProv = resultado.config_proveedores?.[p]?.factor_iva || 1.105;
                             const precioU = precio ? precioMostrado(precio.precio_sin_iva, factorProv, conIva, descuentoPct) : null;
                             const total   = precioU !== null ? precioU * (row.cant || 1) : null;
+                            // En modo neto, el que cotizó CON IVA muestra un neto
+                            // ESTIMADO (lo calculamos nosotros, no está en su papel)
+                            const netoEstimado = !conIva && (resultado.config_proveedores?.[p]?.iva_incluido ?? false);
                             return (
                               <td key={p} className={`px-4 py-3 text-center ${esMejor ? "bg-green-50" : ""}`}>
                                 {precioU !== null ? (
-                                  <div>
+                                  <div title={netoEstimado ? "Neto estimado: este proveedor cotizó con IVA incluido" : undefined}>
                                     <span className={`font-medium ${esMejor ? "text-green-700 font-bold" : "text-gray-700"}`}>
-                                      {fmt(total!)}
+                                      {netoEstimado ? "~" : ""}{fmt(total!)}
                                     </span>
-                                    <div className="text-xs text-gray-400">{fmt(precioU)}/u</div>
+                                    <div className="text-xs text-gray-400">{netoEstimado ? "~" : ""}{fmt(precioU)}/u</div>
                                   </div>
                                 ) : <span className="text-gray-300">—</span>}
                               </td>
