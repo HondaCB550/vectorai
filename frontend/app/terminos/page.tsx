@@ -1,6 +1,6 @@
 import LegalLayout from "@/components/LegalLayout";
 
-export const metadata = { title: "Términos y Condiciones — VectorAI" };
+export const metadata = { title: "Términos y Condiciones — Vectorai" };
 
 export default function Terminos() {
   return (

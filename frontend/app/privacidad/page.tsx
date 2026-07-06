@@ -1,6 +1,6 @@
 import LegalLayout from "@/components/LegalLayout";
 
-export const metadata = { title: "Política de Privacidad — VectorAI" };
+export const metadata = { title: "Política de Privacidad — Vectorai" };
 
 const TH = "text-left font-semibold text-gray-900 px-3 py-2 border-b border-gray-200";
 const TD = "px-3 py-2 border-b border-gray-100 align-top";

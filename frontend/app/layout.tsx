@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "VectorAI — Comparador de presupuestos de construcción",
+  title: "Vectorai — Comparador de presupuestos de construcción",
   description:
     "Compará presupuestos de distintos proveedores. La IA normaliza los materiales y genera la comparativa en segundos.",
 };
