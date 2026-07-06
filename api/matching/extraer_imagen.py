@@ -15,6 +15,15 @@ import base64
 import json
 import os
 
+try:
+    from PIL import Image as _PILImage
+    # Anti "decompression bomb": aborta imágenes gigantes en vez de agotar la RAM
+    # del worker (Railway 1 instancia). Pillow lanza DecompressionBombError arriba
+    # de 2× este valor.
+    _PILImage.MAX_IMAGE_PIXELS = int(os.environ.get("MAX_IMAGE_PIXELS", "64000000"))
+except Exception:
+    pass
+
 MAGIC_MEDIA = [
     (b"\xff\xd8\xff", "image/jpeg"),
     (b"\x89PNG", "image/png"),
@@ -119,11 +128,12 @@ def _api_key_limpia() -> str:
 def _extraer_claude(content: bytes, media_type: str) -> dict:
     import anthropic
 
-    client = anthropic.Anthropic(api_key=_api_key_limpia())
+    client = anthropic.Anthropic(api_key=_api_key_limpia(), timeout=90.0, max_retries=1)
     b64 = base64.standard_b64encode(content).decode("utf-8")
     response = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-sonnet-5",
         max_tokens=16000,
+        thinking={"type": "disabled"},
         output_config={"format": {"type": "json_schema", "schema": SCHEMA_EXTRACCION}},
         messages=[{
             "role": "user",
@@ -235,8 +245,17 @@ def extraer_pdf_escaneado(pdf_bytes: bytes) -> dict:
         iva = "ASUMIDO 1,105"
         metodo = "ocr"
         for i in range(n_pag):
-            # scale=2 ≈ 150 dpi: suficiente para leer tablas sin inflar el payload
-            img = pdf[i].render(scale=2.0).to_pil().convert("RGB")
+            # scale≈2 (150 dpi) para leer tablas, pero acotado: una página con
+            # MediaBox gigante a scale fijo genera un bitmap enorme → OOM.
+            try:
+                w, h = pdf[i].get_size()
+            except Exception:
+                w, h = 612.0, 792.0
+            escala = 2.0
+            objetivo_px = 4_000_000  # ~4 Mpx máx por página
+            if w > 0 and h > 0 and (w * escala) * (h * escala) > objetivo_px:
+                escala = max(0.5, (objetivo_px / (w * h)) ** 0.5)
+            img = pdf[i].render(scale=escala).to_pil().convert("RGB")
             buf = io.BytesIO()
             img.save(buf, format="JPEG", quality=85)
             r = extraer_imagen(buf.getvalue(), f"pagina_{i + 1}.jpg")

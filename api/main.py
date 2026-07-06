@@ -156,7 +156,19 @@ def get_supabase() -> SupabaseClient | None:
         return create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
     return None
 
-_ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": 2}
+# ── Límites de plan / anti-abuso ──────────────────────────────────────────────
+# Plan free: 1 comparativa/mes, hasta 3 proveedores con 5 hojas c/u.
+# Todo configurable por env sin redeploy de código.
+LIMITE_FREE_MES      = int(os.environ.get("LIMITE_FREE_MES", "1"))
+MAX_PROVEEDORES_FREE = int(os.environ.get("MAX_PROVEEDORES_FREE", "3"))
+MAX_HOJAS_PROV_FREE  = int(os.environ.get("MAX_HOJAS_PROV_FREE", "5"))
+# Planes pagos: topes de seguridad (evitan abuso aun con plan alto).
+MAX_PROVEEDORES      = int(os.environ.get("MAX_PROVEEDORES", "15"))
+MAX_HOJAS_PROV       = int(os.environ.get("MAX_HOJAS_PROV", "15"))
+MAX_ARCHIVOS_TOTAL   = int(os.environ.get("MAX_ARCHIVOS_TOTAL", "60"))
+MAX_BYTES_ARCHIVO    = int(os.environ.get("MAX_MB_ARCHIVO", "20")) * 1024 * 1024
+
+_ANONIMO = {"user_id": "anonimo", "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE_MES}
 
 # Emails con acceso al panel /admin (coma-separados en env, con fallback)
 ADMIN_EMAILS = {
@@ -216,19 +228,19 @@ def get_user_plan(authorization: Optional[str]) -> dict:
         if not row:
             # Crear perfil si el trigger no lo hizo (cuentas pre-trigger)
             sb.table("perfiles").insert({"id": user_id, "plan": "free", "usos_mes": 0, "mes_usos": mes}).execute()
-            return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": 2}
+            return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE_MES}
 
         plan   = row.get("plan") or "free"
         usos   = row.get("usos_mes") or 0
-        limite = row.get("limite_mes") or 2
 
         # Resetear contador si es un nuevo mes
         if (row.get("mes_usos") or "") != mes:
             sb.table("perfiles").update({"usos_mes": 0, "mes_usos": mes}).eq("id", user_id).execute()
             usos = 0
 
-        if plan in ("advance", "pro"):
-            limite = 999
+        # El límite lo fija el plan, no la columna (que un usuario podía haber
+        # intentado inflar; además ahora está congelada por trigger en la BD).
+        limite = 999 if plan in ("advance", "pro") else LIMITE_FREE_MES
         return {"user_id": user_id, "plan": plan, "usos_hoy": usos, "limite": limite}
     except Exception as e:
         print(f"get_user_plan error: {e}")
@@ -249,6 +261,64 @@ def _incrementar_uso(user_id: str, usos_actuales: int):
         }).eq("id", user_id).execute()
     except Exception as e:
         print(f"_incrementar_uso error: {e}")
+
+
+def _gate_analisis(user: dict):
+    """Cierra el análisis a anónimos y aplica el límite mensual del plan ANTES de
+    procesar (la extracción/visión cuesta plata; los anónimos no se trackean, así
+    que sin exigir login el abuso es ilimitado)."""
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={
+            "error": "auth_requerida",
+            "mensaje": "Iniciá sesión para analizar presupuestos."})
+    if user["usos_hoy"] >= user["limite"]:
+        plural = "s" if user["limite"] != 1 else ""
+        raise HTTPException(status_code=402, detail={
+            "error": "limite_alcanzado",
+            "plan": user["plan"], "limite": user["limite"],
+            "mensaje": (f"Alcanzaste el límite de tu plan ({user['limite']} "
+                        f"comparativa{plural} por mes). Pasate a Advance para "
+                        "comparaciones ilimitadas.")})
+
+
+def _validar_archivos(files: list, cfgs: list, plan: str):
+    """Topes anti-abuso/DoS por request: cantidad total, tamaño por archivo, y
+    proveedores/hojas según plan (free: 3 proveedores × 5 hojas)."""
+    n = len(files or [])
+    if n == 0:
+        raise HTTPException(status_code=400, detail={
+            "error": "sin_archivos", "mensaje": "Subí al menos un archivo."})
+    if n > MAX_ARCHIVOS_TOTAL:
+        raise HTTPException(status_code=413, detail={
+            "error": "demasiados_archivos",
+            "mensaje": f"Máximo {MAX_ARCHIVOS_TOTAL} archivos por comparativa."})
+    for f in files:
+        sz = getattr(f, "size", None)
+        if sz is not None and sz > MAX_BYTES_ARCHIVO:
+            raise HTTPException(status_code=413, detail={
+                "error": "archivo_grande",
+                "mensaje": (f"'{f.filename}' supera el máximo de "
+                            f"{MAX_BYTES_ARCHIVO // (1024 * 1024)} MB por archivo.")})
+
+    es_free = plan not in ("advance", "pro")
+    max_prov  = MAX_PROVEEDORES_FREE if es_free else MAX_PROVEEDORES
+    max_hojas = MAX_HOJAS_PROV_FREE  if es_free else MAX_HOJAS_PROV
+    sugerir   = " Pasate a Advance para comparar más." if es_free else ""
+
+    conteo: dict = {}
+    for idx in range(n):
+        cfg = cfgs[idx] if idx < len(cfgs) else {}
+        clave = cfg.get("bloque", idx)
+        conteo[clave] = conteo.get(clave, 0) + 1
+    if len(conteo) > max_prov:
+        raise HTTPException(status_code=402 if es_free else 413, detail={
+            "error": "demasiados_proveedores",
+            "mensaje": f"Tu plan permite hasta {max_prov} proveedores por comparativa.{sugerir}"})
+    for c in conteo.values():
+        if c > max_hojas:
+            raise HTTPException(status_code=402 if es_free else 413, detail={
+                "error": "demasiadas_hojas",
+                "mensaje": f"Tu plan permite hasta {max_hojas} hojas por proveedor.{sugerir}"})
 
 
 # ── Proveedores (catálogo global) ─────────────────────────────────────────────
@@ -290,7 +360,7 @@ app.include_router(whatsapp_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "https://vectorai.com.ar", "https://www.vectorai.com.ar"],
-    allow_origin_regex=r"https://vectorai.*\.vercel\.app",
+    allow_origin_regex=r"https://vectorai-[a-z0-9-]+\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -386,8 +456,11 @@ async def analizar(
     Plan free: máximo 2 PDFs (1 por proveedor).
     """
     user = get_user_plan(authorization)
-
-    # Sin límites durante el período de lanzamiento
+    _gate_analisis(user)
+    if len(files) > MAX_ARCHIVOS_TOTAL:
+        raise HTTPException(status_code=413, detail={
+            "error": "demasiados_archivos",
+            "mensaje": f"Máximo {MAX_ARCHIVOS_TOTAL} archivos por comparativa."})
 
     master = get_master()
     equiv: dict = get_equiv()  # Equivalencias aprendidas de borradores confirmados
@@ -1356,14 +1429,18 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
     Devuelve 3 grupos por proveedor: automatico / dudoso / sin_match.
     """
     user = get_user_plan(authorization)
+    _gate_analisis(user)
 
     # Parsear config por archivo (override de IVA y descuento)
     cfgs: list[dict] = []
     if file_configs:
         try:
-            cfgs = json.loads(file_configs)
+            parsed = json.loads(file_configs)
+            cfgs = parsed if isinstance(parsed, list) else []
         except Exception:
             cfgs = []
+
+    _validar_archivos(files, cfgs, user["plan"])
 
     denominaciones = _get_denominaciones()
     if not denominaciones:
@@ -1479,7 +1556,10 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
             # Config por archivo: siempre la que el usuario eligió al subir.
             # IVA y descuento son condiciones de cada operación, no del proveedor.
             fac_archivo  = 1.105 if cfg_archivo.get("con_iva", True) else 1.0
-            desc_archivo = float(cfg_archivo.get("descuento", 0))
+            try:
+                desc_archivo = max(0.0, min(100.0, float(cfg_archivo.get("descuento", 0) or 0)))
+            except (TypeError, ValueError):
+                desc_archivo = 0.0
 
             # Registrar el documento subido (solo logueados: user_id es NOT NULL).
             # Mismo archivo del mismo proveedor re-analizado → REEMPLAZA el
@@ -1992,7 +2072,8 @@ async def admin_validar_pendiente(
     - rechazar: marca RECHAZADO (duplicado o irrelevante)
     - crear: marca para creación manual (queda como VALIDADO sin codigo_material)
     """
-    require_admin(authorization)
+    email = require_admin(authorization)
+    user = {"user_id": email}  # quién validó, para el campo validado_por
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})

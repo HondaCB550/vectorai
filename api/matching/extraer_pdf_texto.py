@@ -633,12 +633,20 @@ def _calidad(items: list[dict]) -> int:
 
 # ── Función principal ──────────────────────────────────────────────────────────
 
+MAX_PAGINAS_EXTRACCION = 100  # tope anti-DoS: un PDF de miles de páginas colgaba el CPU
+
+
 def extraer(pdf_path: str) -> dict:
     fecha = None
     items = []
     metodo = "desconocido"
 
     with pdfplumber.open(pdf_path) as pdf:
+        n_pag = len(pdf.pages)
+        if n_pag > MAX_PAGINAS_EXTRACCION:
+            raise ValueError(
+                f"El PDF tiene {n_pag} páginas (máximo {MAX_PAGINAS_EXTRACCION}). "
+                "Subí un presupuesto más corto o dividilo por proveedor.")
         all_text = "\n".join((p.extract_text() or "") for p in pdf.pages)
 
     # Fecha
