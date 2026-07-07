@@ -62,6 +62,10 @@ export default function Landing() {
   const [logueado, setLogueado] = useState(false);
   useEffect(() => {
     createClient().auth.getUser().then(({ data }) => setLogueado(!!data.user));
+    // Atribución de campaña: ?ref=grupo-fb → sobrevive hasta /registro via localStorage
+    const ref = (new URLSearchParams(window.location.search).get("ref") || "")
+      .toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+    if (ref) { try { localStorage.setItem("va_ref", ref); } catch {} }
   }, []);
   return (
     <>

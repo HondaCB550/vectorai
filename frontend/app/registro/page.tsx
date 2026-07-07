@@ -37,11 +37,31 @@ const DOMINIOS_TEMP = [
   "fakeinbox.com", "mohmal.com", "1secmail.com", "emailfake.com", "burnermail.io",
 ];
 
+// Normaliza el ?ref= de campaña: minúsculas, solo [a-z0-9_-], máx 40 chars
+function refLimpio(v: string | null): string | null {
+  if (!v) return null;
+  const r = v.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+  return r || null;
+}
+
 function RegistroInner() {
   const router = useRouter();
   const params = useSearchParams();
   const planInicial = params.get("plan") || "free";
   const supabase = createClient();
+
+  // Atribución de canal: ?ref= directo en /registro gana; si no, el guardado
+  // por la landing (localStorage) cuando entró por / con ?ref=
+  const [refOrigen, setRefOrigen] = useState<string | null>(null);
+  useEffect(() => {
+    const deUrl = refLimpio(params.get("ref"));
+    if (deUrl) {
+      setRefOrigen(deUrl);
+      try { localStorage.setItem("va_ref", deUrl); } catch {}
+    } else {
+      try { setRefOrigen(refLimpio(localStorage.getItem("va_ref"))); } catch {}
+    }
+  }, [params]);
 
   // Si ya hay sesión VÁLIDA (validada contra el servidor, como el middleware),
   // directo al comparador — evita cuentas duplicadas y loops con sesión vencida
@@ -134,6 +154,7 @@ function RegistroInner() {
         plan: planInicial === "advance" ? "advance" : "free",
         acepto_terminos_at: new Date().toISOString(),
         acepta_marketing: aceptaMarketing,
+        ref_origen: refOrigen,
       });
 
       // Si Supabase requiere confirmación de email, data.session es null
