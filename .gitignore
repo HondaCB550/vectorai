@@ -18,3 +18,6 @@ node_modules/
 
 .vercel
 .env*
+
+.resend_api_key
+.resend_smtp_key

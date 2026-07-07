@@ -2,6 +2,8 @@
 
 SaaS comparador de presupuestos de construcción: el usuario sube PDFs/fotos/planillas de sus proveedores, el sistema extrae los ítems, los matchea contra un maestro de materiales y genera una comparativa de precios con export a Excel/PDF/JPG.
 
+**Identidad y posicionamiento: ver `IDENTIDAD.md` (fuente de verdad de marca).** La frase madre: *VectorAI no es una secretaria — es tu asistente de compras*: ejerce el rol de compras que las constructoras grandes tienen y las PyMEs no pueden pagar. Toda pieza de comunicación (landing, emails, redes, UI, textos de producto) se escribe desde ese documento: mensaje central, qué somos/qué no somos, voz (voseo, datos antes que adjetivos, sin emojis en UI, no nombrar competidores).
+
 ## Arquitectura y deploy
 
 | Pieza | Tech | Hosting | Deploy |
