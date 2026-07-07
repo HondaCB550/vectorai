@@ -636,10 +636,25 @@ def _calidad(items: list[dict]) -> int:
 MAX_PAGINAS_EXTRACCION = 100  # tope anti-DoS: un PDF de miles de páginas colgaba el CPU
 
 
+RE_LINEA_SIN_PRECIO = re.compile(
+    r'(?mi)^.{6,}?\s+\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?\s+unidades?\s*$')
+
+
+def _es_documento_sin_precios(texto: str) -> bool:
+    """True si el PDF lista ítems con CANTIDAD pero sin precio por línea (el precio
+    va solo en el total general), como el 'Presupuesto' de EN SECO/GRUPO MMC con
+    columnas DESCRIPCIÓN + CANTIDAD. Se evalúa SOLO cuando el cascade no extrajo
+    nada, para avisar al usuario en vez de devolver 0 ítems mudo."""
+    if not re.search(r"CANTIDAD", texto, re.I):
+        return False
+    return len(RE_LINEA_SIN_PRECIO.findall(texto)) >= 5
+
+
 def extraer(pdf_path: str) -> dict:
     fecha = None
     items = []
     metodo = "desconocido"
+    sin_precios = False
 
     with pdfplumber.open(pdf_path) as pdf:
         n_pag = len(pdf.pages)
@@ -691,6 +706,12 @@ def extraer(pdf_path: str) -> dict:
         if items:
             metodo = "lineas_heuristico"
 
+    # Documento con ítems + cantidades pero SIN precio por línea (solo total
+    # general): no hay nada que comparar. Se marca para que main.py avise claro.
+    if not items and all_text.strip() and _es_documento_sin_precios(all_text):
+        sin_precios = True
+        metodo = "sin_precios"
+
     # Detectar IVA comparando suma de líneas vs total declarado en el PDF
     suma = sum(it["total"] for it in items)
     iva_detectado = "ASUMIDO 1,105"
@@ -717,6 +738,7 @@ def extraer(pdf_path: str) -> dict:
         "suma_lineas":       round(suma, 2),
         "n_items":           len(items),
         "metodo_extraccion": metodo,
+        "sin_precios":       sin_precios,
         "items":             items,
     }
 

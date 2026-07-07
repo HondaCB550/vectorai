@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "matching"))
-from extraer_pdf_texto import extraer_regex, extraer_lineas  # noqa: E402
+from extraer_pdf_texto import extraer_regex, extraer_lineas, _es_documento_sin_precios  # noqa: E402
 
 
 def _uno(texto):
@@ -172,6 +172,32 @@ def test_lineas_heuristico_precio_al_final():
 
 def test_lineas_heuristico_ignora_texto_normal():
     assert extraer_lineas("Condición de pago: EFECTIVO OF / DEBITO OF") == []
+
+
+# ── Documento sin precios por ítem (EN SECO/GRUPO MMC solo DESCRIPCIÓN+CANTIDAD) ─
+
+def test_sin_precios_en_seco_detectado():
+    texto = (
+        "DESCRIPCIÓN CANTIDAD\n"
+        "[BARBI9ZPBZD2T] FLEJE PARA CRUZ DE SAN ANDRES 50MM E0,94 X 50 MTS 9,00 Unidades\n"
+        "[BARBID9YCM90B] CARTELA 200 X 200 X 1,29 MM PERFORADA 80,00 Unidades\n"
+        "[FIJACOIWJWRIU] TORN. HEX. PM 10 X 3/4\" 32.400,00 Unidades\n"
+        "[LPJULRSX44] PLACA OSB APA 11,1 MM 1,22 X 2,44 MTS 175,00 Unidades\n"
+        "[BARBI557A3HY4] PERFIL SOLERA 35MM X 2,60 MTS 150,00 Unidades\n"
+        "[BARBIR2VOCWSY] PERFIL MONTANTE 34MM X 2,60 MTS 426,00 Unidades\n"
+        "Total $ 52.885.396,83\n"
+    )
+    assert _es_documento_sin_precios(texto) is True
+
+
+def test_sin_precios_no_falsea_documento_con_precios():
+    # Un presupuesto con precio por línea NO debe marcarse como sin precios
+    texto = (
+        "CANTIDAD DESCRIPCIÓN P.UNIT TOTAL\n"
+        "9,00 FLEJE PARA CRUZ 4301,28 38711,52\n"
+        "80,00 CARTELA PERFORADA 1200,00 96000,00\n"
+    )
+    assert _es_documento_sin_precios(texto) is False
 
 
 if __name__ == "__main__":

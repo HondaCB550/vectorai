@@ -1656,6 +1656,19 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                 resultado = extraer_imagen(content, fname)
 
             items = resultado.get("items", [])
+
+            # Documento sin precios por ítem (ej. EN SECO/GRUPO MMC con solo
+            # DESCRIPCIÓN + CANTIDAD): no hay nada que comparar → avisar claro en
+            # vez de devolver 0 ítems mudo (que parece que la app está rota).
+            if not items and resultado.get("sin_precios"):
+                errores.append({
+                    "archivo": fname,
+                    "error": (f"El presupuesto de {proveedor} lista materiales y "
+                              "cantidades pero no tiene precios por ítem, así que no "
+                              "se puede comparar. Pedí una versión con precios unitarios."),
+                })
+                continue
+
             automatico, dudoso, sin_match = [], [], []
 
             # Config por archivo: siempre la que el usuario eligió al subir.
