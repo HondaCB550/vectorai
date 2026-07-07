@@ -5,8 +5,7 @@ import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
 import { createClient } from "@/lib/supabase";
 
-// Fin de la promo de lanzamiento (20% OFF). Pablo: confirmar fecha exacta.
-// Provisorio: lunes de lanzamiento (13/07) + 10 días → 23/07/2026 23:59.
+// Fin de la promo de lanzamiento (30% OFF). Pablo: lunes 13/07 + 10 días → 23/07.
 const LANZAMIENTO_FIN = new Date("2026-07-23T23:59:59-03:00");
 
 function CountdownBadge() {
@@ -52,6 +51,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+// Viñeta de marca (reemplaza los ✅/❌ — sin emojis en VectorAI).
+function Bullet({ neg = false }: { neg?: boolean }) {
+  return <span className={`mt-[7px] w-1.5 h-1.5 rounded-full shrink-0 ${neg ? "bg-gray-300" : "bg-[#E87022]"}`} />;
+}
+
 export default function Landing() {
   // Sesión viva → la landing lo reconoce: botón directo al comparador en vez
   // de "Entrar / Probar gratis" (antes parecía que el login se había perdido)
@@ -64,7 +68,7 @@ export default function Landing() {
       <main className="min-h-screen bg-[#F5F0E8]">
         {/* Urgency bar */}
         <div className="fixed top-0 left-0 right-0 z-[60] bg-[#0F172A] text-white text-xs sm:text-sm font-medium text-center py-2 px-3 flex items-center justify-center gap-2 sm:gap-3 whitespace-nowrap overflow-hidden">
-          <span>🔥 <span className="hidden sm:inline">Precio de lanzamiento — </span><strong>30% OFF</strong></span>
+          <span><span className="hidden sm:inline">Precio de lanzamiento — </span><strong>30% OFF</strong></span>
           <CountdownBadge />
         </div>
 
@@ -131,10 +135,12 @@ export default function Landing() {
                 Ver cómo funciona
               </a>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-gray-600">
-              <span>✅ Sin tarjeta</span>
-              <span>✅ Sin instalación</span>
-              <span>✅ Descargable en Excel</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-medium text-gray-600">
+              <span>Sin tarjeta</span>
+              <span className="text-gray-300">·</span>
+              <span>Sin instalación</span>
+              <span className="text-gray-300">·</span>
+              <span>Descargable en Excel</span>
             </div>
           </div>
         </section>
@@ -179,7 +185,7 @@ export default function Landing() {
         <section className="bg-white py-24 px-6" id="demo">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#1A2B4A] tracking-tight mb-4">Esto es lo que vas a ver 👀</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1A2B4A] tracking-tight mb-4">Esto es lo que vas a ver</h2>
               <p className="text-lg text-gray-600">Mismos materiales, distintos nombres. Vectorai los une solo.</p>
             </div>
             <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-md">
@@ -205,7 +211,7 @@ export default function Landing() {
                       <td className={`px-5 py-3.5 text-center font-bold ${row.mejor === "b" ? "bg-green-50 text-green-700" : "text-gray-400"}`}>{row.b}</td>
                       <td className="px-5 py-3.5 text-center">
                         <span className="bg-green-100 text-green-700 font-bold text-xs px-3 py-1.5 rounded-full">
-                          {row.mejor === "a" ? "✓ Pérez" : "✓ Juan"}
+                          {row.mejor === "a" ? "Pérez" : "Juan"}
                         </span>
                       </td>
                     </tr>
@@ -213,7 +219,7 @@ export default function Landing() {
                 </tbody>
               </table>
             </div>
-            <p className="text-center text-sm text-gray-400 mt-4">🟢 Verde = mejor precio · — = no cotiza ese ítem</p>
+            <p className="text-center text-sm text-gray-400 mt-4">Verde = mejor precio · — = no cotiza ese ítem</p>
           </div>
         </section>
 
@@ -221,12 +227,12 @@ export default function Landing() {
         <section className="py-24 px-6" id="como-funciona">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#1A2B4A] tracking-tight mb-4">Cuatro pasos. Eso es todo. 🙌</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1A2B4A] tracking-tight mb-4">Cuatro pasos. Eso es todo.</h2>
               <p className="text-lg text-gray-600">No hace falta saber nada de software ni de planillas complicadas.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
-                { n: "1", titulo: "Subís los PDFs", desc: "Arrastrás el presupuesto de cada proveedor en la web y Vectorai lo lee." },
+                { n: "1", titulo: "Subís los PDFs", desc: "Arrastrás el presupuesto de cada proveedor, le ponés nombre y si va con IVA o algún descuento. Listo." },
                 { n: "2", titulo: "Vectorai los lee", desc: "Extrae ítems, precios y unidades de forma automática. No tocás nada." },
                 { n: "3", titulo: "Los cruza solo", desc: 'Entiende que "Perfil C 70" y "Perfil galvanizado 70" son lo mismo.' },
                 { n: "4", titulo: "Comparativa lista", desc: "Tabla con el menor precio por ítem. Descargable en Excel al instante." },
@@ -263,7 +269,7 @@ export default function Landing() {
                 { titulo: "Todo desde la web", desc: "Subís los PDFs desde el navegador y se digitalizan automáticamente. Sin instalar nada." },
               ].map((f) => (
                 <div key={f.titulo} className="bg-[#F5F0E8] rounded-2xl p-6 hover:-translate-y-1 transition">
-                  <div className="text-[#E87022] font-bold text-2xl mb-3">✱</div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#E87022] mb-4" />
                   <h3 className="font-semibold text-[#1A2B4A] mb-2 text-lg">{f.titulo}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{f.desc}</p>
                 </div>
@@ -282,19 +288,25 @@ export default function Landing() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Free */}
               <div className="bg-white rounded-3xl border-2 border-gray-200 p-8">
-                <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Gratis 🙌</div>
+                <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Gratis</div>
                 <div className="text-4xl font-bold text-[#1A2B4A] mb-1">$0</div>
                 <p className="text-gray-400 text-sm mb-8">Para probar</p>
                 <ul className="space-y-3 text-sm text-gray-600 mb-8">
                   {[
-                    "✅ 1 comparativa gratis",
-                    "✅ Hasta 3 proveedores",
-                    "✅ Comparativa en pantalla",
-                    "✅ Descarga en Excel",
-                    "❌ Sin historial ni obras",
-                  ].map((f) => (
-                    <li key={f} className="flex gap-2 leading-snug">{f}</li>
-                  ))}
+                    "1 comparativa gratis",
+                    "Hasta 3 proveedores",
+                    "Comparativa en pantalla",
+                    "Descarga en Excel",
+                    "Sin historial ni obras",
+                  ].map((f) => {
+                    const neg = f.startsWith("Sin ");
+                    return (
+                      <li key={f} className="flex gap-2.5 leading-snug items-start">
+                        <Bullet neg={neg} />
+                        <span className={neg ? "text-gray-400" : ""}>{f}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
                 <Link href="/registro" className="block text-center border-2 border-[#1A2B4A] text-[#1A2B4A] font-bold py-3.5 rounded-full hover:bg-[#1A2B4A] hover:text-white transition">
                   Empezar gratis
@@ -303,7 +315,7 @@ export default function Landing() {
 
               {/* Inicial */}
               <div className="bg-white rounded-3xl border-2 border-[#E87022]/40 p-8">
-                <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Inicial 🧰</div>
+                <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Inicial</div>
                 <div className="flex items-end gap-2 mb-1">
                   <span className="text-lg text-gray-400 line-through">$28.000</span>
                   <span className="text-4xl font-bold text-[#1A2B4A]">$19.600</span>
@@ -312,14 +324,17 @@ export default function Landing() {
                 <p className="text-[#E87022] text-xs font-semibold mb-8">Precio de lanzamiento</p>
                 <ul className="space-y-3 text-sm text-gray-600 mb-8">
                   {[
-                    "✅ 6 comparativas por mes",
-                    "✅ 8 el primer mes (2 de regalo)",
-                    "✅ Hasta 5 proveedores por comparativa",
-                    "✅ Hasta 10 hojas por proveedor",
-                    "✅ Lista de compras por proveedor",
-                    "✅ Descarga en Excel y PDF",
+                    "6 comparativas por mes",
+                    "2 más de regalo de prueba",
+                    "Hasta 5 proveedores por comparativa",
+                    "Hasta 10 hojas por proveedor",
+                    "Lista de compras por proveedor",
+                    "Descarga en Excel y PDF",
                   ].map((f) => (
-                    <li key={f} className="flex gap-2 leading-snug">{f}</li>
+                    <li key={f} className="flex gap-2.5 leading-snug items-start">
+                      <Bullet />
+                      <span>{f}</span>
+                    </li>
                   ))}
                 </ul>
                 <Link href="/suscribirse" className="block text-center border-2 border-[#E87022] text-[#E87022] font-bold py-3.5 rounded-full hover:bg-[#E87022] hover:text-white transition">
@@ -330,21 +345,23 @@ export default function Landing() {
               {/* Advance */}
               <div className="bg-[#1A2B4A] rounded-3xl p-8 text-white relative overflow-hidden">
                 <div className="absolute top-5 right-5 bg-[#E87022] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
-                  ⭐ Más popular
+                  Más popular
                 </div>
-                <div className="text-xl font-semibold mb-1">Advance 🚀</div>
+                <div className="text-xl font-semibold mb-1">Advance</div>
                 <div className="text-4xl font-bold mb-1 text-[#E87022]">$48.000<span className="text-xl font-normal text-white/60">/mes</span></div>
                 <p className="text-white/60 text-xs mb-8">Pesos argentinos · IVA incluido</p>
                 <ul className="space-y-3 text-sm mb-8">
                   {[
-                    "✅ Comparativas ilimitadas",
-                    "✅ Hasta 5 proveedores · 10 hojas",
-                    "✅ Obras y precios por zona",
-                    "✅ Mis presupuestos guardados (30 días)",
-                    "✅ Lista de compras por proveedor",
-                    "✅ Soporte prioritario",
+                    "Mismas características que el plan Inicial",
+                    "Comparativas ilimitadas",
+                    "Obras y precios recomendados por zona",
+                    "Mis presupuestos y comparativas guardados 30 días, separados por obra",
+                    "Soporte prioritario",
                   ].map((f) => (
-                    <li key={f} className="flex gap-2 text-white/85 leading-snug">{f}</li>
+                    <li key={f} className="flex gap-2.5 text-white/85 leading-snug items-start">
+                      <Bullet />
+                      <span>{f}</span>
+                    </li>
                   ))}
                 </ul>
                 <Link href="/suscribirse" className="block text-center bg-[#E87022] text-white font-bold py-3.5 rounded-full hover:bg-[#CF5E15] transition">
@@ -418,7 +435,7 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Logo dark />
-            <span className="text-sm text-white/40">© 2026 · Hecho en Argentina 🇦🇷</span>
+            <span className="text-sm text-white/40">© 2026 · Hecho en Argentina</span>
           </div>
           <a
             href="mailto:hola@vectorai.com.ar"
