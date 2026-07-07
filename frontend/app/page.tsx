@@ -168,9 +168,9 @@ export default function Landing() {
               <p className="text-[#1A2B4A] font-medium leading-relaxed">
                 Necesitaba 120 bolsas de cemento para una losa. Mandó 4 presupuestos de corralones
                 distintos a Vectorai. En 2 minutos supo que un corralón le cobraba{" "}
-                <strong>$47.200</strong> la bolsa y otro, a 15 cuadras, <strong>$38.900</strong>.
+                <strong>$7.579</strong> la bolsa y otro, a 15 cuadras, <strong>$6.827</strong>.
               </p>
-              <div className="font-bold text-lg text-green-600 mt-3">Ahorro: $996.000 en una sola compra</div>
+              <div className="font-bold text-lg text-green-600 mt-3">Ahorro: $90.240 en una sola compra</div>
             </div>
           </div>
         </section>
@@ -397,7 +397,7 @@ export default function Landing() {
               Dejá de pagar de más.<br />En serio.
             </h2>
             <p className="text-lg text-white/70 mb-10">
-              Un corralón le cobraba a un cliente $47.200 la bolsa de cemento. Otro, a 20 cuadras, $38.900.
+              Un corralón le cobraba a un cliente $7.579 la bolsa de cemento. Otro, a 20 cuadras, $6.827.
               Vectorai lo encontró en 2 minutos.
             </p>
             <Link
