@@ -1079,6 +1079,18 @@ async def mp_webhook(request: Request):
     if not user_id:
         return {"ok": True}
 
+    # user_id sale de external_reference (lo arma /mp/suscripcion con el UUID de
+    # Supabase). Si no es un UUID válido (ref legada/malformada o de una prueba),
+    # no tiene sentido tocar perfiles: la columna id es uuid y un valor no-UUID
+    # hace fallar el UPDATE con 500. Cortamos limpio con 200 para que MP no
+    # reintente en loop.
+    import uuid as _uuid
+    try:
+        _uuid.UUID(str(user_id))
+    except (ValueError, AttributeError, TypeError):
+        print(f"webhook: external_reference con user_id no-UUID, ignorado: {user_id!r}")
+        return {"ok": True}
+
     sb = get_supabase()
     if not sb:
         return {"ok": True}
