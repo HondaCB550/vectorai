@@ -14,13 +14,24 @@ function ActualizarClaveInner() {
   const router = useRouter();
   const supabase = createClient();
 
-  // Al llegar acá (vía /auth/callback) el usuario ya tiene una sesión de
-  // recuperación. Si no la hay, el link venció o es inválido.
+  // El link del mail cae acá con el code del flujo PKCE en la URL. El cliente
+  // Supabase (detectSessionInUrl) lo canjea al iniciar y emite el evento con la
+  // sesión de recuperación. Escuchamos ese evento en vez de leer getUser() de
+  // una — que correría antes de que termine el canje y daría "link vencido".
   const [sesionOk, setSesionOk] = useState<boolean | null>(null);
   useEffect(() => {
-    createClient().auth.getUser().then(({ data }) => {
-      setSesionOk(!!data.user);
+    const supa = createClient();
+    let hecho = false;
+    const fin = (ok: boolean) => { if (!hecho) { hecho = true; setSesionOk(ok); } };
+    const { data: sub } = supa.auth.onAuthStateChange((event, session) => {
+      if (session) fin(true);
+      else if (event === "INITIAL_SESSION") fin(false);
     });
+    // Fallback por si el evento ya ocurrió antes de suscribirnos.
+    supa.auth.getSession().then(({ data }) => { if (data.session) fin(true); });
+    // Red de seguridad: si nada resolvió en 6s, tratarlo como link inválido.
+    const t = setTimeout(() => fin(false), 6000);
+    return () => { sub.subscription.unsubscribe(); clearTimeout(t); };
   }, []);
 
   const [pass, setPass] = useState("");

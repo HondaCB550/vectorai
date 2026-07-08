@@ -20,10 +20,12 @@ function RecuperarInner() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    // El link del mail cae en /auth/callback (intercambia el code por sesión de
-    // recuperación) y de ahí a /actualizar-clave para elegir la nueva contraseña.
+    // El link del mail cae DIRECTO en /actualizar-clave: el cliente Supabase
+    // detecta ahí la sesión de recuperación (el code verifier del flujo PKCE
+    // vive en este navegador). Enrutarlo por el callback del servidor no sirve:
+    // el verifier/hash no está disponible del lado del servidor.
     const { error } = await supabase.auth.resetPasswordForEmail(mail.trim(), {
-      redirectTo: `${window.location.origin}/auth/callback?next=/actualizar-clave`,
+      redirectTo: `${window.location.origin}/actualizar-clave`,
     });
     setLoading(false);
     if (error) {
