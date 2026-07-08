@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import { esAdmin } from "@/lib/admin";
+import { HORAS_PROYECTO } from "@/lib/horasProyecto";
 import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
 
@@ -28,15 +29,20 @@ const ars = (v: number) => `$ ${Math.round(v).toLocaleString("es-AR")}`;
 const usd = (v: number) => `US$ ${v.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 const num = (v: number) => v.toLocaleString("es-AR");
 
-function KPI({ label, value, sub }: { label: string; value: string; sub?: string }) {
+function KPI({ label, value, sub, accent }: { label: string; value: string; sub?: string; accent?: boolean }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4">
-      <div className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">{label}</div>
-      <div className="text-2xl font-bold text-gray-900 mt-1 leading-tight">{value}</div>
+    <div className={`rounded-xl border p-4 ${accent ? "bg-orange-50 border-orange-200" : "bg-white border-gray-200"}`}>
+      <div className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide flex items-center gap-1.5">
+        {accent && <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-500" />}
+        {label}
+      </div>
+      <div className={`text-2xl font-bold mt-1 leading-tight ${accent ? "text-orange-700" : "text-gray-900"}`}>{value}</div>
       {sub && <div className="text-xs text-gray-400 mt-1">{sub}</div>}
     </div>
   );
 }
+
+const hs = (v: number) => `${v.toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} h`;
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -187,6 +193,12 @@ export default function MetricasPage() {
               <KPI label="Presupuestos" value={num(data.presupuestos_total)} sub="subidos" />
               <KPI label="Ahorro generado" value={ars(data.ahorro_generado)} sub="a los usuarios (vigente)" />
               <KPI label="Costo OCR" value={usd(data.ocr.costo_usd_estimado)} sub={`${num(data.ocr.llamadas)} llamadas de visión`} />
+              <KPI
+                label="Horas de desarrollo"
+                value={hs(HORAS_PROYECTO.total)}
+                sub={`${hs(HORAS_PROYECTO.semana)} última semana · act. ${HORAS_PROYECTO.actualizado}`}
+                accent
+              />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
