@@ -92,6 +92,11 @@ function LoginInner() {
                   )}
                 </button>
               </div>
+              <div className="mt-1.5 text-right">
+                <Link href="/recuperar" className="text-sm text-blue-600 font-medium hover:underline">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
             </div>
 
             {error && (
