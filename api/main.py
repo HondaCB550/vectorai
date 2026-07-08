@@ -1500,6 +1500,24 @@ class ConfirmarV2Request(BaseModel):
     sin_match: list[PendienteItem] = []
 
 
+# ── Modelos: emparejar terminaciones ──────────────────────────────────────────
+class VinculoItemIn(BaseModel):
+    item_id: str                    # id en presupuesto_items (de /analizar-v2)
+    proveedor: str                  # nombre del proveedor (clave en la comparativa)
+    desc_prov: str = ""             # descripción original, para el "recordar"
+
+class ConceptoIn(BaseModel):
+    nombre: str
+    unidad: str = "c/u"
+    cantidad: float = 1.0
+    items: list[VinculoItemIn]
+
+class VinculoManualRequest(BaseModel):
+    comparativa_id: str
+    conceptos: list[ConceptoIn]
+    recordar: bool = True
+
+
 # ── /analizar-v2 ──────────────────────────────────────────────────────────────
 from fastapi import Form as FastAPIForm
 
@@ -2148,6 +2166,104 @@ async def confirmar_v2(
         "ok": True,
         "guardados": guardados,
         "mensaje": f"{guardados['aliases']} aliases, {guardados['pendientes']} pendientes, {guardados['precios']} precios guardados.",
+    }
+
+
+# ── /vinculo-manual ───────────────────────────────────────────────────────────
+@app.post("/vinculo-manual")
+async def vinculo_manual(
+    req: VinculoManualRequest,
+    authorization: Optional[str] = Header(None),
+):
+    """
+    Emparejar terminaciones: guarda vínculos manuales de ítems SIN MATCH
+    (griferías, porcelanatos, inodoros de distintas marcas) agrupados en
+    "conceptos" comparables por proveedor. NO toca el catálogo global.
+
+    Si recordar=True, siembra terminaciones_recordadas (por-usuario) para
+    pre-sugerir el mismo vínculo en próximos análisis del usuario.
+
+    Solo usuarios logueados: los ítems anónimos no tienen item_id estable.
+    """
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={
+            "error": "login_requerido",
+            "mensaje": "Emparejar terminaciones necesita una cuenta. Registrate gratis para guardar tus vínculos.",
+        })
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    guardados = {"conceptos": 0, "items": 0, "recordados": 0}
+
+    for c in req.conceptos:
+        # Un concepto necesita al menos 2 ítems para ser una comparación
+        items_validos = [it for it in c.items if it.item_id]
+        if len(items_validos) < 2:
+            continue
+
+        try:
+            ins = sb.table("terminaciones_conceptos").insert({
+                "user_id":        user["user_id"],
+                "comparativa_id": req.comparativa_id,
+                "nombre":         (c.nombre or "").strip() or "Sin nombre",
+                "unidad":         c.unidad,
+                "cantidad":       c.cantidad,
+                "origen":         "manual",
+            }).execute()
+        except Exception as e:
+            print(f"[vinculo] Error creando concepto '{c.nombre}': {e}")
+            continue
+        if not ins.data:
+            continue
+        concepto_id = ins.data[0]["id"]
+        guardados["conceptos"] += 1
+
+        for it in items_validos:
+            pid = _get_proveedor_id(sb, it.proveedor)
+            try:
+                sb.table("terminaciones_concepto_items").insert({
+                    "concepto_id":         concepto_id,
+                    "presupuesto_item_id": it.item_id,
+                    "proveedor_id":        pid,
+                }).execute()
+                guardados["items"] += 1
+            except Exception as e:
+                print(f"[vinculo] Error vinculando item {it.item_id}: {e}")
+
+            # Recuerdo por-usuario: upsert manual (sube frecuencia si ya existía)
+            if req.recordar:
+                texto = (it.desc_prov or "").strip().lower()
+                if not texto:
+                    continue
+                try:
+                    ex = sb.table("terminaciones_recordadas") \
+                           .select("id,frecuencia") \
+                           .eq("user_id", user["user_id"]) \
+                           .eq("proveedor_id", pid) \
+                           .eq("texto_normalizado", texto) \
+                           .execute()
+                    if ex.data:
+                        sb.table("terminaciones_recordadas").update({
+                            "frecuencia":      (ex.data[0].get("frecuencia") or 1) + 1,
+                            "concepto_nombre": (c.nombre or "").strip(),
+                        }).eq("id", ex.data[0]["id"]).execute()
+                    else:
+                        sb.table("terminaciones_recordadas").insert({
+                            "user_id":           user["user_id"],
+                            "proveedor_id":      pid,
+                            "texto_normalizado": texto,
+                            "concepto_nombre":   (c.nombre or "").strip(),
+                        }).execute()
+                    guardados["recordados"] += 1
+                except Exception as e:
+                    print(f"[vinculo] Error recordando '{texto}': {e}")
+
+    return {
+        "ok": True,
+        "guardados": guardados,
+        "mensaje": f"{guardados['conceptos']} conceptos, {guardados['items']} ítems vinculados.",
     }
 
 
