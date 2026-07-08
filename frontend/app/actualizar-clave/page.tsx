@@ -14,24 +14,23 @@ function ActualizarClaveInner() {
   const router = useRouter();
   const supabase = createClient();
 
-  // El link del mail cae acá con el code del flujo PKCE en la URL. El cliente
-  // Supabase (detectSessionInUrl) lo canjea al iniciar y emite el evento con la
-  // sesión de recuperación. Escuchamos ese evento en vez de leer getUser() de
-  // una — que correría antes de que termine el canje y daría "link vencido".
+  // El link del mail trae ?token_hash=...&type=recovery. Verificamos ese token
+  // directamente con verifyOtp: crea la sesión de recuperación en el cliente SIN
+  // depender del "code verifier" de PKCE (que se pierde en el redirect del mail).
   const [sesionOk, setSesionOk] = useState<boolean | null>(null);
   useEffect(() => {
     const supa = createClient();
-    let hecho = false;
-    const fin = (ok: boolean) => { if (!hecho) { hecho = true; setSesionOk(ok); } };
-    const { data: sub } = supa.auth.onAuthStateChange((event, session) => {
-      if (session) fin(true);
-      else if (event === "INITIAL_SESSION") fin(false);
-    });
-    // Fallback por si el evento ya ocurrió antes de suscribirnos.
-    supa.auth.getSession().then(({ data }) => { if (data.session) fin(true); });
-    // Red de seguridad: si nada resolvió en 6s, tratarlo como link inválido.
-    const t = setTimeout(() => fin(false), 6000);
-    return () => { sub.subscription.unsubscribe(); clearTimeout(t); };
+    const params = new URLSearchParams(window.location.search);
+    const tokenHash = params.get("token_hash");
+    const type = params.get("type");
+    if (tokenHash && type) {
+      supa.auth
+        .verifyOtp({ token_hash: tokenHash, type: type as "recovery" })
+        .then(({ error }) => setSesionOk(!error));
+    } else {
+      // Fallback: quizás ya hay una sesión de recuperación activa.
+      supa.auth.getSession().then(({ data }) => setSesionOk(!!data.session));
+    }
   }, []);
 
   const [pass, setPass] = useState("");

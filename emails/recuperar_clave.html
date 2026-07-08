@@ -1,7 +1,8 @@
 <!--
   VectorAI — Email de recuperación de contraseña (Supabase "Reset Password").
   Pegar el contenido en: Supabase → Authentication → Emails → Reset Password.
-  Variable de Supabase: {{ .ConfirmationURL }}  (NO cambiarla).
+  El link usa {{ .TokenHash }} y apunta directo a /actualizar-clave, que valida
+  el token con verifyOtp (sin PKCE / sin code verifier — evita el bug del redirect).
   Asunto sugerido: Recuperá tu contraseña de VectorAI
 -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6fb;margin:0;padding:32px 12px;font-family:Arial,Helvetica,sans-serif;">
@@ -31,7 +32,7 @@
         <!-- Botón -->
         <tr>
           <td align="center" style="padding:12px 32px 28px 32px;">
-            <a href="{{ .ConfirmationURL }}"
+            <a href="https://www.vectorai.com.ar/actualizar-clave?token_hash={{ .TokenHash }}&type=recovery"
                style="display:inline-block;background-color:#1e40af;color:#ffffff;text-decoration:none;font-size:16px;font-weight:bold;padding:14px 38px;border-radius:10px;">
               Elegir nueva contraseña
             </a>
@@ -45,7 +46,7 @@
               Si el botón no funciona, copiá y pegá este enlace en tu navegador:
             </p>
             <p style="margin:0;font-size:12px;line-height:1.5;word-break:break-all;">
-              <a href="{{ .ConfirmationURL }}" style="color:#1e40af;">{{ .ConfirmationURL }}</a>
+              <a href="https://www.vectorai.com.ar/actualizar-clave?token_hash={{ .TokenHash }}&type=recovery" style="color:#1e40af;">https://www.vectorai.com.ar/actualizar-clave?token_hash={{ .TokenHash }}&type=recovery</a>
             </p>
           </td>
         </tr>
