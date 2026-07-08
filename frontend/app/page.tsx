@@ -183,8 +183,8 @@ export default function Landing() {
               <div className="text-xs font-bold uppercase tracking-wide text-[#E87022] mb-3">Caso real — Chascomús, Buenos Aires</div>
               <p className="text-[#1A2B4A] font-medium leading-relaxed">
                 Necesitaba 120 bolsas de cemento para una losa. Mandó 4 presupuestos de corralones
-                distintos a Vectorai. En 2 minutos supo que un corralón le cobraba{" "}
-                <strong>$7.579</strong> la bolsa y otro, a 15 cuadras, <strong>$6.827</strong>.
+                distintos a Vectorai y en 2 minutos supo a quién comprarle: un corralón le cobraba{" "}
+                <strong>$7.579</strong> la bolsa; otro, a 15 cuadras, <strong>$6.827</strong>.
               </p>
               <div className="font-bold text-lg text-green-600 mt-3">Ahorro: $90.240 en una sola compra</div>
             </div>
