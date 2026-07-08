@@ -51,6 +51,10 @@ h1, h2, h3 {
 
 ::selection { background: #E87022; color: #fff; }
 
+/* Al saltar a una sección con #ancla, dejar espacio para el header fijo
+   (barra de promo ~36px + nav ~68px) para que el título no quede tapado. */
+html { scroll-padding-top: 116px; }
+
 /* Texto oscuro por defecto en los controles de formulario, para que no se
    vuelvan ilegibles cuando el sistema está en modo oscuro (el fondo de los
    inputs es siempre blanco). Va en @layer base para que cualquier utilidad
