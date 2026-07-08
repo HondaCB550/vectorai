@@ -625,7 +625,7 @@ export default function Comparar() {
         </div>
       </nav>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-24 sm:pb-10">
+      <div className={`${resultado ? "max-w-7xl" : "max-w-5xl"} mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-24 sm:pb-10`}>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
         <p className="text-gray-500 text-sm mb-8">Subí PDFs, fotos o planillas de tus proveedores para compararlos</p>
 
