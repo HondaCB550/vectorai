@@ -8,6 +8,10 @@ import { createClient } from "@/lib/supabase";
 // Fin de la promo de lanzamiento (30% OFF). Pablo: lunes 13/07 + 10 días → 23/07.
 const LANZAMIENTO_FIN = new Date("2026-07-23T23:59:59-03:00");
 
+// Barra de estadísticas del hero. OCULTA hasta tener números REALES (no inventar).
+// Para volver a mostrarla: poner true y actualizar los valores en la sección "Stats bar".
+const MOSTRAR_STATS = false;
+
 function CountdownBadge() {
   const [txt, setTxt] = useState("");
   useEffect(() => {
@@ -149,7 +153,8 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Stats bar */}
+        {/* Stats bar — oculta hasta tener números reales (flag MOSTRAR_STATS) */}
+        {MOSTRAR_STATS && (
         <section className="bg-[#1A2B4A] py-12">
           <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -165,6 +170,7 @@ export default function Landing() {
             ))}
           </div>
         </section>
+        )}
 
         {/* Caso real */}
         <section className="py-24 px-6">
