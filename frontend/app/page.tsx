@@ -271,7 +271,7 @@ export default function Landing() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { titulo: "Entiende el IVA", desc: "Vos indicás si el precio viene con o sin IVA —o lo detecta del PDF— y aplica el factor correcto. Sin cálculos manuales." },
+                { titulo: "Entiende el IVA", desc: "Vos indicás si el precio viene con o sin IVA y aplica el factor correcto. Sin cálculos manuales." },
                 { titulo: "Aplica descuentos", desc: "Cargás el % de descuento por proveedor y Vectorai lo aplica automáticamente al comparar." },
                 { titulo: "Matching inteligente", desc: "Reconoce variantes de nombres, abreviaturas y errores de tipeo. Hormigón H-21 = Hormigón H21." },
                 { titulo: "Todos los rubros", desc: "Albañilería, steel frame, eléctrico, sanitario, gas y pinturas. Todo en una sola comparativa." },
