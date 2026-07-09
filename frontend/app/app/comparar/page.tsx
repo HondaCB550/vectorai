@@ -597,6 +597,45 @@ export default function Comparar() {
     }
   }
 
+  // Enviar un ítem sin match a la Comparativa como línea sola (no tiene par
+  // para comparar). Sale de la pila, baja el contador de "Sin match" y aparece
+  // en la Comparativa como fila de un solo proveedor (visible al destildar
+  // "Solo en común").
+  function empEnviarSinMatch(prov: string, item: ItemSinMatch) {
+    setVincGuardados(false);
+    setResultado((prev) => {
+      if (!prev) return prev;
+      const key = item.item_id ?? item.desc_prov;
+      const resultados = { ...prev.resultados };
+      const r = resultados[prov];
+      if (r) {
+        resultados[prov] = {
+          ...r,
+          sin_match: r.sin_match.filter((x) => (x.item_id ?? x.desc_prov) !== key),
+          stats: { ...r.stats, sin_match: Math.max(0, r.stats.sin_match - 1) },
+        };
+      }
+      const cod = `sinmatch_${key}`;
+      const comparativo = prev.comparativo.some((x) => x.cod_int === cod)
+        ? prev.comparativo
+        : [
+            ...prev.comparativo,
+            {
+              cod_int: cod,
+              rubro: "Sin comparación",
+              material: item.desc_prov,
+              unidad: "UN",
+              cant: item.cant,
+              precios: { [prov]: { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "sin_match", cant: item.cant } },
+              mejor_proveedor: prov,
+              ahorro: 0,
+              en_varios: false,
+            },
+          ];
+      return { ...prev, resultados, comparativo };
+    });
+  }
+
   // ── Descargar ──────────────────────────────────────────────────────────────
   async function descargar(endpoint: string, ext: string, setGen: (v: boolean) => void) {
     if (!resultado) return;
@@ -1465,7 +1504,7 @@ export default function Comparar() {
                     <>
                       <div className="bg-[#FEF4EC] border border-[#E87022]/40 rounded-xl px-4 py-3 text-sm text-[#1A2B4A]">
                         <span className="font-bold text-[#E87022] uppercase text-xs tracking-wide mr-1.5">Cómo</span>
-                        Creá un concepto, y arrastrá a su fila el ítem equivalente de cada proveedor (se ubica solo en la columna que corresponde). Sirve para comparar terminaciones (griferías, porcelanatos, inodoros) que cada uno cotiza con otra marca. Los que no emparejes se guardan como pendientes al confirmar.
+                        Creá un concepto, y arrastrá a su fila el ítem equivalente de cada proveedor (se ubica solo en la columna que corresponde). Sirve para comparar terminaciones (griferías, porcelanatos, inodoros) que cada uno cotiza con otra marca. Si un ítem no tiene equivalente, tocá su <span className="font-bold">×</span> para mandarlo a la Comparativa como línea sola (destildá "Solo en común" ahí para verlo). Los que no emparejes se guardan como pendientes al confirmar.
                       </div>
 
                       {/* Acciones — arriba, siempre a mano aunque las pilas sean largas */}
@@ -1640,9 +1679,17 @@ export default function Comparar() {
                                     key={it.item_id ?? it.desc_prov}
                                     draggable
                                     onDragStart={() => { setEmpDragProv(prov); setEmpDragId(it.item_id ?? null); }}
-                                    className="bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm cursor-grab"
+                                    className="relative bg-white border border-gray-200 rounded-lg pl-3 pr-7 py-2 shadow-sm cursor-grab"
                                     style={{ borderLeft: `3px solid ${empColor(provsEmp, prov)}` }}
                                   >
+                                    <button
+                                      onClick={(e) => { e.stopPropagation(); empEnviarSinMatch(prov, it); }}
+                                      onMouseDown={(e) => e.stopPropagation()}
+                                      title="No tiene par: enviarlo a la Comparativa como línea sola"
+                                      className="absolute top-1 right-1 w-5 h-5 rounded-full text-gray-300 hover:bg-gray-100 hover:text-gray-600 text-sm leading-none flex items-center justify-center"
+                                    >
+                                      ×
+                                    </button>
                                     <div className="text-xs font-medium text-[#1A2B4A] leading-snug">{it.desc_prov}</div>
                                     <div className="text-xs text-gray-400 mt-1 tabular-nums">{fmt(it.precio_sin_iva)}</div>
                                   </div>
