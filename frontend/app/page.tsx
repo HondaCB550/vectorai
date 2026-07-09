@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { createClient } from "@/lib/supabase";
 
 // Fin de la promo de lanzamiento (30% OFF). Pablo: lunes 13/07 + 10 días → 23/07.
@@ -94,6 +95,16 @@ export default function Landing() {
               <li><a href="#faq" className="hover:text-[#1A2B4A] transition">FAQ</a></li>
             </ul>
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+              <a
+                href="https://wa.me/5492241410393?text=Hola%20VectorAI%2C%20tengo%20una%20consulta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 sm:py-2.5 rounded-full transition whitespace-nowrap"
+                title="Consultas por WhatsApp"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span className="hidden sm:inline">Consultas</span>
+              </a>
               {logueado ? (
                 <>
                   <Link

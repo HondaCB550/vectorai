@@ -6,6 +6,7 @@ import { esAdmin } from "@/lib/admin";
 import Footer from "@/components/Footer";
 import UserMenu from "@/components/UserMenu";
 import Logo from "@/components/Logo";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -743,9 +744,11 @@ export default function Comparar() {
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
             target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white bg-[#25D366] hover:bg-[#1EBE5D] transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
+            title="Consultas por WhatsApp"
           >
-            Consultas
+            <WhatsAppIcon className="w-4 h-4" />
+            <span className="hidden sm:inline">Consultas</span>
           </a>
           <UserMenu />
         </div>

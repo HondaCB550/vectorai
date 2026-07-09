@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase";
 import { esAdmin } from "@/lib/admin";
 import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -160,8 +161,10 @@ export default function AdminPage() {
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
             target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 transition px-3 py-1.5 rounded-lg"
+            className="flex items-center gap-1.5 text-sm font-medium text-white bg-[#25D366] hover:bg-[#1EBE5D] transition px-3 py-1.5 rounded-lg"
+            title="Consultas por WhatsApp"
           >
+            <WhatsAppIcon className="w-4 h-4" />
             Consultas
           </a>
           <UserMenu />
