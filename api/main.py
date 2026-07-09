@@ -926,12 +926,17 @@ async def generar_pdf(
         )
     from exportar_pdf import generar_pdf_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+    fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    iva_label  = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
+    subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
     pdf_bytes = generar_pdf_comparativo(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
+        subtitulo=subtitulo,
     )
     filename = f"VectorAI_Comparativa_{fecha}.pdf"
     return StreamingResponse(
@@ -956,12 +961,17 @@ async def generar_imagen(
         )
     from exportar_imagen import generar_imagen_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+    fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    iva_label  = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
+    subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
     jpg_bytes = generar_imagen_comparativo(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
+        subtitulo=subtitulo,
     )
     filename = f"VectorAI_Comparativa_{fecha}.jpg"
     return StreamingResponse(

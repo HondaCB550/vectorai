@@ -1,6 +1,7 @@
 """
 exportar_excel.py — Genera un Excel comparativo de presupuestos VectorAI
 Devuelve bytes del .xlsx, listo para enviar como respuesta HTTP.
+Encabezado de marca (isologo + wordmark embebido como imagen) desde marca.py.
 """
 from io import BytesIO
 from datetime import datetime
@@ -10,9 +11,13 @@ from openpyxl.styles import (
     PatternFill, Font, Alignment, Border, Side, numbers
 )
 from openpyxl.utils import get_column_letter
+from openpyxl.drawing.image import Image as XLImage
+
+import marca
 
 # Paleta
-COLOR_HEADER   = "263150"   # azul oscuro
+COLOR_NAVY     = marca.NAVY_HEX
+COLOR_GRIS     = marca.GRIS_HEX
 COLOR_SUBHDR   = "EDF0F5"   # gris claro
 COLOR_MEJOR    = "C6F6D5"   # verde claro
 COLOR_RUBRO    = "E8EDF5"   # azul muy claro
@@ -44,6 +49,40 @@ def _border_bottom() -> Border:
     return Border(bottom=side)
 
 
+# Lockup del isologo renderizado una sola vez (a 3x para que quede nítido)
+_LOCKUP_PNG, _LOCKUP_W, _LOCKUP_H = marca.lockup_png(alto=72)
+_LOCKUP_ALTO_FINAL = 24  # px en la hoja
+
+
+def _logo_imagen() -> XLImage:
+    """Instancia nueva del lockup por hoja (openpyxl no comparte imágenes)."""
+    img = XLImage(BytesIO(_LOCKUP_PNG))
+    img.height = _LOCKUP_ALTO_FINAL
+    img.width  = round(_LOCKUP_W * _LOCKUP_ALTO_FINAL / _LOCKUP_H)
+    return img
+
+
+def _encabezado_marca(ws, total_cols: int, titulo: str, subtitulo: str, ancla: str = "B1"):
+    """Filas 1-3: logo, título navy y metadatos con regla naranja. Fondo blanco."""
+    ws.add_image(_logo_imagen(), ancla)
+    ws.row_dimensions[1].height = 26
+
+    ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=total_cols)
+    c = ws.cell(2, 1, titulo)
+    c.font = _font(bold=True, color=COLOR_NAVY, size=13)
+    c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
+    ws.row_dimensions[2].height = 22
+
+    ws.merge_cells(start_row=3, start_column=1, end_row=3, end_column=total_cols)
+    c = ws.cell(3, 1, subtitulo)
+    c.font = _font(color=COLOR_GRIS, size=9)
+    c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
+    borde_naranja = Border(bottom=Side(style="medium", color=marca.NARANJA_HEX))
+    for col in range(1, total_cols + 1):
+        ws.cell(3, col).border = borde_naranja
+    ws.row_dimensions[3].height = 16
+
+
 def generar_excel_comparativo(
     comparativo: list[dict],
     proveedores: list[str],
@@ -72,24 +111,10 @@ def generar_excel_comparativo(
     col_ahorro = col_mejor + 1
     total_cols = col_ahorro
 
-    # ── Fila 1: título ────────────────────────────────────────────────────────
-    ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=total_cols)
-    c = ws.cell(1, 1, titulo)
-    c.fill  = _fill(COLOR_HEADER)
-    c.font  = _font(bold=True, color=COLOR_TEXTO_W, size=14)
-    c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
-    ws.row_dimensions[1].height = 36
-
-    # ── Fila 2: subtítulo ─────────────────────────────────────────────────────
-    ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=total_cols)
-    c = ws.cell(2, 1, subtitulo)
-    c.fill  = _fill(COLOR_HEADER)
-    c.font  = _font(color="BFC8E6", size=9, italic=True)
-    c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
-    ws.row_dimensions[2].height = 18
-
-    # ── Fila 3: vacía ─────────────────────────────────────────────────────────
-    ws.row_dimensions[3].height = 6
+    # ── Filas 1-3: encabezado de marca (logo + título + metadatos) ────────────
+    _encabezado_marca(ws, total_cols,
+                      marca.titulo_visible(titulo),
+                      marca.meta_visible(subtitulo))
 
     # ── Fila 4: encabezados de columnas ───────────────────────────────────────
     headers = ["Rubro", "Material", "Cant.", "Unidad"] + proveedores + ["Mejor precio", "Ahorro s/IVA"]
@@ -98,13 +123,7 @@ def generar_excel_comparativo(
         c.alignment = Alignment(horizontal="center" if col_idx > 3 else "left",
                                 vertical="center", indent=1 if col_idx <= 3 else 0)
         c.border = _border_bottom()
-        if col_idx == col_rubro:
-            c.fill = _fill(COLOR_SUBHDR)
-            c.font = _font(bold=True, size=9)
-        elif col_idx == col_mat:
-            c.fill = _fill(COLOR_SUBHDR)
-            c.font = _font(bold=True, size=9)
-        elif col_idx == col_unidad:
+        if col_idx in (col_rubro, col_mat, col_cant, col_unidad):
             c.fill = _fill(COLOR_SUBHDR)
             c.font = _font(bold=True, size=9)
         elif col_idx < col_mejor:
@@ -259,17 +278,9 @@ def _agregar_hojas_compras(wb, comparativo: list[dict], proveedores: list[str], 
             continue
         ws = wb.create_sheet(_nombre_hoja(prov))
 
-        ws.merge_cells(start_row=1, start_column=1, end_row=1, end_column=5)
-        c = ws.cell(1, 1, f"Pedido — {prov}")
-        c.fill = _fill(COLOR_HEADER)
-        c.font = _font(bold=True, color=COLOR_TEXTO_W, size=14)
-        c.alignment = Alignment(vertical="center", horizontal="left", indent=2)
-        ws.row_dimensions[1].height = 26
-
-        ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=5)
-        c = ws.cell(2, 1, ((subtitulo + " · ") if subtitulo else "") +
-                    "Solo ítems donde este proveedor tiene el mejor precio")
-        c.font = _font(size=8, italic=True, color="666666")
+        meta = ((marca.meta_visible(subtitulo) + " · ") if subtitulo else "") + \
+               "Solo ítems donde este proveedor tiene el mejor precio"
+        _encabezado_marca(ws, 5, f"Pedido — {prov}", meta, ancla="A1")
 
         headers = ["Material", "Cant.", "Unidad", "Precio unit.", "Subtotal"]
         for j, h in enumerate(headers, start=1):

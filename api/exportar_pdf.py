@@ -1,22 +1,30 @@
 """
 exportar_pdf.py — Genera un PDF comparativo de presupuestos VectorAI.
 Devuelve bytes del .pdf, listo para enviar como respuesta HTTP.
+
+Diseño de marca: isologo (3 barras redondeadas navy/naranja, mismo dibujo que
+frontend/components/Logo.tsx) + wordmark "Vectorai", encabezado blanco con
+regla naranja. Con 4+ proveedores la página pasa a A4 apaisado.
 """
 from io import BytesIO
 from datetime import datetime
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.units import cm
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Flowable
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-COLOR_HEADER  = colors.HexColor("#263150")
+# Paleta de marca (Logo.tsx / IDENTIDAD.md)
+COLOR_NAVY    = colors.HexColor("#1A2B4A")
+COLOR_NARANJA = colors.HexColor("#E87022")
+COLOR_GRIS    = colors.HexColor("#6B7280")
+COLOR_LINEA   = colors.HexColor("#E2E6EE")
+
 COLOR_SUBHDR  = colors.HexColor("#EDF0F5")
 COLOR_MEJOR   = colors.HexColor("#C6F6D5")
 COLOR_RUBRO   = colors.HexColor("#E8EDF5")
-COLOR_BLANCO  = colors.white
 COLOR_TEXTO_W = colors.white
 COLOR_VERDE   = colors.HexColor("#1A804A")
 
@@ -29,61 +37,102 @@ COLORES_PROV = [
     colors.HexColor("#4D99B3"),
 ]
 
+# Barras del isotipo en viewBox 0-100 (x, y, w, h) — y crece hacia abajo como en SVG
+_ISO_BARRAS = [
+    (18, 26, 64, 13, COLOR_NAVY),
+    (30, 48, 40, 13, COLOR_NAVY),
+    (40, 70, 20, 13, COLOR_NARANJA),
+]
+
+
 def _fmt(v: float) -> str:
     return f"$ {int(round(v)):,}".replace(",", ".")
+
+
+class _HeaderVectorAI(Flowable):
+    """Encabezado de marca: isologo + wordmark, metadatos a la derecha,
+    título y regla naranja. Fondo blanco."""
+
+    ALTO = 60
+
+    def __init__(self, ancho: float, titulo: str, meta: str):
+        super().__init__()
+        self.ancho  = ancho
+        self.titulo = titulo
+        self.meta   = meta
+
+    def wrap(self, aw, ah):
+        return self.ancho, self.ALTO
+
+    def draw(self):
+        c = self.canv
+        # Isotipo (caja de 22pt, arriba a la izquierda)
+        iso = 22.0
+        esc = iso / 100.0
+        iso_base = self.ALTO - iso
+        for x, y, w, h, col in _ISO_BARRAS:
+            c.setFillColor(col)
+            c.roundRect(x * esc, iso_base + iso - (y + h) * esc,
+                        w * esc, h * esc, (h * esc) / 2, fill=1, stroke=0)
+        # Wordmark
+        c.setFillColor(COLOR_NAVY)
+        c.setFont("Helvetica-Bold", 15)
+        c.drawString(iso + 7, iso_base + 6, "Vectorai")
+        # Metadatos a la derecha, alineados con el wordmark
+        c.setFillColor(COLOR_GRIS)
+        c.setFont("Helvetica", 8)
+        c.drawRightString(self.ancho, iso_base + 8, self.meta)
+        # Título
+        c.setFillColor(COLOR_NAVY)
+        c.setFont("Helvetica-Bold", 12.5)
+        c.drawString(0, 12, self.titulo)
+        # Regla: acento naranja + línea suave
+        c.setFillColor(COLOR_NARANJA)
+        c.rect(0, 0, 54, 2.4, fill=1, stroke=0)
+        c.setFillColor(COLOR_LINEA)
+        c.rect(54, 0.7, self.ancho - 54, 1, fill=1, stroke=0)
+
+
+def _pie_pagina(canvas, doc):
+    canvas.saveState()
+    canvas.setFont("Helvetica", 7.5)
+    canvas.setFillColor(COLOR_GRIS)
+    canvas.drawString(doc.leftMargin, 0.85 * cm, "vectorai.com.ar")
+    canvas.drawRightString(doc.pagesize[0] - doc.rightMargin, 0.85 * cm,
+                           f"Página {canvas.getPageNumber()}")
+    canvas.restoreState()
 
 
 def generar_pdf_comparativo(
     comparativo: list[dict],
     proveedores: list[str],
     titulo: str = None,
+    subtitulo: str = None,
 ) -> bytes:
-    titulo = titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
-    fecha  = datetime.now().strftime("%d/%m/%Y")
+    from marca import titulo_visible as _tv, meta_visible as _mv
+    titulo_visible = _tv(titulo)
+    meta = _mv(subtitulo)
+
+    n_prov = len(proveedores)
+    pagesize = landscape(A4) if n_prov >= 4 else A4
 
     buf = BytesIO()
     doc = SimpleDocTemplate(
         buf,
-        pagesize=A4,
+        pagesize=pagesize,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
-        topMargin=1.5*cm, bottomMargin=1.5*cm,
+        topMargin=1.2*cm, bottomMargin=1.5*cm,
+        title=titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}",
     )
 
-    styles = getSampleStyleSheet()
-    st_titulo = ParagraphStyle("titulo", fontSize=16, fontName="Helvetica-Bold",
-                                textColor=COLOR_TEXTO_W, spaceAfter=0)
-    st_sub    = ParagraphStyle("sub", fontSize=8, fontName="Helvetica",
-                                textColor=colors.HexColor("#BFC8E6"), spaceAfter=0)
     st_mat    = ParagraphStyle("mat", fontSize=7.5, fontName="Helvetica",
                                 leading=10, textColor=colors.HexColor("#1a1a2e"))
     st_rubro  = ParagraphStyle("rub", fontSize=7.5, fontName="Helvetica-Bold",
                                 textColor=colors.HexColor("#3A5080"))
-    st_num    = ParagraphStyle("num", fontSize=7.5, fontName="Helvetica",
-                                alignment=TA_RIGHT)
-    st_mejor  = ParagraphStyle("mej", fontSize=7.5, fontName="Helvetica-Bold",
-                                textColor=COLOR_VERDE, alignment=TA_CENTER)
-    st_hdr    = ParagraphStyle("hdr", fontSize=8, fontName="Helvetica-Bold",
-                                textColor=COLOR_TEXTO_W, alignment=TA_CENTER)
+    st_mejor  = ParagraphStyle("mej", fontSize=7, fontName="Helvetica-Bold",
+                                textColor=COLOR_VERDE, alignment=TA_CENTER, leading=9)
     st_hdr_l  = ParagraphStyle("hdrl", fontSize=8, fontName="Helvetica-Bold",
                                 textColor=colors.HexColor("#3A5080"), alignment=TA_LEFT)
-
-    n_prov = len(proveedores)
-
-    # ── Encabezado ──────────────────────────────────────────────────────────────
-    header_data = [[
-        Paragraph(titulo, st_titulo),
-        Paragraph(f"Generado el {fecha} · Precios sin IVA · VectorAI", st_sub),
-    ]]
-    header_tbl = Table(header_data, colWidths=["60%", "40%"])
-    header_tbl.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), COLOR_HEADER),
-        ("VALIGN",     (0, 0), (-1, -1), "MIDDLE"),
-        ("TOPPADDING", (0, 0), (-1, -1), 10),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
-        ("LEFTPADDING",   (0, 0), (0, -1), 14),
-        ("RIGHTPADDING",  (1, 0), (1, -1), 14),
-        ("ALIGN", (1, 0), (1, -1), "RIGHT"),
-    ]))
 
     # ── Cabecera de columnas ─────────────────────────────────────────────────
     col_headers = [
@@ -102,10 +151,14 @@ def generar_pdf_comparativo(
         textColor=colors.HexColor("#3A5080"), alignment=TA_RIGHT
     )))
 
-    # Anchos de columna — A4 portrait: 21cm - 3cm márgenes = 18cm útiles
-    page_w = A4[0] - 3*cm
-    prov_w = min(3.5*cm, (page_w - 5.5*cm - 2*cm) / max(n_prov, 1))
-    col_widths = [5.5*cm, 1.4*cm] + [prov_w]*n_prov + [2.2*cm, 1.8*cm]
+    # Anchos de columna — la suma cierra exacta contra el ancho útil de página.
+    page_w  = pagesize[0] - 3*cm
+    w_cant, w_mejor, w_ahorro = 1.4*cm, 2.4*cm, 1.9*cm
+    fijas   = w_cant + w_mejor + w_ahorro
+    prov_w  = min(3.2*cm, (page_w - 5.0*cm - fijas) / max(n_prov, 1))
+    prov_w  = max(prov_w, 1.8*cm)
+    w_mat   = page_w - fijas - prov_w * n_prov
+    col_widths = [w_mat, w_cant] + [prov_w]*n_prov + [w_mejor, w_ahorro]
 
     # ── Filas de datos ───────────────────────────────────────────────────────
     table_data = [col_headers]
@@ -198,7 +251,11 @@ def generar_pdf_comparativo(
     main_table = Table(table_data, colWidths=col_widths, repeatRows=1)
     main_table.setStyle(TableStyle(table_styles))
 
-    story = [header_tbl, Spacer(1, 0.4*cm), main_table]
-    doc.build(story)
+    story = [
+        _HeaderVectorAI(page_w, titulo_visible, meta),
+        Spacer(1, 0.35*cm),
+        main_table,
+    ]
+    doc.build(story, onFirstPage=_pie_pagina, onLaterPages=_pie_pagina)
     buf.seek(0)
     return buf.read()

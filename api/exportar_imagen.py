@@ -1,14 +1,16 @@
 """
 exportar_imagen.py — Genera una imagen JPG comparativa para compartir por WhatsApp/redes.
 Devuelve bytes del .jpg, listo para enviar como respuesta HTTP.
+Encabezado de marca (isologo + wordmark) desde marca.py.
 """
 from io import BytesIO
 from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 
+import marca
+
 # Paleta
-C_HEADER  = (38, 49, 80)
 C_SUBHDR  = (237, 240, 245)
 C_MEJOR   = (198, 246, 213)
 C_RUBRO   = (232, 237, 245)
@@ -30,7 +32,7 @@ COLORES_PROV = [
 ROW_H     = 36
 HDR_H     = 48
 RUBRO_H   = 26
-TITLE_H   = 56
+TITLE_H   = 100
 PAD       = 16
 COL_MAT   = 260
 COL_CANT  = 80
@@ -57,9 +59,10 @@ def generar_imagen_comparativo(
     comparativo: list[dict],
     proveedores: list[str],
     titulo: str = None,
+    subtitulo: str = None,
 ) -> bytes:
-    titulo = titulo or "VectorAI — Comparativa"
-    fecha  = datetime.now().strftime("%d/%m/%Y")
+    titulo_vis = marca.titulo_visible(titulo)
+    meta       = marca.meta_visible(subtitulo)
     n_prov = len(proveedores)
 
     # Calcular dimensiones
@@ -87,10 +90,19 @@ def generar_imagen_comparativo(
     f_small  = _get_font(10)
     f_rubro  = _get_font(10, bold=True)
 
-    # ── Título ──────────────────────────────────────────────────────────────────
-    d.rectangle([(0, 0), (total_w, TITLE_H)], fill=C_HEADER)
-    d.text((PAD, 10), titulo, font=f_title, fill=(255, 255, 255))
-    d.text((PAD, 34), f"Generado el {fecha} · Precios sin IVA · VectorAI beta", font=f_sub, fill=(191, 200, 230))
+    # ── Encabezado de marca ──────────────────────────────────────────────────
+    # Isologo + wordmark a la izquierda, metadatos a la derecha, título debajo,
+    # regla naranja de acento. Fondo blanco.
+    iso = 26
+    marca.dibujar_isotipo(d, PAD, 12, iso)
+    f_marca = _get_font(17, bold=True)
+    d.text((PAD + iso + 8, 12 + (iso - 17) // 2), "Vectorai", font=f_marca, fill=marca.NAVY)
+    bbox = d.textbbox((0, 0), meta, font=f_sub)
+    d.text((total_w - PAD - (bbox[2] - bbox[0]), 12 + (iso - 11) // 2), meta,
+           font=f_sub, fill=marca.GRIS)
+    d.text((PAD, 56), titulo_vis, font=f_title, fill=marca.NAVY)
+    d.rectangle([(PAD, TITLE_H - 8), (PAD + 64, TITLE_H - 5)], fill=marca.NARANJA)
+    d.rectangle([(PAD + 64, TITLE_H - 7), (total_w - PAD, TITLE_H - 6)], fill=marca.LINEA)
 
     y = TITLE_H
 
@@ -105,10 +117,13 @@ def generar_imagen_comparativo(
     for i, prov in enumerate(proveedores):
         col_bg = COLORES_PROV[i % len(COLORES_PROV)]
         d.rectangle([(x, y), (x + COL_PROV, y + HDR_H)], fill=col_bg)
-        # Centrar texto
-        bbox = d.textbbox((0, 0), prov, font=f_bold)
+        # Centrar texto, truncando con elipsis si no entra en la columna
+        etiqueta = prov
+        while etiqueta and d.textbbox((0, 0), etiqueta, font=f_bold)[2] > COL_PROV - 12:
+            etiqueta = etiqueta[:-2].rstrip() + "…"
+        bbox = d.textbbox((0, 0), etiqueta, font=f_bold)
         tw = bbox[2] - bbox[0]
-        d.text((x + (COL_PROV - tw) // 2, y + 14), prov, font=f_bold, fill=(255, 255, 255))
+        d.text((x + (COL_PROV - tw) // 2, y + 14), etiqueta, font=f_bold, fill=(255, 255, 255))
         x += COL_PROV
 
     d.text((x + 4, y + 14), "Mejor", font=f_bold, fill=C_TEXT)
