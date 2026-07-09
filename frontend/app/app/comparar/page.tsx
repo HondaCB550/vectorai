@@ -1465,48 +1465,45 @@ export default function Comparar() {
                     <>
                       <div className="bg-[#FEF4EC] border border-[#E87022]/40 rounded-xl px-4 py-3 text-sm text-[#1A2B4A]">
                         <span className="font-bold text-[#E87022] uppercase text-xs tracking-wide mr-1.5">Cómo</span>
-                        Arrastrá cada ítem a la fila del concepto que le corresponde: se ubica solo en la columna de su proveedor. Sirve para comparar terminaciones equivalentes (griferías, porcelanatos, inodoros) que cada proveedor cotiza con otra marca. Los que no emparejes se guardan como pendientes al confirmar.
+                        Creá un concepto, y arrastrá a su fila el ítem equivalente de cada proveedor (se ubica solo en la columna que corresponde). Sirve para comparar terminaciones (griferías, porcelanatos, inodoros) que cada uno cotiza con otra marca. Los que no emparejes se guardan como pendientes al confirmar.
                       </div>
 
-                      {/* Pilas por proveedor */}
-                      <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${provsEmp.length}, minmax(0, 1fr))` }}>
-                        {provsEmp.map((prov) => {
-                          const pend = (resultado.resultados[prov]?.sin_match ?? []).filter(
-                            (it) => !it.item_id || !asignados.has(it.item_id)
-                          );
-                          return (
-                            <div key={prov}>
-                              <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-[#1A2B4A]">
-                                <span className="w-2 h-2 rounded-full" style={{ background: empColor(provsEmp, prov) }} />
-                                {prov}
-                                <span className="ml-auto text-xs text-gray-400 tabular-nums">{pend.length}</span>
-                              </div>
-                              <div className="space-y-2 min-h-[3rem]">
-                                {pend.map((it) => (
-                                  <div
-                                    key={it.item_id ?? it.desc_prov}
-                                    draggable
-                                    onDragStart={() => { setEmpDragProv(prov); setEmpDragId(it.item_id ?? null); }}
-                                    className="bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm cursor-grab"
-                                    style={{ borderLeft: `3px solid ${empColor(provsEmp, prov)}` }}
-                                  >
-                                    <div className="text-xs font-medium text-[#1A2B4A] leading-snug">{it.desc_prov}</div>
-                                    <div className="text-xs text-gray-400 mt-1 tabular-nums">{fmt(it.precio_sin_iva)}</div>
-                                  </div>
-                                ))}
-                                {pend.length === 0 && (
-                                  <div className="text-xs text-gray-300 italic border border-dashed border-gray-200 rounded-lg py-3 text-center">
-                                    Todo emparejado
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
+                      {/* Acciones — arriba, siempre a mano aunque las pilas sean largas */}
+                      <div className="sticky top-2 z-10 flex items-center gap-4 flex-wrap bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm">
+                        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={empRecordar}
+                            onChange={(e) => setEmpRecordar(e.target.checked)}
+                            className="w-4 h-4 accent-[#E87022]"
+                          />
+                          <span><b className="text-[#1A2B4A] font-semibold">Recordar</b> estos vínculos para mis próximos presupuestos</span>
+                        </label>
+                        <div className="ml-auto flex items-center gap-3">
+                          {vincGuardados && <span className="text-sm text-[#059669] font-medium">Vínculos guardados</span>}
+                          <button
+                            onClick={empAgregarConcepto}
+                            className="border border-gray-300 rounded-lg px-3 py-2 text-sm font-semibold text-[#1A2B4A] hover:border-[#E87022] hover:text-[#E87022]"
+                          >
+                            + Agregar concepto
+                          </button>
+                          <button
+                            onClick={guardarVinculos}
+                            disabled={guardandoVinc}
+                            className="bg-[#E87022] hover:bg-[#CF5E15] disabled:opacity-50 text-white rounded-lg px-4 py-2 text-sm font-bold"
+                          >
+                            {guardandoVinc ? "Guardando…" : "Guardar vínculos"}
+                          </button>
+                        </div>
                       </div>
 
-                      {/* Conceptos */}
+                      {/* Conceptos — área de trabajo, arriba de las pilas */}
                       <div className="space-y-2">
+                        {empConceptos.length === 0 && (
+                          <div className="border border-dashed border-gray-300 rounded-xl py-6 px-4 text-center text-sm text-gray-400">
+                            Todavía no armaste ningún concepto. Tocá <span className="font-semibold text-[#E87022]">+ Agregar concepto</span> y arrastrá a su fila los ítems equivalentes de cada proveedor.
+                          </div>
+                        )}
                         {empConceptos.map((c) => {
                           const filled = provsEmp.map((p) => c.slots[p]).filter(Boolean) as ItemSinMatch[];
                           const precios = filled.map((f) => f.precio_sin_iva);
@@ -1622,35 +1619,43 @@ export default function Comparar() {
                           );
                         })}
 
-                        <button
-                          onClick={empAgregarConcepto}
-                          className="w-full border border-dashed border-gray-300 rounded-xl py-3 text-sm font-medium text-gray-500 hover:border-[#E87022] hover:text-[#E87022]"
-                        >
-                          + Agregar concepto
-                        </button>
                       </div>
 
-                      {/* Acciones */}
-                      <div className="flex items-center gap-4 flex-wrap pt-1">
-                        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
-                          <input
-                            type="checkbox"
-                            checked={empRecordar}
-                            onChange={(e) => setEmpRecordar(e.target.checked)}
-                            className="w-4 h-4 accent-[#E87022]"
-                          />
-                          <span><b className="text-[#1A2B4A] font-semibold">Recordar</b> estos vínculos para mis próximos presupuestos</span>
-                        </label>
-                        <div className="ml-auto flex items-center gap-3">
-                          {vincGuardados && <span className="text-sm text-[#059669] font-medium">Vínculos guardados</span>}
-                          <button
-                            onClick={guardarVinculos}
-                            disabled={guardandoVinc}
-                            className="bg-[#E87022] hover:bg-[#CF5E15] disabled:opacity-50 text-white rounded-lg px-4 py-2 text-sm font-bold"
-                          >
-                            {guardandoVinc ? "Guardando…" : "Guardar vínculos"}
-                          </button>
-                        </div>
+                      {/* Pilas por proveedor — el listado largo, abajo del área de trabajo */}
+                      <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${provsEmp.length}, minmax(0, 1fr))` }}>
+                        {provsEmp.map((prov) => {
+                          const pend = (resultado.resultados[prov]?.sin_match ?? []).filter(
+                            (it) => !it.item_id || !asignados.has(it.item_id)
+                          );
+                          return (
+                            <div key={prov}>
+                              <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-[#1A2B4A]">
+                                <span className="w-2 h-2 rounded-full" style={{ background: empColor(provsEmp, prov) }} />
+                                {prov}
+                                <span className="ml-auto text-xs text-gray-400 tabular-nums">{pend.length}</span>
+                              </div>
+                              <div className="space-y-2 min-h-[3rem]">
+                                {pend.map((it) => (
+                                  <div
+                                    key={it.item_id ?? it.desc_prov}
+                                    draggable
+                                    onDragStart={() => { setEmpDragProv(prov); setEmpDragId(it.item_id ?? null); }}
+                                    className="bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm cursor-grab"
+                                    style={{ borderLeft: `3px solid ${empColor(provsEmp, prov)}` }}
+                                  >
+                                    <div className="text-xs font-medium text-[#1A2B4A] leading-snug">{it.desc_prov}</div>
+                                    <div className="text-xs text-gray-400 mt-1 tabular-nums">{fmt(it.precio_sin_iva)}</div>
+                                  </div>
+                                ))}
+                                {pend.length === 0 && (
+                                  <div className="text-xs text-gray-300 italic border border-dashed border-gray-200 rounded-lg py-3 text-center">
+                                    Todo emparejado
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </>
                   )}
