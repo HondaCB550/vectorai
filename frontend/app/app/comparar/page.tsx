@@ -204,6 +204,7 @@ export default function Comparar() {
   const [empRecordar, setEmpRecordar]     = useState(true);
   const [guardandoVinc, setGuardandoVinc] = useState(false);
   const [vincGuardados, setVincGuardados] = useState(false);
+  const [empUnicos, setEmpUnicos]         = useState<string[]>([]);  // ítems sin par enviados a la comparativa como material único
 
   useEffect(() => {
     const sb = createClient();
@@ -603,36 +604,33 @@ export default function Comparar() {
   // "Solo en común").
   function empEnviarSinMatch(prov: string, item: ItemSinMatch) {
     setVincGuardados(false);
+    const key = item.item_id ?? item.desc_prov;
+    // Sale de la pila (declutter) pero SIGUE en sin_match: así el "Confirmar"
+    // de la comparativa lo manda igual a materiales_pendientes (revisión interna
+    // de VectorAI). Acá solo lo inyectamos en la comparativa como material único
+    // para que quien compra tenga la referencia de precio y no se pierda.
+    setEmpUnicos((u) => (u.includes(key) ? u : [...u, key]));
     setResultado((prev) => {
       if (!prev) return prev;
-      const key = item.item_id ?? item.desc_prov;
-      const resultados = { ...prev.resultados };
-      const r = resultados[prov];
-      if (r) {
-        resultados[prov] = {
-          ...r,
-          sin_match: r.sin_match.filter((x) => (x.item_id ?? x.desc_prov) !== key),
-          stats: { ...r.stats, sin_match: Math.max(0, r.stats.sin_match - 1) },
-        };
-      }
       const cod = `sinmatch_${key}`;
-      const comparativo = prev.comparativo.some((x) => x.cod_int === cod)
-        ? prev.comparativo
-        : [
-            ...prev.comparativo,
-            {
-              cod_int: cod,
-              rubro: "Sin comparación",
-              material: item.desc_prov,
-              unidad: "UN",
-              cant: item.cant,
-              precios: { [prov]: { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "sin_match", cant: item.cant } },
-              mejor_proveedor: prov,
-              ahorro: 0,
-              en_varios: false,
-            },
-          ];
-      return { ...prev, resultados, comparativo };
+      if (prev.comparativo.some((x) => x.cod_int === cod)) return prev;
+      return {
+        ...prev,
+        comparativo: [
+          ...prev.comparativo,
+          {
+            cod_int: cod,
+            rubro: "Material único",
+            material: item.desc_prov,
+            unidad: "UN",
+            cant: item.cant,
+            precios: { [prov]: { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "sin_match", cant: item.cant } },
+            mejor_proveedor: prov,
+            ahorro: 0,
+            en_varios: false,
+          },
+        ],
+      };
     });
   }
 
@@ -1504,7 +1502,7 @@ export default function Comparar() {
                     <>
                       <div className="bg-[#FEF4EC] border border-[#E87022]/40 rounded-xl px-4 py-3 text-sm text-[#1A2B4A]">
                         <span className="font-bold text-[#E87022] uppercase text-xs tracking-wide mr-1.5">Cómo</span>
-                        Creá un concepto, y arrastrá a su fila el ítem equivalente de cada proveedor (se ubica solo en la columna que corresponde). Sirve para comparar terminaciones (griferías, porcelanatos, inodoros) que cada uno cotiza con otra marca. Si un ítem no tiene equivalente, tocá su <span className="font-bold">×</span> para mandarlo a la Comparativa como línea sola (destildá "Solo en común" ahí para verlo). Los que no emparejes se guardan como pendientes al confirmar.
+                        Creá un concepto, y arrastrá a su fila el ítem equivalente de cada proveedor (se ubica solo en la columna que corresponde). Sirve para comparar terminaciones (griferías, porcelanatos, inodoros) que cada uno cotiza con otra marca. Si un ítem lo cotiza un solo proveedor y no tiene equivalente, tocá su <span className="font-bold">×</span>: va a la Comparativa como <b>material único</b> (destildá "Solo en común" ahí para verlo) y queda igual para la revisión interna. Todo lo que no emparejes se guarda como pendiente al confirmar.
                       </div>
 
                       {/* Acciones — arriba, siempre a mano aunque las pilas sean largas */}
@@ -1663,9 +1661,10 @@ export default function Comparar() {
                       {/* Pilas por proveedor — el listado largo, abajo del área de trabajo */}
                       <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${provsEmp.length}, minmax(0, 1fr))` }}>
                         {provsEmp.map((prov) => {
-                          const pend = (resultado.resultados[prov]?.sin_match ?? []).filter(
-                            (it) => !it.item_id || !asignados.has(it.item_id)
-                          );
+                          const pend = (resultado.resultados[prov]?.sin_match ?? []).filter((it) => {
+                            const k = it.item_id ?? it.desc_prov;
+                            return (!it.item_id || !asignados.has(it.item_id)) && !empUnicos.includes(k);
+                          });
                           return (
                             <div key={prov}>
                               <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-[#1A2B4A]">
@@ -1685,7 +1684,7 @@ export default function Comparar() {
                                     <button
                                       onClick={(e) => { e.stopPropagation(); empEnviarSinMatch(prov, it); }}
                                       onMouseDown={(e) => e.stopPropagation()}
-                                      title="No tiene par: enviarlo a la Comparativa como línea sola"
+                                      title="Material único (un solo proveedor): enviarlo a la Comparativa y dejarlo para revisión interna"
                                       className="absolute top-1 right-1 w-5 h-5 rounded-full text-gray-300 hover:bg-gray-100 hover:text-gray-600 text-sm leading-none flex items-center justify-center"
                                     >
                                       ×
