@@ -364,6 +364,7 @@ export default function Landing() {
                   {[
                     "Mismas características que el plan Inicial",
                     "Comparativas ilimitadas",
+                    "Hasta 10 proveedores por comparativa",
                     "Obras y precios recomendados por zona",
                     "Mis presupuestos y comparativas guardados 30 días, separados por obra",
                     "Soporte prioritario",

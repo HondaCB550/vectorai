@@ -42,7 +42,7 @@ const PLANES: Plan[] = [
     destacado: true,
     features: [
       "Comparativas ilimitadas",
-      "Hasta 5 proveedores · 10 hojas",
+      "Hasta 10 proveedores · 10 hojas",
       "Obras y precios por zona",
       "Mis presupuestos guardados",
       "Lista de compras por proveedor",

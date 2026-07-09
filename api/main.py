@@ -182,9 +182,10 @@ LIMITE_INICIAL_MES    = int(os.environ.get("LIMITE_INICIAL_MES", "6"))      # pl
 BONUS_INICIAL_1ER_MES = int(os.environ.get("BONUS_INICIAL_1ER_MES", "2"))   # +2 comparativas el primer mes
 MAX_PROVEEDORES_FREE  = int(os.environ.get("MAX_PROVEEDORES_FREE", "3"))
 MAX_HOJAS_PROV_FREE   = int(os.environ.get("MAX_HOJAS_PROV_FREE", "5"))
-# Planes pagos (Inicial y Advance): tope de seguridad. Más de 5 proveedores no
-# se cruzan en la práctica, y más de 10 hojas por proveedor arriesga colapsar.
+# Planes pagos: tope de seguridad por plan. Inicial 5 proveedores; Advance/Pro 10
+# (licitaciones grandes). Más de 10 hojas por proveedor arriesga colapsar.
 MAX_PROVEEDORES       = int(os.environ.get("MAX_PROVEEDORES", "5"))
+MAX_PROVEEDORES_ADV   = int(os.environ.get("MAX_PROVEEDORES_ADV", "10"))
 MAX_HOJAS_PROV        = int(os.environ.get("MAX_HOJAS_PROV", "10"))
 MAX_ARCHIVOS_TOTAL    = int(os.environ.get("MAX_ARCHIVOS_TOTAL", "60"))
 MAX_BYTES_ARCHIVO     = int(os.environ.get("MAX_MB_ARCHIVO", "20")) * 1024 * 1024
@@ -339,9 +340,17 @@ def _validar_archivos(files: list, cfgs: list, plan: str):
                             f"{MAX_BYTES_ARCHIVO // (1024 * 1024)} MB por archivo.")})
 
     es_pago = plan in ("basico", "advance", "pro")
-    max_prov  = MAX_PROVEEDORES if es_pago else MAX_PROVEEDORES_FREE
-    max_hojas = MAX_HOJAS_PROV  if es_pago else MAX_HOJAS_PROV_FREE
+    if plan in ("advance", "pro"):
+        max_prov = MAX_PROVEEDORES_ADV
+    elif plan == "basico":
+        max_prov = MAX_PROVEEDORES
+    else:
+        max_prov = MAX_PROVEEDORES_FREE
+    max_hojas = MAX_HOJAS_PROV if es_pago else MAX_HOJAS_PROV_FREE
     sugerir   = "" if es_pago else " Pasate al plan Inicial o Advance para comparar más."
+    # Solo para el error de proveedores: al Inicial le sirve subir a Advance.
+    sugerir_prov = (" Pasate al plan Advance para comparar hasta "
+                    f"{MAX_PROVEEDORES_ADV} proveedores.") if plan == "basico" else sugerir
 
     conteo: dict = {}
     for idx in range(n):
@@ -351,7 +360,7 @@ def _validar_archivos(files: list, cfgs: list, plan: str):
     if len(conteo) > max_prov:
         raise HTTPException(status_code=413 if es_pago else 402, detail={
             "error": "demasiados_proveedores",
-            "mensaje": f"Tu plan permite hasta {max_prov} proveedores por comparativa.{sugerir}"})
+            "mensaje": f"Tu plan permite hasta {max_prov} proveedores por comparativa.{sugerir_prov}"})
     for c in conteo.values():
         if c > max_hojas:
             raise HTTPException(status_code=413 if es_pago else 402, detail={
