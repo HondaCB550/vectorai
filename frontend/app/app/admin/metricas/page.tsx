@@ -22,6 +22,7 @@ type Metrics = {
   usuarios_por_zona: { zona: string; usuarios: number }[];
   facturacion_por_mes: { mes: string; monto: number }[];
   ocr: { llamadas: number; costo_usd_estimado: number; por_mes: { mes: string; n: number }[] };
+  catalogo: { maestro: number; aliases: number; precios_historicos: number; pendientes: number };
   precios_plan: Record<string, number>;
 };
 
@@ -193,6 +194,13 @@ export default function MetricasPage() {
               <KPI label="Presupuestos" value={num(data.presupuestos_total)} sub="subidos" />
               <KPI label="Ahorro generado" value={ars(data.ahorro_generado)} sub="a los usuarios (vigente)" />
               <KPI label="Costo OCR" value={usd(data.ocr.costo_usd_estimado)} sub={`${num(data.ocr.llamadas)} llamadas de visión`} />
+              <KPI label="Catálogo maestro" value={num(data.catalogo?.maestro ?? 0)} sub="materiales validados" />
+              <KPI
+                label="Aliases aprendidos"
+                value={num(data.catalogo?.aliases ?? 0)}
+                sub={`${num(data.catalogo?.pendientes ?? 0)} pendientes de revisión`}
+              />
+              <KPI label="Precios históricos" value={num(data.catalogo?.precios_historicos ?? 0)} sub="puntos material × proveedor" />
               <KPI
                 label="Horas de desarrollo"
                 value={hs(HORAS_PROYECTO.total)}

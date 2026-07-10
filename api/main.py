@@ -2632,6 +2632,12 @@ def admin_metrics(authorization: Optional[str] = Header(None)):
         "comparativas_total": m.get("comparativas_total", 0),
         "presupuestos_total": m.get("presupuestos_total", 0),
         "ahorro_generado": m.get("ahorro_comparativas", 0),
+        "catalogo": {
+            "maestro": m.get("maestro_total", 0),
+            "aliases": m.get("aliases_total", 0),
+            "precios_historicos": m.get("precios_historicos_total", 0),
+            "pendientes": m.get("pendientes_total", 0),
+        },
         "crecimiento_usuarios": crecimiento,
         "usuarios_por_zona": zonas_arr,
         "facturacion_por_mes": m.get("facturacion_por_mes") or [],
