@@ -431,6 +431,10 @@ class SheetsRequest(BaseModel):
     filtro_rubro: Optional[str] = None
     incluir_iva: bool = False
     descuento_pct: float = 0.0  # 0–100
+    # Config real por proveedor ({prov: {"iva_incluido": bool}}): con esto el
+    # export replica la vista de pantalla — en "Precio efectivo" el proveedor
+    # que cotizó c/IVA mantiene su precio final (nunca baja al neto).
+    config_proveedores: Optional[dict] = None
 
 
 # Cache en memoria (fallback si Supabase no está disponible)
@@ -867,7 +871,12 @@ async def generar_sheets(
     # Solo Excel: el export a Google Sheets se dio de baja (las service
     # accounts ya no tienen cuota de Drive y crear el sheet devuelve 403;
     # si se retoma, migrar sheets.py a OAuth del usuario).
-    iva_label = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    if req.incluir_iva:
+        iva_label = "finales con IVA (10,5%)"
+    elif req.config_proveedores:
+        iva_label = "efectivos (s/IVA; el proveedor que cotizó c/IVA mantiene su precio final)"
+    else:
+        iva_label = "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · VectorAI"
     xlsx_bytes = generar_excel_comparativo(
@@ -875,6 +884,8 @@ async def generar_sheets(
         proveedores=cached["proveedores"],
         titulo=titulo,
         subtitulo=subtitulo,
+        config_proveedores=req.config_proveedores,
+        vista_efectivo=not req.incluir_iva,
     )
     filename = f"VectorAI_Comparativa_{fecha}.xlsx"
     return StreamingResponse(
@@ -885,6 +896,12 @@ async def generar_sheets(
 
 
 def _aplicar_filtros(comparativo: list, req: SheetsRequest) -> list:
+    """Filtra filas y convierte los netos del cache al precio MOSTRADO de la
+    vista activa, replicando precioMostrado() del frontend:
+      mostrado = neto × (1.105 si vista c/IVA O el proveedor cotizó c/IVA) × desc
+    Recalcula mejor_proveedor y ahorro con esos valores (en vista efectivo el
+    ranking puede diferir del neto del backend). Sin config_proveedores cae al
+    comportamiento viejo (factor uniforme), para requests de clientes viejos."""
     import copy
     rows = comparativo
     if req.solo_comunes:
@@ -892,21 +909,44 @@ def _aplicar_filtros(comparativo: list, req: SheetsRequest) -> list:
     if req.filtro_rubro and req.filtro_rubro != "Todos":
         rows = [r for r in rows if r.get("rubro") == req.filtro_rubro]
 
-    factor_iva = 1.105 if req.incluir_iva else 1.0
     factor_desc = 1.0 - (req.descuento_pct / 100.0) if req.descuento_pct else 1.0
-    factor = round(factor_iva * factor_desc, 6)
+    cfg = req.config_proveedores or {}
 
-    if factor == 1.0:
-        return rows
+    def prov_con_iva(p: str) -> bool:
+        return bool((cfg.get(p) or {}).get("iva_incluido", True))
 
-    # Aplicar factor a una copia para no mutar el cache
+    if not cfg:
+        # Compatibilidad: factor uniforme como antes
+        factor = round((1.105 if req.incluir_iva else 1.0) * factor_desc, 6)
+        if factor == 1.0:
+            return rows
+        result = []
+        for row in rows:
+            r = copy.deepcopy(row)
+            for prov_data in r.get("precios", {}).values():
+                prov_data["precio_sin_iva"] = round(prov_data["precio_sin_iva"] * factor, 2)
+            if r.get("ahorro"):
+                r["ahorro"] = round(r["ahorro"] * factor, 2)
+            result.append(r)
+        return result
+
     result = []
     for row in rows:
         r = copy.deepcopy(row)
-        for prov_data in r.get("precios", {}).values():
-            prov_data["precio_sin_iva"] = round(prov_data["precio_sin_iva"] * factor, 2)
-        if r.get("ahorro"):
-            r["ahorro"] = round(r["ahorro"] * factor, 2)
+        cant = r.get("cant", 1) or 1
+        mostrados = {}
+        for prov, prov_data in r.get("precios", {}).items():
+            neto = prov_data["precio_sin_iva"]
+            factor_iva = 1.105 if (req.incluir_iva or prov_con_iva(prov)) else 1.0
+            prov_data["precio_sin_iva"] = round(neto * factor_iva * factor_desc, 2)
+            # Referencia c/IVA para la doble columna del Excel en vista efectivo
+            prov_data["precio_con_iva"] = round(neto * 1.105 * factor_desc, 2)
+            mostrados[prov] = prov_data["precio_sin_iva"] * cant
+        if mostrados:
+            mejor = min(mostrados, key=mostrados.get)
+            r["mejor_proveedor"] = mejor
+            r["ahorro"] = round(max(mostrados.values()) - min(mostrados.values()), 2) \
+                if (r.get("en_varios") and len(mostrados) > 1) else 0
         result.append(r)
     return result
 
@@ -928,7 +968,12 @@ async def generar_pdf(
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
-    iva_label  = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    if req.incluir_iva:
+        iva_label = "finales con IVA (10,5%)"
+    elif req.config_proveedores:
+        iva_label = "efectivos (c/IVA donde el proveedor lo incluye)"
+    else:
+        iva_label = "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
@@ -963,7 +1008,12 @@ async def generar_imagen(
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
     titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
-    iva_label  = "con IVA (10,5%)" if req.incluir_iva else "sin IVA"
+    if req.incluir_iva:
+        iva_label = "finales con IVA (10,5%)"
+    elif req.config_proveedores:
+        iva_label = "efectivos (c/IVA donde el proveedor lo incluye)"
+    else:
+        iva_label = "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
@@ -2639,6 +2689,26 @@ async def admin_upsert_grupo_marca(
 
 def _plan_permite_obras(plan: str) -> bool:
     return plan in ("advance", "pro")
+
+
+@app.get("/mi-plan")
+async def mi_plan(authorization: Optional[str] = Header(None)):
+    """Topes del plan del usuario, para que el frontend pueda deshabilitar
+    controles ANTES de subir (misma lógica que _validar_archivos)."""
+    user = get_user_plan(authorization)
+    plan = user["plan"]
+    es_pago = plan in ("basico", "advance", "pro")
+    if plan in ("advance", "pro"):
+        max_prov = MAX_PROVEEDORES_ADV
+    elif es_pago:
+        max_prov = MAX_PROVEEDORES
+    else:
+        max_prov = MAX_PROVEEDORES_FREE
+    return {
+        "plan": plan,
+        "max_proveedores": max_prov,
+        "max_hojas": MAX_HOJAS_PROV if es_pago else MAX_HOJAS_PROV_FREE,
+    }
 
 
 @app.get("/obras")

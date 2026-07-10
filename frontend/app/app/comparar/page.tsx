@@ -188,6 +188,10 @@ export default function Comparar() {
   const [confirmado, setConfirmado]   = useState(false);
   const [token, setToken]             = useState<string | null>(null);
   const [soyAdmin, setSoyAdmin]       = useState(false);
+  // Tope de proveedores del plan (free 3 / Inicial 5 / Advance 10): al llegar,
+  // "Agregar proveedor" muta a "Cambiar de plan" (decisión de Pablo 10-07)
+  const [maxProveedores, setMaxProveedores] = useState(3);
+  const [planActual, setPlanActual]         = useState<string>("free");
 
   // Estado editable de dudosos: usuario puede elegir alternativa
   const [dudososEditados, setDudososEditados] = useState<
@@ -227,6 +231,13 @@ export default function Comparar() {
     fetch(`${API_URL}/obras`, { headers: { Authorization: `Bearer ${token}` } })
       .then((r) => r.json())
       .then((d) => { setObras(d.obras || []); setObrasHabilitado(!!d.habilitado); })
+      .catch(() => {});
+    fetch(`${API_URL}/mi-plan`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.max_proveedores) setMaxProveedores(d.max_proveedores);
+        if (d?.plan) setPlanActual(d.plan);
+      })
       .catch(() => {});
   }, [token]);
 
@@ -663,6 +674,9 @@ export default function Comparar() {
           filtro_rubro:   filtroRubro !== "Todos" ? filtroRubro : null,
           incluir_iva:    conIva,
           descuento_pct:  descuentoPct,
+          // Config real por proveedor: el export replica la vista activa
+          // (en efectivo, el que cotizó c/IVA mantiene su precio final)
+          config_proveedores: resultado.config_proveedores ?? null,
         }),
       });
       if (!res.ok) { alert("Error al generar el archivo"); return; }
@@ -938,14 +952,30 @@ export default function Comparar() {
               ))}
             </div>
 
-            {/* Agregar proveedor + Analizar */}
+            {/* Agregar proveedor + Analizar. Al tope del plan, el botón muta a
+                "Cambiar de plan": el usuario entiende el límite y el camino. */}
             <div className="flex items-center gap-3 flex-wrap">
-              <button
-                onClick={addBloque}
-                className="border border-dashed border-gray-300 text-gray-500 text-sm font-medium px-5 py-2.5 rounded-xl hover:border-blue-400 hover:text-blue-600 transition"
-              >
-                ＋ Agregar proveedor
-              </button>
+              {bloques.length < maxProveedores ? (
+                <button
+                  onClick={addBloque}
+                  className="border border-dashed border-gray-300 text-gray-500 text-sm font-medium px-5 py-2.5 rounded-xl hover:border-blue-400 hover:text-blue-600 transition"
+                >
+                  ＋ Agregar proveedor
+                </button>
+              ) : planActual !== "advance" && planActual !== "pro" ? (
+                <Link
+                  href="/suscribirse"
+                  className="border border-dashed border-blue-300 bg-blue-50 text-blue-700 text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-blue-100 transition"
+                  title={`Tu plan permite hasta ${maxProveedores} proveedores por comparativa`}
+                >
+                  Cambiar de plan para comparar más de {maxProveedores} proveedores →
+                </Link>
+              ) : (
+                <span className="border border-dashed border-gray-200 text-gray-400 text-sm font-medium px-5 py-2.5 rounded-xl cursor-default"
+                      title="Límite técnico por comparativa">
+                  Máximo {maxProveedores} proveedores por comparativa
+                </span>
+              )}
 
               {error && (
                 <div className="flex-1 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2.5 rounded-xl whitespace-pre-line">{error}</div>

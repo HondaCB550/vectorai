@@ -88,9 +88,17 @@ def generar_excel_comparativo(
     proveedores: list[str],
     titulo: str = None,
     subtitulo: str = None,
+    config_proveedores: dict = None,
+    vista_efectivo: bool = False,
 ) -> bytes:
     """
     Genera un Excel comparativo y devuelve los bytes del archivo.
+
+    En vista_efectivo (regla de Pablo, 10-07): el proveedor que cotizó c/IVA
+    lleva UNA sola columna (su precio final — no puede vender sin IVA, mostrar
+    un neto sería ficción); el que cotizó s/IVA lleva DOS columnas (s/IVA, que
+    es la comparable, + c/IVA de referencia). El "mejor" se marca sobre las
+    columnas comparables.
     """
     titulo = titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
     fecha  = datetime.now().strftime("%d/%m/%Y")
@@ -100,14 +108,33 @@ def generar_excel_comparativo(
     ws = wb.active
     ws.title = "Comparativa"
 
-    # Columnas: Rubro(oculto) | Material | Cant. | Unidad | prov1..N | Mejor precio | Ahorro
-    n_prov     = len(proveedores)
+    # Spec de columnas de proveedor: (proveedor, tipo)
+    #   "principal" = el precio de la vista (comparable, recibe el "mejor")
+    #   "ref"       = referencia c/IVA del que cotizó s/IVA (solo vista efectivo)
+    cfg = config_proveedores or {}
+
+    def _prov_con_iva(p: str) -> bool:
+        return bool((cfg.get(p) or {}).get("iva_incluido", True))
+
+    cols_prov: list[tuple[str, str, str]] = []   # (prov, tipo, etiqueta)
+    if vista_efectivo and cfg:
+        for p in proveedores:
+            if _prov_con_iva(p):
+                cols_prov.append((p, "principal", f"{p} (c/IVA)"))
+            else:
+                cols_prov.append((p, "principal", f"{p} (s/IVA)"))
+                cols_prov.append((p, "ref", f"{p} (c/IVA ref.)"))
+    else:
+        cols_prov = [(p, "principal", p) for p in proveedores]
+
+    # Columnas: Rubro(oculto) | Material | Cant. | Unidad | provs... | Mejor precio | Ahorro
+    n_cols_prov = len(cols_prov)
     col_rubro  = 1
     col_mat    = 2
     col_cant   = 3
     col_unidad = 4
     col_prov0  = 5
-    col_mejor  = col_prov0 + n_prov
+    col_mejor  = col_prov0 + n_cols_prov
     col_ahorro = col_mejor + 1
     total_cols = col_ahorro
 
@@ -117,7 +144,11 @@ def generar_excel_comparativo(
                       marca.meta_visible(subtitulo))
 
     # ── Fila 4: encabezados de columnas ───────────────────────────────────────
-    headers = ["Rubro", "Material", "Cant.", "Unidad"] + proveedores + ["Mejor precio", "Ahorro s/IVA"]
+    etiqueta_ahorro = "Ahorro" if (vista_efectivo and cfg) else "Ahorro s/IVA"
+    headers = ["Rubro", "Material", "Cant.", "Unidad"] + [e for _, _, e in cols_prov] \
+        + ["Mejor precio", etiqueta_ahorro]
+    # Color por PROVEEDOR (las dos columnas del mismo proveedor comparten color)
+    color_prov = {p: COLORES_PROV[i % len(COLORES_PROV)] for i, p in enumerate(proveedores)}
     for col_idx, label in enumerate(headers, start=1):
         c = ws.cell(4, col_idx, label)
         c.alignment = Alignment(horizontal="center" if col_idx > 3 else "left",
@@ -127,9 +158,10 @@ def generar_excel_comparativo(
             c.fill = _fill(COLOR_SUBHDR)
             c.font = _font(bold=True, size=9)
         elif col_idx < col_mejor:
-            prov_i = col_idx - col_prov0
-            c.fill = _fill(COLORES_PROV[prov_i % len(COLORES_PROV)])
-            c.font = _font(bold=True, color=COLOR_TEXTO_W, size=9)
+            prov, tipo, _ = cols_prov[col_idx - col_prov0]
+            c.fill = _fill(color_prov[prov])
+            c.font = _font(bold=(tipo == "principal"), color=COLOR_TEXTO_W, size=9,
+                           italic=(tipo == "ref"))
         else:
             c.fill = _fill(COLOR_SUBHDR)
             c.font = _font(bold=True, size=9)
@@ -141,7 +173,7 @@ def generar_excel_comparativo(
     # ── Filas de datos ────────────────────────────────────────────────────────
     current_row = 5
     ultimo_rubro = None
-    totales = {p: 0.0 for p in proveedores}
+    totales = [0.0] * n_cols_prov   # un total por columna (incluye las de referencia)
 
     for row in comparativo:
         rubro   = row.get("rubro", "")
@@ -185,18 +217,24 @@ def generar_excel_comparativo(
         c.font = _font(size=9)
         c.alignment = Alignment(horizontal="center", vertical="center")
 
-        for i, prov in enumerate(proveedores):
-            val = precios_vals.get(prov)
+        for i, (prov, tipo, _) in enumerate(cols_prov):
             col = col_prov0 + i
-            is_mejor = (precio_min is not None and val is not None
-                        and val == precio_min and len(precios_vals) > 1)
+            if tipo == "ref":
+                pu_ref = precios.get(prov, {}).get("precio_con_iva")
+                val = round(pu_ref * cant, 2) if pu_ref is not None else None
+            else:
+                val = precios_vals.get(prov)
+            is_mejor = (tipo == "principal" and precio_min is not None
+                        and val is not None and val == precio_min
+                        and len(precios_vals) > 1)
             if val is not None:
-                totales[prov] += val
+                totales[i] += val
                 c = ws.cell(current_row, col, val)
                 c.number_format = NUM_FMT
             else:
                 c = ws.cell(current_row, col, "—")
-            c.font = _font(bold=is_mejor, size=9)
+            c.font = _font(bold=is_mejor, size=9, italic=(tipo == "ref"),
+                           color="808080" if tipo == "ref" else "000000")
             c.alignment = Alignment(horizontal="right", vertical="center")
             if is_mejor:
                 c.fill = _fill(COLOR_MEJOR)
@@ -228,11 +266,11 @@ def generar_excel_comparativo(
     ws.cell(current_row, col_rubro).fill = _fill(COLOR_SUBHDR)
     ws.cell(current_row, col_unidad).fill = _fill(COLOR_SUBHDR)
 
-    for i, prov in enumerate(proveedores):
+    for i, (prov, tipo, _) in enumerate(cols_prov):
         col = col_prov0 + i
-        c = ws.cell(current_row, col, round(totales[prov], 2))
+        c = ws.cell(current_row, col, round(totales[i], 2))
         c.number_format = NUM_FMT
-        c.font = _font(bold=True, size=9)
+        c.font = _font(bold=(tipo == "principal"), size=9, italic=(tipo == "ref"))
         c.fill = _fill(COLOR_SUBHDR)
         c.alignment = Alignment(horizontal="right")
 
@@ -245,7 +283,7 @@ def generar_excel_comparativo(
     ws.column_dimensions[get_column_letter(col_mat)].width    = 42
     ws.column_dimensions[get_column_letter(col_cant)].width   = 7
     ws.column_dimensions[get_column_letter(col_unidad)].width = 9
-    for i in range(n_prov):
+    for i in range(n_cols_prov):
         ws.column_dimensions[get_column_letter(col_prov0 + i)].width = 18
     ws.column_dimensions[get_column_letter(col_mejor)].width  = 18
     ws.column_dimensions[get_column_letter(col_ahorro)].width = 16
