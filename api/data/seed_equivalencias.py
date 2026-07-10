@@ -1,6 +1,6 @@
 """
 seed_equivalencias.py — Extrae matches confirmados de todos los Borradores
-y los consolida en decisiones_usuario.json para la API VectorAI.
+y los consolida en decisiones_usuario.json para la API Vectorai.
 
 Uso:
     python seed_equivalencias.py [--dry-run]

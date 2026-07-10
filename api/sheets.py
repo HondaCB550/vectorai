@@ -1,5 +1,5 @@
 """
-sheets.py — Generador de Google Sheets para comparativas de presupuestos VectorAI
+sheets.py — Generador de Google Sheets para comparativas de presupuestos Vectorai
 
 Crea un Google Sheet con la comparativa formateada:
   - Header con colores por proveedor
@@ -90,7 +90,7 @@ def crear_sheet_comparativa(
 
     comparativo: lista de filas del endpoint /analizar
     proveedores: lista de nombres de proveedores (en orden de columnas)
-    titulo: título del Sheet (default: "VectorAI — Comparativa YYYY-MM-DD")
+    titulo: título del Sheet (default: "Vectorai — Comparativa YYYY-MM-DD")
     user_mail: si se pasa, comparte el Sheet con ese mail como editor
     """
     creds = _creds()
@@ -98,7 +98,7 @@ def crear_sheet_comparativa(
     drive_svc  = build("drive",  "v3", credentials=creds)
 
     fecha = datetime.now().strftime("%d/%m/%Y")
-    titulo = titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
+    titulo = titulo or f"Vectorai — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
 
     # ── Armar datos ────────────────────────────────────────────────────────────
     # Columnas: RUBRO | MATERIAL | UNIDAD | [prov1] | [prov2] | ... | MEJOR | AHORRO
@@ -133,7 +133,7 @@ def crear_sheet_comparativa(
     rows_data.append({
         "values": [
             {
-                "userEnteredValue": {"stringValue": f"Generado el {fecha} · Precios sin IVA · VectorAI"},
+                "userEnteredValue": {"stringValue": f"Generado el {fecha} · Precios sin IVA · Vectorai"},
                 "userEnteredFormat": {
                     **_color_bg(COLOR_HEADER),
                     "textFormat": {"italic": True, "fontSize": 10,

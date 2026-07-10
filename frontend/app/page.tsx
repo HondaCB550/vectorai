@@ -56,7 +56,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-// Viñeta de marca (reemplaza los ✅/❌ — sin emojis en VectorAI).
+// Viñeta de marca (reemplaza los ✅/❌ — sin emojis en Vectorai).
 function Bullet({ neg = false }: { neg?: boolean }) {
   return <span className={`mt-[7px] w-1.5 h-1.5 rounded-full shrink-0 ${neg ? "bg-gray-300" : "bg-[#E87022]"}`} />;
 }
@@ -96,7 +96,7 @@ export default function Landing() {
             </ul>
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
               <a
-                href="https://wa.me/5492241410393?text=Hola%20VectorAI%2C%20tengo%20una%20consulta"
+                href="https://wa.me/5492241410393?text=Hola%20Vectorai%2C%20tengo%20una%20consulta"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 sm:py-2.5 rounded-full transition whitespace-nowrap"

@@ -1,4 +1,4 @@
-# VectorAI v2 — Schema de Base de Datos
+# Vectorai v2 — Schema de Base de Datos
 
 **Decisión clave:** Sin tabla `codigos_proveedores`. El matching se hace 100% por texto (aliases).
 Con 500+ proveedores del país, los códigos internos de cada uno son incompatibles entre sí.
@@ -8,7 +8,7 @@ Los aliases de texto son universales y escalan sin mantenimiento manual.
 
 ## Tabla: materiales_validados
 
-**La BD central de VectorAI.** Contiene todos los materiales conocidos y verificados.
+**La BD central de Vectorai.** Contiene todos los materiales conocidos y verificados.
 Inicialmente se importan desde `api/data/master_materiales.json` (915 materiales).
 
 ### Estructura SQL
@@ -69,7 +69,7 @@ Mapeo:
 
 ## Tabla: material_denominaciones
 
-**El corazón de VectorAI.** Guarda todas las formas en que los proveedores
+**El corazón de Vectorai.** Guarda todas las formas en que los proveedores
 nombran cada material. Crece con cada PDF procesado.
 
 ### Estructura SQL

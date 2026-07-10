@@ -1,4 +1,4 @@
-# VectorAI — Modelo de datos y flujo de lanzamiento
+# Vectorai — Modelo de datos y flujo de lanzamiento
 
 **Fecha:** 2026-07-02
 **Relación con otros docs:** el diagrama grande "Base de Datos Maestra (modelo lógico)" con 14 tablas es el **norte conceptual** (no implementar aún). Este doc define el **corte de lanzamiento**: `SCHEMA_VECTORAI_v2.md` (4 tablas) + proveedores + conversión de unidades + tenancy.

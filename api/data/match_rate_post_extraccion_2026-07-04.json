@@ -6,18 +6,18 @@
    "pdf": "CAROSIO - SANITARIOS.pdf",
    "metodo": "regex",
    "items": 124,
-   "auto": 118,
-   "dudoso": 4,
+   "auto": 119,
+   "dudoso": 3,
    "sin_match": 2,
-   "pct_auto": 95.2
+   "pct_auto": 96.0
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "metodo": "regex",
    "items": 96,
    "auto": 64,
-   "dudoso": 27,
-   "sin_match": 5,
+   "dudoso": 28,
+   "sin_match": 4,
    "pct_auto": 66.7
   },
   {
@@ -108,15 +108,9 @@
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
-   "nivel": "dudoso",
-   "texto": "BOMBA SUMERG. SUB4 100m C/TABLERO YEMPALME",
-   "mejor": "INSTS191 (81.0)"
-  },
-  {
-   "pdf": "CAROSIO - SANITARIOS.pdf",
    "nivel": "sin_match",
    "texto": "SET 6 PZAS LINEA 11000",
-   "mejor": "MAD008 (53.7)"
+   "mejor": "TER308 (54.9)"
   },
   {
    "pdf": "CAROSIO - SANITARIOS.pdf",
@@ -290,7 +284,7 @@
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
    "nivel": "dudoso",
    "texto": "REDUCCIÓN - Excéntrica M H",
-   "mejor": "INSTS221 (64.3)"
+   "mejor": "INSTS223 (75.0)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
@@ -318,9 +312,9 @@
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES.pdf",
-   "nivel": "sin_match",
+   "nivel": "dudoso",
    "texto": "ZZ 52 ZZ 52 52 x 32 x 15 JHONS O",
-   "mejor": "HIE003 (53.7)"
+   "mejor": "TER410 (64.5)"
   },
   {
    "pdf": "CASA ALFONSIN - INSTALACIONES 2.pdf",

@@ -633,7 +633,7 @@ export default function Comparar() {
     const key = item.item_id ?? item.desc_prov;
     // Sale de la pila (declutter) pero SIGUE en sin_match: así el "Confirmar"
     // de la comparativa lo manda igual a materiales_pendientes (revisión interna
-    // de VectorAI). Acá solo lo inyectamos en la comparativa como material único
+    // de Vectorai). Acá solo lo inyectamos en la comparativa como material único
     // para que quien compra tenga la referencia de precio y no se pierda.
     setEmpUnicos((u) => (u.includes(key) ? u : [...u, key]));
     setResultado((prev) => {
@@ -684,7 +684,7 @@ export default function Comparar() {
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href = url;
-      a.download = `VectorAI_${new Date().toISOString().slice(0, 10)}.${ext}`;
+      a.download = `Vectorai_${new Date().toISOString().slice(0, 10)}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {
@@ -770,7 +770,7 @@ export default function Comparar() {
             Mejorar plan
           </Link>
           <a
-            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
+            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Vectorai"
             target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white bg-[#25D366] hover:bg-[#1EBE5D] transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
             title="Consultas por WhatsApp"

@@ -34,7 +34,7 @@ export default function Privacidad() {
               <tr><td className={TD}>Uso</td><td className={TD}>Comparativas realizadas, plan contratado, contadores mensuales</td><td className={TD}>Prestación del servicio y límites de plan</td></tr>
               <tr><td className={TD}>Documentos</td><td className={TD}>Presupuestos subidos y los ítems extraídos de ellos</td><td className={TD}>Generación de comparativas</td></tr>
               <tr><td className={TD}>Precios</td><td className={TD}>Material, precio, unidad, proveedor, zona y fecha</td><td className={TD}>Históricos y estadísticas del servicio</td></tr>
-              <tr><td className={TD}>Pago</td><td className={TD}>Se procesan en MercadoPago; VectorAI <strong>no accede ni almacena datos de tarjetas</strong></td><td className={TD}>Cobro de suscripciones</td></tr>
+              <tr><td className={TD}>Pago</td><td className={TD}>Se procesan en MercadoPago; Vectorai <strong>no accede ni almacena datos de tarjetas</strong></td><td className={TD}>Cobro de suscripciones</td></tr>
               <tr><td className={TD}>Técnicos</td><td className={TD}>Logs de acceso y errores</td><td className={TD}>Seguridad y diagnóstico</td></tr>
             </tbody>
           </table>
@@ -99,7 +99,7 @@ export default function Privacidad() {
       <section>
         <h2>8. Cookies</h2>
         <p>
-          VectorAI utiliza únicamente cookies técnicas, necesarias para mantener la sesión iniciada. No se usan cookies
+          Vectorai utiliza únicamente cookies técnicas, necesarias para mantener la sesión iniciada. No se usan cookies
           publicitarias ni de seguimiento de terceros.
         </p>
       </section>

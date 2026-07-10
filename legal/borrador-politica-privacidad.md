@@ -1,4 +1,4 @@
-# Política de Privacidad — VectorAI
+# Política de Privacidad — Vectorai
 
 > **BORRADOR PARA REVISIÓN** — generado el 03-07-2026. Los puntos entre corchetes 【】 requieren decisión de Pablo. Marco normativo: Ley 25.326 de Protección de Datos Personales (Argentina).
 
@@ -16,7 +16,7 @@
 | Uso | Comparativas realizadas, plan contratado, contadores mensuales | Prestación del servicio y aplicación de límites de plan |
 | Documentos | Presupuestos subidos (PDF/foto/planilla) y los ítems extraídos de ellos | Generación de comparativas |
 | Precios | Material, precio, proveedor y fecha extraídos de los documentos | Históricos y estadísticas del servicio |
-| Pago | Los pagos se procesan en MercadoPago; VectorAI **no accede ni almacena datos de tarjetas** | Cobro de suscripciones |
+| Pago | Los pagos se procesan en MercadoPago; Vectorai **no accede ni almacena datos de tarjetas** | Cobro de suscripciones |
 | Técnicos | Logs de acceso y errores | Seguridad y diagnóstico |
 
 No recolectamos datos sensibles (art. 2, Ley 25.326).
@@ -50,7 +50,7 @@ La baja de la cuenta puede solicitarse desde la plataforma o por correo; implica
 
 ## 8. Cookies
 
-VectorAI utiliza únicamente cookies técnicas necesarias para mantener la sesión iniciada. No se usan cookies publicitarias de terceros. 【Actualizar si se agrega analytics — en ese caso incluir aviso y opción.】
+Vectorai utiliza únicamente cookies técnicas necesarias para mantener la sesión iniciada. No se usan cookies publicitarias de terceros. 【Actualizar si se agrega analytics — en ese caso incluir aviso y opción.】
 
 ## 9. Seguridad
 

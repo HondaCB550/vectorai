@@ -1,4 +1,4 @@
-# Política de Privacidad — VectorAI
+# Política de Privacidad — Vectorai
 
 **Última actualización:** 4 de julio de 2026
 
@@ -14,7 +14,7 @@ Pablo Martín Bontempo, CUIT 20-26435985-7, con domicilio en Orzali 1035, UF 35,
 | Uso | Comparativas realizadas, plan contratado, contadores mensuales | Prestación del servicio y aplicación de límites de plan |
 | Documentos | Presupuestos subidos (PDF/foto/planilla) y los ítems extraídos de ellos | Generación de comparativas |
 | Precios | Material, precio, unidad, proveedor, zona y fecha extraídos de los documentos | Históricos y estadísticas del servicio |
-| Pago | Los pagos se procesan en MercadoPago; VectorAI **no accede ni almacena datos de tarjetas** | Cobro de suscripciones |
+| Pago | Los pagos se procesan en MercadoPago; Vectorai **no accede ni almacena datos de tarjetas** | Cobro de suscripciones |
 | Técnicos | Logs de acceso y errores | Seguridad y diagnóstico |
 
 No recolectamos datos sensibles (art. 2, Ley 25.326).
@@ -49,7 +49,7 @@ La baja de la cuenta puede solicitarse desde la plataforma o por correo; implica
 
 ## 8. Cookies
 
-VectorAI utiliza únicamente cookies técnicas, necesarias para mantener la sesión iniciada. No se usan cookies publicitarias ni de seguimiento de terceros.
+Vectorai utiliza únicamente cookies técnicas, necesarias para mantener la sesión iniciada. No se usan cookies publicitarias ni de seguimiento de terceros.
 
 ## 9. Seguridad
 

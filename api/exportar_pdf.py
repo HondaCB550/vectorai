@@ -1,5 +1,5 @@
 """
-exportar_pdf.py — Genera un PDF comparativo de presupuestos VectorAI.
+exportar_pdf.py — Genera un PDF comparativo de presupuestos Vectorai.
 Devuelve bytes del .pdf, listo para enviar como respuesta HTTP.
 
 Diseño de marca: isologo (3 barras redondeadas navy/naranja, mismo dibujo que
@@ -49,7 +49,7 @@ def _fmt(v: float) -> str:
     return f"$ {int(round(v)):,}".replace(",", ".")
 
 
-class _HeaderVectorAI(Flowable):
+class _HeaderVectorai(Flowable):
     """Encabezado de marca: isologo + wordmark, metadatos a la derecha,
     título y regla naranja. Fondo blanco."""
 
@@ -122,7 +122,7 @@ def generar_pdf_comparativo(
         pagesize=pagesize,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
         topMargin=1.2*cm, bottomMargin=1.5*cm,
-        title=titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}",
+        title=titulo or f"Vectorai — Comparativa {datetime.now().strftime('%Y-%m-%d')}",
     )
 
     st_mat    = ParagraphStyle("mat", fontSize=7.5, fontName="Helvetica",
@@ -252,7 +252,7 @@ def generar_pdf_comparativo(
     main_table.setStyle(TableStyle(table_styles))
 
     story = [
-        _HeaderVectorAI(page_w, titulo_visible, meta),
+        _HeaderVectorai(page_w, titulo_visible, meta),
         Spacer(1, 0.35*cm),
         main_table,
     ]

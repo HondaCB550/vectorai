@@ -1,4 +1,4 @@
-# IDENTIDAD.md — Qué es VectorAI
+# IDENTIDAD.md — Qué es Vectorai
 
 > Fuente de verdad de marca, posicionamiento y voz. Toda pieza de comunicación (landing, emails, redes, UI, prensa) se escribe desde acá. Si algo contradice este documento, gana este documento — o se actualiza este documento primero.
 > Definido por Pablo Bontempo, 08-07-2026.
@@ -7,17 +7,17 @@
 
 ## Posicionamiento (la frase madre)
 
-**VectorAI no es una secretaria — es tu asistente de compras.**
+**Vectorai no es una secretaria — es tu asistente de compras.**
 
 Las empresas constructoras grandes tienen una persona dedicada a compras: cotiza, compara, negocia, arma los pedidos. Las empresas chicas y los profesionales independientes no pueden pagar ese puesto — y ese trabajo lo terminan haciendo ellos mismos, de noche, gratis y mal.
 
-VectorAI ejerce ese rol. No "te ayuda a tipear más rápido" (eso es una secretaria): **hace el trabajo del comprador** — lee los presupuestos como llegan, normaliza los materiales, detecta el mejor precio ítem por ítem y arma el pedido para cada proveedor. Le da a cada profesional de la construcción algo que hasta hoy solo tenían las empresas grandes.
+Vectorai ejerce ese rol. No "te ayuda a tipear más rápido" (eso es una secretaria): **hace el trabajo del comprador** — lee los presupuestos como llegan, normaliza los materiales, detecta el mejor precio ítem por ítem y arma el pedido para cada proveedor. Le da a cada profesional de la construcción algo que hasta hoy solo tenían las empresas grandes.
 
 Consecuencia comercial: **el precio se compara contra un sueldo, no contra otra app.** El plan Inicial ($19.600/mes) es el puesto de compras que no podías pagar, por menos de lo que sale una hora de obra al mes.
 
 ## Misión y actitud
 
-**La misión**: resolver el problema de las compras para los pequeños contratistas, las pequeñas constructoras y los arquitectos autónomos. Representar ese puesto de compras desde la plataforma, **para todos los profesionales** — VectorAI nació como herramienta interna de Bonhaus, pero la idea es vender el servicio de compras a todo el que construye, no quedárnoslo.
+**La misión**: resolver el problema de las compras para los pequeños contratistas, las pequeñas constructoras y los arquitectos autónomos. Representar ese puesto de compras desde la plataforma, **para todos los profesionales** — Vectorai nació como herramienta interna de Bonhaus, pero la idea es vender el servicio de compras a todo el que construye, no quedárnoslo.
 
 **La actitud: no somos perfectos, y lo decimos.** Vamos a mejorar día a día para cumplir esa misión — y no es una frase: es literalmente cómo funciona el producto. Cada presupuesto procesado le enseña materiales nuevos al sistema; cada corrección de un usuario lo hace más preciso para el siguiente. El compromiso de marca no es "funciona perfecto": es **"hoy es mejor que ayer, y si algo falla lo arreglamos rápido"**. En etapa fundador eso es personal: "me lo decís y lo arreglo en el día".
 
@@ -61,9 +61,9 @@ Mensajes de apoyo (con su prueba):
 
 ## Activos de identidad
 
-- **Datos propios** (el moat): catálogo normalizado de +900 materiales + aliases que crecen con cada uso + precios reales por proveedor/zona. Se comunican vía **Índice VectorAI** (dispersión de precios) y **Canasta VectorAI** (materiales anclados al costo de vida: asado, nafta, leche, dólar, hora de oficial).
+- **Datos propios** (el moat): catálogo normalizado de +900 materiales + aliases que crecen con cada uso + precios reales por proveedor/zona. Se comunican vía **Índice Vectorai** (dispersión de precios) y **Canasta Vectorai** (materiales anclados al costo de vida: asado, nafta, leche, dólar, hora de oficial).
 - **Historia fundador**: Pablo, constructor (Bonhaus), que se cansó de comparar a mano y lo construyó para sí mismo primero.
-- Dominio: vectorai.com.ar · Contacto: hola@vectorai.com.ar · Marca escrita: "VectorAI" (en piezas de producto figura "Vectorai" en título de pestaña/legales).
+- Dominio: vectorai.com.ar · Contacto: hola@vectorai.com.ar · **Marca escrita: "Vectorai"** — V mayúscula y el resto minúscula, SIEMPRE. Nunca "VectorAI": no se jerarquiza el "AI" en la marca (decisión de Pablo, 10-07-2026). En contextos todo-mayúscula puede ir "VECTORAI".
 
 ## Dónde vive cada cosa
 

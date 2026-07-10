@@ -1,4 +1,4 @@
-# VectorAI v2 — Índice Maestro de Documentación
+# Vectorai v2 — Índice Maestro de Documentación
 
 **Última actualización:** 22 Junio 2026  
 **Decisión clave:** Sin codigos_proveedores — matching 100% por texto (aliases)  

@@ -1,4 +1,4 @@
-/* Logo oficial VectorAI: isotipo embudo + wordmark "Vectorai".
+/* Logo oficial Vectorai: isotipo embudo + wordmark "Vectorai".
    Usalo en login, registro, el nav del comparador y el footer.
    - dark: para fondos oscuros (barras blancas en vez de navy).
    - El wordmark va TODO del mismo tono (navy, o blanco en dark): el "ai"

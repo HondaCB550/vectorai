@@ -159,7 +159,7 @@ export default function AdminPage() {
             Mejorar plan
           </Link>
           <a
-            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20VectorAI"
+            href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Vectorai"
             target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium text-white bg-[#25D366] hover:bg-[#1EBE5D] transition px-3 py-1.5 rounded-lg"
             title="Consultas por WhatsApp"
@@ -358,7 +358,7 @@ export default function AdminPage() {
                     {accion?.tipo === "crear" && (
                       <div className="mb-3 bg-violet-50 border border-violet-200 rounded-lg p-3 text-xs text-violet-700">
                         Se marcará este item para crear un nuevo material. Luego agregalo manualmente
-                        en <strong>BD_Materiales_VectorAI.xlsx</strong> y corrés <code>migrar_v2.py</code>.
+                        en <strong>BD_Materiales_Vectorai.xlsx</strong> y corrés <code>migrar_v2.py</code>.
                       </div>
                     )}
 

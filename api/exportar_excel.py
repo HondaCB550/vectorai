@@ -1,5 +1,5 @@
 """
-exportar_excel.py — Genera un Excel comparativo de presupuestos VectorAI
+exportar_excel.py — Genera un Excel comparativo de presupuestos Vectorai
 Devuelve bytes del .xlsx, listo para enviar como respuesta HTTP.
 Encabezado de marca (isologo + wordmark embebido como imagen) desde marca.py.
 """
@@ -100,9 +100,9 @@ def generar_excel_comparativo(
     es la comparable, + c/IVA de referencia). El "mejor" se marca sobre las
     columnas comparables.
     """
-    titulo = titulo or f"VectorAI — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
+    titulo = titulo or f"Vectorai — Comparativa {datetime.now().strftime('%Y-%m-%d')}"
     fecha  = datetime.now().strftime("%d/%m/%Y")
-    subtitulo = subtitulo or f"Generado el {fecha} · Precios sin IVA · VectorAI"
+    subtitulo = subtitulo or f"Generado el {fecha} · Precios sin IVA · Vectorai"
 
     wb = Workbook()
     ws = wb.active

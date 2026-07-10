@@ -399,7 +399,7 @@ def _get_proveedor_id(sb: SupabaseClient | None, nombre: str) -> str | None:
 
 
 # ── App FastAPI ───────────────────────────────────────────────────────────────
-app = FastAPI(title="VectorAI API", version="0.1.0")
+app = FastAPI(title="Vectorai API", version="0.1.0")
 
 from whatsapp import router as whatsapp_router
 app.include_router(whatsapp_router)
@@ -865,7 +865,7 @@ async def generar_sheets(
 
     from exportar_excel import generar_excel_comparativo
     fecha = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
-    titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    titulo = req.titulo or f"Vectorai — Comparativa {fecha}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
 
     # Solo Excel: el export a Google Sheets se dio de baja (las service
@@ -878,7 +878,7 @@ async def generar_sheets(
     else:
         iva_label = "sin IVA"
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
-    subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · VectorAI"
+    subtitulo = f"Generado el {fecha} · Precios {iva_label}{desc_label} · Vectorai"
     xlsx_bytes = generar_excel_comparativo(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
@@ -887,7 +887,7 @@ async def generar_sheets(
         config_proveedores=req.config_proveedores,
         vista_efectivo=not req.incluir_iva,
     )
-    filename = f"VectorAI_Comparativa_{fecha}.xlsx"
+    filename = f"Vectorai_Comparativa_{fecha}.xlsx"
     return StreamingResponse(
         BytesIO(xlsx_bytes),
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -967,7 +967,7 @@ async def generar_pdf(
     from exportar_pdf import generar_pdf_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
-    titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    titulo = req.titulo or f"Vectorai — Comparativa {fecha}"
     if req.incluir_iva:
         iva_label = "finales con IVA (10,5%)"
     elif req.config_proveedores:
@@ -983,7 +983,7 @@ async def generar_pdf(
         titulo=titulo,
         subtitulo=subtitulo,
     )
-    filename = f"VectorAI_Comparativa_{fecha}.pdf"
+    filename = f"Vectorai_Comparativa_{fecha}.pdf"
     return StreamingResponse(
         BytesIO(pdf_bytes),
         media_type="application/pdf",
@@ -1007,7 +1007,7 @@ async def generar_imagen(
     from exportar_imagen import generar_imagen_comparativo
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
-    titulo = req.titulo or f"VectorAI — Comparativa {fecha}"
+    titulo = req.titulo or f"Vectorai — Comparativa {fecha}"
     if req.incluir_iva:
         iva_label = "finales con IVA (10,5%)"
     elif req.config_proveedores:
@@ -1023,7 +1023,7 @@ async def generar_imagen(
         titulo=titulo,
         subtitulo=subtitulo,
     )
-    filename = f"VectorAI_Comparativa_{fecha}.jpg"
+    filename = f"Vectorai_Comparativa_{fecha}.jpg"
     return StreamingResponse(
         BytesIO(jpg_bytes),
         media_type="image/jpeg",
@@ -1055,7 +1055,7 @@ async def crear_suscripcion(req: MPSuscripcionRequest):
 
     preapproval_data = {
         "preapproval_plan_id": None,  # sin plan predefinido → ad-hoc
-        "reason": f"VectorAI Plan {nombre_plan} — comparador de presupuestos",
+        "reason": f"Vectorai Plan {nombre_plan} — comparador de presupuestos",
         # El plan viaja en external_reference para que el webhook active el
         # correcto: "<user_id>:<plan>".
         "external_reference": f"{req.user_id}:{plan}",

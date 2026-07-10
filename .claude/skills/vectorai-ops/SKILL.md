@@ -1,9 +1,9 @@
 ---
 name: vectorai-ops
-description: Operaciones de mantenimiento de VectorAI — curado de materiales_pendientes por lote, auditoría de aliases basura, verificación E2E del flujo comparar, checklist post-deploy y diagnóstico con logs de Railway. Usar cuando el usuario diga "revisá los pendientes", "curá pendientes", "auditá aliases", "hay aliases basura", "verificá el deploy", "chequeá vectorai", "diagnosticá el API", o durante sesiones /loop de curado de datos.
+description: Operaciones de mantenimiento de Vectorai — curado de materiales_pendientes por lote, auditoría de aliases basura, verificación E2E del flujo comparar, checklist post-deploy y diagnóstico con logs de Railway. Usar cuando el usuario diga "revisá los pendientes", "curá pendientes", "auditá aliases", "hay aliases basura", "verificá el deploy", "chequeá vectorai", "diagnosticá el API", o durante sesiones /loop de curado de datos.
 ---
 
-# VectorAI Ops
+# Vectorai Ops
 
 Runbooks de mantenimiento. Contexto general del proyecto en `CLAUDE.md` (raíz del repo). Supabase project: `aetwdwvctowannnbelwb`.
 

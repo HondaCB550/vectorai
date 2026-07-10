@@ -1,5 +1,5 @@
 """
-marca.py — Activos de marca VectorAI para los exports (PDF / Excel / imagen).
+marca.py — Activos de marca Vectorai para los exports (PDF / Excel / imagen).
 Isologo: 3 barras redondeadas navy/naranja, mismo dibujo que
 frontend/components/Logo.tsx. Paleta según IDENTIDAD.md.
 """
@@ -63,8 +63,8 @@ def lockup_png(alto: int = 48) -> tuple[bytes, int, int]:
 def titulo_visible(titulo: str | None) -> str:
     """El encabezado ya lleva logo y fecha: el título no repite marca ni ISO-fecha."""
     t = (titulo or "").strip()
-    if t.startswith("VectorAI — "):
-        t = t[len("VectorAI — "):]
+    if t.startswith("Vectorai — "):
+        t = t[len("Vectorai — "):]
     if not t or t.startswith("Comparativa 2"):
         t = "Comparativa de presupuestos"
     return t
@@ -73,7 +73,7 @@ def titulo_visible(titulo: str | None) -> str:
 def meta_visible(subtitulo: str | None) -> str:
     """Línea de metadatos del encabezado; el wordmark ya dice Vectorai."""
     meta = subtitulo or f"Generado el {datetime.now().strftime('%d/%m/%Y')} · Precios sin IVA"
-    for sufijo in (" · VectorAI beta", " · VectorAI"):
+    for sufijo in (" · Vectorai beta", " · Vectorai"):
         if meta.endswith(sufijo):
             meta = meta[: -len(sufijo)]
     return meta

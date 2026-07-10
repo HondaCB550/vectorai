@@ -1,4 +1,4 @@
-# VectorAI v2 — Resumen Final de Arquitectura & Roadmap
+# Vectorai v2 — Resumen Final de Arquitectura & Roadmap
 
 **Fecha:** 22 de Junio 2026  
 **Actualizado:** 22 de Junio 2026 — decisión: sin codigos_proveedores, solo texto  
