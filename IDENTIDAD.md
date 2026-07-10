@@ -56,6 +56,7 @@ Mensajes de apoyo (con su prueba):
 - **Voseo argentino, de colega a colega.** Pablo es constructor: habla como en la obra, no como un SaaS. "Che, mirá lo que armé" antes que "descubra nuestra solución".
 - **Datos antes que adjetivos.** Nunca "ahorrá muchísimo": siempre el número real (39%, $X en una compra). Si no hay dato, no se afirma.
 - **El enemigo es el Excel del domingo**, nunca otra marca. No se nombran competidores en comunicación pública.
+- **Siempre en positivo** (regla de Pablo, 10-07-2026): se dice "quién tiene el mejor precio", nunca "quién te está cobrando de más". Vectorai muestra oportunidades, no acusa a los proveedores — el usuario sigue comprándole a sus corralones de siempre, la relación con ellos se cuida, no se demoniza. Aplica a landing, emails, UI y redes.
 - **Sin emojis en la UI del producto** (regla de diseño: viñeta naranja de marca en su lugar). En redes y WhatsApp los emojis están bien — son parte del registro coloquial.
 - Honestidad operativa: si algo no matcheó o falló, se dice y se arregla — "me la decís y la arreglo en el día" es parte de la marca en etapa fundador.
 

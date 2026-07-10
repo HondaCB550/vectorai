@@ -140,8 +140,8 @@ export default function Landing() {
               ¿Otra vez comparando presupuestos <span className="relative inline-block">a mano<span className="absolute left-0 right-0 -bottom-0.5 h-1.5 bg-[#E87022]/30 rounded" /></span>?
             </h1>
             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto">
-              Subís los PDFs de tu corralón a Vectorai y te cruza los precios, detecta quién te
-              está cobrando de más y te devuelve una tabla lista para comparar. En 3 minutos.
+              Subís los PDFs de tu corralón a Vectorai y te cruza los precios, detecta quién
+              tiene el mejor precio y te devuelve una tabla lista para comparar. En 3 minutos.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
               <Link
