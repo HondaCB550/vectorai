@@ -47,7 +47,8 @@ No incluyas subtotales, notas del proveedor, condiciones de pago ni líneas de f
 Además:
 - fecha: fecha del presupuesto en formato YYYY-MM-DD ("" si no aparece)
 - total_declarado: el TOTAL general declarado al pie del documento (0 si no aparece)
-- observacion_iva: qué dice el documento sobre IVA ("" si nada)"""
+- observacion_iva: qué dice el documento sobre IVA ("" si nada)
+- moneda: "USD" si los precios están en dólares (dice U$S, USD, U$D, "dólar" o los montos son claramente en dólares); "ARS" si están en pesos. Ante la duda, "ARS"."""
 
 SCHEMA_EXTRACCION = {
     "type": "object",
@@ -70,8 +71,9 @@ SCHEMA_EXTRACCION = {
         "fecha": {"type": "string"},
         "total_declarado": {"type": "number"},
         "observacion_iva": {"type": "string"},
+        "moneda": {"type": "string", "enum": ["ARS", "USD"]},
     },
-    "required": ["items", "fecha", "total_declarado", "observacion_iva"],
+    "required": ["items", "fecha", "total_declarado", "observacion_iva", "moneda"],
     "additionalProperties": False,
 }
 
@@ -158,6 +160,7 @@ def _extraer_claude(content: bytes, media_type: str) -> dict:
     return {
         "fecha_presupuesto": (data.get("fecha") or "").strip() or None,
         "iva_detectado": _iva_por_total(items, float(data.get("total_declarado") or 0)),
+        "moneda": "USD" if (data.get("moneda") or "").upper() == "USD" else "ARS",
         "suma_lineas": round(sum(it["total"] for it in items), 2),
         "n_items": len(items),
         "metodo_extraccion": "vision_claude",
@@ -188,9 +191,11 @@ def _extraer_google(content: bytes) -> dict:
         raise ValueError("Google Vision no encontró texto legible en la imagen.")
 
     items = extraer_regex(texto) or extraer_lineas(texto)
+    t_up = texto.upper()
     return {
         "fecha_presupuesto": None,
         "iva_detectado": "ASUMIDO 1,105",
+        "moneda": "USD" if ("U$S" in t_up or "U$D" in t_up or "USD" in t_up) else "ARS",
         "suma_lineas": round(sum(it.get("total") or 0 for it in items), 2),
         "n_items": len(items),
         "metodo_extraccion": "ocr_google",
@@ -243,6 +248,7 @@ def extraer_pdf_escaneado(pdf_bytes: bytes) -> dict:
         items: list[dict] = []
         fecha = None
         iva = "ASUMIDO 1,105"
+        moneda = "ARS"
         metodo = "ocr"
         for i in range(n_pag):
             # scale≈2 (150 dpi) para leer tablas, pero acotado: una página con
@@ -266,12 +272,15 @@ def extraer_pdf_escaneado(pdf_bytes: bytes) -> dict:
             # nos quedamos con el veredicto de IVA más informativo.
             if r.get("iva_detectado") and r["iva_detectado"] != "ASUMIDO 1,105":
                 iva = r["iva_detectado"]
+            if r.get("moneda") == "USD":
+                moneda = "USD"
     finally:
         pdf.close()
 
     return {
         "fecha_presupuesto": fecha,
         "iva_detectado": iva,
+        "moneda": moneda,
         "suma_lineas": round(sum(it.get("total") or 0 for it in items), 2),
         "n_items": len(items),
         "metodo_extraccion": f"{metodo}_pdf" + (f" ({n_pag}/{n_total} pág.)" if n_total > n_pag else ""),

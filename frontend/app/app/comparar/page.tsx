@@ -30,6 +30,10 @@ type ItemAutomatico = {
   precio_sospechoso?: boolean;
   conversion?: string;
   unidad_ambigua?: boolean;
+  unidad?: string;
+  precio_raw?: number;
+  unidad_raw?: string;
+  moneda?: string;
 };
 
 type ItemDudoso = ItemAutomatico & { codigo_elegido?: string };
@@ -73,6 +77,8 @@ type ResultadoProveedor = {
   iva_detectado: boolean;
   metodo_extraccion: string;
   n_items_extraidos: number;
+  moneda_documento?: string;    // "USD" si el documento vino cotizado en dólares
+  tc_aplicado?: number;         // tipo de cambio oficial usado para convertir
 };
 
 type Precio = { precio_sin_iva: number; score: number; origen: string; cant: number };
@@ -339,7 +345,7 @@ export default function Comparar() {
 
       if (!res.ok) {
         if (data?.detail?.error === "plan_limit") {
-          setError("Plan gratuito: máximo 2 análisis por día. Pasate al plan Advance.");
+          setError(data?.detail?.mensaje || "Alcanzaste el límite de tu plan. Mejorá tu plan para seguir comparando.");
         } else if (data?.detail?.error === "sin_resultados" && Array.isArray(data?.detail?.errores)) {
           const lineas = data.detail.errores
             .map((e: { archivo: string; error: string }) => `• ${e.archivo}: ${e.error}`)
@@ -394,9 +400,13 @@ export default function Comparar() {
           proveedor:       prov,
           codigo_material: item.codigo_material,
           precio_sin_iva:  item.precio_sin_iva,
-          unidad:          "UN",
+          unidad:          item.unidad ?? "UN",
           cantidad:        item.cant,
           item_id:         item.item_id ?? null,
+          precio_raw:      item.precio_raw ?? null,
+          unidad_raw:      item.unidad_raw ?? null,
+          moneda:          item.moneda ?? null,
+          conversion:      item.conversion ?? null,
         });
       }
       // Items dudosos con el código que el usuario eligió; si marcó que
@@ -418,9 +428,13 @@ export default function Comparar() {
           proveedor:       prov,
           codigo_material: codigoElegido,
           precio_sin_iva:  item.precio_sin_iva,
-          unidad:          "UN",
+          unidad:          item.unidad ?? "UN",
           cantidad:        item.cant,
           item_id:         item.item_id ?? null,
+          precio_raw:      item.precio_raw ?? null,
+          unidad_raw:      item.unidad_raw ?? null,
+          moneda:          item.moneda ?? null,
+          conversion:      item.conversion ?? null,
         });
       });
       // Sin match
@@ -1082,7 +1096,17 @@ export default function Comparar() {
                 return (
                   <div key={prov} className="min-w-[540px] grid grid-cols-[1fr_80px_80px_80px_80px] gap-x-4 px-4 py-3 border-b border-gray-100 last:border-0 items-center">
                     <div>
-                      <div className="text-sm font-semibold text-gray-800">{prov}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold text-gray-800">{prov}</span>
+                        {r.moneda_documento === "USD" && (
+                          <span
+                            className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200"
+                            title={`Documento cotizado en dólares, convertido a pesos con el oficial venta${r.tc_aplicado ? ` ($${r.tc_aplicado.toLocaleString("es-AR")})` : ""}`}
+                          >
+                            USD{r.tc_aplicado ? ` → ARS $${r.tc_aplicado.toLocaleString("es-AR")}` : ""}
+                          </span>
+                        )}
+                      </div>
                       <div className="flex items-center gap-2 mt-1">
                         <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden max-w-[120px]">
                           <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }} />

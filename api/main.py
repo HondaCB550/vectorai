@@ -1196,6 +1196,34 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
     return pu, cant, unidad_norm or "UN", None, True
 
 
+# ── Tipo de cambio para documentos cotizados en USD ───────────────────────────
+# Algunos proveedores (JMA perfiles, importadores) cotizan en dólares. Para que
+# la comparativa y precios_historicos queden siempre en ARS, el precio se
+# convierte con el dólar oficial VENTA del día (dolarapi.com). El valor
+# original en USD queda en precio_raw + moneda='USD'.
+_tc_cache: dict = {"valor": None, "ts": 0}
+_TC_TTL = 3600  # 1 hora
+
+
+def _tc_oficial() -> float | None:
+    """Dólar oficial venta, cacheado 1h. None si la API no responde y no hay
+    caché previa (el caller decide fallar cerrado)."""
+    import requests as _rq
+    ahora = time.time()
+    if _tc_cache["valor"] and ahora - _tc_cache["ts"] < _TC_TTL:
+        return _tc_cache["valor"]
+    try:
+        r = _rq.get("https://dolarapi.com/v1/dolares/oficial", timeout=8)
+        r.raise_for_status()
+        venta = float(r.json()["venta"])
+        if venta > 0:
+            _tc_cache.update(valor=venta, ts=ahora)
+            return venta
+    except Exception as e:
+        print(f"[tc] Error consultando dolarapi: {e}")
+    return _tc_cache["valor"]  # mejor un TC de hace >1h que nada
+
+
 # Espesores comerciales de steel framing: los proveedores escriben el nominal
 # (0.9 / 1.2 / 1.25 / 1.6 / 2.0) y el maestro el real con zinc (0,94 / 1,29 /
 # 1,64 / 2,04). Se canonizan SOLO en contexto de perfiles PGC/PGU/PGO para no
@@ -1505,6 +1533,12 @@ class ConfirmarItemV2(BaseModel):
     unidad: str = "UN"
     cantidad: float = 1.0
     item_id: Optional[str] = None   # id en presupuesto_items (devuelto por /analizar-v2)
+    # Trazabilidad (echo de /analizar-v2): precio/unidad tal como vinieron en
+    # el documento, moneda original y nota de conversión aplicada.
+    precio_raw: Optional[float] = None
+    unidad_raw: Optional[str] = None
+    moneda: Optional[str] = None
+    conversion: Optional[str] = None
 
 class PendienteItem(BaseModel):
     desc_prov: str
@@ -1694,6 +1728,23 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
 
             items = resultado.get("items", [])
 
+            # Documento cotizado en dólares (JMA perfiles, importadores):
+            # convertir a ARS con el oficial venta del día para que la
+            # comparativa y el histórico queden siempre en una sola moneda.
+            # Sin TC disponible se falla cerrado: mejor pedir reintento que
+            # comparar dólares contra pesos.
+            tc_usd = None
+            if items and (resultado.get("moneda") or "ARS").upper() == "USD":
+                tc_usd = _tc_oficial()
+                if not tc_usd:
+                    errores.append({
+                        "archivo": fname,
+                        "error": (f"El presupuesto de {proveedor} está cotizado en USD y "
+                                  "no se pudo obtener el tipo de cambio oficial para "
+                                  "convertirlo. Volvé a intentar en unos minutos."),
+                    })
+                    continue
+
             # Documento sin precios por ítem (ej. EN SECO/GRUPO MMC con solo
             # DESCRIPCIÓN + CANTIDAD): no hay nada que comparar → avisar claro en
             # vez de devolver 0 ítems mudo (que parece que la app está rota).
@@ -1788,11 +1839,18 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                 # matcheado. Preserva el total de línea (pu×f, cant÷f).
                 unidad_final = (item.get("unidad") or "").strip(". ").upper() or "UN"
                 # Trazabilidad: precio y unidad tal como vinieron en el documento
-                pu_raw, unidad_raw = round(pu, 2), unidad_final
-                conversion_nota, unidad_ambigua = None, False
+                # (si el doc está en USD, precio_raw queda en USD y moneda='USD')
+                pu_raw, unidad_raw = round(pu, 4), unidad_final
+                notas_conv, unidad_ambigua = [], False
+                if tc_usd:
+                    pu = pu * tc_usd
+                    notas_conv.append(f"USD→ARS ×{tc_usd:g} (oficial venta)")
                 if matches and matches[0]["nivel"] != "sin_match":
-                    pu, cant, unidad_final, conversion_nota, unidad_ambigua = _convertir_unidad(
+                    pu, cant, unidad_final, nota_unidad, unidad_ambigua = _convertir_unidad(
                         matches[0]["codigo_material"], desc, item.get("unidad") or "", pu, cant)
+                    if nota_unidad:
+                        notas_conv.append(nota_unidad)
+                conversion_nota = " · ".join(notas_conv) or None
 
                 precio = precio_archivo(pu)
 
@@ -1805,6 +1863,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                     "unidad":        unidad_final,
                     "precio_raw":    pu_raw,
                     "unidad_raw":    unidad_raw,
+                    "moneda":        "USD" if tc_usd else "ARS",
                 }
                 if sospechoso:
                     base["precio_sospechoso"] = True
@@ -1875,6 +1934,7 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "precio_raw":      item.get("precio_raw"),
                             "unidad_raw":      item.get("unidad_raw"),
                             "conversion_aplicada": item.get("conversion"),
+                            "moneda":          item.get("moneda", "ARS"),
                         }
                         for item in automatico
                     ]).execute()
@@ -1930,6 +1990,9 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
             acc["dudoso"].extend(dudoso)
             acc["sin_match"].extend(sin_match)
             acc["n_items_extraidos"] += resultado.get("n_items", 0)
+            if tc_usd:
+                acc["moneda_documento"] = "USD"
+                acc["tc_aplicado"] = tc_usd
 
         except Exception as e:
             errores.append({"archivo": fname, "error": str(e)})
@@ -2127,6 +2190,10 @@ async def confirmar_v2(
                 "unidad":         item.unidad,
                 "precio":         item.precio_sin_iva,
                 "cantidad":       int(item.cantidad),
+                "precio_raw":     item.precio_raw,
+                "unidad_raw":     item.unidad_raw,
+                "conversion_aplicada": item.conversion,
+                "moneda":         item.moneda or "ARS",
             }).execute()
             guardados["precios"] += 1
         except Exception as e:
