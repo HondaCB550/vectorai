@@ -1348,18 +1348,33 @@ def _load_knowledge_cache():
         print(f"[v2] Error cargando conversion_unidades: {e}")
 
     _knowledge_cache_ts = ahora
+    _rebuild_marca_pats()
     print(f"[v2] Knowledge cache: {len(_sin_extra)} sinónimos BD, {len(_grupos_extra)} grupos marcas, {len(_conv_extra)} conversiones")
 
 
-def _mismo_grupo_v2(texto_a: str, texto_b: str) -> bool:
-    """True si ambos textos comparten al menos una marca del mismo grupo (BD + hardcoded)."""
-    todos_grupos = list(MARCAS_EQUIVALENTES) + _grupos_extra
-    for grupo in todos_grupos:
-        en_a = any(m in texto_a.upper() for m in grupo)
-        en_b = any(m in texto_b.upper() for m in grupo)
-        if en_a and en_b:
-            return True
-    return False
+# Patrones compilados de marca → índice de grupo. Con \b para que 'IPS' no
+# dispare dentro de 'TIPS'/'CLIPS' (las variantes con prefijo, tipo AWADUCT,
+# tienen su propia fila en la tabla).
+_marca_pats: list[tuple[re.Pattern, int]] = []
+
+
+def _rebuild_marca_pats():
+    global _marca_pats
+    todos = list(MARCAS_EQUIVALENTES) + _grupos_extra
+    _marca_pats = [
+        (re.compile(r"\b" + re.escape(m.upper()) + r"\b"), gi)
+        for gi, grupo in enumerate(todos)
+        for m in grupo
+    ]
+
+
+def _grupos_marca_en(texto: str) -> set[int]:
+    """Índices de grupos de marca presentes en el texto (por palabra completa)."""
+    t = (texto or "").upper()
+    return {gi for pat, gi in _marca_pats if pat.search(t)}
+
+
+_rebuild_marca_pats()   # con los hardcodeados; se re-arma al cargar la BD
 
 
 def _get_denominaciones() -> list[dict]:
@@ -1526,11 +1541,18 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
     salida = []
     n_tokens_texto = len(texto_prep.split())
     texto_nums = extract_nums(texto_prep)
+    grupos_texto = _grupos_marca_en(texto)
     for texto_match, score, idx in resultados:
         den = denominaciones[idx]
-        # Bonus si comparten marca del mismo grupo equivalente
-        if _mismo_grupo_v2(texto, den["denominacion"]):
+        # Marcas: mismo grupo equivalente → bonus. Grupos DISTINTOS en ambos
+        # lados → dominios incompatibles (IPS=fusión agua vs SIGAS/VANTEC=gas):
+        # el texto puede ser idéntico salvo la marca ("CODO 90 DE 20") pero son
+        # materiales distintos — nunca automático, tope 84 (queda en REVISAR).
+        grupos_alias = _grupos_marca_en(den["denominacion"])
+        if grupos_texto & grupos_alias:
             score = min(100, score + 6)
+        elif grupos_texto and grupos_alias:
+            score = min(score, 84.0)
         # Guarda anti-fragmento (bug clase PERFIL/BROCAS): cuando un lado tiene
         # ≤2 tokens y los textos no son idénticos, token_set da 100 por
         # contención sin identificar nada ('puerta', 'contenedor estandar'
