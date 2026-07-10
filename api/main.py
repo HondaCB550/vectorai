@@ -1320,13 +1320,24 @@ def _load_knowledge_cache():
     except Exception as e:
         print(f"[v2] Error cargando sinonimos: {e}")
 
-    # Grupos de marcas equivalentes desde BD
+    # Grupos de marcas equivalentes desde BD. solo_separar=true → el grupo
+    # capa cruces entre dominios pero NO suma el bonus +6 (familias con muchas
+    # variantes por marca, ej. griferías/pinturas, donde el bonus puede
+    # promover la variante equivocada de la misma marca).
+    global _grupos_sin_bonus
     try:
-        res = sb.table("grupos_marcas").select("marca,grupo").eq("activo", True).execute()
+        res = sb.table("grupos_marcas").select("marca,grupo,solo_separar").eq("activo", True).execute()
         grupos: dict[str, set] = {}
+        sin_bonus: set[str] = set()
         for r in (res.data or []):
             grupos.setdefault(r["grupo"], set()).add(r["marca"].upper())
-        _grupos_extra = [frozenset(v) for v in grupos.values()]
+            if r.get("solo_separar"):
+                sin_bonus.add(r["grupo"])
+        nombres = list(grupos.keys())
+        _grupos_extra = [frozenset(grupos[n]) for n in nombres]
+        # Índices dentro de la lista combinada (los hardcodeados van primero)
+        _grupos_sin_bonus = {len(MARCAS_EQUIVALENTES) + i
+                            for i, n in enumerate(nombres) if n in sin_bonus}
     except Exception as e:
         print(f"[v2] Error cargando grupos_marcas: {e}")
 
@@ -1356,6 +1367,7 @@ def _load_knowledge_cache():
 # dispare dentro de 'TIPS'/'CLIPS' (las variantes con prefijo, tipo AWADUCT,
 # tienen su propia fila en la tabla).
 _marca_pats: list[tuple[re.Pattern, int]] = []
+_grupos_sin_bonus: set[int] = set()   # índices de grupos "solo separar"
 
 
 def _rebuild_marca_pats():
@@ -1544,14 +1556,18 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
     grupos_texto = _grupos_marca_en(texto)
     for texto_match, score, idx in resultados:
         den = denominaciones[idx]
-        # Marcas: mismo grupo equivalente → bonus. Grupos DISTINTOS en ambos
-        # lados → dominios incompatibles (IPS=fusión agua vs SIGAS/VANTEC=gas):
-        # el texto puede ser idéntico salvo la marca ("CODO 90 DE 20") pero son
-        # materiales distintos — nunca automático, tope 84 (queda en REVISAR).
+        # Marcas: mismo grupo equivalente → bonus (salvo grupos "solo separar":
+        # griferías/pinturas tienen tantas variantes por marca que el +6 puede
+        # promover la equivocada — ahí el grupo solo protege, no suma). Grupos
+        # DISTINTOS en ambos lados → dominios incompatibles (IPS=fusión agua vs
+        # SIGAS/VANTEC=gas): el texto puede ser idéntico salvo la marca
+        # ("CODO 90 DE 20") pero son materiales distintos — nunca automático,
+        # tope 84 (queda en REVISAR).
         grupos_alias = _grupos_marca_en(den["denominacion"])
-        if grupos_texto & grupos_alias:
+        compartidos = grupos_texto & grupos_alias
+        if compartidos - _grupos_sin_bonus:
             score = min(100, score + 6)
-        elif grupos_texto and grupos_alias:
+        elif not compartidos and grupos_texto and grupos_alias:
             score = min(score, 84.0)
         # Guarda anti-fragmento (bug clase PERFIL/BROCAS): cuando un lado tiene
         # ≤2 tokens y los textos no son idénticos, token_set da 100 por
