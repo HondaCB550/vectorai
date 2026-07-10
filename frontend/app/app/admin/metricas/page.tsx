@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
@@ -23,6 +23,7 @@ type Metrics = {
   facturacion_por_mes: { mes: string; monto: number }[];
   ocr: { llamadas: number; costo_usd_estimado: number; por_mes: { mes: string; n: number }[] };
   catalogo: { maestro: number; aliases: number; precios_historicos: number; pendientes: number };
+  catalogo_por_dia: { dia: string; maestro: number; aliases: number; precios: number }[];
   precios_plan: Record<string, number>;
 };
 
@@ -96,6 +97,84 @@ function LineChart({ points, labels }: { points: number[]; labels: string[] }) {
   );
 }
 
+// Series del catálogo: color fijo por entidad (paleta validada CVD, no cambiar el orden)
+const SERIES_CATALOGO = [
+  { key: "aliases" as const, label: "Aliases aprendidos", color: "#E87022" },
+  { key: "precios" as const, label: "Precios históricos", color: "#0D9488" },
+  { key: "maestro" as const, label: "Catálogo maestro", color: "#2563EB" },
+];
+
+function MultiLineChart({ rows }: { rows: { dia: string; maestro: number; aliases: number; precios: number }[] }) {
+  const [hover, setHover] = useState<number | null>(null);
+  const w = 560, h = 220, padL = 44, padR = 96, padY = 26;
+  if (rows.length < 2) return <p className="text-sm text-gray-400">Sin datos todavía.</p>;
+  const max = Math.max(1, ...rows.map((r) => Math.max(r.maestro, r.aliases, r.precios)));
+  const xAt = (i: number) => padL + (i / (rows.length - 1)) * (w - padL - padR);
+  const yAt = (v: number) => h - padY - (v / max) * (h - 2 * padY);
+  const fecha = (d: string) => `${d.slice(8, 10)}/${d.slice(5, 7)}`;
+  const cadaN = Math.max(1, Math.ceil(rows.length / 7));
+  const onMove = (e: React.MouseEvent<SVGSVGElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * w;
+    const i = Math.round(((x - padL) / (w - padL - padR)) * (rows.length - 1));
+    setHover(Math.max(0, Math.min(rows.length - 1, i)));
+  };
+  return (
+    <div className="relative">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
+        {[0.5, 1].map((f) => (
+          <g key={f}>
+            <line x1={padL} y1={yAt(max * f)} x2={w - padR} y2={yAt(max * f)} stroke="#f3f4f6" />
+            <text x={padL - 6} y={yAt(max * f) + 3} textAnchor="end" fontSize="9" fill="#9ca3af">{num(Math.round(max * f))}</text>
+          </g>
+        ))}
+        <line x1={padL} y1={h - padY} x2={w - padR} y2={h - padY} stroke="#e5e7eb" />
+        {rows.map((r, i) => (i % cadaN === 0 || i === rows.length - 1) && (
+          <text key={r.dia} x={xAt(i)} y={h - padY + 14} textAnchor="middle" fontSize="9" fill="#9ca3af">{fecha(r.dia)}</text>
+        ))}
+        {SERIES_CATALOGO.map((s) => {
+          const line = rows.map((r, i) => `${i === 0 ? "M" : "L"} ${xAt(i).toFixed(1)} ${yAt(r[s.key]).toFixed(1)}`).join(" ");
+          const fin = rows[rows.length - 1][s.key];
+          return (
+            <g key={s.key}>
+              <path d={line} fill="none" stroke={s.color} strokeWidth="2" strokeLinejoin="round" />
+              <circle cx={xAt(rows.length - 1)} cy={yAt(fin)} r="3" fill={s.color} stroke="#fff" strokeWidth="1.5" />
+              <text x={xAt(rows.length - 1) + 8} y={yAt(fin) + 3} fontSize="10" fontWeight="600" fill="#374151">{num(fin)}</text>
+            </g>
+          );
+        })}
+        {hover !== null && (
+          <g>
+            <line x1={xAt(hover)} y1={padY - 8} x2={xAt(hover)} y2={h - padY} stroke="#9ca3af" strokeDasharray="3 3" />
+            {SERIES_CATALOGO.map((s) => (
+              <circle key={s.key} cx={xAt(hover)} cy={yAt(rows[hover][s.key])} r="3.5" fill={s.color} stroke="#fff" strokeWidth="1.5" />
+            ))}
+          </g>
+        )}
+      </svg>
+      {hover !== null && (
+        <div className="absolute top-0 left-2 bg-white border border-gray-200 rounded-lg shadow-sm px-3 py-2 text-xs pointer-events-none">
+          <div className="font-semibold text-gray-700 mb-1">{fecha(rows[hover].dia)}</div>
+          {SERIES_CATALOGO.map((s) => (
+            <div key={s.key} className="flex items-center gap-1.5 text-gray-600">
+              <span className="inline-block w-2 h-2 rounded-full" style={{ background: s.color }} />
+              {s.label}: <span className="font-medium text-gray-800">{num(rows[hover][s.key])}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="flex flex-wrap gap-4 mt-2 text-xs text-gray-600">
+        {SERIES_CATALOGO.map((s) => (
+          <span key={s.key} className="flex items-center gap-1.5">
+            <span className="inline-block w-3 h-0.5 rounded" style={{ background: s.color }} />
+            {s.label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function BarsV({ data, fmt }: { data: { label: string; value: number }[]; fmt?: (v: number) => string }) {
   const w = 560, h = 200, pad = 34;
   if (!data.length) return <p className="text-sm text-gray-400">Sin datos todavía — se registran desde ahora.</p>;
@@ -157,7 +236,7 @@ export default function MetricasPage() {
   };
 
   const planes = data
-    ? Object.entries(data.usuarios.por_plan)
+    ? Object.entries({ free: 0, basico: 0, advance: 0, pro: 0, ...data.usuarios.por_plan })
         .map(([k, v]) => ({ label: NOMBRE_PLAN[k] || k, value: v }))
         .sort((a, b) => b.value - a.value)
     : [];
@@ -223,6 +302,10 @@ export default function MetricasPage() {
                 points={data.crecimiento_usuarios.map((c) => c.acumulado)}
                 labels={data.crecimiento_usuarios.map((c) => c.mes)}
               />
+            </Card>
+
+            <Card title="Crecimiento del catálogo (acumulado por día)">
+              <MultiLineChart rows={data.catalogo_por_dia ?? []} />
             </Card>
 
             <div className="grid md:grid-cols-2 gap-6">

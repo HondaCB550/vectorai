@@ -2638,6 +2638,7 @@ def admin_metrics(authorization: Optional[str] = Header(None)):
             "precios_historicos": m.get("precios_historicos_total", 0),
             "pendientes": m.get("pendientes_total", 0),
         },
+        "catalogo_por_dia": m.get("catalogo_por_dia") or [],
         "crecimiento_usuarios": crecimiento,
         "usuarios_por_zona": zonas_arr,
         "facturacion_por_mes": m.get("facturacion_por_mes") or [],
