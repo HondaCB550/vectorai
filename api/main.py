@@ -2694,13 +2694,15 @@ async def admin_upsert_grupo_marca(
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    # on_conflict marca,grupo: una marca puede estar en varios grupos (Tigre =
+    # PVC_desague Y fusion_agua) — la unicidad es por el par desde 10-07-2026.
     sb.table("grupos_marcas").upsert({
         "marca":     req.marca.upper().strip(),
         "grupo":     req.grupo.strip(),
         "categoria": req.categoria,
         "notas":     req.notas,
         "activo":    req.activo,
-    }, on_conflict="marca").execute()
+    }, on_conflict="marca,grupo").execute()
     _invalidar_cache_den()
     return {"ok": True, "marca": req.marca.upper(), "grupo": req.grupo}
 
