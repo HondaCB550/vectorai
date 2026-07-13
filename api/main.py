@@ -1432,6 +1432,7 @@ def _load_knowledge_cache():
     try:
         res = sb.table("sinonimos").select("original,canonico").eq("activo", True).execute()
         _sin_extra = {r["original"]: r["canonico"] for r in (res.data or [])}
+        set_sinonimos_extra(_sin_extra)   # sin esto los sinónimos BD no se aplican al match
     except Exception as e:
         print(f"[v2] Error cargando sinonimos: {e}")
 

@@ -222,6 +222,22 @@ SINONIMOS: dict[str, str] = {
 _SINONIMOS_ORDENADOS = sorted(SINONIMOS.items(), key=lambda x: -len(x[0]))
 
 
+def set_sinonimos_extra(extra: dict) -> None:
+    """Fusiona sinónimos externos (tabla sinonimos de Supabase) con los
+    hardcodeados y reordena. Los llama main._load_knowledge_cache() en cada
+    refresh del knowledge cache — sin esto los sinónimos de BD eran código
+    muerto (se cargaban y contaban en /health pero nunca se aplicaban).
+
+    Claves y valores pasan por normalize() para calzar con el texto sobre el
+    que opera aplicar_sinonimos (uppercase, sin acentos)."""
+    global _SINONIMOS_ORDENADOS
+    combinados = dict(SINONIMOS)
+    for k, v in (extra or {}).items():
+        if k and v:
+            combinados[normalize(k)] = normalize(v)
+    _SINONIMOS_ORDENADOS = sorted(combinados.items(), key=lambda x: -len(x[0]))
+
+
 # ── Grupos de marcas equivalentes ────────────────────────────────────────────
 # Si ambos lados (proveedor y maestro) tienen una marca del mismo grupo,
 # se trata como marca compatible aunque no sea idéntica (+5 puntos).
