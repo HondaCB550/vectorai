@@ -162,6 +162,119 @@ def test_europeo():
     _consistente(it)
 
 
+# ── El Galpón Sanitario ────────────────────────────────────────────────────────
+
+def test_galpon_basico():
+    it = _uno("39,00 UN CANO DURATOP 110X4.00 MTS 31737,14 31% 21.898,63 854.046,57")
+    assert "DURATOP" in it["desc"]
+    assert it["cant"] == 39.0 and it["pu"] == 21898.63 and it["total"] == 854046.57
+    assert it.get("unidad") == "UN"
+    _consistente(it)
+
+
+# ── Sanitarios Triunvirato ─────────────────────────────────────────────────────
+
+def test_triunvirato_basico():
+    it = _uno("14 39,00 AWADU00305 CAÑO 1035 DE 110 X 4 AWA 23991,12 13,00 935653,68")
+    assert it["cod"] == "AWADU00305"
+    assert it["cant"] == 39.0 and it["pu"] == 23991.12
+    _consistente(it)
+
+
+def test_triunvirato_codigo_pegado_a_descripcion():
+    it = _uno("41 6,00 ACQACAN00091CAÑO 20MM MAGNUM PN20 A/FRIA Y CAL 7421,98 13,00 44531,88")
+    assert it["cod"] == "ACQACAN00091"
+    assert it["desc"].startswith("CAÑO 20MM")
+    assert it["cant"] == 6.0 and it["pu"] == 7421.98
+    _consistente(it)
+
+
+# ── Insuma Sur (precio de lista sin descuento → pu = total/cant) ──────────────
+
+def test_insuma_descuento_50():
+    it = _uno("010F1025610 FLEJE CINC 25 ancho 610 MM Tonelada 1.000 12,218,191.59 50.00 0.00 6109095.80")
+    assert it["cod"] == "010F1025610"
+    assert it["cant"] == 1.0 and it["pu"] == 6109095.80
+    _consistente(it)
+
+
+def test_insuma_codigo_con_barra():
+    it = _uno('SAVARW1/2X1000 VARILLA GALV P/ANCLAJE W1/2"X1000MM Unidades 1.000 26,061.59 50.00 0.00 13030.79')
+    assert it["cod"] == "SAVARW1/2X1000"
+    assert it["pu"] == 13030.79
+    _consistente(it)
+
+
+# ── La Foresta (cantidad pegada a la descripción) ──────────────────────────────
+
+def test_foresta_basico():
+    it = _uno("16500108 80,00CARTELA 200X200X1,29MM PERFORADA (XUNID) 21,0 2557,81 204624,80")
+    assert it["cod"] == "16500108"
+    assert it["cant"] == 80.0 and it["pu"] == 2557.81
+    assert it["desc"].startswith("CARTELA")
+    _consistente(it)
+
+
+def test_foresta_variante_con_recargo():
+    it = _uno("16500108 80,00CARTELA 200X200X1,29MM PERFORADA (XUNID) 2557.81: +14.00CL 21,0 2199,72 175977,33")
+    assert it["cant"] == 80.0 and it["pu"] == 2199.72
+    _consistente(it)
+
+
+# ── Corralón Laprida ───────────────────────────────────────────────────────────
+
+def test_laprida_linea_limpia():
+    it = _uno("60.00 00001107 PASTINA KLAUKOL X 1 KG 4800.00 4800.00 288000.00")
+    assert it["cod"] == "00001107"
+    assert it["cant"] == 60.0 and it["pu"] == 4800.0
+    _consistente(it)
+
+
+def test_laprida_digitos_espaciados_y_linea_partida():
+    texto = ("4 2 4 . 0 0 0 0 00 1 61 6 CEMENTO AVELLANEDA X 25 KG [X\n"
+             "CANT] 6650.00 6650.00 2819600.00")
+    items = extraer_regex(texto)
+    assert len(items) == 1, items
+    it = items[0]
+    assert it["cant"] == 424.0 and it["pu"] == 6650.0 and it["total"] == 2819600.0
+    assert "CEMENTO AVELLANEDA" in it["desc"]
+    _consistente(it)
+
+
+# ── Corralón Las Quintas / Materalia (ERP "Pedido X PEV") ─────────────────────
+
+def test_pedido_pev():
+    it = _uno("CTOL25 Cemento Loma Negra x 25kg 424,00 $7.217,07 $3.060.036,31")
+    assert it["cod"] == "CTOL25"
+    assert it["cant"] == 424.0 and it["pu"] == 7217.07
+    _consistente(it)
+
+
+# ── Corralón Nuevo Pilar (columna IVA entre descripción y precio) ─────────────
+
+def test_cant_desc_iva():
+    it = _uno("424 CEMENTO AVELLANEDA X 25 KG 10.00 8200.00 3476800.00")
+    assert it["desc"] == "CEMENTO AVELLANEDA X 25 KG"
+    assert it["cant"] == 424.0 and it["pu"] == 8200.0
+    _consistente(it)
+
+
+def test_cant_desc_iva_cero():
+    it = _uno("6 CAÑO DE CEMENTO 0.30 X 1.20 0.00 28200.00 169200.00")
+    assert it["desc"] == "CAÑO DE CEMENTO 0.30 X 1.20"
+    assert it["cant"] == 6.0 and it["pu"] == 28200.0
+    _consistente(it)
+
+
+# ── Civimet (genérico CANT DESC PU TOTAL europeo) ─────────────────────────────
+
+def test_cant_desc_eur():
+    it = _uno("9,00 FLEJE S-A X 50 MTS ESP 0.5 (B) (BARBIERI) 53.750,60 483.755,36")
+    assert it["desc"].startswith("FLEJE S-A")
+    assert it["cant"] == 9.0 and it["pu"] == 53750.60 and it["total"] == 483755.36
+    _consistente(it)
+
+
 # ── Heurístico de líneas ───────────────────────────────────────────────────────
 
 def test_lineas_heuristico_precio_al_final():
