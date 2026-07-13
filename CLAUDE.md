@@ -35,6 +35,8 @@ Núcleo del matching:
 
 Negocio: `perfiles` (plan free/advance/pro, `usos_mes`/`limite_mes`/`mes_usos` — NO usos_hoy), `presupuestos` + `presupuesto_items` (cada PDF procesado y sus líneas), `proveedores`, `conversion_unidades`.
 
+Calidad de extracción: `extracciones_dudosas` + bucket privado `dudosos` (07-2026). Cuando un archivo extrae 0 ítems (con contenido presente) o <50% de ítems consistentes (pu×cant vs total, mínimo 5 con total propio), el API guarda el archivo original en el bucket + fila con metadata (motivo `cero_items`/`inconsistente`, texto_muestra de la 1ra página) y responde `formato_nuevo: true` en `errores` → el frontend muestra el globo "lo resolvemos en 24 hs, probá mañana". El archivo NO se procesa (no llega a matching ni a Mis Presupuestos). Flujo del equipo: `railway run python descargar_dudosos.py` (baja a `Cotizaciones\Para cargar\Dudosos\` y marca `descargado`) → armar parser → deploy → marcar filas `resuelto`. La verificación nocturna alerta si hay pendientes. RLS sin policies: solo service key (la anon de api/.env local NO puede leer la tabla ni el bucket — usar `railway run`).
+
 ## Matching v2 — reglas
 
 - Umbrales: **auto ≥85 / dudoso 60-84 / sin match <60**. Score: token_set + partial + bonus numérico + 6pts por grupo de marca.

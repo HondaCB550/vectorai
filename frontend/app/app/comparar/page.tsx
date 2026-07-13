@@ -111,7 +111,7 @@ type Resultado = {
   usos_restantes: number | null;
   aliases_en_bd: number;
   config_proveedores: Record<string, ConfigProveedor>;
-  errores?: { archivo: string; error: string }[];
+  errores?: { archivo: string; error: string; formato_nuevo?: boolean }[];
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -181,6 +181,8 @@ export default function Comparar() {
   const [creandoObra, setCreandoObra] = useState(false);
   const [resultado, setResultado]     = useState<Resultado | null>(null);
   const [error, setError]             = useState("");
+  // Archivos con formato que el motor todavía no lee: globo de aviso 24 hs
+  const [formatoNuevo, setFormatoNuevo] = useState<string[]>([]);
   const [tab, setTab]                 = useState<"comparativa" | "compras" | "dudosos" | "sin_match">("comparativa");
   const [filtroRubro, setFiltroRubro] = useState("Todos");
   const [soloComunes, setSoloComunes] = useState(true);
@@ -307,6 +309,7 @@ export default function Comparar() {
     if (!hayFuentes) return;
     setLoading(true);
     setError("");
+    setFormatoNuevo([]);
     setResultado(null);
     setConfirmado(false);
 
@@ -358,10 +361,15 @@ export default function Comparar() {
         if (data?.detail?.error === "plan_limit") {
           setError(data?.detail?.mensaje || "Alcanzaste el límite de tu plan. Mejorá tu plan para seguir comparando.");
         } else if (data?.detail?.error === "sin_resultados" && Array.isArray(data?.detail?.errores)) {
-          const lineas = data.detail.errores
-            .map((e: { archivo: string; error: string }) => `• ${e.archivo}: ${e.error}`)
-            .join("\n");
-          setError(`Ningún archivo se pudo procesar:\n${lineas}`);
+          const errs: { archivo: string; error: string; formato_nuevo?: boolean }[] = data.detail.errores;
+          // Formato nuevo → globo de aviso 24 hs; el resto → error clásico
+          const nuevos = errs.filter((e) => e.formato_nuevo).map((e) => e.archivo);
+          if (nuevos.length > 0) setFormatoNuevo(nuevos);
+          const resto = errs.filter((e) => !e.formato_nuevo);
+          if (resto.length > 0) {
+            const lineas = resto.map((e) => `• ${e.archivo}: ${e.error}`).join("\n");
+            setError(`Ningún archivo se pudo procesar:\n${lineas}`);
+          }
         } else {
           setError(data?.detail?.mensaje || JSON.stringify(data?.detail) || "Error al analizar los PDFs");
         }
@@ -370,6 +378,12 @@ export default function Comparar() {
 
       setResultado(data);
       setTab("comparativa");
+
+      // Archivos que no se pudieron leer por formato nuevo → globo de aviso
+      const archivosNuevos = ((data.errores ?? []) as { archivo: string; formato_nuevo?: boolean }[])
+        .filter((e) => e.formato_nuevo)
+        .map((e) => e.archivo);
+      if (archivosNuevos.length > 0) setFormatoNuevo(archivosNuevos);
 
       // Con un solo proveedor no hay ítems "en común": si el filtro
       // "Solo comparables" quedara activo, la tabla se vería vacía.
@@ -749,6 +763,32 @@ export default function Comparar() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <>
+    {/* Globo: formato de presupuesto nuevo, se resuelve dentro de las 24 hs */}
+    {formatoNuevo.length > 0 && (
+      <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 border-t-4 border-[#E87022]">
+          <div className="text-xs font-bold text-[#E87022] uppercase tracking-wide mb-2">Formato nuevo</div>
+          <h3 className="text-lg font-bold text-[#1A2B4A] mb-3">Estamos incorporando este presupuesto</h3>
+          <p className="text-sm text-gray-600 mb-2">
+            {formatoNuevo.length === 1 ? (
+              <>El archivo <b className="text-[#1A2B4A]">{formatoNuevo[0]}</b> usa un formato que todavía no leemos automáticamente.</>
+            ) : (
+              <>Los archivos <b className="text-[#1A2B4A]">{formatoNuevo.join(", ")}</b> usan un formato que todavía no leemos automáticamente.</>
+            )}
+          </p>
+          <p className="text-sm text-gray-600 mb-5">
+            Ya quedó registrado y lo resolvemos dentro de las próximas 24 horas.
+            Volvé a subir el mismo archivo mañana y va a salir completo.
+          </p>
+          <button
+            onClick={() => setFormatoNuevo([])}
+            className="w-full bg-[#E87022] hover:bg-[#CF5E15] text-white rounded-lg px-4 py-2.5 text-sm font-bold"
+          >
+            Entendido
+          </button>
+        </div>
+      </div>
+    )}
     <main className="min-h-screen bg-[#F5F0E8]">
       {/* Nav */}
       <nav className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between flex-wrap gap-y-2">
@@ -1043,10 +1083,20 @@ export default function Comparar() {
             )}
 
             {/* Archivos que fallaron al procesarse (no llegaron a resultados) */}
-            {(resultado.errores?.length ?? 0) > 0 && (
+            {(resultado.errores?.some((e) => !e.formato_nuevo) ?? false) && (
               <div className="mb-4 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-800 space-y-1">
-                <div className="font-semibold">⚠️ Archivos que no se pudieron procesar:</div>
-                {resultado.errores!.map((e, i) => (
+                <div className="font-semibold">Archivos que no se pudieron procesar:</div>
+                {resultado.errores!.filter((e) => !e.formato_nuevo).map((e, i) => (
+                  <div key={i}>• <strong>{e.archivo}</strong>: {e.error}</div>
+                ))}
+              </div>
+            )}
+
+            {/* Archivos con formato nuevo (quedaron registrados, se resuelven en 24 hs) */}
+            {(resultado.errores?.some((e) => e.formato_nuevo) ?? false) && (
+              <div className="mb-4 bg-[#FEF4EC] border border-[#E87022]/40 rounded-xl px-4 py-3 text-sm text-[#1A2B4A] space-y-1">
+                <div className="font-semibold text-[#E87022]">Formato nuevo — lo resolvemos dentro de las próximas 24 horas:</div>
+                {resultado.errores!.filter((e) => e.formato_nuevo).map((e, i) => (
                   <div key={i}>• <strong>{e.archivo}</strong>: {e.error}</div>
                 ))}
               </div>

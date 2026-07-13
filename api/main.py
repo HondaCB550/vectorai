@@ -296,6 +296,54 @@ def _incrementar_uso(user_id: str, usos_actuales: int = 0):
         print(f"_incrementar_uso error: {e}")
 
 
+def _registrar_extraccion_dudosa(sb, user_id: str, fname: str, proveedor: str,
+                                 tipo_fuente: str, resultado: dict, content: bytes,
+                                 motivo: str, n_consistentes: int = 0,
+                                 texto_muestra: str | None = None):
+    """Guarda el archivo original en el bucket 'dudosos' + una fila en
+    extracciones_dudosas cuando el parser no entendió el formato. El equipo
+    lo descarga con descargar_dudosos.py, arma el parser nuevo y el usuario
+    reintenta al día siguiente (el aviso de 24 hs sale en el frontend)."""
+    if not sb:
+        return
+    try:
+        seguro = re.sub(r"[^A-Za-z0-9_.-]+", "_", fname or "archivo")[-80:]
+        path = f"{datetime.now().strftime('%Y-%m')}/{uuid.uuid4().hex[:8]}_{seguro}"
+        ctype = {
+            "pdf":    "application/pdf",
+            "imagen": "image/jpeg",
+            "xlsx":   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "csv":    "text/csv",
+        }.get(tipo_fuente, "application/octet-stream")
+        try:
+            sb.storage.from_("dudosos").upload(path, content, {"content-type": ctype})
+        except Exception as e:
+            print(f"[dudosos] Error subiendo {fname} a storage: {e}")
+            path = None
+        sb.table("extracciones_dudosas").insert({
+            "user_id":           None if user_id == "anonimo" else user_id,
+            "archivo":           fname,
+            "proveedor":         proveedor,
+            "tipo_fuente":       tipo_fuente,
+            "metodo_extraccion": resultado.get("metodo_extraccion"),
+            "motivo":            motivo,
+            "n_items":           resultado.get("n_items", 0),
+            "n_consistentes":    n_consistentes,
+            "storage_path":      path,
+            "texto_muestra":     (texto_muestra or "")[:4000] or None,
+        }).execute()
+        print(f"[dudosos] Registrado {fname} ({motivo}, {resultado.get('n_items', 0)} items)")
+    except Exception as e:
+        print(f"[dudosos] Error registrando extracción dudosa de {fname}: {e}")
+
+
+MSG_FORMATO_NUEVO = (
+    "usa un formato que todavía no leemos automáticamente. Quedó registrado y "
+    "lo vamos a incorporar dentro de las próximas 24 horas — volvé a subir el "
+    "mismo archivo mañana."
+)
+
+
 def _gate_analisis(user: dict):
     """Cierra el análisis a anónimos y aplica el límite mensual del plan ANTES de
     procesar (la extracción/visión cuesta plata; los anónimos no se trackean, así
@@ -1842,6 +1890,51 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                     "error": (f"El presupuesto de {proveedor} lista materiales y "
                               "cantidades pero no tiene precios por ítem, así que no "
                               "se puede comparar. Pedí una versión con precios unitarios."),
+                })
+                continue
+
+            # ── Detección de formato nuevo/roto ──────────────────────────────
+            # 0 ítems con contenido presente, o la mayoría de los ítems con
+            # pu×cant que no cierra contra el total de línea → el parser no
+            # entendió el formato. Se guarda el archivo original (bucket
+            # 'dudosos' + extracciones_dudosas) para armar el parser, y el
+            # usuario ve el aviso de reintentar en 24 hs. Solo se evalúan los
+            # ítems que traen total propio del documento (los extractores de
+            # planillas/fotos completan total=pu×cant y serían consistentes
+            # de forma trivial).
+            con_total = [
+                it for it in items
+                if float(it.get("total") or 0) > 0
+                and float(it.get("pu") or 0) > 0 and float(it.get("cant") or 0) > 0
+            ]
+            n_consist = sum(
+                1 for it in con_total
+                if abs(float(it["pu"]) * float(it["cant"]) - float(it["total"]))
+                <= max(1.0, 0.01 * float(it["total"]))
+            )
+            motivo_dudoso = None
+            if not items:
+                motivo_dudoso = "cero_items"
+            elif len(con_total) >= 5 and n_consist < len(con_total) * 0.5:
+                motivo_dudoso = "inconsistente"
+
+            if motivo_dudoso:
+                texto_muestra = None
+                if tipo_fuente == "pdf" and tmp_path:
+                    try:
+                        import pdfplumber
+                        with pdfplumber.open(tmp_path) as _pdf:
+                            texto_muestra = (_pdf.pages[0].extract_text() or "")[:4000]
+                    except Exception:
+                        pass
+                _registrar_extraccion_dudosa(
+                    sb, user["user_id"], fname, proveedor, tipo_fuente,
+                    resultado, content, motivo_dudoso,
+                    n_consistentes=n_consist, texto_muestra=texto_muestra)
+                errores.append({
+                    "archivo":       fname,
+                    "formato_nuevo": True,
+                    "error":         f"El presupuesto de {proveedor} {MSG_FORMATO_NUEVO}",
                 })
                 continue
 
