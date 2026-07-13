@@ -1399,6 +1399,10 @@ _RE_COMA_DECIMAL = re.compile(r"(?<=\d),(?=\d)")
 _RE_MEDIDA_X = re.compile(r"(?<=\d)\s*[xX*]\s*(?=\d)")
 _RE_DIGITO_LETRA = re.compile(r"(?<=\d)(?=[A-Za-zÁÉÍÓÚÑáéíóúñ])")
 _RE_DECIMAL = re.compile(r"\b\d+\.\d+\b")
+# Barras de hierro: "GERDAU 8 X 12M" = diámetro 8, largo estándar 12 m (o 6 m).
+# El maestro solo tiene el diámetro — el largo hacía matchear "8 x 12" contra
+# el hierro del 12. Solo en contexto corrugado/hierro liso (post-sinónimos).
+_RE_LARGO_BARRA = re.compile(r"(\d)\s*x\s*(?:12(?:\s*(?:m|mt|mts|metros))?|6\s*(?:m|mt|mts|metros))\b")
 
 
 def _prep_v2(s: str) -> str:
@@ -1413,6 +1417,9 @@ def _prep_v2(s: str) -> str:
             t = rx.sub(canon, t)
     # 1.00 → 1, 3.20 → 3.2 (después de los gauges para no romper 2.0 → 2.04)
     t = _RE_DECIMAL.sub(lambda m: m.group().rstrip("0").rstrip("."), t)
+    # Largo de barra en hierros: "corrugado 8 x 12 m" → "corrugado 8"
+    if "corrugado" in t or "hierro liso" in t:
+        t = _RE_LARGO_BARRA.sub(r"\1", t)
     # Los PDFs suelen perder la Ñ ("CANO DURATOP"): unificar con el maestro ("CAÑO")
     return t.replace("ñ", "n")
 
@@ -1715,8 +1722,12 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
         if nums_alias is None:
             nums_alias = extract_nums(alias_norm)
         faltantes = len(nums_alias - texto_nums) if nums_alias else 0
-        if faltantes and score >= 85:
-            score = max(60.0, 84.0 - 8.0 * faltantes)
+        if faltantes:
+            # También por debajo de 85: reordena los dudosos para que el
+            # candidato que contradice una medida no tape al que la respeta
+            # ("hierro 12mm" a 84 le ganaba a "aleteado 25" a 81 para
+            # "varilla del 25").
+            score = min(score, max(60.0, 84.0 - 8.0 * faltantes))
         elif nums_alias and texto_nums and nums_alias == texto_nums and score < 85:
             # Acuerdo numérico exacto: mejora el orden entre dudosos (el
             # candidato cuyas medidas cierran le gana al que las contradice)
@@ -2249,6 +2260,16 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                     },
                 }
                 resultados[proveedor] = acc
+
+            # Leyenda "contado efectivo en mostrador" en el PDF: los precios ya
+            # son sin IVA (regla de Pablo 13-07). Si el usuario dejó el archivo
+            # como "IVA incluido", avisar para que corrija el selector.
+            if resultado.get("leyenda_efectivo") and acc["cfg_aplicada"]["con_iva"]:
+                acc["aviso_iva"] = (
+                    "El documento dice 'contado efectivo en mostrador': esos precios "
+                    "ya son sin IVA (10,5%). Este archivo está marcado como IVA "
+                    "incluido — revisá el selector de IVA."
+                )
 
             acc["automatico"].extend(automatico)
             acc["dudoso"].extend(dudoso)

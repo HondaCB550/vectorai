@@ -77,6 +77,7 @@ type ResultadoProveedor = {
   iva_detectado: boolean;
   metodo_extraccion: string;
   n_items_extraidos: number;
+  aviso_iva?: string;           // leyenda "contado efectivo en mostrador" con el archivo marcado c/IVA
   moneda_documento?: string;    // "USD" si el documento vino cotizado en dólares
   tc_aplicado?: number;         // tipo de cambio oficial usado para convertir
 };
@@ -1172,6 +1173,18 @@ export default function Comparar() {
                 {Object.entries(resultado.resultados).map(([prov, r]) =>
                   r.n_items_extraidos === 0 ? (
                     <div key={prov}>• <strong>{prov}</strong>: 0 ítems extraídos. El PDF puede estar escaneado (imagen), protegido, o en un formato no reconocido. Intentá exportarlo desde el software del proveedor como PDF con texto.</div>
+                  ) : null
+                )}
+              </div>
+            )}
+
+            {/* Aviso de IVA: leyenda "contado efectivo en mostrador" con archivo marcado c/IVA */}
+            {Object.entries(resultado.resultados).some(([, r]) => r.aviso_iva) && (
+              <div className="mb-4 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 space-y-1">
+                <div className="font-semibold">Revisá el IVA de estos archivos:</div>
+                {Object.entries(resultado.resultados).map(([prov, r]) =>
+                  r.aviso_iva ? (
+                    <div key={prov}>• <strong>{prov}</strong>: {r.aviso_iva}</div>
                   ) : null
                 )}
               </div>

@@ -43,6 +43,16 @@
     {"id": "657f734b-3c68-46ed-b226-d3eb9e5e0d35", "codigo_material": "INSTS030", "denominacion": "caño schedule 40 astm a53 de ø 4\" x 6,4 mt con costura", "origen": "borrador_borrador_gramabi_04-05", "confianza": 90, "accion": "DELETE (sin material schedule 40 en maestro)"},
     {"id": "6d5f6fc6-8a87-407b-97c5-721f84b58890", "codigo_material": "INSTS024", "denominacion": "«caño redondo galv. c/borde nº30 4″»»", "origen": "borrador_borrador_ferrocenter_05-05", "confianza": 90, "accion": "DELETE (zinguería, sin material equivalente)"}
   ],
+  "estado_previo_lote4_hierro_liso_giliberto": [
+    {"id": "b12ce727-ff4c-4250-b662-0c73f042b75b", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 6 (12 mts)", "accion": "-> CONS249 (HIERRO LISO 6)"},
+    {"id": "0fafbe62-7f18-4cbc-bf27-9edfa2103eca", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 8 (12 mts)", "accion": "-> CONS250 (HIERRO LISO 8)"},
+    {"id": "f535f4e5-9442-4c44-84a7-c151dfb5949d", "codigo_material": "CONS117", "denominacion": "hierro liso  en barra 10 (12 mts)", "accion": "-> CONS251 (HIERRO LISO 10)"},
+    {"id": "edc10627-1871-4100-96cf-42739aeea54f", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 12 (12 mts)", "accion": "-> CONS252 (HIERRO LISO 12)"},
+    {"id": "d5605aa9-09b7-4126-a651-401ebbdf1705", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 14 (12 mts)", "accion": "-> CONS253 (HIERRO LISO 14)"},
+    {"id": "de4f43b4-2d7e-490f-8ba3-8e7b93b63e8c", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 16 (12 mts)", "accion": "-> CONS254 (HIERRO LISO 16)"},
+    {"id": "17a3c093-c8cd-4a9c-8f15-3773c2a58e83", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 20 (12 mts)", "accion": "-> CONS255 (HIERRO LISO 20)"},
+    {"id": "61631b7f-2513-4a33-9171-a2db5911b7df", "codigo_material": "CONS118", "denominacion": "hierro liso  en barra 25 (12 mts)", "accion": "-> CONS256 (HIERRO LISO 25)"}
+  ],
   "reasignacion": {
     "40 x 1 -> INSTS028 (CAÑO CLOACAL 1*40)": ["367cec00-4e93-4045-bac2-fc2b2ff79e09", "5686a0f9-10e5-403a-83e2-f62f93a794f3"],
     "40 x 2 -> INSTS029 (CAÑO CLOACAL 2*40)": ["1a3ad3d1-5694-4ba6-9b30-4ff49bd88200", "9e9d0e20-8409-4cb4-83f0-b18519ce1734"],

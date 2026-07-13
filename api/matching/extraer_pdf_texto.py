@@ -973,9 +973,20 @@ def extraer(pdf_path: str) -> dict:
         elif abs(suma * 1.105 - total_pdf) < 5:
             iva_detectado = "PRECIOS S/IVA + 10,5%"
 
+    # Leyenda "contado efectivo en mostrador" (regla de Pablo 13-07-2026):
+    # el precio ya es el efectivo, SIN el 10,5% de IVA — no hay que dividir.
+    # Pisa el chequeo matemático: suma==total no distingue "incluye IVA" de
+    # "todo neto", la leyenda sí.
+    leyenda_efectivo = bool(re.search(
+        r"CONTADO\s+EFECTIVO|EFECTIVO\s+(?:EN\s+)?MOSTRADOR|CONTADO\s+EN\s+MOSTRADOR",
+        texto_busqueda, re.I))
+    if leyenda_efectivo:
+        iva_detectado = "PRECIOS EFECTIVO S/IVA (leyenda contado efectivo en mostrador)"
+
     return {
         "fecha_presupuesto": fecha,
         "iva_detectado":     iva_detectado,
+        "leyenda_efectivo":  leyenda_efectivo,
         "suma_lineas":       round(suma, 2),
         "n_items":           len(items),
         "metodo_extraccion": metodo,
