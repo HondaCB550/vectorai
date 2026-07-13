@@ -514,8 +514,8 @@ export default function Comparar() {
       // Integrar en pantalla lo que el usuario resolvió: los dudosos
       // matcheados pasan a la comparativa (y desaparecen de Dudosos),
       // los marcados "ninguno corresponde" pasan a Sin match.
-      setResultado((prev) => {
-        if (!prev) return prev;
+      const prev = resultado;
+      {
         const comparativo = prev.comparativo.map((r) => ({ ...r, precios: { ...r.precios } }));
         const idxPorCodigo = new Map(comparativo.map((r, i) => [r.cod_int, i] as const));
         const nuevosResultados: typeof prev.resultados = {};
@@ -582,8 +582,12 @@ export default function Comparar() {
           }
         }
 
-        return { ...prev, comparativo, resultados: nuevosResultados };
-      });
+        const nuevoResultado = { ...prev, comparativo, resultados: nuevosResultados };
+        setResultado(nuevoResultado);
+        // Guardar la versión curada en el servidor para que el Excel/PDF/JPG
+        // y el historial salgan con los dudosos ya matcheados
+        void persistirComparativa(nuevoResultado);
+      }
       setDudososEditados({});
       setTab("comparativa");
       setConfirmado(true);
@@ -669,28 +673,48 @@ export default function Comparar() {
     // de Vectorai). Acá solo lo inyectamos en la comparativa como material único
     // para que quien compra tenga la referencia de precio y no se pierda.
     setEmpUnicos((u) => (u.includes(key) ? u : [...u, key]));
-    setResultado((prev) => {
-      if (!prev) return prev;
-      const cod = `sinmatch_${key}`;
-      if (prev.comparativo.some((x) => x.cod_int === cod)) return prev;
-      return {
-        ...prev,
-        comparativo: [
-          ...prev.comparativo,
-          {
-            cod_int: cod,
-            rubro: "Material único",
-            material: item.desc_prov,
-            unidad: "UN",
-            cant: item.cant,
-            precios: { [prov]: { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "sin_match", cant: item.cant } },
-            mejor_proveedor: prov,
-            ahorro: 0,
-            en_varios: false,
-          },
-        ],
-      };
-    });
+    if (!resultado) return;
+    const cod = `sinmatch_${key}`;
+    if (resultado.comparativo.some((x) => x.cod_int === cod)) return;
+    const nuevoResultado = {
+      ...resultado,
+      comparativo: [
+        ...resultado.comparativo,
+        {
+          cod_int: cod,
+          rubro: "Material único",
+          material: item.desc_prov,
+          unidad: "UN",
+          cant: item.cant,
+          precios: { [prov]: { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "sin_match", cant: item.cant } },
+          mejor_proveedor: prov,
+          ahorro: 0,
+          en_varios: false,
+        },
+      ],
+    };
+    setResultado(nuevoResultado);
+    // El material único también tiene que salir en el export y el historial
+    void persistirComparativa(nuevoResultado);
+  }
+
+  // Persistir la comparativa curada en el servidor: los exports (Excel/PDF/JPG)
+  // y el historial leen la versión guardada — sin esto mostrarían solo lo
+  // extraído en el análisis inicial, sin los dudosos que el usuario matcheó
+  // ni los materiales únicos del emparejado.
+  async function persistirComparativa(nuevo: Resultado) {
+    try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+      await fetch(`${API_URL}/comparativas/${nuevo.comparativa_id}/actualizar`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ comparativo: nuevo.comparativo, proveedores: nuevo.proveedores }),
+      });
+    } catch {
+      // Best-effort: la pantalla ya está actualizada; el export en esta sesión
+      // reintenta la persistencia antes de descargar.
+    }
   }
 
   // ── Descargar ──────────────────────────────────────────────────────────────
@@ -698,6 +722,11 @@ export default function Comparar() {
     if (!resultado) return;
     setGen(true);
     try {
+      // El export lee la comparativa guardada en el servidor: persistir la
+      // versión en pantalla ANTES de generar, así el archivo siempre sale
+      // igual a lo que el usuario está viendo (dudosos matcheados incluidos),
+      // incluso si una persistencia anterior falló.
+      await persistirComparativa(resultado);
       const res = await fetch(`${API_URL}/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

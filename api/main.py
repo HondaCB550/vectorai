@@ -892,6 +892,57 @@ async def eliminar_comparativa(
         raise HTTPException(status_code=500, detail={"error": "internal_error"})
 
 
+class ActualizarComparativaBody(BaseModel):
+    comparativo: list
+    proveedores: Optional[list] = None
+
+
+@app.post("/comparativas/{comparativa_id}/actualizar")
+async def actualizar_comparativa(
+    comparativa_id: str,
+    body: ActualizarComparativaBody,
+    authorization: Optional[str] = Header(None),
+):
+    """Reemplaza el contenido guardado de una comparativa con la versión curada
+    por el usuario (dudosos confirmados, materiales únicos del emparejado).
+
+    Los exports (/sheets, /pdf, /imagen) y el historial leen la comparativa
+    guardada, que hasta acá era la del análisis inicial: todo el trabajo de
+    curado quedaba solo en pantalla y el Excel salía sin los dudosos
+    matcheados. Solo el propietario puede actualizar."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={"error": "unauthorized"})
+    if not body.comparativo:
+        raise HTTPException(status_code=422, detail={"error": "comparativo_vacio"})
+
+    data_prev = _leer_comparativa(comparativa_id) or {}
+    proveedores = body.proveedores or data_prev.get("proveedores", [])
+    data = {"comparativo": body.comparativo, "proveedores": proveedores}
+
+    sb = get_supabase()
+    if sb:
+        try:
+            res = sb.table("comparativas").select("user_id").eq("id", comparativa_id).single().execute()
+            if not res.data or res.data.get("user_id") != user["user_id"]:
+                raise HTTPException(status_code=403, detail={"error": "forbidden"})
+            sb.table("comparativas").update({
+                "datos_json":   data,
+                "proveedores":  proveedores,
+                "n_items":      len(body.comparativo),
+                "n_comunes":    len([r for r in body.comparativo if r.get("en_varios")]),
+                "ahorro_total": _calcular_ahorro_total(body.comparativo),
+            }).eq("id", comparativa_id).execute()
+        except HTTPException:
+            raise
+        except Exception as e:
+            print(f"Error actualizando comparativa {comparativa_id}: {e}")
+            raise HTTPException(status_code=500, detail={"error": "internal_error"})
+
+    _cache_comparativa(comparativa_id, data)
+    return {"ok": True}
+
+
 # ── /sheets ───────────────────────────────────────────────────────────────────
 @app.post("/sheets")
 async def generar_sheets(
@@ -1242,7 +1293,7 @@ async def mp_webhook(request: Request):
 # ── V2: Cache de denominaciones + sinónimos + grupos de marcas ────────────────
 import time
 from rapidfuzz import fuzz, process as fuzz_process
-from matching import normalize, aplicar_sinonimos, SINONIMOS, MARCAS_EQUIVALENTES
+from matching import normalize, aplicar_sinonimos, SINONIMOS, MARCAS_EQUIVALENTES, set_sinonimos_extra
 
 _den_cache: list[dict] | None = None
 _den_cache_ts: float = 0
