@@ -227,6 +227,22 @@ export default function Comparar() {
     });
   }, []);
 
+  // Aviso del navegador al cerrar/recargar con trabajo sin guardar: elegir
+  // cada dudoso lleva tiempo y se pierde si la página se cierra antes de
+  // confirmar (o mientras la confirmación está en vuelo).
+  useEffect(() => {
+    const hayDudososSinConfirmar =
+      !confirmado && !!resultado &&
+      Object.values(resultado.resultados).some((r) => r.dudoso.length > 0);
+    if (!confirmando && !hayDudososSinConfirmar) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";  // requerido por Chrome para mostrar el diálogo
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [confirmando, confirmado, resultado]);
+
   // Obras del usuario (plan Advance): para agrupar la comparativa por obra
   useEffect(() => {
     if (!token) return;
@@ -486,9 +502,12 @@ export default function Comparar() {
           confirmados,
           sin_match: sin_match_items,
         }),
+        // Tope generoso: si el servidor no responde, cortar con mensaje claro
+        // en vez de dejar el spinner girando para siempre
+        signal: AbortSignal.timeout(120_000),
       });
       if (!res.ok) {
-        alert("No se pudo guardar la confirmación. Probá de nuevo.");
+        alert("No se pudo guardar la confirmación. Tus elecciones siguen en pantalla — probá de nuevo con el mismo botón.");
         return;
       }
 
@@ -569,7 +588,7 @@ export default function Comparar() {
       setTab("comparativa");
       setConfirmado(true);
     } catch {
-      alert("No se pudo guardar la confirmación. Revisá tu conexión y probá de nuevo.");
+      alert("No se pudo guardar la confirmación. Tus elecciones siguen en pantalla — revisá tu conexión y probá de nuevo con el mismo botón.");
     } finally {
       setConfirmando(false);
     }
@@ -763,6 +782,21 @@ export default function Comparar() {
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <>
+    {/* Overlay mientras se guarda la confirmación: el aprendizaje de aliases
+        puede tardar varios segundos y sin feedback parece que se colgó */}
+    {confirmando && (
+      <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center">
+          <div className="mx-auto mb-4 h-10 w-10 rounded-full border-4 border-gray-200 border-t-[#E87022] animate-spin" aria-hidden="true" />
+          <h3 className="text-base font-bold text-[#1A2B4A] mb-1">Guardando tus elecciones</h3>
+          <p className="text-sm text-gray-600">
+            El motor está aprendiendo los materiales que confirmaste.
+            Puede tardar unos segundos — no cierres la página.
+          </p>
+        </div>
+      </div>
+    )}
+
     {/* Globo: formato de presupuesto nuevo, se resuelve dentro de las 24 hs */}
     {formatoNuevo.length > 0 && (
       <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4">
