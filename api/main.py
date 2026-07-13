@@ -1339,15 +1339,31 @@ _GAUGES_STEEL = [
 # "E1.2" viene pegado como un solo token: separar el prefijo de espesor
 _RE_E_PEGADA = re.compile(r"\be(?=\d)")
 
+# Medidas y decimales tal como los escriben los PDFs de proveedores:
+# "40X1.00" viene como un solo token (sin separar quedaba fuera del match
+# numérico y del token_set), "1,00" pierde la coma en normalize() y quedaba
+# "1 00". Se separa dígito-x-dígito y dígito→letra (igual que los aliases
+# sintéticos del maestro), y la coma decimal pasa a punto antes de normalize.
+_RE_COMA_DECIMAL = re.compile(r"(?<=\d),(?=\d)")
+_RE_MEDIDA_X = re.compile(r"(?<=\d)\s*[xX*]\s*(?=\d)")
+_RE_DIGITO_LETRA = re.compile(r"(?<=\d)(?=[A-Za-zÁÉÍÓÚÑáéíóúñ])")
+_RE_DECIMAL = re.compile(r"\b\d+\.\d+\b")
+
 
 def _prep_v2(s: str) -> str:
     """Normaliza + aplica sinónimos → lowercase. Usado en ambos lados del match."""
+    s = _RE_COMA_DECIMAL.sub(".", s or "")   # 1,00 → 1.00
+    s = _RE_MEDIDA_X.sub(" x ", s)           # 40X1.00 → 40 x 1.00
+    s = _RE_DIGITO_LETRA.sub(" ", s)         # 40MM → 40 MM
     t = aplicar_sinonimos(normalize(s)).lower()
     if _RE_PERFIL_STEEL.search(t):
         t = _RE_E_PEGADA.sub("e ", t)
         for rx, canon in _GAUGES_STEEL:
             t = rx.sub(canon, t)
-    return t
+    # 1.00 → 1, 3.20 → 3.2 (después de los gauges para no romper 2.0 → 2.04)
+    t = _RE_DECIMAL.sub(lambda m: m.group().rstrip("0").rstrip("."), t)
+    # Los PDFs suelen perder la Ñ ("CANO DURATOP"): unificar con el maestro ("CAÑO")
+    return t.replace("ñ", "n")
 
 
 def _load_knowledge_cache():
@@ -1468,9 +1484,12 @@ def _get_denominaciones() -> list[dict]:
                 break
             page += 1
 
-        # Pre-computar forma normalizada (sinónimos aplicados) para cada alias
+        # Pre-computar forma normalizada (sinónimos aplicados) y números
+        # (medidas/presentaciones) para cada alias — los números alimentan la
+        # guarda numérica de _match_v2
         for d in todas:
             d["denominacion_norm"] = _prep_v2(d["denominacion"])
+            d["nums"] = extract_nums(d["denominacion_norm"])
 
         # Descartar aliases "basura": textos sin ninguna palabra real de 3+ letras
         # (unidades/números/fragmentos como "m3", "h21", "1 x 1", "3*6"). Con
@@ -1632,13 +1651,25 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
         if min(n_tokens_alias, n_tokens_texto) <= 2 and alias_norm != texto_prep \
                 and not (sintetico_con_medida and not lado_corto_es_texto):
             score = min(score, 84.0)
-        # Guarda numérica para sintéticos: si el nombre canónico tiene números
-        # (medida/presentación) y el texto no los contiene, no puede ser
-        # automático (ej. barniz x 1 LT contra el material de 20LT).
-        if den.get("sintetico") and score >= 85:
-            nums_alias = den.get("nums") or set()
-            if nums_alias and not nums_alias.issubset(texto_nums):
-                score = min(score, 84.0)
+        # Guarda numérica (todos los aliases, no solo sintéticos): si el alias
+        # tiene números (medida/presentación) que el texto no contiene, no
+        # puede ser automático. token_set_ratio da 100 entre "duratop 40 x 1"
+        # y "duratop de 40 x 2" — sin esta guarda el precio se cuelga de la
+        # medida equivocada (bug caños El Galpón, 13-07-2026). La capa es
+        # graduada (-8 por número faltante, piso 60): un alias que contradice
+        # 2 medidas queda debajo de uno que contradice 1, y los candidatos
+        # cuyos números sí cierran (sin capa) pueden superarlos en el orden.
+        nums_alias = den.get("nums")
+        if nums_alias is None:
+            nums_alias = extract_nums(alias_norm)
+        faltantes = len(nums_alias - texto_nums) if nums_alias else 0
+        if faltantes and score >= 85:
+            score = max(60.0, 84.0 - 8.0 * faltantes)
+        elif nums_alias and texto_nums and nums_alias == texto_nums and score < 85:
+            # Acuerdo numérico exacto: mejora el orden entre dudosos (el
+            # candidato cuyas medidas cierran le gana al que las contradice)
+            # pero nunca promueve a automático por sí solo.
+            score = min(score + 4.0, 84.9)
         if score >= 85:
             nivel = "automatico"
         elif score >= 60:

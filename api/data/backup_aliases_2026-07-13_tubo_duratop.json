@@ -1,0 +1,58 @@
+{
+  "fecha": "2026-07-13",
+  "motivo": "Aliases 'tubo duratop de D x L mts' colgados de códigos CUPLA (INSTS052-054) y TAPA MACHO (INSTS065) por confirmaciones erróneas de cargas Carosio. Se reasignan a los CAÑO CLOACAL correctos (descripcion = largo*diametro). Bug reportado por Pablo 13-07-2026: 'CANO DURATOP 40X1.00 MTS' de El Galpón sugería CUPLA 50 / TAPA MACHO 40.",
+  "estado_previo": [
+    {"id": "367cec00-4e93-4045-bac2-fc2b2ff79e09", "codigo_material": "INSTS065", "denominacion": "10-100040100 tubo duratop de 40 x 1 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "1a3ad3d1-5694-4ba6-9b30-4ff49bd88200", "codigo_material": "INSTS065", "denominacion": "10-100040200 tubo duratop de 40 x 2 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "52ed7880-8de3-440d-8e53-c544fffeecad", "codigo_material": "INSTS065", "denominacion": "10-100040400 tubo duratop de 40 x 4 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "3f8cabbc-15ed-4180-a880-00055d9dc0d1", "codigo_material": "INSTS054", "denominacion": "10-100050200 tubo duratop de 50 x 2 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "dcf8c953-8a1c-4f61-8071-c70081d00df1", "codigo_material": "INSTS054", "denominacion": "10-100050400 tubo duratop de 50 x 4 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "f6957c3b-54ad-44d8-96b9-db0eb2b65a32", "codigo_material": "INSTS053", "denominacion": "10-100063100 tubo duratop de 63 x 1 mts.", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "ecbf806a-1e11-4b85-b8e5-dcfb6642378e", "codigo_material": "INSTS053", "denominacion": "10-100063200 tubo duratop de 63 x 2 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "104dcc91-e38e-4e5b-9c06-6ac06d52dd04", "codigo_material": "INSTS053", "denominacion": "10-100063400 tubo duratop de 63 x 4 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "ca8b45fd-7a8b-44a9-8ebf-4635a61f53ff", "codigo_material": "INSTS052", "denominacion": "10-100110100 tubo duratop de 110 x 1 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "40cf532e-a819-40e0-9d19-59b69dd421c1", "codigo_material": "INSTS052", "denominacion": "10-100110400 tubo duratop de 110 x 4 mts", "origen": "usuario_carosio_sanitarios", "confianza": 80},
+    {"id": "43f08ab3-d70f-4503-92c9-9418e07ab5c4", "codigo_material": "INSTS052", "denominacion": "tubo duratop de 110 x 1 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "1377213f-c89d-44dc-99c4-f9cca822b890", "codigo_material": "INSTS052", "denominacion": "tubo duratop de 110 x 4 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "5686a0f9-10e5-403a-83e2-f62f93a794f3", "codigo_material": "INSTS065", "denominacion": "tubo duratop de 40 x 1 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "9e9d0e20-8409-4cb4-83f0-b18519ce1734", "codigo_material": "INSTS065", "denominacion": "tubo duratop de 40 x 2 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "f4ab22c3-5f98-4816-ba77-5d9834357951", "codigo_material": "INSTS065", "denominacion": "tubo duratop de 40 x 4 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "69ff6ad6-4cd9-49c1-8e41-ab5a56cb768f", "codigo_material": "INSTS054", "denominacion": "tubo duratop de 50 x 2 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "d4f8b459-fd3a-4fe8-a68c-14be77a604cc", "codigo_material": "INSTS054", "denominacion": "tubo duratop de 50 x 4 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "0b1a7cc5-735a-4cef-94c6-b9cc96fae2dd", "codigo_material": "INSTS053", "denominacion": "tubo duratop de 63 x 1 mts.", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "35941170-c5ae-44cc-82d2-196e2d70b8c3", "codigo_material": "INSTS053", "denominacion": "tubo duratop de 63 x 2 mts", "origen": "usuario_carosio_sanitario", "confianza": 82},
+    {"id": "310439d2-6dda-4030-9e73-984f042bca4d", "codigo_material": "INSTS053", "denominacion": "tubo duratop de 63 x 4 mts", "origen": "usuario_carosio_sanitario", "confianza": 82}
+  ],
+  "estado_previo_lote2_amanco_awaduct": [
+    {"id": "9e31c5ab-50c3-449c-80b9-f8e439f2b1ba", "codigo_material": "INSTS025", "denominacion": "1015-caño awaduct 50 x 2,00 mt esp1.8mm awaduct", "origen": "usuario_viejo_bueno_-_parte_2", "confianza": 82},
+    {"id": "efe08e0a-d9ee-44d7-8f2b-668bf9e5a1e5", "codigo_material": "INSTS025", "denominacion": "1017-caño awaduct 50 x 4,00 mt esp1.8mm awaduct", "origen": "usuario_viejo_bueno_-_parte_2", "confianza": 82},
+    {"id": "9f5a628f-c70d-4c37-a071-f15ae5724ec9", "codigo_material": "INSTS019", "denominacion": "1035-caño awaduct 110 x4,00 mt esp2.7mm awaduct", "origen": "borrador_borrador_viejo_bueno_13-14", "confianza": 82},
+    {"id": "78141aec-c372-4f71-8529-f0c2043b646a", "codigo_material": "INSTS019", "denominacion": "tubo amanco 40 mm x 1 ,", "origen": "usuario_casa_alfonsin_-_instalaciones", "confianza": 80},
+    {"id": "562dabbb-07d0-43ca-a170-aa75a31e84e8", "codigo_material": "INSTS019", "denominacion": "tubo amanco 40 mm x 2 ,", "origen": "usuario_casa_alfonsin_-_instalaciones", "confianza": 80},
+    {"id": "138463a7-d4f4-4493-8698-5524ba999788", "codigo_material": "INSTS019", "denominacion": "tubo amanco 50 mm x 2 ,", "origen": "usuario_casa_alfonsin_-_instalaciones", "confianza": 80},
+    {"id": "4b3eb187-4b42-4c2b-9519-23edb53126eb", "codigo_material": "INSTS019", "denominacion": "tubo amanco 63 mm x 1 ,", "origen": "usuario_casa_alfonsin_-_instalaciones", "confianza": 80},
+    {"id": "874855cd-555c-49b8-b76c-1af6f156260e", "codigo_material": "INSTS019", "denominacion": "tubo amanco 63 mm x 2 ,", "origen": "usuario_casa_alfonsin_-_instalaciones", "confianza": 80}
+  ],
+  "estado_previo_lote3_residuales": [
+    {"id": "e0159ed4-fdf3-4a06-9981-17e98b1291e9", "codigo_material": "INSTS021", "denominacion": "tubo ips desagüe junta elastica 1 m 110mm", "origen": "usuario_sauce_solo", "confianza": 83, "accion": "-> INSTS019 (1*110)"},
+    {"id": "b6c4e8eb-fc1a-49b9-9709-e5060b3cfeee", "codigo_material": "INSTS021", "denominacion": "caño ips desague junta elastica 1m 110mm", "origen": "borrador_borrador_sauce_18-06", "confianza": 90, "accion": "-> INSTS019 (1*110)"},
+    {"id": "215cda65-8216-4e59-b10a-427f0a5af99d", "codigo_material": "INSTS023", "denominacion": "1026-caño awaduct 63 x 4,00 mt esp1.8mm awaduct", "origen": "usuario_viejo_bueno_-_parte_2", "confianza": 82, "accion": "-> INSTS024 (4*63)"},
+    {"id": "daaaaf1c-21c0-42fc-b077-8ff53cb488de", "codigo_material": "INSTS029", "denominacion": "caño aprobado gas epoxi tenaris de ø 2\" x 6,40 mt de largo", "origen": "borrador_borrador_gramabi_04-05", "confianza": 90, "accion": "-> INSTS228 (CAÑO EPOXI 2 X 6M)"},
+    {"id": "00b7f1ce-7d5b-4594-9f72-1fd720eefa81", "codigo_material": "INSTS030", "denominacion": "caño aprobado gas epoxi tenaris de ø 3/4\" x 6,40 mt de largo", "origen": "borrador_borrador_gramabi_04-05", "confianza": 90, "accion": "DELETE (sin material epoxi 3/4 en maestro)"},
+    {"id": "888335ab-dec7-4c67-b64e-2e345895547a", "codigo_material": "INSTS030", "denominacion": "caño aprobado gas epoxi tenaris de ø 4\" x 6,40 mt de largo", "origen": "borrador_borrador_gramabi_04-05", "confianza": 90, "accion": "DELETE (sin material epoxi 4 en maestro)"},
+    {"id": "657f734b-3c68-46ed-b226-d3eb9e5e0d35", "codigo_material": "INSTS030", "denominacion": "caño schedule 40 astm a53 de ø 4\" x 6,4 mt con costura", "origen": "borrador_borrador_gramabi_04-05", "confianza": 90, "accion": "DELETE (sin material schedule 40 en maestro)"},
+    {"id": "6d5f6fc6-8a87-407b-97c5-721f84b58890", "codigo_material": "INSTS024", "denominacion": "«caño redondo galv. c/borde nº30 4″»»", "origen": "borrador_borrador_ferrocenter_05-05", "confianza": 90, "accion": "DELETE (zinguería, sin material equivalente)"}
+  ],
+  "reasignacion": {
+    "40 x 1 -> INSTS028 (CAÑO CLOACAL 1*40)": ["367cec00-4e93-4045-bac2-fc2b2ff79e09", "5686a0f9-10e5-403a-83e2-f62f93a794f3"],
+    "40 x 2 -> INSTS029 (CAÑO CLOACAL 2*40)": ["1a3ad3d1-5694-4ba6-9b30-4ff49bd88200", "9e9d0e20-8409-4cb4-83f0-b18519ce1734"],
+    "40 x 4 -> INSTS030 (CAÑO CLOACAL 4*40)": ["52ed7880-8de3-440d-8e53-c544fffeecad", "f4ab22c3-5f98-4816-ba77-5d9834357951"],
+    "50 x 2 -> INSTS026 (CAÑO CLOACAL 2*50)": ["3f8cabbc-15ed-4180-a880-00055d9dc0d1", "69ff6ad6-4cd9-49c1-8e41-ab5a56cb768f"],
+    "50 x 4 -> INSTS027 (CAÑO CLOACAL 4*50)": ["dcf8c953-8a1c-4f61-8071-c70081d00df1", "d4f8b459-fd3a-4fe8-a68c-14be77a604cc"],
+    "63 x 1 -> INSTS022 (CAÑO CLOACAL 1*63)": ["f6957c3b-54ad-44d8-96b9-db0eb2b65a32", "0b1a7cc5-735a-4cef-94c6-b9cc96fae2dd"],
+    "63 x 2 -> INSTS023 (CAÑO CLOACAL 2*63)": ["ecbf806a-1e11-4b85-b8e5-dcfb6642378e", "35941170-c5ae-44cc-82d2-196e2d70b8c3"],
+    "63 x 4 -> INSTS024 (CAÑO CLOACAL 4*63)": ["104dcc91-e38e-4e5b-9c06-6ac06d52dd04", "310439d2-6dda-4030-9e73-984f042bca4d"],
+    "110 x 1 -> INSTS019 (CAÑO CLOACAL 1*110)": ["ca8b45fd-7a8b-44a9-8ebf-4635a61f53ff", "43f08ab3-d70f-4503-92c9-9418e07ab5c4"],
+    "110 x 4 -> INSTS021 (CAÑO CLOACAL 4*110)": ["40cf532e-a819-40e0-9d19-59b69dd421c1", "1377213f-c89d-44dc-99c4-f9cca822b890"]
+  }
+}
