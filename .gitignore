@@ -21,3 +21,6 @@ node_modules/
 
 .resend_api_key
 .resend_smtp_key
+
+# Reportes nocturnos (generados por vectorai-nightly, no se commitean)
+reports/
