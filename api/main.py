@@ -1008,6 +1008,17 @@ def _aplicar_filtros(comparativo: list, req: SheetsRequest) -> list:
     if req.filtro_rubro and req.filtro_rubro != "Todos":
         rows = [r for r in rows if r.get("rubro") == req.filtro_rubro]
 
+    # Reagrupar por rubro preservando el orden de primera aparición: los
+    # dudosos confirmados y los materiales únicos se agregan al FINAL de la
+    # comparativa, y los exportadores abren un encabezado de rubro cada vez
+    # que cambia — sin este sort el mismo rubro (ALBAÑILERÍA, AISLACIONES…)
+    # aparecía repetido varias veces en el archivo. El sort es estable: dentro
+    # de cada rubro se mantiene el orden original.
+    orden_rubro: dict = {}
+    for r in rows:
+        orden_rubro.setdefault(r.get("rubro") or "", len(orden_rubro))
+    rows = sorted(rows, key=lambda r: orden_rubro[r.get("rubro") or ""])
+
     factor_desc = 1.0 - (req.descuento_pct / 100.0) if req.descuento_pct else 1.0
     cfg = req.config_proveedores or {}
 
