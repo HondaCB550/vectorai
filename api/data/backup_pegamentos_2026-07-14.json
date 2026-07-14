@@ -1,0 +1,22 @@
+{
+  "fecha": "2026-07-14",
+  "motivo": "Separar pegamento en bolsa por tipo de pieza a pegar (regla de Pablo). CONS105 mezclaba ceramico/impermeable con porcelanato bajo un mismo codigo. Se crean SKUs por tipo y se reasigna el alias porcelanato.",
+  "materiales_validados_estado_previo": [
+    {"codigo": "CONS105", "denominacion_principal": "PEGAMENTO", "descripcion": "25KG", "marcas_disponibles": ["PERFECTO FLEXIBLE"]},
+    {"codigo": "CONS204", "denominacion_principal": "PEGAMENTO", "descripcion": "flex 25KG", "marcas_disponibles": ["WEBER"]}
+  ],
+  "materiales_validados_nuevos": [
+    {"codigo": "CONS270", "denominacion_principal": "PEGAMENTO PORCELANATO", "descripcion": "25 KG"},
+    {"codigo": "CONS271", "denominacion_principal": "PEGAMENTO GRAN FORMATO", "descripcion": "25 KG - CERAMICO Y PORCELANATO GRANDES PIEZAS"}
+  ],
+  "renombres": [
+    {"codigo": "CONS105", "de": "PEGAMENTO / 25KG", "a": "PEGAMENTO CERAMICO IMPERMEABLE / 25 KG"},
+    {"codigo": "CONS204", "de": "PEGAMENTO / flex 25KG", "a": "PEGAMENTO FLEXIBLE / 25 KG"}
+  ],
+  "alias_reasignado": {
+    "id": "1236a064-f174-479f-965d-13acc5bdc9be",
+    "denominacion": "perfecto porcelanato x 25 kg**",
+    "de": "CONS105",
+    "a": "CONS270"
+  }
+}

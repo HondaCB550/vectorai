@@ -1647,10 +1647,23 @@ def _get_denominaciones() -> list[dict]:
         # permite endurecer la guarda anti-fragmento. Las medidas fusionadas
         # ("100MMX25") se separan para tokenizar como escriben los proveedores.
         try:
-            res = sb.table("materiales_validados") \
-                    .select("codigo,denominacion_principal,descripcion").execute()
+            # Paginado: Supabase corta en 1000 filas por request. El maestro
+            # ya pasa las 1000, así que sin esto los códigos más nuevos (los de
+            # mayor número) quedaban SIN sintético → nunca matcheaban automático
+            # (bug detectado 14-07 con los pegamentos CONS270/271).
+            mats: list[dict] = []
+            page = 0
+            while True:
+                r = sb.table("materiales_validados") \
+                       .select("codigo,denominacion_principal,descripcion") \
+                       .range(page * PAGE, (page + 1) * PAGE - 1).execute()
+                lote = r.data or []
+                mats.extend(lote)
+                if len(lote) < PAGE:
+                    break
+                page += 1
             n_sint = 0
-            for m in (res.data or []):
+            for m in mats:
                 nombre = f"{m.get('denominacion_principal') or ''} {m.get('descripcion') or ''}".strip()
                 if not nombre:
                     continue
@@ -1691,6 +1704,23 @@ def _invalidar_cache_den():
     global _den_cache_ts, _knowledge_cache_ts
     _den_cache_ts = 0
     _knowledge_cache_ts = 0
+
+
+def _cargar_materiales_dict(sb, columnas: str) -> dict[str, dict]:
+    """Trae materiales_validados paginado → {codigo: fila}. Supabase corta en
+    1000 filas por request y el maestro ya pasó ese tope; sin paginar, los
+    códigos más nuevos quedaban sin enriquecer (bug 14-07)."""
+    out: dict[str, dict] = {}
+    page = 0
+    while True:
+        res = sb.table("materiales_validados").select(columnas) \
+                .range(page * 1000, (page + 1) * 1000 - 1).execute()
+        lote = res.data or []
+        out.update({m["codigo"]: m for m in lote})
+        if len(lote) < 1000:
+            break
+        page += 1
+    return out
 
 
 def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[dict]:
@@ -1896,14 +1926,14 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
         )
 
     # Cargar materiales validados para enriquecer respuesta (nombre, rubro, unidad)
+    # Paginado: sin esto los códigos más allá de la fila 1000 no se enriquecían
+    # (nombre/rubro vacíos en la respuesta). Ver bug de sintéticos, 14-07.
     sb = get_supabase()
     materiales_dict: dict[str, dict] = {}
     if sb:
         try:
-            res = sb.table("materiales_validados") \
-                    .select("codigo,categoria,denominacion_principal,descripcion,unidades_posibles") \
-                    .execute()
-            materiales_dict = {m["codigo"]: m for m in (res.data or [])}
+            materiales_dict = _cargar_materiales_dict(
+                sb, "codigo,categoria,denominacion_principal,descripcion,unidades_posibles")
         except Exception as e:
             print(f"[v2] Error cargando materiales_validados: {e}")
 
@@ -3203,9 +3233,8 @@ def comparar_guardados(req: CompararGuardadosRequest, authorization: Optional[st
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
 
     denominaciones = _get_denominaciones()
-    res_m = sb.table("materiales_validados") \
-              .select("codigo,categoria,denominacion_principal,descripcion,unidades_posibles").execute()
-    materiales_dict = {m["codigo"]: m for m in (res_m.data or [])}
+    materiales_dict = _cargar_materiales_dict(
+        sb, "codigo,categoria,denominacion_principal,descripcion,unidades_posibles")
 
     res_p = sb.table("presupuestos").select("*").in_("id", req.presupuesto_ids) \
               .eq("user_id", user["user_id"]).execute()
