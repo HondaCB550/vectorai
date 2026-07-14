@@ -628,18 +628,26 @@ export default function Comparar() {
   }
   async function guardarVinculos() {
     if (!resultado) return;
-    const conceptos = empConceptos
+    // Conceptos válidos (nombre + ≥2 slots con ítem), con los slots completos
+    // para poder inyectarlos en la comparativa además de mandarlos al backend.
+    const conceptosValidos = empConceptos
       .map((c) => {
-        const items = Object.entries(c.slots)
+        const slots = Object.entries(c.slots)
           .filter(([, it]) => it && it.item_id)
-          .map(([prov, it]) => ({ item_id: it!.item_id as string, proveedor: prov, desc_prov: it!.desc_prov }));
-        return { nombre: c.nombre.trim(), unidad: c.unidad, cantidad: c.cant, items };
+          .map(([prov, it]) => ({ prov, item: it! }));
+        return { c, slots };
       })
-      .filter((c) => c.items.length >= 2 && c.nombre);
-    if (conceptos.length === 0) {
+      .filter(({ c, slots }) => slots.length >= 2 && c.nombre.trim());
+    if (conceptosValidos.length === 0) {
       alert("Armá al menos un concepto con nombre y 2 ítems para comparar.");
       return;
     }
+    const conceptos = conceptosValidos.map(({ c, slots }) => ({
+      nombre: c.nombre.trim(),
+      unidad: c.unidad,
+      cantidad: c.cant,
+      items: slots.map(({ prov, item }) => ({ item_id: item.item_id as string, proveedor: prov, desc_prov: item.desc_prov })),
+    }));
     setGuardandoVinc(true);
     try {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -654,7 +662,50 @@ export default function Comparar() {
         else alert("No se pudieron guardar los vínculos. Probá de nuevo.");
         return;
       }
-      setVincGuardados(true);
+
+      // Inyectar cada concepto emparejado como fila de la comparativa y sacar
+      // sus ítems de las pilas de sin match: al guardar, el usuario vuelve a la
+      // Comparativa y ve ahí lo que emparejó a mano (antes quedaba en la misma
+      // pantalla sin señal de qué hacer).
+      const emparejadosIds = new Set<string>();
+      conceptosValidos.forEach(({ slots }) => slots.forEach(({ item }) => { if (item.item_id) emparejadosIds.add(item.item_id); }));
+
+      const comparativo = resultado.comparativo.map((r) => ({ ...r, precios: { ...r.precios } }));
+      conceptosValidos.forEach(({ c, slots }) => {
+        const precios: Record<string, Precio> = {};
+        slots.forEach(({ prov, item }) => {
+          precios[prov] = { precio_sin_iva: item.precio_sin_iva, score: 0, origen: "emparejado", cant: item.cant };
+        });
+        const provs = Object.keys(precios);
+        const mejor = provs.reduce((best, p) => (precios[p].precio_sin_iva < precios[best].precio_sin_iva ? p : best), provs[0]);
+        comparativo.push({
+          cod_int: `emp_${c.id}`,
+          rubro: "Emparejado a mano",
+          material: c.nombre.trim(),
+          unidad: c.unidad,
+          cant: c.cant,
+          precios,
+          mejor_proveedor: mejor,
+          ahorro: 0,
+          en_varios: provs.length >= 2,
+        });
+      });
+
+      const nuevosResultados: typeof resultado.resultados = {};
+      for (const [prov, r] of Object.entries(resultado.resultados)) {
+        const nuevoSinMatch = r.sin_match.filter((it) => !it.item_id || !emparejadosIds.has(it.item_id));
+        nuevosResultados[prov] = nuevoSinMatch.length === r.sin_match.length
+          ? r
+          : { ...r, sin_match: nuevoSinMatch, stats: { ...r.stats, sin_match: nuevoSinMatch.length } };
+      }
+
+      const nuevoResultado = { ...resultado, comparativo, resultados: nuevosResultados };
+      setResultado(nuevoResultado);
+      void persistirComparativa(nuevoResultado);
+      setEmpConceptos([]);
+      setVincGuardados(false);
+      setFiltroRubro("Todos");   // que el filtro activo no esconda las filas recién emparejadas
+      setTab("comparativa");
     } catch {
       alert("No se pudieron guardar los vínculos. Revisá tu conexión y probá de nuevo.");
     } finally {
