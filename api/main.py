@@ -1308,28 +1308,49 @@ _conv_extra: dict[str, dict] = {}
 # Marcadores de "precio por metro" en el texto o la unidad del ítem
 _UNIDADES_METRO = {"ML", "M", "MT", "MTS", "METRO", "METROS"}
 _RE_POR_METRO = re.compile(r"^\s*mts?\.?\s|\b(?:x|por)\s*(?:metro|ml|mt)\b", re.I)
+# Presentación por cantidad de unidades: "x 100 un.", "x 10.000 unidades"
+_RE_POR_UNIDADES = re.compile(r"(?:x|por)\s*(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:un\b|u\b|unid\w*)", re.I)
 
 
 def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
-    """Normaliza precio por metro → presentación del material (tira/rollo).
+    """Normaliza el precio a la presentación del material.
 
-    Solo actúa con MARCADOR EXPLÍCITO de metro (unidad ML/MTS del documento o
-    "MTS …"/"x metro" en la descripción) y si el material tiene conversión
-    activa con unidad_comercial='m'. La conversión preserva el total de línea:
-    pu×factor y cant÷factor.
+    Dos modos según conversion_unidades.unidad_comercial:
+      - 'm': texto por metro → tira/rollo del maestro (pu×factor, cant÷factor).
+        Solo con MARCADOR EXPLÍCITO de metro (unidad ML/MTS o "MTS …"/"x metro").
+      - 'un': material vendido por caja de `factor` unidades y texto con
+        presentación propia ("x 100 un."): pu×factor/n, cant×n/factor (total de
+        línea invariante). Caso real: tornillos x 100 un del proveedor contra
+        cajas de 10.000/8.000 del maestro (13-07-2026) — sin esto el precio
+        quedaba 100× subvaluado.
 
     Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
-    el material se vende por presentación (tira/rollo) pero el texto no dice ni
-    "por metro" ni la presentación completa — el precio no es confiable y el
-    ítem debe ir a revisión en vez de entrar solo al histórico.
+    el material se vende por presentación pero el texto no la aclara — el
+    precio no es confiable y el ítem va a revisión en vez de entrar solo al
+    histórico.
     """
     conv = _conv_extra.get(codigo)
     unidad_norm = (unidad_item or "").strip(". ").upper()
-    if not conv or conv["unidad_comercial"] != "m":
+    if not conv:
         return pu, cant, unidad_norm or "UN", None, False
-
     factor = conv["factor"]
     d = (desc or "").lower()
+
+    if conv["unidad_comercial"] == "un":
+        m = _RE_POR_UNIDADES.search(desc or "")
+        if m:
+            n = float(re.sub(r"[.,]", "", m.group(1)))
+            if n > 0:
+                if n == factor:
+                    return pu, cant, conv["unidad_base"], None, False
+                nota = f"normalizado a {conv['unidad_base']} (×{factor:g}/{n:g})"
+                return round(pu * factor / n, 2), cant * n / factor, conv["unidad_base"], nota, False
+        # Material por caja pero el texto no dice la presentación → ambiguo
+        return pu, cant, unidad_norm or "UN", None, True
+
+    if conv["unidad_comercial"] != "m":
+        return pu, cant, unidad_norm or "UN", None, False
+
     por_metro = unidad_norm in _UNIDADES_METRO or bool(_RE_POR_METRO.search(desc or ""))
     if por_metro:
         nota = f"normalizado a {conv['unidad_base']} (×{factor:g})"
@@ -1403,11 +1424,19 @@ _RE_DECIMAL = re.compile(r"\b\d+\.\d+\b")
 # El maestro solo tiene el diámetro — el largo hacía matchear "8 x 12" contra
 # el hierro del 12. Solo en contexto corrugado/hierro liso (post-sinónimos).
 _RE_LARGO_BARRA = re.compile(r"(\d)\s*x\s*(?:12(?:\s*(?:m|mt|mts|metros))?|6\s*(?:m|mt|mts|metros))\b")
+# PFGAL = perfil galvanizado (regla de Pablo 13-07): "PFGAL C100X45..." es un
+# PGC 100, "PFGAL U..." un PGU. La letra viene pegada al número, así que no
+# alcanza con un sinónimo de texto plano. El PFGAL suelto lo cubre el sinónimo
+# BD PFGAL → PERFIL GALVANIZADO.
+_RE_PFGAL_C = re.compile(r"\bPFGAL\s*C\s*(?=\d)", re.I)
+_RE_PFGAL_U = re.compile(r"\bPFGAL\s*U\s*(?=\d)", re.I)
 
 
 def _prep_v2(s: str) -> str:
     """Normaliza + aplica sinónimos → lowercase. Usado en ambos lados del match."""
-    s = _RE_COMA_DECIMAL.sub(".", s or "")   # 1,00 → 1.00
+    s = _RE_PFGAL_C.sub("PGC ", s or "")     # PFGAL C100... → PGC 100...
+    s = _RE_PFGAL_U.sub("PGU ", s)           # PFGAL U100... → PGU 100...
+    s = _RE_COMA_DECIMAL.sub(".", s)         # 1,00 → 1.00
     s = _RE_MEDIDA_X.sub(" x ", s)           # 40X1.00 → 40 x 1.00
     s = _RE_DIGITO_LETRA.sub(" ", s)         # 40MM → 40 MM
     t = aplicar_sinonimos(normalize(s)).lower()
