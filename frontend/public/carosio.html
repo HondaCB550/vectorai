@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vectorai · Propuesta para Carosio Corralón</title>
+<style>
+  :root{
+    --navy:#1A2B4A;
+    --naranja:#E87022;
+    --naranja-suave:#FBEEE3;
+    --papel:#FFFFFF;
+    --crudo:#F7F5F1;
+    --gris:#5B6472;
+    --linea:#E4E1DA;
+    --texto:#2B3A55;
+  }
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#E9E6E0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--texto);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .hoja{
+    max-width:840px;
+    margin:28px auto;
+    background:var(--papel);
+    box-shadow:0 10px 40px rgba(26,43,74,.10);
+    border-radius:6px;
+    overflow:hidden;
+  }
+
+  /* ── Header ── */
+  .top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:26px 40px;
+    border-bottom:1px solid var(--linea);
+  }
+  .brand{display:flex;align-items:center;gap:13px;}
+  .brand .word{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.3px;}
+  .top .prog{font-size:11px;color:var(--gris);text-transform:uppercase;letter-spacing:1.4px;text-align:right;}
+
+  /* ── Hero ── */
+  .hero{padding:34px 40px 30px;}
+  .eyebrow{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.6px;
+    text-transform:uppercase;color:var(--naranja);margin-bottom:14px;
+  }
+  .hero h1{
+    margin:0 0 12px;font-size:31px;line-height:1.18;color:var(--navy);
+    font-weight:750;letter-spacing:-.6px;
+  }
+  .hero h1 .hl{color:var(--naranja);}
+  .hero .lead{margin:0;font-size:15.5px;color:var(--texto);max-width:640px;}
+
+  /* ── Secciones ── */
+  section{padding:22px 40px;}
+  .kick{
+    font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--gris);margin:0 0 14px;
+  }
+  h2{margin:0 0 10px;font-size:19px;color:var(--navy);font-weight:700;letter-spacing:-.3px;}
+  p{margin:0 0 10px;font-size:14px;}
+
+  /* viñetas naranjas */
+  ul.vin{list-style:none;margin:0;padding:0;}
+  ul.vin li{position:relative;padding-left:18px;margin-bottom:8px;font-size:14px;color:var(--texto);}
+  ul.vin li::before{
+    content:"";position:absolute;left:0;top:7px;width:7px;height:7px;
+    border-radius:2px;background:var(--naranja);
+  }
+
+  /* ── Cards de beneficios ── */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+  .card{
+    border:1px solid var(--linea);border-radius:8px;padding:16px 18px;background:var(--crudo);
+  }
+  .card .n{font-size:12px;font-weight:700;color:var(--naranja);letter-spacing:.5px;}
+  .card h3{margin:5px 0 6px;font-size:15px;color:var(--navy);font-weight:700;}
+  .card p{margin:0;font-size:13px;color:var(--texto);line-height:1.46;}
+
+  /* ── Neutralidad ── */
+  .nota{
+    background:var(--naranja-suave);border-left:4px solid var(--naranja);
+    border-radius:0 8px 8px 0;padding:16px 20px;margin-top:4px;
+  }
+  .nota h2{font-size:16px;margin-bottom:6px;}
+  .nota p{margin:0;font-size:13.5px;color:#5a3b22;}
+  .nota strong{color:var(--navy);}
+
+  /* ── Pasos ── */
+  .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px;}
+  .paso{text-align:left;}
+  .paso .num{
+    width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-bottom:9px;
+  }
+  .paso h4{margin:0 0 4px;font-size:14px;color:var(--navy);font-weight:700;}
+  .paso p{margin:0;font-size:12.7px;color:var(--gris);line-height:1.45;}
+
+  /* ── Franja gruesos/steel ── */
+  .rubros{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .rubros span{
+    font-size:12px;font-weight:600;color:var(--navy);background:#fff;
+    border:1px solid var(--linea);border-radius:20px;padding:5px 13px;
+  }
+
+  /* ── Cierre ── */
+  .cierre{
+    background:var(--navy);color:#fff;padding:28px 40px;margin-top:8px;
+  }
+  .cierre h2{color:#fff;font-size:19px;margin-bottom:8px;}
+  .cierre p{color:#cdd6e4;font-size:14px;margin:0 0 4px;max-width:640px;}
+  .cierre .firma{margin-top:16px;font-size:13px;color:#9fb0cc;}
+  .cierre .firma strong{color:#fff;}
+
+  .foot{padding:16px 40px;text-align:center;font-size:11px;color:var(--gris);letter-spacing:.4px;}
+
+  @media(max-width:640px){
+    .hoja{margin:0;border-radius:0;}
+    .top,.hero,section,.cierre{padding-left:22px;padding-right:22px;}
+    .grid,.pasos{grid-template-columns:1fr;}
+    .hero h1{font-size:25px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .hoja{box-shadow:none;margin:0;max-width:100%;}
+    section{padding-top:16px;padding-bottom:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="hoja">
+
+  <!-- Header -->
+  <div class="top">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="18" y="26" width="64" height="13" rx="6.5" fill="#1A2B4A"/>
+        <rect x="30" y="48" width="40" height="13" rx="6.5" fill="#1A2B4A"/>
+        <rect x="40" y="70" width="20" height="13" rx="6.5" fill="#E87022"/>
+      </svg>
+      <span class="word">Vectorai</span>
+    </div>
+    <div class="prog">Programa de<br>catálogos verificados</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="eyebrow">Para Diego Carosio</span>
+    <h1>Carosio Corralón, el primer<br><span class="hl">corralón verificado</span> de Vectorai</h1>
+    <p class="lead">Diego, esta es una propuesta para que todo el catálogo de Carosio —áridos, hierro, albañilería, perfiles y steel frame— quede interpretado y verificado dentro de Vectorai. Nosotros ponemos el trabajo; vos ponés el listado y un rato de revisión.</p>
+  </div>
+
+  <!-- Qué es -->
+  <section style="padding-top:6px;">
+    <p class="kick">Qué es Vectorai</p>
+    <p>Un asistente de compras para construcción. El cliente sube los presupuestos que recibe de sus proveedores, Vectorai lee cada ítem, lo identifica y arma una comparativa clara de precios. Es un comparador <strong>neutral</strong>: ordena por dato, no por acuerdo comercial.</p>
+    <div class="rubros">
+      <span>Áridos</span><span>Hierro</span><span>Albañilería</span><span>Perfiles</span><span>Steel frame</span>
+    </div>
+  </section>
+
+  <!-- Qué gana -->
+  <section>
+    <h2>Qué gana Carosio</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="n">01</div>
+        <h3>Tus presupuestos se leen perfecto</h3>
+        <p>Cuando un cliente sube una cotización de Carosio, cada ítem queda identificado con precisión — no como “genérico” ni mal atribuido a otra marca. Tu cotización se procesa al instante y bien.</p>
+      </div>
+      <div class="card">
+        <div class="n">02</div>
+        <h3>El sello de verificado</h3>
+        <p>Aparecés como corralón verificado en Vectorai. Es una certificación técnica de que tu catálogo está ordenado y bien interpretado en el sistema. Imagen de proveedor prolijo y confiable.</p>
+      </div>
+      <div class="card">
+        <div class="n">03</div>
+        <h3>Cero trabajo para vos</h3>
+        <p>El mapeo lo hacemos nosotros. Ya tenemos buena parte de tu catálogo de gruesos y steel cargado. Vos solo revisás lo poco que necesita tu confirmación.</p>
+      </div>
+      <div class="card">
+        <div class="n">04</div>
+        <h3>Puerta al servicio de compras</h3>
+        <p>Ser el primero te posiciona para lo que viene: el módulo donde las constructoras arman y comparan sus pedidos de obra. Empezás la relación del lado correcto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neutralidad -->
+  <section style="padding-top:8px;">
+    <div class="nota">
+      <h2>Para que quede claro</h2>
+      <p>Vectorai es y sigue siendo un comparador neutral. <strong>El sello no cambia cómo se ordenan los precios</strong> ni te muestra más barato de lo que sos: certifica una sola cosa, que tus ítems están bien interpretados. No se paga por aparecer mejor rankeado. Esa neutralidad es justo lo que hace que quien compara confíe en la herramienta.</p>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section>
+    <h2>Cómo funciona</h2>
+    <div class="pasos">
+      <div class="paso">
+        <div class="num">1</div>
+        <h4>Nos pasás tu catálogo</h4>
+        <p>Excel, PDF o el export de tu sistema. Con código, descripción y unidad. El precio es opcional.</p>
+      </div>
+      <div class="paso">
+        <div class="num">2</div>
+        <h4>Lo normalizamos y te lo mostramos</h4>
+        <p>Cada artículo tuyo mapeado contra nuestro maestro de materiales. Te marcamos lo poco que necesita tu ok.</p>
+      </div>
+      <div class="paso">
+        <div class="num">3</div>
+        <h4>Confirmás y queda verificado</h4>
+        <p>Desde ahí, todo presupuesto de Carosio que entre a Vectorai se reconoce solo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué necesitamos -->
+  <section style="padding-top:8px;">
+    <p class="kick">Qué necesitamos de vos</p>
+    <ul class="vin">
+      <li>El listado de artículos: <strong>código + descripción + unidad</strong>.</li>
+      <li>Si además nos pasás precios de referencia, mejor arranca la comparativa. Si no, igual queda todo el catálogo verificado.</li>
+    </ul>
+  </section>
+
+  <!-- Cierre -->
+  <div class="cierre">
+    <h2>Arranquemos con Carosio</h2>
+    <p>Por la relación que tenemos, quiero abrir el programa con vos como primer corralón verificado de Vectorai. Nosotros hacemos el mapeo; vos aportás el catálogo y un rato de revisión.</p>
+    <p>Cuando quieras lo vemos juntos y te muestro cómo queda tu catálogo dentro del sistema.</p>
+    <div class="firma">Pablo Bontempo · <strong>Vectorai</strong> · vectorai.com.ar</div>
+  </div>
+
+  <div class="foot">Vectorai · asistente de compras para construcción</div>
+
+</div>
+</body>
+</html>
