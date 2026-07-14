@@ -104,6 +104,13 @@ railway logs 2>&1 | grep -i -E "sheets|error|42501|get_user_plan" | tail -20
 curl -s https://vectorai-production-1f06.up.railway.app/health
 cd frontend && npx tsc --noEmit          # type-check antes de commitear
 python -c "import ast; ast.parse(open('api/main.py', encoding='utf-8').read())"
+cd api && python -c "import main"        # OBLIGATORIO antes de pushear api/: detecta imports rotos
+cd api && python test_extraccion_parsers.py   # regresión de parsers si se tocó extraer_pdf_texto.py
+```
+
+**Antes de pushear cambios de api/: commitear JUNTOS todos los archivos relacionados** (el 13-07 un commit llevó main.py con un import de matching.py sin commitear → ImportError al arrancar → producción caída ~5 min hasta el commit del archivo faltante). El `import main` de arriba lo detecta local. Ojo con sesiones paralelas de Claude editando el mismo repo: verificar `git status` de api/ completo antes de commitear.
+
+```bash
 ```
 
 Errores conocidos en logs: `get_user_plan error PGRST116 (0 rows)` — pendiente de investigar si son requests anónimos o perfiles faltantes.
