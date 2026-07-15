@@ -452,6 +452,59 @@ app = FastAPI(title="Vectorai API", version="0.1.0")
 from whatsapp import router as whatsapp_router
 app.include_router(whatsapp_router)
 
+# ── Rate limiting (defensa anti-abuso en endpoints que gastan visión/OCR/CPU) ──
+# Ventana deslizante en memoria por IP+ruta. Sin dependencias nuevas, FAIL-OPEN
+# (cualquier error del limiter deja pasar el request) y con kill-switch por env.
+# Se registra ANTES del CORS para que el CORS lo envuelva y los 429 salgan con
+# los headers CORS (si no, el browser no puede leer la respuesta 429).
+import time as _time
+from collections import deque as _deque
+
+RATE_LIMIT_ENABLED  = os.environ.get("RATE_LIMIT_ENABLED", "1") not in ("0", "false", "False", "")
+RATE_LIMIT_WINDOW_S = int(os.environ.get("RATE_LIMIT_WINDOW_S", "60"))
+RATE_LIMIT_MAX      = int(os.environ.get("RATE_LIMIT_MAX", "20"))
+# Solo endpoints caros. NO el polling GET /analizar-v2/progreso ni las lecturas.
+_RATE_LIMIT_PATHS   = ("/analizar", "/analizar-v2", "/imagen", "/pdf")
+_rate_store: dict[str, "_deque"] = {}
+
+def _client_ip(request: Request) -> str:
+    # Railway está detrás de un proxy: la IP real viaja en X-Forwarded-For.
+    xff = request.headers.get("x-forwarded-for", "")
+    if xff:
+        return xff.split(",")[0].strip()
+    return request.client.host if request.client else "desconocida"
+
+@app.middleware("http")
+async def _rate_limit(request: Request, call_next):
+    try:
+        path = request.url.path
+        if (RATE_LIMIT_ENABLED and request.method == "POST"
+                and any(path == p or path.startswith(p + "/") for p in _RATE_LIMIT_PATHS)):
+            now = _time.monotonic()
+            limite = now - RATE_LIMIT_WINDOW_S
+            key = f"{_client_ip(request)}:{path}"
+            dq = _rate_store.get(key)
+            if dq is None:
+                dq = _rate_store[key] = _deque()
+            while dq and dq[0] < limite:
+                dq.popleft()
+            if len(dq) >= RATE_LIMIT_MAX:
+                retry = int(RATE_LIMIT_WINDOW_S - (now - dq[0])) + 1
+                return JSONResponse(
+                    status_code=429,
+                    content={"detail": "Demasiadas solicitudes seguidas. Esperá unos segundos y probá de nuevo."},
+                    headers={"Retry-After": str(max(1, retry))},
+                )
+            dq.append(now)
+            if len(_rate_store) > 5000:  # limpieza barata: sacar IPs ya inactivas
+                for k in list(_rate_store.keys()):
+                    v = _rate_store[k]
+                    if not v or v[-1] < limite:
+                        _rate_store.pop(k, None)
+    except Exception:
+        pass  # fail-open: nunca bloquear por un bug del limiter
+    return await call_next(request)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "https://vectorai.com.ar", "https://www.vectorai.com.ar"],
