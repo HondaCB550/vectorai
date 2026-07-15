@@ -3089,6 +3089,51 @@ async def mi_plan(authorization: Optional[str] = Header(None)):
     }
 
 
+@app.get("/precios-historial/{codigo_material}")
+def precios_historial(codigo_material: str, authorization: Optional[str] = Header(None)):
+    """Serie de precios de un material a lo largo del tiempo, por proveedor.
+    Alimenta la vista de tendencia. Datos del catálogo compartido (sin RLS por
+    org), pero se exige login para no exponer precios a anónimos."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail="login_requerido")
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    try:
+        filas = (sb.table("precios_historicos").select("*")
+                 .eq("codigo_material", codigo_material).execute().data) or []
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"error_leyendo_precios: {e}")
+
+    def _fecha(f) -> str:  # el nombre de la columna de fecha varía según la carga
+        return str(f.get("fecha") or f.get("created_at") or f.get("fecha_carga") or "")
+
+    filas.sort(key=_fecha)
+    puntos = [{
+        "fecha":     _fecha(f)[:10],
+        "proveedor": f.get("proveedor"),
+        "precio":    f.get("precio"),
+        "unidad":    f.get("unidad"),
+        "moneda":    f.get("moneda") or "ARS",
+    } for f in filas if f.get("precio") is not None]
+
+    material = None
+    try:
+        m = (sb.table("materiales_validados")
+             .select("codigo,denominacion_principal,descripcion")
+             .eq("codigo", codigo_material).limit(1).execute().data or [None])[0]
+        if m:
+            material = {"codigo": codigo_material,
+                        "denominacion": m.get("denominacion_principal"),
+                        "descripcion": m.get("descripcion")}
+    except Exception:
+        pass
+
+    return {"codigo_material": codigo_material, "material": material,
+            "puntos": puntos, "total": len(puntos)}
+
+
 @app.get("/obras")
 async def listar_obras(authorization: Optional[str] = Header(None)):
     user = get_user_plan(authorization)
