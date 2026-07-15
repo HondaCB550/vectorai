@@ -1,0 +1,389 @@
+<title>Vectorai — Checklist a v1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#F5F7FA; --surface:#FFFFFF; --surface-2:#EEF1F6; --border:#DCE2EC;
+    --ink:#151A22; --ink-soft:#59626F; --ink-faint:#8A93A1;
+    --accent:#2E5CEA; --accent-soft:#E4EAFD;
+    --ok:#12885A; --ok-soft:#DEF1E7;
+    --gap:#B0711A; --gap-soft:#F6EBD6;
+    --pablo:#2E5CEA; --pablo-soft:#E4EAFD;
+    --live:#5D6879; --live-soft:#E7EAEF;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.04);
+    --font-body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0E1217; --surface:#161C25; --surface-2:#1D2530; --border:#2A333F;
+      --ink:#E8EDF4; --ink-soft:#98A3B2; --ink-faint:#6C7787;
+      --accent:#6E92FF; --accent-soft:#1B2740;
+      --ok:#34C77E; --ok-soft:#123527;
+      --gap:#E0A24A; --gap-soft:#3A2E17;
+      --pablo:#6E92FF; --pablo-soft:#1B2740;
+      --live:#8894A5; --live-soft:#232C37;
+      --shadow:0 1px 2px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F5F7FA; --surface:#FFFFFF; --surface-2:#EEF1F6; --border:#DCE2EC;
+    --ink:#151A22; --ink-soft:#59626F; --ink-faint:#8A93A1;
+    --accent:#2E5CEA; --accent-soft:#E4EAFD;
+    --ok:#12885A; --ok-soft:#DEF1E7; --gap:#B0711A; --gap-soft:#F6EBD6;
+    --pablo:#2E5CEA; --pablo-soft:#E4EAFD; --live:#5D6879; --live-soft:#E7EAEF;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.04);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1217; --surface:#161C25; --surface-2:#1D2530; --border:#2A333F;
+    --ink:#E8EDF4; --ink-soft:#98A3B2; --ink-faint:#6C7787;
+    --accent:#6E92FF; --accent-soft:#1B2740;
+    --ok:#34C77E; --ok-soft:#123527; --gap:#E0A24A; --gap-soft:#3A2E17;
+    --pablo:#6E92FF; --pablo-soft:#1B2740; --live:#8894A5; --live-soft:#232C37;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+    line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 20px 80px;}
+
+  /* Header */
+  header{padding:44px 0 24px;}
+  .eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 10px;}
+  h1{font-size:clamp(28px,4.4vw,40px);line-height:1.08;letter-spacing:-.02em;
+    font-weight:700;margin:0 0 12px;text-wrap:balance;}
+  .lede{font-size:16px;color:var(--ink-soft);max-width:62ch;margin:0;}
+  .lede b{color:var(--ink);font-weight:600;}
+
+  /* Summary / meter */
+  .summary{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);margin:0 -20px 26px;padding:14px 20px;}
+  .summary-inner{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .meter-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .pct{font-family:var(--font-mono);font-size:26px;font-weight:600;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;color:var(--ink);}
+  .pct span{font-size:13px;color:var(--ink-faint);font-weight:500;}
+  .counts{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-family:var(--font-mono);
+    font-size:12px;font-variant-numeric:tabular-nums;}
+  .counts b{font-weight:600;}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;
+    vertical-align:middle;}
+  .meter{height:8px;border-radius:6px;background:var(--surface-2);overflow:hidden;display:flex;}
+  .meter i{display:block;height:100%;transition:width .5s cubic-bezier(.4,0,.2,1);}
+  .filters{display:flex;gap:7px;flex-wrap:wrap;}
+  .chip{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.03em;
+    padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--surface);
+    color:var(--ink-soft);cursor:pointer;transition:.15s;text-transform:uppercase;font-weight:500;}
+  .chip:hover{border-color:var(--accent);color:var(--ink);}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  @media(prefers-color-scheme:dark){.chip.on{color:#0E1217;}}
+  :root[data-theme="light"] .chip.on{color:#fff;}
+  :root[data-theme="dark"] .chip.on{color:#0E1217;}
+
+  /* Groups */
+  .group{margin:34px 0 0;}
+  .group-head{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;padding:0 2px;}
+  .group-num{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);font-weight:600;}
+  .group-title{font-size:15px;font-weight:650;letter-spacing:-.01em;margin:0;}
+  .group-meta{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);margin-left:auto;
+    font-variant-numeric:tabular-nums;}
+
+  /* Item cards */
+  .item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:15px 16px;margin-bottom:9px;box-shadow:var(--shadow);cursor:pointer;
+    transition:border-color .15s,transform .05s;}
+  .item:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--border));}
+  .item:active{transform:translateY(.5px);}
+  .item.done{opacity:.62;}
+  .item.done .it-title{text-decoration:line-through;text-decoration-color:var(--ink-faint);
+    text-decoration-thickness:1.5px;}
+  .cbox{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);
+    background:var(--surface-2);flex:none;margin-top:1px;display:grid;place-items:center;
+    transition:.15s;}
+  .item:hover .cbox{border-color:var(--accent);}
+  .item.done .cbox{background:var(--ok);border-color:var(--ok);}
+  .cbox svg{width:13px;height:13px;stroke:#fff;stroke-width:3.4;fill:none;
+    opacity:0;transition:.15s;}
+  :root[data-theme="dark"] .item.done .cbox svg{stroke:#0E1217;}
+  @media(prefers-color-scheme:dark){.item.done .cbox svg{stroke:#0E1217;}}
+  .item.done .cbox svg{opacity:1;}
+  .it-body{min-width:0;}
+  .it-title{font-size:14.5px;font-weight:600;letter-spacing:-.005em;margin:0 0 4px;line-height:1.35;}
+  .it-note{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.45;}
+  .it-note code{font-family:var(--font-mono);font-size:12px;background:var(--surface-2);
+    padding:1px 5px;border-radius:4px;color:var(--ink);}
+  .it-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;}
+  .pill{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;
+    font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap;}
+  .p-ok{background:var(--ok-soft);color:var(--ok);}
+  .p-gap{background:var(--gap-soft);color:var(--gap);}
+  .p-pablo{background:var(--pablo-soft);color:var(--pablo);}
+  .p-live{background:var(--live-soft);color:var(--live);}
+  .tag-pablo{font-family:var(--font-mono);font-size:10px;letter-spacing:.03em;color:var(--accent);
+    font-weight:600;display:flex;align-items:center;gap:4px;}
+  .tag-pablo::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);}
+
+  /* Live-data callout */
+  .callout{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;
+    padding:18px 18px 8px;margin-top:14px;}
+  .callout h3{font-size:14px;margin:0 0 6px;font-weight:650;}
+  .callout p{font-size:13px;color:var(--ink-soft);margin:0 0 12px;max-width:70ch;}
+  .callout ul{list-style:none;padding:0;margin:0;display:grid;gap:7px;}
+  .callout li{display:flex;gap:9px;font-size:13px;align-items:baseline;}
+  .callout li::before{content:"›";color:var(--live);font-family:var(--font-mono);flex:none;}
+  .callout code{font-family:var(--font-mono);font-size:11.5px;color:var(--ink);}
+  .reason{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);
+    border-top:1px dashed var(--border);margin-top:14px;padding:11px 0 4px;line-height:1.6;}
+
+  /* Deferred footnote */
+  .deferred{margin-top:40px;padding:18px 0 0;border-top:1px solid var(--border);}
+  .deferred h3{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;margin:0 0 10px;}
+  .deferred p{font-size:13px;color:var(--ink-soft);margin:0 0 6px;max-width:70ch;}
+  .deferred .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;}
+  .deferred .tags span{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);
+    border:1px solid var(--border);border-radius:6px;padding:3px 9px;}
+
+  /* Footer bar */
+  .toolbar{display:flex;gap:12px;align-items:center;margin-top:34px;flex-wrap:wrap;}
+  .btn{font-family:var(--font-mono);font-size:12px;padding:7px 14px;border-radius:8px;
+    border:1px solid var(--border);background:var(--surface);color:var(--ink-soft);cursor:pointer;
+    transition:.15s;}
+  .btn:hover{border-color:var(--accent);color:var(--ink);}
+  .saved{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);}
+  .criterio{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+    border-radius:12px;padding:16px 18px;margin-top:26px;}
+  .criterio .eyebrow{margin-bottom:6px;}
+  .criterio p{margin:0;font-size:14px;color:var(--ink);line-height:1.5;}
+  .criterio b{font-weight:650;}
+  .empty{display:none;text-align:center;color:var(--ink-faint);font-size:13px;
+    font-family:var(--font-mono);padding:30px 0;}
+  @media (max-width:560px){
+    .item{grid-template-columns:auto 1fr;}
+    .it-side{grid-column:2;flex-direction:row;align-items:center;flex-wrap:wrap;margin-top:2px;}
+    .counts{margin-left:0;width:100%;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="summary">
+  <div class="summary-inner">
+    <div class="meter-row">
+      <div class="pct" id="pct">0%<span id="pctlabel"> listo</span></div>
+      <div class="counts" id="counts"></div>
+    </div>
+    <div class="meter" id="meter"></div>
+    <div class="filters" id="filters">
+      <button class="chip on" data-f="all">Todo</button>
+      <button class="chip" data-f="pablo">Necesita de vos</button>
+      <button class="chip" data-f="dev">A construir · dev</button>
+      <button class="chip" data-f="pend">Pendientes</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Vectorai · Auditoría 15-07-2026</p>
+    <h1>De MVP a v1.0 — qué falta</h1>
+    <p class="lede">Estado real por ítem, sacado del código del repo. <b>Verde = ya está hecho</b> y no lo sabías; <b>azul = necesita una acción o decisión tuya</b>; ámbar = trabajo de desarrollo; gris = no se pudo verificar en esta sesión. Tocá cualquier fila para tacharla — se guarda en este navegador.</p>
+  </header>
+
+  <div id="board"></div>
+  <div class="empty" id="empty">No hay ítems en este filtro.</div>
+
+  <div class="criterio">
+    <p class="eyebrow">Criterio de salida</p>
+    <p>Deja de ser MVP cuando un usuario nuevo <b>se registra, paga, sube sus PDFs habituales sin caer en “dudosos”, obtiene una comparativa correcta y vuelve a ver su historial</b> — todo sin que intervengas a mano. Hoy lo que rompe ese “sin intervención” es la cola de dudosos y el curado de pendientes.</p>
+  </div>
+
+  <div class="deferred">
+    <h3>Diferido a propósito · no cuenta para salir de MVP</h3>
+    <p>Decisiones tomadas, no deuda. No suman al progreso de arriba.</p>
+    <div class="tags">
+      <span>WhatsApp como entrada</span>
+      <span>Jerarquía categorías → tipos</span>
+      <span>Marcas / equivalencias como tablas</span>
+      <span>Servicios separados en Railway</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn" id="reset">Reiniciar tildes</button>
+    <span class="saved" id="saved"></span>
+  </div>
+</div>
+
+<script>
+const STORE="vectorai_mvp_checklist_v1";
+// status: ok=verificado en código | gap=a construir (dev) | pablo=necesita acción/decisión de Pablo | live=no verificable esta sesión
+// pablo:true => aparece en filtro "Necesita de vos"
+const GROUPS=[
+ {n:"01",t:"Bloqueantes de lanzamiento",items:[
+   {id:"legal-code",s:"ok",p:false,t:"Términos y política de privacidad redactados y publicados",
+    note:"Versiones finales en <code>legal/</code> + páginas <code>/terminos</code> y <code>/privacidad</code> en el frontend."},
+   {id:"legal-review",s:"pablo",p:true,t:"Revisión legal final + datos de la empresa (razón social, CUIT)",
+    note:"Confirmar que el texto legal y los datos fiscales son los correctos antes de cobrar. Es decisión tuya, no código."},
+   {id:"reset-pass",s:"ok",p:false,t:"Recuperación y reset de contraseña",
+    note:"Páginas <code>/recuperar</code>, <code>/actualizar-clave</code>, <code>/auth/*</code> + emails <code>recuperar_clave.html</code> y <code>confirmacion_signup.html</code>."},
+   {id:"mp-code",s:"ok",p:false,t:"Flujo de cobro MercadoPago construido",
+    note:"<code>/mp/suscripcion</code> crea la preferencia; <code>/mp/webhook</code> verifica firma HMAC fail-closed y re-consulta a MP como 2da verificación."},
+   {id:"mp-secret",s:"pablo",p:true,t:"Confirmar MP_WEBHOOK_SECRET cargado en Railway",
+    note:"El webhook responde <code>503 webhook_no_configurado</code> si falta. No pude verificar el entorno de Railway en esta sesión — chequealo vos."},
+   {id:"mp-e2e",s:"pablo",p:true,t:"Prueba de pago real end-to-end",
+    note:"Alta → webhook activa <code>advance/pro</code> → límite 999 → baja. Requiere una compra real de prueba y verificar el manejo de pago fallido."},
+   {id:"limite-ui",s:"gap",p:false,t:"Corte de plan free visible y bloqueante en la UI",
+    note:"Backend ya enforcea: free = 1 de por vida, Inicial = 6/mes, advance/pro = 999. Falta confirmar que la pantalla muestre el corte + el upsell, no solo el 429."},
+   {id:"monitor",s:"gap",p:false,t:"Alerta en tiempo real si cae el API",
+    note:"Hoy solo hay verificación nocturna. El 13-07 hubo ~5 min de producción caída por un ImportError. Falta un health-check con alerta inmediata."},
+ ]},
+ {n:"02",t:"Calidad de datos — el corazón",items:[
+   {id:"parsers",s:"ok",p:false,t:"Cobertura de parsers de PDF por formato",
+    note:"29 patrones <code>RE_*</code> en <code>extraer_pdf_texto.py</code>, seleccionados por documento. Cobertura amplia y creciente."},
+   {id:"dudosos-umbral",s:"pablo",p:true,t:"Fijar umbral aceptable de extracciones_dudosas",
+    note:"Cada formato nuevo dispara el globo “lo resolvemos en 24 hs”. Definí una meta (ej. <10% de archivos caen a dudosos) como criterio de “listo”. El conteo en vivo quedó bloqueado esta sesión."},
+   {id:"pendientes-meta",s:"pablo",p:true,t:"Meta de ratio de match automático + curar pendientes",
+    note:"El modelo pide que el ratio auto/manual suba con cada validación. Fijá la meta (ej. ≥90% auto) y curá la cola hasta ahí. Conteo en vivo bloqueado esta sesión."},
+   {id:"ci-parsers",s:"gap",p:false,t:"Test de regresión de parsers en CI",
+    note:"Existe <code>test_extraccion_parsers.py</code> pero se corre a mano — no hay <code>.github/workflows</code>. Automatizarlo evita romper parsers en cada deploy."},
+   {id:"ocr-escala",s:"live",p:false,t:"Validar OCR de fotos a escala (costo y precisión)",
+    note:"~19s/página de visión. Falta medir costo y acierto con volumen real de usuarios, no solo casos de prueba."},
+ ]},
+ {n:"03",t:"Robustez de producto",items:[
+   {id:"historial",s:"ok",p:false,t:"Historial y re-uso de comparativas",
+    note:"Páginas <code>/app/historial</code> + <code>/historial/[id]</code>, endpoints <code>/mis-presupuestos</code> y <code>/comparar-guardados</code>."},
+   {id:"tendencia",s:"gap",p:false,t:"Vista de tendencia de precios en el tiempo",
+    note:"<code>precios_historicos</code> ya guarda la data con fecha y moneda. Falta la vista para el usuario que muestre la evolución."},
+   {id:"metricas",s:"ok",p:false,t:"Panel de métricas admin",
+    note:"Página <code>/app/admin/metricas</code> + endpoint <code>/admin/metrics</code>."},
+   {id:"onboarding",s:"gap",p:false,t:"Onboarding / estado vacío del usuario nuevo",
+    note:"Solo hay landing (<code>page.tsx</code>). Falta el primer-PDF guiado y estados vacíos que enseñen, en vez de pantalla en blanco."},
+   {id:"errores-ui",s:"live",p:false,t:"Auditar “errores como lista legible” en toda la UI",
+    note:"Es invariante del proyecto (nunca JSON crudo). Falta una pasada por todas las pantallas para confirmar que se cumple. No verificable sin correr la app."},
+   {id:"multiuser",s:"pablo",p:true,t:"Decidir mono-usuario vs. equipos para v1",
+    note:"El código usa <code>perfiles</code> individual; el modelo de lanzamiento prevé <code>organizaciones</code>/<code>usuarios</code> con RLS. ¿Lanzás mono-usuario (ok para MVP) o necesitás equipos antes? Decisión de producto."},
+ ]},
+ {n:"04",t:"Confianza operacional",items:[
+   {id:"backups",s:"gap",p:false,t:"Backups automáticos del maestro y aliases",
+    note:"Hoy son 7 backups JSON manuales en <code>api/data/</code>. Falta un backup programado de <code>materiales_validados</code> y <code>material_denominaciones</code>."},
+   {id:"advisors",s:"live",p:true,t:"Advisors de seguridad de Supabase en verde (RLS)",
+    note:"Correr <code>get_advisors</code> y resolver hallazgos de RLS/políticas. El MCP de Supabase cortó el stream de aprobación en esta sesión — hay que reintentarlo."},
+   {id:"ratelimit",s:"gap",p:false,t:"Rate limiting en los endpoints de subida",
+    note:"No hay <code>slowapi</code>/limiter en <code>main.py</code>. Sin esto, un usuario free puede quemar visión sin control."},
+   {id:"runbook",s:"gap",p:false,t:"Runbook de incidentes",
+    note:"Qué hacer si cae Railway, si RLS bloquea escrituras (42501) o si un deploy rompe producción. Documentarlo."},
+ ]},
+];
+
+const LIVE={
+ blocked:[
+   "Conteo de <code>materiales_pendientes</code> sin resolver",
+   "Conteo de <code>extracciones_dudosas</code> pendientes",
+   "Usuarios totales / usuarios en plan pago / presupuestos procesados",
+   "Estado de deploy: Vercel <code>readyState</code> y Railway <code>status</code>",
+   "Advisors de seguridad de Supabase",
+   "Salida en vivo de <code>GET /health</code>",
+ ],
+ reason:"Motivo: el egress a <code>vectorai-production-1f06.up.railway.app</code> y al dominio de Vercel está bloqueado por la política de egress de la organización (403 al CONNECT), y el MCP de Supabase/Vercel cerró el stream de aprobación en cada intento. Reintentables en una sesión con esos accesos habilitados."
+};
+
+const PILL={ok:["p-ok","Hecho"],gap:["p-gap","A construir"],pablo:["p-pablo","Necesita de vos"],live:["p-live","Sin verificar"]};
+let state=load();
+let filter="all";
+
+function load(){try{return JSON.parse(localStorage.getItem(STORE))||{}}catch(e){return{}}}
+function isDone(it){ return (it.id in state) ? state[it.id] : it.s==="ok"; }
+function save(){localStorage.setItem(STORE,JSON.stringify(state));flashSaved();}
+function flashSaved(){const s=document.getElementById("saved");s.textContent="Guardado ✓";clearTimeout(flashSaved._t);flashSaved._t=setTimeout(()=>s.textContent="",1600);}
+
+function allItems(){return GROUPS.flatMap(g=>g.items);}
+function match(it){
+  if(filter==="all")return true;
+  if(filter==="pablo")return it.p;
+  if(filter==="dev")return it.s==="gap";
+  if(filter==="pend")return !isDone(it);
+  return true;
+}
+
+function render(){
+  const board=document.getElementById("board");
+  board.innerHTML="";
+  let shown=0;
+  GROUPS.forEach(g=>{
+    const vis=g.items.filter(match);
+    if(!vis.length)return;
+    shown+=vis.length;
+    const done=g.items.filter(isDone).length;
+    const sec=document.createElement("section");
+    sec.className="group";
+    sec.innerHTML=`<div class="group-head"><span class="group-num">${g.n}</span>
+      <h2 class="group-title">${g.t}</h2>
+      <span class="group-meta">${done}/${g.items.length}</span></div>`;
+    vis.forEach(it=>{
+      const d=isDone(it);
+      const [pc,pl]=PILL[it.s];
+      const el=document.createElement("div");
+      el.className="item"+(d?" done":"");
+      el.innerHTML=`
+        <div class="cbox"><svg viewBox="0 0 14 14"><polyline points="2,7.5 5.5,11 12,3"/></svg></div>
+        <div class="it-body">
+          <p class="it-title">${it.t}</p>
+          <p class="it-note">${it.note}</p>
+        </div>
+        <div class="it-side">
+          <span class="pill ${pc}">${pl}</span>
+          ${it.p?'<span class="tag-pablo">Acción tuya</span>':''}
+        </div>`;
+      el.onclick=()=>{state[it.id]=!d;save();render();};
+      sec.appendChild(el);
+    });
+    // live callout appended after group 04
+    board.appendChild(sec);
+    if(g.n==="04"&&(filter==="all"||filter==="pablo")){
+      const c=document.createElement("div");
+      c.className="callout";
+      c.innerHTML=`<h3>Datos en vivo — no obtenibles en esta sesión</h3>
+        <p>Estos números faltan para ponerle métrica exacta a los ítems de arriba. No son un “no se puede”: son un reintento en una sesión con acceso.</p>
+        <ul>${LIVE.blocked.map(b=>`<li>${b}</li>`).join("")}</ul>
+        <div class="reason">${LIVE.reason}</div>`;
+      board.appendChild(c);
+    }
+  });
+  document.getElementById("empty").style.display=shown?"none":"block";
+  updateMeter();
+}
+
+function updateMeter(){
+  const items=allItems();
+  const total=items.length;
+  const counts={ok:0,gap:0,pablo:0,live:0};
+  let done=0;
+  items.forEach(it=>{counts[it.s]++;if(isDone(it))done++;});
+  const pctv=Math.round(done/total*100);
+  document.getElementById("pct").firstChild.textContent=pctv+"%";
+  document.getElementById("pctlabel").textContent=` · ${done}/${total} tildados`;
+  const meter=document.getElementById("meter");
+  meter.innerHTML=`<i style="width:${done/total*100}%;background:var(--ok)"></i>`;
+  const c=document.getElementById("counts");
+  c.innerHTML=`
+    <span><span class="dot" style="background:var(--ok)"></span><b>${counts.ok}</b> hecho</span>
+    <span><span class="dot" style="background:var(--pablo)"></span><b>${counts.pablo}</b> tu acción</span>
+    <span><span class="dot" style="background:var(--gap)"></span><b>${counts.gap}</b> dev</span>
+    <span><span class="dot" style="background:var(--live)"></span><b>${counts.live}</b> sin verif.</span>`;
+}
+
+document.getElementById("filters").onclick=e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  filter=b.dataset.f;
+  [...document.querySelectorAll(".chip")].forEach(c=>c.classList.toggle("on",c===b));
+  render();
+};
+document.getElementById("reset").onclick=()=>{
+  if(confirm("¿Reiniciar todas las tildes al estado de la auditoría?")){
+    state={};localStorage.removeItem(STORE);render();flashSaved();
+  }
+};
+render();
+</script>
