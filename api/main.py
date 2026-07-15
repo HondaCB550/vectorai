@@ -3071,10 +3071,21 @@ async def mi_plan(authorization: Optional[str] = Header(None)):
         max_prov = MAX_PROVEEDORES
     else:
         max_prov = MAX_PROVEEDORES_FREE
+    # Usos del período para que el frontend muestre el saldo ANTES de chocar el
+    # límite. free = tope de por vida (LIMITE_FREE); basico/Inicial = tope
+    # mensual real (LIMITE_INICIAL_MES + bonus). advance/pro = 999 → saldo
+    # irrelevante, se devuelve null para no mostrar un contador.
+    usos = user.get("usos_hoy") or 0
+    limite = user.get("limite")
+    ilimitado = plan in ("advance", "pro")
+    restantes = None if (ilimitado or not isinstance(limite, int)) else max(0, limite - usos)
     return {
         "plan": plan,
         "max_proveedores": max_prov,
         "max_hojas": MAX_HOJAS_PROV if es_pago else MAX_HOJAS_PROV_FREE,
+        "usos": usos,
+        "limite": limite,
+        "usos_restantes": restantes,
     }
 
 

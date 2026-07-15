@@ -24,3 +24,4 @@ node_modules/
 
 # Reportes nocturnos (generados por vectorai-nightly, no se commitean)
 reports/
+backups/
