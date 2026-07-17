@@ -254,8 +254,8 @@ const GROUPS=[
  {n:"03",t:"Robustez de producto",items:[
    {id:"historial",s:"ok",p:false,t:"Historial y re-uso de comparativas",
     note:"Páginas <code>/app/historial</code> + <code>/historial/[id]</code>, endpoints <code>/mis-presupuestos</code> y <code>/comparar-guardados</code>."},
-   {id:"tendencia",s:"gap",p:true,t:"Vista de tendencia de precios en el tiempo",
-    note:"Backend hecho 15-07: endpoint <code>GET /precios-historial/{codigo}</code> devuelve la serie por proveedor (verificado en TestClient, exige login). Falta la UI del gráfico — necesito que definas dónde va (por material desde la comparativa / página propia / dashboard)."},
+   {id:"tendencia",s:"ok",p:false,t:"Vista de tendencia de precios en el tiempo",
+    note:"Hecho 17-07: botón “Ver histórico de precios” en cada material de la comparativa abre un modal con gráfico SVG (línea por proveedor, sin dependencias). Backend <code>GET /precios-historial/{codigo}</code> + UI. tsc limpio, matemática del gráfico verificada en los casos borde."},
    {id:"metricas",s:"ok",p:false,t:"Panel de métricas admin",
     note:"Página <code>/app/admin/metricas</code> + endpoint <code>/admin/metrics</code>."},
    {id:"onboarding",s:"ok",p:false,t:"Onboarding / estado vacío del usuario nuevo",
