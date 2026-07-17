@@ -195,6 +195,10 @@ export default function Comparar() {
   // "Agregar proveedor" muta a "Cambiar de plan" (decisión de Pablo 10-07)
   const [maxProveedores, setMaxProveedores] = useState(3);
   const [planActual, setPlanActual]         = useState<string>("free");
+  // Saldo del período para avisar ANTES de chocar el límite (null = plan sin
+  // tope visible: advance/pro). Alimentado por /mi-plan.
+  const [usosRestantes, setUsosRestantes]   = useState<number | null>(null);
+  const [limiteMes, setLimiteMes]           = useState<number | null>(null);
 
   // Estado editable de dudosos: usuario puede elegir alternativa
   const [dudososEditados, setDudososEditados] = useState<
@@ -256,6 +260,8 @@ export default function Comparar() {
       .then((d) => {
         if (d?.max_proveedores) setMaxProveedores(d.max_proveedores);
         if (d?.plan) setPlanActual(d.plan);
+        setUsosRestantes(typeof d?.usos_restantes === "number" ? d.usos_restantes : null);
+        setLimiteMes(typeof d?.limite === "number" ? d.limite : null);
       })
       .catch(() => {});
   }, [token]);
@@ -940,6 +946,33 @@ export default function Comparar() {
       <div className={`${resultado ? "max-w-7xl" : "max-w-5xl"} mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-24 sm:pb-10`}>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
         <p className="text-gray-500 text-sm mb-8">Subí PDFs, fotos o planillas de tus proveedores para compararlos</p>
+
+        {/* Saldo del plan: avisa el corte ANTES de subir, no recién con el 429 */}
+        {!resultado && usosRestantes !== null && (() => {
+          const nombre = planActual === "basico" ? "Plan Inicial" : "Plan gratuito";
+          const periodo = planActual === "free" ? "" : " este mes";
+          const agotado = usosRestantes <= 0;
+          const ultima = usosRestantes === 1;
+          const tono = agotado
+            ? "border-red-200 bg-red-50 text-red-700"
+            : ultima
+            ? "border-amber-200 bg-amber-50 text-amber-800"
+            : "border-gray-200 bg-white text-gray-600";
+          const conTope = typeof limiteMes === "number" && limiteMes < 900;
+          const mensaje = agotado
+            ? `Llegaste al límite de comparaciones${periodo}.`
+            : `Te ${ultima ? "queda" : "quedan"} ${usosRestantes}${conTope ? ` de ${limiteMes}` : ""} ${ultima ? "comparación" : "comparaciones"}${periodo}.`;
+          return (
+            <div className={`flex items-center justify-between gap-3 flex-wrap border ${tono} rounded-xl px-4 py-3 mb-6 text-sm`}>
+              <span><span className="font-semibold">{nombre}</span> · {mensaje}</span>
+              {(agotado || ultima) && (
+                <Link href="/suscribirse" className="font-semibold underline underline-offset-2 whitespace-nowrap">
+                  Mejorar plan
+                </Link>
+              )}
+            </div>
+          );
+        })()}
 
         {/* Upload: bloques de proveedor */}
         {!resultado && (

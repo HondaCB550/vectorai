@@ -1,0 +1,37 @@
+name: Backup maestro
+
+# Respaldo diario de las tablas curadas a mano (el moat). Sube los JSON como
+# artifact del workflow (retención 90 días) — sin bloat en el repo y suficiente
+# para restaurar a mano si un lote de curado sale mal.
+#
+# REQUIERE dos secrets en el repo (Settings → Secrets and variables → Actions):
+#   SUPABASE_URL           (la misma de Railway)
+#   SUPABASE_SERVICE_KEY   (service key sb_secret_...; la anon NO lee estas tablas)
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC ≈ 03:00 ART, diario
+  workflow_dispatch:
+
+jobs:
+  backup:
+    name: Dump del catálogo a JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar dependencias mínimas
+        run: pip install supabase python-dotenv
+      - name: Ejecutar backup
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python backup_maestro.py
+      - name: Subir backup como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-maestro-${{ github.run_id }}
+          path: backups/
+          retention-days: 90
+          if-no-files-found: error

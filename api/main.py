@@ -452,6 +452,59 @@ app = FastAPI(title="Vectorai API", version="0.1.0")
 from whatsapp import router as whatsapp_router
 app.include_router(whatsapp_router)
 
+# ── Rate limiting (defensa anti-abuso en endpoints que gastan visión/OCR/CPU) ──
+# Ventana deslizante en memoria por IP+ruta. Sin dependencias nuevas, FAIL-OPEN
+# (cualquier error del limiter deja pasar el request) y con kill-switch por env.
+# Se registra ANTES del CORS para que el CORS lo envuelva y los 429 salgan con
+# los headers CORS (si no, el browser no puede leer la respuesta 429).
+import time as _time
+from collections import deque as _deque
+
+RATE_LIMIT_ENABLED  = os.environ.get("RATE_LIMIT_ENABLED", "1") not in ("0", "false", "False", "")
+RATE_LIMIT_WINDOW_S = int(os.environ.get("RATE_LIMIT_WINDOW_S", "60"))
+RATE_LIMIT_MAX      = int(os.environ.get("RATE_LIMIT_MAX", "20"))
+# Solo endpoints caros. NO el polling GET /analizar-v2/progreso ni las lecturas.
+_RATE_LIMIT_PATHS   = ("/analizar", "/analizar-v2", "/imagen", "/pdf")
+_rate_store: dict[str, "_deque"] = {}
+
+def _client_ip(request: Request) -> str:
+    # Railway está detrás de un proxy: la IP real viaja en X-Forwarded-For.
+    xff = request.headers.get("x-forwarded-for", "")
+    if xff:
+        return xff.split(",")[0].strip()
+    return request.client.host if request.client else "desconocida"
+
+@app.middleware("http")
+async def _rate_limit(request: Request, call_next):
+    try:
+        path = request.url.path
+        if (RATE_LIMIT_ENABLED and request.method == "POST"
+                and any(path == p or path.startswith(p + "/") for p in _RATE_LIMIT_PATHS)):
+            now = _time.monotonic()
+            limite = now - RATE_LIMIT_WINDOW_S
+            key = f"{_client_ip(request)}:{path}"
+            dq = _rate_store.get(key)
+            if dq is None:
+                dq = _rate_store[key] = _deque()
+            while dq and dq[0] < limite:
+                dq.popleft()
+            if len(dq) >= RATE_LIMIT_MAX:
+                retry = int(RATE_LIMIT_WINDOW_S - (now - dq[0])) + 1
+                return JSONResponse(
+                    status_code=429,
+                    content={"detail": "Demasiadas solicitudes seguidas. Esperá unos segundos y probá de nuevo."},
+                    headers={"Retry-After": str(max(1, retry))},
+                )
+            dq.append(now)
+            if len(_rate_store) > 5000:  # limpieza barata: sacar IPs ya inactivas
+                for k in list(_rate_store.keys()):
+                    v = _rate_store[k]
+                    if not v or v[-1] < limite:
+                        _rate_store.pop(k, None)
+    except Exception:
+        pass  # fail-open: nunca bloquear por un bug del limiter
+    return await call_next(request)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "https://vectorai.com.ar", "https://www.vectorai.com.ar"],
@@ -3018,11 +3071,67 @@ async def mi_plan(authorization: Optional[str] = Header(None)):
         max_prov = MAX_PROVEEDORES
     else:
         max_prov = MAX_PROVEEDORES_FREE
+    # Usos del período para que el frontend muestre el saldo ANTES de chocar el
+    # límite. free = tope de por vida (LIMITE_FREE); basico/Inicial = tope
+    # mensual real (LIMITE_INICIAL_MES + bonus). advance/pro = 999 → saldo
+    # irrelevante, se devuelve null para no mostrar un contador.
+    usos = user.get("usos_hoy") or 0
+    limite = user.get("limite")
+    ilimitado = plan in ("advance", "pro")
+    restantes = None if (ilimitado or not isinstance(limite, int)) else max(0, limite - usos)
     return {
         "plan": plan,
         "max_proveedores": max_prov,
         "max_hojas": MAX_HOJAS_PROV if es_pago else MAX_HOJAS_PROV_FREE,
+        "usos": usos,
+        "limite": limite,
+        "usos_restantes": restantes,
     }
+
+
+@app.get("/precios-historial/{codigo_material}")
+def precios_historial(codigo_material: str, authorization: Optional[str] = Header(None)):
+    """Serie de precios de un material a lo largo del tiempo, por proveedor.
+    Alimenta la vista de tendencia. Datos del catálogo compartido (sin RLS por
+    org), pero se exige login para no exponer precios a anónimos."""
+    user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail="login_requerido")
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    try:
+        filas = (sb.table("precios_historicos").select("*")
+                 .eq("codigo_material", codigo_material).execute().data) or []
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"error_leyendo_precios: {e}")
+
+    def _fecha(f) -> str:  # el nombre de la columna de fecha varía según la carga
+        return str(f.get("fecha") or f.get("created_at") or f.get("fecha_carga") or "")
+
+    filas.sort(key=_fecha)
+    puntos = [{
+        "fecha":     _fecha(f)[:10],
+        "proveedor": f.get("proveedor"),
+        "precio":    f.get("precio"),
+        "unidad":    f.get("unidad"),
+        "moneda":    f.get("moneda") or "ARS",
+    } for f in filas if f.get("precio") is not None]
+
+    material = None
+    try:
+        m = (sb.table("materiales_validados")
+             .select("codigo,denominacion_principal,descripcion")
+             .eq("codigo", codigo_material).limit(1).execute().data or [None])[0]
+        if m:
+            material = {"codigo": codigo_material,
+                        "denominacion": m.get("denominacion_principal"),
+                        "descripcion": m.get("descripcion")}
+    except Exception:
+        pass
+
+    return {"codigo_material": codigo_material, "material": material,
+            "puntos": puntos, "total": len(puntos)}
 
 
 @app.get("/obras")
