@@ -266,8 +266,8 @@ const GROUPS=[
     note:"El código usa <code>perfiles</code> individual; el modelo de lanzamiento prevé <code>organizaciones</code>/<code>usuarios</code> con RLS. ¿Lanzás mono-usuario (ok para MVP) o necesitás equipos antes? Decisión de producto."},
  ]},
  {n:"04",t:"Confianza operacional",items:[
-   {id:"backups",s:"ok",p:true,t:"Backups automáticos del maestro y aliases",
-    note:"Hecho 15-07: script <code>backup_maestro.py</code> + Action <code>backup-maestro.yml</code> que corre diario 03:00 ART y sube el JSON como artifact (90 días). Solo falta que cargues 2 secrets en el repo: <code>SUPABASE_URL</code> y <code>SUPABASE_SERVICE_KEY</code>."},
+   {id:"backups",s:"ok",p:false,t:"Backups automáticos del maestro y aliases",
+    note:"Verificado 17-07: Action <code>backup-maestro.yml</code> corrió en verde con los secrets cargados — respaldó 7.141 filas (maestro 1.066, aliases 5.750, sinónimos 137, grupos_marcas 149, conversiones 39) a JSON, artifact 273 KB retenido 90 días. Corre diario 03:00 ART."},
    {id:"advisors",s:"live",p:true,t:"Advisors de seguridad de Supabase en verde (RLS)",
     note:"Correr <code>get_advisors</code> y resolver hallazgos de RLS/políticas. El MCP de Supabase cortó el stream de aprobación en esta sesión — hay que reintentarlo."},
    {id:"ratelimit",s:"ok",p:false,t:"Rate limiting en los endpoints de subida",

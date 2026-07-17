@@ -11,11 +11,6 @@ on:
   schedule:
     - cron: "0 6 * * *"   # 06:00 UTC ≈ 03:00 ART, diario
   workflow_dispatch:
-  # TEMPORAL: disparador de prueba en la rama de trabajo para verificar el
-  # backup antes de mergear a main (se quita después de validar).
-  push:
-    branches: ["claude/vectorai-mvp-status-63wz70"]
-    paths: [".github/workflows/backup-maestro.yml"]
 
 jobs:
   backup:
