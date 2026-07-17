@@ -262,8 +262,8 @@ const GROUPS=[
     note:"Revisado 15-07: ambas listas (Mis comparativas y Mis presupuestos) ya muestran estado vacío con CTA a “Crear tu primera comparativa”. La pantalla de comparar es autoexplicativa. Un primer-PDF guiado quedaría como polish opcional, no bloqueante."},
    {id:"errores-ui",s:"live",p:false,t:"Auditar “errores como lista legible” en toda la UI",
     note:"Es invariante del proyecto (nunca JSON crudo). Falta una pasada por todas las pantallas para confirmar que se cumple. No verificable sin correr la app."},
-   {id:"multiuser",s:"pablo",p:true,t:"Decidir mono-usuario vs. equipos para v1",
-    note:"El código usa <code>perfiles</code> individual; el modelo de lanzamiento prevé <code>organizaciones</code>/<code>usuarios</code> con RLS. ¿Lanzás mono-usuario (ok para MVP) o necesitás equipos antes? Decisión de producto."},
+   {id:"multiuser",s:"ok",p:false,t:"Decidir mono-usuario vs. equipos para v1",
+    note:"Decidido 17-07: mono-usuario para los planes actuales (pensados para equipos chicos que comparten credenciales). No requiere código — el sistema ya es un perfil por cuenta. El modelo de organizaciones queda diseñado para planes multi-usuario a futuro."},
  ]},
  {n:"04",t:"Confianza operacional",items:[
    {id:"backups",s:"ok",p:false,t:"Backups automáticos del maestro y aliases",
