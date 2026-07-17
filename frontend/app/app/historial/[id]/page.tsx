@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
-import HistorialPrecios from "@/components/HistorialPrecios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -245,10 +244,7 @@ export default function ComparativaDetalle() {
               <tbody className="divide-y divide-gray-100">
                 {mostradas.map((row) => (
                   <tr key={row.cod_int} className="hover:bg-gray-50">
-                    <td className="px-5 py-3 text-gray-900 font-medium">
-                      {row.material}
-                      <HistorialPrecios codInt={row.cod_int} material={row.material} token={token} />
-                    </td>
+                    <td className="px-5 py-3 text-gray-900 font-medium">{row.material}</td>
                     <td className="px-5 py-3 text-gray-600">{row.rubro}</td>
                     <td className="px-3 py-3 text-center text-gray-600">{row.cant || 1}</td>
                     <td className="px-3 py-3 text-center text-gray-600">{row.unidad || "—"}</td>

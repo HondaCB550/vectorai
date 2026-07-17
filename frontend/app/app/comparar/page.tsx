@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import UserMenu from "@/components/UserMenu";
 import Logo from "@/components/Logo";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import HistorialPrecios from "@/components/HistorialPrecios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -1471,7 +1470,6 @@ export default function Comparar() {
                           <td className="px-4 py-3">
                             <div className="font-medium text-gray-800 text-xs">{row.material}</div>
                             <div className="text-xs text-gray-400">{row.rubro}</div>
-                            <HistorialPrecios codInt={row.cod_int} material={row.material} token={token} />
                           </td>
                           <td className="px-3 py-3 text-center text-xs text-gray-500">
                             {row.cant || 1}
