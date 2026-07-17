@@ -1,6 +1,6 @@
 # Política de Privacidad — Vectorai
 
-**Última actualización:** 4 de julio de 2026
+**Última actualización:** 17 de julio de 2026
 
 ## 1. Responsable
 
@@ -38,7 +38,7 @@ Los datos se alojan en proveedores de infraestructura internacional: Supabase (b
 ## 6. Plazos de conservación
 
 - **Datos de cuenta:** mientras la cuenta esté activa y hasta 12 meses después de su baja.
-- **Archivos subidos:** los archivos originales (PDF, fotos, planillas) **no se almacenan** — se procesan y se descartan. Se conservan los ítems extraídos y las comparativas generadas, durante el plazo que corresponda al plan del usuario.
+- **Archivos subidos:** los archivos originales (PDF, fotos, planillas) se procesan y **no se conservan**, con una excepción: cuando el sistema no logra leer automáticamente un formato nuevo, el archivo se guarda temporalmente en un repositorio privado de acceso restringido, al solo efecto de desarrollar el soporte de ese formato, y se elimina una vez resuelto. Se conservan los ítems extraídos y las comparativas generadas, durante el plazo que corresponda al plan del usuario.
 - **Precios históricos disociados:** sin plazo, por su carácter estadístico.
 
 ## 7. Derechos del titular

@@ -7,7 +7,7 @@ const TD = "px-3 py-2 border-b border-gray-100 align-top";
 
 export default function Privacidad() {
   return (
-    <LegalLayout titulo="Política de Privacidad" actualizacion="4 de julio de 2026">
+    <LegalLayout titulo="Política de Privacidad" actualizacion="17 de julio de 2026">
       <section>
         <h2>1. Responsable</h2>
         <p>
@@ -77,7 +77,7 @@ export default function Privacidad() {
         <h2>6. Plazos de conservación</h2>
         <ul>
           <li><strong>Datos de cuenta:</strong> mientras la cuenta esté activa y hasta 12 meses después de su baja.</li>
-          <li><strong>Archivos subidos:</strong> los archivos originales (PDF, fotos, planillas) <strong>no se almacenan</strong> — se procesan y se descartan. Se conservan los ítems extraídos y las comparativas generadas, durante el plazo que corresponda al plan del usuario.</li>
+          <li><strong>Archivos subidos:</strong> los archivos originales (PDF, fotos, planillas) se procesan y <strong>no se conservan</strong>, con una excepción: cuando el sistema no logra leer automáticamente un formato nuevo, el archivo se guarda temporalmente en un repositorio privado de acceso restringido, al solo efecto de desarrollar el soporte de ese formato, y se elimina una vez resuelto. Se conservan los ítems extraídos y las comparativas generadas, durante el plazo que corresponda al plan del usuario.</li>
           <li><strong>Precios históricos disociados:</strong> sin plazo, por su carácter estadístico.</li>
         </ul>
       </section>
