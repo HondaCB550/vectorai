@@ -1,0 +1,172 @@
+{
+ "conv_update": [
+  "c29bf3dc-312e-4c42-822f-1fecb3283ca2",
+  "0ddaaf59-2e0b-4e8f-b1c4-64ad322729ec",
+  "c94cf3fb-871e-4f9f-ab81-a947c26b8484",
+  "8a109594-56f1-43d1-8310-5d69c568ad3b"
+ ],
+ "conv_insert": [
+  {
+   "codigo_material": "T006",
+   "unidad_comercial": "un",
+   "factor": 5000,
+   "unidad_base": "UN",
+   "activo": true
+  },
+  {
+   "codigo_material": "T009",
+   "unidad_comercial": "un",
+   "factor": 3500,
+   "unidad_base": "UN",
+   "activo": true
+  },
+  {
+   "codigo_material": "T010",
+   "unidad_comercial": "un",
+   "factor": 8000,
+   "unidad_base": "UN",
+   "activo": true
+  },
+  {
+   "codigo_material": "T012",
+   "unidad_comercial": "un",
+   "factor": 6500,
+   "unidad_base": "UN",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH001",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH009",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH010",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH019",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH020",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  },
+  {
+   "codigo_material": "CH021",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "activo": true
+  }
+ ],
+ "chapa_borrar": [
+  "ec0713c5-0e56-4c11-9e36-891a0fc33daa",
+  "c174edff-d820-472d-a0ab-0b978c641a75"
+ ],
+ "chapa_repuntar": [
+  "54a22c5c-4867-415d-ab30-4830c28d114f"
+ ],
+ "alias_borrar": [
+  "7abeef1b-1e62-4a1e-adba-c9c9606fb5c3",
+  "23f61405-1227-47c3-8538-ac80366c4430",
+  "73b956d4-aed3-4ec6-8064-b67437168130"
+ ],
+ "filas": [
+  {
+   "id": "ec0713c5-0e56-4c11-9e36-891a0fc33daa",
+   "proveedor": "CAROSIO CORRALON",
+   "codigo_material": "CH001",
+   "codigo_pendiente": null,
+   "marca": null,
+   "unidad": "UN",
+   "precio": 12892.91,
+   "cantidad": 233,
+   "pdf_origen": null,
+   "created_at": "2026-06-23T11:10:56.941802+00:00",
+   "proveedor_id": "b5f1a516-e1a3-46a3-8466-1dcb9f1a3336",
+   "moneda": "ARS",
+   "precio_raw": null,
+   "unidad_raw": null,
+   "conversion_aplicada": null
+  },
+  {
+   "id": "c174edff-d820-472d-a0ab-0b978c641a75",
+   "proveedor": "SAUCE",
+   "codigo_material": "CH001",
+   "codigo_pendiente": null,
+   "marca": null,
+   "unidad": "UN",
+   "precio": 13601.06,
+   "cantidad": 233,
+   "pdf_origen": null,
+   "created_at": "2026-06-23T11:11:04.297315+00:00",
+   "proveedor_id": "54ce0005-391b-4ae3-8f3e-76d0ec41cfb8",
+   "moneda": "ARS",
+   "precio_raw": null,
+   "unidad_raw": null,
+   "conversion_aplicada": null
+  },
+  {
+   "id": "54a22c5c-4867-415d-ab30-4830c28d114f",
+   "proveedor": "BAUKRAFT",
+   "codigo_material": "CH001",
+   "codigo_pendiente": null,
+   "marca": null,
+   "unidad": "UN",
+   "precio": 15720.91,
+   "cantidad": 115,
+   "pdf_origen": null,
+   "created_at": "2026-06-22T19:28:00.430204+00:00",
+   "proveedor_id": "f2c911c5-2c6a-497b-8cb5-8e0e29e29287",
+   "moneda": "ARS",
+   "precio_raw": null,
+   "unidad_raw": null,
+   "conversion_aplicada": null
+  },
+  {
+   "id": "7abeef1b-1e62-4a1e-adba-c9c9606fb5c3",
+   "codigo_material": "CH001",
+   "denominacion": "chapa cincalum c25 acan x 1,00 mts",
+   "origen": "usuario_carosio_corralon",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-23T11:10:56.84724+00:00"
+  },
+  {
+   "id": "23f61405-1227-47c3-8538-ac80366c4430",
+   "codigo_material": "CH001",
+   "denominacion": "chapa cincalum c25 0,5 x ml",
+   "origen": "usuario_baukraft",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-22T19:28:00.233284+00:00"
+  },
+  {
+   "id": "73b956d4-aed3-4ec6-8064-b67437168130",
+   "codigo_material": "CH001",
+   "denominacion": "chapa c25 acanalada cincalum x m",
+   "origen": "usuario_sauce",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-23T11:11:04.204938+00:00"
+  }
+ ]
+}

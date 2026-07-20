@@ -1,0 +1,108 @@
+{
+ "repuntar_a_CONS129": [
+  "f98bdd5f-34c4-40d6-9bc9-8d72a89c57f0",
+  "46e15286-87ef-4d3a-b9e0-1e833f16e315"
+ ],
+ "borrar": [
+  "76faef46-dafd-4cac-9021-c6559f600e83",
+  "d969bd31-81a9-41d7-8188-5a13220d247e",
+  "b54888a7-14d4-46d2-9598-11dfbfc416a3",
+  "b2870f5a-c0b2-422a-9570-f47708af0c6b",
+  "527cb8eb-2607-4721-b6d0-798436273db1",
+  "1b9a7de4-1246-4f0c-a09e-3bad3ab7f28c",
+  "b150e0c0-092b-4ef7-bef3-82f11750e219",
+  "4be7e153-0407-4003-909e-e9d4129d9e7c"
+ ],
+ "filas": [
+  {
+   "id": "f98bdd5f-34c4-40d6-9bc9-8d72a89c57f0",
+   "codigo_material": "CONS101",
+   "denominacion": "cemento blanco cimsa x 25 kg",
+   "origen": "usuario_corralon_laprida",
+   "confianza": 82,
+   "frecuencia_encontrada": 2,
+   "created_at": "2026-07-13T23:43:24.301232+00:00"
+  },
+  {
+   "id": "46e15286-87ef-4d3a-b9e0-1e833f16e315",
+   "codigo_material": "CONS101",
+   "denominacion": "cemento bco x 25 kg pinguino",
+   "origen": "usuario_corralon_san_rafael",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-14T01:37:56.264617+00:00"
+  },
+  {
+   "id": "76faef46-dafd-4cac-9021-c6559f600e83",
+   "codigo_material": "CONS101",
+   "denominacion": "placa cementicia volcanboard 8mm 1200 x 2400mm*",
+   "origen": "usuario_en_seco",
+   "confianza": 82,
+   "frecuencia_encontrada": 2,
+   "created_at": "2026-07-03T11:40:59.63775+00:00"
+  },
+  {
+   "id": "d969bd31-81a9-41d7-8188-5a13220d247e",
+   "codigo_material": "CONS101",
+   "denominacion": "basecoat saint gobain weber x 25kg",
+   "origen": "usuario_baukraft",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-22T19:28:13.662048+00:00"
+  },
+  {
+   "id": "b54888a7-14d4-46d2-9598-11dfbfc416a3",
+   "codigo_material": "CONS118",
+   "denominacion": "varilla roscada fischer ftr 12 x 160",
+   "origen": "usuario_en_seco",
+   "confianza": 82,
+   "frecuencia_encontrada": 2,
+   "created_at": "2026-07-03T11:40:54.929484+00:00"
+  },
+  {
+   "id": "b2870f5a-c0b2-422a-9570-f47708af0c6b",
+   "codigo_material": "CONS118",
+   "denominacion": "fischer fijacion quimica varilla roscada ftr 12",
+   "origen": "usuario_maderera_lobos",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-03T18:20:06.426298+00:00"
+  },
+  {
+   "id": "527cb8eb-2607-4721-b6d0-798436273db1",
+   "codigo_material": "CONS118",
+   "denominacion": "hierro upn 12",
+   "origen": "borrador_borrador_giliberto_hnos_04-05",
+   "confianza": 90,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-22T19:37:27.692373+00:00"
+  },
+  {
+   "id": "1b9a7de4-1246-4f0c-a09e-3bad3ab7f28c",
+   "codigo_material": "CONS118",
+   "denominacion": "hierro ipn 12",
+   "origen": "borrador_borrador_giliberto_hnos_04-05",
+   "confianza": 90,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-22T19:37:27.917601+00:00"
+  },
+  {
+   "id": "b150e0c0-092b-4ef7-bef3-82f11750e219",
+   "codigo_material": "CH001",
+   "denominacion": "chapa acan polip x 6 ml",
+   "origen": "usuario_carosio_corralon",
+   "confianza": 84,
+   "frecuencia_encontrada": 4,
+   "created_at": "2026-06-23T11:10:57.423703+00:00"
+  },
+  {
+   "id": "4be7e153-0407-4003-909e-e9d4129d9e7c",
+   "codigo_material": "CH001",
+   "denominacion": "chapa aca polip x 6 mt",
+   "origen": "usuario_j.m._landa",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-14T01:10:04.167267+00:00"
+  }
+ ]
+}

@@ -1318,22 +1318,31 @@ _conv_extra: dict[str, dict] = {}
 
 # Marcadores de "precio por metro" en el texto o la unidad del ítem
 _UNIDADES_METRO = {"ML", "M", "MT", "MTS", "METRO", "METROS"}
-_RE_POR_METRO = re.compile(r"^\s*mts?\.?\s|\b(?:x|por)\s*(?:metro|ml|mt)\b", re.I)
+_RE_POR_METRO = re.compile(r"^\s*mts?\.?\s|\b(?:x|por)\s*(?:metros?|mts?|ml|m)\b", re.I)
 # Presentación por cantidad de unidades: "x 100 un.", "x 10.000 unidades"
 _RE_POR_UNIDADES = re.compile(r"(?:x|por)\s*(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:un\b|u\b|unid\w*)", re.I)
+# Largo de chapa entera en el texto: "x 6 mt", "x 6.00 mts", "x 6 ml".
+# El número distingue chapa entera (>1, ej. 6 m) de precio ya por metro
+# ("x 1,00 mts" → largo 1 → sin cambio).
+_RE_LARGO_CHAPA = re.compile(r"[x*]\s*(\d(?:[.,]\d+)?)\s*(?:m|mt|mts|ml|metros?)\b", re.I)
 
 
 def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
-    """Normaliza el precio a la presentación del material.
+    """Normaliza el precio a la presentación canónica del material.
 
-    Dos modos según conversion_unidades.unidad_comercial:
+    Tres modos según conversion_unidades.unidad_comercial:
       - 'm': texto por metro → tira/rollo del maestro (pu×factor, cant÷factor).
-        Solo con MARCADOR EXPLÍCITO de metro (unidad ML/MTS o "MTS …"/"x metro").
-      - 'un': material vendido por caja de `factor` unidades y texto con
-        presentación propia ("x 100 un."): pu×factor/n, cant×n/factor (total de
-        línea invariante). Caso real: tornillos x 100 un del proveedor contra
-        cajas de 10.000/8.000 del maestro (13-07-2026) — sin esto el precio
-        quedaba 100× subvaluado.
+        Canónico = la tira/rollo. Solo con MARCADOR EXPLÍCITO de metro
+        (unidad ML/MTS o "MTS …"/"x metro"). Caños/cables.
+      - 'un': canónico = PRECIO POR UNIDAD (regla de Pablo 20-07-2026). El
+        proveedor puede cotizar por pack/caja ("x 100 un", "CAJA … x 10.000")
+        → se divide a por-unidad (pu÷n, cant×n). Un precio ya por unidad se
+        deja. Caso tornillos T00x: antes se normalizaba a la caja de N (precio
+        de $100k+) y el histórico mezclaba $/unidad con $/caja — ahora todo
+        queda en $/unidad, comparable.
+      - 'ml': canónico = PRECIO POR METRO LINEAL (chapas, regla de Pablo
+        20-07-2026). Una chapa entera con largo explícito ("x 6 mts") se divide
+        por el largo; un precio ya por metro ("x 1,00 mts", "x m") se deja.
 
     Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
     el material se vende por presentación pero el texto no la aclara — el
@@ -1345,21 +1354,47 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
     if not conv:
         return pu, cant, unidad_norm or "UN", None, False
     factor = conv["factor"]
+    modo = conv["unidad_comercial"]
     d = (desc or "").lower()
 
-    if conv["unidad_comercial"] == "un":
-        m = _RE_POR_UNIDADES.search(desc or "")
+    if modo == "un":
+        # Canónico = por unidad. Detectar el tamaño de pack en el texto para
+        # dividir; un precio ya por unidad se deja tal cual.
+        n = None
+        m = _RE_POR_UNIDADES.search(desc or "")          # "x 100 un", "x 10.000 unid"
         if m:
             n = float(re.sub(r"[.,]", "", m.group(1)))
-            if n > 0:
-                if n == factor:
-                    return pu, cant, conv["unidad_base"], None, False
-                nota = f"normalizado a {conv['unidad_base']} (×{factor:g}/{n:g})"
-                return round(pu * factor / n, 2), cant * n / factor, conv["unidad_base"], nota, False
-        # Material por caja pero el texto no dice la presentación → ambiguo
+        else:
+            # Caja entera sin la palabra "un": el texto menciona el pack del
+            # maestro ("CAJA … X 10.000"). Se compara sin separador de miles.
+            desc_sinmiles = re.sub(r"(\d)[.,](\d{3})(?!\d)", r"\1\2", desc or "")
+            if factor and re.search(rf"(?<!\d){factor}(?!\d)", desc_sinmiles):
+                n = float(factor)
+        if n and n > 1:
+            nota = f"a precio por unidad (÷{n:g} del pack)"
+            return round(pu / n, 4), cant * n, "UN", nota, False
+        # Sin pack: si ya viene por unidad lo dejamos; si la unidad del doc
+        # sugiere otra presentación (caja/pack) sin número → ambiguo.
+        if unidad_norm in ("", "UN", "U", "UNID", "UNIDAD", "UNIDADES"):
+            return pu, cant, "UN", None, False
         return pu, cant, unidad_norm or "UN", None, True
 
-    if conv["unidad_comercial"] != "m":
+    if modo == "ml":
+        # Canónico = metro lineal. Chapa entera con largo → dividir por el largo.
+        mlg = _RE_LARGO_CHAPA.search(desc or "")
+        if mlg:
+            largo = float(mlg.group(1).replace(",", "."))
+            if largo > 1:
+                nota = f"a precio por metro lineal (÷{largo:g} m de chapa)"
+                return round(pu / largo, 4), cant * largo, "ML", nota, False
+            if largo > 0:                                 # "x 1,00 mts" → ya por metro
+                return pu, cant, "ML", None, False
+        if unidad_norm in _UNIDADES_METRO or bool(_RE_POR_METRO.search(desc or "")):
+            return pu, cant, "ML", None, False
+        # Sin largo ni marcador de metro: ambiguo (chapa suelta sin dimensión)
+        return pu, cant, unidad_norm or "UN", None, True
+
+    if modo != "m":
         return pu, cant, unidad_norm or "UN", None, False
 
     por_metro = unidad_norm in _UNIDADES_METRO or bool(_RE_POR_METRO.search(desc or ""))
