@@ -1,0 +1,54 @@
+name: Health check API
+
+# Red de seguridad básica: cada 15 min verifica que el API responda 200 en
+# /health y que sea realmente la app (no una página de error del proxy). Si
+# falla, abre un issue mencionando al dueño; cuando se recupera, lo cierra.
+# Corre desde main (los schedules solo disparan desde la rama por defecto).
+# Para algo más fino (latencia, cortes parciales) sumar un servicio dedicado.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /health
+        id: ping
+        run: |
+          code=$(curl -sS -m 25 -o body.json -w "%{http_code}" \
+            https://vectorai-production-1f06.up.railway.app/health || echo 000)
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "HTTP $code"; cat body.json 2>/dev/null || true; echo
+          ok=0
+          if [ "$code" = "200" ] && grep -q '"master_items"' body.json 2>/dev/null; then ok=1; fi
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+
+      - name: Abrir o cerrar issue según el estado
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const ok = '${{ steps.ping.outputs.ok }}' === '1';
+            const code = '${{ steps.ping.outputs.code }}';
+            const title = '🔴 API caída — el health check falló';
+            const { owner, repo } = context.repo;
+            const abiertos = await github.rest.issues.listForRepo({ owner, repo, state: 'open', labels: 'health' });
+            const existente = abiertos.data.find(i => i.title === title);
+            const ahora = new Date().toISOString();
+            if (!ok) {
+              if (existente) {
+                await github.rest.issues.createComment({ owner, repo, issue_number: existente.number,
+                  body: `Sigue caída (HTTP \`${code}\`) — ${ahora}` });
+              } else {
+                await github.rest.issues.create({ owner, repo, title, labels: ['health'],
+                  body: `El health check automático no obtuvo **200 OK** de \`/health\`.\n\n- Código HTTP: \`${code}\`\n- Momento: ${ahora}\n- Endpoint: https://vectorai-production-1f06.up.railway.app/health\n\nRevisá los logs de Railway. cc @HondaCB550` });
+              }
+            } else if (existente) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: existente.number,
+                body: `✅ Recuperada — \`/health\` responde 200. ${ahora}` });
+              await github.rest.issues.update({ owner, repo, issue_number: existente.number, state: 'closed' });
+            }
