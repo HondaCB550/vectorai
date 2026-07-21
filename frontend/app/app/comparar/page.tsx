@@ -1016,7 +1016,7 @@ export default function Comparar() {
             {obrasHabilitado && (
               <div className="bg-white border border-gray-200 rounded-xl px-5 py-4 mb-4">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="text-sm font-semibold text-gray-800">🏗️ Obra</span>
+                  <span className="text-sm font-semibold text-gray-800">Obra</span>
                   <select
                     value={obraId}
                     onChange={(e) => { setObraId(e.target.value); setNuevaObraVisible(false); }}
@@ -1265,7 +1265,7 @@ export default function Comparar() {
                   <p className="text-sm text-gray-600 mt-2 truncate">{progreso.archivo} — {progreso.etapa}</p>
                 )}
                 <p className="text-xs text-amber-600 mt-2">
-                  ⏳ Las fotos y documentos escaneados tardan más en procesarse (≈20 segundos cada uno).
+                  Las fotos y documentos escaneados tardan más en procesarse (≈20 segundos cada uno).
                   No cierres ni salgas de esta pantalla: el análisis se perdería.
                 </p>
               </div>
@@ -1433,7 +1433,7 @@ export default function Comparar() {
             <div className="flex gap-1 mb-4 bg-gray-100 p-1 rounded-xl w-fit">
               {([
                 ["comparativa", `Comparativa (${resultado.comparativo.length})`],
-                ["compras",     "🛒 Lista de compras"],
+                ["compras",     "Lista de compras"],
                 ["dudosos",     `Dudosos (${totalDudosos})`],
                 ["sin_match",   `Sin match (${totalSinMatch})`],
               ] as const).map(([id, label]) => (
@@ -1580,7 +1580,7 @@ export default function Comparar() {
                                 {granDif && <div className="text-amber-500 font-bold">↕ {difPct}%</div>}
                                 {difPct >= 200 && (
                                   <div className="text-red-500 font-semibold" title="Diferencia enorme: puede ser un problema de unidades (ej. caja vs unidad)">
-                                    ⚠ ¿unidad?
+                                    ¿unidad?
                                   </div>
                                 )}
                               </div>
@@ -1619,7 +1619,7 @@ export default function Comparar() {
                     {provs.map((prov) => (
                       <div key={prov} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                         <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
-                          <h3 className="font-semibold text-gray-900">🛒 {prov}</h3>
+                          <h3 className="font-semibold text-gray-900">{prov}</h3>
                           <span className="text-sm text-gray-600">
                             {porProv[prov].filas.length} ítems ·{" "}
                             <strong className="text-gray-900">{fmt(porProv[prov].total)}</strong>
@@ -1695,7 +1695,7 @@ export default function Comparar() {
                                   <div className="text-xs text-gray-400 mt-0.5">{fmt(item.precio_sin_iva)}/u · cant {item.cant}</div>
                                   {item.precio_sospechoso && (
                                     <div className="text-xs text-red-600 mt-1">
-                                      ⚠ Precio unitario × cantidad no coincide con el total de la línea — verificá el precio antes de confirmar.
+                                      Precio unitario × cantidad no coincide con el total de la línea — verificá el precio antes de confirmar.
                                     </div>
                                   )}
                                   {item.conversion && (
@@ -1705,7 +1705,7 @@ export default function Comparar() {
                                   )}
                                   {item.unidad_ambigua && (
                                     <div className="text-xs text-amber-600 mt-1">
-                                      ⚠ Este material se vende por tira/rollo y el texto no aclara si el precio es por metro o por presentación completa — verificá la unidad.
+                                      Este material se vende por tira/rollo y el texto no aclara si el precio es por metro o por presentación completa — verificá la unidad.
                                     </div>
                                   )}
                                 </div>

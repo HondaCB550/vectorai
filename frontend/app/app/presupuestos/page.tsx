@@ -212,7 +212,7 @@ export default function MisPresupuestos() {
             {Object.entries(
               presupuestos.reduce<Record<string, Presupuesto[]>>((acc, p) => {
                 const key = p.obra
-                  ? `🏗️ ${p.obra.nombre}${p.obra.localidad ? ` — ${p.obra.localidad}` : ""}${p.obra.provincia ? `, ${p.obra.provincia}` : ""}`
+                  ? `${p.obra.nombre}${p.obra.localidad ? ` — ${p.obra.localidad}` : ""}${p.obra.provincia ? `, ${p.obra.provincia}` : ""}`
                   : "Sin obra asignada";
                 (acc[key] = acc[key] || []).push(p);
                 return acc;
@@ -244,7 +244,7 @@ export default function MisPresupuestos() {
                       </p>
                       <div className="flex gap-4 mt-3 text-sm text-gray-700 flex-wrap">
                         <span>{p.n_items} ítems</span>
-                        {p.total_sin_iva > 0 && <span className="font-semibold">💰 {fmt(p.total_sin_iva)} s/IVA</span>}
+                        {p.total_sin_iva > 0 && <span className="font-semibold">{fmt(p.total_sin_iva)} s/IVA</span>}
                         <span className="text-gray-400">
                           {p.con_iva ? "cotizó c/IVA" : "cotizó s/IVA"}{p.descuento > 0 ? ` · desc ${p.descuento}%` : ""}
                         </span>
@@ -257,7 +257,7 @@ export default function MisPresupuestos() {
                         title="Eliminar este presupuesto"
                         className="bg-red-50 text-red-600 text-sm font-medium px-2.5 py-1.5 rounded-lg hover:bg-red-100 transition disabled:opacity-50"
                       >
-                        {borrando === p.id ? "⏳" : "✕"}
+                        {borrando === p.id ? "…" : "✕"}
                       </button>
                       <span className="text-gray-400 text-xl select-none">{abierto === p.id ? "▾" : "▸"}</span>
                     </div>

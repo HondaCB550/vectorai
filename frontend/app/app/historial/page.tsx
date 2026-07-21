@@ -131,7 +131,7 @@ export default function Historial() {
             {Object.entries(
               comparativas.reduce<Record<string, Comparativa[]>>((acc, c) => {
                 const key = c.obra
-                  ? `🏗️ ${c.obra.nombre}${c.obra.localidad ? ` — ${c.obra.localidad}` : ""}`
+                  ? `${c.obra.nombre}${c.obra.localidad ? ` — ${c.obra.localidad}` : ""}`
                   : "Sin obra asignada";
                 (acc[key] = acc[key] || []).push(c);
                 return acc;
@@ -155,7 +155,7 @@ export default function Historial() {
                       {c.titulo}
                       {c.obra && (
                         <span className="ml-2 text-xs font-medium bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full align-middle">
-                          🏗️ {c.obra.nombre}{c.obra.localidad ? ` — ${c.obra.localidad}` : ""}
+                          {c.obra.nombre}{c.obra.localidad ? ` — ${c.obra.localidad}` : ""}
                         </span>
                       )}
                     </h2>
@@ -163,10 +163,10 @@ export default function Historial() {
                       {c.proveedores.join(" • ")} • {formatFecha(c.fecha)}
                     </p>
                     <div className="flex gap-4 mt-3 text-sm text-gray-700">
-                      <span>📊 {c.n_items} ítems</span>
-                      <span>🔗 {c.n_comunes} en varios</span>
+                      <span>{c.n_items} ítems</span>
+                      <span>{c.n_comunes} en varios</span>
                       <span className="font-semibold text-green-600">
-                        💰 Ahorro: {fmt(c.ahorro_total)}
+                        Ahorro: {fmt(c.ahorro_total)}
                       </span>
                     </div>
                   </div>
@@ -182,7 +182,7 @@ export default function Historial() {
                       disabled={deletingId === c.id}
                       className="bg-red-100 text-red-700 text-sm font-medium px-3 py-2 rounded-lg hover:bg-red-200 transition disabled:opacity-50"
                     >
-                      {deletingId === c.id ? "⏳" : "✕"}
+                      {deletingId === c.id ? "…" : "✕"}
                     </button>
                   </div>
                 </div>

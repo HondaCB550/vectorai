@@ -200,7 +200,7 @@ export default function ComparativaDetalle() {
             disabled={generandoSheets}
             className="ml-auto bg-blue-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {generandoSheets ? "⏳ Generando..." : "📥 Descargar Excel"}
+            {generandoSheets ? "Generando..." : "↓ Descargar Excel"}
           </button>
         </div>
 
