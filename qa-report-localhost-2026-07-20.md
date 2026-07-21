@@ -89,6 +89,22 @@ Al soltar 4 archivos (3 hojas de CAROSIO + 1 de SAUCE SOLO), cada archivo se con
 
 Bloqueado por la limitación de anon key/RLS (`get_user_plan` no puede crear el perfil). En prod con `SUPABASE_SERVICE_KEY` funciona. Para cerrarlo de verdad hay que correrlo contra prod o con service key local.
 
+## Estado final de los 7 hallazgos
+
+| Hallazgo | Veredicto | Commit |
+|---|---|---|
+| `get_user_plan` degrada a anónimo al logueado | Real, el más grave — **arreglado y verificado** (401 → 503) | `e7b6f05` |
+| Emojis en la UI (8) | Real — **arreglado** | `929a2c5` |
+| Drag-drop de N archivos = N proveedores | Real — **ahora pregunta**, verificado por Pablo | `1f9b2fb` |
+| Copy del plan Advance distinto entre landing y suscribirse | Real — **unificado** ("Soporte prioritario por WhatsApp" + 30 días) | `4b748fb` |
+| Port mismatch :8000 / :8002 | Real — **arreglado** en `.env.local` (gitignoreado, cambio local; backup en `.env.local.bak-qa`) | — |
+| "Analizar" sin archivos = no-op silencioso | **FALSO POSITIVO** — el botón ya está `disabled` (`page.tsx:1141`) | — |
+| Falta casilla de aceptación de términos en /registro | **FALSO POSITIVO** — existe en el **paso 2** del form, con links, y está exigida (`registro/page.tsx:102`) | — |
+
+Los dos falsos positivos vinieron de inspeccionar de más por fuera: no leer el `disabled` del botón y no ver el segundo paso del formulario. Lección para próximas pasadas: confirmar en el código antes de reportar un "falta X".
+
+**Verificación del agrupado** (Pablo, 2026-07-21): soltó 4 archivos y eligió agrupar → quedó Proveedor 1 = SAUCE SOLO (1 archivo) y Proveedor 2 = CAROSIO hojas 1-3 (3 archivos). El muro de upsell "más de 3 proveedores" desapareció, que era el daño colateral del bug.
+
 ## Top 3 para arreglar
 
 1. **Port mismatch :8000 vs :8002** — alinear launchers y `.env.local` (o documentarlo) para que el dev local funcione de fábrica.
