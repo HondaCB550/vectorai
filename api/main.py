@@ -273,7 +273,14 @@ def get_user_plan(authorization: Optional[str]) -> dict:
         return {"user_id": user_id, "plan": plan, "usos_hoy": row.get("usos_total") or 0, "limite": LIMITE_FREE}
     except Exception as e:
         print(f"get_user_plan error: {e}")
-        return dict(_ANONIMO)
+        # Si llegamos acá el JWT YA se verificó arriba: el usuario está logueado y
+        # lo que falló es infraestructura (RLS, Supabase caído, service key rotada).
+        # Degradar a anónimo a secas hace que el gate le diga "iniciá sesión" a
+        # alguien que ya inició sesión — la misma clase de bug mordió dos veces
+        # antes (ver docstring). Marcamos el motivo para que _gate_analisis
+        # responda "problema temporal"; los endpoints que toleran el fallback
+        # anónimo ignoran la clave y no cambian de comportamiento.
+        return {**_ANONIMO, "error_infra": True}
 
 
 def _incrementar_uso(user_id: str, usos_actuales: int = 0):
@@ -349,6 +356,13 @@ def _gate_analisis(user: dict):
     procesar (la extracción/visión cuesta plata; los anónimos no se trackean, así
     que sin exigir login el abuso es ilimitado)."""
     if user["user_id"] == "anonimo":
+        # Anónimo por fallo de infra ≠ anónimo de verdad: al logueado hay que
+        # decirle que fue un problema nuestro, no mandarlo a iniciar sesión.
+        if user.get("error_infra"):
+            raise HTTPException(status_code=503, detail={
+                "error": "cuenta_no_verificable",
+                "mensaje": "No pudimos validar tu cuenta en este momento. "
+                           "Probá de nuevo en un minuto."})
         raise HTTPException(status_code=401, detail={
             "error": "auth_requerida",
             "mensaje": "Iniciá sesión para analizar presupuestos."})
