@@ -44,9 +44,9 @@ const PLANES: Plan[] = [
       "Comparativas ilimitadas",
       "Hasta 10 proveedores · 10 hojas",
       "Obras y precios por zona",
-      "Mis presupuestos guardados",
+      "Mis presupuestos y comparativas guardados 30 días, separados por obra",
       "Lista de compras por proveedor",
-      "Soporte directo por WhatsApp",
+      "Soporte prioritario por WhatsApp",
     ],
   },
 ];

@@ -378,7 +378,7 @@ export default function Landing() {
                     "Hasta 10 proveedores por comparativa",
                     "Obras y precios recomendados por zona",
                     "Mis presupuestos y comparativas guardados 30 días, separados por obra",
-                    "Soporte prioritario",
+                    "Soporte prioritario por WhatsApp",
                   ].map((f) => (
                     <li key={f} className="flex gap-2.5 text-white/85 leading-snug items-start">
                       <Bullet />
