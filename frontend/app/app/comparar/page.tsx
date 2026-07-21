@@ -715,9 +715,25 @@ export default function Comparar() {
       const nuevosResultados: typeof resultado.resultados = {};
       for (const [prov, r] of Object.entries(resultado.resultados)) {
         const nuevoSinMatch = r.sin_match.filter((it) => !it.item_id || !emparejadosIds.has(it.item_id));
-        nuevosResultados[prov] = nuevoSinMatch.length === r.sin_match.length
+        // El emparejado saca ítems de sin_match y los mete en la comparativa.
+        // Hay que sumarlos a automatico o la cuenta del proveedor deja de cerrar
+        // contra n_items_extraidos (el usuario suma las columnas y le falta uno).
+        // Mismo criterio que los dudosos resueltos: resuelto por el usuario
+        // cuenta como resuelto.
+        const emparejados = r.sin_match.length - nuevoSinMatch.length;
+        const autoNuevo = r.stats.automatico + emparejados;
+        nuevosResultados[prov] = emparejados === 0
           ? r
-          : { ...r, sin_match: nuevoSinMatch, stats: { ...r.stats, sin_match: nuevoSinMatch.length } };
+          : {
+              ...r,
+              sin_match: nuevoSinMatch,
+              stats: {
+                ...r.stats,
+                sin_match: nuevoSinMatch.length,
+                automatico: autoNuevo,
+                pct_automatico: Math.round(100 * autoNuevo / Math.max(1, r.stats.total)),
+              },
+            };
       }
 
       const nuevoResultado = { ...resultado, comparativo, resultados: nuevosResultados };
