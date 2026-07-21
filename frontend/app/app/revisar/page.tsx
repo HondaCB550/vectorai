@@ -99,7 +99,6 @@ export default function Revisar() {
 
         {pendientes.length === 0 && (
           <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center mb-6">
-            <div className="text-2xl mb-2">✅</div>
             <p className="text-green-700 font-medium">¡Todos los ítems revisados!</p>
             <Link href="/app/comparar" className="text-blue-600 text-sm hover:underline mt-2 inline-block">
               Ver la comparativa actualizada →

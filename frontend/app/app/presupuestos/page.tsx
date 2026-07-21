@@ -243,7 +243,7 @@ export default function MisPresupuestos() {
                         {p.archivo} • {formatFecha(p.fecha)}
                       </p>
                       <div className="flex gap-4 mt-3 text-sm text-gray-700 flex-wrap">
-                        <span>📄 {p.n_items} ítems</span>
+                        <span>{p.n_items} ítems</span>
                         {p.total_sin_iva > 0 && <span className="font-semibold">💰 {fmt(p.total_sin_iva)} s/IVA</span>}
                         <span className="text-gray-400">
                           {p.con_iva ? "cotizó c/IVA" : "cotizó s/IVA"}{p.descuento > 0 ? ` · desc ${p.descuento}%` : ""}
@@ -341,7 +341,7 @@ export default function MisPresupuestos() {
                 disabled={comparando}
                 className="ml-auto bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-blue-700 transition disabled:opacity-50 whitespace-nowrap"
               >
-                {comparando ? "Comparando…" : `⚡ Comparar (${Object.keys(sel).length})`}
+                {comparando ? "Comparando…" : `Comparar (${Object.keys(sel).length})`}
               </button>
             </div>
           </div>

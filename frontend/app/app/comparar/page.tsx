@@ -1012,7 +1012,6 @@ export default function Comparar() {
                 dragging === -1 ? "border-blue-400 bg-blue-50" : "border-gray-200 bg-white"
               }`}
             >
-              <div className="text-3xl mb-2">📄</div>
               <p className="text-gray-500 text-sm">Arrastrá PDFs acá — cada archivo se agrega como un proveedor nuevo</p>
             </div>
 
@@ -1080,7 +1079,6 @@ export default function Comparar() {
                     <div className="px-4 py-2 space-y-1">
                       {b.files.map((f, fi) => (
                         <div key={fi} className="flex items-center gap-2 text-sm py-1">
-                          <span className="text-gray-400">📄</span>
                           <span className="flex-1 text-gray-700 truncate">{f.name}</span>
                           <span className="text-xs text-gray-400 shrink-0">{(f.size / 1024).toFixed(0)} KB</span>
                           <button
@@ -1141,7 +1139,7 @@ export default function Comparar() {
                 disabled={!bloques.some((b) => b.files.length > 0) || loading}
                 className="ml-auto bg-blue-600 text-white font-semibold px-8 py-2.5 rounded-xl hover:bg-blue-700 transition disabled:opacity-40"
               >
-                {loading ? "Analizando…" : "⚡ Analizar"}
+                {loading ? "Analizando…" : "Analizar"}
               </button>
             </div>
 
@@ -1163,7 +1161,7 @@ export default function Comparar() {
                   />
                 </div>
                 {progreso.archivo && (
-                  <p className="text-sm text-gray-600 mt-2 truncate">📄 {progreso.archivo} — {progreso.etapa}</p>
+                  <p className="text-sm text-gray-600 mt-2 truncate">{progreso.archivo} — {progreso.etapa}</p>
                 )}
                 <p className="text-xs text-amber-600 mt-2">
                   ⏳ Las fotos y documentos escaneados tardan más en procesarse (≈20 segundos cada uno).
@@ -1220,7 +1218,7 @@ export default function Comparar() {
             {/* Alertas de extracción por proveedor */}
             {Object.entries(resultado.resultados).some(([, r]) => r.n_items_extraidos === 0) && (
               <div className="mb-4 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-800 space-y-1">
-                <div className="font-semibold">⚠️ Algunos PDFs no pudieron ser leídos:</div>
+                <div className="font-semibold">Algunos PDFs no pudieron ser leídos:</div>
                 {Object.entries(resultado.resultados).map(([prov, r]) =>
                   r.n_items_extraidos === 0 ? (
                     <div key={prov}>• <strong>{prov}</strong>: 0 ítems extraídos. El PDF puede estar escaneado (imagen), protegido, o en un formato no reconocido. Intentá exportarlo desde el software del proveedor como PDF con texto.</div>
