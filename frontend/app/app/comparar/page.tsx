@@ -170,6 +170,9 @@ function bloqueVacio(): BloqueProveedor {
 export default function Comparar() {
   const [bloques, setBloques]         = useState<BloqueProveedor[]>([bloqueVacio()]);
   const [dragging, setDragging]       = useState<number | null>(null);  // índice del bloque activo
+  // Archivos soltados de a varios, esperando que el usuario diga si son
+  // proveedores distintos o varias hojas de un mismo proveedor.
+  const [dropPendiente, setDropPendiente] = useState<File[] | null>(null);
   const [loading, setLoading]         = useState(false);
   const [progreso, setProgreso]       = useState<{ idx: number; total: number; archivo: string; etapa: string } | null>(null);
   const [obras, setObras]             = useState<Obra[]>([]);
@@ -306,18 +309,30 @@ export default function Comparar() {
     setBloques((prev) => prev.map((b, i) => i === bi ? { ...b, files: b.files.filter((_, j) => j !== fi) } : b));
   }
 
-  // Drop global: cada archivo arrastrado = un proveedor nuevo (1 PDF = 1 proveedor).
-  // Para agrupar varios PDFs en un mismo proveedor, usar "Agregar PDF" dentro del bloque.
+  // Mete los archivos como N proveedores (uno por archivo) o como uno solo con
+  // todas las hojas juntas.
+  function volcarDrop(archivos: File[], agrupar: boolean) {
+    setBloques((prev) => {
+      const usados = prev.filter((b) => b.files.length > 0 || b.nombre.trim());
+      const nuevosBloques = agrupar
+        ? [{ ...bloqueVacio(), files: archivos }]
+        : archivos.map((f) => ({ ...bloqueVacio(), files: [f] }));
+      return [...usados, ...nuevosBloques];
+    });
+  }
+
+  // Drop global. Un archivo = un proveedor nuevo, directo. Pero soltar VARIOS es
+  // ambiguo: pueden ser N proveedores o N hojas del mismo presupuesto. Asumir
+  // "uno por archivo" partía un presupuesto de 3 hojas en 3 proveedores, lo que
+  // ensucia la comparación y encima consume la cuota de proveedores del plan.
+  // Ante la duda, preguntamos.
   const onDropGlobal = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setDragging(null);
     const nuevos = Array.from(e.dataTransfer.files);
     if (!nuevos.length) return;
-    setBloques((prev) => {
-      const usados = prev.filter((b) => b.files.length > 0 || b.nombre.trim());
-      const nuevosBloques = nuevos.map((f) => ({ ...bloqueVacio(), files: [f] }));
-      return [...usados, ...nuevosBloques];
-    });
+    if (nuevos.length > 1) { setDropPendiente(nuevos); return; }
+    volcarDrop(nuevos, false);
   }, []);
 
   // ── Analizar ───────────────────────────────────────────────────────────────
@@ -1012,8 +1027,41 @@ export default function Comparar() {
                 dragging === -1 ? "border-blue-400 bg-blue-50" : "border-gray-200 bg-white"
               }`}
             >
-              <p className="text-gray-500 text-sm">Arrastrá PDFs acá — cada archivo se agrega como un proveedor nuevo</p>
+              <p className="text-gray-500 text-sm">Arrastrá PDFs acá — te preguntamos si son proveedores distintos</p>
             </div>
+
+            {/* Soltaste varios archivos: ¿un proveedor con varias hojas o varios
+                proveedores? Lo decide el usuario, no una suposición nuestra. */}
+            {dropPendiente && (
+              <div className="border border-[#E87022]/30 bg-orange-50 rounded-2xl px-6 py-5 mb-6">
+                <p className="text-sm font-semibold text-gray-800">
+                  Soltaste {dropPendiente.length} archivos. ¿Qué son?
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {dropPendiente.map((f) => f.name).join(" · ")}
+                </p>
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <button
+                    onClick={() => { volcarDrop(dropPendiente, true); setDropPendiente(null); }}
+                    className="bg-[#E87022] text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#d1631d] transition"
+                  >
+                    Un solo proveedor ({dropPendiente.length} hojas)
+                  </button>
+                  <button
+                    onClick={() => { volcarDrop(dropPendiente, false); setDropPendiente(null); }}
+                    className="border border-gray-300 text-gray-700 text-sm font-semibold px-5 py-2.5 rounded-xl hover:border-gray-400 transition"
+                  >
+                    {dropPendiente.length} proveedores distintos
+                  </button>
+                  <button
+                    onClick={() => setDropPendiente(null)}
+                    className="text-gray-500 text-sm font-medium px-3 py-2.5 rounded-xl hover:text-gray-700 transition"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Bloques de proveedor */}
             <div className="space-y-4 mb-6">
