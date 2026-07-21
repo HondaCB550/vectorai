@@ -933,12 +933,16 @@ export default function Comparar() {
           {soyAdmin && (
             <Link href="/app/admin" className="text-sm text-gray-500 hover:text-gray-800 transition">Admin</Link>
           )}
-          <Link
-            href="/suscribirse"
-            className="text-xs sm:text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
-          >
-            Mejorar plan
-          </Link>
+          {/* Ofrecer "Mejorar plan" a quien ya está en el tope no tiene a dónde
+              llevarlo. En Inicial sí sirve (puede pasar a Advance). */}
+          {planActual !== "advance" && planActual !== "pro" && (
+            <Link
+              href="/suscribirse"
+              className="text-xs sm:text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap"
+            >
+              Mejorar plan
+            </Link>
+          )}
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Vectorai"
             target="_blank" rel="noopener noreferrer"

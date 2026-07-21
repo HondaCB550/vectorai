@@ -50,6 +50,7 @@ export default function AdminPage() {
   const [busqueda, setBusqueda]     = useState("");
   // undefined = sesión todavía no resuelta (no disparar fetches aún)
   const [token, setToken]           = useState<string | null | undefined>(undefined);
+  const [planActual, setPlanActual] = useState<string>("free");
   const reqSeq = useRef(0);
   const router = useRouter();
 
@@ -64,6 +65,15 @@ export default function AdminPage() {
       setToken(data.session?.access_token ?? null);
     });
   }, [router]);
+
+  // Plan del usuario: solo para decidir si el nav ofrece "Mejorar plan".
+  useEffect(() => {
+    if (!token) return;
+    fetch(`${API_URL}/mi-plan`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => r.json())
+      .then((d) => { if (d?.plan) setPlanActual(d.plan); })
+      .catch(() => {});
+  }, [token]);
 
   const cargar = useCallback(async () => {
     // Esperar a que la sesión esté resuelta: si el primer fetch sale sin token
@@ -152,12 +162,16 @@ export default function AdminPage() {
           <Link href="/app/admin/metricas" className="text-sm font-medium text-gray-600 hover:text-blue-700">
             Métricas
           </Link>
-          <Link
-            href="/suscribirse"
-            className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
-          >
-            Mejorar plan
-          </Link>
+          {/* Ver "Mejorar plan" estando ya en el tope no lleva a ningún lado.
+              En Inicial sí sirve (puede pasar a Advance). */}
+          {planActual !== "advance" && planActual !== "pro" && (
+            <Link
+              href="/suscribirse"
+              className="text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 transition px-3 py-1.5 rounded-lg"
+            >
+              Mejorar plan
+            </Link>
+          )}
           <a
             href="https://wa.me/5492241410393?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Vectorai"
             target="_blank" rel="noopener noreferrer"
