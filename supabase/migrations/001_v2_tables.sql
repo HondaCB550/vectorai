@@ -102,20 +102,34 @@ alter table public.precios_historicos       enable row level security;
 alter table public.sinonimos                enable row level security;
 alter table public.grupos_marcas            enable row level security;
 
--- Políticas permisivas para service key (el backend ya las bypassa)
--- Usuarios autenticados pueden leer sinónimos y grupos de marcas
-create policy if not exists "sinonimos_read" on public.sinonimos
-  for select using (true);
+-- CORREGIDO 22-07-2026 (auditoría CSO). Este bloque no se podía ejecutar:
+--   1. `create policy if not exists` NO existe en Postgres — la sintaxis correcta
+--      no admite IF NOT EXISTS y el parser corta con `ERROR 42601: syntax error
+--      at or near "not"`. La migración abortaba acá y por eso las policies vivas
+--      terminaron creándose a mano, con OTROS nombres (`select_public`).
+--   2. Las dos policies de precios_historicos filtraban por `auth.uid() = user_id`
+--      y esa tabla nunca tuvo columna `user_id` (es catálogo compartido, no
+--      per-usuario). Se eliminan: describían un modelo que no existe.
+--
+-- Se reconstruye lo que realmente quedó en producción, con los nombres reales,
+-- para que la migración 009 (que las dropea) encuentre lo que espera al
+-- reproducir la historia desde cero.
+--
+-- OJO: estas policies dan lectura al rol `anon`, y la anon key viaja en el
+-- bundle JS. La migración 009 las elimina — no volver a agregarlas.
+drop policy if exists "sinonimos_read"              on public.sinonimos;
+drop policy if exists "grupos_marcas_read"          on public.grupos_marcas;
+drop policy if exists "materiales_validados_read"   on public.materiales_validados;
+drop policy if exists "select_public"               on public.sinonimos;
+drop policy if exists "select_public"               on public.grupos_marcas;
+drop policy if exists "select_public"               on public.materiales_validados;
+drop policy if exists "select_public"               on public.material_denominaciones;
+drop policy if exists "select_public"               on public.materiales_pendientes;
+drop policy if exists "select_public"               on public.precios_historicos;
 
-create policy if not exists "grupos_marcas_read" on public.grupos_marcas
-  for select using (true);
-
-create policy if not exists "materiales_validados_read" on public.materiales_validados
-  for select using (true);
-
--- Precios: cada usuario ve solo los suyos
-create policy if not exists "precios_historicos_own" on public.precios_historicos
-  for select using (auth.uid() = user_id);
-
-create policy if not exists "precios_historicos_insert" on public.precios_historicos
-  for insert with check (auth.uid() = user_id);
+create policy "select_public" on public.sinonimos                for select using (true);
+create policy "select_public" on public.grupos_marcas            for select using (true);
+create policy "select_public" on public.materiales_validados     for select using (true);
+create policy "select_public" on public.material_denominaciones  for select using (true);
+create policy "select_public" on public.materiales_pendientes    for select using (true);
+create policy "select_public" on public.precios_historicos       for select using (true);

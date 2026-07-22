@@ -216,6 +216,31 @@ def require_admin(authorization: Optional[str]) -> str:
         raise HTTPException(status_code=403, detail={"error": "forbidden", "mensaje": "Solo administradores."})
     return email
 
+def _usuario_del_token(authorization: Optional[str]) -> tuple[str, str]:
+    """(user_id, email) sacados del JWT. 401 si no hay token válido.
+
+    /mp/suscripcion tomaba ambos del body: cualquiera podía crear suscripciones
+    de MercadoPago a nombre de otro user_id o con el mail de un tercero como
+    payer_email (auditoría CSO 22-07). El id es el que después usa el webhook
+    vía external_reference para activar el plan, así que tiene que salir del
+    token, no del cliente."""
+    if not authorization:
+        raise HTTPException(status_code=401, detail={
+            "error": "login_requerido",
+            "mensaje": "Iniciá sesión para suscribirte.",
+        })
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    try:
+        u = sb.auth.get_user(authorization.removeprefix("Bearer ").strip())
+    except Exception:
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    if not u.user:
+        raise HTTPException(status_code=401, detail={"error": "login_requerido"})
+    return u.user.id, (u.user.email or "")
+
+
 def get_user_plan(authorization: Optional[str]) -> dict:
     """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N, 'limite': N}.
 
@@ -1349,16 +1374,27 @@ async def generar_imagen(
 
 # ── MercadoPago ──────────────────────────────────────────────────────────────
 class MPSuscripcionRequest(BaseModel):
-    user_id: str
-    email: str
+    # user_id y email se IGNORAN: salen del JWT. Siguen declarados (opcionales)
+    # para no romper con 422 a los clientes viejos que todavía los mandan.
+    user_id: Optional[str] = None
+    email: Optional[str] = None
     plan: str = "advance"  # 'basico' (Inicial) | 'advance'
 
 @app.post("/mp/suscripcion")
-async def crear_suscripcion(req: MPSuscripcionRequest):
+async def crear_suscripcion(
+    req: MPSuscripcionRequest,
+    authorization: Optional[str] = Header(None),
+):
     """
     Crea una suscripción recurrente en MercadoPago y devuelve la URL de pago.
     Usa Preapproval (débito automático mensual).
+
+    Solo usuarios logueados, y la identidad sale del token (ver
+    _usuario_del_token): antes el endpoint era anónimo y confiaba en el user_id
+    y el email del body.
     """
+    user_id, email = _usuario_del_token(authorization)
+
     if not MP_ACCESS_TOKEN:
         raise HTTPException(status_code=503, detail={"error": "mp_no_configurado"})
 
@@ -1374,8 +1410,8 @@ async def crear_suscripcion(req: MPSuscripcionRequest):
         "reason": f"Vectorai Plan {nombre_plan} — comparador de presupuestos",
         # El plan viaja en external_reference para que el webhook active el
         # correcto: "<user_id>:<plan>".
-        "external_reference": f"{req.user_id}:{plan}",
-        "payer_email": req.email,
+        "external_reference": f"{user_id}:{plan}",
+        "payer_email": email,
         "auto_recurring": {
             "frequency": 1,
             "frequency_type": "months",
