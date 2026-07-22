@@ -99,6 +99,17 @@ Calidad de extracción: `extracciones_dudosas` + bucket privado `dudosos` (07-20
 - `perfiles` usa **usos_mes/limite_mes/mes_usos** (tracking mensual). El CHECK de plan admite 'advance' (webhook MP). advance/pro → límite 999.
 - Precios se muestran sin IVA por default; los datos se guardan netos.
 
+### Seguridad (auditoría CSO 22-07-2026 — no revertir)
+
+Todo el API escribe y lee con **service key**, que ignora RLS. Eso significa que **la autorización se hace en el código Python, no en la base**: cualquier endpoint que reciba un id y no filtre por usuario es un IDOR.
+
+- **Endpoints que reciben un `comparativa_id` deben llamar `_exigir_propietario()`** (fail-closed: 401 anónimo / 404 inexistente / 403 ajeno). `/sheets`, `/pdf` e `/imagen` no lo hacían: con el UUID alcanzaba, sin token, para bajar la comparativa de otro cliente.
+- **Nada escribe al catálogo global sin login.** `material_denominaciones`, `precios_historicos` y `materiales_pendientes` las lee el matching de **todos** los usuarios. `/confirmar-v2` era anónimo y se podía envenenar con un curl en bucle (misma clase de daño que el caso A018/BROCAS, pero remoto).
+- **La identidad sale del JWT, nunca del body.** `/mp/suscripcion` tomaba `user_id` y `email` del request; ese `user_id` es el que el webhook usa vía `external_reference` para activar el plan. Usar `_usuario_del_token()`.
+- **Sin policies de lectura pública.** La anon key viaja en el bundle JS: una policy `USING (true)` publica la tabla en internet. Hoy **ninguna** tabla tiene lectura pública, y el único `supabase.from(...)` del frontend es `perfiles`. Si necesitás datos nuevos en el front, pedilos por el API.
+- **El trigger `freeze_perfil_sensitive` debe cubrir INSERT, no solo UPDATE.** Era `BEFORE UPDATE` y se salteaba con DELETE + INSERT: cualquier registro gratuito se ponía `plan='pro'`. Va junto con el `REVOKE DELETE` sobre `perfiles`.
+- Las migraciones **008, 009 y 010** contienen estos candados. Antes vivían solo en la base: si reconstruís desde `supabase/migrations/`, tienen que estar.
+
 ## Diagnóstico rápido
 
 ```bash
@@ -109,6 +120,19 @@ python -c "import ast; ast.parse(open('api/main.py', encoding='utf-8').read())"
 cd api && python -c "import main"        # OBLIGATORIO antes de pushear api/: detecta imports rotos
 cd api && python test_extraccion_parsers.py   # regresión de parsers si se tocó extraer_pdf_texto.py
 ```
+
+**El push NO garantiza el deploy.** El 22-07 dos pushes quedaron en `FAILED` por un error de plataforma de Railway (`configErrors: /orchestrator.RegionService/ListRegions UNAVAILABLE`) y Railway siguió sirviendo el contenedor viejo: el endpoint respondía con el código anterior y parecía que el fix no se había aplicado. Verificar siempre después de pushear:
+
+```bash
+railway deployment list          # el de arriba tiene que decir SUCCESS
+railway status --json            # comparar meta.commitHash de latestDeployment vs activeDeployments[0]
+```
+
+Si `latestDeployment` está FAILED, mirar `meta.configErrors`. `canRedeploy` suele venir en `false`, así que se destraba con `git commit --allow-empty` + push. Ojo: el CLI de Railway está linkeado **por directorio** — desde un git worktree dice "No linked project found"; correrlo desde `presupuestor/`.
+
+**Cambios que tocan API y frontend juntos: deployar el frontend PRIMERO.** Railway y Vercel deployan del mismo push pero a distinta velocidad, y quien tenga la pestaña abierta sigue con el bundle viejo. Si el API empieza a exigir algo que el frontend todavía no manda (un token, un campo), la funcionalidad se rompe para todos hasta que recarguen. Al revés es inofensivo.
+
+**Sesiones paralelas de Claude: una sesión, un worktree.** `git worktree add ../_wt-<tema> origin/main -b <rama>`. Compartir un solo working tree hace que un `git switch` le mueva los archivos a las otras sesiones; el 22-07 una sesión commiteó un fix de seguridad ajeno dentro de un commit sobre otro tema.
 
 **Antes de pushear cambios de api/: commitear JUNTOS todos los archivos relacionados** (el 13-07 un commit llevó main.py con un import de matching.py sin commitear → ImportError al arrancar → producción caída ~5 min hasta el commit del archivo faltante). El `import main` de arriba lo detecta local. Ojo con sesiones paralelas de Claude editando el mismo repo: verificar `git status` de api/ completo antes de commitear.
 
