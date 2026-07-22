@@ -92,7 +92,7 @@ function ActualizarClaveInner() {
 
             {sesionOk === false ? (
               <div className="text-center py-4">
-                <h1 className="text-xl font-bold text-gray-900 mb-2">El link venció</h1>
+                <h1 className="text-xl font-bold mb-2">El link venció</h1>
                 <p className="text-gray-700 text-sm mb-6">
                   El link de recuperación no es válido o ya expiró. Pedí uno nuevo
                   para continuar.
@@ -103,14 +103,14 @@ function ActualizarClaveInner() {
               </div>
             ) : listo ? (
               <div className="text-center py-4">
-                <h1 className="text-xl font-bold text-gray-900 mb-2">¡Contraseña actualizada!</h1>
+                <h1 className="text-xl font-bold mb-2">¡Contraseña actualizada!</h1>
                 <p className="text-gray-700 text-sm">
                   Listo. Te estamos llevando al comparador…
                 </p>
               </div>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva contraseña</h1>
+                <h1 className="text-2xl font-bold mb-2">Nueva contraseña</h1>
                 <p className="text-gray-700 text-sm mb-8">
                   Elegí una contraseña nueva para tu cuenta.
                 </p>

@@ -49,7 +49,7 @@ const hs = (v: number) => `${v.toLocaleString("es-AR", { minimumFractionDigits: 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-5">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">{title}</h3>
+      <h3 className="text-sm font-semibold mb-4">{title}</h3>
       {children}
     </div>
   );

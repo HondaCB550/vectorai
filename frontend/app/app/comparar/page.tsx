@@ -1063,7 +1063,7 @@ export default function Comparar() {
       </nav>
 
       <div className={`${resultado ? "max-w-7xl" : "max-w-5xl"} mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-24 sm:pb-10`}>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Nueva comparativa</h1>
+        <h1 className="text-2xl font-bold mb-2">Nueva comparativa</h1>
         <p className="text-gray-500 text-sm mb-8">Subí PDFs, fotos o planillas de tus proveedores para compararlos</p>
 
         {/* Saldo del plan: avisa el corte ANTES de subir, no recién con el 429 */}
@@ -1713,7 +1713,7 @@ export default function Comparar() {
                     {provs.map((prov) => (
                       <div key={prov} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                         <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
-                          <h3 className="font-semibold text-gray-900">{prov}</h3>
+                          <h3 className="font-semibold">{prov}</h3>
                           <span className="text-sm text-gray-600">
                             {porProv[prov].filas.length} ítems ·{" "}
                             <strong className="text-gray-900">{fmt(porProv[prov].total)}</strong>

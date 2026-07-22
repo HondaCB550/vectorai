@@ -47,21 +47,21 @@ function ConfirmarInner() {
 
             {estado === "verificando" && (
               <>
-                <h1 className="text-xl font-bold text-gray-900 mb-2">Confirmando tu email…</h1>
+                <h1 className="text-xl font-bold mb-2">Confirmando tu email…</h1>
                 <p className="text-gray-700 text-sm">Un segundo, estamos activando tu cuenta.</p>
               </>
             )}
 
             {estado === "ok" && (
               <>
-                <h1 className="text-xl font-bold text-gray-900 mb-2">¡Email confirmado!</h1>
+                <h1 className="text-xl font-bold mb-2">¡Email confirmado!</h1>
                 <p className="text-gray-700 text-sm">Tu cuenta quedó activa. Te llevamos al comparador…</p>
               </>
             )}
 
             {estado === "error" && (
               <>
-                <h1 className="text-xl font-bold text-gray-900 mb-2">No pudimos confirmar el email</h1>
+                <h1 className="text-xl font-bold mb-2">No pudimos confirmar el email</h1>
                 <p className="text-gray-700 text-sm mb-6">
                   El link no es válido o ya expiró. Volvé a registrarte o iniciá sesión
                   si ya confirmaste tu cuenta.

@@ -106,7 +106,7 @@ export default function Historial() {
           <Link href="/app/comparar" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
             ← Volver a Análisis
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900">Mis Comparativas</h1>
+          <h1 className="text-4xl font-bold">Mis Comparativas</h1>
           <p className="text-gray-600 mt-2">Historial de análisis guardados</p>
         </div>
 
@@ -151,7 +151,7 @@ export default function Historial() {
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-1 cursor-pointer hover:opacity-75" onClick={() => setSelectedId(c.id)}>
-                    <h2 className="font-semibold text-gray-900 text-lg">
+                    <h2 className="font-semibold text-lg">
                       {c.titulo}
                       {c.obra && (
                         <span className="ml-2 text-xs font-medium bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full align-middle">

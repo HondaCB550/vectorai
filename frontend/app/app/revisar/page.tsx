@@ -90,7 +90,7 @@ export default function Revisar() {
       </nav>
 
       <div className="max-w-3xl mx-auto px-6 py-10">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Revisión manual</h1>
+        <h1 className="text-2xl font-bold mb-2">Revisión manual</h1>
         <p className="text-gray-500 text-sm mb-8">
           Estos ítems no pudieron ser identificados automáticamente. Confirmá a qué material
           interno corresponde cada uno para completar la comparativa. Cada confirmación mejora

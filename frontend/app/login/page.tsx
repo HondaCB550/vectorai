@@ -52,7 +52,7 @@ function LoginInner() {
           <Link href="/" className="block mb-8">
             <Logo />
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Iniciar sesión</h1>
+          <h1 className="text-2xl font-bold mb-2">Iniciar sesión</h1>
           <p className="text-gray-700 text-sm mb-8">
             ¿No tenés cuenta?{" "}
             <Link href="/registro" className="text-blue-600 font-medium hover:underline">

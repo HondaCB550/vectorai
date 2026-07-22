@@ -185,7 +185,7 @@ export default function MisPresupuestos() {
           <Link href="/app/comparar" className="text-blue-600 text-sm font-medium hover:underline mb-4 inline-block">
             ← Volver a Análisis
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900">Mis Presupuestos</h1>
+          <h1 className="text-4xl font-bold">Mis Presupuestos</h1>
           <p className="text-gray-600 mt-2">
             Los documentos que procesaste, con sus ítems — sin volver a subirlos.
           </p>
@@ -238,7 +238,7 @@ export default function MisPresupuestos() {
                       className="mt-1.5 w-5 h-5 accent-blue-600 shrink-0 cursor-pointer"
                     />
                     <div className="flex-1 min-w-0">
-                      <h2 className="font-semibold text-gray-900 text-lg">{p.proveedor}</h2>
+                      <h2 className="font-semibold text-lg">{p.proveedor}</h2>
                       <p className="text-sm text-gray-600 mt-1 truncate">
                         {p.archivo} • {formatFecha(p.fecha)}
                       </p>

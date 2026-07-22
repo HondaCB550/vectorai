@@ -165,7 +165,7 @@ export default function ComparativaDetalle() {
         </Link>
 
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">{comparativa.titulo}</h1>
+          <h1 className="text-3xl font-bold">{comparativa.titulo}</h1>
           <p className="text-gray-600 mt-1">{comparativa.proveedores.join(" • ")}</p>
         </div>
 

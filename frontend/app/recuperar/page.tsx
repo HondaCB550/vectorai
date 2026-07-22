@@ -56,7 +56,7 @@ function RecuperarInner() {
 
             {!enviado ? (
               <>
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">Recuperar contraseña</h1>
+                <h1 className="text-2xl font-bold mb-2">Recuperar contraseña</h1>
                 <p className="text-gray-700 text-sm mb-8">
                   Ingresá el mail de tu cuenta y te enviamos un link para elegir una
                   contraseña nueva.
@@ -90,7 +90,7 @@ function RecuperarInner() {
               </>
             ) : (
               <div className="text-center py-4">
-                <h1 className="text-xl font-bold text-gray-900 mb-2">Revisá tu mail</h1>
+                <h1 className="text-xl font-bold mb-2">Revisá tu mail</h1>
                 <p className="text-gray-700 text-sm mb-6">
                   Si hay una cuenta asociada a <strong>{mail}</strong>, te enviamos un
                   link para crear una contraseña nueva. Revisá también la carpeta de

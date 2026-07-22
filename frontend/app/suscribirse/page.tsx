@@ -102,7 +102,7 @@ export default function Suscribirse() {
       <main className="min-h-screen bg-gray-50 px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <Link href="/" className="inline-block mb-3"><Logo /></Link>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Elegí tu plan</h1>
+          <h1 className="text-3xl font-bold mb-2">Elegí tu plan</h1>
           <p className="text-gray-600 mb-8">Empezá con lo que necesites. Cancelás cuando quieras desde MercadoPago.</p>
 
           {!user && (
@@ -131,7 +131,7 @@ export default function Suscribirse() {
                     Recomendado
                   </span>
                 )}
-                <h2 className="text-xl font-bold text-gray-900">{plan.nombre}</h2>
+                <h2 className="text-xl font-bold">{plan.nombre}</h2>
                 <p className="text-sm text-gray-500 mt-1 mb-4 min-h-[40px]">{plan.bajada}</p>
 
                 <div className="mb-5">

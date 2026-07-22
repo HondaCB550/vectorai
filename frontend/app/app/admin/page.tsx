@@ -188,7 +188,7 @@ export default function AdminPage() {
       <div className="max-w-4xl mx-auto px-6 py-10">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Panel de revisión</h1>
+          <h1 className="text-2xl font-bold mb-1">Panel de revisión</h1>
           <p className="text-gray-500 text-sm">
             Materiales sin match automático. Linkeá cada descripción al código interno correcto para que el sistema aprenda.
           </p>

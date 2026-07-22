@@ -200,7 +200,7 @@ function RegistroInner() {
         {/* ── Paso 1: Tu perfil ─────────────────────────────────── */}
         {paso === 1 && (
           <>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Crear cuenta</h1>
+            <h1 className="text-2xl font-bold mb-1">Crear cuenta</h1>
             <p className="text-gray-700 text-sm mb-7">
               ¿Ya tenés cuenta?{" "}
               <Link href="/login" className="text-blue-600 font-medium hover:underline">Iniciá sesión</Link>
@@ -267,7 +267,7 @@ function RegistroInner() {
         {/* ── Paso 2: Tu zona ───────────────────────────────────── */}
         {paso === 2 && (
           <>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Tu zona</h1>
+            <h1 className="text-2xl font-bold mb-1">Tu zona</h1>
             <p className="text-gray-700 text-sm mb-7">
               Usamos esta info para mostrarte precios de tu zona y comparativas más precisas.
             </p>
@@ -333,7 +333,7 @@ function RegistroInner() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h1 className="text-xl font-bold text-gray-900 mb-2">Revisá tu mail</h1>
+              <h1 className="text-xl font-bold mb-2">Revisá tu mail</h1>
               <p className="text-gray-500 text-sm mb-6">
                 Te mandamos un link de confirmación a <strong>{mail}</strong>.
                 Hacé click en el link para activar tu cuenta.

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import UserMenu from "@/components/UserMenu";
@@ -35,20 +35,37 @@ function CountdownBadge() {
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
+  // Ids estables entre servidor y cliente para atar botón y panel.
+  const id = useId();
+  const btnId = `${id}-btn`;
+  const panelId = `${id}-panel`;
   return (
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
       <button
+        id={btnId}
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
         className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left font-semibold text-[#1A2B4A] hover:text-[#E87022] transition"
       >
         {q}
         <span
+          aria-hidden="true"
           className={`shrink-0 w-8 h-8 rounded-full bg-[#FBE4D2] text-[#E87022] text-xl font-bold flex items-center justify-center transition-transform duration-300 ${open ? "rotate-45" : ""}`}
         >
           +
         </span>
       </button>
-      <div className={`grid transition-all duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+      {/* El panel colapsa con grid-rows 0fr, que oculta a la vista pero deja el
+          texto en el árbol de accesibilidad: `inert` lo saca de lectores de
+          pantalla y del foco mientras está cerrado, sin romper la transición. */}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={btnId}
+        inert={!open}
+        className={`grid transition-all duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
         <div className="overflow-hidden">
           <p className="px-6 pb-5 text-sm leading-relaxed text-gray-600">{a}</p>
         </div>
