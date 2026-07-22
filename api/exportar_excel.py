@@ -14,6 +14,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.drawing.image import Image as XLImage
 
 import marca
+from lista_compras import pedidos_por_proveedor, subtotal_fila
 
 # Paleta
 COLOR_NAVY     = marca.NAVY_HEX
@@ -308,12 +309,16 @@ def _nombre_hoja(nombre: str) -> str:
 
 def _agregar_hojas_compras(wb, comparativo: list[dict], proveedores: list[str], subtitulo: str = None):
     """Listado de compras: una hoja por proveedor con SOLO los materiales donde
-    ese proveedor tiene el mejor precio — el pedido listo para mandarle."""
-    for prov in proveedores:
-        filas = [r for r in comparativo
-                 if r.get("mejor_proveedor") == prov and prov in r.get("precios", {})]
-        if not filas:
-            continue
+    ese proveedor tiene el mejor precio — el pedido listo para mandarle.
+
+    El agrupado sale de lista_compras.pedidos_por_proveedor(), compartido con
+    el PDF y la imagen: los tres archivos arman el mismo pedido. Las hojas
+    quedan ordenadas por total descendente (igual que el tab en pantalla), no
+    por el orden en que se subieron los proveedores.
+    """
+    for pedido in pedidos_por_proveedor(comparativo):
+        prov  = pedido["proveedor"]
+        filas = pedido["filas"]
         ws = wb.create_sheet(_nombre_hoja(prov))
 
         meta = ((marca.meta_visible(subtitulo) + " · ") if subtitulo else "") + \
@@ -328,12 +333,9 @@ def _agregar_hojas_compras(wb, comparativo: list[dict], proveedores: list[str], 
             c.alignment = Alignment(horizontal="left" if j == 1 else "right")
 
         fila = 5
-        total = 0.0
-        for r in sorted(filas, key=lambda x: (x.get("rubro") or "", x.get("material") or "")):
-            precio = r["precios"][prov]["precio_sin_iva"]
-            cant = r.get("cant") or r["precios"][prov].get("cant") or 1
-            subtotal = round(precio * cant, 2)
-            total += subtotal
+        total = pedido["total"]
+        for r in filas:
+            precio, cant, subtotal = subtotal_fila(r, prov)
             ws.cell(fila, 1, r.get("material", "")).font = _font(size=9)
             for j, (val, fmt) in enumerate([(cant, None), (r.get("unidad", ""), None),
                                             (precio, NUM_FMT), (subtotal, NUM_FMT)], start=2):
