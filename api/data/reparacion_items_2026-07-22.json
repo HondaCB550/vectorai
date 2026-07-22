@@ -1,0 +1,382 @@
+{
+ "bug_a_eliminar": [
+  {
+   "id": "200d16f9-93cf-4e2d-b804-a4dc2979a44a",
+   "texto": "CAÑO CEMEN",
+   "texto_par": "CAÑO CEMENTO 30CM",
+   "precio_malo": 135751.62,
+   "precio_bueno": 25000.92,
+   "cantidad": 6.0,
+   "esperado": 135751.6,
+   "codigo": "AUX001"
+  },
+  {
+   "id": "df8c9f3e-e016-4358-8a28-eaafc569a812",
+   "texto": "PASTINA X1K",
+   "texto_par": "PASTINA X1KG",
+   "precio_malo": 108633.2,
+   "precio_bueno": 2000.66,
+   "cantidad": 60.0,
+   "esperado": 108633.12,
+   "codigo": "CONS206"
+  },
+  {
+   "id": "b53dcbe4-e3ad-4849-9c58-05f25b3b2898",
+   "texto": "PASTINA KLAUKOL",
+   "texto_par": "PASTINA KLAUKOL X 1 KG",
+   "precio_malo": 260633.48,
+   "precio_bueno": 4800.0,
+   "cantidad": 60.0,
+   "esperado": 260633.48,
+   "codigo": "CONS206"
+  },
+  {
+   "id": "e6ae3039-086d-4d73-836a-77009f0bd22a",
+   "texto": "WEBER 25KG",
+   "texto_par": "WEBER 25KG ESTANDAR",
+   "precio_malo": 301365.75,
+   "precio_bueno": 9000.25,
+   "cantidad": 37.0,
+   "esperado": 301365.84,
+   "codigo": "CONS105"
+  },
+  {
+   "id": "6d97c36f-f042-4248-9ac0-f2c7d07edcd7",
+   "texto": "CUARZO X25",
+   "texto_par": "CUARZO X25KG GRIS CEMENTO",
+   "precio_malo": 96292.94,
+   "precio_bueno": 26600.93,
+   "cantidad": 4.0,
+   "esperado": 96292.96,
+   "codigo": "CONS106"
+  },
+  {
+   "id": "ab0f94e4-c377-4968-82de-af9d48d0c639",
+   "texto": "CEMENTO BL",
+   "texto_par": "CEMENTO BLANCO X 25KG",
+   "precio_malo": 142987.76,
+   "precio_bueno": 39500.37,
+   "cantidad": 4.0,
+   "esperado": 142987.76,
+   "codigo": "CONS101"
+  },
+  {
+   "id": "5820658c-0e2e-4ab6-8074-2747af751eb7",
+   "texto": "CEMENTO BLANCO",
+   "texto_par": "CEMENTO BLANCO CIMSA X 25 KG",
+   "precio_malo": 144434.39,
+   "precio_bueno": 39900.0,
+   "cantidad": 4.0,
+   "esperado": 144434.39,
+   "codigo": "CONS129"
+  },
+  {
+   "id": "aa9dd18f-5781-4457-a094-8c3550f2d6ff",
+   "texto": "TOSCA XMET",
+   "texto_par": "TOSCA XMETRO",
+   "precio_malo": 3716741.67,
+   "precio_bueno": 37000.0,
+   "cantidad": 111.0,
+   "esperado": 3716742.08,
+   "codigo": "CONS107"
+  },
+  {
+   "id": "caad1536-8f82-4825-9d2d-02c990bcf97b",
+   "texto": "TOSCA X M3",
+   "texto_par": "TOSCA X M3",
+   "precio_malo": 2511312.22,
+   "precio_bueno": 25000.0,
+   "cantidad": 111.0,
+   "esperado": 2511312.22,
+   "codigo": "CONS107"
+  },
+  {
+   "id": "31d84a13-ab2c-493b-b2ca-b78368f9a95b",
+   "texto": "ARENA BOLS",
+   "texto_par": "ARENA BOLSON",
+   "precio_malo": 978287.67,
+   "precio_bueno": 47000.34,
+   "cantidad": 23.0,
+   "esperado": 978287.62,
+   "codigo": "CONS108"
+  },
+  {
+   "id": "d0051f6b-62b4-460a-b17f-f43c920d3a60",
+   "texto": "ARENA X M3",
+   "texto_par": "ARENA X M3",
+   "precio_malo": 895022.62,
+   "precio_bueno": 43000.0,
+   "cantidad": 23.0,
+   "esperado": 895022.62,
+   "codigo": "CONS240"
+  },
+  {
+   "id": "fe35a863-6aed-4644-8e34-9a2b87dbb27b",
+   "texto": "PIEDRA BOLS",
+   "texto_par": "PIEDRA BOLSON",
+   "precio_malo": 544797.87,
+   "precio_bueno": 86000.24,
+   "cantidad": 7.0,
+   "esperado": 544797.9,
+   "codigo": "CONS110"
+  },
+  {
+   "id": "e4fa6953-a5c0-4241-a794-d3a66ee8d810",
+   "texto": "PIEDRA PARTIDA",
+   "texto_par": "PIEDRA PARTIDA 6/20 X M3",
+   "precio_malo": 557466.06,
+   "precio_bueno": 88000.0,
+   "cantidad": 7.0,
+   "esperado": 557466.06,
+   "codigo": "CONS110"
+  },
+  {
+   "id": "28d52eb3-61ed-4f8c-a260-a97fb71026ab",
+   "texto": "ALAMBRE DU",
+   "texto_par": "ALAMBRE DULCE 4,2 X KG",
+   "precio_malo": 126271.43,
+   "precio_bueno": 4500.97,
+   "cantidad": 31.0,
+   "esperado": 126271.56,
+   "codigo": "CONS111"
+  },
+  {
+   "id": "f27f3f38-4755-420b-8048-b04e7b6dd716",
+   "texto": "ALAMBRE RECOCID",
+   "texto_par": "ALAMBRE RECOCIDO X KG",
+   "precio_malo": 139990.95,
+   "precio_bueno": 4990.0,
+   "cantidad": 31.0,
+   "esperado": 139990.95,
+   "codigo": "CONS111"
+  },
+  {
+   "id": "9fd2e8fa-f835-484e-a767-efcbc4ccfe24",
+   "texto": "MALLA 6 15x",
+   "texto_par": "MALLA 6 15x15",
+   "precio_malo": 2339400.3,
+   "precio_bueno": 55000.79,
+   "cantidad": 47.0,
+   "esperado": 2339400.12,
+   "codigo": "CONS112"
+  },
+  {
+   "id": "648b7c75-c68d-481e-821a-fb17d2efe625",
+   "texto": "VARILLA 6",
+   "texto_par": "VARILLA 6",
+   "precio_malo": 648848.56,
+   "precio_bueno": 6700.73,
+   "cantidad": 107.0,
+   "esperado": 648848.97,
+   "codigo": "A006"
+  },
+  {
+   "id": "5a4c3a53-d230-43ee-870e-3ea41ec60905",
+   "texto": "HIERRO GERDAU Ø",
+   "texto_par": "HIERRO GERDAU Ø 6 MM",
+   "precio_malo": 619728.51,
+   "precio_bueno": 6400.0,
+   "cantidad": 107.0,
+   "esperado": 619728.51,
+   "codigo": "HIE012"
+  },
+  {
+   "id": "3ed26df0-7987-4c98-9b9e-bab8408217c6",
+   "texto": "VARILLA 12",
+   "texto_par": "VARILLA 12",
+   "precio_malo": 188235.29,
+   "precio_bueno": 26000.0,
+   "cantidad": 8.0,
+   "esperado": 188235.29,
+   "codigo": "A006"
+  },
+  {
+   "id": "dfa03c14-4883-47d7-9680-c6f8bbf3af0a",
+   "texto": "CLAVOS 2\" X",
+   "texto_par": "CLAVOS 2\" X KG",
+   "precio_malo": 36199.42,
+   "precio_bueno": 5000.05,
+   "cantidad": 8.0,
+   "esperado": 36199.46,
+   "codigo": "CONS210"
+  },
+  {
+   "id": "8de3d04e-9871-49a4-9bb6-c38429ae6c28",
+   "texto": "CLAVOS 2.5\"",
+   "texto_par": "CLAVOS 2.5\" X KG",
+   "precio_malo": 36200.14,
+   "precio_bueno": 5000.14,
+   "cantidad": 8.0,
+   "esperado": 36200.11,
+   "codigo": "CONS211"
+  },
+  {
+   "id": "19b458fd-0beb-4379-ab5b-c51646fdde56",
+   "texto": "HIERRO GERDAU Ø",
+   "texto_par": "HIERRO GERDAU Ø 12 MM",
+   "precio_malo": 168325.79,
+   "precio_bueno": 23250.0,
+   "cantidad": 8.0,
+   "esperado": 168325.79,
+   "codigo": "HIE012"
+  },
+  {
+   "id": "b5d3e616-7c9e-47cd-b066-b7d37efb3001",
+   "texto": "CLAVOS 2\" X KG",
+   "texto_par": "CLAVOS 2\" X KG",
+   "precio_malo": 31131.22,
+   "precio_bueno": 4300.0,
+   "cantidad": 8.0,
+   "esperado": 31131.22,
+   "codigo": "CONS210"
+  },
+  {
+   "id": "455c4142-55b7-41c9-a5c8-199abc3df229",
+   "texto": "CLAVOS 2 1/2\" X",
+   "texto_par": "CLAVOS 2 1/2\" X KG",
+   "precio_malo": 30407.24,
+   "precio_bueno": 4200.0,
+   "cantidad": 8.0,
+   "esperado": 30407.24,
+   "codigo": "CONS211"
+  },
+  {
+   "id": "3ae32644-bc27-4269-8380-2ec33934a142",
+   "texto": "LADRILLO RE",
+   "texto_par": "LADRILLO REF 229X114X50",
+   "precio_malo": 860153.41,
+   "precio_bueno": 4569.57,
+   "cantidad": 208.0,
+   "esperado": 860154.35,
+   "codigo": "CONS125"
+  },
+  {
+   "id": "5db7aa3c-cc40-4073-8417-8edb90ee6c3d",
+   "texto": "PEGAMENTO",
+   "texto_par": "PEGAMENTO REFRACTARIO X10KG",
+   "precio_malo": 128695.45,
+   "precio_bueno": 15800.94,
+   "cantidad": 9.0,
+   "esperado": 128695.44,
+   "codigo": "CONS105"
+  },
+  {
+   "id": "e212854f-c3af-438f-9a70-fc1b533edadc",
+   "texto": "BOLSON DE P",
+   "texto_par": "BOLSON DE PIEDRA MAR DEL PLATA",
+   "precio_malo": 1629556.02,
+   "precio_bueno": 100036.63,
+   "cantidad": 18.0,
+   "esperado": 1629555.96,
+   "codigo": "CONS245"
+  },
+  {
+   "id": "810e0054-52bf-4e92-ac0a-f3c3f0e1ff7f",
+   "texto": "VARILLA 8",
+   "texto_par": "VARILLA 8",
+   "precio_malo": 619373.31,
+   "precio_bueno": 11800.13,
+   "cantidad": 58.0,
+   "esperado": 619373.34,
+   "codigo": "A006"
+  },
+  {
+   "id": "f581e4aa-2254-4064-8e81-a54e3d1c430f",
+   "texto": "HIERRO GERDAU Ø",
+   "texto_par": "HIERRO GERDAU Ø 8 MM",
+   "precio_malo": 545882.35,
+   "precio_bueno": 10400.0,
+   "cantidad": 58.0,
+   "esperado": 545882.35,
+   "codigo": "HIE012"
+  },
+  {
+   "id": "3de22299-1c85-4dba-8303-75a190708fe3",
+   "texto": "CERESITA X2",
+   "texto_par": "CERESITA X20KG",
+   "precio_malo": 542990.77,
+   "precio_bueno": 50000.4,
+   "cantidad": 12.0,
+   "esperado": 542990.77,
+   "codigo": "CONS141"
+  },
+  {
+   "id": "7cc5bd5b-dba7-43dd-9732-ba64d8df8a26",
+   "texto": "isocret x 170",
+   "texto_par": "isocret x 170",
+   "precio_malo": 418108.59,
+   "precio_bueno": 38500.83,
+   "cantidad": 12.0,
+   "esperado": 418108.56,
+   "codigo": "CONS202"
+  },
+  {
+   "id": "10c40180-51dc-4e40-a1a3-02847897072e",
+   "texto": "MASTROCRET X BO",
+   "texto_par": "MASTROCRET XBOLSA 100 LTS",
+   "precio_malo": 233484.16,
+   "precio_bueno": 21500.0,
+   "cantidad": 12.0,
+   "esperado": 233484.16,
+   "codigo": "CONS202"
+  },
+  {
+   "id": "7e69492f-dcb5-497c-957b-8b6bd36c18bf",
+   "texto": "Base coat mo",
+   "texto_par": "Base coat monocomponente x25kg",
+   "precio_malo": 1727031.0,
+   "precio_bueno": 20520.1,
+   "cantidad": 93.0,
+   "esperado": 1727031.04,
+   "codigo": "TER121"
+  },
+  {
+   "id": "8bdc8531-a948-43e9-b626-0adbd82f61f3",
+   "texto": "CEMENTO LO",
+   "texto_par": "CEMENTO LOMA NEGRA X25KG",
+   "precio_malo": 2878131.65,
+   "precio_bueno": 7500.79,
+   "cantidad": 424.0,
+   "esperado": 2878131.19,
+   "codigo": null
+  }
+ ],
+ "bug_b_normalizar": [
+  {
+   "id": "a7b31a66-4d52-4a06-bc81-1015a155d9ed",
+   "texto": "TORN T2 PTA AGUJA x 100 un.",
+   "codigo": "T003",
+   "precio_viejo": 161461.54,
+   "cantidad_vieja": 0.01,
+   "precio_nuevo": 1614.6154,
+   "cantidad_nueva": 1
+  },
+  {
+   "id": "eb8f9b56-e7c8-4659-b01b-0983cca3fb43",
+   "texto": "TORN T1 PTA MECHA x 100 un.",
+   "codigo": "T002",
+   "precio_viejo": 118837.1,
+   "cantidad_vieja": 0.01,
+   "precio_nuevo": 1188.371,
+   "cantidad_nueva": 1
+  },
+  {
+   "id": "284f86fe-6040-431c-952f-40c1967c1c6d",
+   "texto": "TORN T2 PTA MECHA x 100 un.",
+   "codigo": "T004",
+   "precio_viejo": 147762.53,
+   "cantidad_vieja": 0.0125,
+   "precio_nuevo": 1847.0316,
+   "cantidad_nueva": 1
+  },
+  {
+   "id": "301d0e21-954c-41c7-b025-6eebf33a5cf5",
+   "texto": "TORN AUT S/FRAME 10x3/4 x 100 unid",
+   "codigo": "T001",
+   "precio_viejo": 120463.35,
+   "cantidad_vieja": 0.025,
+   "precio_nuevo": 3011.5838,
+   "cantidad_nueva": 1
+  }
+ ]
+}

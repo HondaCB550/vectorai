@@ -1,0 +1,497 @@
+{
+ "tomado": "2026-07-22T15:30:02",
+ "motivo": "curado de presentaciones y unidades - CURADO_PENDIENTE.md",
+ "filas": 49,
+ "datos": [
+  {
+   "id": "35853e87-615a-4e24-b2ca-fbc883d7d0b1",
+   "codigo_material": "A001",
+   "unidad_comercial": "m",
+   "factor": 50,
+   "unidad_base": "rollo 50m",
+   "descripcion": "Detectado de: FLEJE 50mm/0.90 X 50MTS",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "3aec8dae-0878-49b7-b23d-b11428565a54",
+   "codigo_material": "A009",
+   "unidad_comercial": "unidad",
+   "factor": 25,
+   "unidad_base": "pack x25",
+   "descripcion": "Detectado de: BANDA ACÚSTICA 100MMX25",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "f71e5a04-d1a3-4927-890b-172b8c2acbda",
+   "codigo_material": "AISL114",
+   "unidad_comercial": "m",
+   "factor": 20,
+   "unidad_base": "rollo 20m",
+   "descripcion": "Detectado de: DOBLE ALU 10MM / 1 X 20MTS",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "44e8cb54-208f-46ab-9dbd-5eaf16ac3c8d",
+   "codigo_material": "AISL117",
+   "unidad_comercial": "unidad",
+   "factor": 16,
+   "unidad_base": "pack x16",
+   "descripcion": "Detectado de: BOLSON x 16",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "4bac766c-d7b5-4466-8e0d-3c6703328689",
+   "codigo_material": "AISL118",
+   "unidad_comercial": "m",
+   "factor": 20,
+   "unidad_base": "rollo 20m",
+   "descripcion": "Detectado de: RUFI ALU 5MM / 1X20MTS",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "579cdc8b-aecb-41f0-94c7-191e082fb68b",
+   "codigo_material": "CLIM103",
+   "unidad_comercial": "unidad",
+   "factor": 400,
+   "unidad_base": "pack x400",
+   "descripcion": "Detectado de: 20MM * 400",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "f60c3fb8-4c01-44aa-a501-85bcdd2f4f1c",
+   "codigo_material": "INS008",
+   "unidad_comercial": "unidad",
+   "factor": 12,
+   "unidad_base": "pack x12",
+   "descripcion": "Detectado de: CARPINTERO * 12",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "b6817460-bd96-4e16-b3e0-7b63141bd0a7",
+   "codigo_material": "INS011",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: TRAPEZOIDAL X 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "ad7bfc60-4f27-42b6-aa1c-5547524c342c",
+   "codigo_material": "INS037",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: NIVEL ESPACIADOR 1,5MM X 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "744d3ac1-d44a-47f6-9b54-32f3adbf2e0a",
+   "codigo_material": "INSTE014",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 3/4\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "81736b3a-8a7d-43fb-bf39-ff0914518afc",
+   "codigo_material": "INSTE015",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 7/8\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "55760fc5-ebcd-4066-82a8-05b108ffca64",
+   "codigo_material": "INSTE016",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 1\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "23780054-26fd-437a-beee-fcd46b6cda52",
+   "codigo_material": "INSTE017",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 3/4\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "5bdd93cf-be7a-4f31-8fd6-4a716c28b668",
+   "codigo_material": "INSTE018",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 7/8\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "917bf1d8-e259-42ca-a028-da249fd8f4c8",
+   "codigo_material": "INSTE019",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 1\" METÁLICO *100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "519a3a71-211e-4e57-a0d7-be145b664534",
+   "codigo_material": "INSTE025",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 3/4\" * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "a2a26748-8b24-4171-ba5c-35973a59e0d5",
+   "codigo_material": "INSTE026",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 7/8\" * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "cae54f35-6c7b-4788-90c5-57d271354eb0",
+   "codigo_material": "INSTE027",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 1\" * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "097d6fd0-a040-4762-bb21-c3eb48f6182d",
+   "codigo_material": "INSTE038",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 6MM * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "2fa99583-96bf-485b-81d4-8cb956db19b3",
+   "codigo_material": "INSTE039",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 4MM * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "5a144108-a53f-48d5-8993-ba507482ce78",
+   "codigo_material": "INSTE040",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 2,5MM * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "6c22639d-2fb6-4116-9d96-075fb073e2b9",
+   "codigo_material": "INSTE041",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 1,5MM * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "30d0088d-5f1e-46ca-9c07-af0bdcfe0b36",
+   "codigo_material": "INSTE042",
+   "unidad_comercial": "unidad",
+   "factor": 100,
+   "unidad_base": "pack x100",
+   "descripcion": "Detectado de: 1MM * 100",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "9e50961e-8acc-435f-9442-77874f817da7",
+   "codigo_material": "INSTE044",
+   "unidad_comercial": "m",
+   "factor": 100,
+   "unidad_base": "rollo 100m",
+   "descripcion": "Detectado de: 5 PARES x100M",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "6407df8c-74b2-4ff9-81dc-69894c577939",
+   "codigo_material": "INSTE069",
+   "unidad_comercial": "m",
+   "factor": 100,
+   "unidad_base": "rollo 100m",
+   "descripcion": "Detectado de: 6 PARES x100M",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "4c9c5341-9488-4d99-86ee-f57e3652e5a8",
+   "codigo_material": "INSTE072",
+   "unidad_comercial": "m",
+   "factor": 100,
+   "unidad_base": "rollo 100m",
+   "descripcion": "Detectado de: 2*1/2 * 100M",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "2127baba-529f-46eb-9ac8-71e8d56c3ba5",
+   "codigo_material": "INSTS136",
+   "unidad_comercial": "unidad",
+   "factor": 35,
+   "unidad_base": "pack x35",
+   "descripcion": "Detectado de: 1/2\" - MH - x35",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "a3d6d83d-7453-404b-9570-cf5e1b44ca67",
+   "codigo_material": "INSTS137",
+   "unidad_comercial": "unidad",
+   "factor": 50,
+   "unidad_base": "pack x50",
+   "descripcion": "Detectado de: 3/4\" - MH - x50",
+   "activo": true,
+   "created_at": "2026-07-02T18:15:52.606276+00:00"
+  },
+  {
+   "id": "716af6c4-0e82-4f8b-8882-3cdcc00489e1",
+   "codigo_material": "INSTS140",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Termofusión gas 20x4mts — proveedores cotizan por ML o por tira",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "c8b2e0ce-23c8-4fed-a699-ce10f011503f",
+   "codigo_material": "INSTS141",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Termofusión gas 25x4mts",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "f03f4b58-0773-4653-8721-93f9ca58cb89",
+   "codigo_material": "INSTS142",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Termofusión gas 32x4mts",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "43530df0-2b55-4833-b83b-79f7be7e3636",
+   "codigo_material": "INSTS074",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Fusión agua PN20 20x4",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "45e2a08a-c710-4c1f-bb2a-04fab226208f",
+   "codigo_material": "INSTS075",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Fusión agua PN20 25x4",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "7ef4f1ef-4413-4c33-9b9c-8322f7a49a31",
+   "codigo_material": "INSTS076",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Fusión agua PN20 32x4",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "e69b1e9b-8330-48fa-b4b7-af48858caf47",
+   "codigo_material": "INSTS077",
+   "unidad_comercial": "m",
+   "factor": 4,
+   "unidad_base": "tira 4m",
+   "descripcion": "Fusión agua PN20 50x4",
+   "activo": true,
+   "created_at": "2026-07-04T22:27:16.846422+00:00"
+  },
+  {
+   "id": "c29bf3dc-312e-4c42-822f-1fecb3283ca2",
+   "codigo_material": "T001",
+   "unidad_comercial": "un",
+   "factor": 4000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-14T00:40:13.021884+00:00"
+  },
+  {
+   "id": "0ddaaf59-2e0b-4e8f-b1c4-64ad322729ec",
+   "codigo_material": "T002",
+   "unidad_comercial": "un",
+   "factor": 10000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-14T00:02:43.553104+00:00"
+  },
+  {
+   "id": "c94cf3fb-871e-4f9f-ab81-a947c26b8484",
+   "codigo_material": "T003",
+   "unidad_comercial": "un",
+   "factor": 10000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-14T00:02:43.553104+00:00"
+  },
+  {
+   "id": "8a109594-56f1-43d1-8310-5d69c568ad3b",
+   "codigo_material": "T004",
+   "unidad_comercial": "un",
+   "factor": 8000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-14T00:02:43.553104+00:00"
+  },
+  {
+   "id": "2cf3cff2-fa4b-4680-8bc5-9a9f93520eeb",
+   "codigo_material": "T006",
+   "unidad_comercial": "un",
+   "factor": 5000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "66bc4c13-d590-405e-a150-5e8d189486a3",
+   "codigo_material": "T009",
+   "unidad_comercial": "un",
+   "factor": 3500,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "173d6c46-3db1-40ae-a401-e64da417367c",
+   "codigo_material": "T010",
+   "unidad_comercial": "un",
+   "factor": 8000,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "5dff3d44-2e35-4ec4-9511-498f8ac42f96",
+   "codigo_material": "T012",
+   "unidad_comercial": "un",
+   "factor": 6500,
+   "unidad_base": "UN",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "e75d831b-932e-4aed-b517-1a5fc01ba8dd",
+   "codigo_material": "CH001",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "29758cff-5652-4d30-9f9a-528b36a59898",
+   "codigo_material": "CH009",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "f6e01651-d337-473f-a926-3f9c1d6a14af",
+   "codigo_material": "CH010",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "a409482e-c0d7-4f2f-9097-71d3aca22a3f",
+   "codigo_material": "CH019",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "d6c562b8-3728-42be-93a6-69ead4386f58",
+   "codigo_material": "CH020",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  },
+  {
+   "id": "f0b343a4-1225-4e6d-88f7-63eac7906cf7",
+   "codigo_material": "CH021",
+   "unidad_comercial": "ml",
+   "factor": 1,
+   "unidad_base": "ML",
+   "descripcion": null,
+   "activo": true,
+   "created_at": "2026-07-20T23:08:57.718189+00:00"
+  }
+ ]
+}

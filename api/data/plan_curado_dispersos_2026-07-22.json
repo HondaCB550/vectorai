@@ -1,0 +1,420 @@
+{
+ "generado": "2026-07-22",
+ "umbral_auto": 85.0,
+ "items_reasignar": [
+  {
+   "item_id": "648b7c75-c68d-481e-821a-fb17d2efe625",
+   "de": "A006",
+   "a": "CONS116",
+   "score": 100.0,
+   "texto": "VARILLA 6"
+  },
+  {
+   "item_id": "3ed26df0-7987-4c98-9b9e-bab8408217c6",
+   "de": "A006",
+   "a": "CONS118",
+   "score": 100.0,
+   "texto": "VARILLA 12"
+  },
+  {
+   "item_id": "810e0054-52bf-4e92-ac0a-f3c3f0e1ff7f",
+   "de": "A006",
+   "a": "CONS136",
+   "score": 100.0,
+   "texto": "VARILLA 8"
+  },
+  {
+   "item_id": "022d3b5f-a38f-4520-9c00-7e08418d98e6",
+   "de": "INSTS036",
+   "a": "INSTS037",
+   "score": 100.0,
+   "texto": "CODO MH 63X45 DURATOP"
+  },
+  {
+   "item_id": "ee22684a-5a60-4256-941d-641b55326b66",
+   "de": "INSTS052",
+   "a": "INSTS019",
+   "score": 100.0,
+   "texto": "CANO DURATOP 110X1.00 MTS"
+  },
+  {
+   "item_id": "f6099380-ba55-4965-8b5b-92c53ec5f4db",
+   "de": "INSTS052",
+   "a": "INSTS021",
+   "score": 100.0,
+   "texto": "CANO DURATOP 110X4.00 MTS"
+  },
+  {
+   "item_id": "d4619dfd-65e5-4ac6-9a9f-49663d373ec4",
+   "de": "INSTS053",
+   "a": "INSTS022",
+   "score": 98.0,
+   "texto": "CANO DURATOP 63X1.00 MTS"
+  },
+  {
+   "item_id": "1dce2672-f090-4394-9a9e-6f8e081bfc54",
+   "de": "INSTS054",
+   "a": "INSTS028",
+   "score": 100.0,
+   "texto": "CANO DURATOP 40X1.00 MTS"
+  },
+  {
+   "item_id": "a104d22b-77ed-4a36-af3d-0a74264db93b",
+   "de": "INSTS054",
+   "a": "INSTS029",
+   "score": 100.0,
+   "texto": "CANO DURATOP 40X2.00 MTS"
+  },
+  {
+   "item_id": "d166c7fe-8cf5-4081-b70b-435fcc3347ec",
+   "de": "INSTS065",
+   "a": "INSTS030",
+   "score": 100.0,
+   "texto": "CANO DURATOP 40X4.00 MTS"
+  },
+  {
+   "item_id": "5a6038f2-9bc8-4ae8-9d21-f8e04dcf7c83",
+   "de": "INSTS074",
+   "a": "INSTS172",
+   "score": 100.0,
+   "texto": "A.SYSTEM CANO PN20 CALIENTE 20X4 M"
+  },
+  {
+   "item_id": "41b9faf9-ad20-4c90-a029-94c49e4f3922",
+   "de": "INSTS075",
+   "a": "INSTS109",
+   "score": 100.0,
+   "texto": "A.SYSTEM CANO PN20 CALIENTE 25X4 M"
+  },
+  {
+   "item_id": "16a239b9-e334-44c9-bb4c-a362d25439d6",
+   "de": "INSTS093",
+   "a": "INSTS094",
+   "score": 100.0,
+   "texto": "TEE NORMAL 25 ACQUA"
+  },
+  {
+   "item_id": "7794e434-085e-4021-9694-93bc2182716a",
+   "de": "INSTS093",
+   "a": "INSTS095",
+   "score": 100.0,
+   "texto": "TEE NORMAL 32 ACQUA"
+  },
+  {
+   "item_id": "008e763a-2f33-4d81-b72b-d070e11ecba8",
+   "de": "INSTS172",
+   "a": "INSTS074",
+   "score": 100.0,
+   "texto": "CAÑO 20MM MAGNUM PN20 A/FRIA YCAL"
+  },
+  {
+   "item_id": "092c5145-4441-4e91-ae48-9b74e2413c3f",
+   "de": "INSTS053",
+   "a": "INSTS023",
+   "score": 100.0,
+   "texto": "CANO DURATOP 63X2.00 MTS"
+  },
+  {
+   "item_id": "4c70f901-6065-4f0b-9056-f6f210938c04",
+   "de": "A006",
+   "a": "CONS116",
+   "score": 100.0,
+   "texto": "VARILLA 6"
+  },
+  {
+   "item_id": "e2ed9be6-8dd7-4768-94a4-26aa4bba6205",
+   "de": "A006",
+   "a": "CONS118",
+   "score": 100.0,
+   "texto": "VARILLA 12"
+  },
+  {
+   "item_id": "60d1e3b5-2418-4f49-8d97-3a1674765f2b",
+   "de": "A006",
+   "a": "CONS136",
+   "score": 100.0,
+   "texto": "VARILLA 8"
+  }
+ ],
+ "items_pendientes": [
+  {
+   "item_id": "31d84a13-ab2c-493b-b2ca-b78368f9a95b",
+   "de": "CONS108",
+   "veredicto": "DUDOSO",
+   "score": 84.0,
+   "texto": "ARENA BOLS"
+  },
+  {
+   "item_id": "3ae32644-bc27-4269-8380-2ec33934a142",
+   "de": "CONS125",
+   "veredicto": "ERRADO",
+   "score": 84.0,
+   "texto": "LADRILLO RE"
+  },
+  {
+   "item_id": "dbaa1023-09ad-4ccc-8879-a170d3ca364b",
+   "de": "A001",
+   "veredicto": "BASURA",
+   "score": 0.0,
+   "texto": "MTS"
+  },
+  {
+   "item_id": "02709c80-1e66-450b-8d46-e7e7378f2a26",
+   "de": "INSTS054",
+   "veredicto": "ERRADO",
+   "score": 76.0,
+   "texto": "CANO DURATOP 50X1.00 MTS"
+  },
+  {
+   "item_id": "31668550-8f12-4138-9fbb-540f11f57bd1",
+   "de": "INSTS056",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "SOBRE PILETA 110 C/5 ENTRADAS"
+  },
+  {
+   "item_id": "251c9316-de85-4dae-b494-7c67e63345e7",
+   "de": "INSTS053",
+   "veredicto": "ERRADO",
+   "score": 76.9,
+   "texto": "SYST UNION DOB.MIXTA C/BRI.50X11/2"
+  },
+  {
+   "item_id": "8db33113-660c-413c-a081-e32b01a794c3",
+   "de": "INSTS008",
+   "veredicto": "DUDOSO",
+   "score": 84.9,
+   "texto": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)"
+  },
+  {
+   "item_id": "cad18520-c597-4aea-91e4-b9989dc25d40",
+   "de": "CONS125",
+   "veredicto": "DUDOSO",
+   "score": 84.9,
+   "texto": "LADRILLO REF 229X114X50"
+  },
+  {
+   "item_id": "7747fe1e-bf81-4ebe-94e5-a255cff80833",
+   "de": "CONS108",
+   "veredicto": "DUDOSO",
+   "score": 73.2,
+   "texto": "PEDREG. 3-1 BOLSON X 1.2 TN"
+  },
+  {
+   "item_id": "9ffe555e-594b-448e-b998-71f547dcb936",
+   "de": "CONS125",
+   "veredicto": "DUDOSO",
+   "score": 74.3,
+   "texto": "FARA REFRACTARIO RECTO 229X114X63MM 6CM"
+  },
+  {
+   "item_id": "82964e06-6720-4ff3-abb0-04f1419c2b6f",
+   "de": "CONS125",
+   "veredicto": "DUDOSO",
+   "score": 84.9,
+   "texto": "REF LAD RECTO 229X114X63 ART 1"
+  },
+  {
+   "item_id": "9ef99434-321b-40f6-882d-b5b2807fa048",
+   "de": "INSTS009",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "DESAGUE AQUA LINEAL 70CM CLAS.BRIL ATRIM"
+  },
+  {
+   "item_id": "1110563f-fb87-49dd-a5fa-5326f200f07f",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 20MM IRAM 17010018 TIGRE"
+  },
+  {
+   "item_id": "9cc618d8-aad5-4db1-83b8-25404b39c657",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 25MM IRAM 17010034 TIGRE"
+  },
+  {
+   "item_id": "2da8bc84-b00d-48eb-9f9f-95a08bb190cb",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 32MM IRAM 17010050 TIGRE"
+  },
+  {
+   "item_id": "71022403-4a11-433c-8b67-a3ff2fcfc736",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 50MM IRAM 17010093 TIGRE"
+  },
+  {
+   "item_id": "4cbaf0f7-df4d-4d49-b8ac-382f8606d785",
+   "de": "INSTS093",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "TE NORMAL FUSION 20X20X20 22322508 TIGRE"
+  },
+  {
+   "item_id": "43e6723a-c16d-440f-b93a-ffe937f768a8",
+   "de": "INSTS008",
+   "veredicto": "DUDOSO",
+   "score": 77.4,
+   "texto": "REJA C/MARCO FUNDIDO LINEA PRO 15X15 WATERPLAST"
+  },
+  {
+   "item_id": "38ce751c-98db-498b-9c93-84672b97e83f",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 72.7,
+   "texto": "CAÑO SOLDABLE PVC 50X2.4X6M CL.10 JP TIGRE"
+  },
+  {
+   "item_id": "1be964af-528e-4229-ade3-543875962f32",
+   "de": "INSTS008",
+   "veredicto": "DUDOSO",
+   "score": 72.7,
+   "texto": "CAJA MEDIDOR DE AGUA DOM 40X20X18 CM WATERPLAST"
+  },
+  {
+   "item_id": "5061f4b0-0c55-4f0e-b37b-495498d42bd0",
+   "de": "INSTS009",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "DESAGUE AQUA LINEAL 70CM CLAS.BRIL ATRIM"
+  },
+  {
+   "item_id": "b488da6a-1b21-434d-9fd5-5013df0b0920",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 20MM IRAM 17010018 TIGRE"
+  },
+  {
+   "item_id": "8e354275-61c2-4b83-89b4-3e33ea86fbfa",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 25MM IRAM 17010034 TIGRE"
+  },
+  {
+   "item_id": "49df4d58-7c0b-43e5-bb22-250dd5fc0ec9",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 32MM IRAM 17010050 TIGRE"
+  },
+  {
+   "item_id": "316ff52e-b31a-44f0-8a16-b6238e4ef846",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 83.3,
+   "texto": "TUBO PPR3-PN 20 50MM IRAM 17010093 TIGRE"
+  },
+  {
+   "item_id": "3299a908-c8d1-49e0-9760-11a884daf527",
+   "de": "INSTS093",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "TE NORMAL FUSION 20X20X20 22322508 TIGRE"
+  },
+  {
+   "item_id": "e337b0bc-1e4b-497d-8366-223457979d21",
+   "de": "INSTS008",
+   "veredicto": "DUDOSO",
+   "score": 77.4,
+   "texto": "REJA C/MARCO FUNDIDO LINEA PRO 15X15 WATERPLAST"
+  },
+  {
+   "item_id": "e9be898b-3567-4fe1-894d-606500931427",
+   "de": "INSTE077",
+   "veredicto": "DUDOSO",
+   "score": 72.7,
+   "texto": "CAÑO SOLDABLE PVC 50X2.4X6M CL.10 JP TIGRE"
+  },
+  {
+   "item_id": "ec5bfdfa-1069-486c-a599-1df305c3440a",
+   "de": "INSTS008",
+   "veredicto": "DUDOSO",
+   "score": 72.7,
+   "texto": "CAJA MEDIDOR DE AGUA DOM 40X20X18 CM WATERPLAST"
+  },
+  {
+   "item_id": "d96a0bca-c8f1-40fb-8d1a-83941366d4a1",
+   "de": "CONS125",
+   "veredicto": "DUDOSO",
+   "score": 84.9,
+   "texto": "108 TEJUELA DE 20 MM REFRECTARIO"
+  },
+  {
+   "item_id": "69fd74e2-416e-4d28-9250-bba03825cb82",
+   "de": "TER427",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "TORNILLO P/INODORO COMPLETO 22 X 60"
+  },
+  {
+   "item_id": "d8247afe-3cf8-4e9a-9e0f-a6a165047ae5",
+   "de": "T005",
+   "veredicto": "DUDOSO",
+   "score": 76.0,
+   "texto": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u"
+  },
+  {
+   "item_id": "92e4e3c2-497b-4318-bd98-9280a4fe1f93",
+   "de": "TER114",
+   "veredicto": "DUDOSO",
+   "score": 76.2,
+   "texto": "ARANDELA P/ HTT14 (C) (BARBIERI)"
+  },
+  {
+   "item_id": "2a5d58ae-9f43-4535-9a00-74109f5d8de3",
+   "de": "INSTS187",
+   "veredicto": "BASURA",
+   "score": 0.0,
+   "texto": "1,00 LLAVE DE PASO CON ROSETA YMANIVELA CROMO 32MM FUSIOGAS $ 53.089,77 0,00 $"
+  },
+  {
+   "item_id": "babe9069-c3d7-453d-9449-02b61243cb61",
+   "de": "INSTS222",
+   "veredicto": "BASURA",
+   "score": 0.0,
+   "texto": "15,00 MALLA DE ADVERTENCIA X MT $ 1.188,09 0,00 $"
+  },
+  {
+   "item_id": "be330924-7f23-41d1-aeb1-5113a1625fa8",
+   "de": "INSTS202",
+   "veredicto": "BASURA",
+   "score": 0.0,
+   "texto": "2,00 FLEXIBLE DE GAS 1/2 X 30CM $ 1.856,40 0,00 $"
+  }
+ ],
+ "ph_reasignar": {
+  "4e9b07fd-c69d-42cd-a06a-46ee4f882b54": "INSTS037",
+  "e7816cfa-79ae-461a-8792-a006d5dbd9b7": "INSTS037",
+  "d0ef35f1-f735-4b5f-9448-6c35b3040132": "INSTS172",
+  "2ea0c597-69c7-4a23-842c-45ee361afe65": "INSTS109",
+  "b9c490b7-1a12-4c91-8ca8-91efae28931d": "INSTS094",
+  "25c5014f-981f-4828-87ad-3a2ce28c8d08": "INSTS094",
+  "df49e278-d1ef-48a1-9835-1f53e42dff44": "INSTS095",
+  "530ea1ac-ed14-458f-ada5-b20ddf07f4e4": "INSTS095"
+ },
+ "ph_borrar": [
+  "0adb10d6-90a8-4903-9f82-c8c8a08e7db0",
+  "149ffda4-7b64-4fe6-a5ce-69be2e867261",
+  "208fa429-09bf-4424-b8c2-f414d4e55242",
+  "2199236b-9faf-4198-872e-0feffc7dfe42",
+  "2ad22138-99a7-4d9d-814c-714b442579ab",
+  "639e39fa-f204-4fc4-9ff9-6ffa0a7099bd",
+  "82682141-b67d-4c16-ba5d-e8dbb264e49c",
+  "914540ba-0210-4d64-9abc-bc78a3614b76",
+  "995eaf17-4c10-49e7-9443-970cc30b22ef",
+  "b78128ac-d0c2-48eb-9c8e-c969e5af1cc8",
+  "b8509e58-cac6-42be-a6f7-709179c4fe7e",
+  "d024d1a7-64b4-4b0d-8cec-49726f06d02a",
+  "ebc32abd-ca9f-43fe-8062-315d91ae2e6e",
+  "f311948c-883e-4dad-a78b-d52c33c0eafc"
+ ],
+ "ph_protegidos": []
+}

@@ -1473,18 +1473,95 @@ _conv_extra: dict[str, dict] = {}
 # Marcadores de "precio por metro" en el texto o la unidad del ítem
 _UNIDADES_METRO = {"ML", "M", "MT", "MTS", "METRO", "METROS"}
 _RE_POR_METRO = re.compile(r"^\s*mts?\.?\s|\b(?:x|por)\s*(?:metros?|mts?|ml|m)\b", re.I)
-# Presentación por cantidad de unidades: "x 100 un.", "x 10.000 unidades"
-_RE_POR_UNIDADES = re.compile(r"(?:x|por)\s*(\d{1,3}(?:[.,]\d{3})+|\d+)\s*(?:un\b|u\b|unid\w*)", re.I)
+# Presentación por cantidad de unidades. Tres capas, de la más explícita a la
+# más laxa — ver _detectar_pack().
+_RE_NUM_PACK = r"(\d{1,3}(?:[.,]\d{3})+|\d+)"
+_RE_POR_UNIDADES = re.compile(rf"(?:x|por)\s*{_RE_NUM_PACK}\s*(?:un\b|u\b|unid\w*)", re.I)
+_RE_PACK_PRESENTACION = re.compile(
+    rf"(?:cajas?|cja|bolsas?|blsa|packs?|bultos?|blister|paquetes?|paq)"
+    rf"[^0-9]{{0,15}}?[x*]\s*{_RE_NUM_PACK}", re.I)
+_RE_PACK_REDONDO = re.compile(rf"\s[x*]\s+{_RE_NUM_PACK}\s*[)\"']?\s*$", re.I)
+# Unidad de peso/medida pegada al número: lo descalifica como cantidad de piezas
+# ("Bolsa X 25KG" es peso, no un pack de 25 unidades).
+_RE_UNIDAD_PESO = re.compile(r"\s*(?:kgs?|kilos?|grs?|lts?|litros?|mm|cm|mts?|ml|m)\b", re.I)
+
+
+def _detectar_pack(desc: str) -> float | None:
+    """Cantidad de piezas por pack declarada en el texto del proveedor, o None.
+
+    Tres capas (decisión de Pablo 22-07-2026, medidas contra los 609 textos
+    únicos de presupuesto_items):
+      1. token de unidad explícito  → "x 100 un.", "x 10.000 unid"
+      2. palabra de presentación    → "(BOLSA X 100)", "CAJA x 100"
+      3. número redondo al final    → "ALAS 8 X 1,1/4 X 100", "CAJA … X 6.000"
+
+    La capa 3 es la laxa y la que faltaba: sin ella, de las 4 formas en que los
+    proveedores cotizan T005 solo se normalizaban 2, y un arreglo parcial sobre
+    precios es peor que ninguno (queda mezclado lo normalizado con lo que no).
+    Para acotarla exige que la x venga espaciada a ambos lados (así "229X114X50"
+    se lee como cadena de medidas y "CUARZO X25" como los 25 kg de la bolsa, no
+    como packs), que el número cierre el texto y que sea ≥25 y múltiplo de 25.
+
+    Aun así la capa 3 puede leer un largo como pack ("FLEXIBLE 3/4 X 50"). El
+    límite real no es el regex: _convertir_unidad solo llega acá para materiales
+    con fila `unidad_comercial='un'` en conversion_unidades, así que un falso
+    positivo sobre un material sin conversión cargada no altera ningún precio.
+    """
+    texto = desc or ""
+
+    def _num(m) -> float | None:
+        # El número no vale si lo sigue una unidad de peso o medida. Se valida
+        # acá y no en el patrón: como lookahead hacía backtracking y "25KG"
+        # terminaba matcheando n=2.
+        if _RE_UNIDAD_PESO.match(texto, m.end(1)):
+            return None
+        return float(re.sub(r"[.,]", "", m.group(1)))
+
+    for rx in (_RE_POR_UNIDADES, _RE_PACK_PRESENTACION):
+        m = rx.search(texto)
+        if m:
+            n = _num(m)
+            if n:
+                return n
+
+    m = _RE_PACK_REDONDO.search(texto)
+    if m:
+        n = _num(m)
+        if n and n >= 25 and n % 25 == 0:
+            return n
+    return None
 # Largo de chapa entera en el texto: "x 6 mt", "x 6.00 mts", "x 6 ml".
 # El número distingue chapa entera (>1, ej. 6 m) de precio ya por metro
 # ("x 1,00 mts" → largo 1 → sin cambio).
 _RE_LARGO_CHAPA = re.compile(r"[x*]\s*(\d(?:[.,]\d+)?)\s*(?:m|mt|mts|ml|metros?)\b", re.I)
 
 
+# Peso del envase declarado en el texto: "X 25 KG", "X5KG", "X 1.2TN".
+_RE_NUM_DEC = r"(\d+(?:[.,]\d+)?)"
+_RE_PESO_KG = re.compile(rf"{_RE_NUM_DEC}\s*(?:kgs?|kilos?|kg\.)\b", re.I)
+_RE_PESO_TN = re.compile(rf"{_RE_NUM_DEC}\s*(?:tns?|toneladas?)\b", re.I)
+
+
+def _detectar_peso(desc: str) -> float | None:
+    """Kilos del envase declarados en el texto del proveedor, o None.
+
+    Exige la unidad pegada al número (kg/tn), así "50mm/0.90 X 50MTS" o
+    "22,8 MTS" no se leen como pesos. Las toneladas se pasan a kilos.
+    """
+    texto = desc or ""
+    m = _RE_PESO_KG.search(texto)
+    if m:
+        return float(m.group(1).replace(",", "."))
+    m = _RE_PESO_TN.search(texto)
+    if m:
+        return float(m.group(1).replace(",", ".")) * 1000
+    return None
+
+
 def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
     """Normaliza el precio a la presentación canónica del material.
 
-    Tres modos según conversion_unidades.unidad_comercial:
+    Cuatro modos según conversion_unidades.unidad_comercial:
       - 'm': texto por metro → tira/rollo del maestro (pu×factor, cant÷factor).
         Canónico = la tira/rollo. Solo con MARCADOR EXPLÍCITO de metro
         (unidad ML/MTS o "MTS …"/"x metro"). Caños/cables.
@@ -1497,6 +1574,10 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
       - 'ml': canónico = PRECIO POR METRO LINEAL (chapas, regla de Pablo
         20-07-2026). Una chapa entera con largo explícito ("x 6 mts") se divide
         por el largo; un precio ya por metro ("x 1,00 mts", "x m") se deja.
+      - 'kg': canónico = PRECIO POR KILO (bolsas, curado 22-07-2026). Pastina,
+        basecoat, adhesivos: el maestro fija un envase pero cada proveedor
+        vende el suyo (1, 5, 25, 30 kg), y el histórico mezclaba $/bolsa de
+        tamaños distintos. Manda el peso del TEXTO, no el factor del maestro.
 
     Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
     el material se vende por presentación pero el texto no la aclara — el
@@ -1514,11 +1595,8 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
     if modo == "un":
         # Canónico = por unidad. Detectar el tamaño de pack en el texto para
         # dividir; un precio ya por unidad se deja tal cual.
-        n = None
-        m = _RE_POR_UNIDADES.search(desc or "")          # "x 100 un", "x 10.000 unid"
-        if m:
-            n = float(re.sub(r"[.,]", "", m.group(1)))
-        else:
+        n = _detectar_pack(desc)                         # "x 100 un", "(BOLSA X 100)", "… X 6.000"
+        if not n:
             # Caja entera sin la palabra "un": el texto menciona el pack del
             # maestro ("CAJA … X 10.000"). Se compara sin separador de miles.
             desc_sinmiles = re.sub(r"(\d)[.,](\d{3})(?!\d)", r"\1\2", desc or "")
@@ -1531,6 +1609,21 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
         # sugiere otra presentación (caja/pack) sin número → ambiguo.
         if unidad_norm in ("", "UN", "U", "UNID", "UNIDAD", "UNIDADES"):
             return pu, cant, "UN", None, False
+        return pu, cant, unidad_norm or "UN", None, True
+
+    if modo == "kg":
+        # Canónico = precio por kilo (curado 22-07-2026). El maestro fija una
+        # presentación (PASTINA 5KG, BASECOAT 25KG) pero cada proveedor vende
+        # el envase que quiere: manda SIEMPRE el peso del texto, no el factor.
+        kg = _detectar_peso(desc)
+        if kg and kg > 0:
+            if abs(kg - 1.0) < 1e-9:                      # ya viene por kilo
+                return pu, cant, "KG", None, False
+            nota = f"a precio por kilo (÷{kg:g} kg del envase)"
+            return round(pu / kg, 4), cant * kg, "KG", nota, False
+        if unidad_norm in ("KG", "KGS", "KILO", "KILOS"):
+            return pu, cant, "KG", None, False
+        # Sin peso en el texto no se inventa el envase: va a revisión.
         return pu, cant, unidad_norm or "UN", None, True
 
     if modo == "ml":
@@ -2527,6 +2620,11 @@ def analizar_v2(  # def SIN async: el trabajo es bloqueante (extracción, visió
                             "unidad_raw":      item.get("unidad_raw"),
                             "conversion_aplicada": item.get("conversion"),
                             "moneda":          item.get("moneda", "ARS"),
+                            # El texto del proveedor es lo único que permite
+                            # recalcular la conversión después: sin él no se
+                            # sabe qué presentación cotizó (curado 22-07-2026).
+                            "texto_original":  item.get("desc_prov"),
+                            "origen":          "pipeline",
                         }
                         for item in automatico
                     ]).execute()
@@ -2743,8 +2841,18 @@ async def confirmar_v2(
     V2: Guarda aliases confirmados + pendientes + precios históricos.
     - confirmados → material_denominaciones (alias) + precios_historicos
     - sin_match   → materiales_pendientes + precios_historicos (sin codigo_material)
+
+    Solo usuarios logueados: esto escribe en el catálogo GLOBAL (los aliases y
+    los precios que después usa el matching de todos). Sin este gate cualquiera
+    podía curlear el endpoint sin token y envenenar la base — la misma clase de
+    daño que el caso A018/BROCAS, pero remoto y en bucle.
     """
     user = get_user_plan(authorization)
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={
+            "error": "login_requerido",
+            "mensaje": "Confirmar materiales necesita una cuenta. Registrate gratis para guardar tus confirmaciones.",
+        })
     sb = get_supabase()
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
@@ -2796,6 +2904,8 @@ async def confirmar_v2(
                 "unidad_raw":     item.unidad_raw,
                 "conversion_aplicada": item.conversion,
                 "moneda":         item.moneda or "ARS",
+                "texto_original": item.desc_prov,
+                "origen":         "pipeline",
             }).execute()
             guardados["precios"] += 1
         except Exception as e:
@@ -2833,6 +2943,8 @@ async def confirmar_v2(
                     "codigo_pendiente": pendiente_id,
                     "unidad":         item.unidad,
                     "precio":         item.precio_sin_iva,
+                    "texto_original": item.desc_prov,
+                    "origen":         "pipeline",
                 }).execute()
                 guardados["precios"] += 1
 
@@ -3295,8 +3407,15 @@ def precios_historial(codigo_material: str, authorization: Optional[str] = Heade
     if not sb:
         raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
     try:
+        # Solo la capa 'pipeline': son las filas que guardan el texto del
+        # proveedor y pasaron por el matcher y las conversiones actuales, así
+        # que la serie compara presentaciones equivalentes. Las 'legacy'
+        # (anteriores al 22-07-2026) mezclan $/unidad con $/caja y $/bolsa de
+        # distinto peso sin forma de distinguirlos — graficarlas juntas daba
+        # saltos de varios órdenes de magnitud que no eran cambios de precio.
         filas = (sb.table("precios_historicos").select("*")
-                 .eq("codigo_material", codigo_material).execute().data) or []
+                 .eq("codigo_material", codigo_material)
+                 .eq("origen", "pipeline").execute().data) or []
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"error_leyendo_precios: {e}")
 
