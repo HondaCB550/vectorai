@@ -839,7 +839,13 @@ export default function Comparar() {
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href = url;
-      a.download = `Vectorai_${tab === "compras" ? "Pedidos" : "Comparativa"}_${new Date().toISOString().slice(0, 10)}.${ext}`;
+      // El nombre lo manda el backend: la lista de compras en JPG puede venir
+      // como .jpg (un proveedor) o .zip (varios), así que no se puede asumir
+      // la extensión acá. Si el header no viene, se arma uno razonable.
+      const cd = res.headers.get("content-disposition") || "";
+      const nombreServidor = /filename="?([^";]+)"?/.exec(cd)?.[1];
+      a.download = nombreServidor
+        || `Vectorai_${tab === "compras" ? "Pedidos" : "Comparativa"}_${new Date().toISOString().slice(0, 10)}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {

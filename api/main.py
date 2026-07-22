@@ -1188,7 +1188,7 @@ async def generar_imagen(
             detail={"error": "comparativa_no_encontrada",
                     "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs."}
         )
-    from exportar_imagen import generar_imagen_comparativo, generar_imagen_compras
+    from exportar_imagen import generar_imagen_comparativo, generar_imagenes_compras
     es_compras = req.vista == "compras"
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
@@ -1203,14 +1203,44 @@ async def generar_imagen(
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
-    generar = generar_imagen_compras if es_compras else generar_imagen_comparativo
-    jpg_bytes = generar(
+
+    if es_compras:
+        # Una imagen por proveedor (mismo corte que las páginas del PDF). Con
+        # un solo proveedor va el JPG suelto — mandar un zip de un archivo es
+        # una molestia inútil; con varios, zip para no abrir N descargas.
+        imagenes = generar_imagenes_compras(
+            comparativo=comparativo,
+            proveedores=cached["proveedores"],
+            titulo=titulo,
+            subtitulo=subtitulo,
+        )
+        if len(imagenes) == 1:
+            return StreamingResponse(
+                BytesIO(imagenes[0][1]),
+                media_type="image/jpeg",
+                headers={"Content-Disposition":
+                         f'attachment; filename="Vectorai_Pedidos_{fecha}.jpg"'},
+            )
+        import zipfile
+        zbuf = BytesIO()
+        with zipfile.ZipFile(zbuf, "w", zipfile.ZIP_DEFLATED) as z:
+            for nombre, data in imagenes:
+                z.writestr(nombre, data)
+        zbuf.seek(0)
+        return StreamingResponse(
+            zbuf,
+            media_type="application/zip",
+            headers={"Content-Disposition":
+                     f'attachment; filename="Vectorai_Pedidos_{fecha}.zip"'},
+        )
+
+    jpg_bytes = generar_imagen_comparativo(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
         subtitulo=subtitulo,
     )
-    filename = f"Vectorai_{'Pedidos' if es_compras else 'Comparativa'}_{fecha}.jpg"
+    filename = f"Vectorai_Comparativa_{fecha}.jpg"
     return StreamingResponse(
         BytesIO(jpg_bytes),
         media_type="image/jpeg",

@@ -163,13 +163,9 @@ def generar_pdf_compras(
         buf.seek(0)
         return buf.read()
 
-    gran_total = sum(p["total"] for p in pedidos)
-    story.append(Paragraph(
-        f"Total de la compra: <b>{_fmt(gran_total)}</b> · "
-        f"{len(pedidos)} proveedor{'es' if len(pedidos) != 1 else ''}",
-        ParagraphStyle("gt", fontSize=9, textColor=COLOR_NAVY)))
-    story.append(Spacer(1, 0.3*cm))
-
+    # Sin total de la compra completa: cada página se le manda a un proveedor, y
+    # ver que su pedido es una fracción del total le revela cuánto se le compra
+    # a la competencia. Ese número lo tiene el comprador en pantalla.
     for n, pedido in enumerate(pedidos):
         prov  = pedido["proveedor"]
         filas = pedido["filas"]
