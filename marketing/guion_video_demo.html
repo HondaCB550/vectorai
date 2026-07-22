@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guion — video demo master (60 s)</title>
+<style>
+  :root { --navy:#1A2B4A; --azul:#2563eb; --naranja:#E87022; --crema:#F5F0E8; --gris:#6b7280; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--crema); color:var(--navy); padding:32px 16px; }
+  .wrap { max-width:780px; margin:0 auto; }
+  .volver { font-size:12.5px; color:var(--gris); text-decoration:none; display:inline-block; margin-bottom:14px; }
+  h1 { font-size:24px; margin-bottom:4px; } h1 span{color:var(--naranja);}
+  .sub { color:var(--gris); font-size:13.5px; margin-bottom:22px; line-height:1.5; }
+  .escena { background:#fff; border:1px solid #e5e0d5; border-radius:14px; padding:0; margin-bottom:12px; display:flex; overflow:hidden; }
+  .tiempo { background:var(--navy); color:#fff; min-width:74px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:800; font-size:15px; padding:14px 8px; }
+  .tiempo small { font-weight:400; font-size:10px; opacity:.7; margin-top:2px; }
+  .contenido { padding:14px 18px; flex:1; }
+  .contenido .imagen { font-size:13px; color:#444; line-height:1.5; }
+  .contenido .imagen b { color:var(--navy); font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+  .voz { background:#eff6ff; border-left:3px solid var(--azul); border-radius:0 8px 8px 0; padding:8px 12px; margin-top:8px; font-size:14px; font-style:italic; color:#1e3a8a; }
+  .placa { display:inline-block; margin-top:8px; background:var(--navy); color:#fbd9be; font-size:12px; font-weight:600; padding:4px 12px; border-radius:6px; }
+  .notas { background:#fff8f2; border:1px solid #f5d9c2; border-radius:14px; padding:16px 20px; margin-top:18px; }
+  .notas h2 { font-size:14px; color:var(--naranja); margin-bottom:8px; }
+  .notas li { font-size:13px; line-height:1.6; margin-left:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="volver" href="index.html">← Volver al centro de contenidos</a>
+  <h1>🎬 Video demo master <span>— 60 segundos</span></h1>
+  <div class="sub">Pieza madre: entero en WhatsApp/YouTube, recortado 0-30 s como reel. Pantalla real + <b>voz en off de Pablo</b> (voz real, no locutor — es parte del mensaje). Vertical 9:16 + export horizontal.</div>
+
+  <div class="escena"><div class="tiempo">0-5<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> mesa de obra: 3 presupuestos en papel + celular con PDFs abiertos.</div>
+    <div class="voz">"Tres corralones, tres presupuestos, ¿a cuál le comprás?"</div>
+    <span class="placa">¿A cuál le comprás?</span>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">5-12<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> pantalla /app/comparar — arrastra 2 PDFs y saca FOTO de un presupuesto en papel con el celular. <b>El momento "wow": que se vea el papel arrugado de verdad.</b></div>
+    <div class="voz">"Los subís como te llegaron. PDF, foto del papel, Excel. Sin tipear nada."</div>
+    <span class="placa">PDF · foto · Excel</span>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">12-20<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> barra de progreso corriendo, se arma la tabla comparativa.</div>
+    <div class="voz">"Vectorai lee cada ítem y los cruza entre proveedores."</div>
+    <span class="placa">937 materiales · lee fotos con IA</span>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">20-32<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> tabla comparativa: zoom a una fila con el mejor precio resaltado; scroll mostrando varias. <b>⏹ Acá termina el corte para reel (+ placa CTA de 2 s).</b></div>
+    <div class="voz">"Y te marca, ítem por ítem, dónde conviene comprar. Este mismo hierro: acá sale 50% más caro."</div>
+    <span class="placa">El mismo material varía 27% entre proveedores (mediana del Índice)</span>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">32-42<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> tab "Lista de compras": pedido armado por proveedor con subtotales.</div>
+    <div class="voz">"Te arma el pedido para cada proveedor, con las cantidades y el total."</div>
+    <span class="placa">Lista de compras lista para mandar</span>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">42-50<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> click en "↓ Excel", se descarga; vista rápida del Excel abierto.</div>
+    <div class="voz">"Y te lo llevás a Excel si querés seguir ahí."</div>
+  </div></div>
+
+  <div class="escena"><div class="tiempo">50-60<small>seg</small></div><div class="contenido">
+    <div class="imagen"><b>Imagen:</b> logo Vectorai + pantalla de registro.</div>
+    <div class="voz">"La primera comparativa es gratis. Subí un presupuesto real y fijate cuánto estabas dejando sobre la mesa."</div>
+    <span class="placa">vectorai.com.ar — probalo gratis</span>
+  </div></div>
+
+  <div class="notas">
+    <h2>Notas de grabación</h2>
+    <ul>
+      <li>Presupuestos REALES (tapar teléfonos/CUITs de proveedores si hace falta).</li>
+      <li>Subtítulos SIEMPRE — el 80% de los reels se mira sin audio.</li>
+      <li>Datos reales al 22-07-2026 (capa curada de precios_historicos: mediana 27%; hierro del 12: 50% entre 8 proveedores) — actualizarlo si se regraba más adelante.</li>
+      <li>Herramienta simple para grabar pantalla + voz: OBS (gratis) o la grabadora de Windows (Win+Alt+R); el corte se hace en CapCut.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

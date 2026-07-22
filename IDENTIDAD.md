@@ -42,7 +42,7 @@ Esto baja a la comunicación así:
 Mensajes de apoyo (con su prueba):
 1. **"Las empresas grandes tienen un departamento de compras. Ahora vos también."** — el posicionamiento hecho frase.
 2. "Foto del presupuesto → tabla comparada. Sin cargar nada a mano." — el momento wow del demo.
-3. "El mismo material varía 39% entre proveedores." — dato propio real (actualizar cada mes con el Índice).
+3. "El mismo material varía 27% entre proveedores." — dato propio real, **mediana** del Índice (actualizar cada mes; nunca usar el promedio). Medición 22-07-2026 sobre la capa curada de `precios_historicos` (`origen='pipeline'`): 119 materiales multi-proveedor, 96% con dispersión sana, mediana exacta 27,6% sin excluir nada de la muestra. El 39% de la campaña de julio salió de la medición pre-curado y queda como está en lo ya publicado.
 4. "Funciona con tus corralones de siempre." — desactiva la objeción "yo ya tengo mis proveedores".
 5. "Probalo gratis con un presupuesto real. Sin tarjeta." — cero fricción de entrada.
 
@@ -54,7 +54,7 @@ Mensajes de apoyo (con su prueba):
 ## Voz y tono
 
 - **Voseo argentino, de colega a colega.** Pablo es constructor: habla como en la obra, no como un SaaS. "Che, mirá lo que armé" antes que "descubra nuestra solución".
-- **Datos antes que adjetivos.** Nunca "ahorrá muchísimo": siempre el número real (39%, $X en una compra). Si no hay dato, no se afirma.
+- **Datos antes que adjetivos.** Nunca "ahorrá muchísimo": siempre el número real (27%, $X en una compra). Si no hay dato, no se afirma.
 - **El enemigo es el Excel del domingo**, nunca otra marca. No se nombran competidores en comunicación pública.
 - **Siempre en positivo** (regla de Pablo, 10-07-2026): se dice "quién tiene el mejor precio", nunca "quién te está cobrando de más". Vectorai muestra oportunidades, no acusa a los proveedores — el usuario sigue comprándole a sus corralones de siempre, la relación con ellos se cuida, no se demoniza. Aplica a landing, emails, UI y redes.
 - **Sin emojis en la UI del producto** (regla de diseño: viñeta naranja de marca en su lugar). En redes y WhatsApp los emojis están bien — son parte del registro coloquial.

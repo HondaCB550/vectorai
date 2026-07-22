@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco de reels — 9 conceptos</title>
+<style>
+  :root { --navy:#1A2B4A; --azul:#2563eb; --naranja:#E87022; --crema:#F5F0E8; --gris:#6b7280; --verde:#16a34a; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--crema); color:var(--navy); padding:32px 16px; }
+  .wrap { max-width:920px; margin:0 auto; }
+  .volver { font-size:12.5px; color:var(--gris); text-decoration:none; display:inline-block; margin-bottom:14px; }
+  h1 { font-size:24px; margin-bottom:4px; } h1 span{color:var(--naranja);}
+  .sub { color:var(--gris); font-size:13.5px; margin-bottom:22px; line-height:1.5; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+  .reel { background:#fff; border:1px solid #e5e0d5; border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; }
+  .reel .num { font-size:11px; font-weight:800; color:var(--gris); letter-spacing:.05em; }
+  .reel h2 { font-size:15.5px; margin:4px 0 10px; }
+  .reel .hook { background:#eff6ff; border-left:3px solid var(--azul); border-radius:0 8px 8px 0; padding:8px 12px; font-size:13px; font-style:italic; color:#1e3a8a; margin-bottom:10px; }
+  .reel .hook b { font-style:normal; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--azul); display:block; margin-bottom:2px; }
+  .reel .des { font-size:12.5px; color:#444; line-height:1.5; flex:1; }
+  .reel .fmt { margin-top:12px; font-size:11px; color:var(--gris); border-top:1px solid #f0ece3; padding-top:8px; }
+  .prioridad { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:99px; text-transform:uppercase; letter-spacing:.03em; margin-left:6px; vertical-align:1px; }
+  .p1 { background:#fdeadd; color:var(--naranja); }
+  .p2 { background:#dcfce7; color:var(--verde); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="volver" href="index.html">← Volver al centro de contenidos</a>
+  <h1>🎞️ Banco de reels <span>— 9 conceptos</span></h1>
+  <div class="sub">Cadencia: 2/semana desde el lanzamiento. Todos cierran con "Probalo gratis — vectorai.com.ar" y llevan subtítulos. Link en bio/stories: <b>vectorai.com.ar/?ref=ig</b>. <span class="prioridad p1">1º</span> = producir primero.</div>
+
+  <div class="grid">
+    <div class="reel"><div class="num">REEL 1 <span class="prioridad p1">1º</span></div><h2>🎬 La foto del papel</h2>
+      <div class="hook"><b>Hook (3 s)</b>"¿Te llegó el presupuesto en papel? Sacale una foto."</div>
+      <div class="des">Foto real → tabla comparativa armándose → mejor precio resaltado. Cierre: "Sin tipear nada. Probalo gratis."</div>
+      <div class="fmt">Reel 15-20 s · recorte del video master · el hook más fuerte</div></div>
+
+    <div class="reel"><div class="num">REEL 2 <span class="prioridad p1">1º</span></div><h2>📊 El mismo hierro, tres precios</h2>
+      <div class="hook"><b>Hook</b>"Este hierro del 8 me lo cotizaron a $8.400… y a $11.800. Mismo material, misma semana."</div>
+      <div class="des">3 capturas de presupuestos reales lado a lado (proveedores tapados) → "27% de diferencia (mediana de nuestro Índice)". Cierre: "¿Sabés cuánto podrías ahorrar vos?"</div>
+      <div class="fmt">Carrusel ×4 o reel 20 s · números del Índice (reales)</div></div>
+
+    <div class="reel"><div class="num">REEL 3</div><h2>⏱️ Domingo a la noche</h2>
+      <div class="hook"><b>Hook</b>Constructor tipeando precios en Excel un domingo, cara de fundido.</div>
+      <div class="des">Split screen: 1 hora de Excel vs 2 minutos de Vectorai. Cierre: "El domingo es para el asado."</div>
+      <div class="fmt">Reel 15 s · actuado (Pablo o alguien del equipo) · humor</div></div>
+
+    <div class="reel"><div class="num">REEL 4</div><h2>🛒 El pedido armado</h2>
+      <div class="hook"><b>Hook</b>"Ya sé a quién comprarle cada cosa. ¿Y ahora?"</div>
+      <div class="des">Tab Lista de compras → pedido por proveedor con cantidades y subtotales → descarga Excel → "se lo mandás al corralón así como está".</div>
+      <div class="fmt">Reel 20 s · captura de pantalla · feature</div></div>
+
+    <div class="reel"><div class="num">REEL 5</div><h2>📈 Índice Vectorai</h2>
+      <div class="hook"><b>Hook</b>"¿Qué pasó con los precios de materiales este mes?"</div>
+      <div class="des">3-4 datos del índice mensual (dispersión por rubro, material con más brecha). Cierre: "Datos de presupuestos reales. Índice completo en el blog."</div>
+      <div class="fmt">Carrusel · serie mensual · Claude genera los datos cada mes</div></div>
+
+    <div class="reel"><div class="num">REEL 6 <span class="prioridad p2">Nuevo</span></div><h2>🥩 ¿Cuántos kilos de asado vale tu casa?</h2>
+      <div class="hook"><b>Hook</b>"Un kilo de asado = 7 kilos de la estructura de acero de tu casa."</div>
+      <div class="des">Las equivalencias de la Canasta Vectorai: bolsa de cemento en litros de nafta, kg de perfil en leche. Cierre: "Los materiales, medidos en tu vida real. Canasta completa todos los meses."</div>
+      <div class="fmt">Carrusel o reel 20 s · serie mensual · viralizable — nadie más lo hace</div></div>
+
+    <div class="reel"><div class="num">REEL 7</div><h2>🗣️ Testimonio beta</h2>
+      <div class="hook"><b>Hook</b>"[Nombre], constructor en [zona], probó Vectorai con sus proveedores de siempre:"</div>
+      <div class="des">Video selfie del beta user (30 s máx) o quote sobre captura del producto. Requiere OK del beta user (se pide con el mensaje de cierre de beta).</div>
+      <div class="fmt">Reel 30 s · prueba social</div></div>
+
+    <div class="reel"><div class="num">REEL 7b <span class="prioridad p2">Nuevo</span></div><h2>💼 El departamento de compras</h2>
+      <div class="hook"><b>Hook</b>"Las constructoras grandes tienen un jefe de compras. ¿Y vos?"</div>
+      <div class="des">Split: oficina de compras de empresa grande vs el constructor PyME cotizando a las 11 de la noche → "Vectorai hace ese trabajo: compara, detecta el mejor precio y arma el pedido. No es una secretaria — es tu asistente de compras." Cierre: "El puesto que no podías pagar, por $19.600 al mes."</div>
+      <div class="fmt">Reel 20-25 s · posicionamiento (idea de Pablo) · también sirve como 2º post de LinkedIn</div></div>
+
+    <div class="reel"><div class="num">REEL 8</div><h2>❌ 5 errores al comparar</h2>
+      <div class="hook"><b>Hook</b>"Comparar mal es más caro que no comparar."</div>
+      <div class="des">Versión carrusel de la guía: 1 slide por error + portada + CTA. Es el contenido para grupos de FB sin que sea spam.</div>
+      <div class="fmt">Carrusel ×7 · educativo · ver guia_5_errores.html</div></div>
+
+    <div class="reel"><div class="num">REEL 9</div><h2>🧱 ¿Bolsón o granel?</h2>
+      <div class="hook"><b>Hook</b>"La arena por bolsón y a granel NO son el mismo precio, y casi nadie lo compara bien."</div>
+      <div class="des">Micro-lección de compra: unidades, presentaciones, con/sin IVA → "Vectorai normaliza todo eso solo". Serie posible: cada trampa de comparación (tira vs metro, caja vs unidad) es un reel.</div>
+      <div class="fmt">Reel 20 s · educativo de nicho · serie</div></div>
+  </div>
+</div>
+</body>
+</html>
