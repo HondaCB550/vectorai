@@ -6,8 +6,9 @@ import UserMenu from "@/components/UserMenu";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { createClient } from "@/lib/supabase";
 
-// Fin de la promo de lanzamiento (30% OFF). Pablo: lanzamiento 13/07, extendida 5 días el 12/07 → 28/07.
-const LANZAMIENTO_FIN = new Date("2026-07-28T23:59:59-03:00");
+// Fin de la promo de lanzamiento (30% OFF). Pablo: lanzamiento 13/07, extendida 5 días el 12/07 → 28/07,
+// extendida 1 mes el 22/07 → 28/08.
+const LANZAMIENTO_FIN = new Date("2026-08-28T23:59:59-03:00");
 
 // Barra de estadísticas del hero. OCULTA hasta tener números REALES (no inventar).
 // Para volver a mostrarla: poner true y actualizar los valores en la sección "Stats bar".
