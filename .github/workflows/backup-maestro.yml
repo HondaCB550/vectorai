@@ -1,8 +1,18 @@
 name: Backup maestro
 
-# Respaldo diario de las tablas curadas a mano (el moat). Sube los JSON como
-# artifact del workflow (retención 90 días) — sin bloat en el repo y suficiente
-# para restaurar a mano si un lote de curado sale mal.
+# Respaldo diario del catálogo curado (el moat) Y de los datos de negocio.
+# Sube los JSON como artifact del workflow (retención 90 días) — sin bloat en el
+# repo y suficiente para restaurar a mano.
+#
+# El plan Free de Supabase NO hace backups automáticos: hasta que el proyecto
+# pase a Pro, este workflow es el ÚNICO respaldo que existe. Por eso desde el
+# 22-07-2026 cubre también precios_historicos (antes estaba detrás de un flag
+# que este workflow nunca pasaba) y las tablas de usuarios y facturación.
+#
+# ⚠ El artifact contiene PII: perfiles.json trae mail, nombre, empresa y
+# localidad de los usuarios. Los artifacts heredan los permisos del repo, así
+# que el repo tiene que seguir siendo PRIVADO. Si alguna vez se hace público,
+# antes sacar perfiles de TABLAS_NEGOCIO en backup_maestro.py.
 #
 # REQUIERE dos secrets en el repo (Settings → Secrets and variables → Actions):
 #   SUPABASE_URL           (la misma de Railway)
@@ -14,7 +24,7 @@ on:
 
 jobs:
   backup:
-    name: Dump del catálogo a JSON
+    name: Dump del catálogo y de los datos de negocio a JSON
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
