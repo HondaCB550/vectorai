@@ -1741,6 +1741,45 @@ def _grupos_marca_en(texto: str) -> set[int]:
 _rebuild_marca_pats()   # con los hardcodeados; se re-arma al cargar la BD
 
 
+# Calificadores que CAMBIAN el producto: si un lado lo tiene y el otro no, no
+# son el mismo material por más que el resto del texto coincida.
+#
+# Sin esto, "CEMENTO BCO X 25 KG PINGUINO" matcheaba con "CEMENTO 25KG" a score
+# 100 (token_set_ratio ignora la palabra sobrante) y entraba como AUTOMÁTICO,
+# aunque el blanco vale 7x el común. Paso el 22-07-2026 con CONS101/CONS129 y
+# ensucio la comparativa del usuario, no solo la metrica de ahorro
+# (ver api/data/backup_matches_cemento_2026-07-22.json).
+#
+# Se comparan por prefijo de palabra para tolerar plurales, femeninos y errores
+# de OCR ("REFRACTARI0" con cero en vez de O aparece en un PDF real).
+# Solo se listan calificadores con un caso REAL detrás. Probé sumar
+# "galvanizado" y "epoxi" y los saqué: en steel frame el galvanizado es
+# implícito ("PGC 70") y los sinónimos expanden PFGAL→PERFIL GALVANIZADO, así
+# que un lado tendría el calificador y el otro no, capando medio catálogo de
+# steel sin que haya un error real. Para sumar uno nuevo, primero el caso.
+_CALIFICADORES = {
+    "blanco":      r"\b(BLANCO|BLANCA|BCO|BCA)\b",
+    "refractario": r"\bREFRACTARI\w*",
+    "cementicia":  r"\bCEMENTICI\w*",
+}
+_CALIF_PATS = [(re.compile(p), k) for k, p in _CALIFICADORES.items()]
+
+
+def _calificadores_en(texto: str) -> set[str]:
+    """Calificadores excluyentes presentes en el texto (por palabra completa)."""
+    t = (texto or "").upper()
+    return {k for pat, k in _CALIF_PATS if pat.search(t)}
+
+
+# Calificadores del NOMBRE CANÓNICO de cada material del maestro, por código.
+# Se compara contra esto y no contra el texto del alias: el alias es solo un
+# puntero y puede estar contaminado. Si alguien confirma a mano "cemento bco x
+# 25 kg pinguino" apuntando a CONS101, el alias y el texto coinciden (los dos
+# dicen "bco") y comparar entre ellos no detecta nada — pero el material
+# CONS101 se llama "CEMENTO 25KG", sin calificador, y ahí sí salta.
+_calif_material: dict[str, set[str]] = {}
+
+
 def _get_denominaciones() -> list[dict]:
     """Carga material_denominaciones desde Supabase con cache de 5 min.
     Agrega campo 'denominacion_norm' (sinónimos aplicados) para matching mejorado.
@@ -1868,6 +1907,9 @@ def _get_denominaciones() -> list[dict]:
                     "sintetico":             True,
                     "nums":                  extract_nums(norm_sint),
                 })
+                # Calificadores del nombre canónico: la referencia contra la que
+                # se valida el texto del proveedor, aunque el alias mienta.
+                _calif_material[m["codigo"]] = _calificadores_en(nombre)
                 n_sint += 1
             print(f"[v2] Aliases sintéticos del maestro: {n_sint}")
         except Exception as e:
@@ -1953,6 +1995,22 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
         if compartidos - _grupos_sin_bonus:
             score = min(100, score + 6)
         elif not compartidos and grupos_texto and grupos_alias:
+            score = min(score, 84.0)
+        # Calificadores excluyentes (blanco, refractario, cementicia): si el
+        # texto del proveedor los lleva y el material destino no —o al revés—
+        # nunca automático. token_set_ratio da 100 ignorando justo la palabra
+        # que distingue el producto, y así el cemento blanco entraba como
+        # cemento común a 7x el precio.
+        #
+        # Se compara contra el nombre canónico del material, no contra el
+        # alias: si el alias está contaminado ("cemento bco…" apuntando a
+        # CONS101) coincide con el texto y no detectaría nada. Sin el maestro
+        # cargado (tests, arranque) cae al alias, que igual cubre la entrada
+        # del error.
+        calif_destino = _calif_material.get(den["codigo_material"])
+        if calif_destino is None:
+            calif_destino = _calificadores_en(den["denominacion"])
+        if _calificadores_en(texto_prep) != calif_destino:
             score = min(score, 84.0)
         # Guarda anti-fragmento (bug clase PERFIL/BROCAS): cuando un lado tiene
         # ≤2 tokens y los textos no son idénticos, token_set da 100 por
