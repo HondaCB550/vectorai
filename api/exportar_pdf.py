@@ -13,8 +13,11 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.units import cm
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Flowable
+from reportlab.platypus import (SimpleDocTemplate, Table, TableStyle, Paragraph,
+                                Spacer, Flowable, PageBreak)
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+
+from lista_compras import pedidos_por_proveedor, subtotal_fila
 
 # Paleta de marca (Logo.tsx / IDENTIDAD.md)
 COLOR_NAVY    = colors.HexColor("#1A2B4A")
@@ -101,6 +104,144 @@ def _pie_pagina(canvas, doc):
     canvas.drawRightString(doc.pagesize[0] - doc.rightMargin, 0.85 * cm,
                            f"Página {canvas.getPageNumber()}")
     canvas.restoreState()
+
+
+def generar_pdf_compras(
+    comparativo: list[dict],
+    proveedores: list[str] = None,
+    titulo: str = None,
+    subtitulo: str = None,
+) -> bytes:
+    """Lista de compras en PDF: el pedido de cada proveedor, uno por página.
+
+    Una página por proveedor a propósito — el usuario imprime o reenvía la hoja
+    del corralón que le corresponde sin mandarle lo que le cotizó la competencia.
+
+    `proveedores` se ignora (llega por simetría con generar_pdf_comparativo):
+    quiénes entran y en qué orden lo decide pedidos_por_proveedor().
+    """
+    from marca import titulo_visible as _tv, meta_visible as _mv
+    titulo_visible = _tv(titulo)
+    meta = _mv(subtitulo)
+
+    pedidos = pedidos_por_proveedor(comparativo)
+
+    buf = BytesIO()
+    doc = SimpleDocTemplate(
+        buf,
+        pagesize=A4,
+        leftMargin=1.5*cm, rightMargin=1.5*cm,
+        topMargin=1.2*cm, bottomMargin=1.5*cm,
+        title=titulo or f"Vectorai — Lista de compras {datetime.now().strftime('%Y-%m-%d')}",
+    )
+    page_w = A4[0] - 3*cm
+
+    st_mat   = ParagraphStyle("cmat", fontSize=8, fontName="Helvetica",
+                              leading=10.5, textColor=colors.HexColor("#1a1a2e"))
+    st_rubro = ParagraphStyle("crub", fontSize=7.5, fontName="Helvetica-Bold",
+                              textColor=colors.HexColor("#3A5080"))
+    st_num   = ParagraphStyle("cnum", fontSize=8, alignment=TA_RIGHT,
+                              textColor=colors.HexColor("#1a1a2e"))
+    st_cent  = ParagraphStyle("ccen", fontSize=8, alignment=TA_CENTER,
+                              textColor=colors.HexColor("#1a1a2e"))
+    st_hdr_l = ParagraphStyle("chdl", fontSize=8, fontName="Helvetica-Bold",
+                              textColor=colors.HexColor("#3A5080"), alignment=TA_LEFT)
+    st_hdr_r = ParagraphStyle("chdr", fontSize=8, fontName="Helvetica-Bold",
+                              textColor=colors.HexColor("#3A5080"), alignment=TA_RIGHT)
+    st_hdr_c = ParagraphStyle("chdc", fontSize=8, fontName="Helvetica-Bold",
+                              textColor=colors.HexColor("#3A5080"), alignment=TA_CENTER)
+
+    col_widths = [8.4*cm, 1.8*cm, 2.0*cm, 2.9*cm, 2.9*cm]
+
+    story = [_HeaderVectorai(page_w, titulo_visible, meta), Spacer(1, 0.35*cm)]
+
+    if not pedidos:
+        story.append(Paragraph(
+            "No hay ítems con proveedor ganador para armar la lista de compras.",
+            ParagraphStyle("vacio", fontSize=9, textColor=COLOR_GRIS)))
+        doc.build(story, onFirstPage=_pie_pagina, onLaterPages=_pie_pagina)
+        buf.seek(0)
+        return buf.read()
+
+    gran_total = sum(p["total"] for p in pedidos)
+    story.append(Paragraph(
+        f"Total de la compra: <b>{_fmt(gran_total)}</b> · "
+        f"{len(pedidos)} proveedor{'es' if len(pedidos) != 1 else ''}",
+        ParagraphStyle("gt", fontSize=9, textColor=COLOR_NAVY)))
+    story.append(Spacer(1, 0.3*cm))
+
+    for n, pedido in enumerate(pedidos):
+        prov  = pedido["proveedor"]
+        filas = pedido["filas"]
+
+        if n > 0:
+            story.append(PageBreak())
+            story.append(_HeaderVectorai(page_w, titulo_visible, meta))
+            story.append(Spacer(1, 0.35*cm))
+
+        story.append(Paragraph(
+            f"Pedido — {prov}",
+            ParagraphStyle("pt", fontSize=11, fontName="Helvetica-Bold", textColor=COLOR_NAVY)))
+        story.append(Paragraph(
+            f"{pedido['n_items']} ítem{'s' if pedido['n_items'] != 1 else ''} · "
+            f"solo los materiales donde tiene el mejor precio",
+            ParagraphStyle("ps", fontSize=8, textColor=COLOR_GRIS)))
+        story.append(Spacer(1, 0.22*cm))
+
+        data = [[Paragraph("Material", st_hdr_l), Paragraph("Cant.", st_hdr_c),
+                 Paragraph("Unidad", st_hdr_c), Paragraph("Precio unit.", st_hdr_r),
+                 Paragraph("Subtotal", st_hdr_r)]]
+        styles = [
+            ("BACKGROUND", (0, 0), (-1, 0), COLOR_SUBHDR),
+            ("LINEBELOW",  (0, 0), (-1, 0), 1, colors.HexColor("#B0B5BE")),
+            ("VALIGN",     (0, 0), (-1, -1), "MIDDLE"),
+            ("TOPPADDING", (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+            ("LEFTPADDING",   (0, 0), (-1, -1), 5),
+            ("RIGHTPADDING",  (0, 0), (-1, -1), 5),
+        ]
+
+        ultimo_rubro = None
+        idx = 1
+        for f in filas:
+            rubro = f.get("rubro") or ""
+            if rubro != ultimo_rubro:
+                data.append([Paragraph(rubro.upper(), st_rubro), "", "", "", ""])
+                styles.append(("BACKGROUND", (0, idx), (-1, idx), COLOR_RUBRO))
+                styles.append(("SPAN", (0, idx), (-1, idx)))
+                idx += 1
+                ultimo_rubro = rubro
+
+            precio, cant, subtotal = subtotal_fila(f, prov)
+            data.append([
+                Paragraph(f.get("material") or "", st_mat),
+                Paragraph(f"{cant:g}", st_cent),
+                Paragraph(f.get("unidad") or "", st_cent),
+                Paragraph(_fmt(precio), st_num),
+                Paragraph(_fmt(subtotal), st_num),
+            ])
+            idx += 1
+
+        data.append([
+            Paragraph(f"TOTAL PEDIDO ({pedido['n_items']} ítems)",
+                      ParagraphStyle("tp", fontSize=9, fontName="Helvetica-Bold",
+                                     textColor=colors.HexColor("#3A5080"))),
+            "", "", "",
+            Paragraph(_fmt(pedido["total"]),
+                      ParagraphStyle("tpv", fontSize=9, fontName="Helvetica-Bold",
+                                     alignment=TA_RIGHT, textColor=COLOR_VERDE)),
+        ])
+        styles.append(("BACKGROUND", (0, idx), (-1, idx), COLOR_MEJOR))
+        styles.append(("LINEABOVE",  (0, idx), (-1, idx), 1, colors.HexColor("#B0B5BE")))
+        styles.append(("SPAN", (0, idx), (3, idx)))
+
+        t = Table(data, colWidths=col_widths, repeatRows=1)
+        t.setStyle(TableStyle(styles))
+        story.append(t)
+
+    doc.build(story, onFirstPage=_pie_pagina, onLaterPages=_pie_pagina)
+    buf.seek(0)
+    return buf.read()
 
 
 def generar_pdf_comparativo(
