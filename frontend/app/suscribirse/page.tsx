@@ -70,10 +70,19 @@ export default function Suscribirse() {
     setLoading(plan);
     setError("");
     try {
+      // El API saca el user_id y el email del token, no del body: el endpoint
+      // era anónimo y se podían crear suscripciones a nombre de terceros.
+      const sb = createClient();
+      const { data: sess } = await sb.auth.getSession();
       const res = await fetch(`${API_URL}/mp/suscripcion`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: user.id, email: user.email, plan }),
+        headers: {
+          "Content-Type": "application/json",
+          ...(sess.session?.access_token
+            ? { Authorization: `Bearer ${sess.session.access_token}` }
+            : {}),
+        },
+        body: JSON.stringify({ plan }),
       });
       const data = await res.json();
       if (!res.ok) {
