@@ -351,6 +351,20 @@ MSG_FORMATO_NUEVO = (
 )
 
 
+def _nombre_archivo_pedido(proveedor: str, fecha: str) -> str:
+    """"Lista de compras - CAROSIO CORRALON.jpg" — el nombre con el que se baja
+    el pedido de un proveedor.
+
+    Se pasa a ASCII: el header Content-Disposition sin codificar no admite
+    acentos (un "CORRALÓN" rompía el nombre en algunos navegadores), y los
+    caracteres inválidos en Windows se reemplazan para que la descarga no falle.
+    """
+    import unicodedata
+    limpio = unicodedata.normalize("NFKD", proveedor or "").encode("ascii", "ignore").decode()
+    limpio = "".join(ch if (ch.isalnum() or ch in " -_") else "_" for ch in limpio).strip()
+    return f"Lista de compras - {limpio or 'proveedor'} ({fecha}).jpg"
+
+
 def _gate_analisis(user: dict):
     """Cierra el análisis a anónimos y aplica el límite mensual del plan ANTES de
     procesar (la extracción/visión cuesta plata; los anónimos no se trackean, así
@@ -554,6 +568,9 @@ class SheetsRequest(BaseModel):
     # pedido por proveedor). Los botones de descarga siguen el tab activo, así
     # bajás lo que estás mirando. Default comparativa para clientes viejos.
     vista: str = "comparativa"
+    # Solo para vista="compras": qué proveedor exportar. El JPG baja un archivo
+    # por proveedor (nada de zip), así que el frontend pide uno por uno.
+    proveedor: Optional[str] = None
 
 
 # Cache en memoria (fallback si Supabase no está disponible)
@@ -1205,33 +1222,35 @@ async def generar_imagen(
     comparativo = _aplicar_filtros(cached["comparativo"], req)
 
     if es_compras:
-        # Una imagen por proveedor (mismo corte que las páginas del PDF). Con
-        # un solo proveedor va el JPG suelto — mandar un zip de un archivo es
-        # una molestia inútil; con varios, zip para no abrir N descargas.
+        # Un archivo JPG por proveedor, suelto. Nada de zip: el usuario reenvía
+        # cada imagen por WhatsApp y descomprimir (sobre todo en el celular) le
+        # complica la vida. El frontend pide un proveedor por vez.
         imagenes = generar_imagenes_compras(
             comparativo=comparativo,
             proveedores=cached["proveedores"],
             titulo=titulo,
             subtitulo=subtitulo,
         )
-        if len(imagenes) == 1:
-            return StreamingResponse(
-                BytesIO(imagenes[0][1]),
-                media_type="image/jpeg",
-                headers={"Content-Disposition":
-                         f'attachment; filename="Vectorai_Pedidos_{fecha}.jpg"'},
-            )
-        import zipfile
-        zbuf = BytesIO()
-        with zipfile.ZipFile(zbuf, "w", zipfile.ZIP_DEFLATED) as z:
-            for nombre, data in imagenes:
-                z.writestr(nombre, data)
-        zbuf.seek(0)
+        if not imagenes:
+            raise HTTPException(status_code=404, detail={
+                "error": "sin_pedidos",
+                "mensaje": "No hay ítems con proveedor ganador para armar la lista de compras."})
+
+        elegida = imagenes[0]
+        if req.proveedor:
+            match = [im for im in imagenes if im[0] == req.proveedor]
+            if not match:
+                raise HTTPException(status_code=404, detail={
+                    "error": "proveedor_sin_pedido",
+                    "mensaje": f"{req.proveedor} no tiene ítems con el mejor precio."})
+            elegida = match[0]
+
+        prov_nombre, data = elegida
         return StreamingResponse(
-            zbuf,
-            media_type="application/zip",
+            BytesIO(data),
+            media_type="image/jpeg",
             headers={"Content-Disposition":
-                     f'attachment; filename="Vectorai_Pedidos_{fecha}.zip"'},
+                     f'attachment; filename="{_nombre_archivo_pedido(prov_nombre, fecha)}"'},
         )
 
     jpg_bytes = generar_imagen_comparativo(

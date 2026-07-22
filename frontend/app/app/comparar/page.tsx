@@ -806,6 +806,22 @@ export default function Comparar() {
     }
   }
 
+  // Proveedores que tienen pedido (al menos un ítem donde ganan), en el mismo
+  // orden que usa el backend. Sirve para pedir un JPG por proveedor.
+  function provsConPedido(): string[] {
+    if (!resultado) return [];
+    const total: Record<string, number> = {};
+    for (const row of resultado.comparativo) {
+      const prov = mejorMostrado(row) || row.mejor_proveedor;
+      const pr = prov ? row.precios[prov] : null;
+      if (!prov || !pr) continue;
+      const cant = row.cant ?? pr.cant ?? 1;
+      total[prov] = (total[prov] ?? 0) +
+        precioMostrado(pr.precio_sin_iva, provConIva(prov), conIva, descuentoPct) * cant;
+    }
+    return Object.keys(total).sort((a, b) => total[b] - total[a]);
+  }
+
   // ── Descargar ──────────────────────────────────────────────────────────────
   async function descargar(endpoint: string, ext: string, setGen: (v: boolean) => void) {
     if (!resultado) return;
@@ -816,41 +832,63 @@ export default function Comparar() {
       // igual a lo que el usuario está viendo (dudosos matcheados incluidos),
       // incluso si una persistencia anterior falló.
       await persistirComparativa(resultado);
-      const res = await fetch(`${API_URL}/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          comparativa_id: resultado.comparativa_id,
-          solo_comunes:   soloComunes,
-          filtro_rubro:   filtroRubro !== "Todos" ? filtroRubro : null,
-          incluir_iva:    conIva,
-          descuento_pct:  descuentoPct,
-          // Config real por proveedor: el export replica la vista activa
-          // (en efectivo, el que cotizó c/IVA mantiene su precio final)
-          config_proveedores: resultado.config_proveedores ?? null,
-          // Bajás lo que estás mirando: en el tab de compras el PDF/JPG traen
-          // el pedido por proveedor; en el resto, la comparativa. (El Excel
-          // ignora esto: siempre trae ambas cosas en un solo archivo.)
-          vista: tab === "compras" ? "compras" : "comparativa",
-        }),
-      });
-      if (!res.ok) { alert("Error al generar el archivo"); return; }
-      const blob = await res.blob();
-      const url  = URL.createObjectURL(blob);
-      const a    = document.createElement("a");
-      a.href = url;
-      // El nombre lo manda el backend: la lista de compras en JPG puede venir
-      // como .jpg (un proveedor) o .zip (varios), así que no se puede asumir
-      // la extensión acá. Si el header no viene, se arma uno razonable.
-      const cd = res.headers.get("content-disposition") || "";
-      const nombreServidor = /filename="?([^";]+)"?/.exec(cd)?.[1];
-      a.download = nombreServidor
-        || `Vectorai_${tab === "compras" ? "Pedidos" : "Comparativa"}_${new Date().toISOString().slice(0, 10)}.${ext}`;
-      a.click();
-      URL.revokeObjectURL(url);
+
+      // La lista de compras en JPG baja UN ARCHIVO POR PROVEEDOR, suelto: se
+      // reenvía cada imagen por WhatsApp y un zip complica, sobre todo en el
+      // celular. Se piden de a uno y se disparan las descargas por separado.
+      if (endpoint === "imagen" && tab === "compras") {
+        const provs = provsConPedido();
+        for (const prov of provs) {
+          await descargarUno(endpoint, { proveedor: prov });
+          // Respiro entre descargas: encadenarlas sin pausa hace que el
+          // navegador descarte algunas silenciosamente.
+          await new Promise((r) => setTimeout(r, 350));
+        }
+        return;
+      }
+
+      await descargarUno(endpoint, {});
+    } catch {
+      alert("No se pudo conectar con el servidor.");
     } finally {
       setGen(false);
     }
+  }
+
+  async function descargarUno(endpoint: string, extra: Record<string, unknown>) {
+    if (!resultado) return;
+    const res = await fetch(`${API_URL}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        comparativa_id: resultado.comparativa_id,
+        solo_comunes:   soloComunes,
+        filtro_rubro:   filtroRubro !== "Todos" ? filtroRubro : null,
+        incluir_iva:    conIva,
+        descuento_pct:  descuentoPct,
+        // Config real por proveedor: el export replica la vista activa
+        // (en efectivo, el que cotizó c/IVA mantiene su precio final)
+        config_proveedores: resultado.config_proveedores ?? null,
+        // Bajás lo que estás mirando: en el tab de compras el PDF/JPG traen
+        // el pedido por proveedor; en el resto, la comparativa. (El Excel
+        // ignora esto: siempre trae ambas cosas en un solo archivo.)
+        vista: tab === "compras" ? "compras" : "comparativa",
+        ...extra,
+      }),
+    });
+    if (!res.ok) { alert("Error al generar el archivo"); return; }
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href = url;
+    // El nombre lo pone el backend ("Lista de compras - PROVEEDOR (fecha).jpg").
+    // Si el header no viniera, se arma uno razonable como respaldo.
+    const cd = res.headers.get("content-disposition") || "";
+    const nombreServidor = /filename="?([^";]+)"?/.exec(cd)?.[1];
+    a.download = nombreServidor
+      || `Vectorai_${tab === "compras" ? "Pedidos" : "Comparativa"}_${new Date().toISOString().slice(0, 10)}`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   // ── Datos derivados ────────────────────────────────────────────────────────

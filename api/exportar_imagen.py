@@ -62,12 +62,6 @@ CC_SECCION_H = 46   # alto del encabezado de cada proveedor
 CC_GAP       = 22   # aire entre un proveedor y el siguiente
 
 
-def _nombre_archivo(prov: str) -> str:
-    """Nombre de archivo seguro para el JPG de un proveedor."""
-    limpio = "".join(ch if (ch.isalnum() or ch in " -_") else "_" for ch in (prov or "")).strip()
-    return f"Pedido_{(limpio or 'proveedor').replace(' ', '_')}.jpg"
-
-
 def _imagen_de_pedido(pedido: dict, titulo_vis: str, meta: str) -> bytes:
     """Dibuja el JPG del pedido de UN proveedor.
 
@@ -180,8 +174,9 @@ def generar_imagenes_compras(
 ) -> list[tuple[str, bytes]]:
     """Lista de compras en JPG: UNA IMAGEN POR PROVEEDOR.
 
-    Devuelve [(nombre_archivo, bytes)], en el mismo orden y con el mismo corte
-    que las páginas del PDF.
+    Devuelve [(proveedor, bytes)], en el mismo orden y con el mismo corte que
+    las páginas del PDF. El nombre del archivo lo arma quien la sirve: acá no
+    se decide cómo se llama la descarga.
 
     Antes esto apilaba todos los pedidos en una sola imagen. Con 4 proveedores
     quedaba una tira ilegible, y encima obligaba a recortarla a mano para
@@ -194,22 +189,10 @@ def generar_imagenes_compras(
     meta       = marca.meta_visible(subtitulo)
     pedidos    = pedidos_por_proveedor(comparativo)
 
-    if not pedidos:
-        total_w = PAD + CC_MAT + CC_CANT + CC_UNID + CC_PU + CC_SUB + PAD
-        img = Image.new("RGB", (total_w, TITLE_H + 60), C_BLANCO)
-        d = ImageDraw.Draw(img)
-        marca.dibujar_isotipo(d, PAD, 12, 26)
-        d.text((PAD + 34, 16), "Vectorai", font=_get_font(17, bold=True), fill=marca.NAVY)
-        d.text((PAD, 56), titulo_vis, font=_get_font(18, bold=True), fill=marca.NAVY)
-        d.text((PAD, TITLE_H + 10), "No hay ítems con proveedor ganador.",
-               font=_get_font(12), fill=C_GRAY)
-        buf = BytesIO()
-        img.save(buf, format="JPEG", quality=92)
-        buf.seek(0)
-        return [("Pedidos.jpg", buf.read())]
-
-    return [(_nombre_archivo(p["proveedor"]),
-             _imagen_de_pedido(p, titulo_vis, meta)) for p in pedidos]
+    # Sin pedidos no se devuelve una imagen con un cartel: quien llama decide
+    # qué mostrar (el endpoint responde 404 con mensaje, que se lee mejor que
+    # descargar un JPG que dice "no hay nada").
+    return [(p["proveedor"], _imagen_de_pedido(p, titulo_vis, meta)) for p in pedidos]
 
 
 def generar_imagen_comparativo(
