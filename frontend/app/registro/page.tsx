@@ -28,6 +28,12 @@ const PROFESIONES = [
 const INPUT = "w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500";
 const LABEL = "block text-sm font-semibold text-gray-800 mb-1";
 
+// Tiene que coincidir con Supabase → Authentication → Providers → Email →
+// "Minimum password length" (y con actualizar-clave/page.tsx). Decía 6 cuando
+// el servidor ya exigía 8.
+const MIN_PASS = 12;
+const REQUISITOS = `La contraseña debe tener al menos ${MIN_PASS} caracteres e incluir una minúscula, una mayúscula y un número.`;
+
 // Dominios de mail temporal más comunes — aviso instantáneo al usuario. El
 // bloqueo real (lista completa) está en la base de datos.
 const DOMINIOS_TEMP = [
@@ -91,7 +97,7 @@ function RegistroInner() {
   const [showPass, setShowPass] = useState(false);
 
   function paso1Valido() {
-    return nombre.trim() && profesion && mail.includes("@") && pass.length >= 6;
+    return nombre.trim() && profesion && mail.includes("@") && pass.length >= MIN_PASS;
   }
 
   async function handleRegistro() {
@@ -125,7 +131,7 @@ function RegistroInner() {
         } else if (msg.includes("rate limit") || msg.includes("too many")) {
           setError("Demasiados intentos. Esperá unos minutos e intentá de nuevo.");
         } else if (msg.includes("password")) {
-          setError("La contraseña debe tener al menos 6 caracteres e incluir una minúscula, una mayúscula y un número.");
+          setError(REQUISITOS);
         } else if ((msg.includes("email") && (msg.includes("invalid") || msg.includes("valid"))) || msg.includes("unable to validate email")) {
           setError("El email no es válido. Revisalo e intentá de nuevo.");
         } else if (msg.includes("database error") || msg.includes("saving new user") || msg.includes("temporal") || msg.includes("descartable")) {
@@ -234,7 +240,7 @@ function RegistroInner() {
                 <label className={LABEL}>Contraseña</label>
                 <div className="relative">
                   <input type={showPass ? "text" : "password"} value={pass} onChange={(e) => setPass(e.target.value)}
-                    className={INPUT} placeholder="Mínimo 6 caracteres" />
+                    className={INPUT} placeholder={`Mínimo ${MIN_PASS} caracteres`} />
                   <button type="button" onClick={() => setShowPass(v => !v)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 select-none">
                     {showPass ? (
