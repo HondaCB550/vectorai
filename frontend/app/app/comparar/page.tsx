@@ -857,9 +857,14 @@ export default function Comparar() {
 
   async function descargarUno(endpoint: string, extra: Record<string, unknown>) {
     if (!resultado) return;
+    // El token es obligatorio: los exports ahora verifican que la comparativa
+    // sea tuya antes de generar el archivo (antes bastaba el UUID).
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+
     const res = await fetch(`${API_URL}/${endpoint}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({
         comparativa_id: resultado.comparativa_id,
         solo_comunes:   soloComunes,
