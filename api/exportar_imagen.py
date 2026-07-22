@@ -9,6 +9,7 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
 import marca
+from lista_compras import pedidos_por_proveedor, subtotal_fila
 
 # Paleta
 C_SUBHDR  = (237, 240, 245)
@@ -53,6 +54,149 @@ def _get_font(size=13, bold=False):
         return ImageFont.truetype(font_name, size)
     except Exception:
         return ImageFont.load_default()
+
+
+# Columnas de la lista de compras (más angosta que la comparativa: 5 fijas)
+CC_MAT, CC_CANT, CC_UNID, CC_PU, CC_SUB = 300, 70, 80, 130, 140
+CC_SECCION_H = 46   # alto del encabezado de cada proveedor
+CC_GAP       = 22   # aire entre un proveedor y el siguiente
+
+
+def generar_imagen_compras(
+    comparativo: list[dict],
+    proveedores: list[str] = None,
+    titulo: str = None,
+    subtitulo: str = None,
+) -> bytes:
+    """Lista de compras en JPG: los pedidos de todos los proveedores apilados
+    en una sola imagen, para mandar por WhatsApp.
+
+    A diferencia del PDF (una página por proveedor), acá va todo junto: un JPG
+    es una sola imagen y partirlo en varias complicaría la descarga. Con muchos
+    proveedores la imagen queda alta, que es el trade-off aceptado.
+
+    `proveedores` se ignora (llega por simetría con generar_imagen_comparativo):
+    quiénes entran y en qué orden lo decide pedidos_por_proveedor().
+    """
+    titulo_vis = marca.titulo_visible(titulo)
+    meta       = marca.meta_visible(subtitulo)
+    pedidos    = pedidos_por_proveedor(comparativo)
+
+    total_w = PAD + CC_MAT + CC_CANT + CC_UNID + CC_PU + CC_SUB + PAD
+
+    # Alto dinámico: por proveedor van encabezado + cabecera + una fila por
+    # ítem + una por cada cambio de rubro + total, más el aire entre bloques.
+    alto_bloques = 0
+    for pedido in pedidos:
+        rubros = len({(f.get("rubro") or "") for f in pedido["filas"]})
+        alto_bloques += (CC_SECCION_H + HDR_H
+                         + (len(pedido["filas"]) + rubros) * ROW_H
+                         + ROW_H + CC_GAP)
+    total_h = TITLE_H + 30 + max(alto_bloques, ROW_H) + PAD * 2
+
+    img = Image.new("RGB", (total_w, total_h), C_BLANCO)
+    d   = ImageDraw.Draw(img)
+
+    f_title  = _get_font(18, bold=True)
+    f_sub    = _get_font(11)
+    f_bold   = _get_font(12, bold=True)
+    f_normal = _get_font(12)
+    f_rubro  = _get_font(10, bold=True)
+    f_prov   = _get_font(14, bold=True)
+
+    # ── Encabezado de marca (mismo que la comparativa) ───────────────────────
+    iso = 26
+    marca.dibujar_isotipo(d, PAD, 12, iso)
+    f_marca = _get_font(17, bold=True)
+    d.text((PAD + iso + 8, 12 + (iso - 17) // 2), "Vectorai", font=f_marca, fill=marca.NAVY)
+    bbox = d.textbbox((0, 0), meta, font=f_sub)
+    d.text((total_w - PAD - (bbox[2] - bbox[0]), 12 + (iso - 11) // 2), meta,
+           font=f_sub, fill=marca.GRIS)
+    d.text((PAD, 56), titulo_vis, font=f_title, fill=marca.NAVY)
+    d.rectangle([(PAD, TITLE_H - 8), (PAD + 64, TITLE_H - 5)], fill=marca.NARANJA)
+    d.rectangle([(PAD + 64, TITLE_H - 7), (total_w - PAD, TITLE_H - 6)], fill=marca.LINEA)
+
+    y = TITLE_H
+
+    if not pedidos:
+        d.text((PAD, y + 10), "No hay ítems con proveedor ganador.", font=f_normal, fill=C_GRAY)
+        buf = BytesIO()
+        img.save(buf, format="JPEG", quality=92)
+        buf.seek(0)
+        return buf.read()
+
+    gran_total = sum(p["total"] for p in pedidos)
+    d.text((PAD, y + 6), f"Total de la compra: {_fmt(gran_total)}", font=f_bold, fill=marca.NAVY)
+    y += 30
+
+    def _der(texto, x_col, ancho, yy, font, color):
+        """Texto alineado a la derecha dentro de la columna."""
+        bb = d.textbbox((0, 0), texto, font=font)
+        d.text((x_col + ancho - (bb[2] - bb[0]) - 6, yy), texto, font=font, fill=color)
+
+    for pedido in pedidos:
+        prov = pedido["proveedor"]
+
+        # Encabezado del proveedor
+        d.rectangle([(0, y), (total_w, y + CC_SECCION_H)], fill=C_RUBRO)
+        d.text((PAD, y + 8), prov, font=f_prov, fill=marca.NAVY)
+        d.text((PAD, y + 27), f"{pedido['n_items']} ítems · mejor precio",
+               font=_get_font(10), fill=C_GRAY)
+        _der(_fmt(pedido["total"]), 0, total_w - PAD, y + 14, f_prov, C_VERDE)
+        y += CC_SECCION_H
+
+        # Cabecera de columnas
+        d.rectangle([(0, y), (total_w, y + HDR_H)], fill=C_SUBHDR)
+        x = PAD
+        d.text((x, y + 14), "Material", font=f_bold, fill=C_TEXT)
+        x += CC_MAT
+        _der("Cant.", x, CC_CANT, y + 14, f_bold, C_GRAY);   x += CC_CANT
+        _der("Unidad", x, CC_UNID, y + 14, f_bold, C_GRAY);  x += CC_UNID
+        _der("Precio unit.", x, CC_PU, y + 14, f_bold, C_GRAY); x += CC_PU
+        _der("Subtotal", x, CC_SUB, y + 14, f_bold, C_GRAY)
+        y += HDR_H
+
+        ultimo_rubro = None
+        for f in pedido["filas"]:
+            rubro = f.get("rubro") or ""
+            if rubro != ultimo_rubro:
+                d.rectangle([(0, y), (total_w, y + ROW_H)], fill=C_RUBRO)
+                d.text((PAD, y + 8), rubro.upper(), font=f_rubro, fill=(58, 80, 128))
+                y += ROW_H
+                ultimo_rubro = rubro
+
+            precio, cant, subtotal = subtotal_fila(f, prov)
+            d.line([(0, y), (total_w, y)], fill=C_BORDER, width=1)
+            x = PAD
+            # Recorte con puntos suspensivos: cortar en seco deja nombres como
+            # "CLAVO ... PUNTA PARIS EXTRA LAR", que parece un dato incompleto
+            # en vez de un texto recortado.
+            mat = f.get("material") or ""
+            if d.textbbox((0, 0), mat, font=f_normal)[2] > CC_MAT - 10:
+                while (d.textbbox((0, 0), mat + "…", font=f_normal)[2] > CC_MAT - 10
+                       and len(mat) > 4):
+                    mat = mat[:-1]
+                mat = mat.rstrip() + "…"
+            d.text((x, y + 10), mat, font=f_normal, fill=C_TEXT)
+            x += CC_MAT
+            _der(f"{cant:g}", x, CC_CANT, y + 10, f_normal, C_TEXT);            x += CC_CANT
+            _der(f.get("unidad") or "", x, CC_UNID, y + 10, f_normal, C_TEXT);  x += CC_UNID
+            _der(_fmt(precio), x, CC_PU, y + 10, f_normal, C_TEXT);             x += CC_PU
+            _der(_fmt(subtotal), x, CC_SUB, y + 10, f_bold, C_TEXT)
+            y += ROW_H
+
+        # Total del pedido
+        d.rectangle([(0, y), (total_w, y + ROW_H)], fill=C_MEJOR)
+        d.line([(0, y), (total_w, y)], fill=(176, 181, 190), width=2)
+        d.text((PAD, y + 10), f"TOTAL PEDIDO ({pedido['n_items']} ítems)",
+               font=f_bold, fill=(58, 80, 128))
+        _der(_fmt(pedido["total"]), 0, total_w - PAD, y + 10, f_bold, C_VERDE)
+        y += ROW_H + CC_GAP
+
+    buf = BytesIO()
+    img.save(buf, format="JPEG", quality=92)
+    buf.seek(0)
+    return buf.read()
 
 
 def generar_imagen_comparativo(
