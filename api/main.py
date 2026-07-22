@@ -351,6 +351,36 @@ MSG_FORMATO_NUEVO = (
 )
 
 
+def _ahorro_vs_promedio(precios_val: dict, cant: float) -> float:
+    """Ahorro de un ítem: lo que se ahorra comprándole al más barato en vez de
+    pagar el precio promedio de las cotizaciones.
+
+    Antes era (máx − mín) × cant, que compara contra un comprador que ítem por
+    ítem elige SIEMPRE el más caro — nadie compra así, y el número quedaba
+    inflado. Peor: un solo precio mal extraído lo hacía estallar. Caso real del
+    14/07 (comparativa 4b5e3cbe): una bolsa de cemento leída a $60.850 contra
+    $7.217 real, por 424 unidades, aportaba $22,7M de los $22,8M de "ahorro"
+    de esa comparativa — el 99,88% salía de un dato roto.
+
+    Contra el promedio, el baseline es "comprar sin comparar", que sí es la
+    situación real de la que sacamos al usuario.
+
+    Guarda de dispersión: si el precio más alto es más de 3x el más bajo, el
+    ítem NO aporta ahorro. Un spread así casi nunca es un proveedor caro: es un
+    precio mal extraído (total de línea, pallet o bulto leído como unitario) o
+    dos presentaciones distintas matcheadas al mismo material. Cambiar solo el
+    baseline no alcanzaba — con dos cotizaciones el promedio cae justo en el
+    medio, así que el cemento roto seguía aportando $11,4M. Ante la duda no
+    reclamamos ahorro: prometer de menos y cumplir es mejor que al revés.
+    """
+    vals = list(precios_val.values())
+    minimo = min(vals)
+    if minimo <= 0 or max(vals) > 3 * minimo:
+        return 0.0
+    promedio = sum(vals) / len(vals)
+    return round(max(0.0, promedio - minimo) * (cant or 1), 2)
+
+
 def _nombre_archivo_pedido(proveedor: str, fecha: str) -> str:
     """"Lista de compras - CAROSIO CORRALON.jpg" — el nombre con el que se baja
     el pedido de un proveedor.
@@ -816,9 +846,7 @@ def _build_comparativo(resultados: dict, master: list) -> list[dict]:
             row["cant"] = row["precios"][mejor_prov]["cant"]  # Cantidad del mejor proveedor
 
             if len(precios_val) > 1:
-                # Ahorro = (máx - mín) * cantidad_del_mejor_proveedor
-                ahorro_unitario = max(precios_val.values()) - min(precios_val.values())
-                row["ahorro"] = round(ahorro_unitario * row["cant"], 2)
+                row["ahorro"] = _ahorro_vs_promedio(precios_val, row["cant"])
             else:
                 row["ahorro"] = 0
         row["en_varios"] = len(row["precios"]) > 1
@@ -2637,7 +2665,7 @@ def _build_comparativo_v2(resultados: dict, materiales_dict: dict) -> list[dict]
             row["mejor_proveedor"] = mejor_prov
             row["cant"] = row["precios"][mejor_prov]["cant"]
             if len(precios_val) > 1:
-                row["ahorro"] = round((max(precios_val.values()) - min(precios_val.values())) * row["cant"], 2)
+                row["ahorro"] = _ahorro_vs_promedio(precios_val, row["cant"])
             else:
                 row["ahorro"] = 0
         row["en_varios"] = len(row["precios"]) > 1

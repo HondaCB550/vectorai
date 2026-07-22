@@ -919,10 +919,16 @@ export default function Comparar() {
     return best;
   }
 
-  // Ahorro de una fila: diferencia entre el proveedor más caro y el más barato
-  // con los precios TAL COMO SE MUESTRAN (IVA por proveedor + descuento).
-  // Solo cuenta si el ítem está en varios proveedores — con un solo presupuesto
-  // no hay ahorro comparable.
+  // Ahorro de una fila: lo que se ahorra comprándole al más barato en vez de
+  // pagar el PROMEDIO de las cotizaciones, con los precios TAL COMO SE MUESTRAN
+  // (IVA por proveedor + descuento). Solo cuenta si el ítem está en varios
+  // proveedores — con un solo presupuesto no hay ahorro comparable.
+  //
+  // Antes era máx − mín, que compara contra alguien que ítem por ítem elige
+  // SIEMPRE el más caro: un baseline que nadie usa, y que un solo precio mal
+  // extraído hacía estallar (una bolsa de cemento leída a $60.850 en vez de
+  // $7.217 generó $22,7M de "ahorro" falso en una comparativa real).
+  // Debe quedar igual a _ahorro_vs_promedio() del backend.
   function ahorroFila(row: FilaComparativa): number {
     if (!row.en_varios || !resultado) return 0;
     const totales = resultado.proveedores
@@ -933,7 +939,15 @@ export default function Comparar() {
       })
       .filter((v): v is number => v !== null);
     if (totales.length < 2) return 0;
-    return Math.max(...totales) - Math.min(...totales);
+    // Guarda de dispersión: con el más caro a más de 3× el más barato, el ítem
+    // no aporta ahorro. Ese spread casi siempre es un precio mal extraído o dos
+    // presentaciones distintas matcheadas al mismo material, no un proveedor
+    // caro. Cambiar el baseline no alcanzaba: con dos cotizaciones el promedio
+    // cae en el medio y el dato roto seguía dominando.
+    const minimo = Math.min(...totales);
+    if (minimo <= 0 || Math.max(...totales) > 3 * minimo) return 0;
+    const promedio = totales.reduce((s, v) => s + v, 0) / totales.length;
+    return Math.max(0, promedio - minimo);
   }
 
   const ahorroTotal = filasFiltradas.reduce((s, r) => s + ahorroFila(r), 0);
