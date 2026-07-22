@@ -1,0 +1,38 @@
+{
+  "fecha": "2026-07-22T17:15:31Z",
+  "motivo": "Cemento blanco, cemento refractario y placa cementicia estaban matcheados a CONS101 (CEMENTO 25KG comun). El precio del blanco ($60.850) contaminaba la comparativa del cemento comun y generaba ahorros falsos. La extraccion del PDF era correcta; el error fue de matching.",
+  "revertir": "Volver a poner codigo_material='CONS101' en los ids listados y restaurar el alias con su codigo_material original.",
+
+  "aliases_borrados": [
+    {
+      "id": "ad5d30ae-6954-44d5-9e23-d9134ba3c1b5",
+      "denominacion": "cemento bco x 25 kg pinguino",
+      "codigo_material": "CONS101",
+      "confianza": 80,
+      "origen": "usuario_corralon_san_rafael",
+      "frecuencia_encontrada": 1,
+      "created_at": "2026-07-22T15:01:44.668075+00:00",
+      "nota": "Se BORRA (no se reasigna): el mismo alias ya existia correcto bajo CONS129. Ademas empataban en confianza 80, asi que el filtro de aliases ambiguos excluia el grupo entero del matching; al borrar la copia contaminada, el alias correcto de CONS129 vuelve a ser usable.",
+      "revertir": "insert into material_denominaciones (id, codigo_material, denominacion, confianza, origen, frecuencia_encontrada) values ('ad5d30ae-6954-44d5-9e23-d9134ba3c1b5','CONS101','cemento bco x 25 kg pinguino',80,'usuario_corralon_san_rafael',1)"
+    }
+  ],
+
+  "items_a_CONS129": [
+    {"id": "722c77a3-1625-474c-9701-738575363201", "texto_original": "CEMENTO BCO X 25 KG PINGUINO", "precio": 60850.62, "cantidad": 4, "score_match": 100, "estado_match": "MATCH", "presupuesto_id": "f2c3bfb4-a079-4fd7-8233-f726eb74588d"},
+    {"id": "3480d30a-38a3-412f-b0d3-77fccd9a6bb0", "texto_original": "CEMENTO BLANCO CIMSA X 25 KG", "precio": 42352.94, "cantidad": 4, "score_match": 100, "estado_match": "CONFIRMADO", "origen_match": "usuario", "presupuesto_id": "c4fc4453-61d5-446d-aac1-cceca3e4cf2b"},
+    {"id": "d3aef8e4-867e-4f16-a57e-c1dd7006495c", "texto_original": "CEMENTO BLANCO CIMSA X 25 KG", "precio": 39900.0, "cantidad": 4, "score_match": 100, "estado_match": "CONFIRMADO", "origen_match": "usuario", "presupuesto_id": "ffc7ed3d-56cc-4336-8f05-aa90045ef83a"}
+  ],
+
+  "items_a_SIN_MATCH": [
+    {"id": "31e3a1f9-9298-4901-a69c-396270e85189", "texto_original": "CEMENTO HUMEDO REFRACTARI0 FARA X 20 KG", "precio": 71000.0, "score_match": 84, "estado_match": "REVISAR", "pendiente_id": "16642e86-1f93-4a66-b05e-1933cf6233f1", "motivo": "No existe material de cemento refractario en el maestro (CONS126 es PEGAMENTO refractario, otro producto)"},
+    {"id": "7dc87acd-68d3-4e89-a03f-8bd0ab2e660f", "texto_original": "FARA CEMENTO REFRACTARIO HUMEDO X 20KG", "precio": 62240.35, "score_match": 84, "estado_match": "REVISAR", "pendiente_id": null, "motivo": "Idem anterior"},
+    {"id": "723c6676-fee3-48fa-8e6c-b5b393741127", "texto_original": "PLACA CEMENTICIA VOLCANBOARD 8MM", "precio": 40666.96, "score_match": 82, "estado_match": "REVISAR", "pendiente_id": "175eb085-7965-4d2e-8857-09ac3bf96ea9", "motivo": "No existe placa cementicia en el maestro; las PLACA son de roca de yeso"},
+    {"id": "8bdc8531-a948-43e9-b626-0adbd82f61f3", "texto_original": "CEMENTO LO", "precio": 2878131.65, "cantidad": 424, "score_match": 84, "estado_match": "REVISAR", "motivo": "Texto truncado por el extractor y precio de total de linea; no es un producto identificable"}
+  ],
+
+  "precios_historicos_a_CONS129": [
+    {"id": "d311a287-274b-440f-aab6-6060e2a25b45", "proveedor": "CORRALON SAN RAFAEL", "precio": 60850.62, "precio_raw": 67239.94, "cantidad": 4, "pdf_origen": "CORRALON SAN RAFAEL.pdf", "created_at": "2026-07-22T14:59:36.939799+00:00"},
+    {"id": "7625bcaa-8735-4ee2-9f0c-22fa58f6f6db", "proveedor": "CORRALON SAN RAFAEL", "precio": 60850.62, "precio_raw": 67239.94, "cantidad": 4, "pdf_origen": null, "created_at": "2026-07-22T15:01:44.762306+00:00"},
+    {"id": "194d621d-f06c-4458-a60a-65c40c60e292", "proveedor": "CORRALON SAN RAFAEL", "precio": 60850.62, "precio_raw": 67239.94, "cantidad": 4, "pdf_origen": "CORRALON SAN RAFAEL.pdf", "created_at": "2026-07-22T15:26:09.265115+00:00"}
+  ]
+}
