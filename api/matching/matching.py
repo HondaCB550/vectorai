@@ -159,7 +159,13 @@ SINONIMOS: dict[str, str] = {
     # ── Sanitaria – cañerías ──────────────────────────────────────────────────
     "POLIETILENO DE ALTA DENSIDAD": "POLIETILENO",
     "PEAD":                       "POLIETILENO",
-    "UNION DOBLE":                "UNION",
+    # OJO: "UNION DOBLE" -> "UNION" estuvo acá hasta el 22-07-2026 y se quitó.
+    # Era especifico->generico, la clase de sinonimo que prohibe la regla que
+    # salio del bug PERFIL: el maestro tiene CODIGOS SEPARADOS para las dos
+    # piezas (INSTS080 UNION/32 vs INSTS123 UNION DOBLE/32), asi que colapsarlas
+    # borraba la distincion antes de que el matcher pudiera verla — y de paso
+    # dejaba ciega a la guarda de calificadores, que corria sobre el texto ya
+    # normalizado. Los de abajo si son el mismo concepto con otro nombre.
     "NIPLE":                      "UNION",
     "CUPLA":                      "UNION",   # cupla = unión en desagüe cloacal PVC
     "ACOPLE":                     "UNION",

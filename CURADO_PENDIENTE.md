@@ -307,25 +307,57 @@ Comparación apples-to-apples (mediana con guarda de dispersión 3x):
 La muestra es la mitad pero está sana el 91% en vez del 74%. **El promedio
 sigue sin ser publicable.** La campaña dice 39% y todavía no se tocó.
 
+### Segunda tanda (22-07, misma fecha): matcher + aliases — HECHA
+
+Los "11 bugs vivos del matcher" resultaron ser dos cosas distintas:
+
+1. **Aliases contaminados** (la mayoría): confirmaciones equivocadas de
+   usuario. `CAÑO 160 MM AMANCO` como alias del caño de 110, `codo mh 110x90`
+   en el codo a 45 de 50, rejas Waterplast y la marca sola "waterplast" en
+   CÁMARA DE LODOS, hierro de obra en ANCLAJES, hierro y varilla en EST108
+   (AQUAPANEL — el filtro de ambiguos los ENMASCARABA, no los resolvía).
+   Curados por ID con `curar_aliases_dispersos_2026-07-22.py`: 9 reasignados,
+   15 borrados. Ojo: el chequeo de duplicados tenía un bug (sin `neq` a la
+   propia fila, re-correr el script borraba lo ya reasignado — pasó y se
+   restauró con `restaurar_reasignados_2026-07-22.py`).
+2. **Dos bugs reales del matcher**, arreglados con tests (18/18):
+   - Calificador `doble` en `_CALIFICADORES` + el sinónimo `UNION DOBLE→UNION`
+     eliminado (era específico→genérico, la clase prohibida). La guarda ahora
+     compara sobre el texto CRUDO (los sinónimos podían borrar justo el
+     calificador). "simple" NO se agregó a propósito: capaba 3 matches
+     correctos y ninguno equivocado (en sanitaria "simple" es el default que
+     el maestro omite, y "unión simple" ES la cupla).
+   - Contexto de anclaje en `_prep_v2`: roscada/anclaje/spit/fischer/ftr/rgm
+     enmascaran VARILLA antes del sinónimo VARILLA→HIERRO CORRUGADO. Sin esto
+     "spit varilla 12mm" capturaba todo el hierro de 12, y la varilla roscada
+     Fischer se iba a hierro aleteado.
+
+También: `reconstruir_precios_2026-07-22.py` ahora matchea con `top_n=3` como
+producción (con `top_n=1` la ventana de fuzz_process quedaba en 3 candidatos y
+los aliases largos con token_set crudo 100 la llenaban antes que los buenos).
+
+**Estado final de la capa limpia: 121 multi-proveedor, 117 sanos (96,7%),
+mediana con guarda 26,9% / sin guarda 27,6%** (que casi coincidan = ya no hay
+outliers estructurales). Los 4 dispersos que quedan son los casos listados en
+AMBIGUOS del script de curado (decisiones de catálogo, no bugs).
+
 ### Lo que queda pendiente
 
-1. **Actualizar la campaña al número nuevo** — falta decidir cuál se publica.
-   Archivos: `IDENTIDAD.md:45`, `marketing/emails_bienvenida.{md,html}`,
-   `marketing/guia_5_errores.{md,html}`, `marketing/guion_video_demo.html`,
-   `marketing/conceptos_reels.{md,html}`, `CHECKLIST_LANZAMIENTO.md:31,40`.
-2. **11 materiales siguen dispersos, y son bugs VIVOS del matcher** (no datos
-   viejos: el matcher de hoy les sigue dando ≥85). Patrones:
-   - `UNION SIMPLE` matchea a `UNIÓN DOBLE` (INSTS123, INSTS080)
-   - hierro corrugado matchea a `ANCLAJES VARILLA 12*160` (A006)
-   - `CAÑO 160` matchea a `CAÑO 110` (INSTS019); `CODO 110x90` a `CODO 50` (INSTS036)
-   - rejas y marcos matchean a `CÁMARA DE LODOS` por la marca WATERPLAST (INSTS008)
-   - `UNION DOBLE MIXTA` a `CUPLA 50` (INSTS054)
-   Falta una guarda de calificadores simple/doble y una de medida en sanitarios.
-3. **T011 (HEX 14*1/2 MAX)** tiene un precio de $9.824 que es claramente una
-   caja, pero el material no tiene ninguna fila en `presupuesto_items` y no hay
-   texto del proveedor de donde sacar el factor. Sin resolver a propósito.
-4. **Duplicación en `precios_historicos`**: las filas legacy repiten la misma
-   cotización 4-5 veces, unas con `pdf_origen` y otras en null. No se tocó.
+1. **Actualizar el dato de campaña PARA LO PRÓXIMO** (decisión de Pablo 22-07:
+   lo ya publicado queda como está). El número nuevo es **mediana 27%** (26,9
+   con guarda / 27,6 sin, sobre 121 materiales multi-proveedor, 96,7% sanos).
+   No es buscar-y-reemplazar: hay ~29 archivos con "39%" (`grep -rl "39%"
+   IDENTIDAD.md marketing/ CHECKLIST_LANZAMIENTO.md`), e
+   `indice_ejemplos_2026-07.{md,html}` tienen tablas de materiales que hay que
+   recalcular con la capa `origen='pipeline'`. **Nunca publicar el promedio.**
+2. **6 decisiones de catálogo** (lista AMBIGUOS en
+   `curar_aliases_dispersos_2026-07-22.py`): aro suplementario vs kit inodoro,
+   pileta patio 110 chica, manguito 40 y cupla reducción 40x50 en CUPLA 50,
+   cámara de lodos 180 vs 100 lts, flexible gas 42cm vs 30.
+3. **T011 (HEX 14*1/2 MAX)**: $9.824 es claramente una caja pero no hay texto
+   del proveedor de donde sacar el factor. Sin resolver a propósito.
+4. **Duplicación en las filas legacy** de `precios_historicos` (la misma
+   cotización 4-5 veces). Fuera del Índice, sin tocar.
 5. **`api/data/backup_precios_historicos_2026-07-22.json`** tiene las 4.807
    filas originales por si hay que revertir.
 

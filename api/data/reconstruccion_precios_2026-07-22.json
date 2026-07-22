@@ -470,7 +470,7 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
-   "codigo_material": "INSTS036",
+   "codigo_material": "INSTS040",
    "unidad": "UN",
    "precio": 1101.48,
    "cantidad": 4,
@@ -1022,6 +1022,18 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS022",
+   "unidad": "UN",
+   "precio": 3838.14,
+   "cantidad": 9,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CANO DURATOP 63X1.00 MTS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS028",
    "unidad": "UN",
    "precio": 2323.05,
@@ -1094,8 +1106,8 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
-   "codigo_material": "INSTS074",
-   "unidad": "tira 4m",
+   "codigo_material": "INSTS172",
+   "unidad": "UN",
    "precio": 5665.91,
    "cantidad": 6,
    "pdf_origen": null,
@@ -1106,8 +1118,8 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
-   "codigo_material": "INSTS075",
-   "unidad": "tira 4m",
+   "codigo_material": "INSTS109",
+   "unidad": "UN",
    "precio": 8239.23,
    "cantidad": 16,
    "pdf_origen": null,
@@ -1646,7 +1658,7 @@
   },
   {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
-   "codigo_material": "INSTS080",
+   "codigo_material": "INSTS123",
    "unidad": "UN",
    "precio": 3716.05,
    "cantidad": 4,
@@ -1750,18 +1762,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "VALVULA SIGAS 20",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "TRIUNVIRATO - SANITARIOS",
-   "codigo_material": "INSTS019",
-   "unidad": "UN",
-   "precio": 39572.8,
-   "cantidad": 1,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "CAÑO 160 MM AMANCO STD (900309)",
    "origen": "pipeline"
   },
   {
@@ -2210,7 +2210,7 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
-   "codigo_material": "INSTS036",
+   "codigo_material": "INSTS042",
    "unidad": "UN",
    "precio": 2806.97,
    "cantidad": 8,
@@ -2314,18 +2314,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "CODO NORMAL A 90 DE 20 ACQUA",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "TRIUNVIRATO - SANITARIOS",
-   "codigo_material": "INSTS054",
-   "unidad": "UN",
-   "precio": 42485.75,
-   "cantidad": 2,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "UNION DOBLE MIXTA RH 50 X 11/2 ACQUA",
    "origen": "pipeline"
   },
   {
@@ -2686,6 +2674,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "CUARZO X25KG GRIS CEMENTO",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
+   "codigo_material": "CONS108",
+   "unidad": "UN",
+   "precio": 47000.34,
+   "cantidad": 23,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARENA BOLSON",
    "origen": "pipeline"
   },
   {
@@ -3146,7 +3146,7 @@
   },
   {
    "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
-   "codigo_material": "A006",
+   "codigo_material": "CONS118",
    "unidad": "UN",
    "precio": 21900.45,
    "cantidad": 8,
@@ -3290,18 +3290,6 @@
   },
   {
    "proveedor": "INSUMA - STEEL",
-   "codigo_material": "A006",
-   "unidad": "UN",
-   "precio": 11792.57,
-   "cantidad": 1,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "VARILLA GALV P/ANCLAJE W1/2\"X1000MM",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "INSUMA - STEEL",
    "codigo_material": "EST101",
    "unidad": "UN",
    "precio": 24978.83,
@@ -3394,6 +3382,18 @@
    "conversion_aplicada": "a precio por unidad (÷100 del pack)",
    "moneda": "ARS",
    "texto_original": "TORNILLO T1 MECHA 10X3/4\" (BOLSA X 100)- TEL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "J.M. Landa",
+   "codigo_material": "CONS108",
+   "unidad": "UN",
+   "precio": 40316.74,
+   "cantidad": 23,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARENA NECO BOLSON X 1.2TN",
    "origen": "pipeline"
   },
   {
@@ -3554,6 +3554,18 @@
   },
   {
    "proveedor": "CORRALON SAN RAFAEL",
+   "codigo_material": "CONS108",
+   "unidad": "UN",
+   "precio": 48933.76,
+   "cantidad": 23,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARENA AMARILLA X 1 BIG BAG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON SAN RAFAEL",
    "codigo_material": "CONS110",
    "unidad": "UN",
    "precio": 63446.39,
@@ -3590,7 +3602,7 @@
   },
   {
    "proveedor": "J.M. Landa",
-   "codigo_material": "A006",
+   "codigo_material": "CONS118",
    "unidad": "UN",
    "precio": 20654.39,
    "cantidad": 8,
@@ -3842,7 +3854,7 @@
   },
   {
    "proveedor": "CORRALON LAS QUINTAS",
-   "codigo_material": "A006",
+   "codigo_material": "CONS118",
    "unidad": "UN",
    "precio": 17332.51,
    "cantidad": 8,
@@ -4226,6 +4238,30 @@
   },
   {
    "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "A009",
+   "unidad": "UN",
+   "precio": 26432.11,
+   "cantidad": 7,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BANDA ACUSTICA 10 CM X 25 MTS (BARBIERI)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "A014",
+   "unidad": "UN",
+   "precio": 1170.71,
+   "cantidad": 40,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CONECTOR COLUMNA (H) (BARBIERI)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
    "codigo_material": "AISL110",
    "unidad": "UN",
    "precio": 117582.23,
@@ -4246,18 +4282,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "LANA R400 70 MM - 0.40 X 13 - 15,60 M2 (ISOVER)",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CIVIMET - STEEL",
-   "codigo_material": "AISL114",
-   "unidad": "rollo 20m",
-   "precio": 33937.48,
-   "cantidad": 23,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "POLYESPUMA ALUM 10 MM - 1.00 X 20.00 (20 M2)",
    "origen": "pipeline"
   },
   {
@@ -4454,18 +4478,6 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS123",
-   "unidad": "UN",
-   "precio": 370.64,
-   "cantidad": 15,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "UNION SIMPLE FUSION 32 MM 22325035 TIGRE",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
    "codigo_material": "INSTS054",
    "unidad": "UN",
    "precio": 1305.49,
@@ -4586,19 +4598,7 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS202",
-   "unidad": "UN",
-   "precio": 2512.8,
-   "cantidad": 17,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "FLEX.MALLADO A.INOX. 1/2 X 35 LATYN AF2075 LATYN",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS008",
+   "codigo_material": "INSTS185",
    "unidad": "UN",
    "precio": 4922.67,
    "cantidad": 4,
@@ -4606,18 +4606,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "REJA MARCO DE ACERO 15X15 RMA1515 WATERPLAST",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS008",
-   "unidad": "UN",
-   "precio": 6278.91,
-   "cantidad": 3,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "MARCO BRONCE C/TAPA ACERO INOX 15X15 DURATOP",
    "origen": "pipeline"
   },
   {
@@ -4670,7 +4658,7 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS202",
+   "codigo_material": "INSTS183",
    "unidad": "UN",
    "precio": 2418.4,
    "cantidad": 7,
@@ -4802,18 +4790,6 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS123",
-   "unidad": "UN",
-   "precio": 370.64,
-   "cantidad": 15,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "UNION SIMPLE FUSION 32 MM 22325035 TIGRE",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
    "codigo_material": "INSTS054",
    "unidad": "UN",
    "precio": 1305.49,
@@ -4934,19 +4910,7 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS202",
-   "unidad": "UN",
-   "precio": 2512.8,
-   "cantidad": 17,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "FLEX.MALLADO A.INOX. 1/2 X 35 LATYN AF2075 LATYN",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS008",
+   "codigo_material": "INSTS185",
    "unidad": "UN",
    "precio": 4922.67,
    "cantidad": 4,
@@ -4954,18 +4918,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "REJA MARCO DE ACERO 15X15 RMA1515 WATERPLAST",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS008",
-   "unidad": "UN",
-   "precio": 6278.91,
-   "cantidad": 3,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "MARCO BRONCE C/TAPA ACERO INOX 15X15 DURATOP",
    "origen": "pipeline"
   },
   {
@@ -5018,7 +4970,7 @@
   },
   {
    "proveedor": "VIEJO BUENO - IS,IG,IC - COPY",
-   "codigo_material": "INSTS202",
+   "codigo_material": "INSTS183",
    "unidad": "UN",
    "precio": 2418.4,
    "cantidad": 7,
@@ -5498,7 +5450,7 @@
   },
   {
    "proveedor": "SAUCE",
-   "codigo_material": "A006",
+   "codigo_material": "CONS118",
    "unidad": "UN",
    "precio": 20493.03,
    "cantidad": 8,
@@ -5578,8 +5530,8 @@
   },
   {
    "texto": "MTS",
-   "codigo": "A001",
-   "score": 68.0,
+   "codigo": "CONS138",
+   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -5590,8 +5542,8 @@
   },
   {
    "texto": "MTS [20 KG]",
-   "codigo": "AISL114",
-   "score": 68.0,
+   "codigo": "INSTS074",
+   "score": 84.0,
    "motivo": "score_bajo"
   },
   {
@@ -5626,7 +5578,7 @@
   },
   {
    "texto": "INODORO BARI LARGO BLANCO FERRUM",
-   "codigo": "TER301",
+   "codigo": "TER485",
    "score": 84.0,
    "motivo": "score_bajo"
   },
@@ -5646,12 +5598,6 @@
    "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
    "codigo": "INSTS059",
    "score": 60.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CANO DURATOP 63X1.00 MTS",
-   "codigo": "INSTS023",
-   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -5680,7 +5626,7 @@
   },
   {
    "texto": "REJA 15X15 ACERO INOX CROMO CASAL",
-   "codigo": "INSTS008",
+   "codigo": "INSTS139",
    "score": 84.9,
    "motivo": "score_bajo"
   },
@@ -5747,13 +5693,19 @@
   {
    "texto": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
    "codigo": "TER437",
-   "score": 58.6,
+   "score": 59.4,
    "motivo": "score_bajo"
   },
   {
    "texto": "FLETE SIN CARGO",
    "codigo": "INS029",
    "score": 55.6,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "CAÑO 160 MM AMANCO STD (900309)",
+   "codigo": "INSTS028",
+   "score": 68.0,
    "motivo": "score_bajo"
   },
   {
@@ -5836,20 +5788,26 @@
   },
   {
    "texto": "BUJE 32-25 ACQUA",
-   "codigo": "INSTS118",
-   "score": 76.0,
+   "codigo": "INSTS119",
+   "score": 80.9,
    "motivo": "score_bajo"
   },
   {
    "texto": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
-   "codigo": "INSTS008",
-   "score": 84.9,
+   "codigo": "INSTS185",
+   "score": 79.0,
    "motivo": "score_bajo"
   },
   {
    "texto": "FARA CEMENTO REFRACTARIO HUMEDO X 20KG",
    "codigo": "CONS101",
    "score": 84.0,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "UNION DOBLE MIXTA RH 50 X 11/2 ACQUA",
+   "codigo": "INSTS054",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -5979,12 +5937,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "ARENA BOLSON",
-   "codigo": "CONS108",
-   "score": 84.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "LADRILLO REF 229X114X50",
    "codigo": "CONS125",
    "score": 84.9,
@@ -6052,8 +6004,14 @@
   },
   {
    "texto": "TELGOPOR PERLAS CAFIVEL X 170 LT",
-   "codigo": "TER143",
-   "score": 60.4,
+   "codigo": "CONS202",
+   "score": 60.7,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "VARILLA GALV P/ANCLAJE W1/2\"X1000MM",
+   "codigo": "A006",
+   "score": 71.4,
    "motivo": "score_bajo"
   },
   {
@@ -6107,7 +6065,7 @@
   {
    "texto": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
    "codigo": "TER115",
-   "score": 76.0,
+   "score": 80.5,
    "motivo": "score_bajo"
   },
   {
@@ -6121,12 +6079,6 @@
    "codigo": "TER482",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "ARENA NECO BOLSON X 1.2TN",
-   "codigo": "CONS108",
-   "score": 84.0,
-   "motivo": "score_bajo"
   },
   {
    "texto": "MAPEI CERAMICO 25KG",
@@ -6148,8 +6100,8 @@
   },
   {
    "texto": "PEGAM REFRAC X 10KG",
-   "codigo": "INSTE011",
-   "score": 63.2,
+   "codigo": "CONS126",
+   "score": 64.9,
    "motivo": "score_bajo"
   },
   {
@@ -6168,12 +6120,6 @@
    "texto": "FLETE SIN CARGO",
    "codigo": "INS029",
    "score": 55.6,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "ARENA AMARILLA X 1 BIG BAG",
-   "codigo": "CONS108",
-   "score": 84.0,
    "motivo": "score_bajo"
   },
   {
@@ -6232,8 +6178,8 @@
   },
   {
    "texto": "HIERRO DULCE DEL 4.2",
-   "codigo": "CONS116",
-   "score": 70.6,
+   "codigo": "CONS115",
+   "score": 70.7,
    "motivo": "score_bajo"
   },
   {
@@ -6249,20 +6195,14 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "BANDA ACUSTICA 10 CM X 25 MTS (BARBIERI)",
-   "codigo": "A009",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CONECTOR COLUMNA (H) (BARBIERI)",
-   "codigo": "A014",
-   "score": 84.0,
+   "texto": "POLYESPUMA ALUM 10 MM - 1.00 X 20.00 (20 M2)",
+   "codigo": "AISL114",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
    "texto": "PGU 102 X 0.9 X 6 MTS (BARBIERI)",
-   "codigo": "PU006",
+   "codigo": "PU007",
    "score": 76.0,
    "motivo": "score_bajo"
   },
@@ -6280,8 +6220,8 @@
   },
   {
    "texto": "T3 AGUJA - 6 X 1.1/2 X 100",
-   "codigo": "T012",
-   "score": 76.0,
+   "codigo": "T009",
+   "score": 78.3,
    "motivo": "score_bajo"
   },
   {
@@ -6324,6 +6264,24 @@
    "texto": "Son Pesos: doscientos setenta y nueve mil trescientos tres y 78 / 100 TOTAL:",
    "codigo": "TER551",
    "score": 49.3,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "UNION SIMPLE FUSION 32 MM 22325035 TIGRE",
+   "codigo": "INSTS123",
+   "score": 84.0,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "FLEX.MALLADO A.INOX. 1/2 X 35 LATYN AF2075 LATYN",
+   "codigo": "INSTS183",
+   "score": 76.0,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "MARCO BRONCE C/TAPA ACERO INOX 15X15 DURATOP",
+   "codigo": "TER473",
+   "score": 82.9,
    "motivo": "score_bajo"
   },
   {
@@ -6418,8 +6376,8 @@
   },
   {
    "texto": "REJA C/MARCO FUNDIDO LINEA PRO 15X15 WATERPLAST",
-   "codigo": "INSTS008",
-   "score": 77.4,
+   "codigo": "INSTS185",
+   "score": 68.3,
    "motivo": "score_bajo"
   },
   {
@@ -6471,6 +6429,24 @@
    "motivo": "score_bajo"
   },
   {
+   "texto": "UNION SIMPLE FUSION 32 MM 22325035 TIGRE",
+   "codigo": "INSTS123",
+   "score": 84.0,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "FLEX.MALLADO A.INOX. 1/2 X 35 LATYN AF2075 LATYN",
+   "codigo": "INSTS183",
+   "score": 76.0,
+   "motivo": "score_bajo"
+  },
+  {
+   "texto": "MARCO BRONCE C/TAPA ACERO INOX 15X15 DURATOP",
+   "codigo": "TER473",
+   "score": 82.9,
+   "motivo": "score_bajo"
+  },
+  {
    "texto": "TOALLERO SCALA 80 BLANCO 10000676 PEISA",
    "codigo": "CLIM117",
    "score": 84.0,
@@ -6562,8 +6538,8 @@
   },
   {
    "texto": "REJA C/MARCO FUNDIDO LINEA PRO 15X15 WATERPLAST",
-   "codigo": "INSTS008",
-   "score": 77.4,
+   "codigo": "INSTS185",
+   "score": 68.3,
    "motivo": "score_bajo"
   },
   {

@@ -58,7 +58,13 @@ def construir():
             motivos["sin_texto_o_precio"] += 1
             continue
 
-        ms = main._match_v2(texto, dens, top_n=1) or []
+        # top_n=3 como producción, NO 1: la ventana de candidatos de
+        # fuzz_process.extract es top_n*3, y con 3 candidatos los aliases
+        # largos con token_set crudo 100 (ej. "caño estructural … hierro
+        # 12x12", conf 90) la llenan antes que los buenos; la guarda numérica
+        # los capa después y no queda ningún automático. Con la ventana de 9
+        # el resultado coincide con lo que haría /analizar-v2.
+        ms = main._match_v2(texto, dens, top_n=3) or []
         if not ms:
             motivos["sin_match"] += 1
             continue

@@ -1723,6 +1723,15 @@ _RE_LARGO_BARRA = re.compile(r"(\d)\s*x\s*(?:12(?:\s*(?:m|mt|mts|metros))?|6\s*(
 # BD PFGAL → PERFIL GALVANIZADO.
 _RE_PFGAL_C = re.compile(r"\bPFGAL\s*C\s*(?=\d)", re.I)
 _RE_PFGAL_U = re.compile(r"\bPFGAL\s*U\s*(?=\d)", re.I)
+# Varilla de ANCLAJE vs varilla de corralón (curado 22-07-2026). El sinónimo
+# BD VARILLA→HIERRO CORRUGADO es correcto para el corralón ("varilla 8" =
+# hierro del 8), pero en contexto de anclaje la varilla es una barra roscada:
+# aplicárselo convertía "spit varilla 12mm" en "spit hierro corrugado 12 mm"
+# (cualquier HIERRO 12 quedaba contenido → 100 contra A006) y mandaba
+# "VARILLA ROSCADA FISCHER" al hierro aleteado. Con marcador de anclaje en el
+# texto, la palabra se enmascara antes de los sinónimos y se restaura después.
+_RE_CTX_ANCLAJE = re.compile(r"\b(?:roscad\w*|anclaj\w*|spit|fischer|ftr|rgm)\b", re.I)
+_RE_VARILLA = re.compile(r"\bVARILLAS?\b", re.I)
 
 
 def _prep_v2(s: str) -> str:
@@ -1732,7 +1741,10 @@ def _prep_v2(s: str) -> str:
     s = _RE_COMA_DECIMAL.sub(".", s)         # 1,00 → 1.00
     s = _RE_MEDIDA_X.sub(" x ", s)           # 40X1.00 → 40 x 1.00
     s = _RE_DIGITO_LETRA.sub(" ", s)         # 40MM → 40 MM
+    if _RE_CTX_ANCLAJE.search(s):
+        s = _RE_VARILLA.sub("VARROSCA", s)   # proteger del sinónimo VARILLA→HIERRO
     t = aplicar_sinonimos(normalize(s)).lower()
+    t = t.replace("varrosca", "varilla")
     if _RE_PERFIL_STEEL.search(t):
         t = _RE_E_PEGADA.sub("e ", t)
         for rx, canon in _GAUGES_STEEL:
@@ -1854,6 +1866,23 @@ _CALIFICADORES = {
     "blanco":      r"\b(BLANCO|BLANCA|BCO|BCA)\b",
     "refractario": r"\bREFRACTARI\w*",
     "cementicia":  r"\bCEMENTICI\w*",
+    # doble: el maestro separa la pieza doble de la simple y valen distinto —
+    # UNIÓN DOBLE MIXTA / 50 contra CUPLA 50 es 30x. Sin esto la unión doble
+    # entraba automática al código de la simple y viceversa (curado 22-07-2026,
+    # INSTS080/INSTS123/INSTS054). El de CUPLA es el que más lo necesita: el
+    # sinónimo CUPLA→UNION hace que el sintético "cupla 50" quede contenido en
+    # "UNION DOBLE MIXTA … 50" y dé 100, y la guarda anti-fragmento no lo capa
+    # por ser sintético con medida.
+    #
+    # "simple" NO va, aunque parezca el par natural de "doble". Probado contra
+    # los 646 ítems reales: capaba 3 matches correctos y ninguno equivocado.
+    # En sanitaria la pieza simple es la de por defecto y el maestro omite la
+    # palabra ("RAMAL 2057 SIMPLE 45 HH DE 40" es el RAMAL A 45 / 40 a secas),
+    # y "UNION SIMPLE" es literalmente una cupla — por eso existe el sinónimo
+    # CUPLA→UNION. Los casos de unión simple ya quedan cubiertos por el "doble"
+    # del LADO DEL DESTINO: si el material es la doble y el texto no lo dice,
+    # los conjuntos difieren igual.
+    "doble":       r"\bDOBLES?\b",
 }
 _CALIF_PATS = [(re.compile(p), k) for k, p in _CALIFICADORES.items()]
 
@@ -2100,10 +2129,16 @@ def _match_v2(texto: str, denominaciones: list[dict], top_n: int = 3) -> list[di
         # CONS101) coincide con el texto y no detectaría nada. Sin el maestro
         # cargado (tests, arranque) cae al alias, que igual cubre la entrada
         # del error.
+        # Se mira el texto CRUDO, no texto_prep: los sinónimos corren antes y
+        # pueden borrar justo el calificador. Pasó con "UNION DOBLE" → "UNION"
+        # (sinónimo quitado el 22-07-2026): _prep_v2 dejaba "union plastica 32"
+        # y la guarda no tenía con qué comparar. Además el lado del destino ya
+        # se calcula sobre el nombre canónico crudo, así que comparar contra el
+        # texto normalizado era asimétrico.
         calif_destino = _calif_material.get(den["codigo_material"])
         if calif_destino is None:
             calif_destino = _calificadores_en(den["denominacion"])
-        if _calificadores_en(texto_prep) != calif_destino:
+        if _calificadores_en(texto) != calif_destino:
             score = min(score, 84.0)
         # Guarda anti-fragmento (bug clase PERFIL/BROCAS): cuando un lado tiene
         # ≤2 tokens y los textos no son idénticos, token_set da 100 por
