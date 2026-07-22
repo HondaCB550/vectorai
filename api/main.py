@@ -619,8 +619,12 @@ def _calcular_ahorro_total(comparativo: list) -> float:
     return round(sum(r.get("ahorro", 0) for r in comparativo), 2)
 
 def _guardar_comparativa(comparativa_id: str, data: dict, user_id: str = "anonimo", titulo: str = ""):
-    """Persiste en Supabase; fallback a memoria."""
-    _cache_comparativa(comparativa_id, data)
+    """Persiste en Supabase; fallback a memoria.
+
+    El cache guarda además el user_id para que _exigir_propietario() pueda
+    autorizar sin pegarle a Supabase, y para que siga autorizando cuando el
+    insert de abajo falló y la comparativa vive SOLO en memoria."""
+    _cache_comparativa(comparativa_id, {**data, "user_id": user_id})
     sb = get_supabase()
     if sb and user_id != "anonimo":
         try:
@@ -653,7 +657,7 @@ def _leer_comparativa(comparativa_id: str) -> dict | None:
     sb = get_supabase()
     if sb:
         try:
-            res = sb.table("comparativas").select("datos_json,proveedores") \
+            res = sb.table("comparativas").select("datos_json,proveedores,user_id") \
                     .eq("id", comparativa_id).limit(1).execute()
             row = (res.data or [None])[0]
             if row:
@@ -661,6 +665,7 @@ def _leer_comparativa(comparativa_id: str) -> dict | None:
                 data = {
                     "comparativo": dj.get("comparativo", []),
                     "proveedores": row.get("proveedores") or dj.get("proveedores", []),
+                    "user_id":     row.get("user_id"),
                 }
                 if data["comparativo"]:
                     _cache_comparativa(comparativa_id, data)
@@ -668,6 +673,48 @@ def _leer_comparativa(comparativa_id: str) -> dict | None:
         except Exception as e:
             print(f"Supabase read error: {e}")
     return None
+
+
+def _exigir_propietario(comparativa_id: str, user: dict) -> None:
+    """403/404 salvo que la comparativa sea del usuario.
+
+    Los exports (/sheets, /pdf, /imagen) leían por id sin chequear dueño: con
+    tener el UUID alcanzaba —sin token siquiera— para bajarse la comparativa
+    completa de otro cliente, con sus proveedores, cantidades y precios
+    (auditoría CSO 22-07). Es el mismo chequeo que ya hacían GET, DELETE y
+    /actualizar de /comparativas/{id}; acá faltaba.
+
+    Ningún anónimo puede tener comparativas: _gate_analisis() cierra el
+    análisis a anónimos, así que toda comparativa tiene dueño real y exigir
+    login acá no rompe ningún flujo.
+    """
+    if user["user_id"] == "anonimo":
+        raise HTTPException(status_code=401, detail={
+            "error": "login_requerido",
+            "mensaje": "Iniciá sesión para descargar la comparativa.",
+        })
+
+    dueno = (_comparativas_cache.get(comparativa_id) or {}).get("user_id")
+    if dueno is None:
+        sb = get_supabase()
+        if not sb:
+            raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+        try:
+            res = sb.table("comparativas").select("user_id") \
+                    .eq("id", comparativa_id).limit(1).execute()
+            dueno = ((res.data or [None])[0] or {}).get("user_id")
+        except Exception as e:
+            # Fail-closed: si no podemos verificar, no entregamos el archivo.
+            print(f"Error verificando dueño de {comparativa_id}: {e}")
+            raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    if dueno is None:
+        raise HTTPException(status_code=404, detail={
+            "error": "comparativa_no_encontrada",
+            "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs.",
+        })
+    if dueno != user["user_id"]:
+        raise HTTPException(status_code=403, detail={"error": "forbidden"})
 
 
 # ── /analizar ─────────────────────────────────────────────────────────────────
@@ -1055,7 +1102,9 @@ async def actualizar_comparativa(
             print(f"Error actualizando comparativa {comparativa_id}: {e}")
             raise HTTPException(status_code=500, detail={"error": "internal_error"})
 
-    _cache_comparativa(comparativa_id, data)
+    # Con el user_id: sin él la reescritura borraba el dueño del cache y el
+    # export siguiente tenía que reconsultar Supabase para autorizar.
+    _cache_comparativa(comparativa_id, {**data, "user_id": user["user_id"]})
     return {"ok": True}
 
 
@@ -1069,6 +1118,7 @@ async def generar_sheets(
     Genera un Google Sheet con la comparativa y devuelve la URL.
     """
     user = get_user_plan(authorization)
+    _exigir_propietario(req.comparativa_id, user)
 
     cached = _leer_comparativa(req.comparativa_id)
     if not cached:
@@ -1183,6 +1233,7 @@ async def generar_pdf(
     req: SheetsRequest,
     authorization: Optional[str] = Header(None),
 ):
+    _exigir_propietario(req.comparativa_id, get_user_plan(authorization))
     cached = _leer_comparativa(req.comparativa_id)
     if not cached:
         raise HTTPException(
@@ -1226,6 +1277,7 @@ async def generar_imagen(
     req: SheetsRequest,
     authorization: Optional[str] = Header(None),
 ):
+    _exigir_propietario(req.comparativa_id, get_user_plan(authorization))
     cached = _leer_comparativa(req.comparativa_id)
     if not cached:
         raise HTTPException(
