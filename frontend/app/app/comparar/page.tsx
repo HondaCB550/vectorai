@@ -894,6 +894,23 @@ export default function Comparar() {
 
   const ahorroTotal = filasFiltradas.reduce((s, r) => s + ahorroFila(r), 0);
 
+  // Lo que sale la compra comprándole a cada proveedor lo que tiene más barato.
+  // Incluye los ítems que cotiza uno solo: igual hay que comprarlos, así que
+  // suman al total real de la obra aunque no tengan con qué compararse.
+  // Es la misma cuenta que el tab "Lista de compras" y el header del PDF/JPG:
+  // se calcula una vez acá para que los cuatro lugares no puedan divergir.
+  function totalCompraDe(filas: FilaComparativa[]): number {
+    return filas.reduce((s, row) => {
+      const prov = mejorMostrado(row) || row.mejor_proveedor;
+      const pr = prov ? row.precios[prov] : null;
+      if (!prov || !pr) return s;
+      const cant = row.cant ?? pr.cant ?? 1;
+      return s + precioMostrado(pr.precio_sin_iva, provConIva(prov), conIva, descuentoPct) * cant;
+    }, 0);
+  }
+
+  const totalCompra = totalCompraDe(resultado?.comparativo ?? []);
+
   const totalDudosos  = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.dudoso.length, 0) : 0;
   const totalSinMatch = resultado ? Object.values(resultado.resultados).reduce((s, r) => s + r.sin_match.length, 0) : 0;
   const pctAuto       = resultado
@@ -1345,16 +1362,21 @@ export default function Comparar() {
             )}
 
             {/* KPIs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            {/* 5 columnas en pantalla grande; en tablet bajan a 3 para que los
+                importes no se corten. "Total de la compra" va pegado a "Ahorro
+                potencial" porque se leen juntos: esto sale, esto ahorrás. */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
               {[
-                { label: "Proveedores",     value: resultado.proveedores.length },
-                { label: "Match automático", value: `${pctAuto}%` },
-                { label: "En común",        value: resultado.comparativo.filter((r) => r.en_varios).length },
-                { label: "Ahorro potencial", value: fmt(ahorroTotal) },
+                { label: "Proveedores",     value: resultado.proveedores.length, destacar: false },
+                { label: "Match automático", value: `${pctAuto}%`, destacar: false },
+                { label: "En común",        value: resultado.comparativo.filter((r) => r.en_varios).length, destacar: false },
+                { label: "Total de la compra", value: fmt(totalCompra), destacar: true },
+                { label: "Ahorro potencial", value: fmt(ahorroTotal), destacar: false },
               ].map((k) => (
-                <div key={k.label} className="bg-white rounded-xl border border-gray-200 px-5 py-4">
+                <div key={k.label} className={`rounded-xl border px-5 py-4 ${
+                  k.destacar ? "bg-orange-50 border-[#E87022]/30" : "bg-white border-gray-200"}`}>
                   <div className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-1">{k.label}</div>
-                  <div className="text-2xl font-bold text-gray-900">{k.value}</div>
+                  <div className={`text-2xl font-bold ${k.destacar ? "text-[#E87022]" : "text-gray-900"}`}>{k.value}</div>
                 </div>
               ))}
             </div>
@@ -1614,7 +1636,9 @@ export default function Comparar() {
                 porProv[prov].total += precioMostrado(row.precios[prov].precio_sin_iva, provConIva(prov), conIva, descuentoPct) * cant;
               }
               const provs = Object.keys(porProv).sort((a, b) => porProv[b].total - porProv[a].total);
-              const granTotal = provs.reduce((s, p) => s + porProv[p].total, 0);
+              // Mismo número que la burbuja "Total de la compra" de arriba: una
+              // sola función, así no pueden mostrar cifras distintas.
+              const granTotal = totalCompraDe(resultado.comparativo);
               return (
                 <>
                   <div className="mb-4 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm text-blue-800">
