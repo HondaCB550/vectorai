@@ -550,6 +550,10 @@ class SheetsRequest(BaseModel):
     # export replica la vista de pantalla — en "Precio efectivo" el proveedor
     # que cotizó c/IVA mantiene su precio final (nunca baja al neto).
     config_proveedores: Optional[dict] = None
+    # Qué vista exporta el usuario: "comparativa" (la grilla) o "compras" (el
+    # pedido por proveedor). Los botones de descarga siguen el tab activo, así
+    # bajás lo que estás mirando. Default comparativa para clientes viejos.
+    vista: str = "comparativa"
 
 
 # Cache en memoria (fallback si Supabase no está disponible)
@@ -1141,10 +1145,12 @@ async def generar_pdf(
             detail={"error": "comparativa_no_encontrada",
                     "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs."}
         )
-    from exportar_pdf import generar_pdf_comparativo
+    from exportar_pdf import generar_pdf_comparativo, generar_pdf_compras
+    es_compras = req.vista == "compras"
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
-    titulo = req.titulo or f"Vectorai — Comparativa {fecha}"
+    titulo = req.titulo or (f"Vectorai — Lista de compras {fecha}" if es_compras
+                            else f"Vectorai — Comparativa {fecha}")
     if req.incluir_iva:
         iva_label = "finales con IVA (10,5%)"
     elif req.config_proveedores:
@@ -1154,13 +1160,14 @@ async def generar_pdf(
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
-    pdf_bytes = generar_pdf_comparativo(
+    generar = generar_pdf_compras if es_compras else generar_pdf_comparativo
+    pdf_bytes = generar(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
         subtitulo=subtitulo,
     )
-    filename = f"Vectorai_Comparativa_{fecha}.pdf"
+    filename = f"Vectorai_{'Pedidos' if es_compras else 'Comparativa'}_{fecha}.pdf"
     return StreamingResponse(
         BytesIO(pdf_bytes),
         media_type="application/pdf",
@@ -1181,10 +1188,12 @@ async def generar_imagen(
             detail={"error": "comparativa_no_encontrada",
                     "mensaje": "La comparativa expiró o no existe. Volvé a subir los PDFs."}
         )
-    from exportar_imagen import generar_imagen_comparativo
+    from exportar_imagen import generar_imagen_comparativo, generar_imagen_compras
+    es_compras = req.vista == "compras"
     fecha  = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
     fecha_visible = __import__("datetime").datetime.now().strftime("%d/%m/%Y")
-    titulo = req.titulo or f"Vectorai — Comparativa {fecha}"
+    titulo = req.titulo or (f"Vectorai — Lista de compras {fecha}" if es_compras
+                            else f"Vectorai — Comparativa {fecha}")
     if req.incluir_iva:
         iva_label = "finales con IVA (10,5%)"
     elif req.config_proveedores:
@@ -1194,13 +1203,14 @@ async def generar_imagen(
     desc_label = f" · desc {req.descuento_pct:.0f}%" if req.descuento_pct else ""
     subtitulo  = f"Generado el {fecha_visible} · Precios {iva_label}{desc_label}"
     comparativo = _aplicar_filtros(cached["comparativo"], req)
-    jpg_bytes = generar_imagen_comparativo(
+    generar = generar_imagen_compras if es_compras else generar_imagen_comparativo
+    jpg_bytes = generar(
         comparativo=comparativo,
         proveedores=cached["proveedores"],
         titulo=titulo,
         subtitulo=subtitulo,
     )
-    filename = f"Vectorai_Comparativa_{fecha}.jpg"
+    filename = f"Vectorai_{'Pedidos' if es_compras else 'Comparativa'}_{fecha}.jpg"
     return StreamingResponse(
         BytesIO(jpg_bytes),
         media_type="image/jpeg",

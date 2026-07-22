@@ -828,6 +828,10 @@ export default function Comparar() {
           // Config real por proveedor: el export replica la vista activa
           // (en efectivo, el que cotizó c/IVA mantiene su precio final)
           config_proveedores: resultado.config_proveedores ?? null,
+          // Bajás lo que estás mirando: en el tab de compras el PDF/JPG traen
+          // el pedido por proveedor; en el resto, la comparativa. (El Excel
+          // ignora esto: siempre trae ambas cosas en un solo archivo.)
+          vista: tab === "compras" ? "compras" : "comparativa",
         }),
       });
       if (!res.ok) { alert("Error al generar el archivo"); return; }
@@ -835,7 +839,7 @@ export default function Comparar() {
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href = url;
-      a.download = `Vectorai_${new Date().toISOString().slice(0, 10)}.${ext}`;
+      a.download = `Vectorai_${tab === "compras" ? "Pedidos" : "Comparativa"}_${new Date().toISOString().slice(0, 10)}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {
@@ -1361,13 +1365,16 @@ export default function Comparar() {
                 className="bg-green-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-green-700 transition text-sm disabled:opacity-50">
                 {generandoSheets ? "Generando…" : "↓ Excel"}
               </button>
+              {/* PDF y JPG bajan la vista activa: en el tab de compras, el
+                  pedido por proveedor. El rótulo lo dice para que no haya que
+                  descargarlo para enterarse. */}
               <button onClick={() => descargar("pdf", "pdf", setGenerandoPdf)} disabled={generandoPdf}
                 className="bg-blue-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-blue-700 transition text-sm disabled:opacity-50">
-                {generandoPdf ? "Generando…" : "↓ PDF"}
+                {generandoPdf ? "Generando…" : tab === "compras" ? "↓ PDF (lista de compras)" : "↓ PDF"}
               </button>
               <button onClick={() => descargar("imagen", "jpg", setGenerandoJpg)} disabled={generandoJpg}
                 className="bg-purple-600 text-white font-medium px-5 py-2.5 rounded-lg hover:bg-purple-700 transition text-sm disabled:opacity-50">
-                {generandoJpg ? "Generando…" : "↓ JPG"}
+                {generandoJpg ? "Generando…" : tab === "compras" ? "↓ JPG (lista de compras)" : "↓ JPG"}
               </button>
               <button onClick={() => { setResultado(null); setBloques([bloqueVacio()]); setConfirmado(false); }}
                 className="border border-gray-300 text-gray-600 font-medium px-5 py-2.5 rounded-lg hover:bg-gray-50 transition text-sm">
