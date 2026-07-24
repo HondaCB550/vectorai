@@ -1,0 +1,109 @@
+{
+ "tomado": "2026-07-24T16:20:59",
+ "motivo": "7 decisiones de catalogo de Pablo 23-07",
+ "aliases": [
+  {
+   "id": "330f54cd-0d16-459f-b866-a60f46596ccb",
+   "codigo_material": "INSTS202",
+   "denominacion": "flexible gas aprobado ext. 1/2 x 42cm",
+   "origen": "borrador_borrador_sauce_05-03",
+   "confianza": 90,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-06-22T19:37:30.335979+00:00"
+  },
+  {
+   "id": "825ea032-767e-4e02-a43e-e292fa64f49e",
+   "codigo_material": "TER427",
+   "denominacion": "aro base inodoro c/cera",
+   "origen": "curado_pablo_0710",
+   "confianza": 96,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-10T22:56:08.0031+00:00"
+  },
+  {
+   "id": "9153c1b9-0542-454d-833a-328a55030be5",
+   "codigo_material": "TER427",
+   "denominacion": "conexion inodoro al piso aro (1568) ideal",
+   "origen": "usuario_viejo_bueno_-_parte_1",
+   "confianza": 82,
+   "frecuencia_encontrada": 2,
+   "created_at": "2026-07-09T18:46:48.680848+00:00"
+  },
+  {
+   "id": "aa30d7da-44f9-481e-aea5-c6a564891eff",
+   "codigo_material": "INSTS054",
+   "denominacion": "2013-manguito reparacion 40 awaduct",
+   "origen": "usuario_viejo_bueno_-_parte_1",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-09T21:50:02.782614+00:00"
+  },
+  {
+   "id": "ae76c830-ac80-4e6e-9176-ae8acb6db657",
+   "codigo_material": "TER427",
+   "denominacion": "aro suplementario c/cera ideal",
+   "origen": "usuario_el_galpon_-_sanitarios",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-13T23:31:04.774993+00:00"
+  },
+  {
+   "id": "ae7bb3ae-5744-476b-9817-fb617dcd58a2",
+   "codigo_material": "INSTS056",
+   "denominacion": "pileta patio 110 chica duratop",
+   "origen": "usuario_el_galpon_-_sanitarios",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-13T23:30:55.576043+00:00"
+  },
+  {
+   "id": "d4f82982-b04e-4d1e-8fc8-b66d46ec89ac",
+   "codigo_material": "INSTS054",
+   "denominacion": "29912726 cupla de reduccion de 40 x 50 tigre",
+   "origen": "usuario_carosio_sanitarios",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-06T12:30:04.270001+00:00"
+  },
+  {
+   "id": "d64242dc-4695-489d-a51d-c2a0db15579d",
+   "codigo_material": "INSTS008",
+   "denominacion": "camara registro lodos waterplast 180lts",
+   "origen": "borrador_borrador_carosio_sanitario_19-0",
+   "confianza": 83,
+   "frecuencia_encontrada": 3,
+   "created_at": "2026-06-22T19:37:21.949565+00:00"
+  },
+  {
+   "id": "ef1f38e9-382e-4bfd-a651-ada44f345e33",
+   "codigo_material": "INSTS008",
+   "denominacion": "cr180 camara registro lodos waterplast 180lts",
+   "origen": "usuario_carosio_sanitarios",
+   "confianza": 80,
+   "frecuencia_encontrada": 1,
+   "created_at": "2026-07-06T12:29:30.371276+00:00"
+  }
+ ],
+ "ter427_previo": [
+  {
+   "codigo": "TER427",
+   "categoria": "I. SANITARIA",
+   "denominacion_principal": "KIT FIJACIÓN INODORO",
+   "descripcion": "CERA + TORNILLOS + CINTA",
+   "especificaciones": {},
+   "marcas_disponibles": [
+    "VARIOS"
+   ],
+   "unidades_posibles": [
+    {
+     "unidad": "UN",
+     "descripcion": "unidad base",
+     "equivalencia": 1
+    }
+   ],
+   "validado_por": "migracion_inicial",
+   "created_at": "2026-06-22T16:56:09.320532+00:00",
+   "updated_at": "2026-06-22T16:56:09.320532+00:00"
+  }
+ ]
+}

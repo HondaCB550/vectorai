@@ -370,6 +370,46 @@ AMBIGUOS del script de curado (decisiones de catálogo, no bugs).
 
 ---
 
+## CIERRE (23-07-2026) — todo lo pendiente quedó resuelto
+
+Los puntos 1, 2 y 3 de arriba se cerraron:
+
+1. **Campaña actualizada a 27%** (commit `4ae39e5`): IDENTIDAD, emails, guía,
+   guion de video, reels y sus .html. Lo ya publicado quedó como estaba.
+   `indice_ejemplos_2026-07.md` ganó la sección RE-MEDICIÓN POST-CURADO con la
+   canasta re-medida (mediana de la canasta pesada: 44%).
+2. **Las 6 decisiones de catálogo, respondidas por Pablo y aplicadas**
+   (`aplicar_decisiones_catalogo_2026-07-23.py`, backup
+   `backup_decisiones_catalogo_2026-07-23.json`):
+   - Aro vs kit inodoro: SEPARADOS. Nuevo material **TER597 ARO SUPLEMENTARIO
+     DE CERA | INODORO** con los 3 aliases de aro; TER427 quedó como kit y su
+     descripción pasó a "TORNILLOS + TARUGOS". ⚠ El primer intento usó TER562
+     creyéndolo libre — la lectura del maestro cortó en 1000 filas (la trampa
+     de paginación de CLAUDE.md); TER562 era un basecoat de un curado previo.
+     La guarda de re-run del script lo frenó antes de tocar nada. El código
+     libre se busca con `select max(codigo)` por SQL, nunca paginando a mano.
+   - Pileta patio 110 chica Duratop = la de 3 entradas (INSTS056), conf 96.
+   - Manguito reparación 40 = CUPLA 40 (INSTS055; el destino ya tenía el
+     texto, se borró el duplicado).
+   - Cupla reducción 40x50 Tigre: sin código a propósito → alias borrado, si
+     reaparece cae a pendientes.
+   - Cámara de lodos: es UNA sola (100 y 180 lts unificadas en INSTS008).
+   - Flexible gas 1/2 x 42cm → vinculado al de 30 (INSTS202), conf 96.
+3. **T011 resuelto con evidencia**: la foto `MAD. LOBOS - STEEL - HOJA 2.jpg`
+   dice "TEL-HEX T2 14X1 C/ARA X 100 OFERTA" a $10.855,70 bonificado, que
+   ÷1,105 = $9.824,16 — el precio guardado, exacto. Es caja de 100 (≈$98/u,
+   no $9/u): conversión `T011 un/100` cargada.
+
+**Estado final del Índice (capa pipeline reconstruida, 460 filas):**
+121 materiales multi-proveedor, **97,5% sanos**, mediana **27,4%** — el 27%
+publicado queda válido. Los 3 dispersos restantes (CUPLA 50 3,7x, TAPA HEMBRA
+50 3,3x, BASECOAT 3,1x) son dispersión real de marca/mercado, no errores.
+
+Sigue abierto solo el punto 4 (duplicación en filas legacy, fuera del Índice,
+sin urgencia). Este documento queda como registro histórico.
+
+---
+
 ## Contexto de la sesión anterior
 
 Cambios ya deployados (no rehacer):
