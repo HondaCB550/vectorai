@@ -283,7 +283,7 @@ export default function Landing() {
                   <div className="w-10 h-10 bg-[#E87022] text-white rounded-full flex items-center justify-center text-lg font-bold mb-5">
                     {s.n}
                   </div>
-                  <h3 className="font-semibold text-[#1A2B4A] mb-2 text-base">{s.titulo}</h3>
+                  <h3 className="font-semibold text-[#1A2B4A] mb-2 text-lg">{s.titulo}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
                 </div>
               ))}
