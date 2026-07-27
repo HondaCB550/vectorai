@@ -373,6 +373,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "LA FORESTA - STEEL - SIN FACTURAR",
+   "codigo_material": "CONS277",
+   "unidad": "UN",
+   "precio": 30544.76,
+   "cantidad": 29,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MEMBRANA HIDROFUGA AISLAHOME 1.50X20 MTS",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS008",
    "unidad": "UN",
@@ -998,6 +1010,18 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS253",
+   "unidad": "UN",
+   "precio": 8424.37,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS019",
    "unidad": "UN",
    "precio": 7586.95,
@@ -1358,6 +1382,54 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS251",
+   "unidad": "UN",
+   "precio": 8567.39,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "SOBRE PILETA 110 C/5 ENTRADAS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS257",
+   "unidad": "UN",
+   "precio": 6445.86,
+   "cantidad": 3,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "REJA 15X15 ACERO INOX CROMO CASAL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS258",
+   "unidad": "UN",
+   "precio": 6445.24,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TAPA 15X15 ACERO INOX CROMO CASAL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS253",
+   "unidad": "UN",
+   "precio": 8424.37,
+   "cantidad": 8,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "TER303",
    "unidad": "UN",
    "precio": 79266.65,
@@ -1394,6 +1466,42 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS247",
+   "unidad": "UN",
+   "precio": 27528.03,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAM - KIT-COJINETE-MARCO TAPA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS255",
+   "unidad": "UN",
+   "precio": 4008.14,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAM - ARO- 10 CM",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS058",
+   "unidad": "UN",
+   "precio": 6023.25,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "EMPALME ACCESO 63-50 HORIZ.CHICO",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS117",
    "unidad": "UN",
    "precio": 574.39,
@@ -1426,6 +1534,30 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "A.SYSTEM BUJE RED.50 X 32",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS192",
+   "unidad": "UN",
+   "precio": 236416.78,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "SUMERG ROWA 1HP SUB 4RW COMP 56/7M",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER437",
+   "unidad": "UN",
+   "precio": 127891.03,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
    "origen": "pipeline"
   },
   {
@@ -1921,6 +2053,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "A020",
+   "unidad": "UN",
+   "precio": 151.12,
+   "cantidad": 4,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TARUGO SX 8 LAD.HUECO REDEX",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
    "codigo_material": "INSTS008",
    "unidad": "UN",
@@ -2306,6 +2450,18 @@
   },
   {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS029",
+   "unidad": "UN",
+   "precio": 4136.45,
+   "cantidad": 4,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1006 DE 40 X 2 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
    "codigo_material": "INSTS030",
    "unidad": "UN",
    "precio": 7478.06,
@@ -2594,6 +2750,30 @@
   },
   {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS262",
+   "unidad": "UN",
+   "precio": 182532.16,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BOMBA CLOACAL MEC QSBJH 750B (PLASTICA)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "TER604",
+   "unidad": "UN",
+   "precio": 162844.05,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BARI DEPOSITO APOYAR DUAL BL (DKW6F)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
    "codigo_material": "TER303",
    "unidad": "UN",
    "precio": 79372.71,
@@ -2602,6 +2782,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "TER603",
+   "unidad": "UN",
+   "precio": 107952.4,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
    "origen": "pipeline"
   },
   {
@@ -2638,6 +2830,30 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "TORNILLO P/INODORO COMPLETO 22 X 60",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS256",
+   "unidad": "UN",
+   "precio": 7817.4,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PROL. P/ CAM INSP TUBOFORTE",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS013",
+   "unidad": "UN",
+   "precio": 119025.44,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BOMBA PLUVIUS CPM 158A (1 HP) (CPM)",
    "origen": "pipeline"
   },
   {
@@ -3097,6 +3313,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "CORRALON LAPRIDA",
+   "codigo_material": "CONS275",
+   "unidad": "UN",
+   "precio": 21500.0,
+   "cantidad": 12,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MASTROCRET XBOLSA 100 LTS",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
    "codigo_material": "CONS116",
    "unidad": "UN",
@@ -3493,6 +3721,30 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "codigo_material": "CONS278",
+   "unidad": "UN",
+   "precio": 12036.2,
+   "cantidad": 9,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARCILLA X 10 KG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "codigo_material": "CONS202",
+   "unidad": "UN",
+   "precio": 28959.28,
+   "cantidad": 12,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TELGOPOR PERLAS CAFIVEL X 170 LT",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "INSUMA - STEEL",
    "codigo_material": "PC010",
    "unidad": "UN",
@@ -3566,6 +3818,30 @@
   },
   {
    "proveedor": "INSUMA - STEEL",
+   "codigo_material": "CH023",
+   "unidad": "UN",
+   "precio": 5528593.48,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "FLEJE CINC 25 ancho 610 MM",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "CONS276",
+   "unidad": "UN",
+   "precio": 51739.82,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
    "codigo_material": "T019",
    "unidad": "UN",
    "precio": 66.3584,
@@ -3586,6 +3862,54 @@
    "conversion_aplicada": "a precio por unidad (÷100 del pack)",
    "moneda": "ARS",
    "texto_original": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "P118",
+   "unidad": "UN",
+   "precio": 90496.23,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PFGAL C100X45X15X2.0 MM X 12 M",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "A022",
+   "unidad": "UN",
+   "precio": 1332.1,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "A023",
+   "unidad": "UN",
+   "precio": 3051.0,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "TER609",
+   "unidad": "UN",
+   "precio": 89565.74,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
    "origen": "pipeline"
   },
   {
@@ -3793,6 +4117,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "J.M. Landa",
+   "codigo_material": "CONS274",
+   "unidad": "UN",
+   "precio": 242307.68,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "HIDROFUGO TAMBOR X 200 LT.",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "CORRALON SAN RAFAEL",
    "codigo_material": "AUX001",
    "unidad": "UN",
@@ -3910,6 +4246,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "CLAVOS DE 2.50\" X KILO",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "J.M. Landa",
+   "codigo_material": "CH024",
+   "unidad": "ML",
+   "precio": 13438.9133,
+   "cantidad": 48,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por metro lineal (÷6 m de chapa)",
+   "moneda": "ARS",
+   "texto_original": "CHAPA ACA POLIP X 6 MT",
    "origen": "pipeline"
   },
   {
@@ -4042,6 +4390,18 @@
    "conversion_aplicada": "a precio por kilo (÷25 kg del envase)",
    "moneda": "ARS",
    "texto_original": "WEBER.THERM BASE COAT GRIS X25KG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON SAN RAFAEL",
+   "codigo_material": "CONS111",
+   "unidad": "UN",
+   "precio": 4156.24,
+   "cantidad": 31,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
    "origen": "pipeline"
   },
   {
@@ -4210,6 +4570,18 @@
    "conversion_aplicada": "a precio por kilo (÷30 kg del envase)",
    "moneda": "ARS",
    "texto_original": "WEBER REV BASE COAT GRIS X 30 KG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON LAS QUINTAS",
+   "codigo_material": "CONS111",
+   "unidad": "UN",
+   "precio": 2840.57,
+   "cantidad": 31,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "HIERRO DULCE DEL 4.2",
    "origen": "pipeline"
   },
   {
@@ -4690,6 +5062,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "MALLA F.VIDRIO (5X5) 1.00 X 50 MTS - 160 GRAMOS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "CONS277",
+   "unidad": "UN",
+   "precio": 31923.85,
+   "cantidad": 29,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "WICHI TECNO - 1.20 X 25 - 30 M2",
    "origen": "pipeline"
   },
   {
@@ -5438,6 +5822,18 @@
   },
   {
    "proveedor": "CAROSIO CORRALON",
+   "codigo_material": "CH024",
+   "unidad": "ML",
+   "precio": 2433.8167,
+   "cantidad": 288,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por metro lineal (÷6 m de chapa)",
+   "moneda": "ARS",
+   "texto_original": "CHAPA ACAN POLIP X 6  ML",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CAROSIO CORRALON",
    "codigo_material": "CONS111",
    "unidad": "UN",
    "precio": 3325.89,
@@ -5806,8 +6202,8 @@
   },
   {
    "texto": "MTS [20 KG]",
-   "codigo": "INSTS074",
-   "score": 84.0,
+   "codigo": "INSTS140",
+   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -5835,12 +6231,6 @@
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "MEMBRANA HIDROFUGA AISLAHOME 1.50X20 MTS",
-   "codigo": "TER574",
-   "score": 62.9,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "INODORO BARI LARGO BLANCO FERRUM",
    "codigo": "TER485",
    "score": 84.0,
@@ -5859,63 +6249,15 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
-   "codigo": "INSTS059",
-   "score": 60.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "PLACA CEMENTICIA VOLCANBOARD 8MM",
    "codigo": "EST109",
    "score": 84.9,
    "motivo": "score_bajo"
   },
   {
-   "texto": "SOBRE PILETA 110 C/5 ENTRADAS",
-   "codigo": "INSTS056",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "SYST UNION DOB.MIXTA C/BRI.50X11/2",
    "codigo": "INSTS121",
    "score": 84.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "REJA 15X15 ACERO INOX CROMO CASAL",
-   "codigo": "INSTS139",
-   "score": 84.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TAPA 15X15 ACERO INOX CROMO CASAL",
-   "codigo": "TER473",
-   "score": 82.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
-   "codigo": "INSTS059",
-   "score": 60.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CAM - KIT-COJINETE-MARCO TAPA",
-   "codigo": "INSTE093",
-   "score": 57.1,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "EMPALME ACCESO 63-50 HORIZ.CHICO",
-   "codigo": "INSTS059",
-   "score": 55.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "SUMERG ROWA 1HP SUB 4RW COMP 56/7M",
-   "codigo": "INSTS192",
-   "score": 53.7,
    "motivo": "score_bajo"
   },
   {
@@ -5931,12 +6273,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
-   "codigo": "TER437",
-   "score": 59.4,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "FLETE SIN CARGO",
    "codigo": "INS029",
    "score": 55.6,
@@ -5946,12 +6282,6 @@
    "texto": "CAÑO 160 MM AMANCO STD (900309)",
    "codigo": "INSTS028",
    "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TARUGO SX 8 LAD.HUECO REDEX",
-   "codigo": "A020",
-   "score": 54.5,
    "motivo": "score_bajo"
   },
   {
@@ -5971,12 +6301,6 @@
    "codigo": "INSTS077",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "CAÑO 1006 DE 40 X 2 AWA",
-   "codigo": "INSTS029",
-   "score": 76.0,
-   "motivo": "score_bajo"
   },
   {
    "texto": "CAÑO 20MM MAGNUM PN20 A/FRIA YCAL",
@@ -6015,45 +6339,15 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "BOMBA CLOACAL MEC QSBJH 750B (PLASTICA)",
-   "codigo": "INSTS040",
-   "score": 65.4,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "DESC CORRUG PVC 40 X 40/50 BCO (BIDET)",
    "codigo": "INSTS216",
    "score": 66.7,
    "motivo": "score_bajo"
   },
   {
-   "texto": "BARI DEPOSITO APOYAR DUAL BL (DKW6F)",
-   "codigo": "TER485",
-   "score": 83.3,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
-   "codigo": "TER304",
-   "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "ASIENTO PARAVOR BA 99 BLANCO H/NYLON",
-   "codigo": "TER310",
-   "score": 63.2,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "PROL. P/ CAM INSP TUBOFORTE",
-   "codigo": "INSTS005",
-   "score": 76.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "BOMBA PLUVIUS CPM 158A (1 HP) (CPM)",
-   "codigo": "CLIM117",
-   "score": 54.2,
+   "codigo": "TER601",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -6085,12 +6379,6 @@
    "codigo": "CONS107",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "MASTROCRET XBOLSA 100 LTS",
-   "codigo": "CONS202",
-   "score": 69.6,
-   "motivo": "score_bajo"
   },
   {
    "texto": "PALLET VACIO [DEVOLUCION 100%]",
@@ -6129,39 +6417,9 @@
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "ARCILLA X 10 KG",
-   "codigo": "Y115",
-   "score": 74.1,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TELGOPOR PERLAS CAFIVEL X 170 LT",
-   "codigo": "CONS202",
-   "score": 60.7,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "VARILLA GALV P/ANCLAJE W1/2\"X1000MM",
    "codigo": "A006",
    "score": 71.4,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "FLEJE CINC 25 ancho 610 MM",
-   "codigo": "CH017",
-   "score": 65.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
-   "codigo": "CONS268",
-   "score": 63.6,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "PFGAL C100X45X15X2.0 MM X 12 M",
-   "codigo": "P113",
-   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -6169,24 +6427,6 @@
    "codigo": "A001",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
-   "codigo": "A011",
-   "score": 77.8,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
-   "codigo": "A011",
-   "score": 77.8,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
-   "codigo": "TER115",
-   "score": 80.5,
-   "motivo": "score_bajo"
   },
   {
    "texto": "BASE COAT GRANITEX",
@@ -6199,12 +6439,6 @@
    "codigo": "CONS110",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "HIDROFUGO TAMBOR X 200 LT.",
-   "codigo": "CONS141",
-   "score": 76.0,
-   "motivo": "score_bajo"
   },
   {
    "texto": "SIKA QUARTZ TOP GRIS X 25 KG",
@@ -6249,12 +6483,6 @@
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "CHAPA ACA POLIP X 6 MT",
-   "codigo": "CH010",
-   "score": 70.6,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "CHAPA ACAN. C-25 CIN X MTL",
    "codigo": "CH019",
    "score": 100.0,
@@ -6264,12 +6492,6 @@
    "texto": "PEDREG. 3-1 BOLSON X 1.2 TN",
    "codigo": "CONS108",
    "score": 73.2,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
-   "codigo": "CONS116",
-   "score": 70.6,
    "motivo": "score_bajo"
   },
   {
@@ -6303,12 +6525,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "HIERRO DULCE DEL 4.2",
-   "codigo": "CONS115",
-   "score": 70.7,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "SUPERBOARD ST 8 MM - 1.20 X 2.40 (ETERNIT)",
    "codigo": "EST105",
    "score": 84.9,
@@ -6330,12 +6546,6 @@
    "texto": "ARANDELA P/ HTT14 (C) (BARBIERI)",
    "codigo": "TER114",
    "score": 76.2,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "WICHI TECNO - 1.20 X 25 - 30 M2",
-   "codigo": "HIE024",
-   "score": 65.3,
    "motivo": "score_bajo"
   },
   {
@@ -6490,8 +6700,8 @@
   },
   {
    "texto": "CAÑO SOLDABLE PVC 50X2.4X6M CL.10 JP TIGRE",
-   "codigo": "INSTE077",
-   "score": 72.7,
+   "codigo": "INSTS260",
+   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -6652,8 +6862,8 @@
   },
   {
    "texto": "CAÑO SOLDABLE PVC 50X2.4X6M CL.10 JP TIGRE",
-   "codigo": "INSTE077",
-   "score": 72.7,
+   "codigo": "INSTS260",
+   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -6703,12 +6913,6 @@
    "codigo": "CONS110",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "CHAPA ACAN POLIP X 6  ML",
-   "codigo": "CH009",
-   "score": 71.4,
-   "motivo": "score_bajo"
   },
   {
    "texto": "ARENA (AR)",

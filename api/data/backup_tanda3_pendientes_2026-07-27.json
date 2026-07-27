@@ -1,0 +1,1811 @@
+{
+ "tomado": "2026-07-27T17:36:10",
+ "pendientes": [
+  {
+   "id": "b0ee2d2e-ab15-4f81-a4db-f0565433b6e1",
+   "descripcion_original": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+   "descripcion_normalizada": "pvc boca acc. 160 c/2 bocas rejill",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8424.37,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:37.731616+00:00"
+  },
+  {
+   "id": "4dcfacf5-6e12-4f86-874f-5a26281d9ff0",
+   "descripcion_original": "SOBRE PILETA 110 C/5 ENTRADAS",
+   "descripcion_normalizada": "sobre pileta 110 c/5 entradas",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8567.39,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:40.335253+00:00"
+  },
+  {
+   "id": "45063eb7-9158-438b-9415-8628083a5f1e",
+   "descripcion_original": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+   "descripcion_normalizada": "pvc boca acc. 160 c/2 bocas rejill",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8424.37,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:41.748355+00:00"
+  },
+  {
+   "id": "e08f6eb8-bfa7-4cb8-9c1a-8d7f520edb6f",
+   "descripcion_original": "Cinta de papel microperforada x 23 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 1072.6,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "cf0d2350-be9a-410a-a18e-2e3c654af856",
+   "descripcion_original": "CAM - KIT-COJINETE-MARCO TAPA",
+   "descripcion_normalizada": "cam - kit-cojinete-marco tapa",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 27528.03,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:42.916832+00:00"
+  },
+  {
+   "id": "2218d1c8-1908-4938-9026-866593717aaa",
+   "descripcion_original": "H 21 C.R. 1 x m3",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HORMIGÓN ELABORADO",
+   "unidad_sugerida": null,
+   "precio_visto": 199600.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HORMIGÓN ELABORADO | Cat: HORMIGÓN ELABORADO | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "b276b2f9-5711-47e9-b7cf-2bdcd6006866",
+   "descripcion_original": "EMPALME ACCESO 63-50 HORIZ.CHICO",
+   "descripcion_normalizada": "empalme acceso 63-50 horiz.chico",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6023.25,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:43.505187+00:00"
+  },
+  {
+   "id": "a606a10f-4ede-472a-aef2-b80fa81be4ba",
+   "descripcion_original": "SUMERG ROWA 1HP SUB 4RW COMP 56/7M",
+   "descripcion_normalizada": "sumerg rowa 1hp sub 4rw comp 56/7m",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 236416.78,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:44.940046+00:00"
+  },
+  {
+   "id": "feac6398-bfa2-41ed-8664-db1014e6bd63",
+   "descripcion_original": "Zócalo Eucafloor MDF laminado",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "ZOCALOS",
+   "unidad_sugerida": null,
+   "precio_visto": 8800.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: ZOCALOS | Cat: ZÓCALOS | Tecnoperfil | c/IVA",
+   "created_at": "2026-07-01T17:29:16.142107+00:00"
+  },
+  {
+   "id": "1281425f-42ba-4bdf-a2bd-14d76187c2a0",
+   "descripcion_original": "10-351063540 PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+   "descripcion_normalizada": "10-351063540 pil. de patio 125 mm c/sal 63mm 5ent 40mm",
+   "proveedor": "CAROSIO SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 9370.33,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-06T12:31:03.374035+00:00"
+  },
+  {
+   "id": "4de6001a-c043-4da8-80f8-9e237ffa27d3",
+   "descripcion_original": "Transporte",
+   "descripcion_normalizada": "transporte",
+   "proveedor": "SAUCE",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 771988.54,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:21.165144+00:00"
+  },
+  {
+   "id": "92bc2e5c-40e6-4ae8-b100-8479639ecc69",
+   "descripcion_original": "Transporte",
+   "descripcion_normalizada": "transporte",
+   "proveedor": "SAUCE",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3721506.59,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:21.446142+00:00"
+  },
+  {
+   "id": "ff58cdf9-3c5b-4a0f-bf06-388a5a441a17",
+   "descripcion_original": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+   "descripcion_normalizada": "pil. de patio 125 mm c/sal 63mm 5ent 40mm",
+   "proveedor": "CAROSIO SANITARIO",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 9370.33,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:22.34364+00:00"
+  },
+  {
+   "id": "f7c394a5-192c-47ef-b59c-94801f2fbd64",
+   "descripcion_original": "6023-PILETA PATIO C/SIF.3S 160X110 AWADUCT",
+   "descripcion_normalizada": "6023-pileta patio c/sif.3s 160x110 awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 30318.39,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:23.191413+00:00"
+  },
+  {
+   "id": "cc1437c5-6d94-4090-8a5f-3c8e87075a68",
+   "descripcion_original": "J.E. RAMAL 160X160 A 45 M-H 26035163 TIGRE",
+   "descripcion_normalizada": "j.e. ramal 160x160 a 45 m-h 26035163 tigre",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 23695.94,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:24.07026+00:00"
+  },
+  {
+   "id": "21a51083-9fea-44c6-839a-991b8c754e7a",
+   "descripcion_original": "103/B1P ARIZONA PLUS DUCHA P/EMBUTIR FV",
+   "descripcion_normalizada": "103/b1p arizona plus ducha p/embutir fv",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 93201.37,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:25.21426+00:00"
+  },
+  {
+   "id": "39f0f31e-8f2f-4501-9db6-24b64238ce8f",
+   "descripcion_original": "MONACO INOD. LARGO BL 1061200000202 ROCA",
+   "descripcion_normalizada": "monaco inod. largo bl 1061200000202 roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 140162.88,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:25.807838+00:00"
+  },
+  {
+   "id": "8f360edb-6d23-4ece-b072-14a3b2e4a5f4",
+   "descripcion_original": "MONACO DEPOSITO APOYO 3/6L BL ROCA",
+   "descripcion_normalizada": "monaco deposito apoyo 3/6l bl roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 128614.78,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:26.096564+00:00"
+  },
+  {
+   "id": "63fd5b78-998c-4555-8484-c47c6a2fabda",
+   "descripcion_original": "ASIENTO MONACO HERR. BISAG.NYLON BL ROCA",
+   "descripcion_normalizada": "asiento monaco herr. bisag.nylon bl roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 60255.96,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:26.380873+00:00"
+  },
+  {
+   "id": "ded1cedd-8ecd-4d69-8470-f9af4c10a670",
+   "descripcion_original": "6023-PILETA PATIO C/SIF.3S 160X110 AWADUCT",
+   "descripcion_normalizada": "6023-pileta patio c/sif.3s 160x110 awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 30318.39,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:23.526926+00:00"
+  },
+  {
+   "id": "49acaabd-472c-4d7b-981a-919830a1b69f",
+   "descripcion_original": "J.E. RAMAL 160X160 A 45 M-H 26035163 TIGRE",
+   "descripcion_normalizada": "j.e. ramal 160x160 a 45 m-h 26035163 tigre",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 23695.94,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:24.141871+00:00"
+  },
+  {
+   "id": "06a5f29d-390c-46f7-91cb-342bc1e6fa36",
+   "descripcion_original": "103/B1P ARIZONA PLUS DUCHA P/EMBUTIR FV",
+   "descripcion_normalizada": "103/b1p arizona plus ducha p/embutir fv",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 93201.37,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:25.282754+00:00"
+  },
+  {
+   "id": "c574cc0d-a0ef-4d11-8060-2cb3fb3ef3eb",
+   "descripcion_original": "MONACO INOD. LARGO BL 1061200000202 ROCA",
+   "descripcion_normalizada": "monaco inod. largo bl 1061200000202 roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 140162.88,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:27.321999+00:00"
+  },
+  {
+   "id": "f98915e5-90b8-4591-b3ae-e3f3d6711761",
+   "descripcion_original": "MONACO DEPOSITO APOYO 3/6L BL ROCA",
+   "descripcion_normalizada": "monaco deposito apoyo 3/6l bl roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 128614.78,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:27.605809+00:00"
+  },
+  {
+   "id": "d27d1a2d-2d01-4974-b71b-a82af1769efa",
+   "descripcion_original": "ASIENTO MONACO HERR. BISAG.NYLON BL ROCA",
+   "descripcion_normalizada": "asiento monaco herr. bisag.nylon bl roca",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 60255.96,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:27.919092+00:00"
+  },
+  {
+   "id": "802caad6-c2c6-403c-a459-de8bfd3e18e2",
+   "descripcion_original": "Transporte",
+   "descripcion_normalizada": "transporte",
+   "proveedor": "SAUCE",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3721506.59,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:29.390005+00:00"
+  },
+  {
+   "id": "9dfbb38b-69c2-4950-b1d3-17c63b68a8b1",
+   "descripcion_original": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+   "descripcion_normalizada": "pil. de patio 125 mm c/sal 63mm 5ent 40mm",
+   "proveedor": "CAROSIO SANITARIO",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 9370.33,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:30.01667+00:00"
+  },
+  {
+   "id": "56068240-cdc1-432e-9f63-fa2e360b81f2",
+   "descripcion_original": "INODORO + DEPOSITO SOUTH",
+   "descripcion_normalizada": "inodoro + deposito south",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 252816.24,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:38.508815+00:00"
+  },
+  {
+   "id": "5ddc2c67-bdc1-422b-9cec-d3a0a9499670",
+   "descripcion_original": "BIDET SOUTH VESSANTI",
+   "descripcion_normalizada": "bidet south vessanti",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 146763.73,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:42.898454+00:00"
+  },
+  {
+   "id": "1c9fe028-1de4-43f7-8268-5d1a0f72d595",
+   "descripcion_original": "C 37/18 C 37/18 70,8 x 37 x 18 J H",
+   "descripcion_normalizada": "c 37/18 c 37/18 70,8 x 37 x 18 j h",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 154428.89,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:43.21696+00:00"
+  },
+  {
+   "id": "5bd50b1e-e380-4665-8494-371b9fd99cc9",
+   "descripcion_original": "VILLAGE LAV. PIAZZA",
+   "descripcion_normalizada": "village lav. piazza",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 59003.56,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:44.189928+00:00"
+  },
+  {
+   "id": "67c100d1-3714-4485-9ddb-645452cb7a62",
+   "descripcion_original": "CUBE SET 4 PIEZAS - NICK E",
+   "descripcion_normalizada": "cube set 4 piezas - nick e",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 53154.07,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:44.476272+00:00"
+  },
+  {
+   "id": "063a9808-c4c4-4296-8308-10061c3cb7bd",
+   "descripcion_original": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
+   "descripcion_normalizada": "lavat apoyo tori chica 1ag l320k* oferta",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 127891.03,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:45.820458+00:00"
+  },
+  {
+   "id": "e74ce91b-4ab2-4abf-9841-f9d1e6bc095e",
+   "descripcion_original": "TARUGO SX 8 LAD.HUECO REDEX",
+   "descripcion_normalizada": "tarugo sx 8 lad.hueco redex",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 151.12,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:46.387903+00:00"
+  },
+  {
+   "id": "c090146b-e3fa-4ce1-88ea-b2ba10cf90c5",
+   "descripcion_original": "CAÑO 1006 DE 40 X 2 AWA",
+   "descripcion_normalizada": "caño 1006 de 40 x 2 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4136.45,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:47.781899+00:00"
+  },
+  {
+   "id": "af80a850-0828-41af-b816-7924eea743ab",
+   "descripcion_original": "BARI DEPOSITO APOYAR DUAL BL (DKW6F)",
+   "descripcion_normalizada": "bari deposito apoyar dual bl (dkw6f)",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 162844.05,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:51.239412+00:00"
+  },
+  {
+   "id": "ff1a8fb5-9222-46bc-8b8d-cb89153eb9ee",
+   "descripcion_original": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
+   "descripcion_normalizada": "bacha de apoyo 1 ag. 465x420x155 mm (a449)",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 107952.4,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:51.831065+00:00"
+  },
+  {
+   "id": "4c128cb9-6904-4250-ad4c-764e63ee3865",
+   "descripcion_original": "ASIENTO PARAVOR BA 99 BLANCO H/NYLON",
+   "descripcion_normalizada": "asiento paravor ba 99 blanco h/nylon",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 72176.93,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:52.951096+00:00"
+  },
+  {
+   "id": "d8be232c-8ad1-44a2-943f-9757c0225a3a",
+   "descripcion_original": "BOMBA PLUVIUS CPM 158A (1 HP) (CPM)",
+   "descripcion_normalizada": "bomba pluvius cpm 158a (1 hp) (cpm)",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 119025.44,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:53.532347+00:00"
+  },
+  {
+   "id": "46652934-b4e8-429e-a718-cca94f61d4bc",
+   "descripcion_original": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
+   "descripcion_normalizada": "malla fibra vidrio 90 grs.1 x 50 mts.",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 98970.14,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:15.687313+00:00"
+  },
+  {
+   "id": "d7b2b388-5d92-4a0d-9448-28445f8c8952",
+   "descripcion_original": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
+   "descripcion_normalizada": "malla fibra vidrio 90 grs.1 x 50 mts.",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 89565.74,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:54.025402+00:00"
+  },
+  {
+   "id": "86fc73c6-7125-467e-852d-3fab8ee9fc94",
+   "descripcion_original": "TELGOPOR PERLAS CAFIVEL X 170 LT",
+   "descripcion_normalizada": "telgopor perlas cafivel x 170 lt",
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 28959.28,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:49:01.611398+00:00"
+  },
+  {
+   "id": "59fad2bb-30ac-4c86-81e4-338986692d78",
+   "descripcion_original": "HIERRO DULCE DEL 4.2",
+   "descripcion_normalizada": "hierro dulce del 4.2",
+   "proveedor": "CORRALON LAS QUINTAS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3138.83,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:01.456715+00:00"
+  },
+  {
+   "id": "0216fc2e-f4c1-42bb-aba2-dafe5d40ac6e",
+   "descripcion_original": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
+   "descripcion_normalizada": "hierro dulce del 0.6 x kg al 220 gerdau",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4156.24,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:02.904847+00:00"
+  },
+  {
+   "id": "e0dd01a1-bbbf-4086-bfb8-50237b94f0a9",
+   "descripcion_original": "ARENA (AR)",
+   "descripcion_normalizada": "arena (ar)",
+   "proveedor": "CAROSIO CORRALON",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 39896.3,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-21T16:46:05.040219+00:00"
+  },
+  {
+   "id": "3315089b-a82e-4317-9400-dbb4803e88af",
+   "descripcion_original": "ARENA RUBIA",
+   "descripcion_normalizada": "arena rubia",
+   "proveedor": "SAUCE",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 48408.72,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-21T16:46:05.339259+00:00"
+  },
+  {
+   "id": "1c54a4a7-783e-4a53-ba51-9e4fc6a6f581",
+   "descripcion_original": "ARENA (AR)",
+   "descripcion_normalizada": "arena (ar)",
+   "proveedor": "CAROSIO CORRALON",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 39896.3,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:48.687744+00:00"
+  },
+  {
+   "id": "057f1191-d891-4504-a9ea-b41ebc57db28",
+   "descripcion_original": "ARENA RUBIA",
+   "descripcion_normalizada": "arena rubia",
+   "proveedor": "SAUCE",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 48408.72,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:48.980408+00:00"
+  },
+  {
+   "id": "2c4b557c-a83a-4f6e-b4e2-d5de3b10100f",
+   "descripcion_original": "HIERRO DULCE DEL 4.2",
+   "descripcion_normalizada": "hierro dulce del 4.2",
+   "proveedor": "CORRALON LAS QUINTAS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2840.57,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:49.285143+00:00"
+  },
+  {
+   "id": "c3bd705d-9f61-4b78-8393-6e0dbeba2922",
+   "descripcion_original": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
+   "descripcion_normalizada": "hierro dulce del 0.6 x kg al 220 gerdau",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4156.24,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:49.847817+00:00"
+  },
+  {
+   "id": "91e85942-a483-4edb-8ada-666d0955422d",
+   "descripcion_original": "Contenedor estandar (de 5 m3 de capacidad)",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "ALQUILER DE EQUIPOS",
+   "unidad_sugerida": "x día",
+   "precio_visto": 108900.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: ALQUILER DE EQUIPOS | Cat: RICARDO MALLOZZI SA | c/IVA",
+   "created_at": "2026-06-30T23:51:53.466578+00:00"
+  },
+  {
+   "id": "c0347a7f-82ab-4eb4-b284-e6551c317184",
+   "descripcion_original": "HIDROFUGO TAMBOR X 200 LT.",
+   "descripcion_normalizada": "hidrofugo tambor x 200 lt.",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 242307.68,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:06.919981+00:00"
+  },
+  {
+   "id": "64664560-0fff-441f-b7f0-7328d6bb7a29",
+   "descripcion_original": "FLETE SIN CARGO",
+   "descripcion_normalizada": "flete sin cargo",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 0.07,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:07.761374+00:00"
+  },
+  {
+   "id": "79bd1d89-fa75-4439-a0d6-d3d65eb1c9b5",
+   "descripcion_original": "MASTROCRET XBOLSA 100 LTS",
+   "descripcion_normalizada": "mastrocret xbolsa 100 lts",
+   "proveedor": "CORRALON LAPRIDA",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 21500.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:43:36.266958+00:00"
+  },
+  {
+   "id": "2589e914-a905-4963-b411-eaa891678b26",
+   "descripcion_original": "PALLET VACIO [DEVOLUCION 100%]",
+   "descripcion_normalizada": "pallet vacio [devolucion 100%]",
+   "proveedor": "CORRALON LAPRIDA",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 34000.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:43:36.580791+00:00"
+  },
+  {
+   "id": "b6dd727f-de1f-43e1-86ce-b85557ebafde",
+   "descripcion_original": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
+   "descripcion_normalizada": "arandela cuadrada galv 35x35x3,2mm x 10",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1471.97,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:15.130949+00:00"
+  },
+  {
+   "id": "9e559cba-bed3-4698-ba0b-24fb7e76e355",
+   "descripcion_original": "FLEJE CINC 25 ancho 610 MM",
+   "descripcion_normalizada": "fleje cinc 25 ancho 610 mm",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6109095.8,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:12.807197+00:00"
+  },
+  {
+   "id": "2916407d-9203-4c26-a1c0-53c779e9c120",
+   "descripcion_original": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
+   "descripcion_normalizada": "manta hidrofuga issa 1.50 x30 mts",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 57172.5,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:13.107475+00:00"
+  },
+  {
+   "id": "32a1dac4-8b1f-4dee-949a-fab8cf58c233",
+   "descripcion_original": "PFGAL C100X45X15X2.0 MM X 12 M",
+   "descripcion_normalizada": "pfgal c100x45x15x2.0 mm x 12 m",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 99998.33,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:14.285352+00:00"
+  },
+  {
+   "id": "55611f56-7b76-42f4-b9be-d222dc5dc3be",
+   "descripcion_original": "Cable paralelo 2 x 0,5 mm",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "INSTALACIÓN ELÉCTRICA",
+   "unidad_sugerida": null,
+   "precio_visto": 671.43,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: INSTALACIÓN ELÉCTRICA | Cat: ELECTRICIDAD | Electricidad DER | c/IVA",
+   "created_at": "2026-06-30T23:54:42.683197+00:00"
+  },
+  {
+   "id": "0e08c235-2172-47ed-805f-202e436add0f",
+   "descripcion_original": "Caño PVC Clásico 40x4x3.2",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "INSTALACIÓN SANITARIA",
+   "unidad_sugerida": null,
+   "precio_visto": 10448.8,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: INSTALACIÓN SANITARIA | Cat: INSTALACIONES | c/IVA",
+   "created_at": "2026-06-30T23:56:22.608902+00:00"
+  },
+  {
+   "id": "5f67df98-c06e-4676-a537-3344a7355e99",
+   "descripcion_original": "Caño PVC Clásico 50x 4 X 3.2",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "INSTALACIÓN SANITARIA",
+   "unidad_sugerida": null,
+   "precio_visto": 13505.88,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: INSTALACIÓN SANITARIA | Cat: INSTALACIONES | c/IVA",
+   "created_at": "2026-06-30T23:56:22.608902+00:00"
+  },
+  {
+   "id": "5dd98758-3169-48e8-a385-a239c507eb96",
+   "descripcion_original": "REJA 15X15 ACERO INOX CROMO CASAL",
+   "descripcion_normalizada": "reja 15x15 acero inox cromo casal",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6445.86,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:41.187415+00:00"
+  },
+  {
+   "id": "dd861547-1984-499e-9946-432154f4eede",
+   "descripcion_original": "TAPA 15X15 ACERO INOX CROMO CASAL",
+   "descripcion_normalizada": "tapa 15x15 acero inox cromo casal",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6445.24,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:41.463556+00:00"
+  },
+  {
+   "id": "1139289c-3eee-4ff4-a18a-c4350a2176ad",
+   "descripcion_original": "CAM - ARO- 10 CM",
+   "descripcion_normalizada": "cam - aro- 10 cm",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4008.14,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:43.19689+00:00"
+  },
+  {
+   "id": "b5861198-0065-42bf-81ea-ebb9f68a3c28",
+   "descripcion_original": "FLEJE CINC 25 ancho 610 MM",
+   "descripcion_normalizada": "fleje cinc 25 ancho 610 mm",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 5528593.48,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:51.714613+00:00"
+  },
+  {
+   "id": "e524084f-526b-4c5c-b0d1-0c154cf07036",
+   "descripcion_original": "Cristal Templado 10 mm",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "VIDRIERÍA",
+   "unidad_sugerida": null,
+   "precio_visto": 299467.28,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: VIDRIERÍA | Cat: VIDRIOS | Bianchi vidrios y cristales | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "7d5b3cdb-b95e-4269-a692-2c87ee62c837",
+   "descripcion_original": "Profilit \"U Glass\" medidas del perfil 0.26 x 3 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "VIDRIERÍA",
+   "unidad_sugerida": null,
+   "precio_visto": 88687.51,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: VIDRIERÍA | Cat: VIDRIOS | Bianchi vidrios y cristales | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "78e563d2-f60c-4624-9da8-b2d9605e55a0",
+   "descripcion_original": "Laminado Extra Negro 3+3 mm",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "VIDRIERÍA",
+   "unidad_sugerida": null,
+   "precio_visto": 409015.37,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: VIDRIERÍA | Cat: VIDRIOS DECORATIVOS \"COVERGLASS\" x m2 | c/IVA",
+   "created_at": "2026-07-01T17:29:16.142107+00:00"
+  },
+  {
+   "id": "6157c812-8560-4ebf-8647-0615e587630b",
+   "descripcion_original": "4003-PORTARREJILLA AC.INOX 15X15 REJILLA AWADUCT",
+   "descripcion_normalizada": "4003-portarrejilla ac.inox 15x15 rejilla awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6292.19,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:22.897145+00:00"
+  },
+  {
+   "id": "7becefa1-63b4-496b-bf17-7d4a5da14bb6",
+   "descripcion_original": "4005-PORTARREJILLA AC.INOX 15X15 T.CIEGA AWADUCT",
+   "descripcion_normalizada": "4005-portarrejilla ac.inox 15x15 t.ciega awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6292.19,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:25.488797+00:00"
+  },
+  {
+   "id": "f6fdf32c-0685-4580-9489-e3034d641d56",
+   "descripcion_original": "CAJA PREINSTALACION A.AC SAL.VERT LINEA XDURATOP",
+   "descripcion_normalizada": "caja preinstalacion a.ac sal.vert linea xduratop",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7969.63,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:28.395752+00:00"
+  },
+  {
+   "id": "47e414a2-c530-4fe1-8b6c-03a6f0254385",
+   "descripcion_original": "SUPLEMENTO ARO X 100MM O.V.CAM (cod.ARO) O.V. CAM",
+   "descripcion_normalizada": "suplemento aro x 100mm o.v.cam (cod.aro) o.v. cam",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3865.11,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:28.674408+00:00"
+  },
+  {
+   "id": "0a5aa7c6-4aa9-414a-8891-d2e65d864d72",
+   "descripcion_original": "4003-PORTARREJILLA AC.INOX 15X15 REJILLA AWADUCT",
+   "descripcion_normalizada": "4003-portarrejilla ac.inox 15x15 rejilla awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6292.19,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:23.202672+00:00"
+  },
+  {
+   "id": "fb0c6761-6a09-4087-9ee1-74f535c3fdce",
+   "descripcion_original": "SUPLEMENTO ARO X 100MM O.V.CAM (cod.ARO) O.V. CAM",
+   "descripcion_normalizada": "suplemento aro x 100mm o.v.cam (cod.aro) o.v. cam",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3865.11,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:25.878446+00:00"
+  },
+  {
+   "id": "43ecfb64-c41e-412e-bbb6-5e533cd6c261",
+   "descripcion_original": "4005-PORTARREJILLA AC.INOX 15X15 T.CIEGA AWADUCT",
+   "descripcion_normalizada": "4005-portarrejilla ac.inox 15x15 t.ciega awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6292.19,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:27.032293+00:00"
+  },
+  {
+   "id": "6492d088-7600-46f0-adb8-e1a10f66f065",
+   "descripcion_original": "CAJA PREINSTALACION A.AC SAL.VERT LINEA XDURATOP",
+   "descripcion_normalizada": "caja preinstalacion a.ac sal.vert linea xduratop",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7969.63,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:28.506664+00:00"
+  },
+  {
+   "id": "54cd7c9b-8a9c-46ff-b959-ba3dae1b9bf3",
+   "descripcion_original": "Purifica Dvigi 6 etapas",
+   "descripcion_normalizada": "purifica dvigi 6 etapas",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 436345.85,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:43.887932+00:00"
+  },
+  {
+   "id": "5af07b4f-b246-490f-9c1f-aaf078ff4c21",
+   "descripcion_original": "BOMBA CLOACAL MEC QSBJH 750B (PLASTICA)",
+   "descripcion_normalizada": "bomba cloacal mec qsbjh 750b (plastica)",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 182532.16,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:50.386155+00:00"
+  },
+  {
+   "id": "1f9dec17-885a-4735-8adb-bd6637765953",
+   "descripcion_original": "PROL. P/ CAM INSP TUBOFORTE",
+   "descripcion_normalizada": "prol. p/ cam insp tuboforte",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7817.4,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:53.242098+00:00"
+  },
+  {
+   "id": "d9af3de0-6a24-4112-81c2-f7b461d38ac8",
+   "descripcion_original": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
+   "descripcion_normalizada": "arandela cuadrada galv 80x80x3,2mm x 10",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3371.36,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:15.406883+00:00"
+  },
+  {
+   "id": "748c3547-aadd-4154-bac4-fd95d30856c7",
+   "descripcion_original": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
+   "descripcion_normalizada": "manta hidrofuga issa 1.50 x30 mts",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 51739.82,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:52.010147+00:00"
+  },
+  {
+   "id": "a4a2538c-3590-4340-8cab-fd8d6c1572c3",
+   "descripcion_original": "PFGAL C100X45X15X2.0 MM X 12 M",
+   "descripcion_normalizada": "pfgal c100x45x15x2.0 mm x 12 m",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 90496.23,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:52.879114+00:00"
+  },
+  {
+   "id": "718c94b8-b6cb-4efd-8744-35fb95acf528",
+   "descripcion_original": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
+   "descripcion_normalizada": "arandela cuadrada galv 35x35x3,2mm x 10",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1332.1,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:53.455057+00:00"
+  },
+  {
+   "id": "205a5dcf-de69-486d-9629-acd594de0a18",
+   "descripcion_original": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
+   "descripcion_normalizada": "arandela cuadrada galv 80x80x3,2mm x 10",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3051.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:53.732493+00:00"
+  },
+  {
+   "id": "f64b31be-dbae-401e-a038-467391f30593",
+   "descripcion_original": "MEMBRANA HIDROFUGA AISLAHOME 1.50X20 MTS",
+   "descripcion_normalizada": "membrana hidrofuga aislahome 1.50x20 mts",
+   "proveedor": "LA FORESTA - STEEL - SIN FACTURAR",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 30544.76,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:49:00.0607+00:00"
+  },
+  {
+   "id": "d9f6739f-4ac1-4505-8420-d43b73b1d20f",
+   "descripcion_original": "ARCILLA X 10 KG",
+   "descripcion_normalizada": "arcilla x 10 kg",
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 12036.2,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:49:01.318182+00:00"
+  },
+  {
+   "id": "9d996d41-034c-4670-b353-8374d8d922c4",
+   "descripcion_original": "PALLET DESCARTABLE",
+   "descripcion_normalizada": "pallet descartable",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3619.92,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:08.385116+00:00"
+  },
+  {
+   "id": "a5a4c4b4-2e13-4771-9cd4-10da42676d8e",
+   "descripcion_original": "FLETE SIN CARGO",
+   "descripcion_normalizada": "flete sin cargo",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 0.07,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:08.699624+00:00"
+  }
+ ],
+ "plan": [
+  {
+   "texto": "ARENA (AR)",
+   "codigo": "CONS225",
+   "ids": [
+    "e0dd01a1-bbbf-4086-bfb8-50237b94f0a9",
+    "1c54a4a7-783e-4a53-ba51-9e4fc6a6f581"
+   ]
+  },
+  {
+   "texto": "ARENA RUBIA",
+   "codigo": "CONS240",
+   "ids": [
+    "3315089b-a82e-4317-9400-dbb4803e88af",
+    "057f1191-d891-4504-a9ea-b41ebc57db28"
+   ]
+  },
+  {
+   "texto": "CAÑO 1006 DE 40 X 2 AWA",
+   "codigo": "INSTS029",
+   "ids": [
+    "c090146b-e3fa-4ce1-88ea-b2ba10cf90c5"
+   ]
+  },
+  {
+   "texto": "C 37/18 C 37/18 70,8 x 37 x 18 J H",
+   "codigo": "TER433",
+   "ids": [
+    "1c9fe028-1de4-43f7-8268-5d1a0f72d595"
+   ]
+  },
+  {
+   "texto": "H 21 C.R. 1 x m3",
+   "codigo": "CONS113",
+   "ids": [
+    "2218d1c8-1908-4938-9026-866593717aaa"
+   ]
+  },
+  {
+   "texto": "EMPALME ACCESO 63-50 HORIZ.CHICO",
+   "codigo": "INSTS058",
+   "ids": [
+    "b276b2f9-5711-47e9-b7cf-2bdcd6006866"
+   ]
+  },
+  {
+   "texto": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
+   "codigo": "TER437",
+   "ids": [
+    "063a9808-c4c4-4296-8308-10061c3cb7bd"
+   ]
+  },
+  {
+   "texto": "BOMBA PLUVIUS CPM 158A (1 HP) (CPM)",
+   "codigo": "INSTS013",
+   "ids": [
+    "d8be232c-8ad1-44a2-943f-9757c0225a3a"
+   ]
+  },
+  {
+   "texto": "SUMERG ROWA 1HP SUB 4RW COMP 56/7M",
+   "codigo": "INSTS192",
+   "ids": [
+    "a606a10f-4ede-472a-aef2-b80fa81be4ba"
+   ]
+  },
+  {
+   "texto": "TARUGO SX 8 LAD.HUECO REDEX",
+   "codigo": "A020",
+   "ids": [
+    "e74ce91b-4ab2-4abf-9841-f9d1e6bc095e"
+   ]
+  },
+  {
+   "texto": "Transporte",
+   "codigo": "INS029",
+   "ids": [
+    "4de6001a-c043-4da8-80f8-9e237ffa27d3",
+    "92bc2e5c-40e6-4ae8-b100-8479639ecc69",
+    "802caad6-c2c6-403c-a459-de8bfd3e18e2"
+   ]
+  },
+  {
+   "texto": "TELGOPOR PERLAS CAFIVEL X 170 LT",
+   "codigo": "CONS202",
+   "ids": [
+    "86fc73c6-7125-467e-852d-3fab8ee9fc94"
+   ]
+  },
+  {
+   "texto": "Cinta de papel microperforada x 23 m",
+   "codigo": "Y106",
+   "ids": [
+    "e08f6eb8-bfa7-4cb8-9c1a-8d7f520edb6f"
+   ]
+  },
+  {
+   "texto": "HIERRO DULCE DEL 4.2",
+   "codigo": "CONS111",
+   "ids": [
+    "59fad2bb-30ac-4c86-81e4-338986692d78",
+    "2c4b557c-a83a-4f6e-b4e2-d5de3b10100f"
+   ]
+  },
+  {
+   "texto": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
+   "codigo": "CONS111",
+   "ids": [
+    "0216fc2e-f4c1-42bb-aba2-dafe5d40ac6e",
+    "c3bd705d-9f61-4b78-8393-6e0dbeba2922"
+   ]
+  },
+  {
+   "texto": "CAM - KIT-COJINETE-MARCO TAPA",
+   "codigo": "INSTS247",
+   "ids": [
+    "cf0d2350-be9a-410a-a18e-2e3c654af856"
+   ]
+  },
+  {
+   "texto": "INODORO + DEPOSITO SOUTH",
+   "codigo": "TER598",
+   "ids": [
+    "56068240-cdc1-432e-9f63-fa2e360b81f2"
+   ]
+  },
+  {
+   "texto": "BIDET SOUTH VESSANTI",
+   "codigo": "TER599",
+   "ids": [
+    "5ddc2c67-bdc1-422b-9cec-d3a0a9499670"
+   ]
+  },
+  {
+   "texto": "ASIENTO MONACO HERR. BISAG.NYLON BL ROCA",
+   "codigo": "TER600",
+   "ids": [
+    "63fd5b78-998c-4555-8484-c47c6a2fabda",
+    "d27d1a2d-2d01-4974-b71b-a82af1769efa"
+   ]
+  },
+  {
+   "texto": "ASIENTO PARAVOR BA 99 BLANCO H/NYLON",
+   "codigo": "TER601",
+   "ids": [
+    "4c128cb9-6904-4250-ad4c-764e63ee3865"
+   ]
+  },
+  {
+   "texto": "VILLAGE LAV. PIAZZA",
+   "codigo": "TER602",
+   "ids": [
+    "5bd50b1e-e380-4665-8494-371b9fd99cc9"
+   ]
+  },
+  {
+   "texto": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
+   "codigo": "TER603",
+   "ids": [
+    "ff1a8fb5-9222-46bc-8b8d-cb89153eb9ee"
+   ]
+  },
+  {
+   "texto": "BARI DEPOSITO APOYAR DUAL BL (DKW6F)",
+   "codigo": "TER604",
+   "ids": [
+    "af80a850-0828-41af-b816-7924eea743ab"
+   ]
+  },
+  {
+   "texto": "MONACO DEPOSITO APOYO 3/6L BL ROCA",
+   "codigo": "TER605",
+   "ids": [
+    "8f360edb-6d23-4ece-b072-14a3b2e4a5f4",
+    "f98915e5-90b8-4591-b3ae-e3f3d6711761"
+   ]
+  },
+  {
+   "texto": "MONACO INOD. LARGO BL 1061200000202 ROCA",
+   "codigo": "TER606",
+   "ids": [
+    "39f0f31e-8f2f-4501-9db6-24b64238ce8f",
+    "c574cc0d-a0ef-4d11-8060-2cb3fb3ef3eb"
+   ]
+  },
+  {
+   "texto": "103/B1P ARIZONA PLUS DUCHA P/EMBUTIR FV",
+   "codigo": "TER607",
+   "ids": [
+    "21a51083-9fea-44c6-839a-991b8c754e7a",
+    "06a5f29d-390c-46f7-91cb-342bc1e6fa36"
+   ]
+  },
+  {
+   "texto": "CUBE SET 4 PIEZAS - NICK E",
+   "codigo": "TER608",
+   "ids": [
+    "67c100d1-3714-4485-9ddb-645452cb7a62"
+   ]
+  },
+  {
+   "texto": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
+   "codigo": "TER609",
+   "ids": [
+    "46652934-b4e8-429e-a718-cca94f61d4bc",
+    "d7b2b388-5d92-4a0d-9448-28445f8c8952"
+   ]
+  },
+  {
+   "texto": "Zócalo Eucafloor MDF laminado",
+   "codigo": "TER610",
+   "ids": [
+    "feac6398-bfa2-41ed-8664-db1014e6bd63"
+   ]
+  },
+  {
+   "texto": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+   "codigo": "INSTS251",
+   "ids": [
+    "ff58cdf9-3c5b-4a0f-bf06-388a5a441a17",
+    "9dfbb38b-69c2-4950-b1d3-17c63b68a8b1"
+   ]
+  },
+  {
+   "texto": "10-351063540 PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40",
+   "codigo": "INSTS251",
+   "ids": [
+    "1281425f-42ba-4bdf-a2bd-14d76187c2a0"
+   ]
+  },
+  {
+   "texto": "SOBRE PILETA 110 C/5 ENTRADAS",
+   "codigo": "INSTS251",
+   "ids": [
+    "4dcfacf5-6e12-4f86-874f-5a26281d9ff0"
+   ]
+  },
+  {
+   "texto": "6023-PILETA PATIO C/SIF.3S 160X110 AWADUCT",
+   "codigo": "INSTS252",
+   "ids": [
+    "f7c394a5-192c-47ef-b59c-94801f2fbd64",
+    "ded1cedd-8ecd-4d69-8470-f9af4c10a670"
+   ]
+  },
+  {
+   "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+   "codigo": "INSTS253",
+   "ids": [
+    "b0ee2d2e-ab15-4f81-a4db-f0565433b6e1",
+    "45063eb7-9158-438b-9415-8628083a5f1e"
+   ]
+  },
+  {
+   "texto": "J.E. RAMAL 160X160 A 45 M-H 26035163 TIGRE",
+   "codigo": "INSTS254",
+   "ids": [
+    "cc1437c5-6d94-4090-8a5f-3c8e87075a68",
+    "49acaabd-472c-4d7b-981a-919830a1b69f"
+   ]
+  },
+  {
+   "texto": "SUPLEMENTO ARO X 100MM O.V.CAM (cod.ARO) O.V. CAM",
+   "codigo": "INSTS255",
+   "ids": [
+    "47e414a2-c530-4fe1-8b6c-03a6f0254385",
+    "fb0c6761-6a09-4087-9ee1-74f535c3fdce"
+   ]
+  },
+  {
+   "texto": "CAM - ARO- 10 CM",
+   "codigo": "INSTS255",
+   "ids": [
+    "1139289c-3eee-4ff4-a18a-c4350a2176ad"
+   ]
+  },
+  {
+   "texto": "PROL. P/ CAM INSP TUBOFORTE",
+   "codigo": "INSTS256",
+   "ids": [
+    "1f9dec17-885a-4735-8adb-bd6637765953"
+   ]
+  },
+  {
+   "texto": "REJA 15X15 ACERO INOX CROMO CASAL",
+   "codigo": "INSTS257",
+   "ids": [
+    "5dd98758-3169-48e8-a385-a239c507eb96"
+   ]
+  },
+  {
+   "texto": "4003-PORTARREJILLA AC.INOX 15X15 REJILLA AWADUCT",
+   "codigo": "INSTS257",
+   "ids": [
+    "6157c812-8560-4ebf-8647-0615e587630b",
+    "0a5aa7c6-4aa9-414a-8891-d2e65d864d72"
+   ]
+  },
+  {
+   "texto": "TAPA 15X15 ACERO INOX CROMO CASAL",
+   "codigo": "INSTS258",
+   "ids": [
+    "dd861547-1984-499e-9946-432154f4eede"
+   ]
+  },
+  {
+   "texto": "4005-PORTARREJILLA AC.INOX 15X15 T.CIEGA AWADUCT",
+   "codigo": "INSTS258",
+   "ids": [
+    "7becefa1-63b4-496b-bf17-7d4a5da14bb6",
+    "43ecfb64-c41e-412e-bbb6-5e533cd6c261"
+   ]
+  },
+  {
+   "texto": "Caño PVC Clásico 40x4x3.2",
+   "codigo": "INSTS259",
+   "ids": [
+    "0e08c235-2172-47ed-805f-202e436add0f"
+   ]
+  },
+  {
+   "texto": "Caño PVC Clásico 50x 4 X 3.2",
+   "codigo": "INSTS260",
+   "ids": [
+    "5f67df98-c06e-4676-a537-3344a7355e99"
+   ]
+  },
+  {
+   "texto": "Purifica Dvigi 6 etapas",
+   "codigo": "INSTS261",
+   "ids": [
+    "54cd7c9b-8a9c-46ff-b959-ba3dae1b9bf3"
+   ]
+  },
+  {
+   "texto": "BOMBA CLOACAL MEC QSBJH 750B (PLASTICA)",
+   "codigo": "INSTS262",
+   "ids": [
+    "5af07b4f-b246-490f-9c1f-aaf078ff4c21"
+   ]
+  },
+  {
+   "texto": "HIDROFUGO TAMBOR X 200 LT.",
+   "codigo": "CONS274",
+   "ids": [
+    "c0347a7f-82ab-4eb4-b284-e6551c317184"
+   ]
+  },
+  {
+   "texto": "MASTROCRET XBOLSA 100 LTS",
+   "codigo": "CONS275",
+   "ids": [
+    "79bd1d89-fa75-4439-a0d6-d3d65eb1c9b5"
+   ]
+  },
+  {
+   "texto": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
+   "codigo": "CONS276",
+   "ids": [
+    "2916407d-9203-4c26-a1c0-53c779e9c120",
+    "748c3547-aadd-4154-bac4-fd95d30856c7"
+   ]
+  },
+  {
+   "texto": "MEMBRANA HIDROFUGA AISLAHOME 1.50X20 MTS",
+   "codigo": "CONS277",
+   "ids": [
+    "f64b31be-dbae-401e-a038-467391f30593"
+   ]
+  },
+  {
+   "texto": "ARCILLA X 10 KG",
+   "codigo": "CONS278",
+   "ids": [
+    "d9f6739f-4ac1-4505-8420-d43b73b1d20f"
+   ]
+  },
+  {
+   "texto": "Contenedor estandar (de 5 m3 de capacidad)",
+   "codigo": "CONS279",
+   "ids": [
+    "91e85942-a483-4edb-8ada-666d0955422d"
+   ]
+  },
+  {
+   "texto": "PFGAL C100X45X15X2.0 MM X 12 M",
+   "codigo": "P118",
+   "ids": [
+    "32a1dac4-8b1f-4dee-949a-fab8cf58c233",
+    "a4a2538c-3590-4340-8cab-fd8d6c1572c3"
+   ]
+  },
+  {
+   "texto": "FLEJE CINC 25 ancho 610 MM",
+   "codigo": "CH023",
+   "ids": [
+    "9e559cba-bed3-4698-ba0b-24fb7e76e355",
+    "b5861198-0065-42bf-81ea-ebb9f68a3c28"
+   ]
+  },
+  {
+   "texto": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
+   "codigo": "A022",
+   "ids": [
+    "b6dd727f-de1f-43e1-86ce-b85557ebafde",
+    "718c94b8-b6cb-4efd-8744-35fb95acf528"
+   ]
+  },
+  {
+   "texto": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
+   "codigo": "A023",
+   "ids": [
+    "d9af3de0-6a24-4112-81c2-f7b461d38ac8",
+    "205a5dcf-de69-486d-9629-acd594de0a18"
+   ]
+  },
+  {
+   "texto": "Cable paralelo 2 x 0,5 mm",
+   "codigo": "INSTE124",
+   "ids": [
+    "55611f56-7b76-42f4-b9be-d222dc5dc3be"
+   ]
+  },
+  {
+   "texto": "CAJA PREINSTALACION A.AC SAL.VERT LINEA XDURATOP",
+   "codigo": "CLIM121",
+   "ids": [
+    "f6fdf32c-0685-4580-9489-e3034d641d56",
+    "6492d088-7600-46f0-adb8-e1a10f66f065"
+   ]
+  }
+ ],
+ "rechazos": [
+  {
+   "texto": "FLETE SIN CARGO",
+   "ids": [
+    "64664560-0fff-441f-b7f0-7328d6bb7a29",
+    "a5a4c4b4-2e13-4771-9cd4-10da42676d8e"
+   ]
+  },
+  {
+   "texto": "PALLET DESCARTABLE",
+   "ids": [
+    "9d996d41-034c-4670-b353-8374d8d922c4"
+   ]
+  },
+  {
+   "texto": "PALLET VACIO [DEVOLUCION 100%]",
+   "ids": [
+    "2589e914-a905-4963-b411-eaa891678b26"
+   ]
+  },
+  {
+   "texto": "Cristal Templado 10 mm",
+   "ids": [
+    "e524084f-526b-4c5c-b0d1-0c154cf07036"
+   ]
+  },
+  {
+   "texto": "Laminado Extra Negro 3+3 mm",
+   "ids": [
+    "78e563d2-f60c-4624-9da8-b2d9605e55a0"
+   ]
+  },
+  {
+   "texto": "Profilit \"U Glass\" medidas del perfil 0.26 x 3 m",
+   "ids": [
+    "7d5b3cdb-b95e-4269-a692-2c87ee62c837"
+   ]
+  }
+ ]
+}
