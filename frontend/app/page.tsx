@@ -477,12 +477,20 @@ export default function Landing() {
             <Logo dark />
             <span className="text-sm text-white/40">© 2026 · Hecho en Argentina</span>
           </div>
-          <a
-            href="mailto:hola@vectorai.com.ar"
-            className="text-sm text-white/60 hover:text-white transition"
-          >
-            hola@vectorai.com.ar
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <Link href="/terminos" className="text-sm text-white/60 hover:text-white transition">
+              Términos y Condiciones
+            </Link>
+            <Link href="/privacidad" className="text-sm text-white/60 hover:text-white transition">
+              Privacidad
+            </Link>
+            <a
+              href="mailto:hola@vectorai.com.ar"
+              className="text-sm text-white/60 hover:text-white transition"
+            >
+              hola@vectorai.com.ar
+            </a>
+          </div>
         </div>
       </footer>
     </>
