@@ -246,8 +246,8 @@ export default function Landing() {
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-gray-100 last:border-0">
                       <td className="px-5 py-3.5 text-gray-700 font-medium">{row.mat}</td>
-                      <td className={`px-5 py-3.5 text-center font-bold ${row.mejor === "a" ? "bg-green-50 text-green-700" : "text-gray-400"}`}>{row.a}</td>
-                      <td className={`px-5 py-3.5 text-center font-bold ${row.mejor === "b" ? "bg-green-50 text-green-700" : "text-gray-400"}`}>{row.b}</td>
+                      <td className={`px-5 py-3.5 text-center font-bold tabular-nums ${row.mejor === "a" ? "bg-green-50 text-green-700" : "text-gray-400"}`}>{row.a}</td>
+                      <td className={`px-5 py-3.5 text-center font-bold tabular-nums ${row.mejor === "b" ? "bg-green-50 text-green-700" : "text-gray-400"}`}>{row.b}</td>
                       <td className="px-5 py-3.5 text-center">
                         <span className="bg-green-100 text-green-700 font-bold text-xs px-3 py-1.5 rounded-full">
                           {row.mejor === "a" ? "Pérez" : "Juan"}
@@ -328,7 +328,7 @@ export default function Landing() {
               {/* Free */}
               <div className="bg-white rounded-3xl border-2 border-gray-200 p-8">
                 <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Gratis</div>
-                <div className="text-4xl font-bold text-[#1A2B4A] mb-1">$0</div>
+                <div className="text-4xl font-bold text-[#1A2B4A] mb-1 tabular-nums">$0</div>
                 <p className="text-gray-400 text-sm mb-8">Para probar</p>
                 <ul className="space-y-3 text-sm text-gray-600 mb-8">
                   {[
@@ -357,7 +357,7 @@ export default function Landing() {
                 <div className="text-xl font-semibold text-[#1A2B4A] mb-1">Inicial</div>
                 <div className="flex items-end gap-2 mb-1">
                   <span className="text-lg text-gray-400 line-through">$28.000</span>
-                  <span className="text-4xl font-bold text-[#1A2B4A]">$19.600</span>
+                  <span className="text-4xl font-bold text-[#1A2B4A] tabular-nums">$19.600</span>
                   <span className="text-xl font-normal text-gray-400">/mes</span>
                 </div>
                 <p className="text-[#E87022] text-xs font-semibold mb-8">Precio de lanzamiento</p>
@@ -387,7 +387,7 @@ export default function Landing() {
                   Más popular
                 </div>
                 <div className="text-xl font-semibold mb-1">Advance</div>
-                <div className="text-4xl font-bold mb-1 text-[#E87022]">$48.000<span className="text-xl font-normal text-white/60">/mes</span></div>
+                <div className="text-4xl font-bold mb-1 text-[#E87022] tabular-nums">$48.000<span className="text-xl font-normal text-white/60">/mes</span></div>
                 <p className="text-white/60 text-xs mb-8">Pesos argentinos · IVA incluido</p>
                 <ul className="space-y-3 text-sm mb-8">
                   {[
