@@ -19,6 +19,18 @@ Piezas que PARECEN duplicados o matches pero son productos distintos — nunca f
 - **"Codo con base" / "3 acometidas"** son piezas distintas al codo simple MH/HH.
 - **Sinónimos: NUNCA mapear un tipo específico a su familia genérica** (UPN→PERFIL, VIGA→PERFIL). El alias corto se normaliza al genérico y matchea al 100 contra cualquier texto que contenga esa palabra, contaminando aliases y precios (bug PGC, 04-07-2026). Sinónimos válidos: variantes del MISMO concepto (PARANTE→MONTANTE, TOMACORRIENTE→TOMA).
 
+Reglas agregadas en el curado conversacional del 24/27-07-2026:
+- **Sanitarios de línea/marca van POR MODELO, nunca unificados**: un inodoro South no se compara con un Roca; solo se unifica cuando el código coincide literal (bacha C37/18 = la Johnson C37/18). La comparativa entre modelos se vincula a mano si hace falta la referencia.
+- **Accesorios de cámara PVC por MARCA** (O.V.CAM / Tuboforte / Tigre / Duke): en un mismo presupuesto la boca de acceso puede ser Duke y la desgrasadora Tigre.
+- **Fundición = exterior, inox = interior**: reja 15x15 de fundición y de inoxidable son materiales distintos (INSTS185 vs INSTS257/258).
+- **Hierro dulce = alambre de atar** (CONS111), no hierro liso ni aleteado. "Nervado" sí es aleteado.
+- **Áridos: canónico $/m³** (modo `m3`). Solo la palabra CHASIS divide (chasis = acoplado de 7 m³, precio del viaje); "x 7 m³" a secas es ambiguo → revisión. Bolsón ≠ granel sigue vigente.
+- **Envases grandes = ítems propios** (hidrófugo tambor 200L, isocrete 100L vs 170L, pegamento refractario 10 vs 20 kg): el envase grande siempre es más barato, no se prorratea por litro/kilo. Presentaciones casi iguales (cinta papel 23m vs 150m) sí se unifican.
+- **Mallas sima: canónico $/m²** (modo `m2`, dimensiones de hoja del texto, nunca la cuadrícula 15x15). Malla #5.5 va con la de 6.
+- **Sin marca no se crea** cuando el producto varía por marca (pulsadores, cintas tramadas): rechazar y esperar un texto con marca.
+- **Textos truncados de extracción rota se RECHAZAN**, no se curan.
+- Al buscar un código libre para material nuevo: `select max(codigo)` por SQL — nunca paginando a mano (el maestro pasa las 1000 filas y TER562 casi se pisa por eso).
+
 ## Regla de oro
 
 **Nunca borrar ni modificar datos del maestro sin backup previo + aprobación del usuario.** Backup = JSON con las filas completas en `api/data/backup_aliases_<tema>_<fecha>.json`. Borrados siempre por IDs explícitos, nunca con predicado amplio.
