@@ -1652,6 +1652,31 @@ def _detectar_area(desc: str) -> float | None:
     return None
 
 
+# Volumen del VIAJE: "X CHASIS 7MT". Solo la palabra chasis habilita dividir —
+# "X 7 MTS CUBICOS" a secas no dice si el precio es del viaje o del m³ (caso
+# real: Laprida cotizaba $21.560 POR M³ con "X 7 MTS CUBICOS" describiendo el
+# lote; dividirlo daba $3.080/m³, irreal). Lo ambiguo va a revisión.
+_RE_VOL_CHASIS = re.compile(rf"chasis\s*{_RE_NUM_DEC}\s*(?:mt?s?|m3)?", re.I)
+_RE_MENCION_M3 = re.compile(rf"{_RE_NUM_DEC}\s*(?:m3|m³|mts?\.?\s*cubicos?)", re.I)
+_RE_POR_M3 = re.compile(r"\b(?:x|por)\s*(?:m3|m³|metro\s*cubico)", re.I)
+
+
+def _detectar_volumen(desc: str) -> float | None:
+    """m³ del VIAJE declarado en el texto (solo con la palabra chasis), o None.
+
+    Regla de Pablo 27-07-2026: el chasis es el acoplado del camión que lleva
+    7 m³ — "TOSCA X CHASIS 7MT" es el precio del VIAJE, no del m³.
+    """
+    m = _RE_VOL_CHASIS.search(desc or "")
+    if m:
+        try:
+            n = float(m.group(1).replace(",", "."))
+            return n if n > 0 else None
+        except ValueError:
+            return None
+    return None
+
+
 def _detectar_peso(desc: str) -> float | None:
     """Kilos del envase declarados en el texto del proveedor, o None.
 
@@ -1671,7 +1696,7 @@ def _detectar_peso(desc: str) -> float | None:
 def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
     """Normaliza el precio a la presentación canónica del material.
 
-    Cinco modos según conversion_unidades.unidad_comercial:
+    Seis modos según conversion_unidades.unidad_comercial:
       - 'm': texto por metro → tira/rollo del maestro (pu×factor, cant÷factor).
         Canónico = la tira/rollo. Solo con MARCADOR EXPLÍCITO de metro
         (unidad ML/MTS o "MTS …"/"x metro"). Caños/cables.
@@ -1692,6 +1717,9 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
         24-07-2026). Cada proveedor vende hojas de tamaño distinto (2x5 =
         10 m², 3x2.40 = 7.2 m²): se divide por el área de hoja del texto,
         cuidando no confundirla con la cuadrícula (15x15).
+      - 'm3': canónico = PRECIO POR METRO CÚBICO (áridos, regla de Pablo
+        27-07-2026). "X CHASIS 7MT" es el acoplado del camión: el precio del
+        viaje ÷ 7 da el m³ comparable con el que cotiza "X M3".
 
     Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
     el material se vende por presentación pero el texto no la aclara — el
@@ -1738,6 +1766,18 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
         if unidad_norm in ("KG", "KGS", "KILO", "KILOS"):
             return pu, cant, "KG", None, False
         # Sin peso en el texto no se inventa el envase: va a revisión.
+        return pu, cant, unidad_norm or "UN", None, True
+
+    if modo == "m3":
+        # Canónico = precio por metro cúbico (áridos, regla de Pablo
+        # 27-07-2026). "X CHASIS 7MT" o "X 7 MTS CUBICOS" es el precio del
+        # viaje entero → ÷ volumen. "X M3" ya viene por metro cúbico.
+        vol = _detectar_volumen(desc)
+        if vol and vol > 1:
+            nota = f"a precio por m³ (÷{vol:g} m³ del viaje)"
+            return round(pu / vol, 4), cant * vol, "M3", nota, False
+        if vol or _RE_POR_M3.search(desc or "") or unidad_norm in ("M3", "MT3", "M³"):
+            return pu, cant, "M3", None, False
         return pu, cant, unidad_norm or "UN", None, True
 
     if modo == "m2":

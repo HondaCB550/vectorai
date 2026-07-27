@@ -21,6 +21,7 @@ main._conv_extra = {
     "CONS104": {"unidad_comercial": "kg", "factor": 5,  "unidad_base": "KG"},
     "TER482": {"unidad_comercial": "kg", "factor": 25, "unidad_base": "KG"},
     "CONS112": {"unidad_comercial": "m2", "factor": 1, "unidad_base": "M2"},
+    "CONS107": {"unidad_comercial": "m3", "factor": 1, "unidad_base": "M3"},
 }
 
 
@@ -157,6 +158,29 @@ def test_malla_sin_dimensiones_es_ambigua():
 def test_cuadricula_no_se_lee_como_hoja():
     assert main._detectar_area("MALLA 6 15x15") is None
     assert main._detectar_area("CUADRICULA 05X05") is None
+
+
+# ── Áridos: todo a precio por metro cúbico ────────────────────────────────────
+# Regla de Pablo 27-07-2026: el chasis es el acoplado del camión (7 m³) — el
+# precio del viaje se divide por los m³ para tener el $/m³ comparable.
+def test_tosca_chasis_7m_a_m3():
+    pu, cant, u, nota, amb = conv("CONS107", "TOSCA X CHASIS 7MT", "", 221294.11, 1)
+    assert abs(pu - 221294.11 / 7) < 1e-2 and u == "M3" and abs(cant - 7) < 1e-6 and not amb, (pu, cant, u, nota)
+
+def test_tosca_7_mts_cubicos_sin_chasis_es_ambigua():
+    # "X 7 MTS CUBICOS" sin la palabra chasis no dice si el precio es del
+    # viaje o del m³ (caso real: Laprida cotizaba $21.560 POR M³ y el 7 era
+    # el lote — dividirlo daba $3.080/m³, irreal). Solo CHASIS divide.
+    pu, cant, u, nota, amb = conv("CONS107", "TIERRA TOSCA X 7 MTS CUBICOS**", "", 21559.97, 1)
+    assert amb, (pu, u, nota, amb)
+
+def test_tosca_por_m3_se_deja():
+    pu, cant, u, nota, amb = conv("CONS107", "TOSCA X M3", "", 25000.0, 111)
+    assert pu == 25000.0 and u == "M3" and not amb, (pu, u, nota)
+
+def test_tosca_sin_volumen_es_ambigua():
+    pu, cant, u, nota, amb = conv("CONS107", "TOSCA", "", 19909.50, 111)
+    assert amb, (pu, u, nota, amb)
 
 
 # ── El modo 'm' (caños/cables → tira/rollo) sigue intacto ──────────────────────

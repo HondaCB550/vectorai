@@ -1,0 +1,2074 @@
+{
+ "tomado": "2026-07-27T16:38:47",
+ "pendientes": [
+  {
+   "id": "fd36814b-9a87-4457-8332-20d95e5715eb",
+   "descripcion_original": "MAPEI CERAMICO 25KG",
+   "descripcion_normalizada": "mapei ceramico 25kg",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6108.6,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:06.620345+00:00"
+  },
+  {
+   "id": "152134cf-a4eb-4b60-a395-c391c335dc63",
+   "descripcion_original": "PEGAM REFRAC X 10KG",
+   "descripcion_normalizada": "pegam refrac x 10kg",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 13031.67,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:07.476521+00:00"
+  },
+  {
+   "id": "e32700f0-25e3-4578-b8ba-d40ac7caa9db",
+   "descripcion_original": "Cable 1,50 mm blanco Fonseca",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "INSTALACIÓN ELÉCTRICA",
+   "unidad_sugerida": null,
+   "precio_visto": 575.35,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: INSTALACIÓN ELÉCTRICA | Cat: ELECTRICIDAD | Electricidad DER | c/IVA",
+   "created_at": "2026-06-30T23:54:42.683197+00:00"
+  },
+  {
+   "id": "478928ad-58b3-4597-9c8d-cb2c6ae88902",
+   "descripcion_original": "CANO DURATOP 50X1.00 MTS",
+   "descripcion_normalizada": "cano duratop 50x1.00 mts",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2940.08,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:39.17024+00:00"
+  },
+  {
+   "id": "981d0df1-9df7-49e5-a4dd-9117be380c62",
+   "descripcion_original": "SYST UNION DOB.MIXTA C/BRI.50X11/2",
+   "descripcion_normalizada": "syst union dob.mixta c/bri.50x11/2",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 41782.29,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:40.613262+00:00"
+  },
+  {
+   "id": "37cc9090-729d-4649-8dff-27c2e29a3361",
+   "descripcion_original": "P20 CODO A 90 DE 50 MM I P",
+   "descripcion_normalizada": "p20 codo a 90 de 50 mm i p",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4209.52,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:32.631812+00:00"
+  },
+  {
+   "id": "a512487d-f1ca-4ab2-8c8f-e93045498eb5",
+   "descripcion_original": "Masilla Anclaflex x 32 kg",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 26039.67,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "0d4f913a-78f2-4bcb-b3dc-99052d80bbca",
+   "descripcion_original": "Masilla Durlock Multiuso x 32 kg",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 33100.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "ecd13e2b-8d51-468a-a8aa-13a155151243",
+   "descripcion_original": "Placa Durlock 1.20 m x 2.40 m  x 9,5 mm STD",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 11327.64,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "45838f23-06ee-4cb4-8800-b326ecccd4a6",
+   "descripcion_original": "Tornillos T1 punta mecha x 100 u",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 733.82,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "eb8ef7e3-9545-471d-8a46-ad896d05ac06",
+   "descripcion_original": "P20 CODO A 90 DE 32 MM I P",
+   "descripcion_normalizada": "p20 codo a 90 de 32 mm i p",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1012.14,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:32.347446+00:00"
+  },
+  {
+   "id": "25bb960b-9803-4500-bf78-4e69278cf582",
+   "descripcion_original": "NERVADO 6 mm barra 12 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 5351.72,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "d1f326f1-59f6-49bd-966f-55482934b15c",
+   "descripcion_original": "NERVADO 8 mm barra 12 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 9098.5,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "df5fd451-4cb7-4919-907b-861a456ac8cf",
+   "descripcion_original": "NERVADO 10 mm barra 12 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 14216.4,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "44e27da3-fc39-4fc7-a3a0-7d378f5e64a5",
+   "descripcion_original": "NERVADO 12 mm barra 12 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 20076.09,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "200bc2c2-ef2a-4db7-b31b-2b08083d9ab7",
+   "descripcion_original": "NERVADO 16 mm barra 12 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 35283.57,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-07-01T00:00:04.241905+00:00"
+  },
+  {
+   "id": "5ebbec61-814c-4871-a141-4c8ee7984fce",
+   "descripcion_original": "TOSCA X CHASIS 7MT",
+   "descripcion_normalizada": "tosca x chasis 7mt",
+   "proveedor": "J.M. Landa",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 221294.11,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:10:06.028388+00:00"
+  },
+  {
+   "id": "4183b305-b98c-4d1e-980f-49ad2e8ce8d1",
+   "descripcion_original": "J.E. RAMAL 110X110A45 M-HPVC 26035112 TIGRE",
+   "descripcion_normalizada": "j.e. ramal 110x110a45 m-hpvc 26035112 tigre",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 5534.71,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:23.774924+00:00"
+  },
+  {
+   "id": "9d9533a6-b40f-42a7-b5d1-f8c354b0c3e3",
+   "descripcion_original": "2057-RAMAL SIMP A 45 40X 40HH AWADUCT",
+   "descripcion_normalizada": "2057-ramal simp a 45 40x 40hh awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1664.47,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:27.535695+00:00"
+  },
+  {
+   "id": "481d7834-65af-4882-a618-9c1648010b0b",
+   "descripcion_original": "2026-RAMAL SIMP A 45 63X 63MH AWADUCT",
+   "descripcion_normalizada": "2026-ramal simp a 45 63x 63mh awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3034.86,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:27.822512+00:00"
+  },
+  {
+   "id": "d47e5871-7461-4179-bb5a-c77c59eb2da0",
+   "descripcion_original": "2053-PIL.PAT.POL.3 ENTRA 40X63 AWADUCT",
+   "descripcion_normalizada": "2053-pil.pat.pol.3 entra 40x63 awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6726.99,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:28.115315+00:00"
+  },
+  {
+   "id": "5f5ac2d1-3b50-4d28-bf10-9ff0759ca694",
+   "descripcion_original": "J.E. RAMAL 110X110A45 M-HPVC 26035112 TIGRE",
+   "descripcion_normalizada": "j.e. ramal 110x110a45 m-hpvc 26035112 tigre",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 5534.71,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:23.837482+00:00"
+  },
+  {
+   "id": "a6e7cfdb-1dd6-417f-9319-5bb0ea514d5a",
+   "descripcion_original": "2057-RAMAL SIMP A 45 40X 40HH AWADUCT",
+   "descripcion_normalizada": "2057-ramal simp a 45 40x 40hh awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1664.47,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:26.16101+00:00"
+  },
+  {
+   "id": "8b998479-9080-4b55-850a-cd79ca5f564a",
+   "descripcion_original": "2026-RAMAL SIMP A 45 63X 63MH AWADUCT",
+   "descripcion_normalizada": "2026-ramal simp a 45 63x 63mh awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3034.86,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:26.452828+00:00"
+  },
+  {
+   "id": "70ab6933-22aa-423d-8104-f1b0de235b19",
+   "descripcion_original": "2053-PIL.PAT.POL.3 ENTRA 40X63 AWADUCT",
+   "descripcion_normalizada": "2053-pil.pat.pol.3 entra 40x63 awaduct",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6726.99,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:26.743868+00:00"
+  },
+  {
+   "id": "00af85e2-05c2-408f-8a18-15a0b123f056",
+   "descripcion_original": "P20 CODO A 90 DE 20 MM I P",
+   "descripcion_normalizada": "p20 codo a 90 de 20 mm i p",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 419.9,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:31.779562+00:00"
+  },
+  {
+   "id": "c57e82be-c22a-4ad5-945d-c97bbbf7096e",
+   "descripcion_original": "P20 CODO A 90 DE 25 MM I P",
+   "descripcion_normalizada": "p20 codo a 90 de 25 mm i p",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 724.43,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:32.063449+00:00"
+  },
+  {
+   "id": "7b6ec0b8-5211-42a2-a426-0de6004690c5",
+   "descripcion_original": "CUPLA HH - Lisa 160 mm P",
+   "descripcion_normalizada": "cupla hh - lisa 160 mm p",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 16100.4,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:37.310366+00:00"
+  },
+  {
+   "id": "7abe44a7-32ac-480d-a2a5-a44710420446",
+   "descripcion_original": "VILLAGE BAÑERA DE EMBUTI R",
+   "descripcion_normalizada": "village bañera de embuti r",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 73515.84,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:44.77506+00:00"
+  },
+  {
+   "id": "a049e351-d27f-42e2-86f7-01adef106daf",
+   "descripcion_original": "REJA VENTI. 15X15--100CM2-PLAN-AMU",
+   "descripcion_normalizada": "reja venti. 15x15--100cm2-plan-amu",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2137.95,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:46.107812+00:00"
+  },
+  {
+   "id": "98b4941e-c704-461f-a148-9d2bca115302",
+   "descripcion_original": "CAÑO 1031 DE 110 X 1 AWA",
+   "descripcion_normalizada": "caño 1031 de 110 x 1 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8038.51,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:46.666098+00:00"
+  },
+  {
+   "id": "22876b0b-3428-4531-9e77-2420eb87f0dc",
+   "descripcion_original": "CAÑO 1022 DE 63 X 1 AWA",
+   "descripcion_normalizada": "caño 1022 de 63 x 1 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4346.06,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:46.946261+00:00"
+  },
+  {
+   "id": "e5bd6149-54f9-462a-9307-c437a4af949f",
+   "descripcion_original": "CAÑO 1013 DE 50 X 1 AWA",
+   "descripcion_normalizada": "caño 1013 de 50 x 1 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3373.38,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:47.227872+00:00"
+  },
+  {
+   "id": "d970b104-d2f8-4e41-b62e-ff54bf26a484",
+   "descripcion_original": "CAÑO 1004 DE 40 X 1 AWA",
+   "descripcion_normalizada": "caño 1004 de 40 x 1 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2628.9,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:47.501272+00:00"
+  },
+  {
+   "id": "512b7b6e-40d7-4629-960d-796ffc016b08",
+   "descripcion_original": "CAÑO 1008 DE 40 X 4 AWA",
+   "descripcion_normalizada": "caño 1008 de 40 x 4 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7478.06,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:48.057261+00:00"
+  },
+  {
+   "id": "d61fc504-fcb4-4c42-ba27-d752d8036e7f",
+   "descripcion_original": "PILETA 2127 LOSA 5 ENT ACANAL 50/63 X 110 AWA",
+   "descripcion_normalizada": "pileta 2127 losa 5 ent acanal 50/63 x 110 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 13229.2,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:48.345173+00:00"
+  },
+  {
+   "id": "1be7fe32-9494-431c-93b4-36a05ac15904",
+   "descripcion_original": "BUJE 32-25 ACQUA",
+   "descripcion_normalizada": "buje 32-25 acqua",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1022.44,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:49.262019+00:00"
+  },
+  {
+   "id": "a19ac084-7392-4ed2-bae4-f6802ed3cf9d",
+   "descripcion_original": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
+   "descripcion_normalizada": "reja 15 x 15 a/inox marco fund c/emb (cod 503)",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 11017.63,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:49.546666+00:00"
+  },
+  {
+   "id": "29552156-1fde-47e2-ade4-3ce00f16c0c4",
+   "descripcion_original": "TORNILLO P/INODORO COMPLETO 22 X 60",
+   "descripcion_normalizada": "tornillo p/inodoro completo 22 x 60",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 688.52,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:52.668444+00:00"
+  },
+  {
+   "id": "735cdf2c-796a-4e8f-bfdb-801360e329eb",
+   "descripcion_original": "MANGUITO 2015 DE REP. HH DE 63 AWA",
+   "descripcion_normalizada": "manguito 2015 de rep. hh de 63 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1356.79,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:53.815987+00:00"
+  },
+  {
+   "id": "773ef9fe-dad4-46d5-a800-91c6fb15dbd5",
+   "descripcion_original": "MANGUITO 2014 DE REP. HH DE 50 AWA",
+   "descripcion_normalizada": "manguito 2014 de rep. hh de 50 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1019.23,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:54.093669+00:00"
+  },
+  {
+   "id": "80500ac2-fcb6-4988-ae72-a0cfb23bc474",
+   "descripcion_original": "MANGUITO 2013 DE REP. HH DE 40 AWA",
+   "descripcion_normalizada": "manguito 2013 de rep. hh de 40 awa",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 931.38,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:54.373568+00:00"
+  },
+  {
+   "id": "f5e0d70d-8a58-4a1e-8159-61d2f2f2d74f",
+   "descripcion_original": "LLAVE ESF. C/MJA P/TERMOFUS DE 50 ACQ",
+   "descripcion_normalizada": "llave esf. c/mja p/termofus de 50 acq",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 51385.02,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:54.652947+00:00"
+  },
+  {
+   "id": "a74f98b7-55df-43ca-99f1-b22060c7aed6",
+   "descripcion_original": "LLAVE ESF. C/MJA P/TERMOFUS DE 32 ACQ",
+   "descripcion_normalizada": "llave esf. c/mja p/termofus de 32 acq",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 20409.69,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:54.951416+00:00"
+  },
+  {
+   "id": "175eb085-7965-4d2e-8857-09ac3bf96ea9",
+   "descripcion_original": "PLACA CEMENTICIA VOLCANBOARD 8MM",
+   "descripcion_normalizada": "placa cementicia volcanboard 8mm",
+   "proveedor": "LA FORESTA - STEEL - SIN FACTURAR",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 40666.96,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:48:59.757797+00:00"
+  },
+  {
+   "id": "fef19364-4f9c-43b8-bac3-e6020db9d1f8",
+   "descripcion_original": "LADRILLO REFRACTARIO NAT. 228X114X63",
+   "descripcion_normalizada": "ladrillo refractario nat. 228x114x63",
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 5248.87,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:49:00.994229+00:00"
+  },
+  {
+   "id": "3afba2ab-77c7-4310-b5c5-3e8714c5840c",
+   "descripcion_original": "REF LAD RECTO 229X114X63 ART 1",
+   "descripcion_normalizada": "ref lad recto 229x114x63 art 1",
+   "proveedor": "CORRALON LAS QUINTAS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4491.86,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:02.065686+00:00"
+  },
+  {
+   "id": "982ebdfa-9baa-49f7-a824-7a7f2810d2fb",
+   "descripcion_original": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
+   "descripcion_normalizada": "fara refractario recto 229x114x63mm 6cm",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4501.13,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:03.210306+00:00"
+  },
+  {
+   "id": "a9046d3c-0f5a-43e3-aaa9-8aac7ce522a0",
+   "descripcion_original": "PLANCHA EPS 1.00 X 1.00 ( 30 MM X 20 KG )",
+   "descripcion_normalizada": "plancha eps 1.00 x 1.00 ( 30 mm x 20 kg )",
+   "proveedor": "CIVIMET - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7404.95,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:50:58.817968+00:00"
+  },
+  {
+   "id": "d9a26dc9-4d71-4dee-b5fd-aea5198f58d3",
+   "descripcion_original": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
+   "descripcion_normalizada": "fara refractario recto 229x114x63mm 6cm",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 4501.13,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:50.139607+00:00"
+  },
+  {
+   "id": "bdf6ea59-f654-44d4-b2c8-dc86879edb1e",
+   "descripcion_original": "QUIMTEX impermeable para techos-varios colores x 20 lt",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "ADITIVOS E IMPERMEABILIZANTES",
+   "unidad_sugerida": null,
+   "precio_visto": 115200.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: ADITIVOS E IMPERMEABILIZANTES | Cat: AISLANTES TÉRMICOS E IMPERMEABILIZANTES | Subcat: Revestimientos Santa Fe | Prov.orig: QUIMTEX | c/IVA",
+   "created_at": "2026-06-30T23:53:24.028151+00:00"
+  },
+  {
+   "id": "87eb0a26-0323-4093-bd01-43a29c19833b",
+   "descripcion_original": "MALLA #5.5 [15 X 15] 2 X 5 MTS [20 KG]",
+   "descripcion_normalizada": "malla #5.5 [15 x 15] 2 x 5 mts [20 kg]",
+   "proveedor": "CORRALON LAPRIDA",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 55900.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:43:35.018355+00:00"
+  },
+  {
+   "id": "e3bfb3b4-b717-4c4d-8ae5-ad926fe29685",
+   "descripcion_original": "LADRILLO REFRACTARIO Nº4 [229X114X32 MM]",
+   "descripcion_normalizada": "ladrillo refractario nº4 [229x114x32 mm]",
+   "proveedor": "CORRALON LAPRIDA",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3000.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:43:35.661849+00:00"
+  },
+  {
+   "id": "8767b009-0518-4ddd-a156-0821b50f6a11",
+   "descripcion_original": "Galvanizado N°16 (1.62 mm esp-rollo 40/60 kg) x kg",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 3973.25,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: ALAMBRES | Fisa Metal | c/IVA",
+   "created_at": "2026-06-30T23:53:24.028151+00:00"
+  },
+  {
+   "id": "2c7d1325-f82f-4ed3-be0d-842d664e8c2b",
+   "descripcion_original": "Negro recocido N° 9 x kg",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 3175.23,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: ALAMBRES | Fisa Metal | c/IVA",
+   "created_at": "2026-06-30T23:53:24.028151+00:00"
+  },
+  {
+   "id": "a09daaf4-b34c-4fe4-8ee2-057fa1228528",
+   "descripcion_original": "Negro recocido N° 16 x kg",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 2963.55,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: ALAMBRES | Fisa Metal | c/IVA",
+   "created_at": "2026-06-30T23:53:24.028151+00:00"
+  },
+  {
+   "id": "9ce613cd-a8ef-45f8-b068-ccdccfa2765a",
+   "descripcion_original": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
+   "descripcion_normalizada": "torn alas p/superb. 10 x 1-5/8 x 100 u",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7332.6,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:13.407438+00:00"
+  },
+  {
+   "id": "2578a240-fef0-4738-9b3b-d1ec9512559a",
+   "descripcion_original": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+   "descripcion_normalizada": "torn. alas p/superb 10 x 2 x 100 u",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8667.53,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:13.709852+00:00"
+  },
+  {
+   "id": "cef02581-7500-4e26-a56c-0d779949b177",
+   "descripcion_original": "P35 TEE REDUCIDA CENTRAL",
+   "descripcion_normalizada": "p35 tee reducida central",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6340.84,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:32.928719+00:00"
+  },
+  {
+   "id": "5dda400e-dcc9-4e1d-a7a9-33257cd77588",
+   "descripcion_original": "Cubrecanto 32 x 32 x 2.600 mm",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "CHAPAS",
+   "unidad_sugerida": null,
+   "precio_visto": 1684.32,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: CHAPAS | Cat: CHAPAS DECORATIVAS | c/IVA",
+   "created_at": "2026-06-30T23:57:19.661269+00:00"
+  },
+  {
+   "id": "e5a590c0-fd1f-4d08-a5d3-0c4ea783103a",
+   "descripcion_original": "179.05/B1 CR KIT ACCES. 5 PZAS. FV",
+   "descripcion_normalizada": "179.05/b1 cr kit acces. 5 pzas. fv",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 79266.65,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:42.064981+00:00"
+  },
+  {
+   "id": "3714bb79-8707-4566-b9af-b884f448762a",
+   "descripcion_original": "PILETA 104P DOBLE 57X37X18 CM",
+   "descripcion_normalizada": "pileta 104p doble 57x37x18 cm",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 60572.64,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:42.358232+00:00"
+  },
+  {
+   "id": "13194c78-4e4e-463d-a757-484ba424eebd",
+   "descripcion_original": "189/B1 CR BIDET MONOCOMANDO",
+   "descripcion_normalizada": "189/b1 cr bidet monocomando",
+   "proveedor": "EL GALPON - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 113658.07,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:42.636632+00:00"
+  },
+  {
+   "id": "a46ab215-1796-4608-8225-bd444b404d64",
+   "descripcion_original": "Malla SIMA MINI 150 x 150 x 5 mm de 2,40 x 3 m",
+   "descripcion_normalizada": null,
+   "proveedor": "Cifras Online",
+   "categoria_sugerida": "HIERROS Y PERFILES",
+   "unidad_sugerida": null,
+   "precio_visto": 38583.9,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": "Cifras Online - Revista Interactiva #363 (2026-05) | Rubro: HIERROS Y PERFILES | Cat: HIERROS | c/IVA",
+   "created_at": "2026-06-30T23:58:40.783015+00:00"
+  },
+  {
+   "id": "507b7a1a-8a82-4876-b55e-45795530366d",
+   "descripcion_original": "ORING + TORNILLOS PARA KIT OTOR OV.CAM",
+   "descripcion_normalizada": "oring + tornillos para kit otor ov.cam",
+   "proveedor": "VIEJO BUENO - PARTE 2",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1790.52,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T18:47:28.951469+00:00"
+  },
+  {
+   "id": "4f45074c-744c-4a36-bd16-e167c7927a27",
+   "descripcion_original": "ORING + TORNILLOS PARA KIT OTOR OV.CAM",
+   "descripcion_normalizada": "oring + tornillos para kit otor ov.cam",
+   "proveedor": "VIEJO BUENO - PARTE 1",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1790.52,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:28.810623+00:00"
+  },
+  {
+   "id": "3000f92a-cee9-4c10-8b53-bc3f289fcd89",
+   "descripcion_original": "CODO a 87 30’ MH - Con 2",
+   "descripcion_normalizada": "codo a 87 30’ mh - con 2",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6102.32,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:31.457694+00:00"
+  },
+  {
+   "id": "e4318efe-3004-4550-ae41-3396a4cbb8db",
+   "descripcion_original": "P23 CODO 90 CON ROSCA HE M",
+   "descripcion_normalizada": "p23 codo 90 con rosca he m",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2048.84,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:33.227889+00:00"
+  },
+  {
+   "id": "7d35b20a-7871-487a-8b17-59951f1d82a2",
+   "descripcion_original": "P23 CODO 90 CON ROSCA HE M",
+   "descripcion_normalizada": "p23 codo 90 con rosca he m",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3382.47,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:33.516528+00:00"
+  },
+  {
+   "id": "9b8aa605-ee5f-4523-9391-3a20e23c87c3",
+   "descripcion_original": "P23 CODO 90 CON ROSCA HE M",
+   "descripcion_normalizada": "p23 codo 90 con rosca he m",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3299.2,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:33.808092+00:00"
+  },
+  {
+   "id": "8f542b50-c2f0-4a92-a81f-e49d0911c75d",
+   "descripcion_original": "VALVULAS ESFERICAS METAL I",
+   "descripcion_normalizada": "valvulas esfericas metal i",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 8693.95,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:35.273686+00:00"
+  },
+  {
+   "id": "01b539c3-f46c-4638-8ff0-a9aa59962dd9",
+   "descripcion_original": "P51 V. ESFERICA CON MANI J",
+   "descripcion_normalizada": "p51 v. esferica con mani j",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 18211.83,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:35.54799+00:00"
+  },
+  {
+   "id": "7aae61f7-cd20-479d-9e00-6dd6341ac6f8",
+   "descripcion_original": "TUBO AMANCO NIVEL 1 - St a",
+   "descripcion_normalizada": "tubo amanco nivel 1 - st a",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 13227.62,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:35.839009+00:00"
+  },
+  {
+   "id": "ac573334-5a06-47c9-b183-cfa7a2166698",
+   "descripcion_original": "TUBO AMANCO NIVEL 1 - St a",
+   "descripcion_normalizada": "tubo amanco nivel 1 - st a",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6143.55,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:36.114527+00:00"
+  },
+  {
+   "id": "510daf9b-d8cf-4892-b89c-432fbe3e143c",
+   "descripcion_original": "CODO A 45 HH - PN10 16 0",
+   "descripcion_normalizada": "codo a 45 hh - pn10 16 0",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 42005.53,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:36.428111+00:00"
+  },
+  {
+   "id": "85f3b67d-4b80-434b-a5c2-c60e8e3ef54b",
+   "descripcion_original": "RAMAL CURVO a 87 30’ MH",
+   "descripcion_normalizada": "ramal curvo a 87 30’ mh",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 32645.84,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:37.605204+00:00"
+  },
+  {
+   "id": "1b2d1afb-3570-4be1-8191-3e59645bb3fa",
+   "descripcion_original": "7261 RAMAL POSTIZO TIGRE 160 x",
+   "descripcion_normalizada": "7261 ramal postizo tigre 160 x",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 15723.42,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:37.926318+00:00"
+  },
+  {
+   "id": "58f4bbcc-14fa-42ba-bb3f-08acebade7af",
+   "descripcion_original": "REDUCCIÓN - Excéntrica M H",
+   "descripcion_normalizada": "reducción - excéntrica m h",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 2762.85,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:38.211291+00:00"
+  },
+  {
+   "id": "0f9c4900-4698-4328-ac6d-db48da9f623f",
+   "descripcion_original": "ZZ 52 ZZ 52 52 x 32 x 15 JHONS O",
+   "descripcion_normalizada": "zz 52 zz 52 52 x 32 x 15 jhons o",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 43209.77,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:39.122088+00:00"
+  },
+  {
+   "id": "d558a351-deb3-4bc2-9c41-378dc4dade8a",
+   "descripcion_original": "DESGRASADERA PARA COCINA",
+   "descripcion_normalizada": "desgrasadera para cocina",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 48596.2,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:39.424231+00:00"
+  },
+  {
+   "id": "f0323d64-c2b7-452c-8254-cc77743fd923",
+   "descripcion_original": "DESAGUE BASE ABS REJA PL E",
+   "descripcion_normalizada": "desague base abs reja pl e",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 59623.08,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:39.706896+00:00"
+  },
+  {
+   "id": "09ecc317-2107-4cc9-9aff-8c552f11f5c7",
+   "descripcion_original": "FLEXIBLE DE COBRE ANILLA D",
+   "descripcion_normalizada": "flexible de cobre anilla d",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 9622.14,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:39.996231+00:00"
+  },
+  {
+   "id": "0b7e1e66-62aa-4625-b5dd-1a120a898ab0",
+   "descripcion_original": "FLEXIBLE DE COBRE ANILLA D",
+   "descripcion_normalizada": "flexible de cobre anilla d",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 17246.25,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:40.288382+00:00"
+  },
+  {
+   "id": "1f579fb7-af9b-4822-9dac-3343ba4bad92",
+   "descripcion_original": "FLEXIBLE CORRUGADO PARA B",
+   "descripcion_normalizada": "flexible corrugado para b",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 1181.12,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:40.881809+00:00"
+  },
+  {
+   "id": "24c70eb9-e725-4bcc-b719-f2da9e57916d",
+   "descripcion_original": "Bacha de Porcelana Sanit a",
+   "descripcion_normalizada": "bacha de porcelana sanit a",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 114204.52,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:41.174154+00:00"
+  },
+  {
+   "id": "14be0ca4-648d-464a-8eed-0464603de4ab",
+   "descripcion_original": "Bacha de Porcelana Sanit a",
+   "descripcion_normalizada": "bacha de porcelana sanit a",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 82864.0,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:42.030999+00:00"
+  },
+  {
+   "id": "12ad6f33-57d1-47c8-988b-1135ba18488e",
+   "descripcion_original": "PILETON INYEC. 20 X 20 S A",
+   "descripcion_normalizada": "pileton inyec. 20 x 20 s a",
+   "proveedor": "CASA ALFONSIN - INSTALACIONES",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 10683.26,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-09T21:52:43.570338+00:00"
+  },
+  {
+   "id": "5bbf59da-acf2-42e1-a024-27f7f39257a8",
+   "descripcion_original": "FLEX MALLA A.INOX. P/BOMBA 1 X 50 AF 2074",
+   "descripcion_normalizada": "flex malla a.inox. p/bomba 1 x 50 af 2074",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 18251.21,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:50.665857+00:00"
+  },
+  {
+   "id": "31609049-5c48-471b-85bc-7e31616e83c8",
+   "descripcion_original": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
+   "descripcion_normalizada": "arizona 179.05/b1 jgo acces 5 pzas",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 79372.71,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:51.552641+00:00"
+  },
+  {
+   "id": "e173a80c-a681-4979-8ccb-4402eb30eadf",
+   "descripcion_original": "ARO DE CERA SELLADOR TOSSAL",
+   "descripcion_normalizada": "aro de cera sellador tossal",
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 5545.17,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:31:52.386703+00:00"
+  },
+  {
+   "id": "08ce7ccf-ffc0-45c5-96cd-88f84910d137",
+   "descripcion_original": "TABLERO OSB EST 9.50 - 1220X2440 MM",
+   "descripcion_normalizada": "tablero osb est 9.50 - 1220x2440 mm",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 23628.58,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-13T23:53:15.980393+00:00"
+  },
+  {
+   "id": "00145c03-b573-4638-9ac3-06117c574147",
+   "descripcion_original": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
+   "descripcion_normalizada": "torn alas p/superb. 10 x 1-5/8 x 100 u",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 6635.84,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:52.298181+00:00"
+  },
+  {
+   "id": "2d6ffaf0-da2d-4019-b2dd-cc7d8d169f55",
+   "descripcion_original": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+   "descripcion_normalizada": "torn. alas p/superb 10 x 2 x 100 u",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 7843.92,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:52.593831+00:00"
+  },
+  {
+   "id": "02d4c9d5-ac41-4d61-9603-c2d73218f6e0",
+   "descripcion_original": "TABLERO OSB EST 9.50 - 1220X2440 MM",
+   "descripcion_normalizada": "tablero osb est 9.50 - 1220x2440 mm",
+   "proveedor": "INSUMA - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 21383.33,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T00:44:54.307413+00:00"
+  },
+  {
+   "id": "11f27883-bbcd-4dd5-9788-22a8d34c4c6a",
+   "descripcion_original": "WEBER REFRACTARIO X 20 KG",
+   "descripcion_normalizada": "weber refractario x 20 kg",
+   "proveedor": "CORRALON LAS QUINTAS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 73347.6,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:02.33918+00:00"
+  },
+  {
+   "id": "e392fa38-072c-495b-8e0f-79db9f7ff6c0",
+   "descripcion_original": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+   "descripcion_normalizada": "piedra bca mar d.plata x 7 mts**",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 96204.27,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:38:03.823504+00:00"
+  },
+  {
+   "id": "a11d2cb2-c6d9-4bca-b5b1-2620d52d39e8",
+   "descripcion_original": "T3 AGUJA - 6 X 1.1/2 X 100",
+   "descripcion_normalizada": "t3 aguja - 6 x 1.1/2 x 100",
+   "proveedor": "CIVIMET - STEEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 3453.01,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-14T01:50:58.390618+00:00"
+  },
+  {
+   "id": "6a254135-1d08-4b0f-889e-eece2b3059af",
+   "descripcion_original": "WEBER REFRACTARIO X 20 KG",
+   "descripcion_normalizada": "weber refractario x 20 kg",
+   "proveedor": "CORRALON LAS QUINTAS",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 66377.92,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:49.566455+00:00"
+  },
+  {
+   "id": "d0f4bbaf-7f36-4fac-821a-c6cd93c40807",
+   "descripcion_original": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+   "descripcion_normalizada": "piedra bca mar d.plata x 7 mts**",
+   "proveedor": "CORRALON SAN RAFAEL",
+   "categoria_sugerida": null,
+   "unidad_sugerida": null,
+   "precio_visto": 96204.27,
+   "agrupado_con": [],
+   "estado": "PENDIENTE",
+   "validado_por": null,
+   "codigo_asignado": null,
+   "pdf_origen": null,
+   "created_at": "2026-07-22T15:01:50.697388+00:00"
+  }
+ ],
+ "plan": [
+  {
+   "texto": "MAPEI CERAMICO 25KG",
+   "codigo": "CONS105",
+   "ids": [
+    "fd36814b-9a87-4457-8332-20d95e5715eb"
+   ]
+  },
+  {
+   "texto": "Masilla Anclaflex x 32 kg",
+   "codigo": "Y112",
+   "ids": [
+    "a512487d-f1ca-4ab2-8c8f-e93045498eb5"
+   ]
+  },
+  {
+   "texto": "Masilla Durlock Multiuso x 32 kg",
+   "codigo": "Y112",
+   "ids": [
+    "0d4f913a-78f2-4bcb-b3dc-99052d80bbca"
+   ]
+  },
+  {
+   "texto": "Tornillos T1 punta mecha x 100 u",
+   "codigo": "T002",
+   "ids": [
+    "45838f23-06ee-4cb4-8800-b326ecccd4a6"
+   ]
+  },
+  {
+   "texto": "MANGUITO 2015 DE REP. HH DE 63 AWA",
+   "codigo": "INSTS053",
+   "ids": [
+    "735cdf2c-796a-4e8f-bfdb-801360e329eb"
+   ]
+  },
+  {
+   "texto": "MANGUITO 2014 DE REP. HH DE 50 AWA",
+   "codigo": "INSTS054",
+   "ids": [
+    "773ef9fe-dad4-46d5-a800-91c6fb15dbd5"
+   ]
+  },
+  {
+   "texto": "MANGUITO 2013 DE REP. HH DE 40 AWA",
+   "codigo": "INSTS055",
+   "ids": [
+    "80500ac2-fcb6-4988-ae72-a0cfb23bc474"
+   ]
+  },
+  {
+   "texto": "REF LAD RECTO 229X114X63 ART 1",
+   "codigo": "CONS125",
+   "ids": [
+    "3afba2ab-77c7-4310-b5c5-3e8714c5840c"
+   ]
+  },
+  {
+   "texto": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
+   "codigo": "CONS125",
+   "ids": [
+    "982ebdfa-9baa-49f7-a824-7a7f2810d2fb",
+    "d9a26dc9-4d71-4dee-b5fd-aea5198f58d3"
+   ]
+  },
+  {
+   "texto": "LADRILLO REFRACTARIO NAT. 228X114X63",
+   "codigo": "CONS125",
+   "ids": [
+    "fef19364-4f9c-43b8-bac3-e6020db9d1f8"
+   ]
+  },
+  {
+   "texto": "Placa Durlock 1.20 m x 2.40 m  x 9,5 mm STD",
+   "codigo": "Y102",
+   "ids": [
+    "ecd13e2b-8d51-468a-a8aa-13a155151243"
+   ]
+  },
+  {
+   "texto": "2026-RAMAL SIMP A 45 63X 63MH AWADUCT",
+   "codigo": "INSTS049",
+   "ids": [
+    "481d7834-65af-4882-a618-9c1648010b0b",
+    "8b998479-9080-4b55-850a-cd79ca5f564a"
+   ]
+  },
+  {
+   "texto": "Cable 1,50 mm blanco Fonseca",
+   "codigo": "INSTE041",
+   "ids": [
+    "e32700f0-25e3-4578-b8ba-d40ac7caa9db"
+   ]
+  },
+  {
+   "texto": "BUJE 32-25 ACQUA",
+   "codigo": "INSTS119",
+   "ids": [
+    "1be7fe32-9494-431c-93b4-36a05ac15904"
+   ]
+  },
+  {
+   "texto": "TOSCA X CHASIS 7MT",
+   "codigo": "CONS107",
+   "ids": [
+    "5ebbec61-814c-4871-a141-4c8ee7984fce"
+   ]
+  },
+  {
+   "texto": "J.E. RAMAL 110X110A45 M-HPVC 26035112 TIGRE",
+   "codigo": "INSTS050",
+   "ids": [
+    "4183b305-b98c-4d1e-980f-49ad2e8ce8d1",
+    "5f5ac2d1-3b50-4d28-bf10-9ff0759ca694"
+   ]
+  },
+  {
+   "texto": "CAÑO 1008 DE 40 X 4 AWA",
+   "codigo": "INSTS030",
+   "ids": [
+    "512b7b6e-40d7-4629-960d-796ffc016b08"
+   ]
+  },
+  {
+   "texto": "PILETA 2127 LOSA 5 ENT ACANAL 50/63 X 110 AWA",
+   "codigo": "INSTS060",
+   "ids": [
+    "d61fc504-fcb4-4c42-ba27-d752d8036e7f"
+   ]
+  },
+  {
+   "texto": "TORNILLO P/INODORO COMPLETO 22 X 60",
+   "codigo": "TER427",
+   "ids": [
+    "29552156-1fde-47e2-ade4-3ce00f16c0c4"
+   ]
+  },
+  {
+   "texto": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
+   "codigo": "INSTS185",
+   "ids": [
+    "a19ac084-7392-4ed2-bae4-f6802ed3cf9d"
+   ]
+  },
+  {
+   "texto": "REJA VENTI. 15X15--100CM2-PLAN-AMU",
+   "codigo": "TER426",
+   "ids": [
+    "a049e351-d27f-42e2-86f7-01adef106daf"
+   ]
+  },
+  {
+   "texto": "PEGAM REFRAC X 10KG",
+   "codigo": "CONS126",
+   "ids": [
+    "152134cf-a4eb-4b60-a395-c391c335dc63"
+   ]
+  },
+  {
+   "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 50 ACQ",
+   "codigo": "INSTS132",
+   "ids": [
+    "f5e0d70d-8a58-4a1e-8159-61d2f2f2d74f"
+   ]
+  },
+  {
+   "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 32 ACQ",
+   "codigo": "INSTS134",
+   "ids": [
+    "a74f98b7-55df-43ca-99f1-b22060c7aed6"
+   ]
+  },
+  {
+   "texto": "VILLAGE BAÑERA DE EMBUTI R",
+   "codigo": "TER594",
+   "ids": [
+    "7abe44a7-32ac-480d-a2a5-a44710420446"
+   ]
+  },
+  {
+   "texto": "P20 CODO A 90 DE 20 MM I P",
+   "codigo": "INSTS089",
+   "ids": [
+    "00af85e2-05c2-408f-8a18-15a0b123f056"
+   ]
+  },
+  {
+   "texto": "P20 CODO A 90 DE 25 MM I P",
+   "codigo": "INSTS090",
+   "ids": [
+    "c57e82be-c22a-4ad5-945d-c97bbbf7096e"
+   ]
+  },
+  {
+   "texto": "P20 CODO A 90 DE 32 MM I P",
+   "codigo": "INSTS091",
+   "ids": [
+    "eb8ef7e3-9545-471d-8a46-ad896d05ac06"
+   ]
+  },
+  {
+   "texto": "P20 CODO A 90 DE 50 MM I P",
+   "codigo": "INSTS092",
+   "ids": [
+    "37cc9090-729d-4649-8dff-27c2e29a3361"
+   ]
+  },
+  {
+   "texto": "NERVADO 6 mm barra 12 m",
+   "codigo": "CONS116",
+   "ids": [
+    "25bb960b-9803-4500-bf78-4e69278cf582"
+   ]
+  },
+  {
+   "texto": "NERVADO 8 mm barra 12 m",
+   "codigo": "CONS136",
+   "ids": [
+    "d1f326f1-59f6-49bd-966f-55482934b15c"
+   ]
+  },
+  {
+   "texto": "NERVADO 10 mm barra 12 m",
+   "codigo": "CONS117",
+   "ids": [
+    "df5fd451-4cb7-4919-907b-861a456ac8cf"
+   ]
+  },
+  {
+   "texto": "NERVADO 12 mm barra 12 m",
+   "codigo": "CONS118",
+   "ids": [
+    "44e27da3-fc39-4fc7-a3a0-7d378f5e64a5"
+   ]
+  },
+  {
+   "texto": "NERVADO 16 mm barra 12 m",
+   "codigo": "CONS137",
+   "ids": [
+    "200bc2c2-ef2a-4db7-b31b-2b08083d9ab7"
+   ]
+  },
+  {
+   "texto": "CAÑO 1031 DE 110 X 1 AWA",
+   "codigo": "INSTS019",
+   "ids": [
+    "98b4941e-c704-461f-a148-9d2bca115302"
+   ]
+  },
+  {
+   "texto": "CAÑO 1022 DE 63 X 1 AWA",
+   "codigo": "INSTS022",
+   "ids": [
+    "22876b0b-3428-4531-9e77-2420eb87f0dc"
+   ]
+  },
+  {
+   "texto": "CAÑO 1013 DE 50 X 1 AWA",
+   "codigo": "INSTS025",
+   "ids": [
+    "e5bd6149-54f9-462a-9307-c437a4af949f"
+   ]
+  },
+  {
+   "texto": "CAÑO 1004 DE 40 X 1 AWA",
+   "codigo": "INSTS028",
+   "ids": [
+    "d970b104-d2f8-4e41-b62e-ff54bf26a484"
+   ]
+  },
+  {
+   "texto": "PLANCHA EPS 1.00 X 1.00 ( 30 MM X 20 KG )",
+   "codigo": "TER112",
+   "ids": [
+    "a9046d3c-0f5a-43e3-aaa9-8aac7ce522a0"
+   ]
+  },
+  {
+   "texto": "PLACA CEMENTICIA VOLCANBOARD 8MM",
+   "codigo": "EST109",
+   "ids": [
+    "175eb085-7965-4d2e-8857-09ac3bf96ea9"
+   ]
+  },
+  {
+   "texto": "CANO DURATOP 50X1.00 MTS",
+   "codigo": "INSTS025",
+   "ids": [
+    "478928ad-58b3-4597-9c8d-cb2c6ae88902"
+   ]
+  },
+  {
+   "texto": "2057-RAMAL SIMP A 45 40X 40HH AWADUCT",
+   "codigo": "INSTS048",
+   "ids": [
+    "9d9533a6-b40f-42a7-b5d1-f8c354b0c3e3",
+    "a6e7cfdb-1dd6-417f-9319-5bb0ea514d5a"
+   ]
+  },
+  {
+   "texto": "2053-PIL.PAT.POL.3 ENTRA 40X63 AWADUCT",
+   "codigo": "INSTS056",
+   "ids": [
+    "d47e5871-7461-4179-bb5a-c77c59eb2da0",
+    "70ab6933-22aa-423d-8104-f1b0de235b19"
+   ]
+  },
+  {
+   "texto": "SYST UNION DOB.MIXTA C/BRI.50X11/2",
+   "codigo": "INSTS121",
+   "ids": [
+    "981d0df1-9df7-49e5-a4dd-9117be380c62"
+   ]
+  },
+  {
+   "texto": "CUPLA HH - Lisa 160 mm P",
+   "codigo": "INSTS218",
+   "ids": [
+    "7b6ec0b8-5211-42a2-a426-0de6004690c5"
+   ]
+  },
+  {
+   "texto": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+   "codigo": "CONS128",
+   "ids": [
+    "e392fa38-072c-495b-8e0f-79db9f7ff6c0",
+    "d0f4bbaf-7f36-4fac-821a-c6cd93c40807"
+   ]
+  },
+  {
+   "texto": "Malla SIMA MINI 150 x 150 x 5 mm de 2,40 x 3 m",
+   "codigo": "CONS243",
+   "ids": [
+    "a46ab215-1796-4608-8225-bd444b404d64"
+   ]
+  },
+  {
+   "texto": "MALLA #5.5 [15 X 15] 2 X 5 MTS [20 KG]",
+   "codigo": "CONS112",
+   "ids": [
+    "87eb0a26-0323-4093-bd01-43a29c19833b"
+   ]
+  },
+  {
+   "texto": "WEBER REFRACTARIO X 20 KG",
+   "codigo": "CONS272",
+   "ids": [
+    "11f27883-bbcd-4dd5-9788-22a8d34c4c6a",
+    "6a254135-1d08-4b0f-889e-eece2b3059af"
+   ]
+  },
+  {
+   "texto": "QUIMTEX impermeable para techos-varios colores x 20 lt",
+   "codigo": "TER566",
+   "ids": [
+    "bdf6ea59-f654-44d4-b2c8-dc86879edb1e"
+   ]
+  },
+  {
+   "texto": "FLEX MALLA A.INOX. P/BOMBA 1 X 50 AF 2074",
+   "codigo": "INSTS206",
+   "ids": [
+    "5bbf59da-acf2-42e1-a024-27f7f39257a8"
+   ]
+  },
+  {
+   "texto": "Cubrecanto 32 x 32 x 2.600 mm",
+   "codigo": "Y107",
+   "ids": [
+    "5dda400e-dcc9-4e1d-a7a9-33257cd77588"
+   ]
+  },
+  {
+   "texto": "PILETA 104P DOBLE 57X37X18 CM",
+   "codigo": "TER433",
+   "ids": [
+    "3714bb79-8707-4566-b9af-b884f448762a"
+   ]
+  },
+  {
+   "texto": "ARO DE CERA SELLADOR TOSSAL",
+   "codigo": "TER597",
+   "ids": [
+    "e173a80c-a681-4979-8ccb-4402eb30eadf"
+   ]
+  },
+  {
+   "texto": "189/B1 CR BIDET MONOCOMANDO",
+   "codigo": "TER471",
+   "ids": [
+    "13194c78-4e4e-463d-a757-484ba424eebd"
+   ]
+  },
+  {
+   "texto": "179.05/B1 CR KIT ACCES. 5 PZAS. FV",
+   "codigo": "TER303",
+   "ids": [
+    "e5a590c0-fd1f-4d08-a5d3-0c4ea783103a"
+   ]
+  },
+  {
+   "texto": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
+   "codigo": "TER303",
+   "ids": [
+    "31609049-5c48-471b-85bc-7e31616e83c8"
+   ]
+  },
+  {
+   "texto": "DESGRASADERA PARA COCINA",
+   "codigo": "INSTS250",
+   "ids": [
+    "d558a351-deb3-4bc2-9c41-378dc4dade8a"
+   ]
+  },
+  {
+   "texto": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
+   "codigo": "T019",
+   "ids": [
+    "9ce613cd-a8ef-45f8-b068-ccdccfa2765a",
+    "00145c03-b573-4638-9ac3-06117c574147"
+   ]
+  },
+  {
+   "texto": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+   "codigo": "T020",
+   "ids": [
+    "2578a240-fef0-4738-9b3b-d1ec9512559a",
+    "2d6ffaf0-da2d-4019-b2dd-cc7d8d169f55"
+   ]
+  },
+  {
+   "texto": "T3 AGUJA - 6 X 1.1/2 X 100",
+   "codigo": "T021",
+   "ids": [
+    "a11d2cb2-c6d9-4bca-b5b1-2620d52d39e8"
+   ]
+  },
+  {
+   "texto": "LADRILLO REFRACTARIO Nº4 [229X114X32 MM]",
+   "codigo": "CONS273",
+   "ids": [
+    "e3bfb3b4-b717-4c4d-8ae5-ad926fe29685"
+   ]
+  },
+  {
+   "texto": "TABLERO OSB EST 9.50 - 1220X2440 MM",
+   "codigo": "EST117",
+   "ids": [
+    "08ce7ccf-ffc0-45c5-96cd-88f84910d137",
+    "02d4c9d5-ac41-4d61-9603-c2d73218f6e0"
+   ]
+  },
+  {
+   "texto": "Galvanizado N°16 (1.62 mm esp-rollo 40/60 kg) x kg",
+   "codigo": "CONS111",
+   "ids": [
+    "8767b009-0518-4ddd-a156-0821b50f6a11"
+   ]
+  },
+  {
+   "texto": "Negro recocido N° 9 x kg",
+   "codigo": "CONS111",
+   "ids": [
+    "2c7d1325-f82f-4ed3-be0d-842d664e8c2b"
+   ]
+  },
+  {
+   "texto": "Negro recocido N° 16 x kg",
+   "codigo": "CONS111",
+   "ids": [
+    "a09daaf4-b34c-4fe4-8ee2-057fa1228528"
+   ]
+  }
+ ],
+ "rechazos": [
+  {
+   "texto": "CODO a 87 30’ MH - Con 2",
+   "ids": [
+    "3000f92a-cee9-4c10-8b53-bc3f289fcd89"
+   ]
+  },
+  {
+   "texto": "TUBO AMANCO NIVEL 1 - St a",
+   "ids": [
+    "7aae61f7-cd20-479d-9e00-6dd6341ac6f8",
+    "ac573334-5a06-47c9-b183-cfa7a2166698"
+   ]
+  },
+  {
+   "texto": "CODO A 45 HH - PN10 16 0",
+   "ids": [
+    "510daf9b-d8cf-4892-b89c-432fbe3e143c"
+   ]
+  },
+  {
+   "texto": "REDUCCIÓN - Excéntrica M H",
+   "ids": [
+    "58f4bbcc-14fa-42ba-bb3f-08acebade7af"
+   ]
+  },
+  {
+   "texto": "FLEXIBLE DE COBRE ANILLA D",
+   "ids": [
+    "09ecc317-2107-4cc9-9aff-8c552f11f5c7",
+    "0b7e1e66-62aa-4625-b5dd-1a120a898ab0"
+   ]
+  },
+  {
+   "texto": "FLEXIBLE CORRUGADO PARA B",
+   "ids": [
+    "1f579fb7-af9b-4822-9dac-3343ba4bad92"
+   ]
+  },
+  {
+   "texto": "VALVULAS ESFERICAS METAL I",
+   "ids": [
+    "8f542b50-c2f0-4a92-a81f-e49d0911c75d"
+   ]
+  },
+  {
+   "texto": "RAMAL CURVO a 87 30’ MH",
+   "ids": [
+    "85f3b67d-4b80-434b-a5c2-c60e8e3ef54b"
+   ]
+  },
+  {
+   "texto": "P51 V. ESFERICA CON MANI J",
+   "ids": [
+    "01b539c3-f46c-4638-8ff0-a9aa59962dd9"
+   ]
+  },
+  {
+   "texto": "P23 CODO 90 CON ROSCA HE M",
+   "ids": [
+    "e4318efe-3004-4550-ae41-3396a4cbb8db",
+    "7d35b20a-7871-487a-8b17-59951f1d82a2",
+    "9b8aa605-ee5f-4523-9391-3a20e23c87c3"
+   ]
+  },
+  {
+   "texto": "P35 TEE REDUCIDA CENTRAL",
+   "ids": [
+    "cef02581-7500-4e26-a56c-0d779949b177"
+   ]
+  },
+  {
+   "texto": "DESAGUE BASE ABS REJA PL E",
+   "ids": [
+    "f0323d64-c2b7-452c-8254-cc77743fd923"
+   ]
+  },
+  {
+   "texto": "ORING + TORNILLOS PARA KIT OTOR OV.CAM",
+   "ids": [
+    "507b7a1a-8a82-4876-b55e-45795530366d",
+    "4f45074c-744c-4a36-bd16-e167c7927a27"
+   ]
+  },
+  {
+   "texto": "PILETON INYEC. 20 X 20 S A",
+   "ids": [
+    "12ad6f33-57d1-47c8-988b-1135ba18488e"
+   ]
+  },
+  {
+   "texto": "ZZ 52 ZZ 52 52 x 32 x 15 JHONS O",
+   "ids": [
+    "0f9c4900-4698-4328-ac6d-db48da9f623f"
+   ]
+  },
+  {
+   "texto": "Bacha de Porcelana Sanit a",
+   "ids": [
+    "24c70eb9-e725-4bcc-b719-f2da9e57916d",
+    "14be0ca4-648d-464a-8eed-0464603de4ab"
+   ]
+  },
+  {
+   "texto": "7261 RAMAL POSTIZO TIGRE 160 x",
+   "ids": [
+    "1b2d1afb-3570-4be1-8191-3e59645bb3fa"
+   ]
+  }
+ ]
+}

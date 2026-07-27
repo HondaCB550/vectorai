@@ -1034,6 +1034,18 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "INSTS025",
+   "unidad": "UN",
+   "precio": 2940.08,
+   "cantidad": 8,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CANO DURATOP 50X1.00 MTS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS028",
    "unidad": "UN",
    "precio": 2323.05,
@@ -1342,6 +1354,42 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "ARO SUPLEMENTARIO C/CERA IDEAL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER303",
+   "unidad": "UN",
+   "precio": 79266.65,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "179.05/B1 CR KIT ACCES. 5 PZAS. FV",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER433",
+   "unidad": "UN",
+   "precio": 60572.64,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PILETA 104P DOBLE 57X37X18 CM",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER471",
+   "unidad": "UN",
+   "precio": 113658.07,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "189/B1 CR BIDET MONOCOMANDO",
    "origen": "pipeline"
   },
   {
@@ -1861,6 +1909,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER426",
+   "unidad": "UN",
+   "precio": 2137.95,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "REJA VENTI. 15X15--100CM2-PLAN-AMU",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
    "codigo_material": "INSTS008",
    "unidad": "UN",
@@ -2197,6 +2257,102 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS019",
+   "unidad": "UN",
+   "precio": 8038.51,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1031 DE 110 X 1 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS022",
+   "unidad": "UN",
+   "precio": 4346.06,
+   "cantidad": 9,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1022 DE 63 X 1 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS025",
+   "unidad": "UN",
+   "precio": 3373.38,
+   "cantidad": 8,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1013 DE 50 X 1 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS028",
+   "unidad": "UN",
+   "precio": 2628.9,
+   "cantidad": 7,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1004 DE 40 X 1 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS030",
+   "unidad": "UN",
+   "precio": 7478.06,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CAÑO 1008 DE 40 X 4 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS119",
+   "unidad": "UN",
+   "precio": 1022.44,
+   "cantidad": 4,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "BUJE 32-25 ACQUA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS185",
+   "unidad": "UN",
+   "precio": 11017.63,
+   "cantidad": 3,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON SAN RAFAEL",
+   "codigo_material": "CONS272",
+   "unidad": "UN",
+   "precio": 62240.35,
+   "cantidad": 5,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "FARA CEMENTO REFRACTARIO HUMEDO X 20KG",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "INSTS001",
    "unidad": "UN",
@@ -2438,6 +2594,18 @@
   },
   {
    "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "TER303",
+   "unidad": "UN",
+   "precio": 79372.71,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
    "codigo_material": "TER427",
    "unidad": "UN",
    "precio": 835.36,
@@ -2446,6 +2614,78 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "TORNILLO P/INODORO COMPLETO 22 X 80",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "TER597",
+   "unidad": "UN",
+   "precio": 5545.17,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARO DE CERA SELLADOR TOSSAL",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "TER427",
+   "unidad": "UN",
+   "precio": 688.52,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TORNILLO P/INODORO COMPLETO 22 X 60",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS053",
+   "unidad": "UN",
+   "precio": 1356.79,
+   "cantidad": 15,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MANGUITO 2015 DE REP. HH DE 63 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS055",
+   "unidad": "UN",
+   "precio": 931.38,
+   "cantidad": 20,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MANGUITO 2013 DE REP. HH DE 40 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS132",
+   "unidad": "UN",
+   "precio": 51385.02,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "LLAVE ESF. C/MJA P/TERMOFUS DE 50 ACQ",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS134",
+   "unidad": "UN",
+   "precio": 20409.69,
+   "cantidad": 6,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "LLAVE ESF. C/MJA P/TERMOFUS DE 32 ACQ",
    "origen": "pipeline"
   },
   {
@@ -2494,6 +2734,42 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "A.SYSTEM BUJE RED.32 X 25",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS060",
+   "unidad": "UN",
+   "precio": 13229.2,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PILETA 2127 LOSA 5 ENT ACANAL 50/63 X 110 AWA",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS206",
+   "unidad": "UN",
+   "precio": 18251.21,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "FLEX MALLA A.INOX. P/BOMBA 1 X 50 AF 2074",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS054",
+   "unidad": "UN",
+   "precio": 1019.23,
+   "cantidad": 6,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "MANGUITO 2014 DE REP. HH DE 50 AWA",
    "origen": "pipeline"
   },
   {
@@ -2583,7 +2859,7 @@
   {
    "proveedor": "CORRALON LAPRIDA",
    "codigo_material": "CONS107",
-   "unidad": "UN",
+   "unidad": "M3",
    "precio": 25000.0,
    "cantidad": 111,
    "pdf_origen": null,
@@ -2690,18 +2966,6 @@
   },
   {
    "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 86000.24,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA BOLSON",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
    "codigo_material": "CONS111",
    "unidad": "UN",
    "precio": 4500.97,
@@ -2797,15 +3061,15 @@
    "origen": "pipeline"
   },
   {
-   "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
-   "codigo_material": "CONS107",
-   "unidad": "UN",
-   "precio": 37000.0,
-   "cantidad": 111,
+   "proveedor": "CORRALON LAPRIDA",
+   "codigo_material": "CONS112",
+   "unidad": "M2",
+   "precio": 5590.0,
+   "cantidad": 340,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷10 m² de la hoja)",
    "moneda": "ARS",
-   "texto_original": "TOSCA XMETRO",
+   "texto_original": "MALLA #5.5 [15 X 15] 2 X 5 MTS [20 KG]",
    "origen": "pipeline"
   },
   {
@@ -2818,6 +3082,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "HIERRO GERDAU Ø 6 MM",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON LAPRIDA",
+   "codigo_material": "CONS273",
+   "unidad": "UN",
+   "precio": 3000.0,
+   "cantidad": 208,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "LADRILLO REFRACTARIO Nº4 [229X114X32 MM]",
    "origen": "pipeline"
   },
   {
@@ -2883,7 +3159,7 @@
   {
    "proveedor": "CORRALON LAPRIDA",
    "codigo_material": "CONS110",
-   "unidad": "UN",
+   "unidad": "M3",
    "precio": 88000.0,
    "cantidad": 7,
    "pdf_origen": null,
@@ -3170,18 +3446,6 @@
   },
   {
    "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 81447.96,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA PARTIDA 6/20",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
    "codigo_material": "CONS111",
    "unidad": "UN",
    "precio": 4977.38,
@@ -3214,6 +3478,18 @@
    "conversion_aplicada": "a precio por unidad (÷100 del pack)",
    "moneda": "ARS",
    "texto_original": "T3 MECHA 6X1 5/8 TOOLISTER (BOLSAX100)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
+   "codigo_material": "CONS125",
+   "unidad": "UN",
+   "precio": 5248.87,
+   "cantidad": 208,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "LADRILLO REFRACTARIO NAT. 228X114X63",
    "origen": "pipeline"
   },
   {
@@ -3286,6 +3562,42 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "TABLERO OSB EST 11.1 - 1220X2440 MM",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "T019",
+   "unidad": "UN",
+   "precio": 66.3584,
+   "cantidad": 100,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por unidad (÷100 del pack)",
+   "moneda": "ARS",
+   "texto_original": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "T020",
+   "unidad": "UN",
+   "precio": 78.4392,
+   "cantidad": 100,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por unidad (÷100 del pack)",
+   "moneda": "ARS",
+   "texto_original": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "INSUMA - STEEL",
+   "codigo_material": "EST117",
+   "unidad": "UN",
+   "precio": 21383.33,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TABLERO OSB EST 9.50 - 1220X2440 MM",
    "origen": "pipeline"
   },
   {
@@ -3470,14 +3782,14 @@
   },
   {
    "proveedor": "J.M. Landa",
-   "codigo_material": "CONS110",
+   "codigo_material": "CONS105",
    "unidad": "UN",
-   "precio": 56606.33,
-   "cantidad": 7,
+   "precio": 6108.6,
+   "cantidad": 37,
    "pdf_origen": null,
    "conversion_aplicada": null,
    "moneda": "ARS",
-   "texto_original": "GRANZA 10-20 BOLSON X 1.2 TN",
+   "texto_original": "MAPEI CERAMICO 25KG",
    "origen": "pipeline"
   },
   {
@@ -3530,18 +3842,6 @@
   },
   {
    "proveedor": "CORRALON SAN RAFAEL",
-   "codigo_material": "CONS107",
-   "unidad": "UN",
-   "precio": 21559.97,
-   "cantidad": 111,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "TIERRA TOSCA X 7 MTS CUBICOS**",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON SAN RAFAEL",
    "codigo_material": "CONS108",
    "unidad": "UN",
    "precio": 48933.76,
@@ -3550,18 +3850,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "ARENA AMARILLA X 1 BIG BAG",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON SAN RAFAEL",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 63446.39,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA GRANIT 6-20 X 7 M",
    "origen": "pipeline"
   },
   {
@@ -3646,6 +3934,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "ALAMBRE DE FARDO X 1 KG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "J.M. Landa",
+   "codigo_material": "CONS107",
+   "unidad": "M3",
+   "precio": 31613.4443,
+   "cantidad": 112,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por m³ (÷7 m³ del viaje)",
+   "moneda": "ARS",
+   "texto_original": "TOSCA X CHASIS 7MT",
    "origen": "pipeline"
   },
   {
@@ -3745,6 +4045,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "CORRALON SAN RAFAEL",
+   "codigo_material": "CONS125",
+   "unidad": "UN",
+   "precio": 4501.13,
+   "cantidad": 208,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "CORRALON LAS QUINTAS",
    "codigo_material": "CONS101",
    "unidad": "UN",
@@ -3794,18 +4106,6 @@
   },
   {
    "proveedor": "CORRALON LAS QUINTAS",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 58528.16,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA PARTIDA 6/20 (BIG BAG)",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON LAS QUINTAS",
    "codigo_material": "CONS112",
    "unidad": "M2",
    "precio": 6065.0236,
@@ -3850,18 +4150,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "HIERRO 12 MM ACINDAR/BRAGADO",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON LAS QUINTAS",
-   "codigo_material": "CONS128",
-   "unidad": "UN",
-   "precio": 70035.5,
-   "cantidad": 4,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA BLANCA MDP X 1 M3 (BIG BAG)",
    "origen": "pipeline"
   },
   {
@@ -3922,6 +4210,18 @@
    "conversion_aplicada": "a precio por kilo (÷30 kg del envase)",
    "moneda": "ARS",
    "texto_original": "WEBER REV BASE COAT GRIS X 30 KG",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON LAS QUINTAS",
+   "codigo_material": "CONS272",
+   "unidad": "UN",
+   "precio": 66377.92,
+   "cantidad": 4,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "WEBER REFRACTARIO X 20 KG",
    "origen": "pipeline"
   },
   {
@@ -4390,6 +4690,30 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "MALLA F.VIDRIO (5X5) 1.00 X 50 MTS - 160 GRAMOS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "T021",
+   "unidad": "UN",
+   "precio": 34.5301,
+   "cantidad": 2300,
+   "pdf_origen": null,
+   "conversion_aplicada": "a precio por unidad (÷100 del pack)",
+   "moneda": "ARS",
+   "texto_original": "T3 AGUJA - 6 X 1.1/2 X 100",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "TER112",
+   "unidad": "UN",
+   "precio": 7404.95,
+   "cantidad": 422,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "PLANCHA EPS 1.00 X 1.00 ( 30 MM X 20 KG )",
    "origen": "pipeline"
   },
   {
@@ -5114,18 +5438,6 @@
   },
   {
    "proveedor": "CAROSIO CORRALON",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 52723.8,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA 6/20 BL",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CAROSIO CORRALON",
    "codigo_material": "CONS111",
    "unidad": "UN",
    "precio": 3325.89,
@@ -5206,18 +5518,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "206 PEGAMENTO SECO X 10 KG REFRACTARIO",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CAROSIO CORRALON",
-   "codigo_material": "CONS128",
-   "unidad": "UN",
-   "precio": 86923.09,
-   "cantidad": 18,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA BLANCA",
    "origen": "pipeline"
   },
   {
@@ -5366,18 +5666,6 @@
   },
   {
    "proveedor": "SAUCE",
-   "codigo_material": "CONS110",
-   "unidad": "UN",
-   "precio": 70134.72,
-   "cantidad": 7,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA 6/22",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "SAUCE",
    "codigo_material": "CONS111",
    "unidad": "UN",
    "precio": 4147.4,
@@ -5446,18 +5734,6 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "HIERRO ADN 12mm",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "SAUCE",
-   "codigo_material": "CONS128",
-   "unidad": "UN",
-   "precio": 89228.64,
-   "cantidad": 18,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "PIEDRA BLANCA 6/20",
    "origen": "pipeline"
   },
   {
@@ -5548,8 +5824,8 @@
   },
   {
    "texto": "[229X114X32 MM]",
-   "codigo": "CONS125",
-   "score": 75.0,
+   "codigo": "CONS273",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -5589,15 +5865,9 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "CANO DURATOP 50X1.00 MTS",
-   "codigo": "INSTS028",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "PLACA CEMENTICIA VOLCANBOARD 8MM",
-   "codigo": "CONS101",
-   "score": 82.4,
+   "codigo": "EST109",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -5608,8 +5878,8 @@
   },
   {
    "texto": "SYST UNION DOB.MIXTA C/BRI.50X11/2",
-   "codigo": "INSTS054",
-   "score": 76.9,
+   "codigo": "INSTS121",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -5628,24 +5898,6 @@
    "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
    "codigo": "INSTS059",
    "score": 60.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "179.05/B1 CR KIT ACCES. 5 PZAS. FV",
-   "codigo": "TER471",
-   "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "PILETA 104P DOBLE 57X37X18 CM",
-   "codigo": "TER410",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "189/B1 CR BIDET MONOCOMANDO",
-   "codigo": "TER477",
-   "score": 77.3,
    "motivo": "score_bajo"
   },
   {
@@ -5697,12 +5949,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "REJA VENTI. 15X15--100CM2-PLAN-AMU",
-   "codigo": "TER426",
-   "score": 65.3,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "TARUGO SX 8 LAD.HUECO REDEX",
    "codigo": "A020",
    "score": 54.5,
@@ -5727,38 +5973,8 @@
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "CAÑO 1031 DE 110 X 1 AWA",
-   "codigo": "CLIM104",
-   "score": 80.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CAÑO 1022 DE 63 X 1 AWA",
-   "codigo": "CLIM104",
-   "score": 80.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CAÑO 1013 DE 50 X 1 AWA",
-   "codigo": "CLIM104",
-   "score": 80.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CAÑO 1004 DE 40 X 1 AWA",
-   "codigo": "CLIM104",
-   "score": 80.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "CAÑO 1006 DE 40 X 2 AWA",
    "codigo": "INSTS029",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CAÑO 1008 DE 40 X 4 AWA",
-   "codigo": "INSTS030",
    "score": 76.0,
    "motivo": "score_bajo"
   },
@@ -5773,24 +5989,6 @@
    "codigo": "INSTS075",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "BUJE 32-25 ACQUA",
-   "codigo": "INSTS119",
-   "score": 80.9,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
-   "codigo": "INSTS185",
-   "score": 79.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "FARA CEMENTO REFRACTARIO HUMEDO X 20KG",
-   "codigo": "CONS101",
-   "score": 84.0,
-   "motivo": "score_bajo"
   },
   {
    "texto": "UNION DOBLE MIXTA RH 50 X 11/2 ACQUA",
@@ -5835,27 +6033,9 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
-   "codigo": "TER471",
-   "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
    "codigo": "TER304",
    "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "ARO DE CERA SELLADOR TOSSAL",
-   "codigo": "INS025",
-   "score": 63.6,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TORNILLO P/INODORO COMPLETO 22 X 60",
-   "codigo": "TER427",
-   "score": 76.0,
    "motivo": "score_bajo"
   },
   {
@@ -5877,52 +6057,16 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "MANGUITO 2015 DE REP. HH DE 63 AWA",
-   "codigo": "INSTS053",
-   "score": 84.3,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "MANGUITO 2013 DE REP. HH DE 40 AWA",
-   "codigo": "INSTS055",
-   "score": 84.3,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 50 ACQ",
-   "codigo": "INSTS132",
-   "score": 64.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 32 ACQ",
-   "codigo": "INSTS134",
-   "score": 64.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "KIT DUAL 750 SAL.40 HORIZ (30-620750040)",
    "codigo": "INS032",
    "score": 49.1,
    "motivo": "score_bajo"
   },
   {
-   "texto": "PILETA 2127 LOSA 5 ENT ACANAL 50/63 X 110 AWA",
-   "codigo": "INSTS060",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "FLEX MALLA A.INOX. P/BOMBA 1 X 50 AF 2074",
-   "codigo": "INSTS184",
-   "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "MANGUITO 2014 DE REP. HH DE 50 AWA",
-   "codigo": "INSTS054",
-   "score": 84.3,
-   "motivo": "score_bajo"
+   "texto": "PIEDRA BOLSON",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "MALLA 6 15x15",
@@ -5937,16 +6081,10 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "MALLA #5.5 [15 X 15] 2 X 5 MTS [20 KG]",
-   "codigo": "CONS112",
-   "score": 80.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "LADRILLO REFRACTARIO Nº4 [229X114X32 MM]",
-   "codigo": "HIE009",
-   "score": 84.0,
-   "motivo": "score_bajo"
+   "texto": "TOSCA XMETRO",
+   "codigo": "CONS107",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "MASTROCRET XBOLSA 100 LTS",
@@ -5985,10 +6123,10 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "LADRILLO REFRACTARIO NAT. 228X114X63",
-   "codigo": "HIE009",
-   "score": 84.0,
-   "motivo": "score_bajo"
+   "texto": "PIEDRA PARTIDA 6/20",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "ARCILLA X 10 KG",
@@ -6018,18 +6156,6 @@
    "texto": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
    "codigo": "CONS268",
    "score": 63.6,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
-   "codigo": "T005",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
-   "codigo": "T009",
-   "score": 69.2,
    "motivo": "score_bajo"
   },
   {
@@ -6063,22 +6189,16 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "TABLERO OSB EST 9.50 - 1220X2440 MM",
-   "codigo": "EST101",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "BASE COAT GRANITEX",
    "codigo": "TER482",
    "score": 100.0,
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "MAPEI CERAMICO 25KG",
-   "codigo": "CONS105",
-   "score": 84.9,
-   "motivo": "score_bajo"
+   "texto": "GRANZA 10-20 BOLSON X 1.2 TN",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "HIDROFUGO TAMBOR X 200 LT.",
@@ -6095,13 +6215,13 @@
   {
    "texto": "PEGAM REFRAC X 10KG",
    "codigo": "CONS126",
-   "score": 64.9,
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
    "texto": "REFRAC.TEJUELA 2 X 11 X 22 - UNI",
-   "codigo": "CONS125",
-   "score": 58.1,
+   "codigo": "CONS273",
+   "score": 60.0,
    "motivo": "score_bajo"
   },
   {
@@ -6117,6 +6237,18 @@
    "motivo": "score_bajo"
   },
   {
+   "texto": "TIERRA TOSCA X 7 MTS CUBICOS**",
+   "codigo": "CONS107",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
+  },
+  {
+   "texto": "PIEDRA GRANIT 6-20 X 7 M",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
+  },
+  {
    "texto": "CHAPA ACA POLIP X 6 MT",
    "codigo": "CH010",
    "score": 70.6,
@@ -6127,12 +6259,6 @@
    "codigo": "CH019",
    "score": 100.0,
    "motivo": "unidad_ambigua"
-  },
-  {
-   "texto": "TOSCA X CHASIS 7MT",
-   "codigo": "CONS107",
-   "score": 82.4,
-   "motivo": "score_bajo"
   },
   {
    "texto": "PEDREG. 3-1 BOLSON X 1.2 TN",
@@ -6147,22 +6273,28 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
-   "codigo": "CONS125",
-   "score": 74.3,
-   "motivo": "score_bajo"
+   "texto": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+   "codigo": "CONS128",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
-   "texto": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+   "texto": "PIEDRA PARTIDA 6/20 (BIG BAG)",
    "codigo": "CONS110",
-   "score": 80.0,
-   "motivo": "score_bajo"
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "REF LAD RECTO 229X114X63 ART 1",
    "codigo": "CONS125",
    "score": 84.9,
    "motivo": "score_bajo"
+  },
+  {
+   "texto": "PIEDRA BLANCA MDP X 1 M3 (BIG BAG)",
+   "codigo": "CONS128",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "ARENA FINA (BIG BAG)",
@@ -6174,12 +6306,6 @@
    "texto": "HIERRO DULCE DEL 4.2",
    "codigo": "CONS115",
    "score": 70.7,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "WEBER REFRACTARIO X 20 KG",
-   "codigo": "CONS141",
-   "score": 83.7,
    "motivo": "score_bajo"
   },
   {
@@ -6213,18 +6339,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "T3 AGUJA - 6 X 1.1/2 X 100",
-   "codigo": "T009",
-   "score": 78.3,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "PLANCHA EPS 1.00 X 1.00 ( 30 MM X 20 KG )",
-   "codigo": "CH019",
-   "score": 84.9,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "3,00 LLAVE DE PASO CON ROSETA YMANIVELA CROMO 25MM FUSIOGAS $ 21.960,74 0,00 $",
    "codigo": "INSTS163",
    "score": 82.9,
@@ -6238,8 +6352,8 @@
   },
   {
    "texto": "1,00 PUERTA GABINETE GAS APROBADA CHAPA 40X50 $ 51.483,56 0,00 $",
-   "codigo": "HIE020",
-   "score": 72.7,
+   "codigo": "TER112",
+   "score": 81.8,
    "motivo": "score_bajo"
   },
   {
@@ -6406,8 +6520,8 @@
   },
   {
    "texto": "PUERTA GAS 40 X 60 C/VISOR CHAPA VARIOS",
-   "codigo": "INSTS205",
-   "score": 67.2,
+   "codigo": "TER112",
+   "score": 70.0,
    "motivo": "score_bajo"
   },
   {
@@ -6568,8 +6682,8 @@
   },
   {
    "texto": "PUERTA GAS 40 X 60 C/VISOR CHAPA VARIOS",
-   "codigo": "INSTS205",
-   "score": 67.2,
+   "codigo": "TER112",
+   "score": 70.0,
    "motivo": "score_bajo"
   },
   {
@@ -6583,6 +6697,12 @@
    "codigo": "INSTS162",
    "score": 56.2,
    "motivo": "score_bajo"
+  },
+  {
+   "texto": "PIEDRA 6/20 BL",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "CHAPA ACAN POLIP X 6  ML",
@@ -6601,6 +6721,24 @@
    "codigo": "CONS125",
    "score": 84.9,
    "motivo": "score_bajo"
+  },
+  {
+   "texto": "PIEDRA BLANCA",
+   "codigo": "CONS128",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
+  },
+  {
+   "texto": "PIEDRA 6/22",
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
+  },
+  {
+   "texto": "PIEDRA BLANCA 6/20",
+   "codigo": "CONS128",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "ARENA RUBIA",
