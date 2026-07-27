@@ -135,7 +135,7 @@ export default function Landing() {
                 </>
               ) : (
                 <>
-                  <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap">Entrar</Link>
+                  <Link href="/login" className="text-sm font-semibold text-[#1A2B4A] hover:text-[#E87022] transition whitespace-nowrap px-2 py-3">Entrar</Link>
                   <Link
                     href="/registro"
                     className="bg-[#E87022] text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition whitespace-nowrap"
