@@ -104,7 +104,7 @@ export default function Landing() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[60px] sm:h-[68px] flex items-center justify-between gap-2">
             <Link href="/" className="flex items-center gap-2">
               <Logo />
-              <span className="text-xs font-semibold text-[#E87022] bg-[#FBE4D2] px-2 py-0.5 rounded-full align-middle">beta</span>
+              <span className="text-xs font-semibold text-[#A94C11] bg-[#FBE4D2] px-2 py-0.5 rounded-full align-middle">beta</span>
             </Link>
             <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
               <li><a href="#como-funciona" className="hover:text-[#1A2B4A] transition">¿Cómo funciona?</a></li>
