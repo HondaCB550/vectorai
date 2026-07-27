@@ -62,8 +62,9 @@ function LoginInner() {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-800 mb-1">Mail</label>
+              <label htmlFor="login-mail" className="block text-sm font-semibold text-gray-800 mb-1">Mail</label>
               <input
+                id="login-mail"
                 type="email"
                 value={mail}
                 onChange={(e) => setMail(e.target.value)}
@@ -73,9 +74,10 @@ function LoginInner() {
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-800 mb-1">Contraseña</label>
+              <label htmlFor="login-pass" className="block text-sm font-semibold text-gray-800 mb-1">Contraseña</label>
               <div className="relative">
                 <input
+                  id="login-pass"
                   type={showPass ? "text" : "password"}
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}

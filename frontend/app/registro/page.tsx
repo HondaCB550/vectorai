@@ -208,38 +208,38 @@ function RegistroInner() {
 
             <div className="space-y-4">
               <div>
-                <label className={LABEL}>Nombre completo</label>
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)}
+                <label htmlFor="reg-nombre" className={LABEL}>Nombre completo</label>
+                <input id="reg-nombre" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)}
                   className={INPUT} placeholder="Juan García" />
               </div>
 
               <div>
-                <label className={LABEL}>Profesión</label>
-                <select value={profesion} onChange={(e) => setProfesion(e.target.value)} className={INPUT}>
+                <label htmlFor="reg-profesion" className={LABEL}>Profesión</label>
+                <select id="reg-profesion" value={profesion} onChange={(e) => setProfesion(e.target.value)} className={INPUT}>
                   <option value="">Seleccioná…</option>
                   {PROFESIONES.map((p) => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
 
               <div>
-                <label className={LABEL}>
+                <label htmlFor="reg-empresa" className={LABEL}>
                   Empresa o estudio{" "}
                   <span className="text-gray-500 font-normal">(opcional)</span>
                 </label>
-                <input type="text" value={empresa} onChange={(e) => setEmpresa(e.target.value)}
+                <input id="reg-empresa" type="text" value={empresa} onChange={(e) => setEmpresa(e.target.value)}
                   className={INPUT} placeholder="Estudio García Arquitectura" />
               </div>
 
               <div>
-                <label className={LABEL}>Mail</label>
-                <input type="email" value={mail} onChange={(e) => setMail(e.target.value)}
+                <label htmlFor="reg-mail" className={LABEL}>Mail</label>
+                <input id="reg-mail" type="email" value={mail} onChange={(e) => setMail(e.target.value)}
                   className={INPUT} placeholder="tu@mail.com" />
               </div>
 
               <div>
-                <label className={LABEL}>Contraseña</label>
+                <label htmlFor="reg-pass" className={LABEL}>Contraseña</label>
                 <div className="relative">
-                  <input type={showPass ? "text" : "password"} value={pass} onChange={(e) => setPass(e.target.value)}
+                  <input id="reg-pass" type={showPass ? "text" : "password"} value={pass} onChange={(e) => setPass(e.target.value)}
                     className={INPUT} placeholder={`Mínimo ${MIN_PASS} caracteres`} />
                   <button type="button" onClick={() => setShowPass(v => !v)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 select-none">
@@ -274,14 +274,14 @@ function RegistroInner() {
 
             <div className="space-y-4">
               <div>
-                <label className={LABEL}>Localidad</label>
-                <input type="text" value={localidad} onChange={(e) => setLocalidad(e.target.value)}
+                <label htmlFor="reg-localidad" className={LABEL}>Localidad</label>
+                <input id="reg-localidad" type="text" value={localidad} onChange={(e) => setLocalidad(e.target.value)}
                   className={INPUT} placeholder="Ej: San Isidro, Rosario, Córdoba…" />
               </div>
 
               <div>
-                <label className={LABEL}>Provincia</label>
-                <select value={provincia} onChange={(e) => setProvincia(e.target.value)} className={INPUT}>
+                <label htmlFor="reg-provincia" className={LABEL}>Provincia</label>
+                <select id="reg-provincia" value={provincia} onChange={(e) => setProvincia(e.target.value)} className={INPUT}>
                   <option value="">Seleccioná…</option>
                   {PROVINCIAS.map((p) => <option key={p} value={p}>{p}</option>)}
                 </select>
