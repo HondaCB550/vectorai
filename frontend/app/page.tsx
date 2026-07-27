@@ -450,13 +450,9 @@ export default function Landing() {
         {/* CTA final */}
         <section className="bg-[#0F172A] py-32 px-6 text-center">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-10">
               Comprá siempre al mejor precio.<br />En serio.
             </h2>
-            <p className="text-lg text-white/70 mb-10">
-              A un cliente le cotizaron la bolsa de cemento a $9.103. Otro corralón, a 20 cuadras, la tenía a $7.544.
-              Vectorai encontró el mejor precio en 2 minutos.
-            </p>
             <Link
               href="/registro"
               className="inline-flex items-center gap-2 bg-[#E87022] text-white text-lg font-bold px-10 py-4 rounded-full hover:bg-[#CF5E15] hover:-translate-y-0.5 transition"
