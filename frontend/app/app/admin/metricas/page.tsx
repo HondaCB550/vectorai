@@ -129,7 +129,10 @@ function MultiLineChart({ rows }: { rows: { dia: string; maestro: number; aliase
           </g>
         ))}
         <line x1={padL} y1={h - padY} x2={w - padR} y2={h - padY} stroke="#e5e7eb" />
-        {rows.map((r, i) => (i % cadaN === 0 || i === rows.length - 1) && (
+        {/* La última fecha se dibuja siempre; las regulares solo si quedan a un
+            intervalo completo de ella — si no, la penúltima se pisaba con la
+            última y no se leía ninguna (ej. "26/07" encima de "27/07"). */}
+        {rows.map((r, i) => (i === rows.length - 1 || (i % cadaN === 0 && rows.length - 1 - i >= cadaN)) && (
           <text key={r.dia} x={xAt(i)} y={h - padY + 14} textAnchor="middle" fontSize="9" fill="#9ca3af">{fecha(r.dia)}</text>
         ))}
         {SERIES_CATALOGO.map((s) => {
