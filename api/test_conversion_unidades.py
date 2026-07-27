@@ -20,6 +20,7 @@ main._conv_extra = {
     "INS100": {"unidad_comercial": "m", "factor": 100, "unidad_base": "rollo 100m"},
     "CONS104": {"unidad_comercial": "kg", "factor": 5,  "unidad_base": "KG"},
     "TER482": {"unidad_comercial": "kg", "factor": 25, "unidad_base": "KG"},
+    "CONS112": {"unidad_comercial": "m2", "factor": 1, "unidad_base": "M2"},
 }
 
 
@@ -125,6 +126,37 @@ def test_no_confunde_medida_con_peso():
     # "50mm/0.90" y "22,8 MTS" no son pesos.
     assert main._detectar_peso("SUNCHO FLEJE 50mm/0.90 X 50MTS") is None
     assert main._detectar_peso("CINTA FLEX 22,8 MTS") is None
+
+
+# ── Mallas: todo a precio por metro cuadrado ──────────────────────────────────
+# Regla de Pablo 24-07-2026: la malla sima se cotiza por hoja pero cada
+# proveedor vende hojas de tamaño distinto (2x5 = 10 m², 3x2.40 = 7.2 m²).
+# Canónico = $/m², usando las dimensiones de hoja del TEXTO. El desafío es no
+# confundir la CUADRÍCULA (15x15, 05x05: par de números iguales) con la hoja.
+def test_malla_hoja_3x240_a_m2():
+    pu, cant, u, nota, amb = conv("CONS112", "MALLA MINI 15X15 (6) (3X2.40)", "", 43668.17, 2)
+    assert abs(pu - 43668.17 / 7.2) < 1e-2 and u == "M2" and abs(cant - 14.4) < 1e-6 and not amb, (pu, cant, u, nota)
+
+def test_malla_hoja_2x5_a_m2():
+    pu, cant, u, nota, amb = conv("CONS112", "MALLA 2X5 15X15 Nº 6 LIV.", "", 49773.76, 1)
+    assert abs(pu - 4977.376) < 1e-3 and u == "M2" and abs(cant - 10) < 1e-6 and not amb, (pu, cant, u, nota)
+
+def test_malla_hoja_24x3_decimal_primero():
+    pu, cant, u, nota, amb = conv("CONS112", "MALLA 6-MM 2.4X3 15-15 Q188", "", 54488.70, 1)
+    assert abs(pu - 54488.70 / 7.2) < 1e-2 and u == "M2" and not amb, (pu, u, nota)
+
+def test_malla_q188_con_cuadricula_entre_parentesis():
+    pu, cant, u, nota, amb = conv("CONS112", "Q-188 MALLA 3 X 2.40 (15 X 15) 6 MM", "", 46734.83, 1)
+    assert abs(pu - 46734.83 / 7.2) < 1e-2 and u == "M2" and not amb, (pu, u, nota)
+
+def test_malla_sin_dimensiones_es_ambigua():
+    # "MALLA 6 15x15" solo trae la cuadrícula: sin hoja no se inventa el área.
+    pu, cant, u, nota, amb = conv("CONS112", "MALLA 6 15x15", "", 55000.79, 1)
+    assert amb, (pu, u, nota, amb)
+
+def test_cuadricula_no_se_lee_como_hoja():
+    assert main._detectar_area("MALLA 6 15x15") is None
+    assert main._detectar_area("CUADRICULA 05X05") is None
 
 
 # ── El modo 'm' (caños/cables → tira/rollo) sigue intacto ──────────────────────

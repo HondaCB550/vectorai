@@ -2714,18 +2714,6 @@
   },
   {
    "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
-   "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 55000.79,
-   "cantidad": 47,
-   "pdf_origen": null,
-   "conversion_aplicada": null,
-   "moneda": "ARS",
-   "texto_original": "MALLA 6 15x15",
-   "origen": "pipeline"
-  },
-  {
-   "proveedor": "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO",
    "codigo_material": "CONS126",
    "unidad": "UN",
    "precio": 15800.94,
@@ -3123,11 +3111,11 @@
   {
    "proveedor": "CORRALON NUEVO PILAR - EFECTIVO",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 49773.76,
-   "cantidad": 34,
+   "unidad": "M2",
+   "precio": 4977.376,
+   "cantidad": 340,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷10 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "MALLA 2X5 15X15 Nº 6 LIV.",
    "origen": "pipeline"
@@ -3218,7 +3206,7 @@
   },
   {
    "proveedor": "LA FORESTA - STEEL - SIN FACTURAR",
-   "codigo_material": "T004",
+   "codigo_material": "T018",
    "unidad": "UN",
    "precio": 17.4767,
    "cantidad": 2300,
@@ -3242,7 +3230,7 @@
   },
   {
    "proveedor": "INSUMA - STEEL",
-   "codigo_material": "PC009",
+   "codigo_material": "PC006",
    "unidad": "UN",
    "precio": 29594.35,
    "cantidad": 1,
@@ -3374,7 +3362,7 @@
   },
   {
    "proveedor": "LA FORESTA - STEEL - SIN FACTURAR",
-   "codigo_material": "T004",
+   "codigo_material": "T001",
    "unidad": "UN",
    "precio": 49.6998,
    "cantidad": 31000,
@@ -3579,11 +3567,11 @@
   {
    "proveedor": "CORRALON SAN RAFAEL",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 51121.81,
-   "cantidad": 47,
+   "unidad": "M2",
+   "precio": 7100.2514,
+   "cantidad": 338,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷7.2 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "MALLAS MINI Q188 15X15 3X2.40 6MM GERDAU",
    "origen": "pipeline"
@@ -3639,11 +3627,11 @@
   {
    "proveedor": "J.M. Landa",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 54488.7,
-   "cantidad": 47,
+   "unidad": "M2",
+   "precio": 7567.875,
+   "cantidad": 338,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷7.2 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "MALLA 6-MM 2.4X3 15-15 Q188",
    "origen": "pipeline"
@@ -3819,11 +3807,11 @@
   {
    "proveedor": "CORRALON LAS QUINTAS",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 43668.17,
-   "cantidad": 47,
+   "unidad": "M2",
+   "precio": 6065.0236,
+   "cantidad": 338,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷7.2 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "MALLA MINI 15X15 (6) (3X2.40)",
    "origen": "pipeline"
@@ -5151,11 +5139,11 @@
   {
    "proveedor": "CAROSIO CORRALON",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 46734.83,
-   "cantidad": 47,
+   "unidad": "M2",
+   "precio": 6490.9486,
+   "cantidad": 338,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷7.2 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "Q-188 MALLA 3 X 2.40 (15 X 15) 6 MM",
    "origen": "pipeline"
@@ -5403,11 +5391,11 @@
   {
    "proveedor": "SAUCE",
    "codigo_material": "CONS112",
-   "unidad": "UN",
-   "precio": 42750.16,
-   "cantidad": 47,
+   "unidad": "M2",
+   "precio": 5937.5222,
+   "cantidad": 338,
    "pdf_origen": null,
-   "conversion_aplicada": null,
+   "conversion_aplicada": "a precio por m² (÷7.2 m² de la hoja)",
    "moneda": "ARS",
    "texto_original": "MALLA SIMA 3 x 2.40 Mts. 5.0 mm 15 x 15",
    "origen": "pipeline"
@@ -5602,7 +5590,7 @@
   },
   {
    "texto": "CANO DURATOP 50X1.00 MTS",
-   "codigo": "INSTS026",
+   "codigo": "INSTS028",
    "score": 76.0,
    "motivo": "score_bajo"
   },
@@ -5935,6 +5923,12 @@
    "codigo": "INSTS054",
    "score": 84.3,
    "motivo": "score_bajo"
+  },
+  {
+   "texto": "MALLA 6 15x15",
+   "codigo": "CONS112",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "LADRILLO REF 229X114X50",

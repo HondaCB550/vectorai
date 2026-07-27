@@ -1630,6 +1630,28 @@ _RE_PESO_KG = re.compile(rf"{_RE_NUM_DEC}\s*(?:kgs?|kilos?|kg\.)\b", re.I)
 _RE_PESO_TN = re.compile(rf"{_RE_NUM_DEC}\s*(?:tns?|toneladas?)\b", re.I)
 
 
+# Dimensiones de hoja/panel: "2X5", "3 X 2.40", "2.4X3" (metros).
+_RE_PAR_DIMS = re.compile(rf"(?<![\d.,]){_RE_NUM_DEC}\s*[xX]\s*{_RE_NUM_DEC}(?![\d.,])")
+
+
+def _detectar_area(desc: str) -> float | None:
+    """Área en m² de la hoja declarada en el texto, o None.
+
+    Para mallas (regla de Pablo 24-07-2026): cada proveedor vende hojas de
+    tamaño distinto (2x5 = 10 m², 3x2.40 = 7.2 m²) y el canónico es $/m².
+    El riesgo es la CUADRÍCULA (15x15, 05x05): se descarta todo par con
+    números iguales y todo lado mayor a 12 m — una hoja real no pasa de eso,
+    una cuadrícula en cm sí.
+    """
+    for m in _RE_PAR_DIMS.finditer(desc or ""):
+        a = float(m.group(1).replace(",", "."))
+        b = float(m.group(2).replace(",", "."))
+        if a == b or a > 12 or b > 12 or a <= 0 or b <= 0:
+            continue
+        return round(a * b, 4)
+    return None
+
+
 def _detectar_peso(desc: str) -> float | None:
     """Kilos del envase declarados en el texto del proveedor, o None.
 
@@ -1649,7 +1671,7 @@ def _detectar_peso(desc: str) -> float | None:
 def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant: float):
     """Normaliza el precio a la presentación canónica del material.
 
-    Cuatro modos según conversion_unidades.unidad_comercial:
+    Cinco modos según conversion_unidades.unidad_comercial:
       - 'm': texto por metro → tira/rollo del maestro (pu×factor, cant÷factor).
         Canónico = la tira/rollo. Solo con MARCADOR EXPLÍCITO de metro
         (unidad ML/MTS o "MTS …"/"x metro"). Caños/cables.
@@ -1666,6 +1688,10 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
         basecoat, adhesivos: el maestro fija un envase pero cada proveedor
         vende el suyo (1, 5, 25, 30 kg), y el histórico mezclaba $/bolsa de
         tamaños distintos. Manda el peso del TEXTO, no el factor del maestro.
+      - 'm2': canónico = PRECIO POR METRO CUADRADO (mallas, regla de Pablo
+        24-07-2026). Cada proveedor vende hojas de tamaño distinto (2x5 =
+        10 m², 3x2.40 = 7.2 m²): se divide por el área de hoja del texto,
+        cuidando no confundirla con la cuadrícula (15x15).
 
     Devuelve (pu, cant, unidad_final, nota|None, ambigua). ambigua=True cuando
     el material se vende por presentación pero el texto no la aclara — el
@@ -1712,6 +1738,19 @@ def _convertir_unidad(codigo: str, desc: str, unidad_item: str, pu: float, cant:
         if unidad_norm in ("KG", "KGS", "KILO", "KILOS"):
             return pu, cant, "KG", None, False
         # Sin peso en el texto no se inventa el envase: va a revisión.
+        return pu, cant, unidad_norm or "UN", None, True
+
+    if modo == "m2":
+        # Canónico = precio por metro cuadrado (regla de Pablo 24-07-2026).
+        # Mallas: cada proveedor vende hojas de tamaño distinto (2x5 = 10 m²,
+        # 3x2.40 = 7.2 m²) y el histórico mezclaba $/hoja de áreas distintas.
+        # Mandan las dimensiones del TEXTO; sin ellas no se inventa el área.
+        area = _detectar_area(desc)
+        if area and area > 0:
+            nota = f"a precio por m² (÷{area:g} m² de la hoja)"
+            return round(pu / area, 4), cant * area, "M2", nota, False
+        if unidad_norm in ("M2", "MT2", "M²"):
+            return pu, cant, "M2", None, False
         return pu, cant, unidad_norm or "UN", None, True
 
     if modo == "ml":

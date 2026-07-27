@@ -1,0 +1,7238 @@
+[
+ {
+  "texto": "SINUSOIDAL 0.8mm INC 1.1x 6.0m",
+  "ids": [
+   "a115eb16-3539-4749-a2a5-f5845ef87a3b"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "BAUKRAFT"
+  ],
+  "precios_vistos": [
+   101563.56
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CH010",
+    "maestro": "CHAPA | SINUSOIDAL NEGRA C25 *1,10",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CH010",
+    "maestro": "CHAPA | SINUSOIDAL NEGRA C25 *1,10",
+    "score": 73.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH010",
+    "maestro": "CHAPA | SINUSOIDAL NEGRA C25 *1,10",
+    "score": 73.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "HIERRO GERDAU Ø 6 MM",
+  "ids": [
+   "163838f5-eb4e-4893-95c9-70e58bfb19e0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   6400.0
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "VARILLA 6",
+  "ids": [
+   "0cd14d5d-9687-42be-95e8-04fe10e28ba4"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO"
+  ],
+  "precios_vistos": [
+   6700.73
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 100.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "VARILLA 12",
+  "ids": [
+   "646e923a-3c7a-4898-9e4f-a6b96cc42c60"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO"
+  ],
+  "precios_vistos": [
+   26000.0
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS118",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 12",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS118",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 12",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS118",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 12",
+    "score": 100.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "VARILLA 8",
+  "ids": [
+   "4e20e005-7a1b-4f48-9ac2-f92cfa67e129"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON MATERALIA - QUILMES - PRESUP. GRUESO"
+  ],
+  "precios_vistos": [
+   11800.13
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS136",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 8",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS136",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 8",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS136",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 8",
+    "score": 100.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "TORN AUT S/FRAME 10x3/4 x 100 unid",
+  "ids": [
+   "1a0de756-ac85-430d-a18b-6754b98ea8dd"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   3327.8
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "T005",
+    "maestro": "TEL ALAS 8*1 1/4 | (6.000 unidades)",
+    "score": 64.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PFGAL C100X45X15X1.6 MM X 12 M",
+  "ids": [
+   "05ede9f0-85a7-44da-b629-7bbf47c0d4f6"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   80768.41
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "PC010",
+    "maestro": "PGC 100 | 1,64",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "P111",
+    "maestro": "PGU | 100*1,64",
+    "score": 83.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "PC000",
+    "maestro": "PGC 250 | 1,64",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 110X1.00 MTS",
+  "ids": [
+   "663c2bc5-8e03-492a-9b19-329b659ddcfe"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   7586.95
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS021",
+    "maestro": "CAÑO CLOACAL | 4*110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 110X4.00 MTS",
+  "ids": [
+   "f1794bcf-fbf7-43c7-abee-acb72d072e96"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   19817.76
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS021",
+    "maestro": "CAÑO CLOACAL | 4*110",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 63X2.00 MTS",
+  "ids": [
+   "50013dec-2f1d-42f1-930a-7ac8822529f3"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   5833.76
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS024",
+    "maestro": "CAÑO CLOACAL | 4*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 40X1.00 MTS",
+  "ids": [
+   "cb808966-290d-48c9-bcdb-b50ffca48795"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2323.05
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 40X2.00 MTS",
+  "ids": [
+   "33c6666a-2e17-4e59-9fda-8857d2d07fbe"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   3886.08
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 40X4.00 MTS",
+  "ids": [
+   "ddb7ee7f-4492-45eb-aafe-bde35aec5b1e"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   7054.01
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Llave esférica 3/4”",
+  "ids": [
+   "20b4895a-a11d-488e-b2a0-d4f041a93e3f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   20099.97
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS189",
+    "maestro": "FUSIÓN GAS | LLAVE ESFERICA PARA GAS CANDADO 3/4 - MH",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS135",
+    "maestro": "CANILLA ESFÉRICA | / 3/4\"",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Llave esférica 1”",
+  "ids": [
+   "4b62b63d-9ae7-428d-86f1-a6c5aad400ef"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   45503.63
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 100.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "J.E. CUPLA H-H 160 PVC 26032563 TIGRE",
+  "ids": [
+   "58b96231-4d6a-417a-84aa-b4919cdd69c6"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   12591.04
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS052",
+    "maestro": "CUPLA | 110",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS218",
+    "maestro": "CAÑO PVC | CUPLA DE 160",
+    "score": 76.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MARCO PORTA TAPA PVC O.V.CAM (cod.M-KIT) O.V. CAM",
+  "ids": [
+   "26238f67-4a2e-41d2-b2c5-09e832a49e37",
+   "d7784bec-ea28-4bc3-b2c6-742850f1a796"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   6911.67
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS003",
+    "maestro": "CAMARA INSPECCIÓN CLOACAL | DUKE",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS065",
+    "maestro": "TAPA MACHO | 40",
+    "score": 72.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS066",
+    "maestro": "TAPA MACHO | 50",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TAPA PVC O.V.CAM (cod.T-KIT) O.V. CAM",
+  "ids": [
+   "42922dd7-58b7-4f56-a6ca-dbc7ebeee4f7"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   8207.98
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS003",
+    "maestro": "CAMARA INSPECCIÓN CLOACAL | DUKE",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS003",
+    "maestro": "CAMARA INSPECCIÓN CLOACAL | DUKE",
+    "score": 88.9,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS065",
+    "maestro": "TAPA MACHO | 40",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 20MM MAGNUM PN20 A/FRIA YCAL",
+  "ids": [
+   "1f652f6e-5638-445b-b66b-bda30d5cfea0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   6716.72
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS074",
+    "maestro": "FUSIÓN AGUA | PN20 / 20 X4",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS074",
+    "maestro": "FUSIÓN AGUA | PN20 / 20 X4",
+    "score": 98.6,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS077",
+    "maestro": "FUSIÓN AGUA | PN20 / 50 X4",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 25MM MAGNUM PN20 A/FRIA YCAL",
+  "ids": [
+   "96a02e77-b664-40b5-b837-d2774dae9992"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   9765.61
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS075",
+    "maestro": "FUSIÓN AGUA | PN20 / 25 X4",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS075",
+    "maestro": "FUSIÓN AGUA | PN20 / 25 X4",
+    "score": 98.6,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS075",
+    "maestro": "FUSIÓN AGUA | PN20 / 25 X4",
+    "score": 97.8,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "FLEJE CRUZ SAN ANDRES GALV C18 Des.35-60mm",
+  "ids": [
+   "d5e88b64-d741-4cc6-b9f8-dab4ea6c550d"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   3440787.48
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "A001",
+    "maestro": "SUNCHO | FLEJE 50mm/0.90 X 50MTS",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "A003",
+    "maestro": "CRUZ S. ANDRÉS | ÁNGULO TENSOR",
+    "score": 81.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "A001",
+    "maestro": "SUNCHO | FLEJE 50mm/0.90 X 50MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TORNILLO T1 MECHA 10X3/4\" (BOLSA X 100)- TEL",
+  "ids": [
+   "794a17bf-a308-47b3-ad15-5d2ef8b20b52"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "LA FORESTA - STEEL - SIN FACTURAR"
+  ],
+  "precios_vistos": [
+   4969.98
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "T004",
+    "maestro": "T2 6*1 MECHA | (8.000 unidades)",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 89.7,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 84.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MALLA MINI 15X15 (6) (3X2.40)",
+  "ids": [
+   "2a199504-5c15-409b-bef6-41e15f68883f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAS QUINTAS"
+  ],
+  "precios_vistos": [
+   48253.33
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 100.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS209",
+    "maestro": "MALLA SIMA 8 | 15 X 15 8MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "WEBER COLOR PRESTIGE X 2 KG GRIS PERLA",
+  "ids": [
+   "aef77ebb-1b87-4cf4-8a0d-aa5d21409406"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON SAN RAFAEL"
+  ],
+  "precios_vistos": [
+   10090.47
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS226",
+    "maestro": "PASTINA | 2 KG",
+    "score": 100,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS226",
+    "maestro": "PASTINA | 2 KG",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 63X1.00 MTS",
+  "ids": [
+   "b923911e-2367-4e49-bf8b-917b00e99def"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   3838.14
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS022",
+    "maestro": "CAÑO CLOACAL | 1*63",
+    "score": 98.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS024",
+    "maestro": "CAÑO CLOACAL | 4*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "A.SYSTEM LLAVE DE PASO 20 MIXTO",
+  "ids": [
+   "26e9a2be-8cac-4120-a025-32e9a8357955"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   12485.84
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS128",
+    "maestro": "FUSIÓN AGUA | LLAVE DE PASO / 20",
+    "score": 94.5,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS162",
+    "maestro": "FUSIÓN GAS | VALVULA ESFERICA / 20",
+    "score": 80.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS132",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PF IND C100X40X15X1.3 MM X 6 M",
+  "ids": [
+   "b9619fb9-d310-43ad-b080-ad57e41e6abd"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   32701.76
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "PC009",
+    "maestro": "PGC 150 | 1,64",
+    "score": 93.5,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "EST102",
+    "maestro": "OSB | 15MM",
+    "score": 71.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "PC001",
+    "maestro": "PGC 200 | 2,04",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Solera 70 x 30 x 2.600 mm",
+  "ids": [
+   "60a5caec-e0ad-4fa0-b640-827a913b7797"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   3264.79
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "P104",
+    "maestro": "SOLERA 70 | 2,6 MTS",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "P104",
+    "maestro": "SOLERA 70 | 2,6 MTS",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "P104",
+    "maestro": "SOLERA 70 | 2,6 MTS",
+    "score": 86.7,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "A.SYSTEM BUJE RED.25 X 20",
+  "ids": [
+   "d1d476f5-5e5a-4968-b7dd-462170997ecd"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   574.39
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS117",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 25*20",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS117",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 25*20",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS118",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "A.SYSTEM BUJE RED.32 X 20",
+  "ids": [
+   "a4efba3c-44cc-4632-9b60-486079b0dbad"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   715.33
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS118",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*20",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS118",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*20",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS120",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 50*32",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "A.SYSTEM BUJE RED.32 X 25",
+  "ids": [
+   "b9cf668e-e3cb-45d1-bfe2-bd86d5e82ceb"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   861.16
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS119",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*25",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS119",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*25",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS120",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 50*32",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "A.SYSTEM BUJE RED.50 X 32",
+  "ids": [
+   "9de29722-ed0a-4207-8efc-d058214360f8"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2341.82
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS120",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 50*32",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS120",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 50*32",
+    "score": 92.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS123",
+    "maestro": "FUSIÓN AGUA | UNIÓN DOBLE / 32",
+    "score": 84.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CODO a 45° MH 40 mm P V",
+  "ids": [
+   "96ac3a56-a240-4076-86f3-eb17ee83c4ad"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   1036.86
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS031",
+    "maestro": "CODO CLOACAL A 45 HH | 40",
+    "score": 90.9,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS035",
+    "maestro": "CODO CLOACAL A 45 MH | 40",
+    "score": 90.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS035",
+    "maestro": "CODO CLOACAL A 45 MH | 40",
+    "score": 90.0,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "J.E. REDUCCION TOPE M-H 160X110MM 26037646 TIGRE",
+  "ids": [
+   "2ba5e7c8-8364-4a48-b3f2-c119f3f65756",
+   "f52e6784-c4cb-42fa-9f89-183ab9756e12"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   9966.43
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS221",
+    "maestro": "CAÑO PVC | REDUCCION 160 A 110",
+    "score": 90.5,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS221",
+    "maestro": "CAÑO PVC | REDUCCION 160 A 110",
+    "score": 88.2,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS051",
+    "maestro": "REDUCCIÓN 110-63 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Hidrófugo químico inorgánico Hidrosol x 20 kg",
+  "ids": [
+   "f748098a-60c4-40d8-af04-7956254e0ba3"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   61300.0
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "CONS141",
+    "maestro": "CERECITA | 20 LTS",
+    "score": 90.3,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "CONS141",
+    "maestro": "CERECITA | 20 LTS",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS263",
+    "maestro": "HIDRÓFUGO QUÍMICO INORGÁNICO X | 2 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Lana de vidrio 50 mm con papel aluminio 21,60 m2",
+  "ids": [
+   "cd84628b-4049-489a-95ce-053e1556f569"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   5048.73
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "AISL120",
+    "maestro": "LANA DE VIDRIO CON PAPEL KRAFT | 50 MM",
+    "score": 90.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "AISL120",
+    "maestro": "LANA DE VIDRIO CON PAPEL KRAFT | 50 MM",
+    "score": 90.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "AISL121",
+    "maestro": "LANA DE VIDRIO SIN PAPEL ALUMINIO | 38 MM X 21,6 M2",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Lana de vidrio Isover con papel aluminio 50 mm x 14,4 m2",
+  "ids": [
+   "fb2a425c-8491-4edb-aed8-83a3283bc99c"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   104384.16
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "AISL120",
+    "maestro": "LANA DE VIDRIO CON PAPEL KRAFT | 50 MM",
+    "score": 90.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "AISL120",
+    "maestro": "LANA DE VIDRIO CON PAPEL KRAFT | 50 MM",
+    "score": 90.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "AISL112",
+    "maestro": "LANA DE VIDRIO | ROLAC PLATA ALUM 50MM",
+    "score": 73.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TORNILLO P/INODORO COMPLETO 22 X 80",
+  "ids": [
+   "17932229-4702-4ad0-8bb1-66b09a2158df"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   835.36
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 89.2,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 80.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T009",
+    "maestro": "T4 AGUJA 6*2 | (3.500 unidades)",
+    "score": 64.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CODO a 45° MH 110 mm PV C",
+  "ids": [
+   "fe2a288d-e531-4890-8b58-9e916e6c92ed"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   3900.64
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS038",
+    "maestro": "CODO CLOACAL A 45 MH | 110",
+    "score": 88.4,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS038",
+    "maestro": "CODO CLOACAL A 45 MH | 110",
+    "score": 88.4,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS034",
+    "maestro": "CODO CLOACAL A 45 HH | 110",
+    "score": 86.5,
+    "nivel": "automatico"
+   }
+  ]
+ },
+ {
+  "texto": "J.E. REDUCCION TOPE M-H 110X40MM 26037590 TIGRE",
+  "ids": [
+   "eed5d40d-06ee-4f8c-9b24-a08cec52db9c",
+   "187def5a-6857-4dbd-86d9-f3559e7f8df3"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   1805.36
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "INSTS221",
+    "maestro": "CAÑO PVC | REDUCCION 160 A 110",
+    "score": 88.2,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "INSTS051",
+    "maestro": "REDUCCIÓN 110-63 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS223",
+    "maestro": "CAÑO PVC | REDUCCION 110 A 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "T3 MECHA 6X1 5/8 TOOLISTER (BOLSAX100)",
+  "ids": [
+   "c2454e69-8c3a-49ee-9b7e-5913049c9595"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "LA FORESTA - STEEL - SIN FACTURAR"
+  ],
+  "precios_vistos": [
+   1747.67
+  ],
+  "banda": "A_fuerte",
+  "candidatos": [
+   {
+    "codigo": "T004",
+    "maestro": "T2 6*1 MECHA | (8.000 unidades)",
+    "score": 88.0,
+    "nivel": "automatico"
+   },
+   {
+    "codigo": "T010",
+    "maestro": "T2 6*1 1/8 MECHA | (8.000 unidades)",
+    "score": 80.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T002",
+    "maestro": "T1 MECHA 8*1/2 | (10.000 unidades)",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MAPEI CERAMICO 25KG",
+  "ids": [
+   "fd36814b-9a87-4457-8332-20d95e5715eb"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   6108.6
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS247",
+    "maestro": "CAL HIDRATADA X | 25 KG",
+    "score": 66.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS106",
+    "maestro": "CUARZO ENM | 25KG",
+    "score": 65.1,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Cable 1,50 mm blanco Fonseca",
+  "ids": [
+   "e32700f0-25e3-4578-b8ba-d40ac7caa9db"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   575.35
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "REJA 15X15 ACERO INOX CROMO CASAL",
+  "ids": [
+   "5dd98758-3169-48e8-a385-a239c507eb96"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   6445.86
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS139",
+    "maestro": "REJILLA DE PISO | CIEGA 15*15",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER473",
+    "maestro": "REJILLA DESAGÜE LINEAL | ATRIM - RÍO PP+AC / INOX WAVE",
+    "score": 82.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS185",
+    "maestro": "REJA 15x15 | FUNDICIÓN",
+    "score": 79.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Masilla Anclaflex x 32 kg",
+  "ids": [
+   "a512487d-f1ca-4ab2-8c8f-e93045498eb5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   26039.67
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y112",
+    "maestro": "MASILLA | 32 KGS",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y115",
+    "maestro": "ENDUÍDO | 1 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y111",
+    "maestro": "ENDUIDO | 16 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Masilla Durlock Multiuso x 32 kg",
+  "ids": [
+   "0d4f913a-78f2-4bcb-b3dc-99052d80bbca"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   33100.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y112",
+    "maestro": "MASILLA | 32 KGS",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y115",
+    "maestro": "ENDUÍDO | 1 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y121",
+    "maestro": "MASILLA MULTIUSO - | 7 KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Tornillos T1 punta mecha x 100 u",
+  "ids": [
+   "45838f23-06ee-4cb4-8800-b326ecccd4a6"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   733.82
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "T002",
+    "maestro": "T1 MECHA 8*1/2 | (10.000 unidades)",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T004",
+    "maestro": "T2 6*1 MECHA | (8.000 unidades)",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T010",
+    "maestro": "T2 6*1 1/8 MECHA | (8.000 unidades)",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P20 CODO A 90 DE 32 MM I P",
+  "ids": [
+   "eb8ef7e3-9545-471d-8a46-ad896d05ac06"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   1012.14
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS145",
+    "maestro": "FUSIÓN GAS | CODO 90 / 32",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 74.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS144",
+    "maestro": "FUSIÓN GAS | CODO 90 / 25",
+    "score": 74.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "J.E. RAMAL 160X160 A 45 M-H 26035163 TIGRE",
+  "ids": [
+   "cc1437c5-6d94-4090-8a5f-3c8e87075a68",
+   "49acaabd-472c-4d7b-981a-919830a1b69f"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   23695.94
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS172",
+    "maestro": "TIGRE | CAÑO PVC 3,2MM 160 4 MTS",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS048",
+    "maestro": "RAMAL A 45 | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS049",
+    "maestro": "RAMAL A 45 | 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P20 CODO A 90 DE 20 MM I P",
+  "ids": [
+   "00af85e2-05c2-408f-8a18-15a0b123f056"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   419.9
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 84.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P20 CODO A 90 DE 25 MM I P",
+  "ids": [
+   "c57e82be-c22a-4ad5-945d-c97bbbf7096e"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   724.43
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS144",
+    "maestro": "FUSIÓN GAS | CODO 90 / 25",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 74.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS145",
+    "maestro": "FUSIÓN GAS | CODO 90 / 32",
+    "score": 74.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "REF LAD RECTO 229X114X63 ART 1",
+  "ids": [
+   "3afba2ab-77c7-4310-b5c5-3e8714c5840c"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAS QUINTAS"
+  ],
+  "precios_vistos": [
+   4491.86
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 70.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 61.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PLANCHA EPS 1.00 X 1.00 ( 30 MM X 20 KG )",
+  "ids": [
+   "a9046d3c-0f5a-43e3-aaa9-8aac7ce522a0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CIVIMET - STEEL"
+  ],
+  "precios_vistos": [
+   7404.95
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CH019",
+    "maestro": "CHAPA | SINUSOIDAL CINCALUM C25 x ml",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH019",
+    "maestro": "CHAPA | SINUSOIDAL CINCALUM C25 x ml",
+    "score": 84.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH006",
+    "maestro": "CHAPA | LISA PREPINTADA C24 1,20*2M",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MANGUITO 2015 DE REP. HH DE 63 AWA",
+  "ids": [
+   "735cdf2c-796a-4e8f-bfdb-801360e329eb"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   1356.79
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 84.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS055",
+    "maestro": "CUPLA | 40",
+    "score": 75.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS052",
+    "maestro": "CUPLA | 110",
+    "score": 74.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MANGUITO 2014 DE REP. HH DE 50 AWA",
+  "ids": [
+   "773ef9fe-dad4-46d5-a800-91c6fb15dbd5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   1019.23
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS054",
+    "maestro": "CUPLA | 50",
+    "score": 84.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 75.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS055",
+    "maestro": "CUPLA | 40",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MANGUITO 2013 DE REP. HH DE 40 AWA",
+  "ids": [
+   "80500ac2-fcb6-4988-ae72-a0cfb23bc474"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   931.38
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS055",
+    "maestro": "CUPLA | 40",
+    "score": 84.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS054",
+    "maestro": "CUPLA | 50",
+    "score": 75.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "INODORO + DEPOSITO SOUTH",
+  "ids": [
+   "56068240-cdc1-432e-9f63-fa2e360b81f2"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   252816.24
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER486",
+    "maestro": "ASIENTO INODORO | ANDINA",
+    "score": 84.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER444",
+    "maestro": "JUEGO DE BAÑO | FERRUM ANDINA",
+    "score": 84.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 84.2,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "LADRILLO REFRACTARIO Nº4 [229X114X32 MM]",
+  "ids": [
+   "e3bfb3b4-b717-4c4d-8ae5-ad926fe29685"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   3000.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "HIE009",
+    "maestro": "MOTOR LEVADIZO | 1\" * 3/16\"",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS135",
+    "maestro": "LADRILLO | COMÚN",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CEMENTO HUMEDO REFRACTARI0 FARA X 20 KG",
+  "ids": [
+   "16642e86-1f93-4a66-b05e-1933cf6233f1"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   71000.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "AUX001",
+    "maestro": "TUBO ALCANTARILLA HORMIGÓN | 30CM",
+    "score": 73.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Placa Durlock 1.20 m x 2.40 m  x 9,5 mm STD",
+  "ids": [
+   "ecd13e2b-8d51-468a-a8aa-13a155151243"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   11327.64
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y102",
+    "maestro": "PLACA ROCA YESO | 9,5MM",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y101",
+    "maestro": "PLACA ROCA YESO | 12,5MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "EST105",
+    "maestro": "SUPERBOARD | CEMENTICIA 8",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "NERVADO 10 mm barra 12 m",
+  "ids": [
+   "df5fd451-4cb7-4919-907b-861a456ac8cf"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   14216.4
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS251",
+    "maestro": "HIERRO LISO - DIAMETRO | 10",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE059",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE062",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 25",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "NERVADO 16 mm barra 12 m",
+  "ids": [
+   "200bc2c2-ef2a-4db7-b31b-2b08083d9ab7"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   35283.57
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS254",
+    "maestro": "HIERRO LISO - DIAMETRO | 16",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE059",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE062",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 25",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "2026-RAMAL SIMP A 45 63X 63MH AWADUCT",
+  "ids": [
+   "481d7834-65af-4882-a618-9c1648010b0b",
+   "8b998479-9080-4b55-850a-cd79ca5f564a"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   3034.86
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS049",
+    "maestro": "RAMAL A 45 | 63",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS037",
+    "maestro": "CODO CLOACAL A 45 MH | 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "LADRILLO REFRACTARIO NAT. 228X114X63",
+  "ids": [
+   "fef19364-4f9c-43b8-bac3-e6020db9d1f8"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON NUEVO PILAR - EFECTIVO"
+  ],
+  "precios_vistos": [
+   5248.87
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "HIE009",
+    "maestro": "MOTOR LEVADIZO | 1\" * 3/16\"",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS135",
+    "maestro": "LADRILLO | COMÚN",
+    "score": 72.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FARA CEMENTO REFRACTARIO HUMEDO X 20KG",
+  "ids": [
+   "816d75e8-48d6-4c43-963c-4fbf0eac9320",
+   "c21ec16d-bfec-427b-820d-04c78d60ab13"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON SAN RAFAEL"
+  ],
+  "precios_vistos": [
+   62240.35
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "AUX001",
+    "maestro": "TUBO ALCANTARILLA HORMIGÓN | 30CM",
+    "score": 73.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARENA (AR)",
+  "ids": [
+   "e0dd01a1-bbbf-4086-bfb8-50237b94f0a9",
+   "1c54a4a7-783e-4a53-ba51-9e4fc6a6f581"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CAROSIO CORRALON"
+  ],
+  "precios_vistos": [
+   39896.3
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS225",
+    "maestro": "ARENA | M3 A GRANEL (tirada desde camión)",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS108",
+    "maestro": "ARENA | M3 BOLSÓN",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS240",
+    "maestro": "ARENA FINA PUESTA EN OBRA X | M3",
+    "score": 84.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARENA RUBIA",
+  "ids": [
+   "3315089b-a82e-4317-9400-dbb4803e88af",
+   "057f1191-d891-4504-a9ea-b41ebc57db28"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "SAUCE"
+  ],
+  "precios_vistos": [
+   48408.72
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS225",
+    "maestro": "ARENA | M3 A GRANEL (tirada desde camión)",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS108",
+    "maestro": "ARENA | M3 BOLSÓN",
+    "score": 84.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS240",
+    "maestro": "ARENA FINA PUESTA EN OBRA X | M3",
+    "score": 84.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "WEBER REFRACTARIO X 20 KG",
+  "ids": [
+   "11f27883-bbcd-4dd5-9788-22a8d34c4c6a",
+   "6a254135-1d08-4b0f-889e-eece2b3059af"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON LAS QUINTAS"
+  ],
+  "precios_vistos": [
+   66377.92,
+   73347.6
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS141",
+    "maestro": "CERECITA | 20 LTS",
+    "score": 83.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 74.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "BARI DEPOSITO APOYAR DUAL BL (DKW6F)",
+  "ids": [
+   "af80a850-0828-41af-b816-7924eea743ab"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   162844.05
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 83.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER430",
+    "maestro": "ASIENTO INODORO | BARI MADERA",
+    "score": 78.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 78.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TAPA 15X15 ACERO INOX CROMO CASAL",
+  "ids": [
+   "dd861547-1984-499e-9946-432154f4eede"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   6445.24
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER473",
+    "maestro": "REJILLA DESAGÜE LINEAL | ATRIM - RÍO PP+AC / INOX WAVE",
+    "score": 82.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS186",
+    "maestro": "TAPA 15x15 | FUNDICIÓN",
+    "score": 75.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS139",
+    "maestro": "REJILLA DE PISO | CIEGA 15*15",
+    "score": 69.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "NERVADO 6 mm barra 12 m",
+  "ids": [
+   "25bb960b-9803-4500-bf78-4e69278cf582"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   5351.72
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS249",
+    "maestro": "HIERRO LISO - DIAMETRO | 6",
+    "score": 82.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE059",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE062",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 25",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "NERVADO 8 mm barra 12 m",
+  "ids": [
+   "d1f326f1-59f6-49bd-966f-55482934b15c"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   9098.5
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS250",
+    "maestro": "HIERRO LISO - DIAMETRO | 8",
+    "score": 82.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE059",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE062",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 25",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TOSCA X CHASIS 7MT",
+  "ids": [
+   "5ebbec61-814c-4871-a141-4c8ee7984fce"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   221294.11
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS107",
+    "maestro": "TOSCA | A GRANEL",
+    "score": 82.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS107",
+    "maestro": "TOSCA | A GRANEL",
+    "score": 72.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS107",
+    "maestro": "TOSCA | A GRANEL",
+    "score": 70.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PLACA CEMENTICIA VOLCANBOARD 8MM",
+  "ids": [
+   "175eb085-7965-4d2e-8857-09ac3bf96ea9"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "LA FORESTA - STEEL - SIN FACTURAR"
+  ],
+  "precios_vistos": [
+   40666.96
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 82.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "AUX001",
+    "maestro": "TUBO ALCANTARILLA HORMIGÓN | 30CM",
+    "score": 73.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS101",
+    "maestro": "CEMENTO | 25KG",
+    "score": 70.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Plavicon Transparente x 20 lt",
+  "ids": [
+   "ce944094-c60f-4f94-9f38-dc8a32e42585"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   174400.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER102",
+    "maestro": "LATEX | INTERIOR 20LT",
+    "score": 82.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER591",
+    "maestro": "IMPERMEABILIZANTE DE LADRILLOS Y TEJAS - | 20LTS",
+    "score": 75.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS260",
+    "maestro": "IMPERMEABILIZANTE MUROS - | 25 KG",
+    "score": 69.2,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "SIKA QUARTZ TOP GRIS X 25 KG",
+  "ids": [
+   "7263eb8e-d8b2-4815-8a03-a81b406c8fbb"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   31764.7
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS247",
+    "maestro": "CAL HIDRATADA X | 25 KG",
+    "score": 81.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 74.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE119",
+    "maestro": "STUKO EXTERIOR - | 25KG",
+    "score": 64.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TANQUE MULTICAPA 1100LTS A148 X D110 + FLOT/FILT",
+  "ids": [
+   "1ccf8ca5-0f87-4f52-9c2b-dd520cadf4a3"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   372608.8
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS181",
+    "maestro": "TANQUE DE AGUA | FLAT 1100lts",
+    "score": 81.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS181",
+    "maestro": "TANQUE DE AGUA | FLAT 1100lts",
+    "score": 73.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS181",
+    "maestro": "TANQUE DE AGUA | FLAT 1100lts",
+    "score": 69.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "BUJE 32-25 ACQUA",
+  "ids": [
+   "1be7fe32-9494-431c-93b4-36a05ac15904"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   1022.44
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS119",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*25",
+    "score": 80.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS118",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 32*20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS120",
+    "maestro": "FUSIÓN AGUA | BUJE REDUCCIÓN / 50*32",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "2057-RAMAL SIMP A 45 40X 40HH AWADUCT",
+  "ids": [
+   "9d9533a6-b40f-42a7-b5d1-f8c354b0c3e3",
+   "a6e7cfdb-1dd6-417f-9319-5bb0ea514d5a"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   1664.47
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS035",
+    "maestro": "CODO CLOACAL A 45 MH | 40",
+    "score": 80.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS048",
+    "maestro": "RAMAL A 45 | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "NERVADO 12 mm barra 12 m",
+  "ids": [
+   "44e27da3-fc39-4fc7-a3a0-7d378f5e64a5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   20076.09
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS252",
+    "maestro": "HIERRO LISO - DIAMETRO | 12",
+    "score": 80.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE059",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 20",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE062",
+    "maestro": "HIERRO ALETEADO - DIAMETRO | 25",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MALLA FIBRA VIDRIO 90 Grs.1 x 50 Mts.",
+  "ids": [
+   "46652934-b4e8-429e-a718-cca94f61d4bc",
+   "d7b2b388-5d92-4a0d-9448-28445f8c8952"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   89565.74,
+   98970.14
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER115",
+    "maestro": "MALLA F. VIDRIO | 160 GRS/5*5",
+    "score": 80.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER115",
+    "maestro": "MALLA F. VIDRIO | 160 GRS/5*5",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER115",
+    "maestro": "MALLA F. VIDRIO | 160 GRS/5*5",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MALLA #5.5 [15 X 15] 2 X 5 MTS [20 KG]",
+  "ids": [
+   "87eb0a26-0323-4093-bd01-43a29c19833b"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   55900.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 73.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1031 DE 110 X 1 AWA",
+  "ids": [
+   "98b4941e-c704-461f-a148-9d2bca115302"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   8038.51
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CLIM104",
+    "maestro": "CAÑO PEX | 1 X 1",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 77.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1022 DE 63 X 1 AWA",
+  "ids": [
+   "22876b0b-3428-4531-9e77-2420eb87f0dc"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   4346.06
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CLIM104",
+    "maestro": "CAÑO PEX | 1 X 1",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS022",
+    "maestro": "CAÑO CLOACAL | 1*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS022",
+    "maestro": "CAÑO CLOACAL | 1*63",
+    "score": 73.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1013 DE 50 X 1 AWA",
+  "ids": [
+   "e5bd6149-54f9-462a-9307-c437a4af949f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   3373.38
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CLIM104",
+    "maestro": "CAÑO PEX | 1 X 1",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS025",
+    "maestro": "CAÑO CLOACAL | 1*50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1004 DE 40 X 1 AWA",
+  "ids": [
+   "d970b104-d2f8-4e41-b62e-ff54bf26a484"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2628.9
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CLIM104",
+    "maestro": "CAÑO PEX | 1 X 1",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 73.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
+  "ids": [
+   "e392fa38-072c-495b-8e0f-79db9f7ff6c0",
+   "d0f4bbaf-7f36-4fac-821a-c6cd93c40807"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON SAN RAFAEL"
+  ],
+  "precios_vistos": [
+   96204.27
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS110",
+    "maestro": "PIEDRA | M3",
+    "score": 80.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS110",
+    "maestro": "PIEDRA | M3",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS110",
+    "maestro": "PIEDRA | M3",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "REJA 15 X 15 A/INOX MARCO FUND C/EMB (COD 503)",
+  "ids": [
+   "a19ac084-7392-4ed2-bae4-f6802ed3cf9d"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   11017.63
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS185",
+    "maestro": "REJA 15x15 | FUNDICIÓN",
+    "score": 79.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS185",
+    "maestro": "REJA 15x15 | FUNDICIÓN",
+    "score": 70.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS139",
+    "maestro": "REJILLA DE PISO | CIEGA 15*15",
+    "score": 68.4,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "T3 AGUJA - 6 X 1.1/2 X 100",
+  "ids": [
+   "a11d2cb2-c6d9-4bca-b5b1-2620d52d39e8"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CIVIMET - STEEL"
+  ],
+  "precios_vistos": [
+   3453.01
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "T009",
+    "maestro": "T4 AGUJA 6*2 | (3.500 unidades)",
+    "score": 78.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T012",
+    "maestro": "T3 6*1/2 AGUJA | (6.500 unidaes)",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T003",
+    "maestro": "T2 6*1 AGUJA | (10.000 unidades)",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "SUPLEMENTO ARO X 100MM O.V.CAM (cod.ARO) O.V. CAM",
+  "ids": [
+   "47e414a2-c530-4fe1-8b6c-03a6f0254385",
+   "fb0c6761-6a09-4087-9ee1-74f535c3fdce"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   3865.11
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS003",
+    "maestro": "CAMARA INSPECCIÓN CLOACAL | DUKE",
+    "score": 78.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS003",
+    "maestro": "CAMARA INSPECCIÓN CLOACAL | DUKE",
+    "score": 64.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE038",
+    "maestro": "CABLE | 6MM * 100",
+    "score": 60.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARANDELA CUADRADA GALV 35X35X3,2MM X 10",
+  "ids": [
+   "b6dd727f-de1f-43e1-86ce-b85557ebafde",
+   "718c94b8-b6cb-4efd-8744-35fb95acf528"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   1332.1,
+   1471.97
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "A011",
+    "maestro": "ANCLAJES | ARANDELA 57*57 3.2MM",
+    "score": 77.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 76.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "A011",
+    "maestro": "ANCLAJES | ARANDELA 57*57 3.2MM",
+    "score": 73.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARANDELA CUADRADA GALV 80X80X3,2MM X 10",
+  "ids": [
+   "d9af3de0-6a24-4112-81c2-f7b461d38ac8",
+   "205a5dcf-de69-486d-9629-acd594de0a18"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   3051.0,
+   3371.36
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "A011",
+    "maestro": "ANCLAJES | ARANDELA 57*57 3.2MM",
+    "score": 77.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 76.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "A011",
+    "maestro": "ANCLAJES | ARANDELA 57*57 3.2MM",
+    "score": 73.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "189/B1 CR BIDET MONOCOMANDO",
+  "ids": [
+   "13194c78-4e4e-463d-a757-484ba424eebd"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   113658.07
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER477",
+    "maestro": "GRIFERÍA DE BAÑO | BIDET MONOCOMANDO LUGO",
+    "score": 77.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER494",
+    "maestro": "GRIFERIA BAÑO - BIDET | MONOCOMANDO FV PUELO",
+    "score": 77.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER442",
+    "maestro": "GRIFERÍA DE LAVATORIO | MONOCOMANDO",
+    "score": 75.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P20 CODO A 90 DE 50 MM I P",
+  "ids": [
+   "37cc9090-729d-4649-8dff-27c2e29a3361"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   4209.52
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS044",
+    "maestro": "CODO CLOACAL A 90 HH | 50",
+    "score": 77.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS032",
+    "maestro": "CODO CLOACAL A 45 HH | 50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 74.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "SYST UNION DOB.MIXTA C/BRI.50X11/2",
+  "ids": [
+   "981d0df1-9df7-49e5-a4dd-9117be380c62"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   41782.29
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS054",
+    "maestro": "CUPLA | 50",
+    "score": 76.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS055",
+    "maestro": "CUPLA | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PROL. P/ CAM INSP TUBOFORTE",
+  "ids": [
+   "1f9dec17-885a-4735-8adb-bd6637765953"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   7817.4
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS005",
+    "maestro": "CAMARA INSPECCIÓN PLUVIAL | DUKE",
+    "score": 76.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS007",
+    "maestro": "DUKE | ARO PROLONGADOR",
+    "score": 56.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS007",
+    "maestro": "DUKE | ARO PROLONGADOR",
+    "score": 55.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Galvanizado N°16 (1.62 mm esp-rollo 40/60 kg) x kg",
+  "ids": [
+   "8767b009-0518-4ddd-a156-0821b50f6a11"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   3973.25
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CH001",
+    "maestro": "CHAPA | SINUSOIDAL GALVANIZADA C25 *M",
+    "score": 76.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER544",
+    "maestro": "PINTURA PARA GALVANIZADO | PINTURA ACRILICA ANTIADHERENTE X 4LT",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH017",
+    "maestro": "ZINGUERÍA | CAÑO GALVANIZADO - 100 x 50",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Negro recocido N° 9 x kg",
+  "ids": [
+   "2c7d1325-f82f-4ed3-be0d-842d664e8c2b"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   3175.23
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "V031",
+    "maestro": "CURTAIN WALL | 0,80x 1,70m - ALUMINIO NEGRO",
+    "score": 76.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "V031",
+    "maestro": "CURTAIN WALL | 0,80x 1,70m - ALUMINIO NEGRO",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE006",
+    "maestro": "CAÑO CUADRADO | 20*20*1,6",
+    "score": 56.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Negro recocido N° 16 x kg",
+  "ids": [
+   "a09daaf4-b34c-4fe4-8ee2-057fa1228528"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   2963.55
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "V031",
+    "maestro": "CURTAIN WALL | 0,80x 1,70m - ALUMINIO NEGRO",
+    "score": 76.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS111",
+    "maestro": "ALAMBRE | DULCE PARA ATAR",
+    "score": 75.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS111",
+    "maestro": "ALAMBRE | DULCE PARA ATAR",
+    "score": 63.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "VILLAGE BAÑERA DE EMBUTI R",
+  "ids": [
+   "7abe44a7-32ac-480d-a2a5-a44710420446"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   73515.84
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER594",
+    "maestro": "GRIFERIA BAÑERA EMB C / TRANSF",
+    "score": 76.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER594",
+    "maestro": "GRIFERIA BAÑERA EMB C / TRANSF",
+    "score": 70.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER493",
+    "maestro": "BIDET | FERRUM VARESE",
+    "score": 58.3,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "ARANDELA P/ HTT14 (C) (BARBIERI)",
+  "ids": [
+   "0be0582b-af5b-4319-8e86-99c331293740"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CIVIMET - STEEL"
+  ],
+  "precios_vistos": [
+   400.25
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 76.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 68.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 64.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "HIDROFUGO TAMBOR X 200 LT.",
+  "ids": [
+   "c0347a7f-82ab-4eb4-b284-e6551c317184"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   242307.68
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS141",
+    "maestro": "CERECITA | 20 LTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS268",
+    "maestro": "HIDRÓFUGO | 1 - 20 KG",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS268",
+    "maestro": "HIDRÓFUGO | 1 - 20 KG",
+    "score": 66.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TORN ALAS P/SUPERB. 10 x 1-5/8 x 100 u",
+  "ids": [
+   "9ce613cd-a8ef-45f8-b068-ccdccfa2765a",
+   "00145c03-b573-4638-9ac3-06117c574147"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   6635.84,
+   7332.6
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "T005",
+    "maestro": "TEL ALAS 8*1 1/4 | (6.000 unidades)",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T005",
+    "maestro": "TEL ALAS 8*1 1/4 | (6.000 unidades)",
+    "score": 63.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 62.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PFGAL C100X45X15X2.0 MM X 12 M",
+  "ids": [
+   "32a1dac4-8b1f-4dee-949a-fab8cf58c233",
+   "a4a2538c-3590-4340-8cab-fd8d6c1572c3"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   90496.23,
+   99998.33
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "P113",
+    "maestro": "PGC | 250*2,04",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "PC001",
+    "maestro": "PGC 200 | 2,04",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "PC005",
+    "maestro": "PGC 150 | 2,00",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Cable paralelo 2 x 0,5 mm",
+  "ids": [
+   "55611f56-7b76-42f4-b9be-d222dc5dc3be"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   671.43
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTE043",
+    "maestro": "CABLE PARALELO | 2 X 0,75",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE043",
+    "maestro": "CABLE PARALELO | 2 X 0,75",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE043",
+    "maestro": "CABLE PARALELO | 2 X 0,75",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CANO DURATOP 50X1.00 MTS",
+  "ids": [
+   "478928ad-58b3-4597-9c8d-cb2c6ae88902"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2940.08
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS026",
+    "maestro": "CAÑO CLOACAL | 2*50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS027",
+    "maestro": "CAÑO CLOACAL | 4*50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "SOBRE PILETA 110 C/5 ENTRADAS",
+  "ids": [
+   "4dcfacf5-6e12-4f86-874f-5a26281d9ff0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   8567.39
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS056",
+    "maestro": "PILETA DE PATIO | 3 ENTRADAS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS056",
+    "maestro": "PILETA DE PATIO | 3 ENTRADAS",
+    "score": 73.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS057",
+    "maestro": "PILETA DE PATIO | 7 ENTRADAS",
+    "score": 73.2,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Caño PVC Clásico 40x4x3.2",
+  "ids": [
+   "0e08c235-2172-47ed-805f-202e436add0f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   10448.8
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS210",
+    "maestro": "CAÑO PVC | 110 X 3,2MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS024",
+    "maestro": "CAÑO CLOACAL | 4*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 73.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Caño PVC Clásico 50x 4 X 3.2",
+  "ids": [
+   "5f67df98-c06e-4676-a537-3344a7355e99"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   13505.88
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS210",
+    "maestro": "CAÑO PVC | 110 X 3,2MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS024",
+    "maestro": "CAÑO CLOACAL | 4*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS027",
+    "maestro": "CAÑO CLOACAL | 4*50",
+    "score": 73.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Cinta de papel microperforada x 23 m",
+  "ids": [
+   "e08f6eb8-bfa7-4cb8-9c1a-8d7f520edb6f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   1072.6
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y106",
+    "maestro": "CINTA PAPEL MICROPERFORADA | 150MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y106",
+    "maestro": "CINTA PAPEL MICROPERFORADA | 150MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y106",
+    "maestro": "CINTA PAPEL MICROPERFORADA | 150MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Cinta tramada autoadhesiva x 20 m",
+  "ids": [
+   "347451b1-3b6b-4abf-a863-2b04e63073f3"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   797.04
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y124",
+    "maestro": "BARRERA DE AGUA Y VIENTO - CINTA FLEX | 90 MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y123",
+    "maestro": "BARRERA DE AGUA Y VIENTO - CINTA FLEX | 45 MTS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "EST110",
+    "maestro": "BARRERA AGUA Y VIENTO | CINTA TOMA JUNTAS 22,9 MTS",
+    "score": 64.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PILETA 104P DOBLE 57X37X18 CM",
+  "ids": [
+   "3714bb79-8707-4566-b9af-b884f448762a"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   60572.64
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER410",
+    "maestro": "BACHA DE COCINA | COCINA MI PILETA 305",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE020",
+    "maestro": "GABINETE PILETA | 3,00*1,00",
+    "score": 63.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER431",
+    "maestro": "BACHA LAVADERO | MI PILETA - MOD 420 LE",
+    "score": 60.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Malla SIMA MINI 150 x 150 x 5 mm de 2,40 x 3 m",
+  "ids": [
+   "a46ab215-1796-4608-8225-bd444b404d64"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   38583.9
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS243",
+    "maestro": "MALLA SIMA | 15X 15 X 5 MM DE 2,40 X 6 M",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "SOPAPA UNIV.C/ROSCA 11/4 0246.01-B",
+  "ids": [
+   "df596bc6-64f9-4f04-ab05-4994560059f7"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   12652.48
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER578",
+    "maestro": "SOPAPA | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS208",
+    "maestro": "SOPAPA PARA LAVATORIO | ø40",
+    "score": 49.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER578",
+    "maestro": "SOPAPA | 40",
+    "score": 48.3,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "J.E. RAMAL 110X110A45 M-HPVC 26035112 TIGRE",
+  "ids": [
+   "4183b305-b98c-4d1e-980f-49ad2e8ce8d1",
+   "5f5ac2d1-3b50-4d28-bf10-9ff0759ca694"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   5534.71
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 73.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CODO a 87 30’ MH - Con 2",
+  "ids": [
+   "3000f92a-cee9-4c10-8b53-bc3f289fcd89"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   6102.32
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS039",
+    "maestro": "CODO CLOACAL A 90 MH | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS212",
+    "maestro": "CAÑO PVC | CODO A 90 DE 40",
+    "score": 75.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS032",
+    "maestro": "CODO CLOACAL A 45 HH | 50",
+    "score": 75.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TUBO AMANCO NIVEL 1 - St a",
+  "ids": [
+   "7aae61f7-cd20-479d-9e00-6dd6341ac6f8",
+   "ac573334-5a06-47c9-b183-cfa7a2166698"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   6143.55,
+   13227.62
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS022",
+    "maestro": "CAÑO CLOACAL | 1*63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS019",
+    "maestro": "CAÑO CLOACAL | 1*110",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CODO A 45 HH - PN10 16 0",
+  "ids": [
+   "510daf9b-d8cf-4892-b89c-432fbe3e143c"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   42005.53
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS031",
+    "maestro": "CODO CLOACAL A 45 HH | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS032",
+    "maestro": "CODO CLOACAL A 45 HH | 50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS034",
+    "maestro": "CODO CLOACAL A 45 HH | 110",
+    "score": 72.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CUPLA HH - Lisa 160 mm P",
+  "ids": [
+   "7b6ec0b8-5211-42a2-a426-0de6004690c5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   16100.4
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS053",
+    "maestro": "CUPLA | 63",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS054",
+    "maestro": "CUPLA | 50",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS055",
+    "maestro": "CUPLA | 40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Bacha de Porcelana Sanit a",
+  "ids": [
+   "24c70eb9-e725-4bcc-b719-f2da9e57916d",
+   "14be0ca4-648d-464a-8eed-0464603de4ab"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   82864.0,
+   114204.52
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER304",
+    "maestro": "BACHA DE BAÑO | PIAZZA A117",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER436",
+    "maestro": "BACHA BAÑO | BLADE",
+    "score": 73.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER410",
+    "maestro": "BACHA DE COCINA | COCINA MI PILETA 305",
+    "score": 61.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1006 DE 40 X 2 AWA",
+  "ids": [
+   "c090146b-e3fa-4ce1-88ea-b2ba10cf90c5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   4136.45
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 73.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CAÑO 1008 DE 40 X 4 AWA",
+  "ids": [
+   "512b7b6e-40d7-4629-960d-796ffc016b08"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   7478.06
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS030",
+    "maestro": "CAÑO CLOACAL | 4*40",
+    "score": 73.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS028",
+    "maestro": "CAÑO CLOACAL | 1*40",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PILETA 2127 LOSA 5 ENT ACANAL 50/63 X 110 AWA",
+  "ids": [
+   "d61fc504-fcb4-4c42-ba27-d752d8036e7f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   13229.2
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS060",
+    "maestro": "PILETA DE PATIO | 50*110*63 C SIFON PARA LOSA",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS021",
+    "maestro": "CAÑO CLOACAL | 4*110",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "RCT 3/4\" BCE",
+  "ids": [
+   "22d01043-1761-43a7-86cb-d2ac8e21c0b0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2369.96
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS174",
+    "maestro": "TEE | BRONCE 3/4\"",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS174",
+    "maestro": "TEE | BRONCE 3/4\"",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS174",
+    "maestro": "TEE | BRONCE 3/4\"",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TORNILLO P/INODORO COMPLETO 22 X 60",
+  "ids": [
+   "29552156-1fde-47e2-ade4-3ce00f16c0c4"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   688.52
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 74.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T009",
+    "maestro": "T4 AGUJA 6*2 | (3.500 unidades)",
+    "score": 64.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TABLERO OSB EST 9.50 - 1220X2440 MM",
+  "ids": [
+   "08ce7ccf-ffc0-45c5-96cd-88f84910d137",
+   "02d4c9d5-ac41-4d61-9603-c2d73218f6e0"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   21383.33,
+   23628.58
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "EST101",
+    "maestro": "OSB | 11MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "EST102",
+    "maestro": "OSB | 15MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "EST103",
+    "maestro": "OSB | 18MM",
+    "score": 76.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "VALVULAS ESFERICAS METAL I",
+  "ids": [
+   "8f542b50-c2f0-4a92-a81f-e49d0911c75d"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   8693.95
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS162",
+    "maestro": "FUSIÓN GAS | VALVULA ESFERICA / 20",
+    "score": 74.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 69.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS162",
+    "maestro": "FUSIÓN GAS | VALVULA ESFERICA / 20",
+    "score": 69.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FARA REFRACTARIO RECTO 229X114X63MM 6CM",
+  "ids": [
+   "982ebdfa-9baa-49f7-a824-7a7f2810d2fb",
+   "d9a26dc9-4d71-4dee-b5fd-aea5198f58d3"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON SAN RAFAEL"
+  ],
+  "precios_vistos": [
+   4501.13
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 74.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS126",
+    "maestro": "PEGAMENTO | REFRACTARIO 10 KG",
+    "score": 66.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS022",
+    "maestro": "CAÑO CLOACAL | 1*63",
+    "score": 61.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARCILLA X 10 KG",
+  "ids": [
+   "d9f6739f-4ac1-4505-8420-d43b73b1d20f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON NUEVO PILAR - EFECTIVO"
+  ],
+  "precios_vistos": [
+   12036.2
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y115",
+    "maestro": "ENDUÍDO | 1 KG",
+    "score": 74.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y115",
+    "maestro": "ENDUÍDO | 1 KG",
+    "score": 74.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y111",
+    "maestro": "ENDUIDO | 16 KG",
+    "score": 71.4,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "QUIMTEX impermeable para techos-varios colores x 20 lt",
+  "ids": [
+   "bdf6ea59-f654-44d4-b2c8-dc86879edb1e"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   115200.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS260",
+    "maestro": "IMPERMEABILIZANTE MUROS - | 25 KG",
+    "score": 73.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 73.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 71.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PEDREG. 3-1 BOLSON X 1.2 TN",
+  "ids": [
+   "39d760c2-372e-48a5-8d23-1adce8a6e581"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   54081.45
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS108",
+    "maestro": "ARENA | M3 BOLSÓN",
+    "score": 73.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS110",
+    "maestro": "PIEDRA | M3",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS108",
+    "maestro": "ARENA | M3 BOLSÓN",
+    "score": 66.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P11 CONECTOR MACHO DE 32",
+  "ids": [
+   "7e1917e9-1b2f-4250-b0b5-f7181ba85307"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   7121.49
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y107",
+    "maestro": "CANTONERA DE INTERIOR | 2.6",
+    "score": 72.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE015",
+    "maestro": "CONECTOR | 7/8\" METÁLICO *100",
+    "score": 66.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE015",
+    "maestro": "CONECTOR | 7/8\" METÁLICO *100",
+    "score": 66.7,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P13 CONECTOR HEMBRA DE 3 2",
+  "ids": [
+   "7bdecef3-9b5d-41b5-adff-ff10fd559ac0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   5958.05
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "Y107",
+    "maestro": "CANTONERA DE INTERIOR | 2.6",
+    "score": 72.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "A014",
+    "maestro": "ANCLAJES | CONECTOR COLUMNA",
+    "score": 66.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE107",
+    "maestro": "UNIÓN | 20MM PVC",
+    "score": 64.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "4003-PORTARREJILLA AC.INOX 15X15 REJILLA AWADUCT",
+  "ids": [
+   "6157c812-8560-4ebf-8647-0615e587630b",
+   "0a5aa7c6-4aa9-414a-8891-d2e65d864d72"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   6292.19
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER473",
+    "maestro": "REJILLA DESAGÜE LINEAL | ATRIM - RÍO PP+AC / INOX WAVE",
+    "score": 72.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS139",
+    "maestro": "REJILLA DE PISO | CIEGA 15*15",
+    "score": 67.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS138",
+    "maestro": "REJILLA DE PISO | ABIERTA 15*15",
+    "score": 64.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "RAMAL CURVO a 87 30’ MH",
+  "ids": [
+   "85f3b67d-4b80-434b-a5c2-c60e8e3ef54b"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   32645.84
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS039",
+    "maestro": "CODO CLOACAL A 90 MH | 40",
+    "score": 71.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS048",
+    "maestro": "RAMAL A 45 | 40",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS049",
+    "maestro": "RAMAL A 45 | 63",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "CHAPA ACAN POLIP X 6 ML",
+  "ids": [
+   "1e14df11-9eaa-421b-83b3-6fa476bfe4e2",
+   "1f5305c7-9600-4ee3-b8ac-c10da64baeb2"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CAROSIO CORRALON"
+  ],
+  "precios_vistos": [
+   14602.9
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CH009",
+    "maestro": "CHAPA | ZINCADA x ml",
+    "score": 71.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH019",
+    "maestro": "CHAPA | SINUSOIDAL CINCALUM C25 x ml",
+    "score": 68.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CH019",
+    "maestro": "CHAPA | SINUSOIDAL CINCALUM C25 x ml",
+    "score": 68.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "HIERRO DULCE DEL 4.2",
+  "ids": [
+   "59fad2bb-30ac-4c86-81e4-338986692d78",
+   "2c4b557c-a83a-4f6e-b4e2-d5de3b10100f"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON LAS QUINTAS"
+  ],
+  "precios_vistos": [
+   2840.57,
+   3138.83
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS115",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 4.2",
+    "score": 70.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Llave de Paso 13 Hh hierro 471b",
+  "ids": [
+   "468e011d-9f4e-47bb-ba8d-64b5631f2f9d"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   13018.55
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS136",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 8",
+    "score": 70.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "HIERRO DULCE DEL 0.6 X KG AL 220 GERDAU",
+  "ids": [
+   "0216fc2e-f4c1-42bb-aba2-dafe5d40ac6e",
+   "c3bd705d-9f61-4b78-8393-6e0dbeba2922"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CORRALON SAN RAFAEL"
+  ],
+  "precios_vistos": [
+   4156.24
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS116",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 6",
+    "score": 70.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS136",
+    "maestro": "HIERRO ALETEADO | DIAMETRO 8",
+    "score": 70.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "103/B1P ARIZONA PLUS DUCHA P/EMBUTIR FV",
+  "ids": [
+   "21a51083-9fea-44c6-839a-991b8c754e7a",
+   "06a5f29d-390c-46f7-91cb-342bc1e6fa36"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   93201.37
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER302",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - LAVATORIO",
+    "score": 70.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER471",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - BIDET",
+    "score": 69.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER471",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - BIDET",
+    "score": 65.2,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MASTROCRET XBOLSA 100 LTS",
+  "ids": [
+   "79bd1d89-fa75-4439-a0d6-d3d65eb1c9b5"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   21500.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS202",
+    "maestro": "ISOCRETE PERLAS EPS | BOLSA 170 LTS",
+    "score": 69.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS202",
+    "maestro": "ISOCRETE PERLAS EPS | BOLSA 170 LTS",
+    "score": 66.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS202",
+    "maestro": "ISOCRETE PERLAS EPS | BOLSA 170 LTS",
+    "score": 59.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Pulsador de embutir tipo tecla",
+  "ids": [
+   "86c93ef5-b425-490a-b7ea-ec7fbb3490cc"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   605.82
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTE047",
+    "maestro": "TECLA DOBLE | CAMBRE SXXII",
+    "score": 69.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE047",
+    "maestro": "TECLA DOBLE | CAMBRE SXXII",
+    "score": 69.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER493",
+    "maestro": "BIDET | FERRUM VARESE",
+    "score": 60.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Cubrecanto 32 x 32 x 2.600 mm",
+  "ids": [
+   "5dda400e-dcc9-4e1d-a7a9-33257cd77588"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   1684.32
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "P101",
+    "maestro": "SOLERA 35 | 2,6 MTS",
+    "score": 69.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 65.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER459",
+    "maestro": "GUATAMBU | 2,60*1,83*12MM",
+    "score": 63.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "TORN. ALAS P/SUPERB 10 x 2 x 100 u",
+  "ids": [
+   "2578a240-fef0-4738-9b3b-d1ec9512559a",
+   "2d6ffaf0-da2d-4019-b2dd-cc7d8d169f55"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   7843.92,
+   8667.53
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "T009",
+    "maestro": "T4 AGUJA 6*2 | (3.500 unidades)",
+    "score": 69.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T001",
+    "maestro": "T1 HEX 10*3/4 | (4000 unidades)",
+    "score": 63.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "T012",
+    "maestro": "T3 6*1/2 AGUJA | (6.500 unidaes)",
+    "score": 60.4,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ZZ 52 ZZ 52 52 x 32 x 15 JHONS O",
+  "ids": [
+   "0f9c4900-4698-4328-ac6d-db48da9f623f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   43209.77
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER431",
+    "maestro": "BACHA LAVADERO | MI PILETA - MOD 420 LE",
+    "score": 68.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER410",
+    "maestro": "BACHA DE COCINA | COCINA MI PILETA 305",
+    "score": 68.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER410",
+    "maestro": "BACHA DE COCINA | COCINA MI PILETA 305",
+    "score": 68.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FLEXIBLE CORRUGADO PARA B",
+  "ids": [
+   "1f579fb7-af9b-4822-9dac-3343ba4bad92"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   1181.12
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS236",
+    "maestro": "REGULADOR PARA GAS NATURAL | 6 M3 CON FLEXIBLE",
+    "score": 68.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS236",
+    "maestro": "REGULADOR PARA GAS NATURAL | 6 M3 CON FLEXIBLE",
+    "score": 68.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE022",
+    "maestro": "CAÑO CORRUGADO | 3/4\" PVC PESADO IGNIFUGO",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "179.05/B1 CR KIT ACCES. 5 PZAS. FV",
+  "ids": [
+   "e5a590c0-fd1f-4d08-a5d3-0c4ea783103a"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   79266.65
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER471",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - BIDET",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER303",
+    "maestro": "ACCESORIOS DE BAÑO | FV ARIZONA",
+    "score": 56.4,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER445",
+    "maestro": "ACCESORIOS DE BAÑO | FV CALIFORNIA",
+    "score": 56.4,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Profilit \"U Glass\" medidas del perfil 0.26 x 3 m",
+  "ids": [
+   "7d5b3cdb-b95e-4269-a692-2c87ee62c837"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   88687.51
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "HIE047",
+    "maestro": "PERFIL U | 200*3,25",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE047",
+    "maestro": "PERFIL U | 200*3,25",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "P116",
+    "maestro": "PGO | 37 MM",
+    "score": 58.7,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "6023-PILETA PATIO C/SIF.3S 160X110 AWADUCT",
+  "ids": [
+   "f7c394a5-192c-47ef-b59c-94801f2fbd64",
+   "ded1cedd-8ecd-4d69-8470-f9af4c10a670"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   30318.39
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS021",
+    "maestro": "CAÑO CLOACAL | 4*110",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS058",
+    "maestro": "BOCA DE ACCESO | 63*50 3 ENTRADAS",
+    "score": 66.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS056",
+    "maestro": "PILETA DE PATIO | 3 ENTRADAS",
+    "score": 65.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "2053-PIL.PAT.POL.3 ENTRA 40X63 AWADUCT",
+  "ids": [
+   "d47e5871-7461-4179-bb5a-c77c59eb2da0",
+   "70ab6933-22aa-423d-8104-f1b0de235b19"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   6726.99
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS061",
+    "maestro": "TAPA HEMBRA | 40",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS023",
+    "maestro": "CAÑO CLOACAL | 2*63",
+    "score": 67.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS058",
+    "maestro": "BOCA DE ACCESO | 63*50 3 ENTRADAS",
+    "score": 65.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "REDUCCIÓN - Excéntrica M H",
+  "ids": [
+   "58f4bbcc-14fa-42ba-bb3f-08acebade7af"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   2762.85
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS223",
+    "maestro": "CAÑO PVC | REDUCCION 110 A 63",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS221",
+    "maestro": "CAÑO PVC | REDUCCION 160 A 110",
+    "score": 64.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS223",
+    "maestro": "CAÑO PVC | REDUCCION 110 A 63",
+    "score": 64.3,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FLEXIBLE DE COBRE ANILLA D",
+  "ids": [
+   "09ecc317-2107-4cc9-9aff-8c552f11f5c7",
+   "0b7e1e66-62aa-4625-b5dd-1a120a898ab0"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   9622.14,
+   17246.25
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS136",
+    "maestro": "FLEXIBLE PASO TOTAL | 1/2\" - MH - x35",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS137",
+    "maestro": "FLEXIBLE PASO TOTAL | 3/4\" - MH - x50",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS137",
+    "maestro": "FLEXIBLE PASO TOTAL | 3/4\" - MH - x50",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FLEX MALLA A.INOX. P/BOMBA 1 X 50 AF 2074",
+  "ids": [
+   "5bbf59da-acf2-42e1-a024-27f7f39257a8"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   18251.21
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS184",
+    "maestro": "FLEXIBLE MALLADO | 3/4x30",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS183",
+    "maestro": "FLEXIBLE MALLADO | 1/2x30",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS112",
+    "maestro": "MALLA SIMA 6 | 15 X 15 6MM",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARIZONA 179.05/B1 JGO ACCES 5 PZAS",
+  "ids": [
+   "31609049-5c48-471b-85bc-7e31616e83c8"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   79372.71
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER471",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - BIDET",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER423",
+    "maestro": "GRIFERIA COCINA MONOCOMANDO | FV ARIZONA",
+    "score": 63.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER302",
+    "maestro": "GRIFERÍA DE BAÑO | FV ARIZONA - LAVATORIO",
+    "score": 63.6,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "BACHA DE APOYO 1 AG. 465X420X155 MM (A449)",
+  "ids": [
+   "ff1a8fb5-9222-46bc-8b8d-cb89153eb9ee"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   107952.4
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER304",
+    "maestro": "BACHA DE BAÑO | PIAZZA A117",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER304",
+    "maestro": "BACHA DE BAÑO | PIAZZA A117",
+    "score": 68.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER304",
+    "maestro": "BACHA DE BAÑO | PIAZZA A117",
+    "score": 68.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "7261 RAMAL POSTIZO TIGRE 160 x",
+  "ids": [
+   "1b2d1afb-3570-4be1-8191-3e59645bb3fa"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   15723.42
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS050",
+    "maestro": "RAMAL A 45 | 110",
+    "score": 67.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS172",
+    "maestro": "TIGRE | CAÑO PVC 3,2MM 160 4 MTS",
+    "score": 66.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS172",
+    "maestro": "TIGRE | CAÑO PVC 3,2MM 160 4 MTS",
+    "score": 63.1,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "DESC CORRUG PVC 40 X 40/50 BCO (BIDET)",
+  "ids": [
+   "122f7d20-e1db-4421-8300-7e235944fe45"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   1802.73
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS216",
+    "maestro": "CAÑO PVC | CODO A 45 DE 40",
+    "score": 66.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS212",
+    "maestro": "CAÑO PVC | CODO A 90 DE 40",
+    "score": 63.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS214",
+    "maestro": "CAÑO PVC | CODO A 45 DE 160",
+    "score": 61.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "BOMBA CLOACAL MEC QSBJH 750B (PLASTICA)",
+  "ids": [
+   "5af07b4f-b246-490f-9c1f-aaf078ff4c21"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   182532.16
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS040",
+    "maestro": "CODO CLOACAL A 90 MH | 50",
+    "score": 65.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS044",
+    "maestro": "CODO CLOACAL A 90 HH | 50",
+    "score": 65.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS031",
+    "maestro": "CODO CLOACAL A 45 HH | 40",
+    "score": 61.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "REJA VENTI. 15X15--100CM2-PLAN-AMU",
+  "ids": [
+   "a049e351-d27f-42e2-86f7-01adef106daf"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2137.95
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER426",
+    "maestro": "REJA VENTILACIÓN | 15X15",
+    "score": 65.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER426",
+    "maestro": "REJA VENTILACIÓN | 15X15",
+    "score": 65.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER426",
+    "maestro": "REJA VENTILACIÓN | 15X15",
+    "score": 64.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "WICHI TECNO - 1.20 X 25 - 30 M2",
+  "ids": [
+   "66417432-c064-4074-9557-8a3f563913fa"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CIVIMET - STEEL"
+  ],
+  "precios_vistos": [
+   31923.85
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "HIE024",
+    "maestro": "CAÑO RECT | 30*50*1.2",
+    "score": 65.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS207",
+    "maestro": "MEMBRANA ASFÁLTICA | CON ALUMINIO",
+    "score": 58.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "HIE030",
+    "maestro": "CAÑO RECTANGULAR | 50*20*2",
+    "score": 56.7,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "DESGRASADERA PARA COCINA",
+  "ids": [
+   "d558a351-deb3-4bc2-9c41-378dc4dade8a"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   48596.2
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER593",
+    "maestro": "GRIFERIA COCINA MESADA",
+    "score": 65.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER411",
+    "maestro": "GRIFERÍA COCINA | PIAZZA GOURMET",
+    "score": 63.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER593",
+    "maestro": "GRIFERIA COCINA MESADA",
+    "score": 62.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "FLEJE CINC 25 ancho 610 MM",
+  "ids": [
+   "9e559cba-bed3-4698-ba0b-24fb7e76e355",
+   "b5861198-0065-42bf-81ea-ebb9f68a3c28"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   5528593.48,
+   6109095.8
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CH017",
+    "maestro": "ZINGUERÍA | CAÑO GALVANIZADO - 100 x 50",
+    "score": 65.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS026",
+    "maestro": "CAÑO CLOACAL | 2*50",
+    "score": 63.8,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 63.8,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PEGAM REFRAC X 10KG",
+  "ids": [
+   "152134cf-a4eb-4b60-a395-c391c335dc63"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   13031.67
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS126",
+    "maestro": "PEGAMENTO | REFRACTARIO 10 KG",
+    "score": 64.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE011",
+    "maestro": "TÉRMICA | 2x10A 4,5KA",
+    "score": 63.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS141",
+    "maestro": "CERECITA | 20 LTS",
+    "score": 61.1,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ORING + TORNILLOS PARA KIT OTOR OV.CAM",
+  "ids": [
+   "507b7a1a-8a82-4876-b55e-45795530366d",
+   "4f45074c-744c-4a36-bd16-e167c7927a27"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   1790.52
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 64.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS167",
+    "maestro": "FILTRO Y BOMBA PILETA C/ COLECTOR | VULCANO VC30",
+    "score": 56.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 56.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+  "ids": [
+   "ff58cdf9-3c5b-4a0f-bf06-388a5a441a17",
+   "9dfbb38b-69c2-4950-b1d3-17c63b68a8b1"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CAROSIO SANITARIO"
+  ],
+  "precios_vistos": [
+   9370.33
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS056",
+    "maestro": "PILETA DE PATIO | 3 ENTRADAS",
+    "score": 64.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS057",
+    "maestro": "PILETA DE PATIO | 7 ENTRADAS",
+    "score": 62.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS060",
+    "maestro": "PILETA DE PATIO | 50*110*63 C SIFON PARA LOSA",
+    "score": 60.2,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 50 ACQ",
+  "ids": [
+   "f5e0d70d-8a58-4a1e-8159-61d2f2f2d74f"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   51385.02
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS132",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 50",
+    "score": 64.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS132",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 50",
+    "score": 56.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS093",
+    "maestro": "FUSIÓN AGUA | TEE / 20",
+    "score": 56.2,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "LLAVE ESF. C/MJA P/TERMOFUS DE 32 ACQ",
+  "ids": [
+   "a74f98b7-55df-43ca-99f1-b22060c7aed6"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   20409.69
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS134",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 32",
+    "score": 64.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS134",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 32",
+    "score": 58.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 58.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "MANTA HIDROFUGA ISSA 1.50 x30 MTS",
+  "ids": [
+   "2916407d-9203-4c26-a1c0-53c779e9c120",
+   "748c3547-aadd-4154-bac4-fd95d30856c7"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "INSUMA - STEEL"
+  ],
+  "precios_vistos": [
+   51739.82,
+   57172.5
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS268",
+    "maestro": "HIDRÓFUGO | 1 - 20 KG",
+    "score": 63.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 60.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 60.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "ARO DE CERA SELLADOR TOSSAL",
+  "ids": [
+   "e173a80c-a681-4979-8ccb-4402eb30eadf"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   5545.17
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INS025",
+    "maestro": "SELLADOR | POLIURETANICO NEGRO",
+    "score": 63.6,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER597",
+    "maestro": "ARO SUPLEMENTARIO DE CERA | INODORO",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER597",
+    "maestro": "ARO SUPLEMENTARIO DE CERA | INODORO",
+    "score": 59.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "P51 V. ESFERICA CON MANI J",
+  "ids": [
+   "01b539c3-f46c-4638-8ff0-a9aa59962dd9"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   18211.83
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS132",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 50",
+    "score": 63.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS135",
+    "maestro": "CANILLA ESFÉRICA | / 3/4\"",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS180",
+    "maestro": "CANILLA ESFÉRICA c/PICO | PICO 3/4 x 1 MARIPOSA",
+    "score": 55.1,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "ASIENTO PARAVOR BA 99 BLANCO H/NYLON",
+  "ids": [
+   "4c128cb9-6904-4250-ad4c-764e63ee3865"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   72176.93
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER310",
+    "maestro": "CUARZO | BLANCO",
+    "score": 63.2,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER430",
+    "maestro": "ASIENTO INODORO | BARI MADERA",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER430",
+    "maestro": "ASIENTO INODORO | BARI MADERA",
+    "score": 56.5,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "P35 TEE REDUCIDA CENTRAL",
+  "ids": [
+   "cef02581-7500-4e26-a56c-0d779949b177"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   6340.84
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS201",
+    "maestro": "FUSIÓN GAS | TEE CON RED. CENTRAL 32-25",
+    "score": 62.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS201",
+    "maestro": "FUSIÓN GAS | TEE CON RED. CENTRAL 32-25",
+    "score": 62.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS201",
+    "maestro": "FUSIÓN GAS | TEE CON RED. CENTRAL 32-25",
+    "score": 60.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "MEMBRANA HIDROFUGA AISLAHOME 1.50X20 MTS",
+  "ids": [
+   "f64b31be-dbae-401e-a038-467391f30593"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "LA FORESTA - STEEL - SIN FACTURAR"
+  ],
+  "precios_vistos": [
+   30544.76
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER574",
+    "maestro": "MEMBRANA LIQUIDA - | 20 KG",
+    "score": 62.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "CONS207",
+    "maestro": "MEMBRANA ASFÁLTICA | CON ALUMINIO",
+    "score": 61.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTE041",
+    "maestro": "CABLE | 1,5MM * 100",
+    "score": 60.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Llave de Paso Bronce Hh19 H 471b",
+  "ids": [
+   "6eb3ac13-91f3-43ab-9188-7922623d0db9"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   16692.29
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 62.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS162",
+    "maestro": "FUSIÓN GAS | VALVULA ESFERICA / 20",
+    "score": 60.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS163",
+    "maestro": "FUSIÓN GAS | VALVULA ESFERICA / 25",
+    "score": 60.9,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "P23 CODO 90 CON ROSCA HE M",
+  "ids": [
+   "e4318efe-3004-4550-ae41-3396a4cbb8db",
+   "7d35b20a-7871-487a-8b17-59951f1d82a2",
+   "9b8aa605-ee5f-4523-9391-3a20e23c87c3"
+  ],
+  "n_filas": 3,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   2048.84,
+   3299.2,
+   3382.47
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS143",
+    "maestro": "FUSIÓN GAS | CODO 90 / 20",
+    "score": 62.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS144",
+    "maestro": "FUSIÓN GAS | CODO 90 / 25",
+    "score": 62.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS145",
+    "maestro": "FUSIÓN GAS | CODO 90 / 32",
+    "score": 62.5,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "Contenedor estandar (de 5 m3 de capacidad)",
+  "ids": [
+   "91e85942-a483-4edb-8ada-666d0955422d"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   108900.0
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS105",
+    "maestro": "PEGAMENTO CERAMICO IMPERMEABLE | 25 KG",
+    "score": 61.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INS012",
+    "maestro": "Anteojos protección | ESTANDAR",
+    "score": 59.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "PC008",
+    "maestro": "PGC 100 | 0.94",
+    "score": 59.3,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "MONACO DEPOSITO APOYO 3/6L BL ROCA",
+  "ids": [
+   "8f360edb-6d23-4ece-b072-14a3b2e4a5f4",
+   "f98915e5-90b8-4591-b3ae-e3f3d6711761"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   128614.78
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 61.1,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER443",
+    "maestro": "INODORO LARGO + MOCHILA | FERRUM VARESE",
+    "score": 54.1,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "DESAGUE BASE ABS REJA PL E",
+  "ids": [
+   "f0323d64-c2b7-452c-8254-cc77743fd923"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   59623.08
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS059",
+    "maestro": "BOCA DE ACCESO | 50*110 PARA LOSA",
+    "score": 60.9,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS139",
+    "maestro": "REJILLA DE PISO | CIEGA 15*15",
+    "score": 56.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS009",
+    "maestro": "REJILLA LINEAL | ACQUA 70CM - ATRIM",
+    "score": 56.7,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "TELGOPOR PERLAS CAFIVEL X 170 LT",
+  "ids": [
+   "86fc73c6-7125-467e-852d-3fab8ee9fc94"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON NUEVO PILAR - EFECTIVO"
+  ],
+  "precios_vistos": [
+   28959.28
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "CONS202",
+    "maestro": "ISOCRETE PERLAS EPS | BOLSA 170 LTS",
+    "score": 60.7,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER143",
+    "maestro": "LATEX | CIELORASO 20LT",
+    "score": 60.4,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER143",
+    "maestro": "LATEX | CIELORASO 20LT",
+    "score": 60.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "PILETON INYEC. 20 X 20 S A",
+  "ids": [
+   "12ad6f33-57d1-47c8-988b-1135ba18488e"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   10683.26
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER581",
+    "maestro": "LIGANTE LÁTEX X | 20 KG",
+    "score": 60.5,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE020",
+    "maestro": "GABINETE PILETA | 3,00*1,00",
+    "score": 59.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "HIE018",
+    "maestro": "TAPA INSPECCIÓN | 60*60",
+    "score": 55.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "4005-PORTARREJILLA AC.INOX 15X15 T.CIEGA AWADUCT",
+  "ids": [
+   "7becefa1-63b4-496b-bf17-7d4a5da14bb6",
+   "43ecfb64-c41e-412e-bbb6-5e533cd6c261"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   6292.19
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS058",
+    "maestro": "BOCA DE ACCESO | 63*50 3 ENTRADAS",
+    "score": 60.3,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS021",
+    "maestro": "CAÑO CLOACAL | 4*110",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS035",
+    "maestro": "CODO CLOACAL A 45 MH | 40",
+    "score": 56.7,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "PVC BOCA ACC. 160 C/2 BOCAS REJILL",
+  "ids": [
+   "b0ee2d2e-ab15-4f81-a4db-f0565433b6e1",
+   "45063eb7-9158-438b-9415-8628083a5f1e"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   8424.37
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "INSTS059",
+    "maestro": "BOCA DE ACCESO | 50*110 PARA LOSA",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS059",
+    "maestro": "BOCA DE ACCESO | 50*110 PARA LOSA",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS213",
+    "maestro": "CAÑO PVC | CODO A 90 DE 160",
+    "score": 57.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Cristal Templado 10 mm",
+  "ids": [
+   "e524084f-526b-4c5c-b0d1-0c154cf07036"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   299467.28
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "HIE011",
+    "maestro": "KIT COLUMNA 3\" MOLDURA | 2,40 * 3\"",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "HIE011",
+    "maestro": "KIT COLUMNA 3\" MOLDURA | 2,40 * 3\"",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "Y106",
+    "maestro": "CINTA PAPEL MICROPERFORADA | 150MTS",
+    "score": 58.5,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Laminado Extra Negro 3+3 mm",
+  "ids": [
+   "78e563d2-f60c-4624-9da8-b2d9605e55a0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   409015.37
+  ],
+  "banda": "B_dudoso",
+  "candidatos": [
+   {
+    "codigo": "TER560",
+    "maestro": "MULTILAMINADO FENOLICO | 18MM EUCA 1,22*2,44",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "INSTS179",
+    "maestro": "CANILLA ESFÉRICA c/PICO | PICO 1/2 x 3/4 MARIPOSA",
+    "score": 60.0,
+    "nivel": "dudoso"
+   },
+   {
+    "codigo": "TER560",
+    "maestro": "MULTILAMINADO FENOLICO | 18MM EUCA 1,22*2,44",
+    "score": 60.0,
+    "nivel": "dudoso"
+   }
+  ]
+ },
+ {
+  "texto": "LAVAT APOYO TORI CHICA 1AG L320K* OFERTA",
+  "ids": [
+   "063a9808-c4c4-4296-8308-10061c3cb7bd"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   127891.03
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER437",
+    "maestro": "BACHA BAÑO | FERRUM TORI CILINDRICA 36,5cm",
+    "score": 59.4,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER437",
+    "maestro": "BACHA BAÑO | FERRUM TORI CILINDRICA 36,5cm",
+    "score": 58.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "HIE033",
+    "maestro": "CAÑO RECTANGULAR | 80*40*1,6",
+    "score": 58.5,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "MEGGAFLEX S/ROSCA AJUST. 40 X40-50",
+  "ids": [
+   "a322952d-a35e-4a96-800d-ecb94f5ed1aa"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   2749.44
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "A019",
+    "maestro": "LANA DE VIDRIO - ACUSTIVER | R400 50MM",
+    "score": 58.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "T013",
+    "maestro": "AUTOP. MECHA 14*5 | UNIDAD",
+    "score": 52.5,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "A001",
+    "maestro": "SUNCHO | FLEJE 50mm/0.90 X 50MTS",
+    "score": 52.5,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Transporte",
+  "ids": [
+   "4de6001a-c043-4da8-80f8-9e237ffa27d3",
+   "92bc2e5c-40e6-4ae8-b100-8479639ecc69",
+   "802caad6-c2c6-403c-a459-de8bfd3e18e2"
+  ],
+  "n_filas": 3,
+  "proveedores": [
+   "SAUCE"
+  ],
+  "precios_vistos": [
+   771988.54,
+   3721506.59
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER114",
+    "maestro": "EIFS | ARANDELA",
+    "score": 58.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS005",
+    "maestro": "CAMARA INSPECCIÓN PLUVIAL | DUKE",
+    "score": 51.4,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS109",
+    "maestro": "CASCOTE | M3",
+    "score": 50.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "REFRAC.TEJUELA 2 X 11 X 22 - UNI",
+  "ids": [
+   "6ee3ae26-bac7-448c-9a14-d382331fe761"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   1791.86
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 58.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "A002",
+    "maestro": "CRUZ S. ANDRÉS | CARTELA 20X20",
+    "score": 55.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS125",
+    "maestro": "LADRILLO | REFRACTARIO 15*20*.05",
+    "score": 54.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "10-351063540 PIL. DE PATIO 125 MM C/SAL 63MM 5ENT 40MM",
+  "ids": [
+   "1281425f-42ba-4bdf-a2bd-14d76187c2a0"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CAROSIO SANITARIOS"
+  ],
+  "precios_vistos": [
+   9370.33
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "HIE018",
+    "maestro": "TAPA INSPECCIÓN | 60*60",
+    "score": 57.8,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS024",
+    "maestro": "CAÑO CLOACAL | 4*63",
+    "score": 57.8,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CH017",
+    "maestro": "ZINGUERÍA | CAÑO GALVANIZADO - 100 x 50",
+    "score": 57.1,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "CAM - KIT-COJINETE-MARCO TAPA",
+  "ids": [
+   "cf0d2350-be9a-410a-a18e-2e3c654af856"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   27528.03
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTE093",
+    "maestro": "TAPA | JELUZ PLATINUM",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS186",
+    "maestro": "TAPA 15x15 | FUNDICIÓN",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTE063",
+    "maestro": "CONTACTOR | TRIPOLAR 12A",
+    "score": 53.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "H 21 C.R. 1 x m3",
+  "ids": [
+   "2218d1c8-1908-4938-9026-866593717aaa"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   199600.0
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "CONS240",
+    "maestro": "ARENA FINA PUESTA EN OBRA X | M3",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS107",
+    "maestro": "TOSCA | A GRANEL",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS124",
+    "maestro": "CARTEL DE OBRA | 2X1",
+    "score": 55.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "CUBE SET 4 PIEZAS - NICK E",
+  "ids": [
+   "67c100d1-3714-4485-9ddb-645452cb7a62"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   53154.07
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER421",
+    "maestro": "PILETA SIMPLE LUXOR SI85A 85,5x48,2x21 | JOHNSON",
+    "score": 57.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER596",
+    "maestro": "SET ACCESORIODE BAÑO | 6 PZAS",
+    "score": 56.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER495",
+    "maestro": "GRIFERIA BAÑO - DUCHA | MONOCOMANDO FV PUELO",
+    "score": 55.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Zócalo Eucafloor MDF laminado",
+  "ids": [
+   "feac6398-bfa2-41ed-8664-db1014e6bd63"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   8800.0
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER497",
+    "maestro": "MODULO OFICINA | MELAMINA BLANCA Y COLOR",
+    "score": 56.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER560",
+    "maestro": "MULTILAMINADO FENOLICO | 18MM EUCA 1,22*2,44",
+    "score": 56.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "HIE012",
+    "maestro": "CAÑO REDONDO | 2,5\" x 2mm",
+    "score": 54.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "BIDET SOUTH VESSANTI",
+  "ids": [
+   "5ddc2c67-bdc1-422b-9cec-d3a0a9499670"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   146763.73
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER493",
+    "maestro": "BIDET | FERRUM VARESE",
+    "score": 56.4,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER485",
+    "maestro": "BIDET | FERRUM BARI",
+    "score": 52.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER495",
+    "maestro": "GRIFERIA BAÑO - DUCHA | MONOCOMANDO FV PUELO",
+    "score": 50.9,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "EMPALME ACCESO 63-50 HORIZ.CHICO",
+  "ids": [
+   "b276b2f9-5711-47e9-b7cf-2bdcd6006866"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   6023.25
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTS059",
+    "maestro": "BOCA DE ACCESO | 50*110 PARA LOSA",
+    "score": 55.9,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS059",
+    "maestro": "BOCA DE ACCESO | 50*110 PARA LOSA",
+    "score": 55.9,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS058",
+    "maestro": "BOCA DE ACCESO | 63*50 3 ENTRADAS",
+    "score": 52.2,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "MONACO INOD. LARGO BL 1061200000202 ROCA",
+  "ids": [
+   "39f0f31e-8f2f-4501-9db6-24b64238ce8f",
+   "c574cc0d-a0ef-4d11-8060-2cb3fb3ef3eb"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   140162.88
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER301",
+    "maestro": "INODORO LARGO + MOCHILA | VARIOS STD",
+    "score": 55.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS029",
+    "maestro": "CAÑO CLOACAL | 2*40",
+    "score": 53.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS026",
+    "maestro": "CAÑO CLOACAL | 2*50",
+    "score": 53.2,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "FLETE SIN CARGO",
+  "ids": [
+   "64664560-0fff-441f-b7f0-7328d6bb7a29",
+   "a5a4c4b4-2e13-4771-9cd4-10da42676d8e"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   0.07
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INS029",
+    "maestro": "FLETES | Camioneta F-100",
+    "score": 55.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INS022",
+    "maestro": "Pantalón | CARGO",
+    "score": 55.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER580",
+    "maestro": "SIFÓN SIMPLE CON FUELLE",
+    "score": 52.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "SUPERFLEX- Emcisa",
+  "ids": [
+   "3abfedf1-4e83-4834-8285-4b660439618b"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "Cifras Online"
+  ],
+  "precios_vistos": [
+   39200.0
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "EST105",
+    "maestro": "SUPERBOARD | CEMENTICIA 8",
+    "score": 55.0,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "EST106",
+    "maestro": "SUPERBOARD | CEMENTICIA 6",
+    "score": 55.0,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "EST104",
+    "maestro": "SUPERBOARD | CEMENTICIA 15",
+    "score": 53.7,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "VILLAGE LAV. PIAZZA",
+  "ids": [
+   "5bd50b1e-e380-4665-8494-371b9fd99cc9"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   59003.56
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER493",
+    "maestro": "BIDET | FERRUM VARESE",
+    "score": 54.5,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER594",
+    "maestro": "GRIFERIA BAÑERA EMB C / TRANSF",
+    "score": 53.8,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER592",
+    "maestro": "GRIFERIA BIDET C / TRANSF",
+    "score": 53.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "TARUGO SX 8 LAD.HUECO REDEX",
+  "ids": [
+   "e74ce91b-4ab2-4abf-9841-f9d1e6bc095e"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   151.12
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "A020",
+    "maestro": "TARUGO | 8 MM CON TOPE X 100 U",
+    "score": 54.5,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "A020",
+    "maestro": "TARUGO | 8 MM CON TOPE X 100 U",
+    "score": 54.5,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "A020",
+    "maestro": "TARUGO | 8 MM CON TOPE X 100 U",
+    "score": 51.2,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "PALLET VACIO [DEVOLUCION 100%]",
+  "ids": [
+   "2589e914-a905-4963-b411-eaa891678b26"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CORRALON LAPRIDA"
+  ],
+  "precios_vistos": [
+   34000.0
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "HIE022",
+    "maestro": "PUERTAS DE CANILLA SERVICIO | 0,20*,30",
+    "score": 54.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTE019",
+    "maestro": "EMPALME | 1\" METÁLICO *100",
+    "score": 53.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CLIM117",
+    "maestro": "TOALLERO | PEISA SCALA 80",
+    "score": 52.3,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "BOMBA PLUVIUS CPM 158A (1 HP) (CPM)",
+  "ids": [
+   "d8be232c-8ad1-44a2-943f-9757c0225a3a"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   119025.44
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "CLIM117",
+    "maestro": "TOALLERO | PEISA SCALA 80",
+    "score": 54.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "Y122",
+    "maestro": "MASILLA MULTIUSO - | 18 KG",
+    "score": 51.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS013",
+    "maestro": "BOMBA ELEVADORA | CENTRIFUGA 1HP",
+    "score": 50.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "SUMERG ROWA 1HP SUB 4RW COMP 56/7M",
+  "ids": [
+   "a606a10f-4ede-472a-aef2-b80fa81be4ba"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   236416.78
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTS192",
+    "maestro": "BOMBA SUMERGIBLE MOTORARG SUB4 | 1HP c/ cable sumergible, emplame y tablero protec.",
+    "score": 53.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS192",
+    "maestro": "BOMBA SUMERGIBLE MOTORARG SUB4 | 1HP c/ cable sumergible, emplame y tablero protec.",
+    "score": 52.5,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS191",
+    "maestro": "BOMBA SUMERGIBLE VASSER | 1HP c/ cable sumergible y emplame",
+    "score": 52.5,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "ASIENTO MONACO HERR. BISAG.NYLON BL ROCA",
+  "ids": [
+   "63fd5b78-998c-4555-8484-c47c6a2fabda",
+   "d27d1a2d-2d01-4974-b71b-a82af1769efa"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1"
+  ],
+  "precios_vistos": [
+   60255.96
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "TER430",
+    "maestro": "ASIENTO INODORO | BARI MADERA",
+    "score": 53.7,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER430",
+    "maestro": "ASIENTO INODORO | BARI MADERA",
+    "score": 53.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER486",
+    "maestro": "ASIENTO INODORO | ANDINA",
+    "score": 51.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "CAJA PREINSTALACION A.AC SAL.VERT LINEA XDURATOP",
+  "ids": [
+   "f6fdf32c-0685-4580-9489-e3034d641d56",
+   "6492d088-7600-46f0-adb8-e1a10f66f065"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "VIEJO BUENO - PARTE 1",
+   "VIEJO BUENO - PARTE 2"
+  ],
+  "precios_vistos": [
+   7969.63
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTE028",
+    "maestro": "CAJA | MIGNON PVC",
+    "score": 53.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CH006",
+    "maestro": "CHAPA | LISA PREPINTADA C24 1,20*2M",
+    "score": 50.6,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER427",
+    "maestro": "KIT FIJACIÓN INODORO | TORNILLOS + TARUGOS",
+    "score": 50.6,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "Purifica Dvigi 6 etapas",
+  "ids": [
+   "54cd7c9b-8a9c-46ff-b959-ba3dae1b9bf3"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   436345.85
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTS056",
+    "maestro": "PILETA DE PATIO | 3 ENTRADAS",
+    "score": 53.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS057",
+    "maestro": "PILETA DE PATIO | 7 ENTRADAS",
+    "score": 53.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS159",
+    "maestro": "FUSIÓN GAS | TAPA / 20",
+    "score": 49.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "C 37/18 C 37/18 70,8 x 37 x 18 J H",
+  "ids": [
+   "1c9fe028-1de4-43f7-8268-5d1a0f72d595"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   154428.89
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "T010",
+    "maestro": "T2 6*1 1/8 MECHA | (8.000 unidades)",
+    "score": 52.4,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "HIE007",
+    "maestro": "PLANCHUELA | 6*3/16",
+    "score": 51.2,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS228",
+    "maestro": "LADRILLO | HUECO 8*18*33",
+    "score": 50.0,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "P51 LLAVE PASO CABEZAL M E",
+  "ids": [
+   "8c106815-5c29-4db0-a7fc-874159fe5523",
+   "26f6e50a-bc98-4fe5-8f0b-9affb7d3732d"
+  ],
+  "n_filas": 2,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   15355.18,
+   16345.0
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 52.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS130",
+    "maestro": "FUSIÓN AGUA | LLAVE VÁLVULA ESFÉRICA / 1\"",
+    "score": 52.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "TER119",
+    "maestro": "CANTONERA PVC | CHINA (GENERICA)",
+    "score": 50.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "PALLET DESCARTABLE",
+  "ids": [
+   "9d996d41-034c-4670-b353-8374d8d922c4"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "J.M. Landa"
+  ],
+  "precios_vistos": [
+   3619.92
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INSTE044",
+    "maestro": "CABLE TELEFÓNICO | 5 PARES x100M",
+    "score": 51.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTE044",
+    "maestro": "CABLE TELEFÓNICO | 5 PARES x100M",
+    "score": 51.3,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "CONS203",
+    "maestro": "MURETE PIEDRA | POLELIN ESCALLA",
+    "score": 51.1,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "KIT DUAL 750 SAL.40 HORIZ (30-620750040)",
+  "ids": [
+   "a4b07aed-c197-42a7-8c18-565dc428c199"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "TRIUNVIRATO - SANITARIOS"
+  ],
+  "precios_vistos": [
+   61750.46
+  ],
+  "banda": "C_sin",
+  "candidatos": [
+   {
+    "codigo": "INS032",
+    "maestro": "ALAMBRE SAN MARTIN | 17/15/250 mts",
+    "score": 49.1,
+    "nivel": "sin_match"
+   },
+   {
+    "codigo": "INSTS103",
+    "maestro": "FUSIÓN AGUA | TAPA / 50",
+    "score": 48.8,
+    "nivel": "sin_match"
+   }
+  ]
+ },
+ {
+  "texto": "CAM - ARO- 10 CM",
+  "ids": [
+   "1139289c-3eee-4ff4-a18a-c4350a2176ad"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "EL GALPON - SANITARIOS"
+  ],
+  "precios_vistos": [
+   4008.14
+  ],
+  "banda": "C_sin",
+  "candidatos": []
+ },
+ {
+  "texto": "ÑUK01-000-315 Ñuke Wichi 40",
+  "ids": [
+   "fe340a4c-fb74-4a33-abfc-481947f44b07"
+  ],
+  "n_filas": 1,
+  "proveedores": [
+   "CASA ALFONSIN - INSTALACIONES"
+  ],
+  "precios_vistos": [
+   395633.99
+  ],
+  "banda": "C_sin",
+  "candidatos": []
+ }
+]
