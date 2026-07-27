@@ -58,6 +58,19 @@
 
 ::selection { background: #E87022; color: #fff; }
 
+/* Con "reducir movimiento" activo en el sistema, las transiciones y
+   animaciones colapsan a casi cero sin romper los estados finales. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Al saltar a una sección con #ancla, dejar espacio para el header fijo
    (barra de promo ~36px + nav ~68px) para que el título no quede tapado. */
 html { scroll-padding-top: 116px; }
