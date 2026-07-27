@@ -6526,9 +6526,9 @@
   },
   {
    "texto": "PEDREG. 3-1 BOLSON X 1.2 TN",
-   "codigo": "CONS108",
-   "score": 73.2,
-   "motivo": "score_bajo"
+   "codigo": "CONS110",
+   "score": 100.0,
+   "motivo": "unidad_ambigua"
   },
   {
    "texto": "PIEDRA BCA MAR D.PLATA X 7 MTS**",
