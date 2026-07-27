@@ -1550,6 +1550,18 @@
   },
   {
    "proveedor": "EL GALPON - SANITARIOS",
+   "codigo_material": "TER578",
+   "unidad": "UN",
+   "precio": 12652.48,
+   "cantidad": 2,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "SOPAPA UNIV.C/ROSCA 11/4 0246.01-B",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "EL GALPON - SANITARIOS",
    "codigo_material": "TER437",
    "unidad": "UN",
    "precio": 127891.03,
@@ -2062,6 +2074,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "TARUGO SX 8 LAD.HUECO REDEX",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CORRALON LAPRIDA",
+   "codigo_material": "CONS272",
+   "unidad": "UN",
+   "precio": 71000.0,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "CEMENTO HUMEDO REFRACTARI0 FARA X 20 KG",
    "origen": "pipeline"
   },
   {
@@ -2746,6 +2770,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "BARI BIDET BL. (BKM1 AG BKM)",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "TRIUNVIRATO - SANITARIOS",
+   "codigo_material": "INSTS264",
+   "unidad": "UN",
+   "precio": 372608.8,
+   "cantidad": 1,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "TANQUE MULTICAPA 1100LTS A148 X D110 + FLOT/FILT",
    "origen": "pipeline"
   },
   {
@@ -4129,6 +4165,18 @@
    "origen": "pipeline"
   },
   {
+   "proveedor": "J.M. Landa",
+   "codigo_material": "CONS106",
+   "unidad": "UN",
+   "precio": 31764.7,
+   "cantidad": 4,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "SIKA QUARTZ TOP GRIS X 25 KG",
+   "origen": "pipeline"
+  },
+  {
    "proveedor": "CORRALON SAN RAFAEL",
    "codigo_material": "AUX001",
    "unidad": "UN",
@@ -5062,6 +5110,18 @@
    "conversion_aplicada": null,
    "moneda": "ARS",
    "texto_original": "MALLA F.VIDRIO (5X5) 1.00 X 50 MTS - 160 GRAMOS",
+   "origen": "pipeline"
+  },
+  {
+   "proveedor": "CIVIMET - STEEL",
+   "codigo_material": "A011",
+   "unidad": "UN",
+   "precio": 400.25,
+   "cantidad": 73,
+   "pdf_origen": null,
+   "conversion_aplicada": null,
+   "moneda": "ARS",
+   "texto_original": "ARANDELA P/ HTT14 (C) (BARBIERI)",
    "origen": "pipeline"
   },
   {
@@ -6208,8 +6268,8 @@
   },
   {
    "texto": "FARA X 20 KG",
-   "codigo": "TER581",
-   "score": 77.7,
+   "codigo": "CONS272",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -6261,12 +6321,6 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "SOPAPA UNIV.C/ROSCA 11/4 0246.01-B",
-   "codigo": "TER578",
-   "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "MEGGAFLEX S/ROSCA AJUST. 40 X40-50",
    "codigo": "A019",
    "score": 58.1,
@@ -6282,12 +6336,6 @@
    "texto": "CAÑO 160 MM AMANCO STD (900309)",
    "codigo": "INSTS028",
    "score": 68.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "CEMENTO HUMEDO REFRACTARI0 FARA X 20 KG",
-   "codigo": "CONS101",
-   "score": 84.0,
    "motivo": "score_bajo"
   },
   {
@@ -6333,15 +6381,9 @@
    "motivo": "score_bajo"
   },
   {
-   "texto": "TANQUE MULTICAPA 1100LTS A148 X D110 + FLOT/FILT",
-   "codigo": "INSTS181",
-   "score": 81.8,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "DESC CORRUG PVC 40 X 40/50 BCO (BIDET)",
-   "codigo": "INSTS216",
-   "score": 66.7,
+   "codigo": "INSTS263",
+   "score": 84.9,
    "motivo": "score_bajo"
   },
   {
@@ -6441,12 +6483,6 @@
    "motivo": "unidad_ambigua"
   },
   {
-   "texto": "SIKA QUARTZ TOP GRIS X 25 KG",
-   "codigo": "CONS247",
-   "score": 81.8,
-   "motivo": "score_bajo"
-  },
-  {
    "texto": "PEGAM REFRAC X 10KG",
    "codigo": "CONS126",
    "score": 84.9,
@@ -6540,12 +6576,6 @@
    "texto": "PGU 102 X 0.9 X 6 MTS (BARBIERI)",
    "codigo": "PU007",
    "score": 76.0,
-   "motivo": "score_bajo"
-  },
-  {
-   "texto": "ARANDELA P/ HTT14 (C) (BARBIERI)",
-   "codigo": "TER114",
-   "score": 76.2,
    "motivo": "score_bajo"
   },
   {
