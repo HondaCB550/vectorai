@@ -6,8 +6,8 @@
 // GENERADO AUTOMÁTICAMENTE por actualizar_horas.py (tarea semanal).
 // Para forzar una actualización: python actualizar_horas.py
 export const HORAS_PROYECTO = {
-  total: 71.0, // horas totales del proyecto (acumuladas)
-  semana: 11.7, // horas de los últimos 7 días
-  previo: 59.3, // horas previas a esa semana (total = previo + semana)
-  actualizado: "27 jul 2026", // fecha de la última actualización
+  total: 71.2, // horas totales del proyecto (acumuladas)
+  semana: 0.5, // horas de los últimos 7 días
+  previo: 70.7, // horas previas a esa semana (total = previo + semana)
+  actualizado: "4 ago 2026", // fecha de la última actualización
 };
