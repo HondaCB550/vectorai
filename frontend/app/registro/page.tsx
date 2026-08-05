@@ -67,6 +67,12 @@ function RegistroInner() {
     } else {
       try { setRefOrigen(refLimpio(localStorage.getItem("va_ref"))); } catch {}
     }
+    // Código promocional (?codigo=X en el link): queda guardado para que
+    // /suscribirse lo prefille después de crear la cuenta / iniciar sesión.
+    const cod = (params.get("codigo") || "").trim().toUpperCase();
+    if (cod && /^[A-Z0-9_-]{3,32}$/.test(cod)) {
+      try { localStorage.setItem("va_promo", cod); } catch {}
+    }
   }, [params]);
 
   // Si ya hay sesión VÁLIDA (validada contra el servidor, como el middleware),
@@ -172,7 +178,10 @@ function RegistroInner() {
         return;
       }
 
-      router.push("/app/comparar");
+      // Si vino con un código promocional, directo a canjearlo
+      let promo = "";
+      try { promo = localStorage.getItem("va_promo") || ""; } catch {}
+      router.push(promo ? "/suscribirse" : "/app/comparar");
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Error inesperado. Intentá de nuevo.";
       setError(msg);

@@ -162,6 +162,9 @@ export default function AdminPage() {
           <Link href="/app/admin/metricas" className="text-sm font-medium text-gray-600 hover:text-blue-700">
             Métricas
           </Link>
+          <Link href="/app/admin/codigos" className="text-sm font-medium text-gray-600 hover:text-blue-700">
+            Códigos
+          </Link>
           {/* Ver "Mejorar plan" estando ya en el tope no lleva a ningún lado.
               En Inicial sí sirve (puede pasar a Advance). */}
           {planActual !== "advance" && planActual !== "pro" && (

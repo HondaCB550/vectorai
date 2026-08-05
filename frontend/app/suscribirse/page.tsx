@@ -1,7 +1,8 @@
 "use client";
 export const dynamic = "force-dynamic";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
@@ -53,10 +54,29 @@ const PLANES: Plan[] = [
 
 const ars = (v: number) => `$${v.toLocaleString("es-AR")}`;
 
-export default function Suscribirse() {
+function SuscribirseInner() {
+  const router = useRouter();
+  const params = useSearchParams();
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [user, setUser] = useState<{ id: string; email: string } | null>(null);
+
+  // Código promocional: viene por URL (?codigo=X, link de influencer) o quedó
+  // guardado en localStorage desde /registro. Se canjea logueado.
+  const [codigo, setCodigo] = useState("");
+  const [promoMsg, setPromoMsg] = useState("");
+  const [promoErr, setPromoErr] = useState("");
+  const [canjeando, setCanjeando] = useState(false);
+
+  useEffect(() => {
+    const deUrl = (params.get("codigo") || "").trim().toUpperCase();
+    if (deUrl) {
+      setCodigo(deUrl);
+      try { localStorage.setItem("va_promo", deUrl); } catch {}
+    } else {
+      try { setCodigo((localStorage.getItem("va_promo") || "").toUpperCase()); } catch {}
+    }
+  }, [params]);
 
   useEffect(() => {
     const sb = createClient();
@@ -64,6 +84,45 @@ export default function Suscribirse() {
       if (data.user) setUser({ id: data.user.id, email: data.user.email ?? "" });
     });
   }, []);
+
+  async function canjearCodigo() {
+    const cod = codigo.trim().toUpperCase();
+    if (!cod || canjeando) return;
+    setCanjeando(true);
+    setPromoErr("");
+    setPromoMsg("");
+    try {
+      const sb = createClient();
+      const { data: sess } = await sb.auth.getSession();
+      if (!sess.session) {
+        router.push(`/login?from=${encodeURIComponent(`/suscribirse?codigo=${cod}`)}`);
+        return;
+      }
+      const res = await fetch(`${API_URL}/promo/canjear`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sess.session.access_token}`,
+        },
+        body: JSON.stringify({ codigo: cod }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPromoErr(data?.detail?.mensaje || "No se pudo canjear el código. Revisalo e intentá de nuevo.");
+        return;
+      }
+      try { localStorage.removeItem("va_promo"); } catch {}
+      const hasta = data.hasta ? new Date(data.hasta).toLocaleDateString("es-AR") : "";
+      setPromoMsg(
+        `Listo: tenés el plan ${data.plan === "basico" ? "Inicial" : "Advance"} gratis por ${data.meses === 1 ? "1 mes" : `${data.meses} meses`}${hasta ? ` (hasta el ${hasta})` : ""}. Te llevamos al comparador…`
+      );
+      setTimeout(() => router.push("/app/comparar"), 2500);
+    } catch {
+      setPromoErr("Error de conexión. Intentá de nuevo.");
+    } finally {
+      setCanjeando(false);
+    }
+  }
 
   async function iniciarPago(plan: "basico" | "advance") {
     if (!user) return;
@@ -117,6 +176,41 @@ export default function Suscribirse() {
               {error}
             </div>
           )}
+
+          {/* Código promocional */}
+          <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-8">
+            <h2 className="text-sm font-semibold text-gray-800 mb-1">¿Tenés un código?</h2>
+            <p className="text-xs text-gray-500 mb-3">
+              Canjealo y usá Vectorai gratis durante el período del código. Sin tarjeta.
+            </p>
+            {promoMsg ? (
+              <div className="bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-xl">
+                {promoMsg}
+              </div>
+            ) : (
+              <>
+                <div className="flex gap-2 flex-wrap">
+                  <input
+                    type="text"
+                    value={codigo}
+                    onChange={(e) => setCodigo(e.target.value.toUpperCase())}
+                    placeholder="Ej: AMIGOS2026"
+                    className="flex-1 min-w-48 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 uppercase tracking-wide placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    onClick={canjearCodigo}
+                    disabled={!codigo.trim() || canjeando}
+                    className="bg-gray-900 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-gray-800 transition disabled:opacity-50"
+                  >
+                    {canjeando ? "Canjeando…" : user ? "Canjear" : "Iniciar sesión y canjear"}
+                  </button>
+                </div>
+                {promoErr && (
+                  <div className="text-red-600 text-sm mt-2">{promoErr}</div>
+                )}
+              </>
+            )}
+          </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {PLANES.map((plan) => (
@@ -175,5 +269,13 @@ export default function Suscribirse() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export default function Suscribirse() {
+  return (
+    <Suspense>
+      <SuscribirseInner />
+    </Suspense>
   );
 }

@@ -35,7 +35,11 @@ function LoginInner() {
       setError("Mail o contraseña incorrectos");
       setLoading(false);
     } else {
-      const from = params.get("from") || "/app/comparar";
+      // Con un código promocional pendiente de canjear, priorizar /suscribirse
+      // (salvo que venga con un destino explícito en ?from=)
+      let promo = "";
+      try { promo = localStorage.getItem("va_promo") || ""; } catch {}
+      const from = params.get("from") || (promo ? "/suscribirse" : "/app/comparar");
       router.push(from);
     }
   }

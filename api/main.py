@@ -241,6 +241,25 @@ def _usuario_del_token(authorization: Optional[str]) -> tuple[str, str]:
     return u.user.id, (u.user.email or "")
 
 
+def _fecha_pasada(iso) -> bool:
+    """True si el timestamp ISO (posiblemente con zona) ya pasó. Ante un valor
+    imparseable devuelve False (no degradar un plan por un dato roto)."""
+    try:
+        v = datetime.fromisoformat(str(iso).replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return False
+    ahora = datetime.now(v.tzinfo) if v.tzinfo else datetime.now()
+    return v < ahora
+
+
+def _sumar_meses(dt: datetime, meses: int) -> datetime:
+    """dt + N meses calendario (clampeando el día: 31-ene + 1 mes = 28-feb)."""
+    import calendar
+    m = dt.month - 1 + meses
+    anio, mes = dt.year + m // 12, m % 12 + 1
+    return dt.replace(year=anio, month=mes, day=min(dt.day, calendar.monthrange(anio, mes)[1]))
+
+
 def get_user_plan(authorization: Optional[str]) -> dict:
     """Devuelve {'user_id': ..., 'plan': 'free'|'advance', 'usos_hoy': N, 'limite': N}.
 
@@ -270,7 +289,7 @@ def get_user_plan(authorization: Optional[str]) -> dict:
         # OJO: .single() LANZA excepción con 0 filas (PGRST116) en vez de devolver
         # data=None, así que el auto-create nunca corría y el usuario quedaba
         # degradado a anónimo. limit(1) devuelve lista (vacía si no hay perfil).
-        perfil = sb.table("perfiles").select("plan,usos_mes,usos_total,mes_usos,plan_desde").eq("id", user_id).limit(1).execute()
+        perfil = sb.table("perfiles").select("plan,usos_mes,usos_total,mes_usos,plan_desde,plan_hasta").eq("id", user_id).limit(1).execute()
         row = (perfil.data or [None])[0]
         if not row:
             # Crear perfil si el trigger no lo hizo (cuentas pre-trigger)
@@ -278,6 +297,13 @@ def get_user_plan(authorization: Optional[str]) -> dict:
             return {"user_id": user_id, "plan": "free", "usos_hoy": 0, "limite": LIMITE_FREE}
 
         plan = row.get("plan") or "free"
+
+        # Vencimiento de plan regalado por código promocional (perfiles.plan_hasta).
+        # Los planes pagos por MP tienen plan_hasta NULL (el webhook lo limpia al
+        # activar), así que esto solo baja a free a los regalos vencidos.
+        if plan != "free" and row.get("plan_hasta") and _fecha_pasada(row["plan_hasta"]):
+            sb.table("perfiles").update({"plan": "free", "plan_hasta": None}).eq("id", user_id).execute()
+            plan = "free"
 
         # Reset del contador MENSUAL al cambiar de mes (planes con tope por mes).
         usos_mes = row.get("usos_mes") or 0
@@ -1520,6 +1546,9 @@ async def mp_webhook(request: Request):
         sb.table("perfiles").update({
             "plan": plan_comprado,
             "plan_desde": datetime.now().isoformat(),
+            # Un pago real no vence por fecha: si venía de un código promocional,
+            # el vencimiento del regalo deja de aplicar.
+            "plan_hasta": None,
         }).eq("id", user_id).execute()
         try:
             sb.table("facturacion_eventos").insert({
@@ -1541,6 +1570,139 @@ async def mp_webhook(request: Request):
         print(f"Plan cancelado, vuelve a free: {user_id}")
 
     return {"ok": True}
+
+
+# ── Códigos promocionales ─────────────────────────────────────────────────────
+# Regalan N meses de un plan pago (amigos arquitectos, influencers). El código
+# lo crea el admin (/admin/codigos); el usuario lo canjea logueado en
+# /promo/canjear. El vencimiento vive en perfiles.plan_hasta y lo aplica
+# get_user_plan. Un usuario canjea UN código en la vida (UNIQUE user_id en
+# codigos_promo_canjes — esa constraint es también la guarda anti-carrera).
+
+_RE_CODIGO_PROMO = re.compile(r"^[A-Z0-9_-]{3,32}$")
+
+class PromoCanjeRequest(BaseModel):
+    codigo: str
+
+@app.post("/promo/canjear")
+async def promo_canjear(req: PromoCanjeRequest, authorization: Optional[str] = Header(None)):
+    """Canjea un código promocional: activa `meses` de `plan` gratis para el
+    usuario del token. Solo cuentas en plan free (no pisa un plan pago)."""
+    user_id, _email = _usuario_del_token(authorization)
+    codigo = (req.codigo or "").strip().upper()
+    if not _RE_CODIGO_PROMO.match(codigo):
+        raise HTTPException(status_code=400, detail={"error": "codigo_invalido", "mensaje": "Ese código no es válido."})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+
+    res = sb.table("codigos_promo").select("*").eq("codigo", codigo).limit(1).execute()
+    promo = (res.data or [None])[0]
+    if not promo or not promo.get("activo"):
+        raise HTTPException(status_code=404, detail={"error": "codigo_invalido", "mensaje": "Ese código no existe o ya no está activo."})
+    if promo.get("vence") and _fecha_pasada(promo["vence"]):
+        raise HTTPException(status_code=400, detail={"error": "codigo_vencido", "mensaje": "Ese código ya venció."})
+    if promo.get("max_canjes") is not None and (promo.get("canjes") or 0) >= promo["max_canjes"]:
+        raise HTTPException(status_code=400, detail={"error": "codigo_agotado", "mensaje": "Ese código ya alcanzó el máximo de usos."})
+
+    perfil = sb.table("perfiles").select("plan").eq("id", user_id).limit(1).execute()
+    plan_actual = ((perfil.data or [{}])[0] or {}).get("plan") or "free"
+    if plan_actual in ("basico", "advance", "pro"):
+        raise HTTPException(status_code=400, detail={"error": "ya_con_plan", "mensaje": "Ya tenés un plan activo. Los códigos son para cuentas sin plan."})
+
+    plan_promo = promo.get("plan") or "advance"
+    meses = int(promo.get("meses") or 1)
+
+    # El insert va ANTES de tocar perfiles: si el usuario ya canjeó otro código,
+    # el UNIQUE(user_id) lo rebota acá y no se regala dos veces.
+    try:
+        sb.table("codigos_promo_canjes").insert({
+            "codigo": codigo, "user_id": user_id, "plan": plan_promo, "meses": meses,
+        }).execute()
+    except Exception:
+        raise HTTPException(status_code=400, detail={"error": "ya_canjeado", "mensaje": "Ya canjeaste un código promocional antes."})
+
+    ahora = datetime.now()
+    hasta = _sumar_meses(ahora, meses)
+    sb.table("perfiles").update({
+        "plan": plan_promo,
+        "plan_desde": ahora.isoformat(),
+        "plan_hasta": hasta.isoformat(),
+    }).eq("id", user_id).execute()
+
+    # Contador denormalizado (informativo; la fuente es la tabla de canjes)
+    try:
+        n = sb.table("codigos_promo_canjes").select("id", count="exact").eq("codigo", codigo).execute().count
+        sb.table("codigos_promo").update({"canjes": n or 0}).eq("codigo", codigo).execute()
+    except Exception as e:
+        print(f"codigos_promo contador error: {e}")
+    try:
+        sb.table("facturacion_eventos").insert({
+            "user_id": user_id, "evento": "promo", "plan": plan_promo,
+            "monto": 0, "mp_id": f"promo:{codigo}",
+        }).execute()
+    except Exception as e:
+        print(f"facturacion_eventos error: {e}")
+
+    print(f"Promo {codigo} canjeada: {user_id} → {plan_promo} x{meses} meses (hasta {hasta.date()})")
+    return {"ok": True, "plan": plan_promo, "meses": meses, "hasta": hasta.isoformat()}
+
+
+class AdminCodigoRequest(BaseModel):
+    codigo: str
+    plan: str = "advance"          # 'basico' | 'advance'
+    meses: int = 1                 # 1..12
+    max_canjes: Optional[int] = None   # None = sin tope
+    vence: Optional[str] = None    # ISO: fecha límite para canjear
+    nota: Optional[str] = None
+    activo: bool = True
+
+@app.get("/admin/codigos")
+async def admin_listar_codigos(authorization: Optional[str] = Header(None)):
+    """Códigos promocionales + últimos canjes (solo admin)."""
+    require_admin(authorization)
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    codigos = sb.table("codigos_promo").select("*").order("creado_en", desc=True).execute().data or []
+    canjes = sb.table("codigos_promo_canjes").select("codigo,user_id,plan,meses,canjeado_en").order("canjeado_en", desc=True).limit(200).execute().data or []
+    # Nombre del usuario que canjeó (perfiles.nombre) para no mostrar UUIDs pelados
+    ids = list({c["user_id"] for c in canjes})
+    nombres = {}
+    if ids:
+        try:
+            for p in (sb.table("perfiles").select("id,nombre").in_("id", ids).execute().data or []):
+                nombres[p["id"]] = p.get("nombre") or ""
+        except Exception:
+            pass
+    for c in canjes:
+        c["nombre"] = nombres.get(c["user_id"], "")
+    return {"codigos": codigos, "canjes": canjes}
+
+@app.post("/admin/codigos")
+async def admin_upsert_codigo(req: AdminCodigoRequest, authorization: Optional[str] = Header(None)):
+    """Crea o actualiza un código promocional (solo admin)."""
+    require_admin(authorization)
+    codigo = (req.codigo or "").strip().upper()
+    if not _RE_CODIGO_PROMO.match(codigo):
+        raise HTTPException(status_code=400, detail={"error": "codigo_invalido", "mensaje": "Usá 3-32 caracteres: letras, números, guión o guión bajo."})
+    if req.plan not in ("basico", "advance"):
+        raise HTTPException(status_code=400, detail={"error": "plan_invalido"})
+    if not 1 <= req.meses <= 12:
+        raise HTTPException(status_code=400, detail={"error": "meses_invalido", "mensaje": "Entre 1 y 12 meses."})
+    sb = get_supabase()
+    if not sb:
+        raise HTTPException(status_code=503, detail={"error": "db_no_disponible"})
+    sb.table("codigos_promo").upsert({
+        "codigo": codigo,
+        "plan": req.plan,
+        "meses": req.meses,
+        "max_canjes": req.max_canjes,
+        "vence": req.vence or None,
+        "nota": req.nota,
+        "activo": req.activo,
+    }, on_conflict="codigo").execute()
+    return {"ok": True, "codigo": codigo}
 
 
 # ── V2: Cache de denominaciones + sinónimos + grupos de marcas ────────────────
