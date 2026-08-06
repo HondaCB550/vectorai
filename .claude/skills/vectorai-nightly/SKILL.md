@@ -27,10 +27,10 @@ Corre y devuelve JSON con PASO/ATENCION/FALLO por chequeo:
 
 | Chequeo | Qué valida |
 |---|---|
-| tests_extraccion | `api/test_extraccion_parsers.py` — parsers de los 8+ formatos de proveedor, 0 fallos |
+| tests | Las tres suites de `SUITES_TESTS`: `test_extraccion_parsers.py` (parsers de proveedor), `test_conversion_unidades.py` y `test_matching_contaminacion.py`. 0 fallos. Al agregar un `test_*.py` autoejecutable a `api/`, sumarlo a esa lista |
 | typecheck_frontend | `npx tsc --noEmit` en `frontend/` |
+| health_api | `/health` de Railway: `master_items` debe **coincidir con `api/data/master_materiales.json` del repo** (si difiere, producción sirve otro build), `aliases_v2` ≥4000 y sin caída >2% contra la corrida anterior, OCR con key |
 | sintaxis_api | `ast.parse` de todos los `.py` de `api/` |
-| health_api | `/health` de Railway con umbrales (master_items ≥900, aliases_v2 ≥4000, OCR con key) |
 | frontend_prod | `vectorai.com.ar` responde 200 |
 | secretos_en_repo | patrones de keys (sb_secret_, sk-ant-, APP_USR-, JWT) en archivos trackeados + `.env` no trackeado |
 | npm_audit | vulnerabilidades de dependencias del frontend (critical = FALLO, high = ATENCION) |
@@ -40,8 +40,13 @@ Dura varios minutos (tsc + audits). El flag `--rapido` saltea los dos audits si 
 
 ## Paso 2 — Chequeos MCP y de logs (agente)
 
-1. **Supabase advisors** (proyecto `aetwdwvctowannnbelwb`): `get_advisors` con type `security` y luego `performance`. Registrar cantidad y títulos de lints nuevos vs la corrida anterior (comparar contra el reporte previo en `reports/nocturno/`). Los advisors de seguridad (RLS deshabilitado, funciones sin search_path, etc.) son ATENCION siempre y FALLO si aparece uno nuevo de nivel ERROR.
-2. **Vercel**: `get_project` del proyecto **"vectorai"** (team bontempopablo) → `latestDeployment.readyState == READY`. Si está ERROR, traer `get_deployment_build_logs`.
+1. **Supabase advisors** (proyecto `aetwdwvctowannnbelwb`): `get_advisors` con type `security` y luego `performance`.
+
+   Sobre los de **performance**: no son deuda accionable mientras no haya tráfico, y conviene no proponerlos como tarea en cada corrida.
+   - `unused_index` (INFO) **no prueba que el índice sobre**: prueba que nadie corrió la consulta que lo usa. Con la app sin uso real, todos los índices figuran así — el `idx_codigos_promo_canjes_codigo`, creado el 06-08 para tapar un `unindexed_foreign_keys`, apareció como "unused" en la misma corrida. No borrar índices por este lint sin tráfico que lo respalde.
+   - `auth_rls_initplan` (WARN) sí es una optimización real (envolver `auth.*()` en `(select auth.*())`), pero toca **políticas de autorización**: el beneficio a volumen cero es nulo y un error abre datos. Tocarlas solo en una sesión dedicada, con el invariante del CSO a la vista y verificando cada policy después.
+   - `unindexed_foreign_keys` sí conviene cerrarlo: es barato y evita scans al validar la FK. Registrar cantidad y títulos de lints nuevos vs la corrida anterior (comparar contra el reporte previo en `reports/nocturno/`). Los advisors de seguridad (RLS deshabilitado, funciones sin search_path, etc.) son ATENCION siempre y FALLO si aparece uno nuevo de nivel ERROR.
+2. **Vercel**: `get_project` del proyecto **"vectorai"**, team **`bontempopablo-1923s-projects`** (`team_8Plg98YsKIUgnYi3CfC8lCr0`) → `latestDeployment.readyState == READY`. Si está ERROR, traer `get_deployment_build_logs`. El slug viejo `bontempopablo` devuelve 403: es permisos, no una caída del proyecto.
 3. **Logs de Railway** (desde `C:\Pablo\presupuestor`):
    ```bash
    railway logs 2>&1 | grep -i -E "error|42501|Traceback|PGRST" | tail -30
@@ -52,7 +57,10 @@ Dura varios minutos (tsc + audits). El flag `--rapido` saltea los dos audits si 
 4. **Métricas de datos** (Supabase `execute_sql`, solo SELECT):
    ```sql
    select
-     (select count(*) from materiales_pendientes where estado is distinct from 'RESUELTO') as pendientes_sin_resolver,
+     -- Los estados reales de la cola son VALIDADO y RECHAZADO (no 'RESUELTO'):
+     -- filtrar por 'RESUELTO' devuelve la tabla entera y simula una cola falsa.
+     (select count(*) from materiales_pendientes
+       where estado not in ('VALIDADO','RECHAZADO')) as pendientes_sin_curar,
      (select count(*) from precios_historicos) as precios_historicos,
      (select count(*) from precios_historicos where created_at > now() - interval '1 day') as precios_ultimas_24h,
      (select count(*) from perfiles) as perfiles,
@@ -70,6 +78,12 @@ Dura varios minutos (tsc + audits). El flag `--rapido` saltea los dos audits si 
    ) q;
    ```
    Si crece contra la corrida anterior, listar los nuevos en el reporte como candidatos a auditoría (`vectorai-ops` sección 2). No tocar datos.
+
+   **Los ~240 de base NO son deuda** (analizado el 06-08-2026, no repetirlo cada noche). Se parten en dos clases y el filtro del pool ya maneja las dos:
+   - **150 son nombres de rubro de la migración inicial** (`origen=migracion_item`, confianza 90): "fusión agua" cuelga de 65 códigos, "fusión gas" de 33, "caño pvc" de 13, "chapa" de 8. Empatan todos en la confianza máxima → el grupo entero queda excluido del pool, que es lo correcto: son genéricos que nunca deberían matchear solos (la guarda anti-genérico los frenaría igual).
+   - **90 son duplicados de importación de borradores**, donde una copia tiene más confianza y sobrevive sola (ej. "arandela anclaje e 3,2" → A016 con 90 le gana a TER114 con 80). El matching ya elige bien.
+
+   Borrar los perdedores sería cosmético y **requiere criterio de dominio caso por caso**: en pares como "206 pegamento seco x 10 kg" → CONS126 (refractario) vs CONS105 (cerámico), cuál sobra depende del producto real. Solo curarlos en una sesión con Pablo, con backup e IDs explícitos. Reportar el número y su delta; no proponerlo como acción pendiente.
 
 ## Paso 3 — Reporte y envío
 

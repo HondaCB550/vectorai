@@ -175,6 +175,47 @@ RE_CANT_DESC_EUR = re.compile(
     r"((?:\d{1,3}\.)*\d+,\d{2})\s+((?:\d{1,3}\.)*\d+,\d{2})\s*$"
 )
 
+# JELUZ / Electrocity (ERP "Presupuesto de venta"):
+# "1 01CAM00208 6910 BASTIDOR MIGNON 14 C/U INMEDIATA $ 505.39 CAMBRE $ 7,075.50"
+# Orden: ITEM COD [SKU] DESC CANT UNIDAD ENTREGA [*] $P.UNIT MARCA $TOTAL
+# (americano). La columna ENTREGA es de vocabulario cerrado y hace al patrón muy
+# específico. El "*" marca precio sujeto a confirmación (se ignora). Las
+# descripciones largas envuelven al renglón siguiente: ese sobrante no matchea y
+# se descarta, igual que en el resto de los formatos.
+RE_JELUZ = re.compile(
+    r"^\s*\d+\s+(\S+)\s+(.+?)\s+(\d+)\s+(\S+)\s+"
+    r"(?:INMEDIATA|PARCIAL|CONSULTAR|A CONFIRMAR)\s+\*?\s*"
+    r"\$\s*((?:\d{1,3},)*\d+\.\d{2})\s+(.+?)\s+"
+    r"\$\s*((?:\d{1,3},)*\d+\.\d{2})\s*$"
+)
+
+# MOLBER SRL:
+# "28.00 UNI VARILLA ROSCADA FTR/RGM 12 X 160 FISCHER 5213.261 %18 4274.874 119696.47"
+# Orden: CANT UMED DESC P.LISTA %DESC P.C/DESC TOTAL (americano; el signo % va
+# ANTES del número y el descuento puede tener un decimal: "%29.5"). Los precios
+# traen 3 decimales. pu = precio con descuento (el que paga el cliente).
+# La columna de descuento es opcional: los ítems sin bonificación repiten el
+# precio de lista y omiten el "%N" ("13.00 UNI ISOTEX PLAT 50 1.2 * 1.6
+# 70707.000 70707.000 919191.00").
+RE_MOLBER = re.compile(
+    r"^\s*(\d+(?:\.\d{2})?)\s+([A-Z]{2,4})\s+(.+?)\s+"
+    r"[\d,]+\.\d{1,3}\s+(?:%\d{1,2}(?:\.\d)?\s+)?"
+    r"([\d,]+\.\d{1,3})\s+([\d,]+\.\d{2})\s*$"
+)
+
+# Ofertas Eléctricas:
+# "UTR022 Union para Tubo PVC 22 mm 100 $29,63 0% $2.963,00 21% $3.585,23"
+# Orden: COD DESC CANT $P.UNIT %BONIF $SUBTOTAL %ALICUOTA $SUBTOTAL_C/IVA
+# (europeo). El total del ítem es el SUBTOTAL sin IVA — los precios se guardan
+# netos y la alícuota se descarta (el IVA es por archivo). El código se parte en
+# dos renglones ("UTR022" + "E"): lo repara _reparar_cod_envuelto().
+RE_OFERTAS = re.compile(
+    r"^\s*(\S+)\s+(\D.+?)\s+(\d+(?:,\d{2})?)\s+"
+    r"\$\s*((?:\d{1,3}\.)*\d+,\d{2})\s+\d{1,2}(?:,\d)?%\s+"
+    r"\$\s*((?:\d{1,3}\.)*\d+,\d{2})\s+\d{1,2}(?:,\d)?%\s+"
+    r"\$\s*(?:\d{1,3}\.)*\d+,\d{2}\s*$"
+)
+
 RE_PRECIO = re.compile(r"^[\d,]+\.\d{2}$|^[\d.]+,\d{2}$")
 
 # Artículo de PDF: "H ORMIGON" → "HORMIGON", "F IBRAKRETE" → "FIBRAKRETE"
@@ -575,6 +616,9 @@ PATRONES = [
     (RE_CAROSIO_PRESU, "carosio_presu"),
     (RE_ALFONSIN,      "alfonsin"),
     (RE_MADLOBOS,      "madlobos"),
+    (RE_JELUZ,         "jeluz"),
+    (RE_OFERTAS,       "ofertas"),
+    (RE_MOLBER,        "molber"),
     (RE_GALPON,        "galpon"),
     (RE_TRIUNVIRATO,   "triunvirato"),
     (RE_INSUMA,        "insuma"),
@@ -649,6 +693,40 @@ def _reparar_texto(texto: str) -> str:
     return "\n".join(out)
 
 
+# Continuación de un código partido por el ancho de columna (Ofertas Eléctricas):
+# renglón con un único token corto en mayúsculas, sin precios ni signos.
+RE_COD_CONTINUACION = re.compile(r"^[A-Z0-9./-]{1,8}$")
+
+
+def _reparar_cod_envuelto(texto: str) -> str:
+    """Pega la continuación de un código partido en dos renglones.
+
+    Ofertas Eléctricas corta el código por ancho de columna y deja el resto en
+    el renglón siguiente ("UTR022 Union para Tubo...\\nE" → "UTR022E Union...").
+    Sin esto los códigos quedan truncados y COLISIONAN entre ítems distintos
+    ("SUBTE2X4" y "SUBTE2X10" caerían los dos en "SUBTE2"), que después se
+    aprenderían como equivalencias cruzadas.
+
+    Solo actúa si la línea previa matchea RE_OFERTAS, así que no puede afectar
+    a los demás formatos.
+    """
+    lineas = texto.splitlines()
+    out: list[str] = []
+    i = 0
+    while i < len(lineas):
+        line = lineas[i]
+        if (i + 1 < len(lineas)
+                and RE_COD_CONTINUACION.match(lineas[i + 1].strip())
+                and RE_OFERTAS.match(line)):
+            m = RE_OFERTAS.match(line)
+            cod = m.group(1)
+            line = line.replace(cod, cod + lineas[i + 1].strip(), 1)
+            i += 1
+        out.append(line)
+        i += 1
+    return "\n".join(out)
+
+
 def _item_de_match(parser: str, m: re.Match) -> dict | None:
     """Construye el dict de ítem según el formato del proveedor."""
     if parser == "enseco":
@@ -681,6 +759,29 @@ def _item_de_match(parser: str, m: re.Match) -> dict | None:
         return {
             "cod": "", "desc": _fix_split_words(desc.strip()),
             "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+        }
+    if parser == "jeluz":
+        cod, desc, cant, unidad, pu, marca, total = m.groups()
+        # El SKU del fabricante viene entre el código interno y la descripción
+        # ("01CAM00208 6910 BASTIDOR MIGNON"): queda dentro de desc, que es lo
+        # que consume el matching. El código interno es el que sirve de cod_prov.
+        return {
+            "cod": cod, "desc": _fix_split_words(desc.strip()),
+            "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+            "unidad": unidad.strip(".").upper(), "marca": marca.strip(),
+        }
+    if parser == "molber":
+        cant, umed, desc, pu, total = m.groups()
+        return {
+            "cod": "", "desc": _fix_split_words(desc.strip()),
+            "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(total),
+            "unidad": umed.strip(".").upper(),
+        }
+    if parser == "ofertas":
+        cod, desc, cant, pu, subtotal = m.groups()
+        return {
+            "cod": cod, "desc": _fix_split_words(desc.strip()),
+            "cant": parse_num(cant), "pu": parse_num(pu), "total": parse_num(subtotal),
         }
     if parser == "galpon":
         cant, umed, desc, pu, total = m.groups()
@@ -790,6 +891,13 @@ def _extraer_regex_meta(texto: str) -> tuple[str, list[dict]]:
 
     Devuelve (nombre_patron, items). En empate de calidad gana el patrón más
     específico (orden de PATRONES)."""
+    # Pre-proceso, no variante: reparar el código partido no agrega ítems (la
+    # línea ya matchea igual), así que compitiendo por (_calidad, len) empataría
+    # y perdería siempre — y los códigos quedarían truncados y colisionando.
+    # Es seguro aplicarlo incondicionalmente: solo toca líneas que matchean
+    # RE_OFERTAS.
+    texto = _reparar_cod_envuelto(texto)
+
     variantes = [texto]
     reparado = _reparar_texto(texto)
     if reparado != texto:

@@ -8,7 +8,7 @@ SaaS comparador de presupuestos de construcción: el usuario sube PDFs/fotos/pla
 
 | Pieza | Tech | Hosting | Deploy |
 |---|---|---|---|
-| Frontend | Next.js (`frontend/`) | Vercel, proyecto **"vectorai"** (team bontempopablo) | `git push origin main` → auto |
+| Frontend | Next.js (`frontend/`) | Vercel, proyecto **"vectorai"** (team `bontempopablo-1923s-projects`, `team_8Plg98YsKIUgnYi3CfC8lCr0`) | `git push origin main` → auto |
 | API | FastAPI (`api/main.py`) | Railway, proyecto **"desirable-perception"** | `git push origin main` → auto |
 | DB | Supabase, proyecto **aetwdwvctowannnbelwb** ("vectorai") | — | migraciones via SQL Editor / MCP |
 
@@ -30,7 +30,7 @@ Núcleo del matching:
 1. `materiales_validados` (~937) — maestro. **La identidad está partida en dos campos**: `denominacion_principal` (genérico, ej. "CABLE") + `descripcion` (lo que distingue, ej. "2,5MM * 100"). En UI mostrar siempre ambos.
 2. `material_denominaciones` (~5.600) — aliases de texto (flywheel: crece con cada confirmación). Campos: codigo_material, denominacion, origen, confianza (90 migración / 96 curado humano), frecuencia_encontrada.
 3. `materiales_pendientes` — cola de sin-match para revisión en /app/admin.
-4. `precios_historicos` — precio por material/proveedor/fecha, se alimenta automático (ítems con score ≥85) y al confirmar. Columna `moneda` para USD.
+4. `precios_historicos` — precio por material/proveedor/fecha, se alimenta automático (ítems con score ≥85) y al confirmar. Columna `moneda` para USD. **El saneamiento del 27-07 borró a propósito las ~460 filas anteriores a esa fecha**: eran precios cargados antes del curado, con matches viejos que entraban en conflicto con los códigos ya corregidos. La tabla arranca su serie ahí; no buscar histórico previo (punto cerrado, detectado por la verificación nocturna del 29-07).
 5. `sinonimos`, `grupos_marcas` — normalización del matching.
 
 Negocio: `perfiles` (plan free/advance/pro, `usos_mes`/`limite_mes`/`mes_usos` — NO usos_hoy), `presupuestos` + `presupuesto_items` (cada PDF procesado y sus líneas), `proveedores`, `conversion_unidades`.

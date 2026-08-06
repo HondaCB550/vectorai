@@ -174,6 +174,99 @@ def test_galpon_basico():
 
 # ── Sanitarios Triunvirato ─────────────────────────────────────────────────────
 
+# ── JELUZ / Electrocity (ERP "Presupuesto de venta") ──────────────────────────
+
+def test_jeluz_basico():
+    it = _uno("1 01CAM00208 6910 BASTIDOR MIGNON 14 C/U INMEDIATA $ 505.39 CAMBRE $ 7,075.50")
+    assert it["cod"] == "01CAM00208"
+    assert it["cant"] == 14.0 and it["pu"] == 505.39
+    assert it["unidad"] == "C/U" and it["marca"] == "CAMBRE"
+    _consistente(it)
+
+
+def test_jeluz_marca_con_espacios():
+    # La marca puede tener dos palabras ("GEN ROD") y no debe comerse el total.
+    it = _uno("9 01CAE00141 02210PG-12 CAJA EMBUTIR RECTANGULAR 5 X 10 PLASTICA 19 C/U "
+              "INMEDIATA $ 453.98 GEN ROD $ 8,625.62")
+    assert it["cod"] == "01CAE00141"
+    assert it["marca"] == "GEN ROD"
+    assert it["cant"] == 19.0 and it["pu"] == 453.98
+    _consistente(it)
+
+
+def test_jeluz_asterisco_precio_a_confirmar():
+    # El "*" antes del precio marca sujeto a confirmación: se ignora.
+    it = _uno("22 01VIY00201 2359-1.5 AUT.DE TANQUE UNIP.10A CABLE 1.5 MTS 2 C/U "
+              "INMEDIATA * $ 8,917.04 VIYILANT $ 17,834.08")
+    assert it["cant"] == 2.0 and it["pu"] == 8917.04
+    _consistente(it)
+
+
+def test_jeluz_unidad_rollo_no_es_unitario():
+    # Cables por rollo de 100 m: el pu es por rollo, no por metro.
+    it = _uno("3 01COR00683 CABLE UNIP. FLEX. 4 MM CELESTE 4 100M INMEDIATA "
+              "$ 87,394.74 NORMALIZA $ 349,578.97")
+    assert it["unidad"] == "100M"
+    assert it["cant"] == 4.0 and it["pu"] == 87394.74
+    _consistente(it)
+
+
+# ── MOLBER SRL ────────────────────────────────────────────────────────────────
+
+def test_molber_basico():
+    it = _uno("28.00 UNI VARILLA ROSCADA FTR/RGM 12 X 160 FISCHER "
+              "5213.261 %18 4274.874 119696.47")
+    assert it["desc"].startswith("VARILLA ROSCADA")
+    assert it["cant"] == 28.0 and it["pu"] == 4274.874
+    assert it["unidad"] == "UNI"
+    _consistente(it)
+
+
+def test_molber_descuento_con_decimal():
+    it = _uno("76.00 UNI PGU 100 (BARBIERI 6 M X 0,94) 23090.188 %29.5 16278.583 1237172.31")
+    assert it["cant"] == 76.0 and it["pu"] == 16278.583
+    _consistente(it)
+
+
+def test_molber_sin_columna_de_descuento():
+    # Ítem sin bonificación: repite el precio de lista y omite el "%N".
+    it = _uno("13.00 UNI ISOTEX PLAT 50 1.2 * 1.6 70707.000 70707.000 919191.00")
+    assert it["cant"] == 13.0 and it["pu"] == 70707.0
+    _consistente(it)
+
+
+# ── Ofertas Eléctricas ────────────────────────────────────────────────────────
+
+def test_ofertas_toma_subtotal_sin_iva():
+    # El total del ítem es el subtotal NETO, no el "Subtotal c/IVA" de la última
+    # columna: los precios se guardan sin IVA.
+    it = _uno("UTR022 Union para Tubo PVC 22 mm 100 $29,63 0% $2.963,00 21% $3.585,23")
+    assert it["cod"] == "UTR022"
+    assert it["cant"] == 100.0 and it["pu"] == 29.63
+    assert it["total"] == 2963.00
+    _consistente(it)
+
+
+def test_ofertas_alicuota_con_decimal():
+    it = _uno("VIYLANT Automatico de Tanque Viyilant 1.5 mts 1 $662,50 0% $662,50 10,5% $732,06")
+    assert it["cant"] == 1.0 and it["pu"] == 662.50 and it["total"] == 662.50
+    _consistente(it)
+
+
+def test_ofertas_codigo_partido_en_dos_renglones():
+    # El código se corta por ancho de columna y sigue en el renglón siguiente.
+    # Sin reparar, "SUBTE2X4" y "SUBTE2X10" colisionarían los dos en "SUBTE2".
+    texto = ("SUBTE2 Cable Subterraneo 2 x 4 mm 30 $207,48 0% $6.224,40 21% $7.531,52\n"
+             "X4\n"
+             "SUBTE2 Cable Subterraneo 2 x 10mm 20 $503,39 0% $10.067,80 21% $12.182,04\n"
+             "X10")
+    items = extraer_regex(texto)
+    assert len(items) == 2, items
+    assert [i["cod"] for i in items] == ["SUBTE2X4", "SUBTE2X10"]
+    for it in items:
+        _consistente(it)
+
+
 def test_triunvirato_basico():
     it = _uno("14 39,00 AWADU00305 CAÑO 1035 DE 110 X 4 AWA 23991,12 13,00 935653,68")
     assert it["cod"] == "AWADU00305"
